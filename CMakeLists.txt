@@ -15,4 +15,3 @@ ADD_EXECUTABLE(behave src/behavePlus.cpp
 			   src/surfaceFuelbedIntermediates.cpp
                            src/surfaceInputs.cpp
                            src/surfaceFireSpread.cpp)
-TARGET_LINK_LIBRARIES(canopy_flow ${PLPLOT_LIB} ${PLPLOT_LIB_CXX})
