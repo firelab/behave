@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "behavePlus.h"
 #include <time.h>
+#include <cmath>
 
 int main()
 {	
@@ -80,7 +81,7 @@ int main()
 		spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 
 		directionOfMaxSpread = behavePlus.getDirectionOfMaxSpread();
-		std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << std::round(directionOfMaxSpread) 
+        std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread)
 			<< " degrees" << std::endl;
 		spreadRate = floor(spreadRate * 10 + 0.5) / 10;
 		// std::cout << "The direction of interest is " << directionOfInterest << " degrees" << std::endl;
