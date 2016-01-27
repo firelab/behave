@@ -47,7 +47,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
 	double sigma = surfaceFuelbedIntermediates_->getSigma();
 	double packingRatio = surfaceFuelbedIntermediates_->getPackingRatio();
 	double propagatingFlux = surfaceFirePropogatingFlux_.calculatePropagatingFlux(sigma, packingRatio);
-	double heatSink = surfaceFuelbedIntermediates_->getHeatSink(); 
+	double heatSink = surfaceFuelbedIntermediates_->getHeatSink();
 	reactionIntensity_ = surfaceFireReactionIntensity_.calculateReactionIntensity();
 
 	// Calculate Wind and Slope Factors
@@ -107,7 +107,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
 
 double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest)
 {
-	if (surfaceInputs_->getWindAndSpreadAngleMode() == SurfaceInputs::FROM_NORTH)
+	if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
 	{
 		double slopeAspect = surfaceInputs_->getSlopeAspect();
 		directionOfInterest -= slopeAspect + 180; // Direction of interest is now relative to north
@@ -169,7 +169,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
 	// Calculate coordinate components
 	double x = slopeRate + (windRate * cos(windDirRadians));
 	double y = windRate * sin(windDirRadians);
-	double rateVector= sqrt((x * x) + (y * y));
+	double rateVector = sqrt((x * x) + (y * y));
 
 	// Apply wind and slope rate to spread rate
 	forwardSpreadRate_ = noWindNoSlopeSpreadRate_ + rateVector;
@@ -273,7 +273,7 @@ void SurfaceFireSpread::calculateBackingSpreadRate()
 double  SurfaceFireSpread::getDirectionOfMaxSpread() const
 {
 	double localDirMaxSpread = directionOfMaxSpread_;
-	if (surfaceInputs_->getWindAndSpreadAngleMode() == SurfaceInputs::FROM_NORTH)
+	if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
 	{
 		localDirMaxSpread = convertDirectionOfSpreadToRelativeToNorth(localDirMaxSpread);
 		while (localDirMaxSpread >= 360)

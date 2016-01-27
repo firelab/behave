@@ -47,9 +47,6 @@ public:
 	void setSlopeInputToPercent();
 	void setSlopeInputToDegrees();
 
-	WindAndSpreadDirectionEnumType getWindAndSpreadAngleMode() const;
-	SlopeInputModeEnumType getSlopeInputMode() const;
-
 private:
 	void setSlopeInputMode(SlopeInputModeEnumType mode);
 	void setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode);
