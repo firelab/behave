@@ -8,8 +8,8 @@ class SurfaceInputs
 {
 public:
 	enum WindAndSpreadDirectionEnumType {
-		FROM_UPSLOPE = 0,	// Wind and spread direction I/O are clockwise relative to upslope
-		FROM_NORTH = 1		// Wind direction direction I/O are clockwise relative to compass north
+		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction I/O are clockwise relative to upslope
+		RELATIVE_TO_NORTH = 1		// Wind direction direction I/O are clockwise relative to compass north
 	};
 
 	enum SlopeInputModeEnumType {
@@ -53,8 +53,10 @@ public:
 	double getMoistureHundredHour() const;
 	double getMoistureLiveHerbaceous() const;
 	double getMoistureLiveWoody() const;
-	WindAndSpreadDirectionEnumType getWindAndSpreadAngleMode() const;
-	SlopeInputModeEnumType getSlopeInputMode() const;
+	bool isWindAndSpreadAngleRelativeToNorth() const;
+	bool isWindAndSpreadAngleRelativeToUpslope() const;
+	bool isSlopeInDegrees() const;
+	bool isSlopeInPercent() const;
 
 private:
 	double convertWindToUpslope(double windDirectionFromNorth);

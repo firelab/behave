@@ -43,17 +43,17 @@ double BehavePlus::calculateSurfaceFireForwardSpreadRate(double directionOfInter
 	return surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 }
 
-BehavePlus::WindAndSpreadDirectionEnumType BehavePlus::getWindAndSpreadAngleMode() const
-{
-	int windAndSpreadMode = surfaceInputs_.getWindAndSpreadAngleMode();
-	return (WindAndSpreadDirectionEnumType)windAndSpreadMode;
-}
-
-BehavePlus::SlopeInputModeEnumType BehavePlus::getSlopeInputMode() const
-{
-	int slopeMode = surfaceInputs_.getSlopeInputMode();
-	return (SlopeInputModeEnumType)slopeMode;
-}
+//BehavePlus::WindAndSpreadDirectionEnumType BehavePlus::getWindAndSpreadAngleMode() const
+//{
+//	int windAndSpreadMode = surfaceInputs_.getWindAndSpreadAngleMode();
+//	return (WindAndSpreadDirectionEnumType)windAndSpreadMode;
+//}
+//
+//BehavePlus::SlopeInputModeEnumType BehavePlus::getSlopeInputMode() const
+//{
+//	int slopeMode = surfaceInputs_.getSlopeInputMode();
+//	return (SlopeInputModeEnumType)slopeMode;
+//}
 
 void BehavePlus::setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode)
 {
@@ -87,25 +87,25 @@ void BehavePlus::setSlopeInputToDegrees()
 
 bool BehavePlus::isWindAndSpreadAngleRelativeToNorth() const
 {
-	bool isRelativeToNorth = (getWindAndSpreadAngleMode() == RELATIVE_TO_NORTH);
+	bool isRelativeToNorth = surfaceInputs_.isWindAndSpreadAngleRelativeToNorth();
 	return isRelativeToNorth;
 }
 
 bool BehavePlus::isWindAndSpreadAngleRelativeToUpslope() const
 {
-	bool isRelativeToUpslope = (getWindAndSpreadAngleMode() == RELATIVE_TO_UPSLOPE);
+	bool isRelativeToUpslope = surfaceInputs_.isWindAndSpreadAngleRelativeToUpslope();
 	return isRelativeToUpslope;
 }
 
 bool BehavePlus::isSlopeInDegrees() const
 {
-	bool isSlopeModeDegrees = (getSlopeInputMode() == SLOPE_IN_DEGREES);
+	bool isSlopeModeDegrees = surfaceInputs_.isSlopeInDegrees();
 	return isSlopeModeDegrees;
 }
 
 bool BehavePlus::isSlopeInPercent() const
 {
-	bool isSlopeInPercent = (getSlopeInputMode() == SLOPE_IN_PERCENT);
+	bool isSlopeInPercent = surfaceInputs_.isSlopeInPercent();
 	return isSlopeInPercent;
 }
 

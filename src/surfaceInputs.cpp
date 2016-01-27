@@ -27,7 +27,7 @@ void SurfaceInputs::initializeMembers()
 	windDirection_ = 0.0;
 
 	slopeInputMode_ = SLOPE_IN_PERCENT;
-	windAndSpreadAngleMode_ = FROM_UPSLOPE;
+	windAndSpreadAngleMode_ = RELATIVE_TO_UPSLOPE;
 
 	for (int i = 0; i < MAX_SIZES; i++)
 	{
@@ -49,9 +49,9 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 	setSlope(slope);
 	slopeAspect_ = slopeAspect;
 
-	//	To Fix Original BehavePlus's reporting 360 as direction of max spread,
-	//		just add an equaul sign after the less than or greater than sign 
-	//		in the next 2 conditional statements 
+	//	To Fix Original BehavePlus's occasional reporting 360 as direction of max 
+	//	spread, just add an equaul sign after the less than or greater than sign 
+	//	in the next 2 conditional statements 
 	if (windDirection < 0.0)
 	{
 		windDirection += 360.0;
@@ -61,7 +61,7 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 		windDirection -= 360.0;
 	}
 
-	if (windAndSpreadAngleMode_ == FROM_NORTH)
+	if (windAndSpreadAngleMode_ == RELATIVE_TO_NORTH)
 	{
 		windDirection = convertWindToUpslope(windDirection);
 	}
@@ -79,20 +79,15 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 	setMoistureLive();
 }
 
-SurfaceInputs::WindAndSpreadDirectionEnumType SurfaceInputs::getWindAndSpreadAngleMode() const
-{
-	return windAndSpreadAngleMode_;
-}
-
 void SurfaceInputs::setWindAndSpreadDirectionMode(int mode)
 {
-	if (mode == FROM_UPSLOPE)
+	if (mode == RELATIVE_TO_UPSLOPE)
 	{
-		windAndSpreadAngleMode_ = FROM_UPSLOPE;
+		windAndSpreadAngleMode_ = RELATIVE_TO_UPSLOPE;
 	}
-	if (mode == FROM_NORTH)
+	if (mode == RELATIVE_TO_NORTH)
 	{
-		windAndSpreadAngleMode_ = FROM_NORTH;
+		windAndSpreadAngleMode_ = RELATIVE_TO_NORTH;
 	}
 }
 
@@ -100,7 +95,6 @@ double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
 {
 	// Important information: 
 	// when wind is given relativet to upslope, it is given as the direction the wind pushes the fire, not the direction from which is blowing - WMC 01/2016
-	//double windDirectionFromUpslope = windDirectionFromNorth - slopeAspect_  + 180; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
 	double windDirectionFromUpslope = windDirectionFromNorth - slopeAspect_; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
 	return windDirectionFromUpslope; 
 }
@@ -166,7 +160,7 @@ void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 
 void SurfaceInputs::setSlope(double slope)
 {
-	if (getSlopeInputMode() == SLOPE_IN_PERCENT)
+	if (slopeInputMode_ == SLOPE_IN_PERCENT)
 	{
 		const double PI = 3.141592653589793238463;
 		slope = (180 / PI) * atan(slope / 100); // slope is now in degees
@@ -220,10 +214,30 @@ double SurfaceInputs::getSlopeAspect() const
 	return slopeAspect_;
 }
 
-SurfaceInputs::SlopeInputModeEnumType SurfaceInputs::getSlopeInputMode() const
+bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
 {
-	return slopeInputMode_;
+	bool isRelativeToNorth = (windAndSpreadAngleMode_ == RELATIVE_TO_NORTH);
+	return isRelativeToNorth;
 }
+
+bool SurfaceInputs::isWindAndSpreadAngleRelativeToUpslope() const
+{
+	bool isRelativeToUpslope = (windAndSpreadAngleMode_ == RELATIVE_TO_UPSLOPE);
+	return isRelativeToUpslope;
+}
+
+bool SurfaceInputs::isSlopeInDegrees() const
+{
+	bool isSlopeModeDegrees = (slopeInputMode_ == SLOPE_IN_DEGREES);
+	return isSlopeModeDegrees;
+}
+
+bool SurfaceInputs::isSlopeInPercent() const
+{
+	bool isSlopeInPercent = (slopeInputMode_ == SLOPE_IN_PERCENT);
+	return isSlopeInPercent;
+}
+
 
 double SurfaceInputs::getWindDirection() const
 { 
