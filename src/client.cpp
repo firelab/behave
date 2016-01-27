@@ -230,7 +230,7 @@ int main()
 		moistureLiveWood = 0.90;
 		windspeed = 3;
 		windDirection = 90;
-		slope = 80;
+		slope = 50;
 		slopeAspect = 50;
 		behavePlus.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWood, windspeed, windDirection, slope, slopeAspect);
 		directionOfInterest = 0;
