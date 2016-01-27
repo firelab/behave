@@ -69,7 +69,7 @@ int main()
 		slope = 50;
 		slopeAspect = 50;
 		behavePlus.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWood, windspeed, windDirection, slope, slopeAspect);
-		directionOfInterest = 333;
+		directionOfInterest = 0;
 
 		spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate();
 		//spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
