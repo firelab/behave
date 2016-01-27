@@ -15,11 +15,13 @@ ENDIF(CLI)
 # Find boost libs, 
 # *****************************************************************************
 INCLUDE(FindBoost)
-SET(Boost_DEBUG ON)
-SET(Boost_USE_MULTITHREAD OFF)
-FIND_PACKAGE(Boost 1.41.1 COMPONENTS program_options REQUIRED)
+IF(Boost_FOUND)
+	SET(Boost_DEBUG ON)
+	SET(Boost_USE_MULTITHREAD OFF)
+	FIND_PACKAGE(Boost 1.41.1 COMPONENTS program_options REQUIRED)
 
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS}) 
+	INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS}) 
+ENDIF(Boost_FOUND)
 
 SET(SOURCE
 	src/behavePlus.cpp
@@ -46,4 +48,6 @@ SET(HEADERS
 
 ADD_EXECUTABLE(behave ${SOURCE} ${HEADERS})
 
-TARGET_LINK_LIBRARIES(behave ${Boost_LIBRARIES})
+IF(Boost_FOUND)
+	TARGET_LINK_LIBRARIES(behave ${Boost_LIBRARIES})
+ENDIF(Boost_FOUND)
