@@ -6,6 +6,21 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(behave)
 
+OPTION(CLI "Enable CLI boost parser" OFF)
+IF(CLI)
+    ADD_DEFINITIONS(-DCLI)
+ENDIF(CLI)
+
+# *****************************************************************************
+# Find boost libs, 
+# *****************************************************************************
+INCLUDE(FindBoost)
+SET(Boost_DEBUG ON)
+SET(Boost_USE_MULTITHREAD OFF)
+FIND_PACKAGE(Boost 1.41.1 COMPONENTS program_options REQUIRED)
+
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS}) 
+
 SET(SOURCE
 	src/behavePlus.cpp
 	src/client.cpp
@@ -30,3 +45,5 @@ SET(HEADERS
 )
 
 ADD_EXECUTABLE(behave ${SOURCE} ${HEADERS})
+
+TARGET_LINK_LIBRARIES(behave ${Boost_LIBRARIES})
