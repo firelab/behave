@@ -107,7 +107,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
 
 double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest)
 {
-	if (surfaceInputs_->getWindAndSpreadAngleMode() == SurfaceInputs::FROM_NORTH)
+	if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
 	{
 		double slopeAspect = surfaceInputs_->getSlopeAspect();
 		directionOfInterest -= slopeAspect + 180; // Direction of interest is now relative to north
@@ -273,7 +273,7 @@ void SurfaceFireSpread::calculateBackingSpreadRate()
 double  SurfaceFireSpread::getDirectionOfMaxSpread() const
 {
 	double localDirMaxSpread = directionOfMaxSpread_;
-	if (surfaceInputs_->getWindAndSpreadAngleMode() == SurfaceInputs::FROM_NORTH)
+	if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
 	{
 		localDirMaxSpread = convertDirectionOfSpreadToRelativeToNorth(localDirMaxSpread);
 		while (localDirMaxSpread >= 360)
