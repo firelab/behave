@@ -53,6 +53,10 @@ int main()
     double windDirection = 0;
     double slope = 0.0;
     double slopeAspect = 0.0;
+    double directionOfMaxSpread = 0;
+    double flameLength = 0; 
+    double directionOfInterest = 0;
+    double spreadRate = 0;
 
 #ifdef CLI
     // Declare a group of options that will be
@@ -172,7 +176,7 @@ int main()
     windDirection = vm["wind_direction"].as<double>();
     slope = vm["slope"].as<double>();
     slopeAspect = vm["aspect"].as<double>();
-    
+
 #endif //CLI        
 
         
@@ -180,16 +184,12 @@ int main()
 	
 	const double PI = 3.141592653589793238463;
 
-	BehavePlus behavePlus;
-
 	//const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-	double directionOfMaxSpread = 0;
-	double flameLength = 0; 
-	double directionOfInterest = 0;
-	double spreadRate = 0;
+        
+        BehavePlus behavePlus;
 
 	// Setting the wind and spread angle input mode (default is upslope)
-	//behavePlus.setAnglesRelativeToUpslope();
+	//behavePlus.setWindAndSpreadAnglesRelativeToUpslope();
 	behavePlus.setWindAndSpreadAnglesRelativeToNorth();
 
 	// Checking  wind and spread angle input mode
@@ -233,10 +233,10 @@ int main()
 		slope = 50;
 		slopeAspect = 50;
 		behavePlus.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWood, windspeed, windDirection, slope, slopeAspect);
-		directionOfInterest = 333;
+		directionOfInterest = 0;
 
-		//spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate();
-		spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+		spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate();
+		//spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 
 		directionOfMaxSpread = behavePlus.getDirectionOfMaxSpread();
         std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread)
