@@ -25,7 +25,6 @@ ENDIF(Boost_FOUND)
 
 SET(SOURCE
 	src/behave.cpp
-	src/client.cpp
 	src/fuelModels.cpp
 	src/surface.cpp
 	src/surfaceFirePropogatingFlux.cpp
@@ -45,8 +44,11 @@ SET(HEADERS
 	src/surfaceInputs.h
 	src/surfaceFireSpread.h
 )
-
-ADD_EXECUTABLE(behave ${SOURCE} ${HEADERS})
+	
+ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})
+IF(CLI)
+	ADD_EXECUTABLE(behave_cli ${SOURCE} src/cli.cpp ${HEADERS})
+ENDIF(CLI)
 
 IF(Boost_FOUND)
 	TARGET_LINK_LIBRARIES(behave ${Boost_LIBRARIES})

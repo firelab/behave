@@ -177,6 +177,8 @@ int main()
     slope = vm["slope"].as<double>();
     slopeAspect = vm["aspect"].as<double>();
 
+	printf("Spread_rate=%lf", spreadRate);
+
 #endif //CLI        
 
     Behave behave;
@@ -213,6 +215,9 @@ int main()
 		std::cout << "degrees" << std::endl << std::endl;
 	}
 
+	spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+
+#ifndef CLI
 	for (int i = 101; i <= 109; i++)
 	{
 		fuelModelNumber = i; 
@@ -242,8 +247,6 @@ int main()
 		flameLength = floor(flameLength * 10 + 0.5) / 10;
 		std::cout << "Flame length for fuel model " << i << " is "<< flameLength << " ft" << std::endl << std::endl;
 	}
-
-#ifndef CLI
 	// Used for debug
 	std::cout << "Press Enter to continue";
 	std::cin.get();
