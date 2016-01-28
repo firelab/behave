@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "behavePlus.h"
+#include "behave.h"
 #include <time.h>
 #include <cmath>
 
@@ -179,43 +179,36 @@ int main()
 
 #endif //CLI        
 
-        
-	// clock_t tStart = clock();
-	
-	const double PI = 3.141592653589793238463;
-
-	//const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-        
-        BehavePlus behavePlus;
+    Behave behave;
 
 	// Setting the wind and spread angle input mode (default is upslope)
 	//behavePlus.setWindAndSpreadAnglesRelativeToUpslope();
-	behavePlus.setWindAndSpreadAnglesRelativeToNorth();
+	behave.setWindAndSpreadAnglesRelativeToNorth();
 
 	// Checking  wind and spread angle input mode
 	// The method of determining angle or slope input mode is admittedly bit clunky
 	std::cout << "Wind and spread direction are in degrees clockwise relative to ";
-	if (behavePlus.isWindAndSpreadAngleRelativeToUpslope())
+	if (behave.isWindAndSpreadAngleRelativeToUpslope())
 	{
 		std::cout << "upslope" << std::endl << std::endl;
 	}
-	if (behavePlus.isWindAndSpreadAngleRelativeToNorth())
+	if (behave.isWindAndSpreadAngleRelativeToNorth())
 	{
 		std::cout << "compass north" << std::endl << std::endl;
 	}
 
 	// Setting the slope input mode (default is percent)
 	//behavePlus.setSlopeInputToPercent();
-	behavePlus.setSlopeInputToDegrees();
+	behave.setSlopeInputToDegrees();
 
 	// Checking the slope input mode
 	// The method of determining slope input mode is admittedly bit clunky
 	std::wcout << "Slope input mode is ";
-	if (behavePlus.isSlopeInPercent())
+	if (behave.isSlopeInPercent())
 	{
 		std::cout << "percent" << std::endl << std::endl;
 	}
-	if (behavePlus.isSlopeInDegrees())
+	if (behave.isSlopeInDegrees())
 	{
 		std::cout << "degrees" << std::endl << std::endl;
 	}
@@ -232,29 +225,29 @@ int main()
 		windDirection = 90;
 		slope = 50;
 		slopeAspect = 50;
-		behavePlus.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWood, windspeed, windDirection, slope, slopeAspect);
+		behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWood, windspeed, windDirection, slope, slopeAspect);
 		directionOfInterest = 0;
 
-		spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate();
-		//spreadRate = behavePlus.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+		spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 
-		directionOfMaxSpread = behavePlus.getDirectionOfMaxSpread();
+		directionOfMaxSpread = behave.getDirectionOfMaxSpread();
         std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread)
 			<< " degrees" << std::endl;
 		spreadRate = floor(spreadRate * 10 + 0.5) / 10;
 		// std::cout << "The direction of interest is " << directionOfInterest << " degrees" << std::endl;
 		std::cout << "Spread rate in direction of interest " << directionOfInterest << " degrees for fuel model " << i << " is " << std::setprecision(1) << std::fixed
 			<< spreadRate << " ch/hr" << std::endl;
-		flameLength = behavePlus.getFlameLength();
+		flameLength = behave.getFlameLength();
 		flameLength = floor(flameLength * 10 + 0.5) / 10;
 		std::cout << "Flame length for fuel model " << i << " is "<< flameLength << " ft" << std::endl << std::endl;
 	}
 
-	//double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
-	//std::cout << "Total execution time of program is " << executionTimeInSeconds << " seconds." << std::endl;
-
-	//std::cout << "Press Enter to continue";
-	//std::cin.get();
+#ifndef CLI
+	// Used for debug
+	std::cout << "Press Enter to continue";
+	std::cin.get();
+#endif // CLI
 
 	return 0;
 }

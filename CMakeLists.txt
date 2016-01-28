@@ -24,7 +24,7 @@ IF(Boost_FOUND)
 ENDIF(Boost_FOUND)
 
 SET(SOURCE
-	src/behavePlus.cpp
+	src/behave.cpp
 	src/client.cpp
 	src/fuelModels.cpp
 	src/surface.cpp
@@ -36,7 +36,7 @@ SET(SOURCE
 )
 
 SET(HEADERS
-	src/behavePlus.h
+	src/behave.h
 	src/fuelModels.h
 	src/surface.h
 	src/surfaceFirePropogatingFlux.h

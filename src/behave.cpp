@@ -1,20 +1,20 @@
-#include "behavePlus.h"
+#include "behave.h"
 
 #include <iostream>
 
-BehavePlus::BehavePlus()
+Behave::Behave()
 	: surfaceInputs_{}, surface_{ fuelModels_, surfaceInputs_ }
 {
 	// Default Constructor
 }
 
-BehavePlus::BehavePlus(SurfaceInputs &surfaceInputs)
+Behave::Behave(SurfaceInputs &surfaceInputs)
 	: surface_{ fuelModels_, surfaceInputs }
 {
 	// Constructor taking a SurfaceInputs object as a parameter
 }
 
-BehavePlus::BehavePlus(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+Behave::Behave(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
 	: surfaceInputs_(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour,
@@ -24,12 +24,12 @@ BehavePlus::BehavePlus(int fuelModelNumber, double moistureOneHour, double moist
 	// Constructor takes a list of doubles as parameters
 }
 
-BehavePlus::~BehavePlus()
+Behave::~Behave()
 {
 	// Default Destructor
 }
 
-void BehavePlus::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
 {
@@ -37,7 +37,7 @@ void BehavePlus::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour
 		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
 }
 
-double BehavePlus::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
+double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
 {
 	// Calculate Spread Rate
 	return surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
@@ -55,81 +55,81 @@ double BehavePlus::calculateSurfaceFireForwardSpreadRate(double directionOfInter
 //	return (SlopeInputModeEnumType)slopeMode;
 //}
 
-void BehavePlus::setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode)
+void Behave::setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode)
 {
 	surfaceInputs_.setWindAndSpreadDirectionMode(mode);
 }
 
-void BehavePlus::setSlopeInputMode(SlopeInputModeEnumType mode)
+void Behave::setSlopeInputMode(SlopeInputModeEnumType mode)
 {
 	surfaceInputs_.setSlopeInputMode(mode);
 }
 
-void BehavePlus::setWindAndSpreadAnglesRelativeToNorth()
+void Behave::setWindAndSpreadAnglesRelativeToNorth()
 {
-	surfaceInputs_.setWindAndSpreadDirectionMode(BehavePlus::RELATIVE_TO_NORTH);
+	surfaceInputs_.setWindAndSpreadDirectionMode(Behave::RELATIVE_TO_NORTH);
 }
 
-void BehavePlus::setWindAndSpreadAnglesRelativeToUpslope()
+void Behave::setWindAndSpreadAnglesRelativeToUpslope()
 {
-	surfaceInputs_.setWindAndSpreadDirectionMode(BehavePlus::RELATIVE_TO_UPSLOPE);
+	surfaceInputs_.setWindAndSpreadDirectionMode(Behave::RELATIVE_TO_UPSLOPE);
 }
 
-void BehavePlus::setSlopeInputToPercent()
+void Behave::setSlopeInputToPercent()
 {
 	surfaceInputs_.setSlopeInputMode(SLOPE_IN_PERCENT);
 }
 
-void BehavePlus::setSlopeInputToDegrees()
+void Behave::setSlopeInputToDegrees()
 {
 	surfaceInputs_.setSlopeInputMode(SLOPE_IN_DEGREES);
 }
 
-bool BehavePlus::isWindAndSpreadAngleRelativeToNorth() const
+bool Behave::isWindAndSpreadAngleRelativeToNorth() const
 {
 	bool isRelativeToNorth = surfaceInputs_.isWindAndSpreadAngleRelativeToNorth();
 	return isRelativeToNorth;
 }
 
-bool BehavePlus::isWindAndSpreadAngleRelativeToUpslope() const
+bool Behave::isWindAndSpreadAngleRelativeToUpslope() const
 {
 	bool isRelativeToUpslope = surfaceInputs_.isWindAndSpreadAngleRelativeToUpslope();
 	return isRelativeToUpslope;
 }
 
-bool BehavePlus::isSlopeInDegrees() const
+bool Behave::isSlopeInDegrees() const
 {
 	bool isSlopeModeDegrees = surfaceInputs_.isSlopeInDegrees();
 	return isSlopeModeDegrees;
 }
 
-bool BehavePlus::isSlopeInPercent() const
+bool Behave::isSlopeInPercent() const
 {
 	bool isSlopeInPercent = surfaceInputs_.isSlopeInPercent();
 	return isSlopeInPercent;
 }
 
-double BehavePlus::getDirectionOfMaxSpread() const
+double Behave::getDirectionOfMaxSpread() const
 {
 	return surface_.getDirectionOfMaxSpread();
 }
 
-double BehavePlus::getFlameLength() const
+double Behave::getFlameLength() const
 {
 	return surface_.getFlameLength();
 }
 
-double BehavePlus::getFireLengthToWidthRatio() const
+double Behave::getFireLengthToWidthRatio() const
 {
 	return surface_.getFireLengthToWidthRatio();
 }
 
-double BehavePlus::getFireEccentricity() const
+double Behave::getFireEccentricity() const
 {
 	return surface_.getFireEccentricity();
 }
 
-bool BehavePlus::isFuelModelDefined(int fuelModelNumber) const
+bool Behave::isFuelModelDefined(int fuelModelNumber) const
 {
 	return fuelModels_.isFuelModelDefined(fuelModelNumber);
 }

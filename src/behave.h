@@ -1,21 +1,21 @@
-// Interface for BehavePlus application based on the Facade OOP Design Pattern
-// It is used to tie together the modules and objects used by BehavePlus - WMC 10/2015
+// Interface for Behave application based on the Facade OOP Design Pattern
+// It is used to tie together the modules and objects used by Behave - WMC 10/2015
 
-#ifndef BEHAVEPLUS_HEADER
-#define BEHAVEPLUS_HEADER
+#ifndef BEHAVE_HEADER
+#define BEHAVE_HEADER
 
 #include "fuelModels.h"
 #include "surface.h"
 
-class BehavePlus
+class Behave
 {
 public:
-	BehavePlus();
-	explicit BehavePlus(SurfaceInputs &surfaceInputs);
-	BehavePlus(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+	Behave();
+	explicit Behave(SurfaceInputs &surfaceInputs);
+	Behave(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 		double midflameWindSpeed, double windDirection, double slope, double slopeAspect = 0);
-	~BehavePlus();
+	~Behave();
 	
 	// SURFACE Module 
 	void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
@@ -56,4 +56,4 @@ private:
 	SurfaceInputs surfaceInputs_;								// Object that manages user input to SURFACE Module
 };
 
-#endif //BEHAVEPLUS_HEADER
+#endif //BEHAVE_HEADER
