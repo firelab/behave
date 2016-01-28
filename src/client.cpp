@@ -253,8 +253,8 @@ int main()
 	//double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
 	//std::cout << "Total execution time of program is " << executionTimeInSeconds << " seconds." << std::endl;
 
-	//std::cout << "Press Enter to continue";
-	//std::cin.get();
+	std::cout << "Press Enter to continue";
+	std::cin.get();
 
 	return 0;
 }
