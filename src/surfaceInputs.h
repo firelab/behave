@@ -7,16 +7,6 @@
 class SurfaceInputs
 {
 public:
-	enum WindAndSpreadDirectionEnumType {
-		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction I/O are clockwise relative to upslope
-		RELATIVE_TO_NORTH = 1		// Wind direction direction I/O are clockwise relative to compass north
-	};
-
-	enum SlopeInputModeEnumType {
-		SLOPE_IN_PERCENT = 0,	// Slope is input as a percent
-		SLOPE_IN_DEGREES = 1	// Slope is input as degrees
-	};
-
 	SurfaceInputs();
 	SurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
@@ -76,6 +66,16 @@ private:
 	double	slopeAspect_;				// degrees, 0-360
 	double	moistureDead_[MAX_SIZES];	// dead fuel moisture content
 	double	moistureLive_[MAX_SIZES];	// live fuel moisture content
+
+	enum WindAndSpreadDirectionEnumType {
+		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction I/O are clockwise relative to upslope
+		RELATIVE_TO_NORTH = 1		// Wind direction direction I/O are clockwise relative to compass north
+	};
+
+	enum SlopeInputModeEnumType {
+		SLOPE_IN_PERCENT = 0,	// Slope is input as a percent
+		SLOPE_IN_DEGREES = 1	// Slope is input as degrees
+	};
 
 	WindAndSpreadDirectionEnumType windAndSpreadAngleMode_; // Determines how wind and spread directions are referenced
 	SlopeInputModeEnumType slopeInputMode_;	// Determines whether slope is input as percent or degrees
