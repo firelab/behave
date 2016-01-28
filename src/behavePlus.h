@@ -9,6 +9,16 @@
 
 class BehavePlus
 {
+	enum WindAndSpreadDirectionEnumType {
+		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction are clockwise relative to upslope
+		RELATIVE_TO_NORTH = 1		// Wind direction direction are clockwise relative to compass north
+	};
+
+	enum SlopeInputModeEnumType {
+		SLOPE_IN_PERCENT = 0,	// Slope is input as a percent
+		SLOPE_IN_DEGREES = 1	// Slope is input as degrees
+	};
+
 public:
 	BehavePlus();
 	explicit BehavePlus(SurfaceInputs &surfaceInputs);
@@ -38,16 +48,6 @@ public:
 	void setSlopeInputToDegrees();
 
 private:
-	enum WindAndSpreadDirectionEnumType {
-		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction are clockwise relative to upslope
-		RELATIVE_TO_NORTH = 1		// Wind direction direction are clockwise relative to compass north
-	};
-
-	enum SlopeInputModeEnumType {
-		SLOPE_IN_PERCENT = 0,	// Slope is input as a percent
-		SLOPE_IN_DEGREES = 1	// Slope is input as degrees
-	};
-
 	void setSlopeInputMode(SlopeInputModeEnumType mode);
 	void setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode);
 
