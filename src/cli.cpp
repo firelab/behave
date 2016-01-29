@@ -183,4 +183,6 @@ int main(int argc, char *argv[])
 	printf("Spread_rate=%lf", spreadRate);
 
 	return 0;
+}
+
 #endif //CLI        

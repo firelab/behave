@@ -46,9 +46,9 @@ SET(HEADERS
 )
 	
 ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})
-IF(CLI)
+IF(Boost_FOUND)
 	ADD_EXECUTABLE(behave_cli ${SOURCE} src/cli.cpp ${HEADERS})
-ENDIF(CLI)
+ENDIF(Boost_FOUND)
 
 IF(Boost_FOUND)
 	TARGET_LINK_LIBRARIES(behave ${Boost_LIBRARIES})
