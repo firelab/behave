@@ -4,145 +4,80 @@
 #include <time.h>
 #include <cmath>
 
-#ifdef CLI
-#include <fstream>
-#include <iterator>
-#include <boost/program_options.hpp>
-#include <boost/tokenizer.hpp>
-#include <boost/token_functions.hpp>
-namespace po = boost::program_options;
+#include <stdlib.h>
+#include <stdio.h>
+#include "behave.h"
 
-/**
-* Function used to verify if an option has been set (not defaulted)
-* @param vm variable map
-* @param optn required option
-*/
-void verify_option_set(const po::variables_map& vm, const char* optn)
+#define EQUAL(a,b) (strcmp(a,b)==0)
+
+void Usage()
 {
-	if (!vm.count(optn) && !vm[optn].defaulted())
+	printf("Usage:\n");
+	printf("behave_cli [--fuel_model_number number]\n");
+	printf("           [--1hr percent]\n");
+	printf("           [--10hr percent]\n");
+	printf("           [--100hr percent]\n");
+	printf("           [--live_herb percent]\n");
+	printf("           [--live_woody percent]\n");
+	printf("           [--wind_speed speed]\n");
+	printf("           [--wind_direction degrees]\n");
+	printf("           [--slope degrees]\n");
+	printf("           [--aspect degrees]\n");
+	printf("           [--direction-of-interest degrees]\n");
+	printf("           [--output-to-file]\n");
+	printf("           [--file-name name]\n");
+	printf("           [--append]\n");
+	printf("           [--run-identifier name]\n");
+	//printf("           [--verbose]\n");
+	printf("\n");
+	printf("Arguments:\n");
+	printf("\n");
+	printf("--fuel-model-number <number>        The fuel model number \n");
+	printf("--1hr <percent>                     1-hr fuel moisture\n");
+	printf("--10hr <percent>                    10-hr fuel moisture\n");
+	printf("--100hr <percent>                   100-hr fuel moisture\n");
+	printf("--live-herb <percent>               Live herbacious fuel moisture\n");
+	printf("--live-woody <percent>              Live woody fuel moisture\n");
+	printf("--wind-speed <speed>                Mid-flame wind speed\n");
+	printf("--wind-direction <degrees>          Wind direction\n");
+	printf("--slope <degrees>                   Slope\n");
+	printf("--aspect <degrees>                  Aspect\n");
+	printf("--direction-of-interest <degrees>   Optional: calculate spread\n");
+	printf("                                    rate in direction other than max\n");
+	printf("--output-to-file                    Optional: output to a txt file\n");
+	printf("                                    default file name: output.txt\n");
+	printf("--file-name <name>                  Optional: specify output file name\n");
+	printf("--output-to-file                    Optional: append run to output file\n");
+	printf("--run-identifier <name>             Optional: specify identifier for run");
+	exit(1);
+}
+
+void checkMoistureBound(double moisture)
+{
+	if ((moisture < 0.0) || (moisture > 300.00))
 	{
-		std::cout << (std::string("Option '") + optn + "' was not set.\n") << std::endl;
+		throw std::runtime_error("ERROR: Moisture cannot negative or greater than 300.\n");
 	}
 }
 
-// Additional command line parser which interprets '@something' as a
-// option "response_file" with the value "something"
-std::pair<std::string, std::string> at_option_parser(std::string const&s)
+void checkAngleBound(double angle)
 {
-	if ('@' == s[0])
-		return std::make_pair(std::string("response_file"), s.substr(1));
-	else
-		return std::pair<std::string, std::string>();
+	if ((angle < 0.0) || (angle > 360.00))
+	{
+		throw std::runtime_error("ERROR: Angles cannot negative or greater than 360.\n");
+	}
 }
 
 int main(int argc, char *argv[])
 {
-	// Declare a group of options that will be
-	// allowed only on command line
-	po::options_description generic("Generic options");
-	generic.add_options()
-		("help", "produce help message")
-		("config_file", po::value<std::string>(),
-		"configuration file ('config_file' flag not required)")
-		("response_file", po::value<std::string>(),
-		"response file (can be specified with '@name', also)")
-		;
-	// Declare a group of options that will be
-	// allowed both on command line and in
-	// config file
-	po::options_description config("Simulation options");
-	config.add_options()
-		("fuel_model_number", po::value<int>()->required(), "Fuel model number")
-		("moisture_1hr", po::value<double>()->required(), "1-hr fuel moisture")
-		("moisture_10hr", po::value<double>()->required(), "10-hr fuel moisture")
-		("moisture_100hr", po::value<double>()->required(), "100-hr fuel moisture")
-		("moisture_live_herb", po::value<double>()->required(), "Live herbacious fuel moisture")
-		("moisture_live_wood", po::value<double>()->required(), "Live woody fuel moisture")
-		("wind_speed", po::value<double>()->required(), "Mid-flame wind speed")
-		("wind_direction", po::value<double>()->required(), "Mid-flame wind direction")
-		("slope", po::value<double>()->required(), "slope")
-		("aspect", po::value<double>()->required(), "aspect")
-		;
-
-	po::options_description cmdline_options;
-	cmdline_options.add(generic).add(config);
-
-	po::options_description config_file_options;
-	config_file_options.add(config);
-
-	po::options_description visible("Allowed options");
-	visible.add(generic).add(config);
-
-	po::positional_options_description p;
-	p.add("config_file", -1);
-
-	po::variables_map vm;
-
-	po::parsed_options opts_command = po::command_line_parser(argc, argv).
-		options(cmdline_options).extra_parser(at_option_parser).positional(p).run();
-
-	store(opts_command, vm);
-
-	if (argc == 1)
-	{
-		std::cout << visible << "\n";
-		return -1;
-	}
-
-	if (vm.count("config_file")) {
-		std::ifstream ifs(vm["config_file"].as<std::string>().c_str());
-		if (!ifs)
-		{
-			std::cout << "cannot open config file: " << vm["config_file"].as<std::string>() << "\n";
-			return -1;
-		}
-		else
-		{
-			po::parsed_options opts_config = parse_config_file(ifs, config_file_options);
-
-			store(opts_config, vm);
-		}
-	}
-
-	if (vm.count("help")) {
-		std::cout << visible << "\n";
-		return 0;
-	}
-
-	//        if (vm.count("version")) {
-	//            cout << "Behave version: " << VERSION << "\n";
-	//            cout << "Git version: " << GIT_VERSION << "\n";
-	//            cout << "Release date: " << RELEASE_DATE << "\n";
-	//            return 0;
-	//        }
-
-	if (vm.count("response_file")) {
-		// Load the file and tokenize it
-		std::ifstream ifs(vm["response_file"].as<std::string>().c_str());
-		if (!ifs) {
-			std::cout << "Could not open the response file\n";
-			return -1;
-		}
-		// Read the whole file into a string
-		std::stringstream ss;
-		ss << ifs.rdbuf();
-		// Split the file content
-		boost::char_separator<char> sep(" \n\r");
-		std::string sstr = ss.str();
-		boost::tokenizer<boost::char_separator<char> > tok(sstr, sep);
-		std::vector<std::string> args;
-		copy(tok.begin(), tok.end(), std::back_inserter(args));
-
-		for (unsigned int i = 0; i< args.size(); i++)
-			std::cout << args[i] << std::endl;
-
-		po::parsed_options opts_resp = po::command_line_parser(args).options(cmdline_options).run();
-
-		// Parse the file and store the options
-		store(opts_resp, vm);
-	}
-
-	notify(vm);
+	bool isOutputtingToFile = false;
+	bool hasSpecifiedFileName = false;
+	bool isAppending = false;
+	bool hasDirectionOfInterest = false;
+	bool hasRunIdentifier = false;
+	int i;
+	std::string fileName = "output.txt"; // default output file name
+	std::string runIdentifier = "";
 
 	// Surface Fire Inputs;
 	int fuelModelNumber = 0;
@@ -150,39 +85,169 @@ int main(int argc, char *argv[])
 	double moisture10h = 0.0;
 	double moisture100h = 0.0;
 	double moistureLiveHerb = 0.0;
-	double moistureLiveWood = 0.0;
-	double windspeed = 0.0;
+	double moistureLiveWoody = 0.0;
+	double windSpeed = 0.0;
 	double windDirection = 0;
 	double slope = 0.0;
-	double slopeAspect = 0.0;
+	double aspect = 0.0;
 	double directionOfMaxSpread = 0;
 	double flameLength = 0;
+	double directionOfInterest = 0; 
 	double spreadRate = 0;
-
-	fuelModelNumber = vm["fuel_model_number"].as<int>();
-	moisture1h = vm["moisture_1hr"].as<double>();
-	moisture10h = vm["moisture_10hr"].as<double>();
-	moisture100h = vm["moisture_100hr"].as<double>();
-	moistureLiveHerb = vm["moisture_live_herb"].as<double>();
-	moistureLiveWood = vm["moisture_live_wood"].as<double>();
-	windspeed = vm["wind_speed"].as<double>();
-	windDirection = vm["wind_direction"].as<double>();
-	slope = vm["slope"].as<double>();
-	slopeAspect = vm["aspect"].as<double>();
 
 	Behave behave;
 
-	// Set the wind and spread angle input mode (default is upslope)
-	behave.setWindAndSpreadAnglesRelativeToNorth();
+	if (argc == 1)
+	{
+		Usage();
+	}
 
-	// Set slope input mode (default is percent)
-	behave.setSlopeInputToDegrees();
+	i = 1;
+	while(i < argc)
+	{
+		if (EQUAL(argv[i], "--fuel-model-number"))
+		{
+			fuelModelNumber = atoi(argv[++i]);
+			if (!behave.isFuelModelDefined(fuelModelNumber))
+			{
+				throw std::runtime_error("ERROR: Fuel model is undefined.\n");
+			}
+		}
+		else if(EQUAL(argv[i], "--1hr"))
+		{
+			moisture1h = atof(argv[++i]);
+			checkMoistureBound(moisture1h);
+			moisture1h /= 100;
+		}
+		else if(EQUAL(argv[i], "--10hr"))
+		{
+			moisture10h = atof(argv[++i]);
+			checkMoistureBound(moisture10h);
+			moisture10h /= 100;
+		}
+		else if(EQUAL(argv[i], "--100hr"))
+		{
+			moisture100h = atof(argv[++i]);
+			moisture100h /= 100;
+			checkMoistureBound(moisture10h);
+		}
+		else if(EQUAL(argv[i], "--live-herb"))
+		{
+			moistureLiveHerb = atof(argv[++i]);
+			checkMoistureBound(moisture10h);
+			moistureLiveHerb /= 100;
+		}
+		else if(EQUAL(argv[i], "--live-woody"))
+		{
+			moistureLiveWoody = atof(argv[++i]);
+			checkMoistureBound(moisture10h);
+			moistureLiveWoody /= 100;
+		}
+		else if(EQUAL(argv[i], "--wind-speed"))
+		{
+			windSpeed = atof(argv[++i]);
+			checkMoistureBound(moisture10h);
+		}
+		else if(EQUAL(argv[i], "--wind-direction"))
+		{
+			windDirection = atof(argv[++i]);
+			checkMoistureBound(moisture10h);
+		}
+		else if(EQUAL(argv[i], "--slope"))
+		{
+			slope = atof(argv[++i]);
+			checkAngleBound(slope);
+		}
+		else if (EQUAL(argv[i], "--aspect"))
+		{
+			aspect = atof(argv[++i]);
+			checkAngleBound(aspect);
+		}
+		else if (EQUAL(argv[i], "--direction-of-interest"))
+		{
+			directionOfInterest = atof(argv[++i]);
+			checkAngleBound(directionOfInterest);
+			hasDirectionOfInterest = true;
+		}
+		else if(EQUAL(argv[i], "--output-to-file"))
+		{
+			isOutputtingToFile = true;
+		}
+		else if (EQUAL(argv[i], "--file-name"))
+		{
+			hasSpecifiedFileName = true;
+			fileName = argv[++i];
+		}
+		else if (EQUAL(argv[i], "--append"))
+		{
+			isAppending = true;
+		}
+		else if (EQUAL(argv[i], "--run-identifier"))
+		{
+			hasRunIdentifier = true;
+			runIdentifier = argv[++i];
+		}
+		//else if(EQUAL(argv[i], "--verbose"))
+		//{
+		//	verbose = true;
+		//}
+		else
+		{
+			Usage();
+		}
+		i++;
+	}
+	
+	if (!isOutputtingToFile && hasSpecifiedFileName)
+	{
+		throw std::runtime_error("Must be printing a file to specify a file name\n");
+		Usage();
+	}
 
-	spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+	if (!isOutputtingToFile && hasRunIdentifier)
+	{
+		throw std::runtime_error("Must be printing a file to specify a run identifer\n");
+		Usage();
+	}
 
-	printf("Spread_rate=%lf", spreadRate);
+	behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
+
+	if (hasDirectionOfInterest)
+	{
+		spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+	}
+	else
+	{
+		spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+	}
+
+	flameLength = behave.getFlameLength();
+	directionOfMaxSpread = behave.getDirectionOfMaxSpread();
+
+	if (isOutputtingToFile)
+	{
+		FILE *fout;
+		//fout = fopen(fileName.c_str(), "wt");
+		if (isAppending)
+		{
+			fopen_s(&fout, fileName.c_str(), "at");
+		}
+		else
+		{
+			fopen_s(&fout, fileName.c_str(), "wt");
+		}
+		if (hasRunIdentifier)
+		{
+			fprintf(fout, runIdentifier.c_str());
+			fprintf(fout,"\t");
+		}
+		fprintf(fout, "Spread_rate_(ch/hr)\t %lf\t" \
+			"Flame_length(ft)\t %lf\t" \
+			"Direction_of_max_spread(degrees)\t %lf\n", 
+			spreadRate, flameLength, directionOfMaxSpread);
+		fclose(fout);
+	}
 
 	return 0;
 }
 
-#endif //CLI        

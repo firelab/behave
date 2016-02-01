@@ -11,18 +11,6 @@ IF(CLI)
     ADD_DEFINITIONS(-DCLI)
 ENDIF(CLI)
 
-# *****************************************************************************
-# Find boost libs, 
-# *****************************************************************************
-INCLUDE(FindBoost)
-IF(Boost_FOUND)
-	SET(Boost_DEBUG ON)
-	SET(Boost_USE_MULTITHREAD OFF)
-	FIND_PACKAGE(Boost 1.41.1 COMPONENTS program_options REQUIRED)
-
-	INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS}) 
-ENDIF(Boost_FOUND)
-
 SET(SOURCE
 	src/behave.cpp
 	src/fuelModels.cpp
@@ -46,10 +34,7 @@ SET(HEADERS
 )
 	
 ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})
-IF(Boost_FOUND)
-	ADD_EXECUTABLE(behave_cli ${SOURCE} src/cli.cpp ${HEADERS})
-ENDIF(Boost_FOUND)
 
-IF(Boost_FOUND)
-	TARGET_LINK_LIBRARIES(behave ${Boost_LIBRARIES})
-ENDIF(Boost_FOUND)
+IF(CLI)
+	ADD_EXECUTABLE(behave_cli ${SOURCE} src/cli.cpp ${HEADERS})
+ENDIF(CLI)
