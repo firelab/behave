@@ -30,14 +30,14 @@ enum
 void Usage()
 {
 	printf("\nUsage:\n");
-	printf("behave_cli [--fuel_model_number number]      Required\n");
+	printf("behave_cli [--fuel-model-number number]      Required\n");
 	printf("           [--1hr percent]                   Required\n");
 	printf("           [--10hr percent]                  Required\n");
 	printf("           [--100hr percent]                 Required\n");
-	printf("           [--live_herb percent]             Required\n");
-	printf("           [--live_woody percent]            Required\n");
-	printf("           [--wind_speed speed]              Required\n");
-	printf("           [--wind_direction degrees]        Required\n");
+	printf("           [--live-herb percent]             Required\n");
+	printf("           [--live-woody percent]            Required\n");
+	printf("           [--wind-speed speed]              Required\n");
+	printf("           [--wind-direction degrees]        Required\n");
 	printf("           [--slope degrees]                 Required\n");
 	printf("           [--aspect degrees]                Required\n");
 	printf("           [--direction-of-interest degrees] Optional\n");
