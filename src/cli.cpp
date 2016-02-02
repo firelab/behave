@@ -96,8 +96,8 @@ void checkAngleBound(double angle)
 	if ((angle < 0.0) || (angle > 360.00))
 	{
 		//throw std::runtime_error("ERROR: Angles cannot negative or greater than 360.\n");
-		printf("ERROR: Angles cannot negative or greater than 360.\n");
-		exit(1);
+		printf("ERROR: Angles cannot be negative or greater than 360.\n");
+		Usage();
 	}
 }
 
@@ -107,7 +107,7 @@ void checkSlopeBound(double angle)
 	if (angle > 80.0)
 	{
 		printf("ERROR: Slope cannot exceed 80 degrees.\n");
-		exit(1);
+		Usage();
 	}
 }
 
@@ -117,7 +117,7 @@ void checkMoistureBound(double moisture)
 	{
 		//throw std::runtime_error("ERROR: Moisture cannot negative or greater than 300.\n");
 		printf("ERROR: Moisture cannot negative or greater than 300.\n");
-		exit(1);
+		Usage();
 	}
 }
 
@@ -550,9 +550,9 @@ int main(int argc, char *argv[])
 			fprintf(fout, runIdentifier.c_str());
 			fprintf(fout, "\t");
 		}
-		fprintf(fout, "Spread_rate_(ch/hr)\t %lf\t" \
-			"Flame_length(ft)\t %lf\t" \
-			"Direction_of_max_spread(degrees)\t %lf\n",
+		fprintf(fout, "Spread_rate_(ch/hr)\t%lf\t" \
+			"Flame_length(ft)\t%lf\t" \
+			"Direction_of_max_spread(degrees)\t%lf\n",
 			spreadRate, flameLength, directionOfMaxSpread);
 		fclose(fout);
 	}
