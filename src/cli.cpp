@@ -11,7 +11,9 @@
 #define EQUAL(a,b) (strcmp(a,b)==0)
 
 const int REQUIRED_ARG_COUNT = 10;
-enum RequiredArgs {
+
+enum 
+{
 	FUEL_MODEL_NUMBER,
 	ONE_HOUR,
 	TEN_HOUR,
@@ -66,12 +68,43 @@ void Usage()
 	exit(1);
 }
 
+int parseInteger(int i, std::string argString)
+{
+	int retVal = -1;
+	if (argString.c_str() != NULL)
+	{
+		char* end;
+		long val = strtol(argString.c_str(), &end, 10);
+		if (!end[0] && val >= 0)
+		{
+			retVal = val;
+		}
+	}
+	return retVal;
+}
+
+double parseDouble(int i, std::string argString)
+{
+	double retVal = -1;
+	if (argString.c_str() != NULL)
+	{
+		char* end;
+		double val = strtod(argString.c_str(), &end);
+		if (!end[0] && val >= 0)
+		{
+			retVal = val;
+		}
+	}
+	return retVal;
+}
+
 void checkMoistureBound(double moisture)
 {
 	if ((moisture < 0.0) || (moisture > 300.00))
 	{
 		//throw std::runtime_error("ERROR: Moisture cannot negative or greater than 300.\n");
 		printf("ERROR: Moisture cannot negative or greater than 300.\n");
+		exit(1);
 	}
 }
 
@@ -81,58 +114,60 @@ void checkAngleBound(double angle)
 	{
 		//throw std::runtime_error("ERROR: Angles cannot negative or greater than 360.\n");
 		printf("ERROR: Angles cannot negative or greater than 360.\n");
+		exit(1);
 	}
 }
 
 std::string getArgumentName(int argIndex)
 {
 	std::string retString = "";
-	if (argIndex == RequiredArgs::ASPECT)
+	if (argIndex == ASPECT)
 	{
 		retString = "aspect";
 	}
-	if (argIndex == RequiredArgs::FUEL_MODEL_NUMBER)
+	if (argIndex == FUEL_MODEL_NUMBER)
 	{
 		retString = "fuel model number";
 	}
-	if (argIndex == RequiredArgs::HUNDRED_HOUR)
+	if (argIndex == HUNDRED_HOUR)
 	{
 		retString = "100-hr moisture";
 	}
-	if (argIndex == RequiredArgs::LIVE_HERB)
+	if (argIndex == LIVE_HERB)
 	{
 		retString = "live herbaceous moisture";
 	}
-	if (argIndex == RequiredArgs::LIVE_WOODY)
+	if (argIndex == LIVE_WOODY)
 	{
 		retString = "live woody moisture";
 	}
-	if (argIndex == RequiredArgs::ONE_HOUR)
+	if (argIndex == ONE_HOUR)
 	{
 		retString = "1-hr moisture";
 	}
-	if (argIndex == RequiredArgs::SLOPE)
+	if (argIndex == SLOPE)
 	{
 		retString = "slope";
 	}
-	if (argIndex == RequiredArgs::TEN_HOUR)
+	if (argIndex == TEN_HOUR)
 	{
 		retString = "10-hr moisture";
 	}
-	if (argIndex == RequiredArgs::WIND_DIRECTION)
+	if (argIndex == WIND_DIRECTION)
 	{
 		retString = "wind direction";
 	}
-	if (argIndex == RequiredArgs::WIND_SPEED)
+	if (argIndex == WIND_SPEED)
 	{
 		retString = "wind speed";
 	}
-
 	return retString;
 }
 
 int main(int argc, char *argv[])
 {
+	const int MAX_ARG_INDEX = argc - 1;
+
 	bool requiredArgArray[REQUIRED_ARG_COUNT];
 	bool isOutputtingToFile = false;
 	bool hasSpecifiedFileName = false;
@@ -140,32 +175,33 @@ int main(int argc, char *argv[])
 	bool hasDirectionOfInterest = false;
 	bool hasRunIdentifier = false;
 	int i;
-	int test_i;
 	std::string fileName = "output.txt"; // default output file name
 	std::string runIdentifier = "";
 
 	// Surface Fire Inputs;
-	int fuelModelNumber = 0;
-	double moisture1h = 0.0;
-	double moisture10h = 0.0;
-	double moisture100h = 0.0;
-	double moistureLiveHerb = 0.0;
-	double moistureLiveWoody = 0.0;
-	double windSpeed = 0.0;
-	double windDirection = 0;
-	double slope = 0.0;
-	double aspect = 0.0;
-	double directionOfMaxSpread = 0;
-	double flameLength = 0;
-	double directionOfInterest = 0; 
+	int fuelModelNumber = -1;
+	double moistureOneHr = -1.0;
+	double moistureTenHr = -1.0;
+	double moistureHundredHr = -1.0;
+	double moistureLiveHerb = -1.0;
+	double moistureLiveWoody = -1.0;
+	double windSpeed = -1.0;
+	double windDirection = -1.0;
+	double slope = -1.0;
+	double aspect = -1.0;
+	double directionOfMaxSpread = -1.0;
+	double flameLength = -1.0;
+	double directionOfInterest = -1.0; 
 	double spreadRate = 0;
 
-	for (int i = 0; i < REQUIRED_ARG_COUNT; i++)
+	for (int index = 0; index < REQUIRED_ARG_COUNT; index++)
 	{
-		requiredArgArray[i] = false;
+		requiredArgArray[index] = false;
 	}
 
 	Behave behave;
+	behave.setSlopeInputToDegrees();
+	behave.setWindAndSpreadAnglesRelativeToNorth();
 
 	// Parse command line arguments
 	if (argc == 1)
@@ -173,144 +209,191 @@ int main(int argc, char *argv[])
 		Usage();
 	}
 	i = 1;
+
 	while(i < argc)
 	{
 		if (EQUAL(argv[i], "--fuel-model-number"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for fuel model number\n");
-				break;
+				std::string argString = argv[++i];
+				fuelModelNumber = parseInteger(i, argString);
 			}
-			fuelModelNumber = atoi(argv[++i]);
-			if (!behave.isFuelModelDefined(fuelModelNumber))
+			if (fuelModelNumber <= 0)
 			{
-				throw std::runtime_error("ERROR: Fuel model is undefined.\n");
+				printf("ERROR: No valid value entered for fuelModelNumber");
+				Usage();
+				exit(1);
 			}
-			requiredArgArray[RequiredArgs::FUEL_MODEL_NUMBER] = true;
+			else if (!behave.isFuelModelDefined(fuelModelNumber))
+			{
+				printf("ERROR: Fuel model %d is undefined.\n", fuelModelNumber);
+				Usage();
+				exit(1);
+			}
+			requiredArgArray[FUEL_MODEL_NUMBER] = true;
 		}
 		else if(EQUAL(argv[i], "--1hr"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for 1-hr moisture\n");
-				break;
+				std::string argString = argv[++i];
+				moistureOneHr = parseDouble(i, argString);
 			}
-			moisture1h = atof(argv[++i]);
-			checkMoistureBound(moisture1h);
-			moisture1h /= 100;
-			requiredArgArray[RequiredArgs::ONE_HOUR] = true;
+			if (moistureOneHr < 0)
+			{
+				printf("ERROR: No valid value entered for 1-hr moisture\n");
+				Usage();
+				exit(1);
+			}
+			checkMoistureBound(moistureOneHr);
+			moistureOneHr /= 100;
+			requiredArgArray[ONE_HOUR] = true;
 		}
 		else if(EQUAL(argv[i], "--10hr"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for 10-hr moisture\n");
-				break;
+				std::string argString = argv[++i];
+				moistureTenHr = parseDouble(i, argString);
 			}
-			moisture10h = atof(argv[++i]);
-			checkMoistureBound(moisture10h);
-			moisture10h /= 100;
-			requiredArgArray[RequiredArgs::TEN_HOUR] = true;
+			if (moistureTenHr < 0)
+			{
+				printf("ERROR: No valid value entered for 10-hr moisture\n");
+				Usage();
+				exit(1);
+			}
+			checkMoistureBound(moistureTenHr);
+			moistureTenHr /= 100;
+			requiredArgArray[TEN_HOUR] = true;
 		}
 		else if(EQUAL(argv[i], "--100hr"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for 100-hr moisture\n");
+				std::string argString = argv[++i];
+				moistureHundredHr = parseDouble(i, argString);
+			}
+			if (moistureHundredHr < 0)
+			{
+				printf("ERROR: No valid value entered for 100-hr moisture\n");
+				Usage();
 				break;
 			}
-			moisture100h = atof(argv[++i]);
-			checkMoistureBound(moisture100h);
-			moisture100h /= 100;
-			requiredArgArray[RequiredArgs::HUNDRED_HOUR] = true;
+			checkMoistureBound(moistureHundredHr);
+			moistureHundredHr /= 100;
+			requiredArgArray[HUNDRED_HOUR] = true;
 		}
 		else if(EQUAL(argv[i], "--live-herb"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for live herbaceous moisture\n");
+				std::string argString = argv[++i];
+				moistureLiveHerb = parseDouble(i, argString);
+			}
+			if (moistureLiveHerb < 0)
+			{
+				printf("ERROR: No valid value entered for live herbaceous moisture\n");
+				Usage();
 				break;
 			}
-			moistureLiveHerb = atof(argv[++i]);
-			checkMoistureBound(moisture10h);
+			checkMoistureBound(moistureLiveHerb);
 			moistureLiveHerb /= 100;
-			requiredArgArray[RequiredArgs::LIVE_HERB] = true;
+			requiredArgArray[LIVE_HERB] = true;
 		}
 		else if(EQUAL(argv[i], "--live-woody"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for live woody moisture\n");
+				std::string argString = argv[++i];
+				moistureLiveWoody = parseDouble(i, argString);
+			}
+			if (moistureLiveWoody < 0)
+			{
+				printf("ERROR: No valid value entered for live woody moisture\n");
+				Usage();
 				break;
 			}
-			moistureLiveWoody = atof(argv[++i]);
-			checkMoistureBound(moisture10h);
+			checkMoistureBound(moistureLiveWoody);
 			moistureLiveWoody /= 100;
-			requiredArgArray[RequiredArgs::LIVE_WOODY] = true;
+			requiredArgArray[LIVE_WOODY] = true;
 		}
 		else if(EQUAL(argv[i], "--wind-speed"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for wind speed\n");
+				std::string argString = argv[++i];
+				windSpeed = parseDouble(i, argString);
+			}
+			if (windSpeed < 0)
+			{
+				printf("ERROR: No valid value entered for wind speed\n");
+				Usage();
 				break;
 			}
-			windSpeed = atof(argv[++i]);
-			requiredArgArray[RequiredArgs::WIND_SPEED] = true;
+			requiredArgArray[WIND_SPEED] = true;
 		}
 		else if(EQUAL(argv[i], "--wind-direction"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for wind direction\n");
+				std::string argString = argv[++i];
+				windDirection = parseDouble(i, argString);
+			}
+			if (windDirection < 0)
+			{
+				printf("ERROR: No valid value entered for wind direction\n");
+				Usage();
 				break;
 			}
-			windDirection = atof(argv[++i]);
-			checkAngleBound(moisture10h);
-			requiredArgArray[RequiredArgs::WIND_DIRECTION] = true;
+			checkAngleBound(windDirection);
+			requiredArgArray[WIND_DIRECTION] = true;
 		}
 		else if(EQUAL(argv[i], "--slope"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for slope\n");
+				std::string argString = argv[++i];
+				slope = parseDouble(i, argString);
+			}
+			if (slope < 0)
+			{
+				printf("ERROR: No valid value entered for slope\n");
+				Usage();
 				break;
 			}
-			slope = atof(argv[++i]);
 			checkAngleBound(slope);
-			requiredArgArray[RequiredArgs::SLOPE] = true;
+			requiredArgArray[SLOPE] = true;
 		}
 		else if (EQUAL(argv[i], "--aspect"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for aspect\n");
+				std::string argString = argv[++i];
+				aspect = parseDouble(i, argString);
+			}
+			if (aspect < 0)
+			{
+				printf("ERROR: No valid value entered for aspect\n");
+				Usage();
 				break;
 			}
-			aspect = atof(argv[++i]);
 			checkAngleBound(aspect);
-			requiredArgArray[RequiredArgs::ASPECT] = true;
+			requiredArgArray[ASPECT] = true;
 		}
 		else if (EQUAL(argv[i], "--direction-of-interest"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if ((i + 1) <= MAX_ARG_INDEX)
 			{
-				printf("ERROR: No value entered for direction of interest\n");
+				std::string argString = argv[++i];
+				directionOfInterest = parseDouble(i, argString);
+			}
+			if (directionOfInterest < 0)
+			{
+				printf("ERROR: No valid value entered for direction of interest\n");
+				Usage();
 				break;
 			}
-			directionOfInterest = atof(argv[++i]);
 			checkAngleBound(directionOfInterest);
 			hasDirectionOfInterest = true;
 		}
@@ -320,10 +403,10 @@ int main(int argc, char *argv[])
 		}
 		else if (EQUAL(argv[i], "--file-name"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if (argv[++i] < 0)
 			{
 				printf("ERROR: No file name entered\n");
+				Usage();
 				break;
 			}
 			hasSpecifiedFileName = true;
@@ -335,10 +418,10 @@ int main(int argc, char *argv[])
 		}
 		else if (EQUAL(argv[i], "--run-identifier"))
 		{
-			test_i = i + 1;
-			if (argv[test_i] == NULL)
+			if (argv[++i] == NULL)
 			{
 				printf("ERROR: No run identifier entered\n");
+				Usage();
 				break;
 			}
 			hasRunIdentifier = true;
@@ -380,7 +463,7 @@ int main(int argc, char *argv[])
 		//throw std::runtime_error("Must be printing a file to specify a run identifer\n");
 	}
 
-	behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
+	behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
 
 	if (hasDirectionOfInterest)
 	{
@@ -397,14 +480,15 @@ int main(int argc, char *argv[])
 	if (isOutputtingToFile)
 	{
 		FILE *fout;
-		//fout = fopen(fileName.c_str(), "wt");
 		if (isAppending)
 		{
-			fopen_s(&fout, fileName.c_str(), "at");
+			//fopen_s(&fout, fileName.c_str(), "at");
+			fout = fopen(fileName.c_str(), "at");
 		}
 		else
 		{
-			fopen_s(&fout, fileName.c_str(), "wt");
+			//fopen_s(&fout, fileName.c_str(), "wt");
+			fout = fopen(fileName.c_str(), "wt");
 		}
 		if (hasRunIdentifier)
 		{
@@ -417,6 +501,10 @@ int main(int argc, char *argv[])
 			spreadRate, flameLength, directionOfMaxSpread);
 		fclose(fout);
 	}
+
+	printf("Spread_rate_(ch/hr)\t\t\t%lf\n", spreadRate);
+	printf("Flame_length(ft)\t\t\t%lf\n", flameLength);
+	printf(	"Direction_of_max_spread(degrees)\t%lf\n", directionOfMaxSpread);
 
 	return 0;
 }

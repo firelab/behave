@@ -70,7 +70,7 @@ private:
 		bool		isDefined_;						// If true, record has been populated with values for its fields
 	};
 
-	//std::array<FuelModelRecord, 256> FuelModelArray;; // too big to be stack allocated
+	//std::array<FuelModelRecord, 257> FuelModelArray;; // too big to be stack allocated
 	std::vector<FuelModelRecord> FuelModelArray;
 	
 };

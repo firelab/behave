@@ -76,7 +76,7 @@ void FuelModels::populateFuelModels()
 	// Index 0 not used so that array index number == fuel model number
 	setFuelModelRecord(0, "NO_CODE", "NO_NAME", 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, false, true);
-
+	FuelModelArray[0].isDefined_ = false;
 	/*
 	fuelModelNumber, code, name
 	fuelBedDepth, moistureOfExtinctionDeadFuel, heatOfCombustionDeadFuel, heatOfCombustionLiveFuel,
@@ -558,6 +558,13 @@ bool FuelModels::getIsDynamic(int fuelModelNumber) const
 
 bool FuelModels::isFuelModelDefined(int fuelModelNumber) const
 {
-	return FuelModelArray[fuelModelNumber].isDefined_;
+	if (fuelModelNumber <= 0 || fuelModelNumber > 256)
+	{
+		return false;
+	}
+	else
+	{
+		return FuelModelArray[fuelModelNumber].isDefined_;
+	}
 }
 
