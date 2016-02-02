@@ -57,17 +57,17 @@ void Usage()
 	printf("--100hr <percent>                   Required: 100-hr fuel moisture\n");
 	printf("--live-herb <percent>               Required: Live herbacious fuel moisture\n");
 	printf("--live-woody <percent>              Required: Live woody fuel moisture\n");
-	printf("--wind-speed <speed>                Required: Mid-flame wind speed\n");
+	printf("--wind-speed <speed>                Required: Mid-flame wind speed(mi/hr)\n");
 	printf("--wind-direction <degrees>          Required: Wind direction\n");
 	printf("--slope <degrees>                   Required: Slope steepness\n");
 	printf("--aspect <degrees>                  Required: Aspect of the slope\n");
-	printf("--direction-of-interest <degrees>   Optional: calculate spread rate in a\n");
+	printf("--direction-of-interest <degrees>   Optional: Calculate spread rate in a\n");
 	printf("                                       direction other than maximum\n");
-	printf("--output-to-file                    Optional: output to a txt file\n");
+	printf("--output-to-file                    Optional: Output to a txt file\n");
 	printf("                                       default file name: output.txt\n");
-	printf("--file-name <name>                  Optional: specify output file name\n");
-	printf("--append                            Optional: append run to output file\n");
-	printf("--run-identifier <name>             Optional: specify identifier for run\n");
+	printf("--file-name <name>                  Optional: Specify output file name\n");
+	printf("--append                            Optional: Append run to output file\n");
+	printf("--run-identifier <name>             Optional: Specify identifier for run\n");
 	exit(1);
 }
 
