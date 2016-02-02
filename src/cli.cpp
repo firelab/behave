@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "behave.h"
 
 #define EQUAL(a,b) (strcmp(a,b)==0)
@@ -64,7 +65,7 @@ void Usage()
 	printf("                                       default file name: output.txt\n");
 	printf("--file-name <name>                  Optional: specify output file name\n");
 	printf("--output-to-file                    Optional: append run to output file\n");
-	printf("--run-identifier <name>             Optional: specify identifier for run");
+    printf("--run-identifier <name>             Optional: specify identifier for run\n");
 	exit(1);
 }
 
