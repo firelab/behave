@@ -30,7 +30,7 @@ enum
 void Usage()
 {
 	printf("\nUsage:\n");
-	printf("behave_cli [--fuel-model-number number]      Required\n");
+	printf("behave-cli [--fuel-model-number number]      Required\n");
 	printf("           [--1hr percent]                   Required\n");
 	printf("           [--10hr percent]                  Required\n");
 	printf("           [--100hr percent]                 Required\n");
