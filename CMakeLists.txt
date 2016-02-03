@@ -36,5 +36,5 @@ SET(HEADERS
 ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})
 
 IF(CLI)
-	ADD_EXECUTABLE(behave_cli ${SOURCE} src/cli.cpp ${HEADERS})
+	ADD_EXECUTABLE(behave-cli ${SOURCE} src/cli.cpp ${HEADERS})
 ENDIF(CLI)
