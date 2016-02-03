@@ -45,7 +45,6 @@ void Usage()
 	printf("           [--file-name name]                Optional\n");
 	printf("           [--append]                        Optional\n");
 	printf("           [--run-identifier name]           Optional\n");
-	//printf("           [--verbose]\n");
 	printf("\n");
 	printf("All parameter values must be non-negative and angles must be between\n");
 	printf("0-360 degrees, and all angles are relative to compass north\n\n");
@@ -68,34 +67,13 @@ void Usage()
 	printf("--file-name <name>                  Optional: Specify output file name\n");
 	printf("--append                            Optional: Append run to output file\n");
 	printf("--run-identifier <name>             Optional: Specify identifier for run\n");
-	exit(1);
-}
-
-int parseFuelModelNumber(int i, const int MAX_ARG_INDEX, std::string argString)
-{
-	int retVal = -1;
-	if (argString.c_str() != NULL)
-	{
-		char* end;
-		long val = strtol(argString.c_str(), &end, 10);
-		if (!end[0] && val >= 0)
-		{
-			retVal = val;
-		}
-	}
-	if (retVal <= 0)
-	{
-		printf("ERROR: No valid value entered for fuel model number");
-		Usage();
-	}
-	return retVal;
+	exit(1); // Exit with error code 1
 }
 
 void checkAngleBound(double angle)
 {
 	if ((angle < 0.0) || (angle > 360.00))
 	{
-		//throw std::runtime_error("ERROR: Angles cannot negative or greater than 360.\n");
 		printf("ERROR: Angles cannot be negative or greater than 360.\n");
 		Usage();
 	}
@@ -115,30 +93,56 @@ void checkMoistureBound(double moisture)
 {
 	if ((moisture < 0.0) || (moisture > 300.00))
 	{
-		//throw std::runtime_error("ERROR: Moisture cannot negative or greater than 300.\n");
 		printf("ERROR: Moisture cannot negative or greater than 300.\n");
 		Usage();
 	}
 }
 
-double parseMoisture(int i, const int MAX_ARG_INDEX, std::string argString, std::string argName)
+int parseFuelModelNumber(int i, const int MAX_ARG_INDEX, char *argv[])
 {
-	double retVal = -1;
-	if (argString.c_str() != NULL)
+	int retVal = -1;
+	int fuelModelNumberIndex = i + 1;
+	// Parse command line argument
+	if ((fuelModelNumberIndex <= MAX_ARG_INDEX) && (argv[fuelModelNumberIndex] != NULL))
 	{
 		char* end;
-		double val = strtod(argString.c_str(), &end);
+		long val = strtol(argv[fuelModelNumberIndex], &end, 10);
 		if (!end[0] && val >= 0)
 		{
 			retVal = val;
 		}
 	}
-	if (retVal < 0)
+	if (retVal <= 0) // An error has occurred
 	{
+		// Report error
+		printf("ERROR: No valid value entered for fuel model number");
+		Usage();  // Exits program
+	}
+
+	return retVal;
+}
+
+double parseMoisture(int i, const int MAX_ARG_INDEX, char *argv[], std::string argName)
+{
+	double retVal = -1;
+	int moistureValueIndex = i + 1;
+	// Parse command line argument
+	if ((moistureValueIndex <= MAX_ARG_INDEX) && (argv[moistureValueIndex] != NULL))
+	{
+		char* end;
+		double val = strtod(argv[moistureValueIndex], &end);
+		if (!end[0] && val >= 0)
+		{
+			retVal = val;
+		}
+	}
+	if (retVal < 0) // An error has occurred
+	{
+		// Report error
 		std::string errorString = "ERROR: No valid value entered for ";
 		errorString += argName;
 		printf(errorString.c_str());
-		Usage();
+		Usage(); // Exits program
 	}
 	checkMoistureBound(retVal);
 	retVal /= 100;
@@ -146,24 +150,27 @@ double parseMoisture(int i, const int MAX_ARG_INDEX, std::string argString, std:
 	return retVal;
 }
 
-double parseDouble(int i, const int MAX_ARG_INDEX, std::string argString, std::string argName)
+double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string argName)
 {
 	double retVal = -1;
-	if (argString.c_str() != NULL)
+	int doubleValueIndex = i + 1;
+	// Parse command line argument
+	if ((doubleValueIndex <= MAX_ARG_INDEX) && (argv[doubleValueIndex] != NULL))
 	{
 		char* end;
-		double val = strtod(argString.c_str(), &end);
+		double val = strtod(argv[doubleValueIndex], &end);
 		if (!end[0] && val >= 0)
 		{
 			retVal = val;
 		}
 	}
-	if (retVal < 0)
+	if (retVal < 0) // An error has occured
 	{
+		// Report error
 		std::string errorString = "ERROR: No valid value entered for ";
 		errorString += argName;
 		printf(errorString.c_str());
-		Usage();
+		Usage(); // Exits program
 	}
 
 	return retVal;
@@ -257,185 +264,89 @@ int main(int argc, char *argv[])
 	behave.setSlopeInputToDegrees();
 	behave.setWindAndSpreadAnglesRelativeToNorth();
 
-	// Parse command line arguments
+	// Check for presense command line arguments
 	if (argc == 1)
 	{
 		Usage();
 	}
 	i = 1;
 
+	// Parse commandline arguments
 	while (i < argc)
 	{
 		if (EQUAL(argv[i], "--fuel-model-number"))
 		{
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				fuelModelNumber = parseFuelModelNumber(i, MAX_ARG_INDEX, argString);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for fuel model number\n");
-				Usage();
-			}
+			fuelModelNumber = parseFuelModelNumber(i, MAX_ARG_INDEX, argv);
+			// Check if fuel model is defined
 			if (!behave.isFuelModelDefined(fuelModelNumber))
 			{
+				// An error has occurred
 				printf("ERROR: Fuel model %d is undefined\n", fuelModelNumber);
-				Usage();
+				Usage(); // Exits program
 			}
 			requiredArgArray[FUEL_MODEL_NUMBER] = true;
 		}
 		else if (EQUAL(argv[i], "--1hr"))
 		{
 			argName = "1-hr moisture";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				moistureOneHr = parseMoisture(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for 1-hr moisture\n");
-				Usage();
-			}
+			moistureOneHr = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
 			requiredArgArray[ONE_HOUR] = true;
 		}
 		else if (EQUAL(argv[i], "--10hr"))
 		{
 			argName = "10-hr moisture";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				moistureTenHr = parseMoisture(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for 10-hr moisture\n");
-				Usage();
-			}
+			moistureTenHr = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
 			requiredArgArray[TEN_HOUR] = true;
 		}
 		else if (EQUAL(argv[i], "--100hr"))
 		{
 			argName = "100-hr moisture";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				moistureHundredHr = parseMoisture(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for 100-hr moisture\n");
-				Usage();
-			}
+			moistureHundredHr = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
 			requiredArgArray[HUNDRED_HOUR] = true;
 		}
 		else if (EQUAL(argv[i], "--live-herb"))
 		{
 			argName = "live herbaceous moisture";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				moistureLiveHerb = parseMoisture(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for live herbaceous moisture\n");
-				Usage();
-			}
+			moistureLiveHerb = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
 			requiredArgArray[LIVE_HERB] = true;
 		}
 		else if (EQUAL(argv[i], "--live-woody"))
 		{
 			argName = "live woody moisture";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				moistureLiveWoody = parseMoisture(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for live woody moisture\n");
-				Usage();
-			}
+			moistureLiveWoody = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
 			requiredArgArray[LIVE_WOODY] = true;
 		}
 		else if (EQUAL(argv[i], "--wind-speed"))
 		{
 			argName = "wind speed";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				windSpeed = parseDouble(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for wind speed\n");
-				Usage();
-			}
+			windSpeed = parseDouble(i, MAX_ARG_INDEX, argv, argName);
 			requiredArgArray[WIND_SPEED] = true;
 		}
 		else if (EQUAL(argv[i], "--wind-direction"))
 		{
 			argName = "wind direction";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				windDirection = parseDouble(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for wind direction\n");
-				Usage();
-			}
+			windDirection = parseDouble(i, MAX_ARG_INDEX, argv, argName);
 			checkAngleBound(windDirection);
 			requiredArgArray[WIND_DIRECTION] = true;
 		}
 		else if (EQUAL(argv[i], "--slope"))
 		{
 			argName = "slope";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				slope = parseDouble(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for slope\n");
-				Usage();
-			}
+			slope = parseDouble(i, MAX_ARG_INDEX, argv, argName);
 			checkSlopeBound(slope);
 			requiredArgArray[SLOPE] = true;
 		}
 		else if (EQUAL(argv[i], "--aspect"))
 		{
 			argName = "aspect";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				aspect = parseDouble(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for aspect\n");
-				Usage();
-			}
+			aspect = parseDouble(i, MAX_ARG_INDEX, argv, argName);
 			checkAngleBound(aspect);
 			requiredArgArray[ASPECT] = true;
 		}
 		else if (EQUAL(argv[i], "--direction-of-interest"))
 		{
 			argName = "direction of interest";
-			if ((i + 1) <= MAX_ARG_INDEX)
-			{
-				argString = argv[++i];
-				directionOfInterest = parseDouble(i, MAX_ARG_INDEX, argString, argName);
-			}
-			else
-			{
-				printf("ERROR: No valid value entered for direction of interest\n");
-				Usage();
-			}
+			directionOfInterest = parseDouble(i, MAX_ARG_INDEX, argv, argName);
 			checkAngleBound(directionOfInterest);
 			hasDirectionOfInterest = true;
 		}
@@ -445,15 +356,17 @@ int main(int argc, char *argv[])
 		}
 		else if (EQUAL(argv[i], "--file-name"))
 		{
-			if ((i + 1) > MAX_ARG_INDEX)
+			if ((i + 1) > MAX_ARG_INDEX) // An error has occurred
 			{
+				// Report error
 				printf("ERROR: No file name entered\n");
-				Usage();
+				Usage(); // Exits program
 			}
 			hasSpecifiedFileName = true;
 			fileName = argv[++i];
-			if (!(fileName.substr(fileName.find_last_of(".") + 1) == "txt"))
+			if (!(fileName.substr(fileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
 			{
+				// Give the file a .txt extension
 				fileName += ".txt";
 			}
 		}
@@ -463,21 +376,14 @@ int main(int argc, char *argv[])
 		}
 		else if (EQUAL(argv[i], "--run-identifier"))
 		{
-			if ((i + 1) > MAX_ARG_INDEX)
+			if ((i + 1) > MAX_ARG_INDEX) // An error has occurred
 			{
+				// Report error
 				printf("ERROR: No run identifier entered\n");
-				Usage();
+				Usage(); // Exits program
 			}
 			hasRunIdentifier = true;
 			runIdentifier = argv[++i];
-		}
-		//else if(EQUAL(argv[i], "--verbose"))
-		//{
-		//	verbose = true;
-		//}
-		else
-		{
-			Usage();
 		}
 		i++;
 	}
@@ -485,41 +391,45 @@ int main(int argc, char *argv[])
 	// Check for required arguments
 	for (int i = 0; i < REQUIRED_ARG_COUNT; i++)
 	{
-		if (requiredArgArray[i] == false)
+		if (requiredArgArray[i] == false) // An error has occurred
 		{
+			// Report error
 			std::string errorString = "ERROR: Missing required argument ";
 			errorString += getArgumentName(i);
-			//throw std::runtime_error(errorString);
 			printf(errorString.c_str());
 			printf("\n");
 			isMissingReq = true;
 		}
 	}
-	if (isMissingReq)
+	if (isMissingReq) // An error has occurred
 	{
-		exit(1);
+		Usage(); // Exits program
 	}
 
-	if (!isOutputtingToFile && hasSpecifiedFileName)
+	// Check for output to file and related parameters
+	if (!isOutputtingToFile && hasSpecifiedFileName) // An error has occurred
 	{
+		// Report error
 		printf("ERROR: Must be printing a file to specify a file name\n");
 		Usage();
 	}
-
-	if (!isOutputtingToFile && isAppending)
+	if (!isOutputtingToFile && isAppending) // An error has occurred
 	{
+		// Report error
 		printf("ERROR: Must be printing a file to append to a file\n");
-		Usage();
+		Usage();  // Exits program
 	}
-
-	if (!isOutputtingToFile && hasRunIdentifier)
+	if (!isOutputtingToFile && hasRunIdentifier) // An error has occurred
 	{
+		// Report error
 		printf("ERROR: Must be printing a file to specify a run identifer\n");
-		Usage();
+		Usage();  // Exits program
 	}
 
+	// Feed input values to behave
 	behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
 
+	// Do the spread rate calculation
 	if (hasDirectionOfInterest)
 	{
 		spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
@@ -529,9 +439,11 @@ int main(int argc, char *argv[])
 		spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
 	}
 
+	// Get other required outputs
 	flameLength = behave.getFlameLength();
 	directionOfMaxSpread = behave.getDirectionOfMaxSpread();
 
+	// Handle file output
 	if (isOutputtingToFile)
 	{
 		FILE *fout;
@@ -557,10 +469,11 @@ int main(int argc, char *argv[])
 		fclose(fout);
 	}
 
+	// Print to console
 	printf("Spread_rate_(ch/hr)\t\t\t%lf\n", spreadRate);
 	printf("Flame_length(ft)\t\t\t%lf\n", flameLength);
 	printf("Direction_of_max_spread(degrees)\t%lf\n", directionOfMaxSpread);
 
-	return 0;
+	return 0; // Success
 }
 
