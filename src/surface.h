@@ -8,10 +8,6 @@
 //	10 meter wind and input wind adjustment factor, 10 meter wind calculate wind adjustment factor
 //	WMC - 11/2015
 
-//	TODO: Need to add logic to handle the following wind direction input methods: Upslope, Degrees 
-//	clockwise from upslope, Degrees clockwise from north
-//	WMC - 11/2015
-
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
