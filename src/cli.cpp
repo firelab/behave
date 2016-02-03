@@ -100,7 +100,7 @@ void checkMoistureBound(double moisture)
 
 int parseFuelModelNumber(int i, const int MAX_ARG_INDEX, char *argv[])
 {
-	int retVal = -1;
+	int parsedFuelModelNumber = -1;
 	int fuelModelNumberIndex = i + 1;
 	// Parse command line argument
 	if ((fuelModelNumberIndex <= MAX_ARG_INDEX) && (argv[fuelModelNumberIndex] != NULL))
@@ -109,22 +109,22 @@ int parseFuelModelNumber(int i, const int MAX_ARG_INDEX, char *argv[])
 		long val = strtol(argv[fuelModelNumberIndex], &end, 10);
 		if (!end[0] && val >= 0)
 		{
-			retVal = val;
+			parsedFuelModelNumber = val;
 		}
 	}
-	if (retVal <= 0) // An error has occurred
+	if (parsedFuelModelNumber <= 0) // An error has occurred
 	{
 		// Report error
 		printf("ERROR: No valid value entered for fuel model number");
 		Usage();  // Exits program
 	}
 
-	return retVal;
+	return parsedFuelModelNumber;
 }
 
 double parseMoisture(int i, const int MAX_ARG_INDEX, char *argv[], std::string argName)
 {
-	double retVal = -1;
+	double parsedMoistureValue = -1;
 	int moistureValueIndex = i + 1;
 	// Parse command line argument
 	if ((moistureValueIndex <= MAX_ARG_INDEX) && (argv[moistureValueIndex] != NULL))
@@ -133,10 +133,10 @@ double parseMoisture(int i, const int MAX_ARG_INDEX, char *argv[], std::string a
 		double val = strtod(argv[moistureValueIndex], &end);
 		if (!end[0] && val >= 0)
 		{
-			retVal = val;
+			parsedMoistureValue = val;
 		}
 	}
-	if (retVal < 0) // An error has occurred
+	if (parsedMoistureValue < 0) // An error has occurred
 	{
 		// Report error
 		std::string errorString = "ERROR: No valid value entered for ";
@@ -144,15 +144,15 @@ double parseMoisture(int i, const int MAX_ARG_INDEX, char *argv[], std::string a
 		printf(errorString.c_str());
 		Usage(); // Exits program
 	}
-	checkMoistureBound(retVal);
-	retVal /= 100;
+	checkMoistureBound(parsedMoistureValue);
+	parsedMoistureValue /= 100;
 
-	return retVal;
+	return parsedMoistureValue;
 }
 
 double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string argName)
 {
-	double retVal = -1;
+	double parsedDouble = -1;
 	int doubleValueIndex = i + 1;
 	// Parse command line argument
 	if ((doubleValueIndex <= MAX_ARG_INDEX) && (argv[doubleValueIndex] != NULL))
@@ -161,10 +161,10 @@ double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string arg
 		double val = strtod(argv[doubleValueIndex], &end);
 		if (!end[0] && val >= 0)
 		{
-			retVal = val;
+			parsedDouble = val;
 		}
 	}
-	if (retVal < 0) // An error has occured
+	if (parsedDouble < 0) // An error has occured
 	{
 		// Report error
 		std::string errorString = "ERROR: No valid value entered for ";
@@ -173,7 +173,7 @@ double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string arg
 		Usage(); // Exits program
 	}
 
-	return retVal;
+	return parsedDouble;
 }
 
 std::string getArgumentName(int argIndex)
