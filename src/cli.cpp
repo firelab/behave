@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS // Disable warnings for fopen()
 
 #include <iostream>
 #include <iomanip>
@@ -152,7 +152,7 @@ double parseMoisture(int i, const int MAX_ARG_INDEX, char *argv[], std::string a
 	return parsedMoistureValue;
 }
 
-double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string argName)
+double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string argumentName)
 {
 	double parsedDouble = -1;
 	int doubleValueIndex = i + 1;
@@ -170,7 +170,7 @@ double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string arg
 	{
 		// Report error
 		std::string errorString = "ERROR: No valid value entered for ";
-		errorString += argName;
+		errorString += argumentName;
 		printf(errorString.c_str());
 		Usage(); // Exits program
 	}
@@ -178,68 +178,68 @@ double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string arg
 	return parsedDouble;
 }
 
-std::string getArgumentName(int argIndex)
+std::string getArgumentName(int argumentIndex)
 {
-	std::string retString = "";
-	if (argIndex == ASPECT)
+	std::string argumentName = "";
+	if (argumentIndex == ASPECT)
 	{
-		retString = "aspect";
+		argumentName = "aspect";
 	}
-	if (argIndex == FUEL_MODEL_NUMBER)
+	if (argumentIndex == FUEL_MODEL_NUMBER)
 	{
-		retString = "fuel model number";
+		argumentName = "fuel model number";
 	}
-	if (argIndex == HUNDRED_HOUR)
+	if (argumentIndex == HUNDRED_HOUR)
 	{
-		retString = "100-hr moisture";
+		argumentName = "100-hr moisture";
 	}
-	if (argIndex == LIVE_HERB)
+	if (argumentIndex == LIVE_HERB)
 	{
-		retString = "live herbaceous moisture";
+		argumentName = "live herbaceous moisture";
 	}
-	if (argIndex == LIVE_WOODY)
+	if (argumentIndex == LIVE_WOODY)
 	{
-		retString = "live woody moisture";
+		argumentName = "live woody moisture";
 	}
-	if (argIndex == ONE_HOUR)
+	if (argumentIndex == ONE_HOUR)
 	{
-		retString = "1-hr moisture";
+		argumentName = "1-hr moisture";
 	}
-	if (argIndex == SLOPE)
+	if (argumentIndex == SLOPE)
 	{
-		retString = "slope";
+		argumentName = "slope";
 	}
-	if (argIndex == TEN_HOUR)
+	if (argumentIndex == TEN_HOUR)
 	{
-		retString = "10-hr moisture";
+		argumentName = "10-hr moisture";
 	}
-	if (argIndex == WIND_DIRECTION)
+	if (argumentIndex == WIND_DIRECTION)
 	{
-		retString = "wind direction";
+		argumentName = "wind direction";
 	}
-	if (argIndex == WIND_SPEED)
+	if (argumentIndex == WIND_SPEED)
 	{
-		retString = "wind speed";
+		argumentName = "wind speed";
 	}
-	return retString;
+	return argumentName;
 }
 
 int main(int argc, char *argv[])
 {
-	const int MAX_ARG_INDEX = argc - 1;
+	const int MAX_ARGUMENT_INDEX = argc - 1;
 
-	bool requiredArgArray[REQUIRED_ARG_COUNT];
+	bool requiredArgumentArray[REQUIRED_ARG_COUNT];
 	bool isOutputtingToFile = false;
-	bool isMissingReq = false;
+	bool isMissingRequirement = false;
 	bool hasSpecifiedFileName = false;
 	bool isAppending = false;
 	bool hasDirectionOfInterest = false;
 	bool hasRunIdentifier = false;
 	int i;
-	std::string argString = "";
+	
 	std::string fileName = "output.txt"; // default output file name
 	std::string runIdentifier = "";
-	std::string argName = "";
+	std::string argumentName = "";
 
 	// Surface Fire Inputs;
 	int fuelModelNumber = 0;
@@ -259,7 +259,7 @@ int main(int argc, char *argv[])
 
 	for (int index = 0; index < REQUIRED_ARG_COUNT; index++)
 	{
-		requiredArgArray[index] = false;
+		requiredArgumentArray[index] = false;
 	}
 
 	Behave behave;
@@ -278,7 +278,7 @@ int main(int argc, char *argv[])
 	{
 		if (EQUAL(argv[i], "--fuel-model-number"))
 		{
-			fuelModelNumber = parseFuelModelNumber(i, MAX_ARG_INDEX, argv);
+			fuelModelNumber = parseFuelModelNumber(i, MAX_ARGUMENT_INDEX, argv);
 			// Check if fuel model is defined
 			if (!behave.isFuelModelDefined(fuelModelNumber))
 			{
@@ -286,69 +286,69 @@ int main(int argc, char *argv[])
 				printf("ERROR: Fuel model %d is undefined\n", fuelModelNumber);
 				Usage(); // Exits program
 			}
-			requiredArgArray[FUEL_MODEL_NUMBER] = true;
+			requiredArgumentArray[FUEL_MODEL_NUMBER] = true;
 		}
 		else if (EQUAL(argv[i], "--1hr"))
 		{
-			argName = "1-hr moisture";
-			moistureOneHr = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
-			requiredArgArray[ONE_HOUR] = true;
+			argumentName = "1-hr moisture";
+			moistureOneHr = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+			requiredArgumentArray[ONE_HOUR] = true;
 		}
 		else if (EQUAL(argv[i], "--10hr"))
 		{
-			argName = "10-hr moisture";
-			moistureTenHr = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
-			requiredArgArray[TEN_HOUR] = true;
+			argumentName = "10-hr moisture";
+			moistureTenHr = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+			requiredArgumentArray[TEN_HOUR] = true;
 		}
 		else if (EQUAL(argv[i], "--100hr"))
 		{
-			argName = "100-hr moisture";
-			moistureHundredHr = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
-			requiredArgArray[HUNDRED_HOUR] = true;
+			argumentName = "100-hr moisture";
+			moistureHundredHr = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+			requiredArgumentArray[HUNDRED_HOUR] = true;
 		}
 		else if (EQUAL(argv[i], "--live-herb"))
 		{
-			argName = "live herbaceous moisture";
-			moistureLiveHerb = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
-			requiredArgArray[LIVE_HERB] = true;
+			argumentName = "live herbaceous moisture";
+			moistureLiveHerb = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+			requiredArgumentArray[LIVE_HERB] = true;
 		}
 		else if (EQUAL(argv[i], "--live-woody"))
 		{
-			argName = "live woody moisture";
-			moistureLiveWoody = parseMoisture(i, MAX_ARG_INDEX, argv, argName);
-			requiredArgArray[LIVE_WOODY] = true;
+			argumentName = "live woody moisture";
+			moistureLiveWoody = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+			requiredArgumentArray[LIVE_WOODY] = true;
 		}
 		else if (EQUAL(argv[i], "--wind-speed"))
 		{
-			argName = "wind speed";
-			windSpeed = parseDouble(i, MAX_ARG_INDEX, argv, argName);
-			requiredArgArray[WIND_SPEED] = true;
+			argumentName = "wind speed";
+			windSpeed = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+			requiredArgumentArray[WIND_SPEED] = true;
 		}
 		else if (EQUAL(argv[i], "--wind-direction"))
 		{
-			argName = "wind direction";
-			windDirection = parseDouble(i, MAX_ARG_INDEX, argv, argName);
+			argumentName = "wind direction";
+			windDirection = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
 			checkAngleBound(windDirection);
-			requiredArgArray[WIND_DIRECTION] = true;
+			requiredArgumentArray[WIND_DIRECTION] = true;
 		}
 		else if (EQUAL(argv[i], "--slope"))
 		{
-			argName = "slope";
-			slope = parseDouble(i, MAX_ARG_INDEX, argv, argName);
+			argumentName = "slope";
+			slope = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
 			checkSlopeBound(slope);
-			requiredArgArray[SLOPE] = true;
+			requiredArgumentArray[SLOPE] = true;
 		}
 		else if (EQUAL(argv[i], "--aspect"))
 		{
-			argName = "aspect";
-			aspect = parseDouble(i, MAX_ARG_INDEX, argv, argName);
+			argumentName = "aspect";
+			aspect = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
 			checkAngleBound(aspect);
-			requiredArgArray[ASPECT] = true;
+			requiredArgumentArray[ASPECT] = true;
 		}
 		else if (EQUAL(argv[i], "--direction-of-interest"))
 		{
-			argName = "direction of interest";
-			directionOfInterest = parseDouble(i, MAX_ARG_INDEX, argv, argName);
+			argumentName = "direction of interest";
+			directionOfInterest = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
 			checkAngleBound(directionOfInterest);
 			hasDirectionOfInterest = true;
 		}
@@ -358,7 +358,7 @@ int main(int argc, char *argv[])
 		}
 		else if (EQUAL(argv[i], "--file-name"))
 		{
-			if ((i + 1) > MAX_ARG_INDEX) // An error has occurred
+			if ((i + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
 			{
 				// Report error
 				printf("ERROR: No file name entered\n");
@@ -378,7 +378,7 @@ int main(int argc, char *argv[])
 		}
 		else if (EQUAL(argv[i], "--run-identifier"))
 		{
-			if ((i + 1) > MAX_ARG_INDEX) // An error has occurred
+			if ((i + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
 			{
 				// Report error
 				printf("ERROR: No run identifier entered\n");
@@ -393,17 +393,17 @@ int main(int argc, char *argv[])
 	// Check for required arguments
 	for (int i = 0; i < REQUIRED_ARG_COUNT; i++)
 	{
-		if (requiredArgArray[i] == false) // An error has occurred
+		if (requiredArgumentArray[i] == false) // An error has occurred
 		{
 			// Report error
 			std::string errorString = "ERROR: Missing required argument ";
 			errorString += getArgumentName(i);
 			printf(errorString.c_str());
 			printf("\n");
-			isMissingReq = true;
+			isMissingRequirement = true;
 		}
 	}
-	if (isMissingReq) // An error has occurred
+	if (isMissingRequirement) // An error has occurred
 	{
 		Usage(); // Exits program
 	}
