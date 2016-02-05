@@ -456,6 +456,7 @@ int main(int argc, char *argv[])
 			if (!fout)
 			{
 				fprintf(stderr, "Cannot open file `%s`!\n", fileName.c_str());
+				exit(1); // Exit with error code 1
 			}
 		}
 		else
@@ -464,6 +465,7 @@ int main(int argc, char *argv[])
 			if (!fout)
 			{
 				fprintf(stderr, "Cannot open file `%s`!\n", fileName.c_str());
+				exit(1); // Exit with error code 1
 			}
 		}
 		if (hasRunIdentifier)
