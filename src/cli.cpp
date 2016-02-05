@@ -5,10 +5,11 @@
 #include "behave.h"
 #include <time.h>
 #include <cmath>
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <algorithm>
+
 #include "behave.h"
 
 #define EQUAL(a,b) (strcmp(a,b)==0)
@@ -234,11 +235,10 @@ int main(int argc, char *argv[])
 	bool hasSpecifiedFileName = false;
 	bool isAppending = false;
 	bool hasDirectionOfInterest = false;
-	bool hasRunIdentifier = false;
 	int i;
 	
 	std::string fileName = "output.txt"; // default output file name
-	std::string runIdentifier = "";
+	std::string runIdentifier = "no-run-identifier";
 	std::string argumentName = "";
 
 	// Surface Fire Inputs;
@@ -384,8 +384,9 @@ int main(int argc, char *argv[])
 				printf("ERROR: No run identifier entered\n");
 				Usage(); // Exits program
 			}
-			hasRunIdentifier = true;
 			runIdentifier = argv[++i];
+			// in case user somehow feeds in a whitespace in the argument
+			std::replace(runIdentifier.begin(), runIdentifier.end(), ' ', '-');
 		}
 		i++;
 	}
@@ -421,12 +422,6 @@ int main(int argc, char *argv[])
 		printf("ERROR: Must be printing a file to append to a file\n");
 		Usage();  // Exits program
 	}
-	if (!isOutputtingToFile && hasRunIdentifier) // An error has occurred
-	{
-		// Report error
-		printf("ERROR: Must be printing a file to specify a run identifer\n");
-		Usage();  // Exits program
-	}
 
 	// Feed input values to behave
 	behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
@@ -449,13 +444,30 @@ int main(int argc, char *argv[])
 	if (isOutputtingToFile)
 	{
 		FILE *fout;
+		size_t size;
+		std::string firstToken = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+		
 
 		if (isAppending)
 		{
-			fout = fopen(fileName.c_str(), "at");
+			fout = fopen(fileName.c_str(), "a+t");
+
 			if (!fout)
 			{
-				fprintf(stderr, "Cannot open file `%s`!\n", fileName.c_str());
+				fprintf(stderr, "ERROR: Cannot open file `%s`\n", fileName.c_str());
+				exit(1); // Exit with error code 1
+			}
+			char firstTokenCString[256];
+			fscanf(fout, "%s", firstTokenCString);
+			firstToken = firstTokenCString;
+		
+			fseek(fout, 0, SEEK_END);
+			size = ftell(fout);
+			std::string testString = "run-identifier";
+			
+			if ((firstToken.compare(testString) != 0) && (size != 0))
+			{
+				fprintf(stderr, "ERROR: File format unrecognized, exiting\n");
 				exit(1); // Exit with error code 1
 			}
 		}
@@ -464,26 +476,40 @@ int main(int argc, char *argv[])
 			fout = fopen(fileName.c_str(), "wt");
 			if (!fout)
 			{
-				fprintf(stderr, "Cannot open file `%s`!\n", fileName.c_str());
+				fprintf(stderr, "ERROR: Cannot open file `%s`\n", fileName.c_str());
 				exit(1); // Exit with error code 1
 			}
 		}
-		if (hasRunIdentifier)
+		
+		fseek(fout, 0, SEEK_END);
+		size = ftell(fout);
+		
+		if (size == 0) // File is empty, so print column headers
 		{
-			fprintf(fout, runIdentifier.c_str());
-			fprintf(fout, "\t");
+			std::string runIDHeader = "run-identifier";
+			std::string spreadRateHeader = "spread-rate(ch/hr)";
+			std::string flameLengthHeader = "flame-length(ft)";
+			std::string dirMaxDHeader = "direction-of-max-spread(degrees)";
+			fprintf(fout,  "%-20s\t" \
+				"%-20s\t" \
+				"%-20s\t" \
+				"%-20s\n", runIDHeader.c_str(), spreadRateHeader.c_str(), flameLengthHeader.c_str(), dirMaxDHeader.c_str());
 		}
-		fprintf(fout, "Spread_rate_(ch/hr)\t%lf\t" \
-			"Flame_length(ft)\t%lf\t" \
-			"Direction_of_max_spread(degrees)\t%lf\n",
-			spreadRate, flameLength, directionOfMaxSpread);
+		
+		fprintf(fout, "%-20s\t" \
+			"%-20lf\t" \
+			"%-20lf\t" \
+			"%-20lf\n",
+			runIdentifier.c_str(), spreadRate, flameLength, directionOfMaxSpread);
 		fclose(fout);
+
 	}
 
 	// Print to console
-	printf("Spread_rate_(ch/hr)\t\t\t%lf\n", spreadRate);
-	printf("Flame_length(ft)\t\t\t%lf\n", flameLength);
-	printf("Direction_of_max_spread(degrees)\t%lf\n", directionOfMaxSpread);
+	printf("run-identifier\t\t\t\t%s\n", runIdentifier.c_str());
+	printf("spread-rate(ch/hr)\t\t\t%lf\n", spreadRate);
+	printf("flame-Length(ft)\t\t\t%lf\n", flameLength);
+	printf("direction-of_max-spread(degrees)\t%lf\n", directionOfMaxSpread);
 
 	return 0; // Success
 }
