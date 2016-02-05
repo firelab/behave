@@ -449,15 +449,22 @@ int main(int argc, char *argv[])
 	if (isOutputtingToFile)
 	{
 		FILE *fout;
+
 		if (isAppending)
 		{
-			//fopen_s(&fout, fileName.c_str(), "at");
 			fout = fopen(fileName.c_str(), "at");
+			if (!fout)
+			{
+				fprintf(stderr, "Cannot open file `%s`!\n", fileName.c_str());
+			}
 		}
 		else
 		{
-			//fopen_s(&fout, fileName.c_str(), "wt");
 			fout = fopen(fileName.c_str(), "wt");
+			if (!fout)
+			{
+				fprintf(stderr, "Cannot open file `%s`!\n", fileName.c_str());
+			}
 		}
 		if (hasRunIdentifier)
 		{
