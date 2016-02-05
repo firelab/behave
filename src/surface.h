@@ -11,6 +11,7 @@
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
+#include "surfaceTwoFuelModels.h"
 
 class Surface
 {

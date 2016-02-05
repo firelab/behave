@@ -1,43 +1,45 @@
-#include "twoFuelModels.h"
+#include "surfaceTwoFuelModels.h"
 
+SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, 
+	SurfaceFireSpread& surfaceFireSpread)
+{
+	surfaceInputs_ = &surfaceInputs;
+	surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
+	surfaceFireSpread_ = &surfaceFireSpread;
+}
 
 //------------------------------------------------------------------------------
 /*! \brief FuelBedWeighted
 *
 *  Dependent Variables (Outputs)
-*      vSurfaceFireReactionInt (Btu/ft2/min)
-*      vSurfaceFireSpreadAtHead (ft/min)
-*      vSurfaceFireSpreadAtVector (ft/min)
-*      vSurfaceFireMaxDirFromUpslope (clockwise from upslope)
-*      vSurfaceFireEffWindAtHead (mi/h)
-*      vSurfaceFireEffWindAtVector (mi/h)
-*      vSurfaceFireWindSpeedLimit (mi/h)
-*      vSurfaceFireWindSpeedFlag (flag)
-*      vSurfaceFireHeatPerUnitArea (Btu/ft2)
-*      vSurfaceFireLineIntAtHead (Btu/ft/s)
-*      vSurfaceFireLineIntAtVector (Btu/ft/s)
-*      vSurfaceFireFlameLengIntAtHead (ft)
-*      vSurfaceFireFlameLengIntAtVector (ft)
+*      SurfaceReactionIntensity (Btu/ft2/min)
+*      SurfaceFireSpreadRate (ft/min)
+*      SurfaceFireMaxDirFromUpslope (clockwise from upslope)
+*      SurfaceFireEffectiveWind (mi/h)
+*      SurfaceFireWindSpeedLimit (mi/h)
+*      SurfaceFireWindSpeedFlag (flag)
+*      SurfaceFireHeatPerUnitArea (Btu/ft2)
+*      SurfaceFireLineIntensity (Btu/ft/s)
+*      SurfaceFireFlameLength (ft)
 *
 *  Independent Variables (Inputs)
-*      vSurfaceFuelBedModel1 (item)
-*      vSurfaceFuelBedModel2 (item)
-*      vSurfaceFuelBedCoverage1 (fraction)
-*      vSiteSlopeFraction (rise/reach)
-*      vWindDirFromUpslope (degrees)
-*      vWindSpeedAtMidflame (mi/h)
-*      vSurfaceFuelMoisDead1 (fraction)
-*      vSurfaceFuelMoisDead10 (fraction)
-*      vSurfaceFuelMoisDead100 (fraction)
-*      vSurfaceFuelMoisDead1000 (fraction)
-*      vSurfaceFuelMoisLiveHerb (fraction)
-*      vSurfaceFuelMoisLiveWood (fraction)
-*      vSurfaceFuelLoadTransferFraction (fraction)
-*      vSurfaceFireVectorDirFromUpslope (deg)
+*      SurfaceFuelBedModel1 (item)
+*      SurfaceFuelBedModel2 (item)
+*      SurfaceFuelBedCoverage1 (fraction)
+*      SiteSlopeFraction (rise/reach)
+*      WindDirFromUpslope (degrees)
+*      WindSpeedAtMidflame (mi/h)
+*      SurfaceFuelMoisDead1 (fraction)
+*      SurfaceFuelMoisDead10 (fraction)
+*      SurfaceFuelMoisDead100 (fraction)
+*      SurfaceFuelMoisDead1000 (fraction)
+*      SurfaceFuelMoisLiveHerb (fraction)
+*      SurfaceFuelMoisLiveWood (fraction)
+*      SurfaceFuelLoadTransferFraction (fraction)
+*      SurfaceFireVectorDirFromUpslope (deg)
 */
 
-
-void TwoFuelModels::FuelBedWeighted(void)
+void SurfaceTwoFuelModels::FuelBedWeighted(int firstFuelModelNumber, int secondFuelModelNumber)
 {
 /*
 	// Get the primary and secondary fuel models
@@ -55,15 +57,15 @@ void TwoFuelModels::FuelBedWeighted(void)
 	//----------------------------------------
 
 	// Intermediate outputs for each fuel model
-	double rosh[2], rosv[2];	// ros at head and vector
-	double flih[2], fliv[2];	// fireline intensity at head and vector
-	double flh[2], flv[2];		// flame length at head and vector
-	double ewsh[2], ewsv[2];	// effective wind speed at head and vector
-	double flw[2];				// fire length-to-width ratio
+	double ros[2]					// rate of spread
+	double fli[2]					// fireline intensity
+	double fl[2]					// flame length
+	double ewsh[2]					// effective wind speed
+	double flw[2];					// fire length-to-width ratio
 	double rxi[2], hua[2], mxd[2];	// reaction intensity, heat per unit area, dir of max spread
-	double waf[2], wmf[2];		// wind adjustment factor and wind speed at midflame
-	double wsl[2];				// wind speed limit
-	int    wsf[2];				// wind speed flag
+	double waf[2], wmf[2];			// wind adjustment factor and wind speed at midflame
+	double wsl[2];					// wind speed limit
+	int    wsf[2];					// wind speed flag
 
 	// Calculate fire outputs for each fuel model
 	for (int i = 0; i<2; i++)
@@ -201,8 +203,6 @@ void TwoFuelModels::FuelBedWeighted(void)
 	//------------------------------------------------
 
 	// Fire spread rate depends upon the weighting method...
-	double wtdh = 0.;	// value at head
-	double wtdv = 0.;	// value at vector
 	double wtd = 0.;	// anything
 	// If area weighted spread rate ...
 	if (prop->boolean("surfaceConfFuelAreaWeighted"))
@@ -233,8 +233,8 @@ void TwoFuelModels::FuelBedWeighted(void)
 		wtdv = FBL_SurfaceFireExpectedSpreadRate(rosv, cov, 2, lbRatio,
 			samples, depth, laterals);
 	}
-	vSurfaceFireSpreadAtHead->update(wtdh);
-	vSurfaceFireSpreadAtVector->update(wtdv);
+	SurfaceFireSpread->update(wtdh);
+
 
 	// The following assignments are based on Pat's rules:
 	// If only 1 fuel is present (whether primary or secondary), use its values exclusively

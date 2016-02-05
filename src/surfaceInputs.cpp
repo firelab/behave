@@ -16,6 +16,7 @@ SurfaceInputs::SurfaceInputs(int fuelModelNumber, double moistureOneHour, double
 void SurfaceInputs::initializeMembers()
 {
 	fuelModelNumber_ = 0;
+	secondFuelModelNumber_ = 0;
 	moistureOneHour_ = 0.0;
 	moistureTenHour_ = 0.0;
 	moistureHundredHour_ = 0.0;
@@ -183,6 +184,16 @@ void SurfaceInputs::setSlopeInputMode(int mode)
 	{
 		slopeInputMode_ = SLOPE_IN_DEGREES;
 	}
+}
+
+void  SurfaceInputs::setFirstFuelModelNumber(int firstFuelModelNumber)
+{
+	firstFuelModelNumber_ = firstFuelModelNumber;
+}
+
+void  SurfaceInputs::setSecondFuelModelNumber(int secondFuelModelNumber)
+{
+	secondFuelModelNumber_ = secondFuelModelNumber;
 }
 
 void SurfaceInputs::setMidflameWindSpeed(double midflameWindSpeed)

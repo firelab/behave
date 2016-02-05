@@ -30,7 +30,9 @@ public:
 	void setMidflameWindSpeed(double midflameWindSpeed);
 	void setWindDirection(double windDirection);
 	void setWindAndSpreadDirectionMode(int mode); // From upslope == 0, From north == 1
-
+	void setFirstFuelModelNumber(int firstFuelModelNumber);
+	void setSecondFuelModelNumber(int secondFuelModelNumber);
+	
 	int getFuelModelNumber() const;
 	double getMoistureDeadAtIndex(int index) const;
 	double getMoistureLiveAtIndex(int index) const;
@@ -55,6 +57,8 @@ private:
 
 	static const int MAX_SIZES = 4;		// Max number of fuel size classes
 	int		fuelModelNumber_;			// 1 to 256
+	int		firstFuelModelNumber_;		// 1 to 256, first fuel used in Two Fuel Models
+	int		secondFuelModelNumber_;		// 1 to 256, second fuel used in Two Fuel Models
 	double	moistureOneHour_;			// 1% to 60%
 	double	moistureTenHour_;			// 1% to 60%		
 	double	moistureHundredHour_;		// 1% to 60%
@@ -62,23 +66,34 @@ private:
 	double	moistureLiveWoody_;			// 30% to 300%
 	double	midflameWindSpeed_;			// in miles per hour
 	double	windDirection_;				// degrees, 0-360
-	double	slope_;						// % gradient 0-604 or degrees 0-81  
+	double	slope_;						// gradient 0-600 or degrees 0-80  
 	double	slopeAspect_;				// degrees, 0-360
 	double	moistureDead_[MAX_SIZES];	// dead fuel moisture content
 	double	moistureLive_[MAX_SIZES];	// live fuel moisture content
+	double	coverage;					// percent of landscape occupied by first fuel in Two Fuel Models
 
-	enum WindAndSpreadDirectionEnumType {
+	enum WindAndSpreadDirectionEnumType
+	{
 		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction I/O are clockwise relative to upslope
 		RELATIVE_TO_NORTH = 1		// Wind direction direction I/O are clockwise relative to compass north
 	};
 
-	enum SlopeInputModeEnumType {
+	enum SlopeInputModeEnumType
+	{
 		SLOPE_IN_PERCENT = 0,	// Slope is input as a percent
 		SLOPE_IN_DEGREES = 1	// Slope is input as degrees
 	};
 
+	enum TwoFuelModelsMethod
+	{
+		ARITHMETIC = 0,			// Use arithmetic mean
+		HARMONIC = 1,			// Use harmoic mean
+		TWO_DIMENSIONAL = 2,	// Use Finney's two dimensional method
+	};
+
 	WindAndSpreadDirectionEnumType windAndSpreadAngleMode_; // Determines how wind and spread directions are referenced
 	SlopeInputModeEnumType slopeInputMode_;	// Determines whether slope is input as percent or degrees
+
 };
 
 #endif // SURFACEINPUTS_HEADER

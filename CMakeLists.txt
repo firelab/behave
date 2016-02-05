@@ -14,23 +14,29 @@ ENDIF(CLI)
 SET(SOURCE
 	src/behave.cpp
 	src/fuelModels.cpp
+	# Start of Surface Module
 	src/surface.cpp
 	src/surfaceFirePropogatingFlux.cpp
 	src/surfaceFireReactionIntensity.cpp
 	src/surfaceFuelbedIntermediates.cpp
 	src/surfaceInputs.cpp
 	src/surfaceFireSpread.cpp
+	src/surfacetwoFuelModels.cpp
+	# End of Surface Module
 )
 
 SET(HEADERS
 	src/behave.h
 	src/fuelModels.h
+	# Start of Surface Module
 	src/surface.h
 	src/surfaceFirePropogatingFlux.h
 	src/surfaceFireReactionIntensity.h
 	src/surfaceFuelbedIntermediates.h
 	src/surfaceInputs.h
 	src/surfaceFireSpread.h
+	src/surfaceTwoFuelModels.h
+	# End of Surface Module
 )
 	
 ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})

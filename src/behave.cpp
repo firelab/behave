@@ -37,23 +37,16 @@ void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, do
 		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
 }
 
+void Behave::useTwoFuelModels(int firstFuelModel, int secondFuelModel, TwoFuelModelsMethod method)
+{
+
+}
+
 double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
 {
 	// Calculate Spread Rate
 	return surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 }
-
-//BehavePlus::WindAndSpreadDirectionEnumType BehavePlus::getWindAndSpreadAngleMode() const
-//{
-//	int windAndSpreadMode = surfaceInputs_.getWindAndSpreadAngleMode();
-//	return (WindAndSpreadDirectionEnumType)windAndSpreadMode;
-//}
-//
-//BehavePlus::SlopeInputModeEnumType BehavePlus::getSlopeInputMode() const
-//{
-//	int slopeMode = surfaceInputs_.getSlopeInputMode();
-//	return (SlopeInputModeEnumType)slopeMode;
-//}
 
 void Behave::setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode)
 {
