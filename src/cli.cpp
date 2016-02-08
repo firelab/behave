@@ -610,19 +610,14 @@ int main(int argc, char *argv[])
 	if (isUsingMetric)
 	{
 		printf("spread-rate(m/s)\t\t\t%lf\n", spreadRate);
-	}
-	else
-	{
-		printf("spread-rate(ch/hr)\t\t\t%lf\n", spreadRate);
-	}
-	if (isUsingMetric)
-	{
 		printf("flame-Length(m)\t\t\t\t%lf\n", flameLength);
 	}
 	else
 	{
+		printf("spread-rate(ch/hr)\t\t\t%lf\n", spreadRate);
 		printf("flame-Length(ft)\t\t\t%lf\n", flameLength);
 	}
+	
 	printf("direction-of_max-spread(degrees)\t%lf\n", directionOfMaxSpread);
 
 	return 0; // Success
