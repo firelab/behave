@@ -445,11 +445,13 @@ int main(int argc, char *argv[])
 	{
 		FILE *fout;
 		size_t size;
-		std::string firstToken = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+		std::string firstToken = "";
 		
 
 		if (isAppending)
 		{
+			// Used a+ mode, otherwise file pointer for reading starts at first free block,
+				// this way reading can start at first block and writing at first free block
 			fout = fopen(fileName.c_str(), "a+t");
 
 			if (!fout)
