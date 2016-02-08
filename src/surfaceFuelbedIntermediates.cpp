@@ -3,11 +3,6 @@
 SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs)
 {
 	fuelModels_ = &fuelModels;
-    if (fuelModels_ == NULL)
-	{
-		// TODO: Implement some sort of error reporting/handling 
-	}
-
 	surfaceInputs_ = &surfaceInputs;
 	initializeMemberVariables();
 }
