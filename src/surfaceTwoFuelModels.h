@@ -1,7 +1,7 @@
 #ifndef SURFACETWOFUELMODELS_HEADER
 #define SURFACETWOFUELMODELS_HEADER
 
-#include "fuelmodels.h"
+#include "fuelModels.h"
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
