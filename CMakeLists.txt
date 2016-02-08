@@ -21,7 +21,7 @@ SET(SOURCE
 	src/surfaceFuelbedIntermediates.cpp
 	src/surfaceInputs.cpp
 	src/surfaceFireSpread.cpp
-	src/surfacetwoFuelModels.cpp
+	src/surfaceTwoFuelModels.cpp
 	# End of Surface Module
 )
 
