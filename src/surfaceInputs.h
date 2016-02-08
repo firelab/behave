@@ -16,6 +16,11 @@ public:
 	void updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 		double midflameWindSpeed, double windDirection, double slope, double slopeAspect);
+	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
+		double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+		double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
+		double windDirection, double slope, double coverage, int method, 
+		double slopeAspect = 0);
 	void setFuelModelNumber(int fuelModelNumber);
 	void setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour);
 	void setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody);
@@ -34,6 +39,9 @@ public:
 	void setSecondFuelModelNumber(int secondFuelModelNumber);
 	
 	int getFuelModelNumber() const;
+	int getFirstFuelModelNumber() const;
+	int getSecondFuelModelNumber() const;
+	int getTwoFuelModelsMethod() const;
 	double getMoistureDeadAtIndex(int index) const;
 	double getMoistureLiveAtIndex(int index) const;
 	double getSlope() const;
@@ -45,6 +53,7 @@ public:
 	double getMoistureHundredHour() const;
 	double getMoistureLiveHerbaceous() const;
 	double getMoistureLiveWoody() const;
+	double getCoverage() const;
 	bool isWindAndSpreadAngleRelativeToNorth() const;
 	bool isWindAndSpreadAngleRelativeToUpslope() const;
 	bool isSlopeInDegrees() const;
@@ -70,7 +79,7 @@ private:
 	double	slopeAspect_;				// degrees, 0-360
 	double	moistureDead_[MAX_SIZES];	// dead fuel moisture content
 	double	moistureLive_[MAX_SIZES];	// live fuel moisture content
-	double	coverage;					// percent of landscape occupied by first fuel in Two Fuel Models
+	double	coverage_;					// percent of landscape occupied by first fuel in Two Fuel Models
 
 	enum WindAndSpreadDirectionEnumType
 	{
@@ -89,11 +98,12 @@ private:
 		ARITHMETIC = 0,			// Use arithmetic mean
 		HARMONIC = 1,			// Use harmoic mean
 		TWO_DIMENSIONAL = 2,	// Use Finney's two dimensional method
+		NO_METHOD = 3			// Don't use TwoFuel Model Method
 	};
 
 	WindAndSpreadDirectionEnumType windAndSpreadAngleMode_; // Determines how wind and spread directions are referenced
 	SlopeInputModeEnumType slopeInputMode_;	// Determines whether slope is input as percent or degrees
-
+	TwoFuelModelsMethod twoFuelModelsMethod_; // Determines method used in Two Fuel Models calculations
 };
 
 #endif // SURFACEINPUTS_HEADER

@@ -30,6 +30,16 @@ public:
 	double getFireEccentricity() const;
 
 private:
+	enum TwoFuelModelsMethod
+	{
+		ARITHMETIC = 0,			// Use arithmetic mean
+		HARMONIC = 1,			// Use harmoic mean
+		TWO_DIMENSIONAL = 2,	// Use Finney's two dimensional method
+		NO_METHOD = 3
+	};
+
+	TwoFuelModelsMethod getTwoFuelModelsMethod() const;
+
 	// SURFACE Module component objects
 	SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
 	SurfaceFireSpread surfaceFireSpread_;

@@ -37,9 +37,15 @@ void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, do
 		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
 }
 
-void Behave::useTwoFuelModels(int firstFuelModel, int secondFuelModel, TwoFuelModelsMethod method)
+void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
+	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
+	double windDirection, double slope, double coverage, TwoFuelModelsMethod method, double slopeAspect)
 {
-
+	int myMethod = (int) method;
+	surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
+		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, midflameWindSpeed, windDirection, slope, coverage,
+		 myMethod, slopeAspect);
 }
 
 double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)

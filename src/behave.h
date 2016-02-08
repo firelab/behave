@@ -30,6 +30,10 @@ public:
 	void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 		double midflameWindSpeed, double windDirection, double slope, double slopeAspect = 0);
+	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, 
+		double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
+		double moistureLiveHerbaceous, double moistureLiveWoody,double midflameWindSpeed, 
+		double windDirection, double slope, double coverage, TwoFuelModelsMethod method, double slopeAspect = 0);
 	double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 	double getDirectionOfMaxSpread() const;
 	double getFlameLength() const;
@@ -40,9 +44,7 @@ public:
 	bool isWindAndSpreadAngleRelativeToUpslope() const;
 	bool isSlopeInDegrees() const;
 	bool isSlopeInPercent() const;
-	bool isUsingTwoFuelModels() const;
 
-	void useTwoFuelModels(int firstFuelModel, int secondFuelModel, TwoFuelModelsMethod method);
 	void cancelUsingTwoFuelModels();
 	void setWindAndSpreadAnglesRelativeToNorth();
 	void setWindAndSpreadAnglesRelativeToUpslope();
@@ -61,11 +63,10 @@ private:
 		RELATIVE_TO_NORTH = 1		// Wind direction direction are clockwise relative to compass north
 	};
 
-
-
 	void setSlopeInputMode(SlopeInputModeEnumType mode);
 	void setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode);
 
+	bool useTwoFuelModels;
 	FuelModels fuelModels_;			// Object containing data for fuel models
 	Surface surface_;				// SURFACE Moduel object
 	SurfaceInputs surfaceInputs_;	// Object that manages user input to SURFACE Module

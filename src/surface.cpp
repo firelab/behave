@@ -49,6 +49,11 @@ double Surface::getFireEccentricity() const
 	return surfaceFireSpread_.getFireEccentricity();
 }
 
+Surface::TwoFuelModelsMethod Surface::getTwoFuelModelsMethod() const
+{
+	return (Surface::TwoFuelModelsMethod)surfaceInputs_->getTwoFuelModelsMethod();
+}
+
 void Surface::validateInputs()
 {
 	const int MINIMUM_FUEL_MODEL_NUMBER = 1;

@@ -29,6 +29,7 @@ void SurfaceInputs::initializeMembers()
 
 	slopeInputMode_ = SLOPE_IN_PERCENT;
 	windAndSpreadAngleMode_ = RELATIVE_TO_UPSLOPE;
+	twoFuelModelsMethod_ = NO_METHOD;
 
 	for (int i = 0; i < MAX_SIZES; i++)
 	{
@@ -78,6 +79,29 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 
 	setMoistureDead();
 	setMoistureLive();
+}
+
+
+void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
+	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
+	double windDirection, double slope, double coverage, int method, double slopeAspect)
+{
+	int fuelModelNumber = firstfuelModelNumber;
+	updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
+		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
+		midflameWindSpeed, windDirection, slope, slopeAspect);
+	firstFuelModelNumber_ = firstfuelModelNumber;
+	secondFuelModelNumber_ = secondFuelModelNumber;
+	coverage_ = coverage;
+	if (method == ARITHMETIC || method == HARMONIC || method == TWO_DIMENSIONAL)
+	{
+		twoFuelModelsMethod_ = (TwoFuelModelsMethod)method;
+	}
+	else
+	{
+		twoFuelModelsMethod_ = NO_METHOD;
+	}
 }
 
 void SurfaceInputs::setWindAndSpreadDirectionMode(int mode)
@@ -223,6 +247,16 @@ double SurfaceInputs::getSlope() const
 double SurfaceInputs::getSlopeAspect() const
 {
 	return slopeAspect_;
+}
+
+double SurfaceInputs::getCoverage() const
+{
+	return coverage_;
+}
+
+int SurfaceInputs::getTwoFuelModelsMethod() const
+{
+	return twoFuelModelsMethod_;
 }
 
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
