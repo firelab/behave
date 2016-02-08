@@ -576,17 +576,11 @@ int main(int argc, char *argv[])
 			if (isUsingMetric)
 			{
 				spreadRateHeader = "spread-rate(m/s)";
-			}
-			else
-			{
-				spreadRateHeader = "spread-rate(ch/hr)";
-			}
-			if (isUsingMetric)
-			{
 				flameLengthHeader = "flame-length(m)";
 			}
 			else
 			{
+				spreadRateHeader = "spread-rate(ch/hr)";
 				flameLengthHeader = "flame-length(ft)";
 			}
 			dirMaxDHeader = "direction-of-max-spread(degrees)";
