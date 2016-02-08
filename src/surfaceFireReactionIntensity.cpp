@@ -110,3 +110,8 @@ void SurfaceFireReactionIntensity::calculateEtaS()
 		}
 	}
 }
+
+double SurfaceFireReactionIntensity::getReactionIntensity() const
+{
+	return reactionIntensity_;
+}

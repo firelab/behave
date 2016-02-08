@@ -20,7 +20,7 @@ public:
 		double moistureOneHour, double moistureTenHour, double moistureHundredHour,
 		double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
 		double windDirection, double slope, double coverage, int method, 
-		double slopeAspect = 0);
+		double slopeAspect);
 	void setFuelModelNumber(int fuelModelNumber);
 	void setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour);
 	void setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody);
@@ -37,7 +37,9 @@ public:
 	void setWindAndSpreadDirectionMode(int mode); // From upslope == 0, From north == 1
 	void setFirstFuelModelNumber(int firstFuelModelNumber);
 	void setSecondFuelModelNumber(int secondFuelModelNumber);
-	
+	void setTwoFuelModelsMethod(int method);
+	void setIsUsingTwoFuelModels(bool isUsingTwoFuelModels);
+
 	int getFuelModelNumber() const;
 	int getFirstFuelModelNumber() const;
 	int getSecondFuelModelNumber() const;
@@ -65,6 +67,7 @@ private:
 	void setMoistureLive();
 
 	static const int MAX_SIZES = 4;		// Max number of fuel size classes
+	bool	isUsingTwoFuelModels_;		// Whether or not fuel spread calculation will use Two Fuel Models
 	int		fuelModelNumber_;			// 1 to 256
 	int		firstFuelModelNumber_;		// 1 to 256, first fuel used in Two Fuel Models
 	int		secondFuelModelNumber_;		// 1 to 256, second fuel used in Two Fuel Models
@@ -95,10 +98,10 @@ private:
 
 	enum TwoFuelModelsMethod
 	{
-		ARITHMETIC = 0,			// Use arithmetic mean
-		HARMONIC = 1,			// Use harmoic mean
-		TWO_DIMENSIONAL = 2,	// Use Finney's two dimensional method
-		NO_METHOD = 3			// Don't use TwoFuel Model Method
+		NO_METHOD = 0,			// Don't use TwoFuel Model Method
+		ARITHMETIC = 1,			// Use arithmetic mean
+		HARMONIC = 2,			// Use harmoic mean
+		TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
 	};
 
 	WindAndSpreadDirectionEnumType windAndSpreadAngleMode_; // Determines how wind and spread directions are referenced

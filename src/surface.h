@@ -29,13 +29,16 @@ public:
 	double getFireLengthToWidthRatio() const;
 	double getFireEccentricity() const;
 
+	void setTwoFuelModelsMethod();
+	void setIsUsingTwoFuelModels();
+
 private:
 	enum TwoFuelModelsMethod
 	{
-		ARITHMETIC = 0,			// Use arithmetic mean
-		HARMONIC = 1,			// Use harmoic mean
-		TWO_DIMENSIONAL = 2,	// Use Finney's two dimensional method
-		NO_METHOD = 3
+		NO_METHOD = 0,		// Don't use Two Fuel Models
+		ARITHMETIC = 1,		// Use arithmetic mean
+		HARMONIC = 2,		// Use harmoic mean
+		TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
 	};
 
 	TwoFuelModelsMethod getTwoFuelModelsMethod() const;
@@ -46,6 +49,9 @@ private:
 	SurfaceInputs* surfaceInputs_;
 	const FuelModels*	fuelModels_;
 
+	bool isUsingTwoFuelModels;
+
+	void initializeMembers();
 	void validateInputs();
 };
 

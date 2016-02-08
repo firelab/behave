@@ -524,6 +524,12 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 	}
 }
 
+double SurfaceFuelbedIntermediates::getFuelbedDepth() const
+{
+	double fuelbedDepth = fuelModels_->getFuelbedDepth(fuelModelNumber_);
+	return fuelbedDepth;
+}
+
 double SurfaceFuelbedIntermediates::getBulkDensity() const
 {
 	return bulkDensity_;

@@ -21,6 +21,7 @@ public:
 	void calculateFuelbedIntermediates();
 	
 	// Public Getters
+	double getFuelbedDepth() const;
 	double getBulkDensity() const;
 	double getPackingRatio()const;
 	double getRelativePackingRatio() const;

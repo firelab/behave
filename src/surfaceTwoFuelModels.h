@@ -10,29 +10,35 @@ class SurfaceTwoFuelModels
 {
 public:
 	SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, SurfaceFireSpread& surfaceFireSpread);
-	void FuelBedWeighted(int firstFuelModelNumber, int secondFuelModelNumber);
+	double FuelBedWeighted(double directionOfInterest);
 
 private:
 	enum MEAN_METHOD
 	{
-		ARITHMETIC = 0,
-		HARMONIC = 1,
-		TWO_DIMENSIONAL = 2
+		NO_METHOD = 0,
+		ARITHMETIC = 1,
+		HARMONIC = 2,
+		TWO_DIMENSIONAL = 3
 	};
 
-	SurfaceInputs*		surfaceInputs_;
+	SurfaceInputs* surfaceInputs_;
 	SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
 	SurfaceFireSpread* surfaceFireSpread_;
 
-	double reactionIntensity;		// (Btu / ft2 / min)
-	double spreadRate;				// (ft / min)
-	double maxDirectionFromUpslope;	// (clockwise from upslope)
-	double effectiveWind;			// (mi / h)
-	double windSpeedLimit;			// (mi / h)
-	double fireWindSpeedFlag;		// (flag)
-	double fireHeatPerUnitArea;		// (Btu / ft2)
-	double fireLineIntensity;		// (Btu / ft / s)
-	double fireFlameLength;			// (ft)
+	bool windLimitExceeded_;			// (flag)
+	double reactionIntensity_;			// (Btu / ft2 / min)
+	double spreadRate_;					// (ft / min)
+	double directionOfMaxSpread_;		// (clockwise from upslope or north)
+	double effectiveWind_;				// (mi / h)
+	double fuelbedDepth_;
+	double heatPerUnitArea_;
+	double midFlameWindSpeed_;
+	double windSpeedLimit_;				// (mi / h)
+	double windAdjustmentFactor_;
+	double fireHeatPerUnitArea_;		// (Btu / ft2)
+	double fireLineIntensity_;			// (Btu / ft / s)
+	double fireFlameLength_;			// (ft)
+	double fireLengthToWidthRatio_;
 };
 
 #endif //SURFACETWOFUELMODELS_HEADER

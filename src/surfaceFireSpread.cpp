@@ -270,7 +270,7 @@ void SurfaceFireSpread::calculateBackingSpreadRate()
 	backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
 }
 
-double  SurfaceFireSpread::getDirectionOfMaxSpread() const
+double SurfaceFireSpread::getDirectionOfMaxSpread() const
 {
 	double localDirMaxSpread = directionOfMaxSpread_;
 	if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
@@ -284,12 +284,22 @@ double  SurfaceFireSpread::getDirectionOfMaxSpread() const
 	return localDirMaxSpread;
 }
 
-double  SurfaceFireSpread::convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const
+double SurfaceFireSpread::getEffectiveWindSpeed() const
+{
+	return effectiveWindSpeed_;
+}
+
+double SurfaceFireSpread::convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const
 {
 	double dirMaxSpreadRelativeToNorth = directionOfMaxSpreadFromUpslope;
 	double slopeAspect = surfaceInputs_->getSlopeAspect();
 	dirMaxSpreadRelativeToNorth += slopeAspect + 180; // spread direction is now relative to north
 	return dirMaxSpreadRelativeToNorth;
+}
+
+double SurfaceFireSpread::getFirelineIntensity() const
+{
+	return firelineIntensity_;
 }
 
 double SurfaceFireSpread::getFlameLength() const
@@ -305,6 +315,32 @@ double SurfaceFireSpread::getFireLengthToWidthRatio() const
 double SurfaceFireSpread::getFireEccentricity() const
 {
 	return eccentricity_;
+}
+
+double  SurfaceFireSpread::getResidenceTime() const
+{
+	return residenceTime_;
+}
+
+double SurfaceFireSpread::getHeatPerUnitArea() const
+{
+	double heatPerUnitArea = reactionIntensity_ * residenceTime_;
+	return heatPerUnitArea;
+}
+
+double SurfaceFireSpread::getWindSpeedLimit() const
+{
+	return windSpeedLimit_;
+}
+
+double SurfaceFireSpread::getReactionIntensity() const
+{
+	return surfaceFireReactionIntensity_.getReactionIntensity();
+}
+
+bool SurfaceFireSpread::getIsWindLimitExceeded() const
+{
+	return isWindLimitExceeded_;
 }
 
 void SurfaceFireSpread::initializeMembers()

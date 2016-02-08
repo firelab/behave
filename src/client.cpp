@@ -12,24 +12,28 @@ int main()
     double moisture10h = 0.0;
     double moisture100h = 0.0;
     double moistureLiveHerb = 0.0;
-    double moistureLiveWood = 0.0;
-    double windspeed = 0.0;
+    double moistureLiveWoody = 0.0;
+    double windSpeed = 0.0;
     double windDirection = 0;
     double slope = 0.0;
-    double slopeAspect = 0.0;
+    double aspect = 0.0;
     double directionOfMaxSpread = 0;
     double flameLength = 0; 
     double directionOfInterest = 0;
     double spreadRate = 0;
 
+	// Two Fuel Models
+	int firstFuelModelNumber = 2;
+	int secondFuelModelNumber = 4;
+	double coverage = 33;
+
     Behave behave;
 
 	// Setting the wind and spread angle input mode (default is upslope)
 	//behavePlus.setWindAndSpreadAnglesRelativeToUpslope();
-	behave.setWindAndSpreadAnglesRelativeToNorth();
+	//behave.setWindAndSpreadAnglesRelativeToNorth();
 
 	// Checking  wind and spread angle input mode
-	// The method of determining angle or slope input mode is admittedly bit clunky
 	std::cout << "Wind and spread direction are in degrees clockwise relative to ";
 	if (behave.isWindAndSpreadAngleRelativeToUpslope())
 	{
@@ -41,11 +45,10 @@ int main()
 	}
 
 	// Setting the slope input mode (default is percent)
-	//behavePlus.setSlopeInputToPercent();
-	behave.setSlopeInputToDegrees();
+	behave.setSlopeInputToPercent();
+	//behave.setSlopeInputToDegrees();
 
 	// Checking the slope input mode
-	// The method of determining slope input mode is admittedly bit clunky
 	std::wcout << "Slope input mode is ";
 	if (behave.isSlopeInPercent())
 	{
@@ -56,25 +59,27 @@ int main()
 		std::cout << "degrees" << std::endl << std::endl;
 	}
 
-	spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
-
-	for (int i = 101; i <= 109; i++)
+	for (int i = 1; i <= 1; i++)
 	{
 		fuelModelNumber = i; 
 		moisture1h = 0.06;
 		moisture10h = 0.07;
 		moisture100h = 0.08;
 		moistureLiveHerb = 0.60;
-		moistureLiveWood = 0.90;
-		windspeed = 3;
-		windDirection = 90;
-		slope = 50;
-		slopeAspect = 50;
-		behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWood, windspeed, windDirection, slope, slopeAspect);
-		directionOfInterest = 0;
+		moistureLiveWoody = 0.90;
+		windSpeed = 3;
+		windDirection = 0;
+		slope = 20;
+		aspect = 50;
+
+		//behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
+		behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, coverage, Behave::ARITHMETIC, aspect);
 
 		spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+
+		//directionOfInterest = 0;
 		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+	
 
 		directionOfMaxSpread = behave.getDirectionOfMaxSpread();
 		std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread)

@@ -39,7 +39,7 @@ SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, Surface
 *      SurfaceFireVectorDirFromUpslope (deg)
 */
 
-void SurfaceTwoFuelModels::FuelBedWeighted(int firstFuelModelNumber, int secondFuelModelNumber)
+double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 {
 /*
 	// Get the primary and secondary fuel models
@@ -57,71 +57,51 @@ void SurfaceTwoFuelModels::FuelBedWeighted(int firstFuelModelNumber, int secondF
 	//----------------------------------------
 
 	// Intermediate outputs for each fuel model
-	double ros[2]					// rate of spread
-	double fli[2]					// fireline intensity
-	double fl[2]					// flame length
-	double ewsh[2]					// effective wind speed
+	double ros[2];					// rate of spread
+	double fli[2];					// fireline intensity
+	double fl[2];					// flame length
+	double ewsh[2];					// effective wind speed
 	double flw[2];					// fire length-to-width ratio
 	double rxi[2], hua[2], mxd[2];	// reaction intensity, heat per unit area, dir of max spread
 	double waf[2], wmf[2];			// wind adjustment factor and wind speed at midflame
 	double wsl[2];					// wind speed limit
 	int    wsf[2];					// wind speed flag
+*/
+
+	// For all arrays below: 
+	// index 0 = first fuel model, index 1 = second fuel model
+	int		fuelModelNumber[2];			// fuel model number
+	double	coverage[2];				// coverage
+	double	ros[2];						// rate of spread
+	double	firelineIntensity[2];		// fireline intensity
+	double	flameLength[2];				// flame length
+	double	fuelbedDepth[2];
+	double	effectiveWindSpeed[2];		// effective wind speed
+	double	lengthToWidthRatio[2];		// fire length-to-width ratio
+	double	reactionIntensity[2];		// reaction intensity, 
+	double	heatPerUnitArea[2];			// heat per unit area
+	double	dirMaxSpread[2];			// direction of max spread
+	double	windAdjustmentFactor[2];	// wind adjustment factor
+	double	midFlameWindSpeed[2];		// wind speed at midflame
+	double	windSpeedLimit[2];			// wind speed limit
+	bool	windLimitExceeded[2];		// wind speed exceeded flag
+
+	fuelModelNumber[0] = surfaceInputs_->getFirstFuelModelNumber();
+	fuelModelNumber[1] = surfaceInputs_->getSecondFuelModelNumber();
+
+	coverage[0] = surfaceInputs_->getCoverage();
+	coverage[0] /= 100;
+	coverage[1] = 1 - coverage[0];
+
 
 	// Calculate fire outputs for each fuel model
-	for (int i = 0; i<2; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		// Load the fuel attributes into the equation tree's fuel model
-		// This replaces the call to FuelBedModel()
-		vSurfaceFuelBedDepth->update(fm[i]->m_depth);
-		vSurfaceFuelBedMextDead->update(fm[i]->m_mext);
-		vSurfaceFuelHeatDead->update(fm[i]->m_heatDead);
-		vSurfaceFuelHeatLive->update(fm[i]->m_heatLive);
-		vSurfaceFuelLoadDead1->update(fm[i]->m_load1);
-		vSurfaceFuelLoadDead10->update(fm[i]->m_load10);
-		vSurfaceFuelLoadDead100->update(fm[i]->m_load100);
-		vSurfaceFuelLoadLiveHerb->update(fm[i]->m_loadHerb);
-		vSurfaceFuelLoadLiveWood->update(fm[i]->m_loadWood);
-		vSurfaceFuelSavrDead1->update(fm[i]->m_savr1);
-		vSurfaceFuelSavrLiveHerb->update(fm[i]->m_savrHerb);
-		vSurfaceFuelSavrLiveWood->update(fm[i]->m_savrWood);
-		vSurfaceFuelLoadTransferEq->updateItem(fm[i]->m_transfer);
-
-		// Load the equation tree's fuel model into fuel parameter arrays
-		FuelBedParms();
-		FuelLoadTransferFraction();		// vSurfaceFuelLoadTransferFraction
-
-		// Calculate the fuel bed intermediates
-		FuelBedIntermediates();
-
-		// Calculate vSurfaceFireResidenceTime
-		FireResidenceTime();			// vSurfaceFireResidenceTime
-
-		// Load life class moistures into the equation tree time-lag classes
-		if (prop->boolean("surfaceConfMoisLifeCat"))
-		{
-			FuelMoisLifeClass();		// vSurfaceFuelMoisLifeDead, vSurfaceFuelMoisLifeLive
-		}
-		// or load moisture scenario into the equation tree time-lag classes
-		else if (prop->boolean("surfaceConfMoisScenario"))
-		{
-			FuelMoisScenarioModel();
-		}
-		// Load equation tree time-lag classes into fuel parameter arrays
-		FuelMoisTimeLag();
-
-		// Calculate heat sink outputs
-		FuelBedHeatSink();
-
-		// Calculate vSurfaceFirePropagatingFlux
-		FirePropagatingFlux();
-
-		// Calculate and store vSurfaceFireReactionInt
-		FireReactionInt();
-		rxi[i] = vSurfaceFireReactionInt->m_nativeValue;
-
-		// Calculate vSurfaceFireNoWindRate
-		FireNoWindRate();
-
+		surfaceInputs_->setFuelModelNumber(fuelModelNumber[i]);
+		surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
+		fuelbedDepth[i] = surfaceFuelbedIntermediates_->getFuelbedDepth();
+		midFlameWindSpeed[i] = surfaceInputs_->getMidflameWindSpeed();
+		/*
 		// If necessary, calculate wind adjustment factor from canopy and fuel parameters
 		if (prop->boolean("surfaceConfWindSpeedAt10MCalc")
 			|| prop->boolean("surfaceConfWindSpeedAt20FtCalc"))
@@ -143,61 +123,21 @@ void SurfaceTwoFuelModels::FuelBedWeighted(int firstFuelModelNumber, int secondF
 			WindSpeedAtMidflame();
 		}
 		wmf[i] = vWindSpeedAtMidflame->m_nativeValue;
+		*/
+	
+		ros[i] = surfaceFireSpread_->calculateForwardSpreadRate(directionOfInterest);
+		reactionIntensity[i] = surfaceFireSpread_->getReactionIntensity();
+		dirMaxSpread[i] = surfaceFireSpread_->getDirectionOfMaxSpread();
+		effectiveWindSpeed[i] = surfaceFireSpread_->getEffectiveWindSpeed();
+		windSpeedLimit[i] = surfaceFireSpread_->getWindSpeedLimit();
+		windLimitExceeded[i] = surfaceFireSpread_->getIsWindLimitExceeded();
 
-		// Calculate and store fire spread outputs
-		FireSpreadAtHead();
-		rosh[i] = vSurfaceFireSpreadAtHead->m_nativeValue;
-		mxd[i] = vSurfaceFireMaxDirFromUpslope->m_nativeValue;
-		ewsh[i] = vSurfaceFireEffWindAtHead->m_nativeValue;
-		wsl[i] = vSurfaceFireWindSpeedLimit->m_nativeValue;
-		wsf[i] = (wmf[i] > wsl[i]) ? 1 : 0;
-
-		// Calculate vSurfaceFireLineIntAtHead
-		FireLineIntAtHead();
-		flih[i] = vSurfaceFireLineIntAtHead->m_nativeValue;
-
-		// Calculate vSurfaceFireFlameLengAtHead
-		FireFlameLengAtHead();
-		flh[i] = vSurfaceFireFlameLengAtHead->m_nativeValue;
-
-		// Calculate vSurfaceFireLengthToWidth
-		FireLengthToWidth();
-		flw[i] = vSurfaceFireLengthToWidth->m_nativeValue;
-
-		// Calculate vSurfaceFireEccentricity
-		FireEccentricity();
-
-		// If spread direction is upslope, set vector to 0
-		if (prop->boolean("surfaceConfSpreadDirMax"))
-		{
-			vSurfaceFireVectorBeta->update(0.);
-		}
-		else
-		{
-			FireVectorBeta();
-		}
-
-		// Calculate vSurfaceFireSpreadAtVector
-		FireSpreadAtBeta();
-		rosv[i] = vSurfaceFireSpreadAtVector->m_nativeValue;
-
-		// Calculate vSurfaceFireLineIntAtVector
-		FireLineIntAtVector();
-		fliv[i] = vSurfaceFireLineIntAtVector->m_nativeValue;
-
-		// Calculate vSurfaceFireFlameLengAtVector
-		FireFlameLengAtVector();
-		flv[i] = vSurfaceFireFlameLengAtVector->m_nativeValue;
-
-		// Calculate vSurfaceFireEffWindAtVector
-		FireEffWindAtVector();
-		ewsv[i] = vSurfaceFireEffWindAtVector->m_nativeValue;
-
-		// Calculate and store vSurfaceFireHeatPerUnitArea
-		FireHeatPerUnitArea();
-		hua[i] = vSurfaceFireHeatPerUnitArea->m_nativeValue;
+		firelineIntensity[i] = surfaceFireSpread_->getFirelineIntensity();
+		flameLength[i] = surfaceFireSpread_->getFlameLength();
+		lengthToWidthRatio[i] = surfaceFireSpread_->getFireLengthToWidthRatio();
+		heatPerUnitArea[i] = surfaceFireSpread_->getHeatPerUnitArea();
 	}
-
+	/*
 	//------------------------------------------------
 	// Determine and store combined fuel model outputs
 	//------------------------------------------------
@@ -210,6 +150,14 @@ void SurfaceTwoFuelModels::FuelBedWeighted(int firstFuelModelNumber, int secondF
 		wtdh = (cov[0] * rosh[0]) + (cov[1] * rosh[1]);
 		wtdv = (cov[0] * rosv[0]) + (cov[1] * rosv[1]);
 	}
+	*/
+	int method = surfaceInputs_->getTwoFuelModelsMethod();
+	if (method == ARITHMETIC)
+	{
+		spreadRate_ = (coverage[0] * ros[0]) + (coverage[1] * ros[1]);
+	}
+
+	/*
 	// else if harmonic mean spread rate...
 	else if (prop->boolean("surfaceConfFuelHarmonicMean"))
 	{
@@ -228,152 +176,70 @@ void SurfaceTwoFuelModels::FuelBedWeighted(int firstFuelModelNumber, int secondF
 		int samples = prop->integer("surfaceConfFuel2DSamples");
 		int depth = prop->integer("surfaceConfFuel2DDepth");
 		int laterals = prop->integer("surfaceConfFuel2DLaterals");
-		wtdh = FBL_SurfaceFireExpectedSpreadRate(rosh, cov, 2, lbRatio,
-			samples, depth, laterals);
 		wtdv = FBL_SurfaceFireExpectedSpreadRate(rosv, cov, 2, lbRatio,
 			samples, depth, laterals);
 	}
 	SurfaceFireSpread->update(wtdh);
-
+	*/
 
 	// The following assignments are based on Pat's rules:
 	// If only 1 fuel is present (whether primary or secondary), use its values exclusively
-	if (cov[0] > 0.999 || cov[1] > 0.999)
+	if (coverage[0] > 0.999 || coverage[1] > 0.999)
 	{
-		int i = (cov[0] > 0.999) ? 0 : 1;
-		vSurfaceFireReactionInt->update(rxi[i]);
-		vSurfaceFireMaxDirFromUpslope->update(mxd[i]);
-		vWindAdjFactor->update(waf[i]);
-		vWindSpeedAtMidflame->update(wmf[i]);
-		vSurfaceFireEffWindAtHead->update(ewsh[i]);
-		vSurfaceFireEffWindAtVector->update(ewsv[i]);
-		vSurfaceFireWindSpeedLimit->update(wsl[i]);
-		vSurfaceFireWindSpeedFlag->updateItem(wsf[i]);
-		vSurfaceFireLengthToWidth->update(flw[i]);
-		vSurfaceFireHeatPerUnitArea->update(hua[i]);
-		vSurfaceFireLineIntAtHead->update(flih[i]);
-		vSurfaceFireLineIntAtVector->update(fliv[i]);
-		vSurfaceFireFlameLengAtHead->update(flh[i]);
-		vSurfaceFireFlameLengAtVector->update(flv[i]);
-		vSurfaceFuelBedDepth->update(fm[i]->m_depth);
+		int i = (coverage[0] > 0.999) ? 0 : 1;
+		reactionIntensity_ = reactionIntensity[i];
+		directionOfMaxSpread_ = dirMaxSpread[i];
+		// windAdjustmentFactor_- = windAdjustmentFactor[i]; // TODO
+		//windSpeed_ = midFlameWindSpeed[i]; // TODO
+		effectiveWind_ = effectiveWindSpeed[i];
+		windSpeedLimit_ = windSpeedLimit[i];
+		windLimitExceeded_ = windLimitExceeded[i];
+		fireLengthToWidthRatio_ = lengthToWidthRatio[i];
+		heatPerUnitArea_ = heatPerUnitArea[i];
+		fireLineIntensity_ = firelineIntensity[i];
+		fireFlameLength_ = flameLength[i];
+		fuelbedDepth_ = fuelbedDepth[i];
 	}
 	// Otherwise the wtd value depends upon Pat's criteria; could be wtd, min, max, or primary
 	else
 	{
 		// Reaction intensity is the maximum of the two models
-		wtd = (rxi[0] > rxi[1]) ? rxi[0] : rxi[1];
-		vSurfaceFireReactionInt->update(wtd);
-
+		reactionIntensity_ = (reactionIntensity[0] > reactionIntensity[1]) ? reactionIntensity[0] : reactionIntensity[1];
+	
 		// Direction of maximum spread is for the FIRST (not necessarily dominant) fuel model
-		vSurfaceFireMaxDirFromUpslope->update(mxd[0]);
+		directionOfMaxSpread_ = dirMaxSpread[0];
 
 		// Wind adjustment factor is for the FIRST (not necessarily dominant) fuel model
-		vWindAdjFactor->update(waf[0]);
+		//windAdjustmentFactor_ = windAdjustmentFactor[0]; // TODO
 
 		// Midflame wind speed is for the FIRST (not necessarily dominant) fuel model
-		vWindSpeedAtMidflame->update(wmf[0]);
+		midFlameWindSpeed_ = midFlameWindSpeed[0];
 
 		// Effective wind speed is for the FIRST (not necessarily dominant) fuel model
-		vSurfaceFireEffWindAtHead->update(ewsh[0]);
-		vSurfaceFireEffWindAtVector->update(ewsv[0]);
-
+		effectiveWind_ = effectiveWindSpeed[0];
+	
 		// Maximum reliable wind speed is the minimum of the two models
-		wtd = (wsl[0] < wsl[1]) ? wsl[0] : wsl[1];
-		vSurfaceFireWindSpeedLimit->update(wtd);
+		windSpeedLimit_ = (windSpeedLimit[0] < windSpeedLimit[1]) ? windSpeedLimit[0] : windSpeedLimit[1];
 
 		// If either wind limit is exceeded, set the flag
-		vSurfaceFireWindSpeedFlag->updateItem(wsf[0] || wsf[1]);
+		windLimitExceeded_ = (windLimitExceeded[0] || windLimitExceeded[1]);
 
 		// Fire length-to-width ratio is for the FIRST (not necessarily dominant) fuel model
-		vSurfaceFireLengthToWidth->update(flw[0]);
+		fireLengthToWidthRatio_ = lengthToWidthRatio[0];
 
 		// Heat per unit area is the maximum of the two models
-		wtd = (hua[0] > hua[1]) ? hua[0] : hua[1];
-		vSurfaceFireHeatPerUnitArea->update(wtd);
+		heatPerUnitArea_ = (heatPerUnitArea[0] > heatPerUnitArea[1]) ? heatPerUnitArea[0] : heatPerUnitArea[1];
 
 		// Fireline intensity is the maximum of the two models
-		wtdh = (flih[0] > flih[1]) ? flih[0] : flih[1];
-		wtdv = (fliv[0] > fliv[1]) ? fliv[0] : fliv[1];
-		vSurfaceFireLineIntAtHead->update(wtdh);
-		vSurfaceFireLineIntAtVector->update(wtdv);
-
+		fireLineIntensity_ = (firelineIntensity[0] > firelineIntensity[1]) ? firelineIntensity[0] : firelineIntensity[1];
+	
 		// Flame length is the maximum of the two models
-		wtdh = (flh[0] > flh[1]) ? flh[0] : flh[1];
-		wtdv = (flv[0] > flv[1]) ? flv[0] : flv[1];
-		vSurfaceFireFlameLengAtHead->update(wtdh);
-		vSurfaceFireFlameLengAtVector->update(wtdv);
-
+		fireFlameLength_ = (flameLength[0] > flameLength[1]) ? flameLength[0] : flameLength[1];
+	
 		// Fuel bed depth is the maximum of the two fuel bed depths
-		wtd = (fm[0]->m_depth > fm[1]->m_depth) ? fm[0]->m_depth : fm[1]->m_depth;
-		vSurfaceFuelBedDepth->update(wtd);
+		fuelbedDepth_ = (fuelbedDepth[0] > fuelbedDepth[1]) ? fuelbedDepth[0] : fuelbedDepth[1];
 	}
-	//------------
-	// Log results
-	//------------
 
-	if (m_log)
-	{
-		fprintf(m_log, "%sbegin proc FuelBedWeighted() 6 13\n", Margin);
-		fprintf(m_log, "%s  i vSurfaceFuelBedModel1 %d %s\n", Margin,
-			vSurfaceFuelBedModel1->activeItemDataIndex(),
-			vSurfaceFuelBedModel1->activeItemName().latin1());
-		fprintf(m_log, "%s  i vSurfaceFuelBedModel2 %d %s\n", Margin,
-			vSurfaceFuelBedModel2->activeItemDataIndex(),
-			vSurfaceFuelBedModel2->activeItemName().latin1());
-		fprintf(m_log, "%s  i vSurfaceFuelBedCoverage1 %g %s\n", Margin,
-			vSurfaceFuelBedCoverage1->m_nativeValue,
-			vSurfaceFuelBedCoverage1->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  i vSiteSlopeFraction %g %s\n", Margin,
-			vSiteSlopeFraction->m_nativeValue,
-			vSiteSlopeFraction->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  i vWindDirFromUpslope %g %s\n", Margin,
-			vWindDirFromUpslope->m_nativeValue,
-			vWindDirFromUpslope->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  i vWindSpeedAtMidflame %g %s\n", Margin,
-			vWindSpeedAtMidflame->m_nativeValue,
-			vWindSpeedAtMidflame->m_nativeUnits.latin1());
-
-		fprintf(m_log, "%s  o vSurfaceFireReactionInt %g %s\n", Margin,
-			vSurfaceFireReactionInt->m_nativeValue,
-			vSurfaceFireReactionInt->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireSpreadAtHead %g %s\n", Margin,
-			vSurfaceFireSpreadAtHead->m_nativeValue,
-			vSurfaceFireSpreadAtHead->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireSpreadAtVector %g %s\n", Margin,
-			vSurfaceFireSpreadAtVector->m_nativeValue,
-			vSurfaceFireSpreadAtVector->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireMaxDirFromUpslope %g %s\n", Margin,
-			vSurfaceFireMaxDirFromUpslope->m_nativeValue,
-			vSurfaceFireMaxDirFromUpslope->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireEffWindAtHead %g %s\n", Margin,
-			vSurfaceFireEffWindAtHead->m_nativeValue,
-			vSurfaceFireEffWindAtHead->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireEffWindAtVector %g %s\n", Margin,
-			vSurfaceFireEffWindAtVector->m_nativeValue,
-			vSurfaceFireEffWindAtVector->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireWindSpeedLimit %g %s\n", Margin,
-			vSurfaceFireWindSpeedLimit->m_nativeValue,
-			vSurfaceFireWindSpeedLimit->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireWindSpeedFlag %g %s\n", Margin,
-			vSurfaceFireWindSpeedFlag->m_nativeValue,
-			vSurfaceFireWindSpeedFlag->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireHeatPerUnitArea %g %s\n", Margin,
-			vSurfaceFireHeatPerUnitArea->m_nativeValue,
-			vSurfaceFireHeatPerUnitArea->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireLineIntAtHead %g %s\n", Margin,
-			vSurfaceFireLineIntAtHead->m_nativeValue,
-			vSurfaceFireLineIntAtHead->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireLineIntAtVector %g %s\n", Margin,
-			vSurfaceFireLineIntAtVector->m_nativeValue,
-			vSurfaceFireLineIntAtVector->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireFlameLengAtHead %g %s\n", Margin,
-			vSurfaceFireFlameLengAtHead->m_nativeValue,
-			vSurfaceFireFlameLengAtHead->m_nativeUnits.latin1());
-		fprintf(m_log, "%s  o vSurfaceFireFlameLengAtVector %g %s\n", Margin,
-			vSurfaceFireFlameLengAtVector->m_nativeValue,
-			vSurfaceFireFlameLengAtVector->m_nativeUnits.latin1());
-	}
-	return;
-	*/
+	return spreadRate_;
 }
 

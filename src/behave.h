@@ -14,9 +14,10 @@ class Behave
 public:
 	enum TwoFuelModelsMethod
 	{
-		ARITHMETIC = 0,			// Use arithmetic mean
-		HARMONIC = 1,			// Use harmoic mean
-		TWO_DIMENSIONAL = 2,	// Use Finney's two dimensional method
+		NO_METHOD = 0,			// Don't use Two Fuel Models
+		ARITHMETIC = 1,			// Use arithmetic mean
+		HARMONIC = 2,			// Use harmoic mean
+		TWO_DIMENSIONAL = 3,	// Use Finney's two dimensional method
 	};
 
 	Behave();
@@ -66,7 +67,6 @@ private:
 	void setSlopeInputMode(SlopeInputModeEnumType mode);
 	void setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode);
 
-	bool useTwoFuelModels;
 	FuelModels fuelModels_;			// Object containing data for fuel models
 	Surface surface_;				// SURFACE Moduel object
 	SurfaceInputs surfaceInputs_;	// Object that manages user input to SURFACE Module

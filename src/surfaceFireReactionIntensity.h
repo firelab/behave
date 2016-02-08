@@ -14,6 +14,7 @@ public:
 	double calculateReactionIntensity();
 	void calculateEtaM();
 	void calculateEtaS();
+	double getReactionIntensity() const;
 
 private:
 	const double SMIDGEN = 1.0e-07;							//< Number used to test for "close enough to zero" to prevent divide - by - zero, sqrt(0), etc.

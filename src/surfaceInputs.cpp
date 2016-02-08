@@ -210,9 +210,44 @@ void SurfaceInputs::setSlopeInputMode(int mode)
 	}
 }
 
+void SurfaceInputs::setTwoFuelModelsMethod(int method)
+{
+	if (method == ARITHMETIC)
+	{
+		twoFuelModelsMethod_ = ARITHMETIC;
+	}
+	if (method == HARMONIC)
+	{
+		twoFuelModelsMethod_ = HARMONIC;
+	}
+	if (method == TWO_DIMENSIONAL)
+	{
+		twoFuelModelsMethod_ = TWO_DIMENSIONAL;
+	}
+	if (method == NO_METHOD)
+	{
+		twoFuelModelsMethod_ = NO_METHOD;
+	}
+}
+
+void SurfaceInputs::setIsUsingTwoFuelModels(bool isUsingTwoFuelModels)
+{
+	isUsingTwoFuelModels_ = isUsingTwoFuelModels;
+}
+
 void  SurfaceInputs::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
 	firstFuelModelNumber_ = firstFuelModelNumber;
+}
+
+int  SurfaceInputs::getFirstFuelModelNumber() const
+{
+	return firstFuelModelNumber_;
+}
+
+int  SurfaceInputs::getSecondFuelModelNumber() const
+{
+	return secondFuelModelNumber_;
 }
 
 void  SurfaceInputs::setSecondFuelModelNumber(int secondFuelModelNumber)

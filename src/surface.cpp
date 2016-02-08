@@ -2,8 +2,8 @@
 
 Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
 	// Surface Module initialiazation list
-		: surfaceFuelbedIntermediates_{ fuelModels, surfaceInputs },
-		surfaceFireSpread_{surfaceFuelbedIntermediates_, surfaceInputs}
+	: surfaceFuelbedIntermediates_{ fuelModels, surfaceInputs },
+	surfaceFireSpread_{surfaceFuelbedIntermediates_, surfaceInputs}
 {
 	fuelModels_ = &fuelModels;
 	surfaceInputs_ = &surfaceInputs;
@@ -13,14 +13,39 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 {
 	double spreadRate = 0.0;
 
-	// Make sure inputs are within valid ranges
-	validateInputs();
-	// Calculate fuel bed intermediates
-	surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
-	// Calculate spread rate
-	spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+	if (getTwoFuelModelsMethod() == NO_METHOD)
+	{
+		// Make sure inputs are within valid ranges
+		validateInputs();
+		// Calculate fuel bed intermediates
+		surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
+		// Calculate spread rate
+		spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+	}
+	else
+	{
+		// Calculate spread rate for Two Fuel Models
+		SurfaceTwoFuelModels surfaceTwoFuelModels(*(surfaceInputs_), surfaceFuelbedIntermediates_, surfaceFireSpread_);
+		spreadRate = surfaceTwoFuelModels.FuelBedWeighted(directionOfInterest);
+	}
 	// Return results
 	return spreadRate;
+}
+
+void Surface::initializeMembers()
+{
+	isUsingTwoFuelModels = false;
+
+}
+
+void Surface::setTwoFuelModelsMethod()
+{
+	
+}
+
+void Surface::setIsUsingTwoFuelModels()
+{
+
 }
 
 double Surface::calculateSpreadRateAtVector(double directionOfinterest)

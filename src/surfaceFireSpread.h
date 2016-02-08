@@ -17,10 +17,17 @@ public:
 
 	// Public getters
 	double getDirectionOfMaxSpread() const;
+	double getEffectiveWindSpeed() const;
+	double getFirelineIntensity() const;
 	double getFlameLength() const;
 	double getFireLengthToWidthRatio() const;
 	double getFireEccentricity() const;
-	
+	double getResidenceTime() const;
+	double getHeatPerUnitArea() const;
+	double getWindSpeedLimit() const;
+	double getReactionIntensity() const;
+	bool getIsWindLimitExceeded() const;
+
 private:
 	void initializeMembers();
 	void calculateWindFactors();
@@ -44,7 +51,7 @@ private:
 	// Pointers to other objects
 	const SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
 	const SurfaceInputs* surfaceInputs_;
-	SurfaceFireReactionIntensity surfaceFireReactionIntensity_; // dereferenced pointer needed for SurfaceFireReactionIntensity constructor
+	SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
 	SurfaceFirePropogatingFlux surfaceFirePropogatingFlux_;
 
 	// Member variables
