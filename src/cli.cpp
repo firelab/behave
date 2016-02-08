@@ -43,6 +43,8 @@ void Usage()
 	printf("           [--wind-direction degrees]        Required\n");
 	printf("           [--slope degrees]                 Required\n");
 	printf("           [--aspect degrees]                Required\n");
+	printf("           [--metric]                        Optional\n");
+	printf("           [--english]                       Optional\n");
 	printf("           [--direction-of-interest degrees] Optional\n");
 	printf("           [--output-to-file]                Optional\n");
 	printf("           [--file-name name]                Optional\n");
@@ -63,6 +65,10 @@ void Usage()
 	printf("--wind-direction <degrees>          Required: Wind direction\n");
 	printf("--slope <degrees>                   Required: Slope steepness\n");
 	printf("--aspect <degrees>                  Required: Aspect of the slope\n");
+	printf("--metric                            Optional: In/Output is in metric units a\n");
+	printf("                                       default units: English\n");
+	printf("--english                           Optional: In/Output is in English units a\n");
+	printf("                                       default units: English\n");
 	printf("--direction-of-interest <degrees>   Optional: Calculate spread rate in a\n");
 	printf("                                       direction other than maximum\n");
 	printf("--output-to-file                    Optional: Output to a txt file\n");
@@ -228,6 +234,9 @@ std::string getArgumentName(int argumentIndex)
 int main(int argc, char *argv[])
 {
 	const int MAX_ARGUMENT_INDEX = argc - 1;
+	const double METERS_PER_SECOND_TO_MILES_PER_HOUR = 2.236936;
+	const double CHAINS_PER_HOUSR_TO_METERS_PER_SECOND = 0.005588;
+	const double FEET_TO_METERS = 0.3048;
 
 	bool requiredArgumentArray[REQUIRED_ARG_COUNT];
 	bool isOutputtingToFile = false;
@@ -235,6 +244,8 @@ int main(int argc, char *argv[])
 	bool hasSpecifiedFileName = false;
 	bool isAppending = false;
 	bool hasDirectionOfInterest = false;
+	bool isUsingEnglish = false;
+	bool isUsingMetric = false;
 	int i;
 	
 	std::string fileName = "output.txt"; // default output file name
@@ -345,6 +356,14 @@ int main(int argc, char *argv[])
 			checkAngleBound(aspect);
 			requiredArgumentArray[ASPECT] = true;
 		}
+		else if (EQUAL(argv[i], "--metric"))
+		{
+			isUsingMetric = true;
+		}
+		else if (EQUAL(argv[i], "--english"))
+		{
+			isUsingEnglish = true;
+		}
 		else if (EQUAL(argv[i], "--direction-of-interest"))
 		{
 			argumentName = "direction of interest";
@@ -409,18 +428,33 @@ int main(int argc, char *argv[])
 		Usage(); // Exits program
 	}
 
+
+	// Check for logical consistency of parameters
+	// Check for using metric XOR english input and output
+	if (isUsingEnglish && isUsingMetric)
+	{
+		// Report error
+		printf("ERROR: Cannot use both English and Metric units\n");
+		Usage(); // Exits program
+	}
 	// Check for output to file and related parameters
 	if (!isOutputtingToFile && hasSpecifiedFileName) // An error has occurred
 	{
 		// Report error
 		printf("ERROR: Must be printing a file to specify a file name\n");
-		Usage();
+		Usage(); // Exits program
 	}
 	if (!isOutputtingToFile && isAppending) // An error has occurred
 	{
 		// Report error
 		printf("ERROR: Must be printing a file to append to a file\n");
 		Usage();  // Exits program
+	}
+
+	// Convert input units if necessary
+	if (isUsingMetric)
+	{
+		windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
 	}
 
 	// Feed input values to behave
@@ -440,13 +474,21 @@ int main(int argc, char *argv[])
 	flameLength = behave.getFlameLength();
 	directionOfMaxSpread = behave.getDirectionOfMaxSpread();
 
+	// Convert output units if necessary
+	if (isUsingMetric)
+	{
+		spreadRate *= CHAINS_PER_HOUSR_TO_METERS_PER_SECOND;
+		flameLength *= FEET_TO_METERS;
+	}
+
 	// Handle file output
 	if (isOutputtingToFile)
 	{
 		FILE *fout;
 		size_t size;
 		std::string firstToken = "";
-		
+		std::string secondToken = "";
+		std::string thirdToken = "";
 
 		if (isAppending)
 		{
@@ -459,17 +501,56 @@ int main(int argc, char *argv[])
 				fprintf(stderr, "ERROR: Cannot open file `%s`\n", fileName.c_str());
 				exit(1); // Exit with error code 1
 			}
-			char firstTokenCString[256];
-			fscanf(fout, "%s", firstTokenCString);
-			firstToken = firstTokenCString;
-		
+
+			// Scope of temporary c-strings
+			{
+				char firstTokenCString[128];
+				char secondTokenCString[128];
+				char thirdTokenCString[128];
+
+				// Read first three tokens
+				fscanf(fout, "%s", firstTokenCString);
+				fscanf(fout, "%s", secondTokenCString);
+				fscanf(fout, "%s", thirdTokenCString);
+
+				// Copy c-strings to std::strings
+				firstToken = firstTokenCString;
+				secondToken = secondTokenCString;
+				thirdToken = thirdTokenCString;
+			}
+
 			fseek(fout, 0, SEEK_END);
 			size = ftell(fout);
 			std::string testString = "run-identifier";
-			
 			if ((firstToken.compare(testString) != 0) && (size != 0))
 			{
 				fprintf(stderr, "ERROR: File format unrecognized, exiting\n");
+				exit(1); // Exit with error code 1
+			}
+
+			// Test for units mismatch
+			testString = "spread-rate(ch/hr)";
+			if ((secondToken.compare(testString) == 0) && isUsingMetric)
+			{
+				fprintf(stderr, "ERROR: Cannot append to a file with mismatched units, exiting\n");
+				exit(1); // Exit with error code 1
+			}
+			testString = "spread-rate(m/s)";
+			if ((secondToken.compare(testString) == 0) && !isUsingMetric)
+			{
+				fprintf(stderr, "ERROR: Cannot append to a file with mismatched units, exiting\n");
+				exit(1); // Exit with error code 1
+			}
+			testString = "spread-rate(ft)";
+			if ((thirdToken.compare(testString) == 0) && isUsingMetric)
+			{
+				fprintf(stderr, "ERROR: Cannot append to a file with mismatched units, exiting\n");
+				exit(1); // Exit with error code 1
+			}
+			testString = "spread-rate(m)";
+			if ((thirdToken.compare(testString) == 0) && !isUsingMetric)
+			{
+				fprintf(stderr, "ERROR: Cannot append to a file with mismatched units, exiting\n");
 				exit(1); // Exit with error code 1
 			}
 		}
@@ -488,10 +569,27 @@ int main(int argc, char *argv[])
 		
 		if (size == 0) // File is empty, so print column headers
 		{
+			std::string spreadRateHeader = "";
+			std::string flameLengthHeader = "";
+			std::string dirMaxDHeader = "";
 			std::string runIDHeader = "run-identifier";
-			std::string spreadRateHeader = "spread-rate(ch/hr)";
-			std::string flameLengthHeader = "flame-length(ft)";
-			std::string dirMaxDHeader = "direction-of-max-spread(degrees)";
+			if (isUsingMetric)
+			{
+				spreadRateHeader = "spread-rate(m/s)";
+			}
+			else
+			{
+				spreadRateHeader = "spread-rate(ch/hr)";
+			}
+			if (isUsingMetric)
+			{
+				flameLengthHeader = "flame-length(m)";
+			}
+			else
+			{
+				flameLengthHeader = "flame-length(ft)";
+			}
+			dirMaxDHeader = "direction-of-max-spread(degrees)";
 			fprintf(fout,  "%-20s\t" \
 				"%-20s\t" \
 				"%-20s\t" \
