@@ -247,7 +247,7 @@ void SurfaceFireSpread::calculateFireLengthToWidthRatio()
 {
 	if (effectiveWindSpeed_ > 1.0e-07)
 	{
-		fireLengthToWidthRatio_ = (1.0 + 0.25 * effectiveWindSpeed_);
+		fireLengthToWidthRatio_ = 1.0 + (0.25 * effectiveWindSpeed_);
 	}
 	else
 	{

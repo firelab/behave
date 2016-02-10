@@ -79,12 +79,12 @@ int main()
 		moistureLiveWoody = 0.90;
 		windSpeed = 15;
 		windDirection = 0;
-		slope = 0;
+		slope = 50;
 		aspect = 50;
 		behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
 
-		firstFuelModelNumber = 5;
-		secondFuelModelNumber =	101;
+		firstFuelModelNumber = 101;
+		secondFuelModelNumber =	5;
 		coverage = 0 + (.10 * i);
 		behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, coverage, Behave::TWO_DIMENSIONAL, aspect);
 

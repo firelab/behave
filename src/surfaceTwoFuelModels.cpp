@@ -251,7 +251,7 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 	else if (method == TWO_DIMENSIONAL)
 	{
 		//double lbRatio = lengthToWidthRatio[0]; // get first fuel model's length-to-width ratio
-		double lbRatio = lengthToWidthRatio[1]; // get second? fuel model's length-to-width ratio
+		double lbRatio = lengthToWidthRatio[1]; // get second? fuel model's length-to-width ratio, seems to agree with BehavePlus
 		//double lbRatio = 0;
 		//if (lengthToWidthRatio[0] <= lengthToWidthRatio[1])
 		//{
