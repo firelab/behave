@@ -83,8 +83,8 @@ int main()
 		aspect = 50;
 		behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
 
-		firstFuelModelNumber = 101;
-		secondFuelModelNumber =	5;
+		firstFuelModelNumber = 5;
+		secondFuelModelNumber =	8;
 		coverage = 0 + (.10 * i);
 		behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, coverage, Behave::TWO_DIMENSIONAL, aspect);
 
