@@ -247,7 +247,7 @@ void SurfaceFireSpread::calculateFireLengthToWidthRatio()
 {
 	if (effectiveWindSpeed_ > 1.0e-07)
 	{
-		fireLengthToWidthRatio_ = 1.0 + (0.25 * effectiveWindSpeed_);
+		fireLengthToWidthRatio_ = (1.0 + 0.25 * effectiveWindSpeed_);
 	}
 	else
 	{
@@ -341,6 +341,66 @@ double SurfaceFireSpread::getReactionIntensity() const
 bool SurfaceFireSpread::getIsWindLimitExceeded() const
 {
 	return isWindLimitExceeded_;
+}
+
+void SurfaceFireSpread::setDirectionOfMaxSpread(double directionOFMaxSpread)
+{
+	directionOfMaxSpread_ = directionOFMaxSpread;
+}
+
+void SurfaceFireSpread::setEffectiveWindSpeed(double effectiveWindSpeed)
+{
+	effectiveWindSpeed_ = effectiveWindSpeed;
+}
+
+void SurfaceFireSpread::setFirelineIntensity(double firelineIntensity)
+{
+	firelineIntensity_ = firelineIntensity;
+}
+
+void SurfaceFireSpread::setFlameLength(double flameLength)
+{
+	flameLength_ = flameLength;
+}
+
+void SurfaceFireSpread::setFireLengthToWidthRatio(double lengthToWidthRatio)
+{
+	fireLengthToWidthRatio_ = lengthToWidthRatio;
+}
+
+void SurfaceFireSpread::setFireEccentricity(double eccentricity)
+{
+	eccentricity_ = eccentricity;
+}
+
+void SurfaceFireSpread::setResidenceTime(double residenceTime)
+{
+	residenceTime_ = residenceTime;
+}
+
+void SurfaceFireSpread::setWindSpeedLimit(double windSpeedLimit)
+{
+	windSpeedLimit_ = windSpeedLimit;
+}
+
+void SurfaceFireSpread::setReactionIntensity(double reactionIntensity)
+{
+	reactionIntensity_ = reactionIntensity;
+}
+
+void SurfaceFireSpread::setHeatPerUnitArea(double heatPerUnitArea)
+{
+	heatPerUnitArea_ = heatPerUnitArea;
+}
+
+void SurfaceFireSpread::setIsWindLimitExceeded(bool isWindLimitExceeded)
+{
+	isWindLimitExceeded_ = isWindLimitExceeded;
+}
+
+void SurfaceFireSpread::setWindAdjustmentFactor(double windAdjustmentFactor)
+{
+	windAdjustmentFactor_ = windAdjustmentFactor;
 }
 
 void SurfaceFireSpread::initializeMembers()

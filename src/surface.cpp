@@ -32,22 +32,6 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 	return spreadRate;
 }
 
-void Surface::initializeMembers()
-{
-	isUsingTwoFuelModels = false;
-
-}
-
-void Surface::setTwoFuelModelsMethod()
-{
-	
-}
-
-void Surface::setIsUsingTwoFuelModels()
-{
-
-}
-
 double Surface::calculateSpreadRateAtVector(double directionOfinterest)
 {
 	return surfaceFireSpread_.calculateSpreadRateAtVector(directionOfinterest);

@@ -46,7 +46,6 @@ public:
 	bool isSlopeInDegrees() const;
 	bool isSlopeInPercent() const;
 
-	void cancelUsingTwoFuelModels();
 	void setWindAndSpreadAnglesRelativeToNorth();
 	void setWindAndSpreadAnglesRelativeToUpslope();
 	void setSlopeInputToPercent();

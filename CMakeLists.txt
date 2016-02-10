@@ -15,6 +15,9 @@ SET(SOURCE
 	src/behave.cpp
 	src/fuelModels.cpp
 	# Start of Surface Module
+	src/newext.cpp
+	src/randfuel.cpp
+	src/randthread.cpp
 	src/surface.cpp
 	src/surfaceFirePropogatingFlux.cpp
 	src/surfaceFireReactionIntensity.cpp
@@ -29,6 +32,9 @@ SET(HEADERS
 	src/behave.h
 	src/fuelModels.h
 	# Start of Surface Module
+	src/newext.h
+	src/randfuel.h
+	src/randthread.h
 	src/surface.h
 	src/surfaceFirePropogatingFlux.h
 	src/surfaceFireReactionIntensity.h

@@ -600,19 +600,19 @@ int main(int argc, char *argv[])
 	}
 
 	// Print to console
-	printf("run-identifier\t\t\t\t%s\n", runIdentifier.c_str());
-	if (isUsingMetric)
-	{
-		printf("spread-rate(m/s)\t\t\t%lf\n", spreadRate);
-		printf("flame-Length(m)\t\t\t\t%lf\n", flameLength);
-	}
-	else
-	{
-		printf("spread-rate(ch/hr)\t\t\t%lf\n", spreadRate);
-		printf("flame-Length(ft)\t\t\t%lf\n", flameLength);
-	}
-	
-	printf("direction-of_max-spread(degrees)\t%lf\n", directionOfMaxSpread);
+	//printf("run-identifier\t\t\t\t%s\n", runIdentifier.c_str());
+	//if (isUsingMetric)
+	//{
+	//	printf("spread-rate(m/s)\t\t\t%lf\n", spreadRate);
+	//	printf("flame-Length(m)\t\t\t\t%lf\n", flameLength);
+	//}
+	//else
+	//{
+	//	printf("spread-rate(ch/hr)\t\t\t%lf\n", spreadRate);
+	//	printf("flame-Length(ft)\t\t\t%lf\n", flameLength);
+	//}
+	//
+	//printf("direction-of_max-spread(degrees)\t%lf\n", directionOfMaxSpread);
 
 	return 0; // Success
 }

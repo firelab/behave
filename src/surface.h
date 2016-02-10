@@ -29,9 +29,6 @@ public:
 	double getFireLengthToWidthRatio() const;
 	double getFireEccentricity() const;
 
-	void setTwoFuelModelsMethod();
-	void setIsUsingTwoFuelModels();
-
 private:
 	enum TwoFuelModelsMethod
 	{
@@ -48,8 +45,6 @@ private:
 	SurfaceFireSpread surfaceFireSpread_;
 	SurfaceInputs* surfaceInputs_;
 	const FuelModels*	fuelModels_;
-
-	bool isUsingTwoFuelModels;
 
 	void initializeMembers();
 	void validateInputs();

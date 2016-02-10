@@ -28,6 +28,20 @@ public:
 	double getReactionIntensity() const;
 	bool getIsWindLimitExceeded() const;
 
+	// public setters
+	void setDirectionOfMaxSpread(double directionOFMaxSpread);
+	void setEffectiveWindSpeed(double effectiveWindSpeed);
+	void setFirelineIntensity(double firelineIntensity);
+	void setFlameLength(double flameLength);
+	void setFireLengthToWidthRatio(double lengthToWidthRatio);
+	void setFireEccentricity(double eccentricity);
+	void setResidenceTime(double residenceTime);
+	void setWindSpeedLimit(double windSpeedLimit);
+	void setReactionIntensity(double reactionIntensity);
+	void setHeatPerUnitArea(double heatPerUnitArea);
+	void setIsWindLimitExceeded(bool isWindLimitExceeded);
+	void setWindAdjustmentFactor(double windAdjustmentFactor);
+
 private:
 	void initializeMembers();
 	void calculateWindFactors();
@@ -70,6 +84,7 @@ private:
 	//double etaM_[MAX_LIFE_STATES];						// Moisture damping coefficient for  i-th categort (dead/live)
 	//double etaS_[MAX_LIFE_STATES];						// Mineral(silica) damping coefficient for i - th categort(dead / live)
 	//double propagatingFlux_;								// Propagating flux ratio, Rothermel 1972, equation 42
+	double heatPerUnitArea_;
 	double fireLengthToWidthRatio_;
 	double eccentricity_;
 	double residenceTime_;
@@ -78,6 +93,9 @@ private:
 	double firelineIntensity_;
 	double flameLength_;
 	double backingSpreadRate_;
+
+	// Placeholder for Wind Adjustment Factor Model
+	double windAdjustmentFactor_;
 
 	//SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
 	//SurfaceFirePropogatingFlux surfaceFirePropogatingFlux_;

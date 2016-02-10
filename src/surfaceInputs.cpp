@@ -79,6 +79,8 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 
 	setMoistureDead();
 	setMoistureLive();
+
+	twoFuelModelsMethod_ = NO_METHOD;
 }
 
 
