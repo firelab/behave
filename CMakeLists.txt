@@ -16,6 +16,7 @@ SET(SOURCE
 	src/fuelModels.cpp
 	# Start of Surface Module
 	src/newext.cpp
+	src/palmettoGallberry.h
 	src/randfuel.cpp
 	src/randthread.cpp
 	src/surface.cpp
@@ -33,6 +34,7 @@ SET(HEADERS
 	src/fuelModels.h
 	# Start of Surface Module
 	src/newext.h
+	src/palmettoGallberry.cpp
 	src/randfuel.h
 	src/randthread.h
 	src/surface.h

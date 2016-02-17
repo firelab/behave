@@ -19,8 +19,11 @@ public:
 	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 		double moistureOneHour, double moistureTenHour, double moistureHundredHour,
 		double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-		double windDirection, double slope, double coverage, int method, 
+		double windDirection, double coverage, int method, double slope,
 		double slopeAspect);
+	void  updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+		double midflameWindSpeed, double windDirection, double slope, double slopeAspect);
 	void setFuelModelNumber(int fuelModelNumber);
 	void setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour);
 	void setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody);
@@ -38,7 +41,8 @@ public:
 	void setFirstFuelModelNumber(int firstFuelModelNumber);
 	void setSecondFuelModelNumber(int secondFuelModelNumber);
 	void setTwoFuelModelsMethod(int method);
-	void setIsUsingTwoFuelModels(bool isUsingTwoFuelModels);
+	//void setIsUsingTwoFuelModels(bool isUsingTwoFuelModels);
+	void setIsUsingPalmettoGallberry(bool PalmettoGallberry);
 
 	int getFuelModelNumber() const;
 	int getFirstFuelModelNumber() const;
@@ -60,6 +64,7 @@ public:
 	bool isWindAndSpreadAngleRelativeToUpslope() const;
 	bool isSlopeInDegrees() const;
 	bool isSlopeInPercent() const;
+	bool isUsingTwoFuelModels() const;
 
 private:
 	double convertWindToUpslope(double windDirectionFromNorth);
@@ -67,7 +72,8 @@ private:
 	void setMoistureLive();
 
 	static const int MAX_SIZES = 4;		// Max number of fuel size classes
-	bool	isUsingTwoFuelModels_;		// Whether or not fuel spread calculation will use Two Fuel Models
+	bool	isUsingTwoFuelModels_;		// Whether fuel spread calculation is using Two Fuel Models
+	bool	isUsingPalmettoGallberry_;	// Whether fuel spread calculation is using Palmetto-Gallbery
 	int		fuelModelNumber_;			// 1 to 256
 	int		firstFuelModelNumber_;		// 1 to 256, first fuel used in Two Fuel Models
 	int		secondFuelModelNumber_;		// 1 to 256, second fuel used in Two Fuel Models

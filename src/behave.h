@@ -34,7 +34,10 @@ public:
 	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, 
 		double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
 		double moistureLiveHerbaceous, double moistureLiveWoody,double midflameWindSpeed, 
-		double windDirection, double slope, double coverage, TwoFuelModelsMethod method, double slopeAspect = 0);
+		double windDirection, double coverage, TwoFuelModelsMethod method, double slope, double slopeAspect = 0);
+	void  updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+		double midflameWindSpeed, double windDirection, double slope, double slopeAspect = 0);
 	double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 	double getDirectionOfMaxSpread() const;
 	double getFlameLength() const;

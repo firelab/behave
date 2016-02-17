@@ -71,22 +71,23 @@ int main()
 
 	for (int i = 0; i < 11; i++)
 	{
-		fuelModelNumber = 13; 
+		//fuelModelNumber = i; 
 		moisture1h = 0.06;
 		moisture10h = 0.07;
 		moisture100h = 0.08;
 		moistureLiveHerb = 0.60;
 		moistureLiveWoody = 0.90;
-		windSpeed = 15;
+		windSpeed = 5;
 		windDirection = 0;
-		slope = 50;
-		aspect = 50;
-		behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
+		slope = 30;
+		aspect = 0;
+		//behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
 
-		firstFuelModelNumber = 5;
-		secondFuelModelNumber =	8;
+		firstFuelModelNumber = 124;
+		secondFuelModelNumber =	3;
 		coverage = 0 + (.10 * i);
-		behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, coverage, Behave::TWO_DIMENSIONAL, aspect);
+
+		behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, coverage, Behave::TWO_DIMENSIONAL, slope, aspect);
 
 		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
 

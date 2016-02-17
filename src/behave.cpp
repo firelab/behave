@@ -35,21 +35,26 @@ void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, do
 {
 	surfaceInputs_.updateInput(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
 		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
-	surfaceInputs_.setIsUsingTwoFuelModels(false);
 	surfaceInputs_.setTwoFuelModelsMethod(NO_METHOD);
 }
 
 void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
 	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-	double windDirection, double slope, double coverage, TwoFuelModelsMethod method, double slopeAspect)
+	double windDirection, double coverage, TwoFuelModelsMethod method, double slope, double slopeAspect)
 {
 	int myMethod = (int) method;
 	surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
-		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, midflameWindSpeed, windDirection, slope, coverage,
-		 myMethod, slopeAspect);
-	surfaceInputs_.setIsUsingTwoFuelModels(true);
+		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, midflameWindSpeed, windDirection, coverage,
+		myMethod, slope, slopeAspect);
 	surfaceInputs_.setTwoFuelModelsMethod(method);
+}
+
+void  Behave::updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
+{
+
 }
 
 double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)

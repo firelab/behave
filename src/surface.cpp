@@ -13,7 +13,13 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 {
 	double spreadRate = 0.0;
 
-	if (getTwoFuelModelsMethod() == NO_METHOD)
+	if (isUsingTwoFuelModels())
+	{
+		// Calculate spread rate for Two Fuel Models
+		SurfaceTwoFuelModels surfaceTwoFuelModels(*(surfaceInputs_), surfaceFuelbedIntermediates_, surfaceFireSpread_);
+		spreadRate = surfaceTwoFuelModels.FuelBedWeighted(directionOfInterest);
+	}
+	else // Use only one fuel model
 	{
 		// Make sure inputs are within valid ranges
 		validateInputs();
@@ -21,12 +27,6 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 		surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
 		// Calculate spread rate
 		spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
-	}
-	else
-	{
-		// Calculate spread rate for Two Fuel Models
-		SurfaceTwoFuelModels surfaceTwoFuelModels(*(surfaceInputs_), surfaceFuelbedIntermediates_, surfaceFireSpread_);
-		spreadRate = surfaceTwoFuelModels.FuelBedWeighted(directionOfInterest);
 	}
 	// Return results
 	return spreadRate;
@@ -58,9 +58,9 @@ double Surface::getFireEccentricity() const
 	return surfaceFireSpread_.getFireEccentricity();
 }
 
-Surface::TwoFuelModelsMethod Surface::getTwoFuelModelsMethod() const
+bool Surface::isUsingTwoFuelModels() const
 {
-	return (Surface::TwoFuelModelsMethod)surfaceInputs_->getTwoFuelModelsMethod();
+	return surfaceInputs_->isUsingTwoFuelModels();
 }
 
 void Surface::validateInputs()

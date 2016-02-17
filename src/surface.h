@@ -38,7 +38,7 @@ private:
 		TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
 	};
 
-	TwoFuelModelsMethod getTwoFuelModelsMethod() const;
+	bool isUsingTwoFuelModels() const;
 
 	// SURFACE Module component objects
 	SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;

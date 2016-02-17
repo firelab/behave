@@ -27,6 +27,9 @@ void SurfaceInputs::initializeMembers()
 	midflameWindSpeed_ = 0.0;
 	windDirection_ = 0.0;
 
+	isUsingTwoFuelModels_ = false;
+	isUsingPalmettoGallberry_ = false;
+
 	slopeInputMode_ = SLOPE_IN_PERCENT;
 	windAndSpreadAngleMode_ = RELATIVE_TO_UPSLOPE;
 	twoFuelModelsMethod_ = NO_METHOD;
@@ -80,14 +83,14 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 	setMoistureDead();
 	setMoistureLive();
 
+	isUsingTwoFuelModels_ = false;
 	twoFuelModelsMethod_ = NO_METHOD;
 }
-
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
 	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-	double windDirection, double slope, double coverage, int method, double slopeAspect)
+	double windDirection, double coverage, int method, double slope, double slopeAspect)
 {
 	int fuelModelNumber = firstfuelModelNumber;
 	updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
@@ -96,6 +99,8 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
 	firstFuelModelNumber_ = firstfuelModelNumber;
 	secondFuelModelNumber_ = secondFuelModelNumber;
 	coverage_ = coverage;
+
+	isUsingTwoFuelModels_ = true;
 	if (method == ARITHMETIC || method == HARMONIC || method == TWO_DIMENSIONAL)
 	{
 		twoFuelModelsMethod_ = (TwoFuelModelsMethod)method;
@@ -104,6 +109,13 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
 	{
 		twoFuelModelsMethod_ = NO_METHOD;
 	}
+}
+
+void  updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
+{
+
 }
 
 void SurfaceInputs::setWindAndSpreadDirectionMode(int mode)
@@ -232,10 +244,10 @@ void SurfaceInputs::setTwoFuelModelsMethod(int method)
 	}
 }
 
-void SurfaceInputs::setIsUsingTwoFuelModels(bool isUsingTwoFuelModels)
-{
-	isUsingTwoFuelModels_ = isUsingTwoFuelModels;
-}
+//void SurfaceInputs::setIsUsingTwoFuelModels(bool isUsingTwoFuelModels)
+//{
+//	isUsingTwoFuelModels_ = isUsingTwoFuelModels;
+//}
 
 void  SurfaceInputs::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
@@ -294,6 +306,11 @@ double SurfaceInputs::getCoverage() const
 int SurfaceInputs::getTwoFuelModelsMethod() const
 {
 	return twoFuelModelsMethod_;
+}
+
+bool SurfaceInputs::isUsingTwoFuelModels() const
+{
+	return isUsingTwoFuelModels_;
 }
 
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
