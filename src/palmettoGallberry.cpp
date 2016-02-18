@@ -18,7 +18,7 @@ double PalmettoGallberry::PalmettoGallberyDeadOneHourLoad(double age, double hei
 	{
 		load = 0.0;
 	}
-	return(load);
+	return load;
 }
 
 //------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ double PalmettoGallberry::PalmettoGallberyDeadTenHourLoad(double age, double cov
 	{
 		load = 0.0;
 	}
-	return(load);
+	return load;
 }
 
 //------------------------------------------------------------------------------
@@ -53,7 +53,8 @@ double PalmettoGallberry::PalmettoGallberyDeadTenHourLoad(double age, double cov
 
 double PalmettoGallberry::PalmettoGallberyDeadFoliageLoad(double age, double cover)
 {
-	return(0.00221 * pow(age, 0.51263) * exp(0.02482 * cover));
+	double load = 0.00221 * pow(age, 0.51263) * exp(0.02482 * cover);
+	return load;
 }
 
 //------------------------------------------------------------------------------
@@ -66,7 +67,8 @@ double PalmettoGallberry::PalmettoGallberyDeadFoliageLoad(double age, double cov
 
 double PalmettoGallberry::PalmettoGallberyFuelBedDepth(double height)
 {
-	return(2. * height / 3.);
+	double depth = 2.0 * height / 3.0;
+	return depth;
 }
 
 //------------------------------------------------------------------------------
@@ -80,7 +82,8 @@ double PalmettoGallberry::PalmettoGallberyFuelBedDepth(double height)
 
 double PalmettoGallberry::PalmettoGallberyLitterLoad(double age, double ba)
 {
-	return((0.03632 + 0.0005336 * ba) * (1.0 - pow(0.25, age)));
+	double load = (0.03632 + 0.0005336 * ba) * (1.0 - pow(0.25, age));
+	return load;
 }
 
 //------------------------------------------------------------------------------
@@ -94,7 +97,8 @@ double PalmettoGallberry::PalmettoGallberyLitterLoad(double age, double ba)
 
 double PalmettoGallberry::PalmettoGallberyLiveOneHourLoad(double age, double height)
 {
-	return(0.00546 + 0.00092 * age + 0.00212 * height * height);
+	double load = 0.00546 + 0.00092 * age + 0.00212 * height * height;
+	return load;
 }
 
 //------------------------------------------------------------------------------
@@ -115,7 +119,7 @@ double PalmettoGallberry::PalmettoGallberyLiveTenHourLoad(double age, double hei
 	{
 		load = 0.0;
 	}
-	return(load);
+	return load;
 }
 
 //------------------------------------------------------------------------------
@@ -139,5 +143,5 @@ double PalmettoGallberry::PalmettoGallberyLiveFoliageLoad(double age, double cov
 	{
 		load = 0.0;
 	}
-	return(load);
+	return load;
 }
