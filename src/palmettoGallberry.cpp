@@ -9,7 +9,7 @@
 *  \return Palmetto-gallbery dead 0.0 - 0.25" load (lb/ft2).
 */
 
-double PalmettoGallberry::PalmettoGallberyDead1HrLoad(double age, double height)
+double PalmettoGallberry::PalmettoGallberyDeadOneHourLoad(double age, double height)
 {
 	double load = -0.00121
 		+ 0.00379 * log(age)
@@ -30,7 +30,7 @@ double PalmettoGallberry::PalmettoGallberyDead1HrLoad(double age, double height)
 *  \return Palmetto-gallbery dead 0.25 - 1.0" load (lb/ft2).
 */
 
-double PalmettoGallberry::PalmettoGallberyDead10HrLoad(double age, double cover)
+double PalmettoGallberry::PalmettoGallberyDeadTenHourLoad(double age, double cover)
 {
 	double load = -0.00775
 		+ 0.00021 * cover
@@ -92,7 +92,7 @@ double PalmettoGallberry::PalmettoGallberyLitterLoad(double age, double ba)
 *  \return Palmetto-gallbery live 0.0 - 0.25" load (lb/ft2).
 */
 
-double PalmettoGallberry::PalmettoGallberyLive1HrLoad(double age, double height)
+double PalmettoGallberry::PalmettoGallberyLiveOneHourLoad(double age, double height)
 {
 	return(0.00546 + 0.00092 * age + 0.00212 * height * height);
 }
@@ -106,7 +106,7 @@ double PalmettoGallberry::PalmettoGallberyLive1HrLoad(double age, double height)
 *  \return Palmetto-gallbery live 0.25 - 1.0" load (lb/ft2).
 */
 
-double PalmettoGallberry::PalmettoGallberyLive10HrLoad(double age, double height)
+double PalmettoGallberry::PalmettoGallberyLiveTenHourLoad(double age, double height)
 {
 	double load = -0.02128
 		+ 0.00014 * age * age

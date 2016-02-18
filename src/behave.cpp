@@ -52,7 +52,8 @@ void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int 
 
 void  Behave::updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
+	double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
+	double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect)
 {
 
 }
