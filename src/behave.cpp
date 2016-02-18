@@ -14,16 +14,6 @@ Behave::Behave(SurfaceInputs &surfaceInputs)
 	// Constructor taking a SurfaceInputs object as a parameter
 }
 
-Behave::Behave(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
-	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
-	: surfaceInputs_(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour,
-	moistureLiveHerbaceous, moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect),
-	surface_{ fuelModels_, surfaceInputs_ }
-{
-	// Constructor takes a list of doubles as parameters
-}
-
 Behave::~Behave()
 {
 	// Default Destructor

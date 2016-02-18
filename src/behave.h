@@ -24,9 +24,6 @@ public:
 
 	Behave();
 	explicit Behave(SurfaceInputs &surfaceInputs);
-	Behave(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
-		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-		double midflameWindSpeed, double windDirection, double slope, double slopeAspect = 0);
 	~Behave();
 	
 	// SURFACE Module Inputs 
