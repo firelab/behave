@@ -74,9 +74,9 @@ int main()
 		fuelModelNumber = 1; 
 		moistureOneHour = 0.10;
 		moistureTenHour = 0.20;
-		moistureHundredHour = 0.30;
-		moistureLiveHerbaceous = 0.50;
-		moistureLiveWoody = 1.20;
+		moistureHundredHour = 0.40;
+		moistureLiveHerbaceous = 0.60;
+		moistureLiveWoody = 0.60;
 		windSpeed = 5;
 		windDirection = 0;
 		slope = 30;
@@ -92,10 +92,10 @@ int main()
 		//std::cout << "Spread rate for fuel model " << i << " is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
 
 		// Palmetto-Gallbury test
-		double	ageOfRough = 6;
-		double	heightOfUnderstory = 6;
-		double	palmettoCoverage = 50;
-		double	overstoryBasalArea = 50;
+		double	ageOfRough = 20;
+		double	heightOfUnderstory = 3;
+		double	palmettoCoverage = 25;
+		double	overstoryBasalArea = 100;
 		behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect);
 		spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 		std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
