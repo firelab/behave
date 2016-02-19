@@ -123,26 +123,6 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
 		loadLive_[2] = 0.0;
 		loadLive_[3] = 0.0;
 	}
-
-
-	// Debug
-	double loadDeadTonsPerAcre[4];
-	double loadLiveTonsPerAcre[4];
-
-	for (int i = 0; i < 4; i++)
-	{
-		loadDeadTonsPerAcre[i] = loadDead_[i] * 21.78;
-		loadLiveTonsPerAcre[i] = loadLive_[i] * 21.78;
-	}
-
-	double totalDead = 0;
-	double totalLive = 0;
-
-	for (int i = 0; i < 4; i++)
-	{
-		totalDead += loadDeadTonsPerAcre[i];
-		totalLive += loadLiveTonsPerAcre[i];
-	}
 }
 
 void SurfaceFuelbedIntermediates::setMoistureContent()
