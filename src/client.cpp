@@ -18,10 +18,10 @@ int main()
 
     // Surface Fire Inputs;
     int fuelModelNumber = 0;
-    double moisture1h = 0.0;
-    double moisture10h = 0.0;
-    double moisture100h = 0.0;
-    double moistureLiveHerb = 0.0;
+    double moistureOneHour = 0.0;
+    double moistureTenHour = 0.0;
+    double moistureHundredHour = 0.0;
+	double moistureLiveHerbaceous = 0.0;
     double moistureLiveWoody = 0.0;
     double windSpeed = 0.0;
     double windDirection = 0;
@@ -69,40 +69,53 @@ int main()
 		std::cout << "degrees" << std::endl << std::endl;
 	}
 
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		//fuelModelNumber = i; 
-		moisture1h = 0.06;
-		moisture10h = 0.07;
-		moisture100h = 0.08;
-		moistureLiveHerb = 0.60;
-		moistureLiveWoody = 0.90;
+		fuelModelNumber = 1; 
+		moistureOneHour = 0.10;
+		moistureTenHour = 0.20;
+		moistureHundredHour = 0.30;
+		moistureLiveHerbaceous = 0.50;
+		moistureLiveWoody = 1.20;
 		windSpeed = 5;
 		windDirection = 0;
 		slope = 30;
 		aspect = 0;
-		//behave.updateSurfaceInputs(fuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
-
-		firstFuelModelNumber = 124;
-		secondFuelModelNumber =	3;
-		coverage = 0 + (.10 * i);
-
-		behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moisture1h, moisture10h, moisture100h, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, coverage, Behave::TWO_DIMENSIONAL, slope, aspect);
-
-		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
 
 		directionOfInterest = -1;
+		// std::cout << "The direction of interest is " << directionOfInterest << " degrees" << std::endl;
+
+		// Single fuel model test
+		//behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
+		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+		//std::cout << "Spread rate for fuel model " << i << " is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
+
+		// Palmetto-Gallbury test
+		double	ageOfRough = 6;
+		double	heightOfUnderstory = 6;
+		double	palmettoCoverage = 50;
+		double	overstoryBasalArea = 50;
+		behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect);
 		spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-	
+		std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
+
+		// Two Fuel Models test
+		//firstFuelModelNumber = 3;
+		//secondFuelModelNumber = 4;
+		////coverage = 0 + (.10 * i);
+		//coverage = .25;
+		//behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection, coverage, Behave::TWO_DIMENSIONAL, slope, aspect);
+		//std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << coverage << std::endl;
+		//std::cout << "is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+		//spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+
 		directionOfMaxSpread = behave.getDirectionOfMaxSpread();
 		//std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread)
 		//	<< " degrees" << std::endl;
-		//spreadRate = floor(spreadRate * 10 + 0.5) / 10;
-		// std::cout << "The direction of interest is " << directionOfInterest << " degrees" << std::endl;
-		//std::cout << "Spread rate for fuel model " << i << " is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
 
-		std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << coverage << std::endl;
-		std::cout << "is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+		spreadRate = floor(spreadRate * 10 + 0.5) / 10;
+		
 		flameLength = behave.getFlameLength();
 		flameLength = floor(flameLength * 10 + 0.5) / 10;
 		std::cout << "Flame length for fuel model " << i << " is " << flameLength << " ft" << std::endl << std::endl;

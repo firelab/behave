@@ -85,6 +85,8 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 
 	isUsingTwoFuelModels_ = false;
 	twoFuelModelsMethod_ = NO_METHOD;
+
+	isUsingPalmettoGallberry_ = false;
 }
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
@@ -111,12 +113,20 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
 	}
 }
 
-void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 	double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
 	double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect)
 {
+	updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
 
+	ageOfRough_ = ageOfRough;
+	heightOfUnderstory_ = heightOfUnderstory;
+	palmettoCoverage_ = palmettoCoverage;
+	overstoryBasalArea_ = overstoryBasalArea;
+
+	isUsingPalmettoGallberry_ = true;
 }
 
 void SurfaceInputs::setWindAndSpreadDirectionMode(int mode)
@@ -314,6 +324,16 @@ bool SurfaceInputs::isUsingTwoFuelModels() const
 	return isUsingTwoFuelModels_;
 }
 
+void SurfaceInputs::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
+{
+	isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
+}
+
+bool SurfaceInputs::isUsingPalmettoGallberry() const
+{
+	return isUsingPalmettoGallberry_;
+}
+
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
 {
 	bool isRelativeToNorth = (windAndSpreadAngleMode_ == RELATIVE_TO_NORTH);
@@ -337,7 +357,6 @@ bool SurfaceInputs::isSlopeInPercent() const
 	bool isSlopeInPercent = (slopeInputMode_ == SLOPE_IN_PERCENT);
 	return isSlopeInPercent;
 }
-
 
 double SurfaceInputs::getWindDirection() const
 {
@@ -372,4 +391,44 @@ double SurfaceInputs::getMoistureLiveHerbaceous() const
 double SurfaceInputs::getMoistureLiveWoody() const
 {
 	return moistureLiveWoody_;
+}
+
+void SurfaceInputs::setAgeOfRough(double ageOfRough)
+{
+	ageOfRough_ = ageOfRough;
+}
+
+double SurfaceInputs::getAgeOfRough() const
+{
+	return ageOfRough_;
+}
+
+void SurfaceInputs::setHeightOfUnderstory(double heightOfUnderstory)
+{
+	heightOfUnderstory_ = heightOfUnderstory;
+}
+
+double SurfaceInputs::getHeightOfUnderstory() const
+{
+	return heightOfUnderstory_;
+}
+
+void SurfaceInputs::setPalmettoCoverage(double palmettoCoverage)
+{
+	palmettoCoverage_ = palmettoCoverage;
+}
+
+double SurfaceInputs::getPalmettoCoverage() const
+{
+	return palmettoCoverage_;
+}
+
+void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea)
+{
+	overstoryBasalArea_ = overstoryBasalArea;
+}
+
+double SurfaceInputs::getOverstoryBasalArea() const
+{
+	return overstoryBasalArea_;
 }

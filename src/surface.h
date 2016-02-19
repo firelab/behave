@@ -8,11 +8,11 @@
 //	10 meter wind and input wind adjustment factor, 10 meter wind calculate wind adjustment factor
 //	WMC - 11/2015
 
+#include "palmettoGallberry.h"
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
 #include "surfaceTwoFuelModels.h"
-
 class Surface
 {
 	static const int MAX_SIZES = 4;
@@ -21,7 +21,7 @@ class Surface
 	static const int LIVE = 1;
 
 public:
-	Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
+	Surface(FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
 	double calculateSurfaceFireForwardSpreadRate(double directionOfinterest = -1.0);
 	double calculateSpreadRateAtVector(double directionOfinterest);
 	double getDirectionOfMaxSpread() const;
@@ -40,11 +40,13 @@ private:
 
 	bool isUsingTwoFuelModels() const;
 
+	bool isUsingPalmettoGallberry() const;
+
 	// SURFACE Module component objects
 	SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
 	SurfaceFireSpread surfaceFireSpread_;
 	SurfaceInputs* surfaceInputs_;
-	const FuelModels*	fuelModels_;
+	FuelModels*	fuelModels_;
 
 	void initializeMembers();
 	void validateInputs();

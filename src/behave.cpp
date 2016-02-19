@@ -40,12 +40,15 @@ void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int 
 	surfaceInputs_.setTwoFuelModelsMethod(method);
 }
 
-void  Behave::updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+void  Behave::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 	double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
 	double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect)
 {
-
+	surfaceInputs_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour,
+		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
+		midflameWindSpeed, windDirection, ageOfRough, heightOfUnderstory,
+		palmettoCoverage, overstoryBasalArea, slope, slopeAspect);
 }
 
 double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)

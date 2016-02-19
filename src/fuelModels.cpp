@@ -73,9 +73,9 @@ void FuelModels::setFuelModelRecord(int fuelModelNumber, std::string code, std::
 // as well as earmarking which models are available for use as custom models
 void FuelModels::populateFuelModels()
 {
-	// Index 0 not used so that array index number == fuel model number
+	// Index 0 is reserved for use in Palmetto-Gallberry or Western Apsen special case fuel models
 	setFuelModelRecord(0, "NO_CODE", "NO_NAME", 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, false, true);
+		0, 0, 0, 0, 0, 0, 0, 0, false, false);
 	FuelModelArray[0].isDefined_ = false;
 	/*
 	fuelModelNumber, code, name
@@ -466,6 +466,21 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
 			fuelLoadOneHour, fuelLoadTenHour, fuelLoadHundredHour, fuelLoadliveHerb,
 			fuelLoadliveWoody, savrOneHour, savrLiveHerb, savrLiveWoody, isDynamic, 
 			FuelModelArray[fuelModelNumber].isReserved_);
+		successStatus = true;
+	}
+	return successStatus;
+}
+
+bool FuelModels::setPalmettoGallberryFuelModel(double depth)
+{
+	bool successStatus = false;
+	if (FuelModelArray[0].isReserved_ == false)
+	{
+		setFuelModelRecord(0, "SCP", "Palmetto-Gallbery",
+			depth, 0.40, 8300, 8300,
+			0, 0, 0, 0,
+			0, 0, 0, 0, false,
+			FuelModelArray[0].isReserved_);
 		successStatus = true;
 	}
 	return successStatus;

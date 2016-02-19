@@ -1,5 +1,10 @@
 #include "palmettoGallberry.h"
 
+PalmettoGallberry::PalmettoGallberry()
+{
+
+}
+
 //------------------------------------------------------------------------------
 /*! \brief Calculates the palmetto-gallberry dead 0.0 - 0.25" load.
 *
@@ -144,44 +149,4 @@ double PalmettoGallberry::palmettoGallberyLiveFoliageLoad(double ageOfRough, dou
 		load = 0.0;
 	}
 	return load;
-}
-
-void PalmettoGallberry::setAgeOfRough(double ageOfRough)
-{
-	ageOfRough_ = ageOfRough;
-}
-
-double PalmettoGallberry::getAgeOfRough() const
-{
-	return ageOfRough_;
-}
-
-void PalmettoGallberry::setHeightOfUnderstory(double heightOfUnderstory)
-{
-	heightOfUnderstory_ = heightOfUnderstory;
-}
-
-double PalmettoGallberry::getHeightOfUnderstory() const
-{
-	return heightOfUnderstory_;
-}
-
-void PalmettoGallberry::setPalmettoCoverage(double palmettoCoverage)
-{
-	palmettoCoverage_ = palmettoCoverage;
-}
-
-double PalmettoGallberry::getPalmettoCoverage() const
-{
-	return palmettoCoverage_;
-}
-
-void PalmettoGallberry::setOverstoryBasalArea(double overstoryBasalArea)
-{
-	overstoryBasalArea_ = overstoryBasalArea;
-}
-
-double PalmettoGallberry::getOverstoryBasalArea() const
-{
-	return overstoryBasalArea_;
 }

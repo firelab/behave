@@ -27,21 +27,18 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 	initializeMemberVariables(); // Reset member variables to zero to forget previous state  
 	const double PI = 3.14159265358979;
 
-	double rateo = 0;						// No-slope-no-wind rate of surface fire spread, Rothermel 1972 Equation 43
 	double depth = 0.0;						// Fuel bed depth in feet
 	double ovendryFuelLoad = 0.0;			// Ovendry fuel loading, Rothermel 1972
 	double optimumPackingRatio = 0.0;		// Optimum packing ratio, Rothermel 1972, equation 37
-	double aa = 0.0;						// Alternate A value for Rothermel equations for use in computer models, Albini 1976, p. 88
 	double ovendryFuelDensity = 32.0;		// Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
-	double relativeMoisture = 0.0;			// (Moisture content) / (Moisture of extinction)
-	
 	
 	bool isDynamic = false;					// Whether or not fuel model is dynamic
 
 	fuelModelNumber_ = surfaceInputs_->getFuelModelNumber();
+	
+	setFuelLoad();
 	depth = fuelModels_->getFuelbedDepth(fuelModelNumber_);
 
-	setFuelLoad();
 	countSizeClasses();
 
 	setMoistureContent();
@@ -63,64 +60,157 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 	// Moisture of extinction
 	moistureOfExtinction_[DEAD] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_);
 	calculateLiveMoistureOfExtinction();
-
+	
 	// Intermediate calculations, summing parameters by fuel component
 	sumIntermediateParametersByFuelComponent();
 
 	/* final calculations */
-	bulkDensity_ = totalLoad_ / depth;
+	double totalLoad = totalLoad_[DEAD] + totalLoad_[LIVE];
 
-	calculateHeatSink();
+	bulkDensity_ = totalLoad / depth;
 
-	packingRatio_ = totalLoad_ / (depth * ovendryFuelDensity);
+	for (int lifeState = 0; lifeState < MAX_LIFE_STATES; lifeState++)
+	{
+		//packingRatio_ = totalLoad / (depth * ovendryFuelDensity);
+		packingRatio_ += totalLoad_[lifeState] / (depth * fuelDensity_[lifeState]);
+	}
+
 	optimumPackingRatio = 3.348 / pow(sigma_, 0.8189);
 	relativePackingRatio_ = packingRatio_ / optimumPackingRatio;
+
+	calculateHeatSink();
 }
 
 void SurfaceFuelbedIntermediates::setFuelLoad()
 {
-	loadLive_[0] = fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber_);
-	loadLive_[1] = fuelModels_->getFuelLoadLiveWoody(fuelModelNumber_);
-	loadLive_[2] = 0.0;
-	loadLive_[3] = 0.0;
+	bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
 
-	loadDead_[0] = fuelModels_->getFuelLoadOneHour(fuelModelNumber_);
-	loadDead_[1] = fuelModels_->getFuelLoadTenHour(fuelModelNumber_);
-	loadDead_[2] = fuelModels_->getFuelLoadHundredHour(fuelModelNumber_);
-	loadDead_[3] = 0.0;
+	if (isUsingPalmettoGallberry)
+	{
+		// Calculate load values for Palmetto-Gallberry
+		PalmettoGallberry palmettoGallberry;
+
+		double ageOfRough = surfaceInputs_->getAgeOfRough();
+		double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory();
+		double palmettoCoverage = surfaceInputs_->getPalmettoCoverage();
+		double overstoryBasalArea = surfaceInputs_->getOverstoryBasalArea();
+
+		loadDead_[0] = palmettoGallberry.palmettoGallberyDeadOneHourLoad(ageOfRough, heightOfUnderstory);
+		loadDead_[1] = palmettoGallberry.palmettoGallberyDeadTenHourLoad(ageOfRough, palmettoCoverage);
+		loadDead_[2] = palmettoGallberry.palmettoGallberyDeadFoliageLoad(ageOfRough, palmettoCoverage);
+		loadDead_[3] = palmettoGallberry.palmettoGallberyLitterLoad(ageOfRough, overstoryBasalArea);
+
+		loadLive_[0] = palmettoGallberry.palmettoGallberyLiveOneHourLoad(ageOfRough, heightOfUnderstory);
+		loadLive_[1] = palmettoGallberry.palmettoGallberyLiveTenHourLoad(ageOfRough, heightOfUnderstory);
+		loadLive_[2] = palmettoGallberry.palmettoGallberyLiveFoliageLoad(ageOfRough, palmettoCoverage, heightOfUnderstory);
+		loadLive_[3] = 0.0;
+
+		for (int i = 0; i < 3; i++)
+		{
+			silicaEffectiveLive_[i] = 0.015;
+		}
+	}
+	else
+	{
+		// Proceed as normal
+		loadDead_[0] = fuelModels_->getFuelLoadOneHour(fuelModelNumber_);
+		loadDead_[1] = fuelModels_->getFuelLoadTenHour(fuelModelNumber_);
+		loadDead_[2] = fuelModels_->getFuelLoadHundredHour(fuelModelNumber_);
+		loadDead_[3] = 0.0;
+
+		loadLive_[0] = fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber_);
+		loadLive_[1] = fuelModels_->getFuelLoadLiveWoody(fuelModelNumber_);
+		loadLive_[2] = 0.0;
+		loadLive_[3] = 0.0;
+	}
+
+
+	// Debug
+	double loadDeadTonsPerAcre[4];
+	double loadLiveTonsPerAcre[4];
+
+	for (int i = 0; i < 4; i++)
+	{
+		loadDeadTonsPerAcre[i] = loadDead_[i] * 21.78;
+		loadLiveTonsPerAcre[i] = loadLive_[i] * 21.78;
+	}
+
+	double totalDead = 0;
+	double totalLive = 0;
+
+	for (int i = 0; i < 4; i++)
+	{
+		totalDead += loadDeadTonsPerAcre[i];
+		totalLive += loadLiveTonsPerAcre[i];
+	}
 }
 
 void SurfaceFuelbedIntermediates::setMoistureContent()
 {
-	for (int i = 0; i < MAX_PARTICLES; i++)
-	{
-		moistureDead_[i] = 0;
-		moistureLive_[i] = 0;
-	}
+	bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
 
-	for (int i = 0; i < MAX_PARTICLES; i++)
+	if (isUsingPalmettoGallberry)
 	{
-		moistureDead_[i] = surfaceInputs_->getMoistureDeadAtIndex(i);
-		moistureLive_[i] = surfaceInputs_->getMoistureLiveAtIndex(i);
+		moistureDead_[0] = surfaceInputs_->getMoistureDeadAtIndex(0);
+		moistureDead_[1] = surfaceInputs_->getMoistureDeadAtIndex(1);
+		moistureDead_[2] = surfaceInputs_->getMoistureDeadAtIndex(0);
+		moistureDead_[3] = surfaceInputs_->getMoistureDeadAtIndex(2);
+
+		moistureLive_[0] = surfaceInputs_->getMoistureLiveAtIndex(1);
+		moistureLive_[1] = surfaceInputs_->getMoistureLiveAtIndex(1);
+		moistureLive_[2] = surfaceInputs_->getMoistureLiveAtIndex(0);
+	}
+	else
+	{
+		for (int i = 0; i < MAX_PARTICLES; i++)
+		{
+			moistureDead_[i] = 0;
+			moistureLive_[i] = 0;
+		}
+
+		for (int i = 0; i < MAX_PARTICLES; i++)
+		{
+			moistureDead_[i] = surfaceInputs_->getMoistureDeadAtIndex(i);
+			moistureLive_[i] = surfaceInputs_->getMoistureLiveAtIndex(i);
+		}
 	}
 }
 
 void SurfaceFuelbedIntermediates::setSAV()
 {
-	savrLive_[0] = fuelModels_->getSavrLiveHerbaceous(fuelModelNumber_);
-	savrLive_[1] = fuelModels_->getSavrLiveWoody(fuelModelNumber_);
-	savrLive_[2] = 0.0;
-	savrLive_[3] = 0.0;
+	bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
+	
+	if (isUsingPalmettoGallberry)
+	{
+		// Special values for Palmetto-Gallberry
+		savrDead_[0] = 350.0;
+		savrDead_[1] = 140.0;
+		savrDead_[2] = 2000.0;
+		savrDead_[3] = 2000.0; // TODO: find appropriate savr for palmetto-gallberry litter
 
-	savrDead_[0] = fuelModels_->getSavrOneHour(fuelModelNumber_);
-	savrDead_[1] = 109.0;
-	savrDead_[2] = 30.0;
-	savrDead_[3] = fuelModels_->getSavrLiveHerbaceous(fuelModelNumber_);
+		savrLive_[0] = 350.0;
+		savrLive_[1] = 140.0;
+		savrLive_[2] = 2000.0;
+		savrLive_[3] = 0.0;
+	}
+	else
+	{
+		// Proceed as normal
+		savrDead_[0] = fuelModels_->getSavrOneHour(fuelModelNumber_);
+		savrDead_[1] = 109.0;
+		savrDead_[2] = 30.0;
+		savrDead_[3] = fuelModels_->getSavrLiveHerbaceous(fuelModelNumber_);
+
+		savrLive_[0] = fuelModels_->getSavrLiveHerbaceous(fuelModelNumber_);
+		savrLive_[1] = fuelModels_->getSavrLiveWoody(fuelModelNumber_);
+		savrLive_[2] = 0.0;
+		savrLive_[3] = 0.0;
+	}
 }
 
 void SurfaceFuelbedIntermediates::setHeatOfCombustion()
 {
-	const int NUMBER_OF_LIVE_SIZE_CLASSES = 2;
+	const int NUMBER_OF_LIVE_SIZE_CLASSES = 3;
 
 	double heatOfCombustionDead = fuelModels_->getHeatOfCombustionDead(fuelModelNumber_);
 	double heatOfCombustionLive = fuelModels_->getHeatOfCombustionLive(fuelModelNumber_);
@@ -176,10 +266,11 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 	double	weightedSavr[MAX_LIFE_STATES];	// Weighted SAVR for i-th categort (live/dead)
 
 	// Initialize Accumulated values
-	totalLoad_ = 0.0;
+	//totalLoad_ = 0.0;
 	sigma_ = 0.0;
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
+		totalLoad_[i] = 0.0;
 		weightedHeat_[i] = 0.0;
 		weightedSilica_[i] = 0.0;
 		weightedMoisture_[i] = 0.0;
@@ -192,30 +283,36 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 		wnLive[i] = 0.0;
 	}
 
+	bool isUsingPalmettoGallbery = surfaceInputs_->isUsingPalmettoGallberry();
+	if (isUsingPalmettoGallbery)
+	{
+		totalSilicaContent_ = 0.030;
+	}
+
 	for (int i = 0; i < MAX_PARTICLES; i++)
 	{
 		if (savrDead_[i] > 1.0e-07)
 		{
-			wnDead[i] = loadDead_[i] * (1.0 - TOTAL_SILICA_CONTENT); // Rothermel 1972, equation 24
+			wnDead[i] = loadDead_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
 			weightedHeat_[DEAD] += areaWeightingFactorDead_[i] * heatDead_[i]; // weighted heat content
 			weightedSilica_[DEAD] += areaWeightingFactorDead_[i] * silicaEffectiveDead_[i]; // weighted silica content
 			weightedMoisture_[DEAD] += areaWeightingFactorDead_[i] * moistureDead_[i]; // weighted moisture content
 			weightedSavr[DEAD] += areaWeightingFactorDead_[i] * savrDead_[i]; // weighted SAVR
-			totalLoad_ += loadDead_[i];
+			totalLoad_[DEAD] += loadDead_[i];
 		}
 		if (savrLive_[i] > 1.0e-07)
 		{
-			wnLive[i] = loadLive_[i] * (1.0 - TOTAL_SILICA_CONTENT); // Rothermel 1972, equation 24
+			wnLive[i] = loadLive_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
 			weightedHeat_[LIVE] += areaWeightingFactorLive_[i] * heatLive_[i]; // weighted heat content
 			weightedSilica_[LIVE] += areaWeightingFactorLive_[i] * silicaEffectiveLive_[i]; // weighted silica content
 			weightedMoisture_[LIVE] += areaWeightingFactorLive_[i] * moistureLive_[i]; // weighted moisture content
 			weightedSavr[LIVE] += areaWeightingFactorLive_[i] * savrLive_[i]; // weighted SAVR
-			totalLoad_ += loadLive_[i];
+			totalLoad_[LIVE] += loadLive_[i];
 		}
 		weightedFuelLoad_[DEAD] += sizeSortedWeightingFactorsDead_[i] * wnDead[i];
 		weightedFuelLoad_[LIVE] += sizeSortedWeightingFactorsLive_[i] * wnLive[i];
 	}
-
+	
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
 		sigma_ += relativeWeightedSurfaceArea_[i] * weightedSavr[i];
@@ -224,8 +321,8 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 
 void SurfaceFuelbedIntermediates::countSizeClasses()
 {
-	const int NUMBER_OF_DEAD_SIZE_CLASSES = 3;
-	const int NUMBER_OF_LIVE_SIZE_CLASSES = 2;
+	const int NUMBER_OF_DEAD_SIZE_CLASSES = 4;
+	const int NUMBER_OF_LIVE_SIZE_CLASSES = 3;
 	const int MAX_DEAD_SIZE_CLASSES = 4;
 	const int MAX_LIVE_SIZE_CLASSES = 2;
 
@@ -252,6 +349,10 @@ void SurfaceFuelbedIntermediates::countSizeClasses()
 	{
 		numberOfDead_ = MAX_DEAD_SIZE_CLASSES; // Boost to max number
 	}
+
+	numberOfDead_ = 4;
+	numberOfLive_ = 3;
+
 	numberOfSizeClasses[0] = numberOfDead_;
 	numberOfSizeClasses[1] = numberOfLive_;
 }
@@ -310,16 +411,25 @@ void SurfaceFuelbedIntermediates::calculateWeightedSurfaceAreas(int lifeState)
 		weightedSurfaceArea_[lifeState] = 0.0;
 	}
 	
+	bool isUsingPalmettoGallbery = surfaceInputs_->isUsingPalmettoGallberry();
+	if (isUsingPalmettoGallbery)
+	{
+		fuelDensity_[DEAD] = 30.0;
+		fuelDensity_[LIVE] = 46.0;
+	}
+
 	for (int i = 0; i < numberOfSizeClasses[lifeState]; i++)
 	{
 		if (lifeState == DEAD)
 		{
-			surfaceAreaDead_[i] = loadDead_[i] * savrDead_[i] / OVENDRY_FUEL_DENSITY;
+			//surfaceAreaDead_[i] = loadDead_[i] * savrDead_[i] / OVENDRY_FUEL_DENSITY;
+			surfaceAreaDead_[i] = loadDead_[i] * savrDead_[i] / fuelDensity_[DEAD];
 			weightedSurfaceArea_[lifeState] += surfaceAreaDead_[i];
 		}
 		if (lifeState == LIVE)
 		{
-			surfaceAreaLive_[i] = loadLive_[i] * savrLive_[i] / OVENDRY_FUEL_DENSITY;
+			//surfaceAreaLive_[i] = loadLive_[i] * savrLive_[i] / OVENDRY_FUEL_DENSITY;
+			surfaceAreaLive_[i] = loadLive_[i] * savrLive_[i] / fuelDensity_[LIVE];
 			weightedSurfaceArea_[lifeState] += surfaceAreaLive_[i];
 		}
 	}
@@ -483,8 +593,9 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 	sigma_ = 0.0;
 	bulkDensity_ = 0.0;
 	packingRatio_ = 0.0;
-	totalLoad_ = 0.0;
+	//totalLoad_ = 0.0;
 	heatSink_ = 0.0;
+	totalSilicaContent_ = 0.0555;
 
 	for (int i = 0; i < MAX_PARTICLES; i++)
 	{
@@ -516,11 +627,13 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
+		totalLoad_[i] = 0.0;
 		relativeWeightedSurfaceArea_[i] = 0.0;
 		moistureOfExtinction_[i] = 0.0;
 		weightedSurfaceArea_[i] = 0.0;
 		weightedMoisture_[i] = 0.0;
 		weightedSilica_[i] = 0.0;
+		fuelDensity_[i] = 32; // Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
 	}
 }
 

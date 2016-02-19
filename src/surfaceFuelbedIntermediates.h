@@ -1,9 +1,10 @@
 #ifndef SURFACEFUELBEDINTERMEDIATES_HEADER
 #define SURFACEFUELBEDINTERMEDIATES_HEADER
 
-#include "fuelModels.h"
-#include "surfaceInputs.h"
 #include <cmath>
+#include "fuelModels.h"
+#include "palmettoGallberry.h" 
+#include "surfaceInputs.h"
 
 class SurfaceFuelbedIntermediates
 {
@@ -56,8 +57,8 @@ private:
 	// Class Constants
 	const int			DEAD = 0;								// Dead life category index
 	const int			LIVE = 1;								// Live life category index
-	const double		OVENDRY_FUEL_DENSITY = 32.0;			// Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
-	const double		TOTAL_SILICA_CONTENT = 0.0555;			// Total silica content in percent, Albini 1976, p. 91 
+	//const double		OVENDRY_FUEL_DENSITY = 32.0;			// Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
+	//const double		TOTAL_SILICA_CONTENT = 0.0555;			// Total silica content in percent, Albini 1976, p. 91 
 
 	const FuelModels*		fuelModels_;						// Pointer to FuelModels object
 	const SurfaceInputs*	surfaceInputs_;						// Pointer to surfaceInputs object
@@ -71,6 +72,8 @@ private:
 	double	moistureOfExtinction_[MAX_LIFE_STATES];				// Moisture of extinction for both life and dead fuel categories
 	double	relativeWeightedSurfaceArea_[MAX_LIFE_STATES];		// Ratio of weighted surface area for life category (dead/live) to total weighted surface area
 	int		numberOfSizeClasses[MAX_LIFE_STATES];				// Number of size classes (live and dead) represented in the currently used fuel model
+	double	fuelDensity_[MAX_LIFE_STATES];						// Fuel density for live and dead fuels
+	double	totalLoad_[MAX_LIFE_STATES];							// Total fuel load for live and dead fuels
 
 	double sizeSortedWeightingFactorsDead_[MAX_PARTICLES];		// Intermediate fuel weighting values for dead fuels sorted by size class
 	double sizeSortedWeightingFactorsLive_[MAX_PARTICLES];		// Intermediate fuel weighting values for live fuels sorted by size class
@@ -88,18 +91,20 @@ private:
 	double silicaEffectiveLive_[MAX_PARTICLES];
 	double areaWeightingFactorDead_[MAX_PARTICLES];
 	double areaWeightingFactorLive_[MAX_PARTICLES];
+	
 
-	int		fuelModelNumber_;		// The number associated with the current fuel model being used
-	int		numberOfLive_;			// number of live size classes in the current fuel model being used
-	int		numberOfDead_;			// number of dead size classes in the current fuel model being used
-	double	liveFuelMois_;			// Live fuel moisture content */
-	double	liveFuelMext_;			// Live fuel moisture of extinction */
-	double	totalLoad_;				// Total fuel loading in fuel bed */
-	double	heatSink_;				// Rothermel 1972, Denominator of equation 52 */
-	double	sigma_;					// Particle characteristic SAVR, Rothermel 1972 
-	double	bulkDensity_;			// Ovendry bulk density in lbs/ft^2, Rothermale 1972, equation 40
-	double	packingRatio_;			// Packing ratio, Rothermel 1972, equation 31 
-	double	relativePackingRatio_;	// Packing ratio divided by the optimum packing ratio, Rothermel 1972, term in RHS equation 47
+	int		fuelModelNumber_;				// The number associated with the current fuel model being used
+	int		numberOfLive_;					// number of live size classes in the current fuel model being used
+	int		numberOfDead_;					// number of dead size classes in the current fuel model being used
+	double	liveFuelMois_;					// Live fuel moisture content */
+	double	liveFuelMext_;					// Live fuel moisture of extinction */
+	//double	totalLoad_;						// Total fuel loading in fuel bed */
+	double	heatSink_;						// Rothermel 1972, Denominator of equation 52 */
+	double	sigma_;							// Particle characteristic SAVR, Rothermel 1972 
+	double	bulkDensity_;					// Ovendry bulk density in lbs/ft^2, Rothermale 1972, equation 40
+	double	packingRatio_;					// Packing ratio, Rothermel 1972, equation 31 
+	double	relativePackingRatio_;			// Packing ratio divided by the optimum packing ratio, Rothermel 1972, term in RHS equation 47
+	double	totalSilicaContent_;	// Total silica content in percent, Albini 1976, p. 91
 };
 
 #endif	// SURFACEFUELBEDINTERMEDIATES_HEADER

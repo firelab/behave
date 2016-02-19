@@ -21,7 +21,7 @@ public:
 		double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
 		double windDirection, double coverage, int method, double slope,
 		double slopeAspect);
-	void  updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+	void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 		double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
 		double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect);
@@ -42,8 +42,18 @@ public:
 	void setFirstFuelModelNumber(int firstFuelModelNumber);
 	void setSecondFuelModelNumber(int secondFuelModelNumber);
 	void setTwoFuelModelsMethod(int method);
-	//void setIsUsingTwoFuelModels(bool isUsingTwoFuelModels);
-	void setIsUsingPalmettoGallberry(bool PalmettoGallberry);
+	
+	void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
+	bool isUsingPalmettoGallberry() const;
+
+	void setAgeOfRough(double ageOfRough);
+	double getAgeOfRough() const;
+	void setHeightOfUnderstory(double heightOfUnderstory);
+	double getHeightOfUnderstory() const;
+	void setPalmettoCoverage(double palmettoCoverage);
+	double getPalmettoCoverage() const;
+	void setOverstoryBasalArea(double overstoryBasalArea);
+	double getOverstoryBasalArea() const;
 
 	int getFuelModelNumber() const;
 	int getFirstFuelModelNumber() const;
@@ -66,18 +76,15 @@ public:
 	bool isSlopeInDegrees() const;
 	bool isSlopeInPercent() const;
 	bool isUsingTwoFuelModels() const;
-
+	
 private:
 	double convertWindToUpslope(double windDirectionFromNorth);
 	void setMoistureDead();
 	void setMoistureLive();
 
 	static const int MAX_SIZES = 4;		// Max number of fuel size classes
-	bool	isUsingTwoFuelModels_;		// Whether fuel spread calculation is using Two Fuel Models
-	bool	isUsingPalmettoGallberry_;	// Whether fuel spread calculation is using Palmetto-Gallbery
+	
 	int		fuelModelNumber_;			// 1 to 256
-	int		firstFuelModelNumber_;		// 1 to 256, first fuel used in Two Fuel Models
-	int		secondFuelModelNumber_;		// 1 to 256, second fuel used in Two Fuel Models
 	double	moistureOneHour_;			// 1% to 60%
 	double	moistureTenHour_;			// 1% to 60%		
 	double	moistureHundredHour_;		// 1% to 60%
@@ -89,7 +96,19 @@ private:
 	double	slopeAspect_;				// degrees, 0-360
 	double	moistureDead_[MAX_SIZES];	// dead fuel moisture content
 	double	moistureLive_[MAX_SIZES];	// live fuel moisture content
+
+	// Two Fuel Models
+	bool	isUsingTwoFuelModels_;		// Whether fuel spread calculation is using Two Fuel Models
+	int		firstFuelModelNumber_;		// 1 to 256, first fuel used in Two Fuel Models
+	int		secondFuelModelNumber_;		// 1 to 256, second fuel used in Two Fuel Models
 	double	coverage_;					// percent of landscape occupied by first fuel in Two Fuel Models
+
+	// Palmetto-Gallberry
+	bool	isUsingPalmettoGallberry_;	// Whether fuel spread calculation is using Palmetto-Gallbery
+	double	ageOfRough_;
+	double	heightOfUnderstory_;
+	double	palmettoCoverage_;
+	double	overstoryBasalArea_;
 
 	enum WindAndSpreadDirectionEnumType
 	{

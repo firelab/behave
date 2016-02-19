@@ -34,7 +34,7 @@ public:
 		double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
 		double moistureLiveHerbaceous, double moistureLiveWoody,double midflameWindSpeed, 
 		double windDirection, double coverage, TwoFuelModelsMethod method, double slope, double slopeAspect = 0);
-	void  updateSurfaceInputsForPalmettoGallbery(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
+	void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
 		double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, 
 		double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect = 0);

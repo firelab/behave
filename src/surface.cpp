@@ -1,6 +1,6 @@
 #include "surface.h"
 
-Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
+Surface::Surface(FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
 	// Surface Module initialiazation list
 	: surfaceFuelbedIntermediates_{ fuelModels, surfaceInputs },
 	surfaceFireSpread_{surfaceFuelbedIntermediates_, surfaceInputs}
@@ -13,10 +13,20 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 {
 	double spreadRate = 0.0;
 
-	if (isUsingTwoFuelModels())
+	if (isUsingPalmettoGallberry())
+	{
+		PalmettoGallberry palmettoGallberry;
+		double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory();
+		double depth = palmettoGallberry.palmettoGallberyFuelBedDepth(heightOfUnderstory);
+		fuelModels_->setPalmettoGallberryFuelModel(depth);
+		// Calculate fuel bed intermediates
+		surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
+		spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+	}
+	else if (isUsingTwoFuelModels())
 	{
 		// Calculate spread rate for Two Fuel Models
-		SurfaceTwoFuelModels surfaceTwoFuelModels(*(surfaceInputs_), surfaceFuelbedIntermediates_, surfaceFireSpread_);
+		SurfaceTwoFuelModels surfaceTwoFuelModels(*surfaceInputs_, surfaceFuelbedIntermediates_, surfaceFireSpread_);
 		spreadRate = surfaceTwoFuelModels.FuelBedWeighted(directionOfInterest);
 	}
 	else // Use only one fuel model
@@ -61,6 +71,11 @@ double Surface::getFireEccentricity() const
 bool Surface::isUsingTwoFuelModels() const
 {
 	return surfaceInputs_->isUsingTwoFuelModels();
+}
+
+bool Surface::isUsingPalmettoGallberry() const
+{
+	return surfaceInputs_->isUsingPalmettoGallberry();
 }
 
 void Surface::validateInputs()
