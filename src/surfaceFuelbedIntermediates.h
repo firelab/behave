@@ -55,32 +55,32 @@ private:
 	void calculateResidenceTime();
 
 	// Class Constants
-	const int			DEAD = 0;								// Dead life category index
-	const int			LIVE = 1;								// Live life category index
+	const int			DEAD = 0;							// Dead life category index
+	const int			LIVE = 1;							// Live life category index
 
-	const FuelModels*		fuelModels_;						// Pointer to FuelModels object
-	const SurfaceInputs*	surfaceInputs_;						// Pointer to surfaceInputs object
+	const FuelModels*		fuelModels_;					// Pointer to FuelModels object
+	const SurfaceInputs*	surfaceInputs_;					// Pointer to surfaceInputs object
 	
 	// Member variables
-	double	weightedMoisture_[MAX_LIFE_STATES];					// Weighted moisture content for both life and dead fuel categories
-	double	weightedSurfaceArea_[MAX_LIFE_STATES];				// Weighted surface area for i-th category (dead/live)
-	double	weightedHeat_[MAX_LIFE_STATES];						// Weighted heat content for i-th category (live/dead)
-	double	weightedSilica_[MAX_LIFE_STATES];					// Weighted effective silica content for i-th categort (dead/live)
-	double	weightedFuelLoad_[MAX_LIFE_STATES];					// Weighted fuel loading for i-th category (dead/live)
-	double	moistureOfExtinction_[MAX_LIFE_STATES];				// Moisture of extinction for both life and dead fuel categories
-	double	relativeWeightedSurfaceArea_[MAX_LIFE_STATES];		// Ratio of weighted surface area for life category (dead/live) to total weighted surface area
-	int		numberOfSizeClasses[MAX_LIFE_STATES];				// Number of size classes (live and dead) represented in the currently used fuel model
-	double	fuelDensity_[MAX_LIFE_STATES];						// Fuel density for live and dead fuels
-	double	totalLoad_[MAX_LIFE_STATES];						// Total fuel load for live and dead fuels
+	double	weightedMoisture_[MAX_LIFE_STATES];				// Weighted moisture content for both life and dead fuel categories
+	double	weightedSurfaceArea_[MAX_LIFE_STATES];			// Weighted surface area for i-th category (dead/live)
+	double	weightedHeat_[MAX_LIFE_STATES];					// Weighted heat content for i-th category (live/dead)
+	double	weightedSilica_[MAX_LIFE_STATES];				// Weighted effective silica content for i-th categort (dead/live)
+	double	weightedFuelLoad_[MAX_LIFE_STATES];				// Weighted fuel loading for i-th category (dead/live)
+	double	moistureOfExtinction_[MAX_LIFE_STATES];			// Moisture of extinction for both life and dead fuel categories
+	double	relativeWeightedSurfaceArea_[MAX_LIFE_STATES];	// Ratio of weighted surface area for life category (dead/live) to total weighted surface area
+	int		numberOfSizeClasses[MAX_LIFE_STATES];			// Number of size classes (live and dead) represented in the currently used fuel model
+	double	fuelDensity_[MAX_LIFE_STATES];					// Fuel density for live and dead fuels
+	double	totalLoadForLifeState_[MAX_LIFE_STATES];		// Total fuel load for live and dead fuels
 
-	double sizeSortedWeightingFactorsDead_[MAX_PARTICLES];		// Intermediate fuel weighting values for dead fuels sorted by size class
-	double sizeSortedWeightingFactorsLive_[MAX_PARTICLES];		// Intermediate fuel weighting values for live fuels sorted by size class
-	double moistureDead_[MAX_PARTICLES];						// Moisture content in fraction of oven-dry weight for dead fuels
-	double moistureLive_[MAX_PARTICLES];						// Moisture content in fraction of oven-dry weight for live fuels
-	double loadDead_[MAX_PARTICLES];							// Fuel load of fuelbad 4 size classes for dead fuels
-	double loadLive_[MAX_PARTICLES];							// Fuel load of fuelbad 4 size classes for live fuels
-	double savrDead_[MAX_PARTICLES];							// Surface area to volume ratio for dead fuels
-	double savrLive_[MAX_PARTICLES];							// Surface area to volume ratio for live fuels
+	double sizeSortedWeightingFactorsDead_[MAX_PARTICLES];	// Intermediate fuel weighting values for dead fuels sorted by size class
+	double sizeSortedWeightingFactorsLive_[MAX_PARTICLES];	// Intermediate fuel weighting values for live fuels sorted by size class
+	double moistureDead_[MAX_PARTICLES];					// Moisture content in fraction of oven-dry weight for dead fuels
+	double moistureLive_[MAX_PARTICLES];					// Moisture content in fraction of oven-dry weight for live fuels
+	double loadDead_[MAX_PARTICLES];						// Fuel load of fuelbad 4 size classes for dead fuels
+	double loadLive_[MAX_PARTICLES];						// Fuel load of fuelbad 4 size classes for live fuels
+	double savrDead_[MAX_PARTICLES];						// Surface area to volume ratio for dead fuels
+	double savrLive_[MAX_PARTICLES];						// Surface area to volume ratio for live fuels
 	double surfaceAreaDead_[MAX_PARTICLES];
 	double surfaceAreaLive_[MAX_PARTICLES];
 	double heatDead_[MAX_PARTICLES];
@@ -90,7 +90,6 @@ private:
 	double areaWeightingFactorDead_[MAX_PARTICLES];
 	double areaWeightingFactorLive_[MAX_PARTICLES];
 	
-
 	int		fuelModelNumber_;				// The number associated with the current fuel model being used
 	int		numberOfLive_;					// number of live size classes in the current fuel model being used
 	int		numberOfDead_;					// number of dead size classes in the current fuel model being used

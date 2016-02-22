@@ -65,14 +65,14 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 	sumIntermediateParametersByFuelComponent();
 
 	/* final calculations */
-	double totalLoad = totalLoad_[DEAD] + totalLoad_[LIVE];
+	double totalLoad = totalLoadForLifeState_[DEAD] + totalLoadForLifeState_[LIVE];
 
 	bulkDensity_ = totalLoad / depth;
 
 	for (int lifeState = 0; lifeState < MAX_LIFE_STATES; lifeState++)
 	{
 		//packingRatio_ = totalLoad / (depth * ovendryFuelDensity);
-		packingRatio_ += totalLoad_[lifeState] / (depth * fuelDensity_[lifeState]);
+		packingRatio_ += totalLoadForLifeState_[lifeState] / (depth * fuelDensity_[lifeState]);
 	}
 
 	optimumPackingRatio = 3.348 / pow(sigma_, 0.8189);
@@ -246,11 +246,10 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 	double	weightedSavr[MAX_LIFE_STATES];	// Weighted SAVR for i-th categort (live/dead)
 
 	// Initialize Accumulated values
-	//totalLoad_ = 0.0;
 	sigma_ = 0.0;
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
-		totalLoad_[i] = 0.0;
+		totalLoadForLifeState_[i] = 0.0;
 		weightedHeat_[i] = 0.0;
 		weightedSilica_[i] = 0.0;
 		weightedMoisture_[i] = 0.0;
@@ -278,7 +277,7 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 			weightedSilica_[DEAD] += areaWeightingFactorDead_[i] * silicaEffectiveDead_[i]; // weighted silica content
 			weightedMoisture_[DEAD] += areaWeightingFactorDead_[i] * moistureDead_[i]; // weighted moisture content
 			weightedSavr[DEAD] += areaWeightingFactorDead_[i] * savrDead_[i]; // weighted SAVR
-			totalLoad_[DEAD] += loadDead_[i];
+			totalLoadForLifeState_[DEAD] += loadDead_[i];
 		}
 		if (savrLive_[i] > 1.0e-07)
 		{
@@ -287,7 +286,7 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 			weightedSilica_[LIVE] += areaWeightingFactorLive_[i] * silicaEffectiveLive_[i]; // weighted silica content
 			weightedMoisture_[LIVE] += areaWeightingFactorLive_[i] * moistureLive_[i]; // weighted moisture content
 			weightedSavr[LIVE] += areaWeightingFactorLive_[i] * savrLive_[i]; // weighted SAVR
-			totalLoad_[LIVE] += loadLive_[i];
+			totalLoadForLifeState_[LIVE] += loadLive_[i];
 		}
 		weightedFuelLoad_[DEAD] += sizeSortedWeightingFactorsDead_[i] * wnDead[i];
 		weightedFuelLoad_[LIVE] += sizeSortedWeightingFactorsLive_[i] * wnLive[i];
@@ -579,7 +578,6 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 
 	for (int i = 0; i < MAX_PARTICLES; i++)
 	{
-		
 		sizeSortedWeightingFactorsDead_[i] = 0.0;
 		sizeSortedWeightingFactorsLive_[i] = 0.0;
 		areaWeightingFactorDead_[i] = 0.0;
@@ -604,10 +602,9 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 			silicaEffectiveLive_[i] = 0.0;
 		}
 	}
-
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
-		totalLoad_[i] = 0.0;
+		totalLoadForLifeState_[i] = 0.0;
 		relativeWeightedSurfaceArea_[i] = 0.0;
 		moistureOfExtinction_[i] = 0.0;
 		weightedSurfaceArea_[i] = 0.0;
