@@ -23,9 +23,9 @@ struct TwoFuelModelsMethod
 {
     enum TwoFuelModelsMethodEnum
     {
-        NO_METHOD = 0,			// Don't use TwoFuel Models method
-        ARITHMETIC = 1,			// Use arithmetic mean
-        HARMONIC = 2,			// Use harmoic mean
+        NO_METHOD = 0,          // Don't use TwoFuel Models method
+        ARITHMETIC = 1,         // Use arithmetic mean
+        HARMONIC = 2,           // Use harmoic mean
         TWO_DIMENSIONAL = 3     // Use Finney's two dimensional method
     };
 };
