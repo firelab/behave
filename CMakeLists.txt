@@ -20,7 +20,6 @@ SET(SOURCE
 	src/randfuel.cpp
 	src/randthread.cpp
 	src/surface.cpp
-	src/surfaceEnums.cpp
 	src/surfaceFirePropogatingFlux.cpp
 	src/surfaceFireReactionIntensity.cpp
 	src/surfaceFuelbedIntermediates.cpp
