@@ -41,15 +41,15 @@ private:
 	void setSAV();
 	void countSizeClasses();
 	void dynamicLoadTransfer();
-	void calculateFuelWeightingFactors();
-	void calculateWeightedSurfaceAreas(int lifeCategory);
-	void calculateAreaWeightingFactors(int lifeCategory);
+	void calculateFractionOfTotalSurfaceArea();
+	void calculateTotalSurfaceAreaForLifeState(int lifeCategory);
+	void calculateFractionOfTotalSurfaceAreaForSizeClasses(int lifeCategory);
 	void sumAreaWeightingFactorsBySizeClass(const double areaWeightingFactorDeadOrLive[MAX_PARTICLES], const double savrDeadOrLive[MAX_PARTICLES], 
 		double summedWeightingFactors[MAX_PARTICLES]);
 	void assignWeightingFactorBySizeClass(const double savrDeadOrLive[MAX_PARTICLES], const double summedWeightingFactors[MAX_PARTICLES],
 		double sizeSortedWeightingFactorsDeadOrLive[MAX_PARTICLES]);
 	void setHeatOfCombustion();
-	void sumIntermediateParametersByFuelComponent();
+	void calculateCharacteristicSAVR();
 	void calculateHeatSink();
 	void calculateLiveMoistureOfExtinction();
 	void calculateResidenceTime();
@@ -63,12 +63,12 @@ private:
 	
 	// Member variables
 	double	weightedMoisture_[MAX_LIFE_STATES];				// Weighted moisture content for both life and dead fuel categories
-	double	weightedSurfaceArea_[MAX_LIFE_STATES];			// Weighted surface area for i-th category (dead/live)
-	double	weightedHeat_[MAX_LIFE_STATES];					// Weighted heat content for i-th category (live/dead)
-	double	weightedSilica_[MAX_LIFE_STATES];				// Weighted effective silica content for i-th categort (dead/live)
-	double	weightedFuelLoad_[MAX_LIFE_STATES];				// Weighted fuel loading for i-th category (dead/live)
-	double	moistureOfExtinction_[MAX_LIFE_STATES];			// Moisture of extinction for both life and dead fuel categories
-	double	relativeWeightedSurfaceArea_[MAX_LIFE_STATES];	// Ratio of weighted surface area for life category (dead/live) to total weighted surface area
+	double	totalSurfaceArea_[MAX_LIFE_STATES];				// Total surface area for life state (dead/live)
+	double	weightedHeat_[MAX_LIFE_STATES];					// Weighted heat content for life state (live/dead)
+	double	weightedSilica_[MAX_LIFE_STATES];				// Weighted effective silica content life state(dead/live)
+	double	weightedFuelLoad_[MAX_LIFE_STATES];				// Weighted fuel loading for life state (dead/live)
+	double	moistureOfExtinction_[MAX_LIFE_STATES];			// Moisture of extinction for life state (dead/live)
+	double	fractionOfTotalSurfaceArea_[MAX_LIFE_STATES];	// Ratio of surface area for life category (dead/live) to total surface area
 	int		numberOfSizeClasses[MAX_LIFE_STATES];			// Number of size classes (live and dead) represented in the currently used fuel model
 	double	fuelDensity_[MAX_LIFE_STATES];					// Fuel density for live and dead fuels
 	double	totalLoadForLifeState_[MAX_LIFE_STATES];		// Total fuel load for live and dead fuels
@@ -87,8 +87,8 @@ private:
 	double heatLive_[MAX_PARTICLES];
 	double silicaEffectiveDead_[MAX_PARTICLES];
 	double silicaEffectiveLive_[MAX_PARTICLES];
-	double areaWeightingFactorDead_[MAX_PARTICLES];
-	double areaWeightingFactorLive_[MAX_PARTICLES];
+	double fractionOfTotalSurfaceAreaForDeadSizeClass_[MAX_PARTICLES];
+	double fractionOfTotalSurfaceAreaForLiveSizeClass_[MAX_PARTICLES];
 	
 	int		fuelModelNumber_;				// The number associated with the current fuel model being used
 	int		numberOfLive_;					// number of live size classes in the current fuel model being used
@@ -96,7 +96,7 @@ private:
 	double	liveFuelMois_;					// Live fuel moisture content */
 	double	liveFuelMext_;					// Live fuel moisture of extinction */
 	double	heatSink_;						// Rothermel 1972, Denominator of equation 52 */
-	double	sigma_;							// Particle characteristic SAVR, Rothermel 1972 
+	double	sigma_;							// Fuelbed characteristic SAVR, Rothermel 1972 
 	double	bulkDensity_;					// Ovendry bulk density in lbs/ft^2, Rothermale 1972, equation 40
 	double	packingRatio_;					// Packing ratio, Rothermel 1972, equation 31 
 	double	relativePackingRatio_;			// Packing ratio divided by the optimum packing ratio, Rothermel 1972, term in RHS equation 47

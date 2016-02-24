@@ -55,14 +55,14 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 	setHeatOfCombustion();
 
 	// Fuel weighting factors
-	calculateFuelWeightingFactors();
+	calculateFractionOfTotalSurfaceArea();
 
 	// Moisture of extinction
 	moistureOfExtinction_[DEAD] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_);
 	calculateLiveMoistureOfExtinction();
 	
 	// Intermediate calculations, summing parameters by fuel component
-	sumIntermediateParametersByFuelComponent();
+	calculateCharacteristicSAVR();
 
 	/* final calculations */
 	double totalLoad = totalLoadForLifeState_[DEAD] + totalLoadForLifeState_[LIVE];
@@ -227,18 +227,18 @@ void SurfaceFuelbedIntermediates::calculateHeatSink()
 		if (savrDead_[i] > 1.0e-07)
 		{
 			qigDead[i] = 250.0 + 1116.0 * moistureDead_[i];
-			heatSink_ += relativeWeightedSurfaceArea_[DEAD] * areaWeightingFactorDead_[i] * qigDead[i] * exp(-138.0 / savrDead_[i]);
+			heatSink_ += fractionOfTotalSurfaceArea_[DEAD] * fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * qigDead[i] * exp(-138.0 / savrDead_[i]);
 		}
 		if (savrLive_[i] > 1.0e-07)
 		{
 			qigLive[i] = 250.0 + 1116.0 * moistureLive_[i];
-			heatSink_ += relativeWeightedSurfaceArea_[LIVE] * areaWeightingFactorLive_[i] * qigLive[i] * exp(-138.0 / savrLive_[i]);
+			heatSink_ += fractionOfTotalSurfaceArea_[LIVE] * fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * qigLive[i] * exp(-138.0 / savrLive_[i]);
 		}
 	}
 	heatSink_ *= bulkDensity_;
 }
 
-void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
+void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
 {
 	double	wnLive[MAX_PARTICLES];			// Net fuel loading for live fuels, Rothermel 1972, equation 24	
 	double	wnDead[MAX_PARTICLES]; 			// Net fuel loading for dead fuels, Rothermel 1972, equation 24
@@ -273,28 +273,28 @@ void SurfaceFuelbedIntermediates::sumIntermediateParametersByFuelComponent()
 		if (savrDead_[i] > 1.0e-07)
 		{
 			wnDead[i] = loadDead_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
-			weightedHeat_[DEAD] += areaWeightingFactorDead_[i] * heatDead_[i]; // weighted heat content
-			weightedSilica_[DEAD] += areaWeightingFactorDead_[i] * silicaEffectiveDead_[i]; // weighted silica content
-			weightedMoisture_[DEAD] += areaWeightingFactorDead_[i] * moistureDead_[i]; // weighted moisture content
-			weightedSavr[DEAD] += areaWeightingFactorDead_[i] * savrDead_[i]; // weighted SAVR
+			weightedHeat_[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * heatDead_[i]; // weighted heat content
+			weightedSilica_[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * silicaEffectiveDead_[i]; // weighted silica content
+			weightedMoisture_[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * moistureDead_[i]; // weighted moisture content
+			weightedSavr[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * savrDead_[i]; // weighted SAVR
 			totalLoadForLifeState_[DEAD] += loadDead_[i];
 		}
 		if (savrLive_[i] > 1.0e-07)
 		{
 			wnLive[i] = loadLive_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
-			weightedHeat_[LIVE] += areaWeightingFactorLive_[i] * heatLive_[i]; // weighted heat content
-			weightedSilica_[LIVE] += areaWeightingFactorLive_[i] * silicaEffectiveLive_[i]; // weighted silica content
-			weightedMoisture_[LIVE] += areaWeightingFactorLive_[i] * moistureLive_[i]; // weighted moisture content
-			weightedSavr[LIVE] += areaWeightingFactorLive_[i] * savrLive_[i]; // weighted SAVR
+			weightedHeat_[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * heatLive_[i]; // weighted heat content
+			weightedSilica_[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * silicaEffectiveLive_[i]; // weighted silica content
+			weightedMoisture_[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * moistureLive_[i]; // weighted moisture content
+			weightedSavr[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * savrLive_[i]; // weighted SAVR
 			totalLoadForLifeState_[LIVE] += loadLive_[i];
 		}
 		weightedFuelLoad_[DEAD] += sizeSortedWeightingFactorsDead_[i] * wnDead[i];
 		weightedFuelLoad_[LIVE] += sizeSortedWeightingFactorsLive_[i] * wnLive[i];
 	}
 	
-	for (int i = 0; i < MAX_LIFE_STATES; i++)
+	for (int lifeState = 0; lifeState < MAX_LIFE_STATES; lifeState++)
 	{
-		sigma_ += relativeWeightedSurfaceArea_[i] * weightedSavr[i];
+		sigma_ += fractionOfTotalSurfaceArea_[lifeState] * weightedSavr[lifeState];
 	}
 }
 
@@ -351,7 +351,7 @@ void SurfaceFuelbedIntermediates::dynamicLoadTransfer()
 	}
 }
 
-void SurfaceFuelbedIntermediates::calculateFuelWeightingFactors()
+void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceArea()
 {
 	const int SIZE_CLASSES = 5;
 	double summedWeightingFactors[SIZE_CLASSES];	// Intermediate weighting factors for each size class
@@ -360,8 +360,8 @@ void SurfaceFuelbedIntermediates::calculateFuelWeightingFactors()
 	{
 		if (numberOfSizeClasses[lifeState] != 0)
 		{
-			calculateWeightedSurfaceAreas(lifeState);
-			calculateAreaWeightingFactors(lifeState);
+			calculateTotalSurfaceAreaForLifeState(lifeState);
+			calculateFractionOfTotalSurfaceAreaForSizeClasses(lifeState);
 		}
 		for (int j = 0; j < SIZE_CLASSES; j++)
 		{
@@ -369,25 +369,25 @@ void SurfaceFuelbedIntermediates::calculateFuelWeightingFactors()
 		}
 		if (lifeState == DEAD)
 		{
-			sumAreaWeightingFactorsBySizeClass(areaWeightingFactorDead_, savrDead_, summedWeightingFactors);
+			sumAreaWeightingFactorsBySizeClass(fractionOfTotalSurfaceAreaForDeadSizeClass_, savrDead_, summedWeightingFactors);
 			assignWeightingFactorBySizeClass(savrDead_, summedWeightingFactors, sizeSortedWeightingFactorsDead_);
 		}
 		if (lifeState == LIVE)
 		{
-			sumAreaWeightingFactorsBySizeClass(areaWeightingFactorLive_, savrLive_, summedWeightingFactors);
+			sumAreaWeightingFactorsBySizeClass(fractionOfTotalSurfaceAreaForLiveSizeClass_, savrLive_, summedWeightingFactors);
 			assignWeightingFactorBySizeClass(savrLive_, summedWeightingFactors, sizeSortedWeightingFactorsLive_);
 		}
 	}
 
-	relativeWeightedSurfaceArea_[DEAD] = weightedSurfaceArea_[DEAD] / (weightedSurfaceArea_[DEAD] + weightedSurfaceArea_[LIVE]);
-	relativeWeightedSurfaceArea_[LIVE] = 1.0 - relativeWeightedSurfaceArea_[DEAD];
+	fractionOfTotalSurfaceArea_[DEAD] = totalSurfaceArea_[DEAD] / (totalSurfaceArea_[DEAD] + totalSurfaceArea_[LIVE]);
+	fractionOfTotalSurfaceArea_[LIVE] = 1.0 - fractionOfTotalSurfaceArea_[DEAD];
 }    
 
-void SurfaceFuelbedIntermediates::calculateWeightedSurfaceAreas(int lifeState)
+void SurfaceFuelbedIntermediates::calculateTotalSurfaceAreaForLifeState(int lifeState)
 {
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
-		weightedSurfaceArea_[lifeState] = 0.0;
+		totalSurfaceArea_[lifeState] = 0.0;
 	}
 	
 	bool isUsingPalmettoGallbery = surfaceInputs_->isUsingPalmettoGallberry();
@@ -403,41 +403,41 @@ void SurfaceFuelbedIntermediates::calculateWeightedSurfaceAreas(int lifeState)
 		{
 			//surfaceAreaDead_[i] = loadDead_[i] * savrDead_[i] / OVENDRY_FUEL_DENSITY;
 			surfaceAreaDead_[i] = loadDead_[i] * savrDead_[i] / fuelDensity_[DEAD];
-			weightedSurfaceArea_[lifeState] += surfaceAreaDead_[i];
+			totalSurfaceArea_[lifeState] += surfaceAreaDead_[i];
 		}
 		if (lifeState == LIVE)
 		{
 			//surfaceAreaLive_[i] = loadLive_[i] * savrLive_[i] / OVENDRY_FUEL_DENSITY;
 			surfaceAreaLive_[i] = loadLive_[i] * savrLive_[i] / fuelDensity_[LIVE];
-			weightedSurfaceArea_[lifeState] += surfaceAreaLive_[i];
+			totalSurfaceArea_[lifeState] += surfaceAreaLive_[i];
 		}
 	}
 }
 
-void SurfaceFuelbedIntermediates::calculateAreaWeightingFactors(int lifeState)
+void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceAreaForSizeClasses(int lifeState)
 {
 	for (int i = 0; i < numberOfSizeClasses[lifeState]; i++)
 	{
-		if (weightedSurfaceArea_[lifeState] > 1.0e-7)
+		if (totalSurfaceArea_[lifeState] > 1.0e-7)
 		{
 			if (lifeState == DEAD)
 			{
-				areaWeightingFactorDead_[i] = surfaceAreaDead_[i] / weightedSurfaceArea_[DEAD];
+				fractionOfTotalSurfaceAreaForDeadSizeClass_[i] = surfaceAreaDead_[i] / totalSurfaceArea_[DEAD];
 			}
 			if (lifeState == LIVE)
 			{
-				areaWeightingFactorLive_[i] = surfaceAreaLive_[i] / weightedSurfaceArea_[LIVE];
+				fractionOfTotalSurfaceAreaForLiveSizeClass_[i] = surfaceAreaLive_[i] / totalSurfaceArea_[LIVE];
 			}
 		}
 		else
 		{
 			if (lifeState == DEAD)
 			{
-				areaWeightingFactorDead_[i] = 0.0;
+				fractionOfTotalSurfaceAreaForDeadSizeClass_[i] = 0.0;
 			}
 			if (lifeState == LIVE)
 			{
-				areaWeightingFactorLive_[i] = 0.0;
+				fractionOfTotalSurfaceAreaForLiveSizeClass_[i] = 0.0;
 			}
 		}
 	}
@@ -580,8 +580,8 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 	{
 		sizeSortedWeightingFactorsDead_[i] = 0.0;
 		sizeSortedWeightingFactorsLive_[i] = 0.0;
-		areaWeightingFactorDead_[i] = 0.0;
-		areaWeightingFactorLive_[i] = 0.0;
+		fractionOfTotalSurfaceAreaForDeadSizeClass_[i] = 0.0;
+		fractionOfTotalSurfaceAreaForLiveSizeClass_[i] = 0.0;
 		surfaceAreaDead_[i] = 0.0;
 		surfaceAreaLive_[i] = 0.0;
 		moistureDead_[i] = 0.0;
@@ -605,9 +605,9 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 	for (int i = 0; i < MAX_LIFE_STATES; i++)
 	{
 		totalLoadForLifeState_[i] = 0.0;
-		relativeWeightedSurfaceArea_[i] = 0.0;
+		fractionOfTotalSurfaceArea_[i] = 0.0;
 		moistureOfExtinction_[i] = 0.0;
-		weightedSurfaceArea_[i] = 0.0;
+		totalSurfaceArea_[i] = 0.0;
 		weightedMoisture_[i] = 0.0;
 		weightedSilica_[i] = 0.0;
 		fuelDensity_[i] = 32; // Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
