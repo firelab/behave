@@ -20,16 +20,16 @@ public:
     // SURFACE Module Inputs 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, 
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
-        double windSpeed, double windDirection, double slope, double slopeAspect);
-	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
+        double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
+    void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
         double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
-        double windSpeed,double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method, 
-        double slope, double slopeAspect);
+        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+        double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method,
+        double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
         double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,double palmettoCoverage, 
-        double overstoryBasalArea, double slope, double slopeAspect);
+        double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
     // SURFACE Module Getters

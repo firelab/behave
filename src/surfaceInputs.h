@@ -13,13 +13,14 @@ public:
     void initializeMembers();
     void updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, 
         double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, 
-        double slope, double slopeAspect);
+        double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,double moistureOneHour, double moistureTenHour, 
         double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-        double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double slopeAspect);
+        double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double slopeAspect, 
+        double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
-        double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect);
+        double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour);
     void setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody);
@@ -31,7 +32,7 @@ public:
     void setSlope(double slope);
     void setSlopeAspect(double slopeAspect);
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
-    void setMidflameWindSpeed(double midflameWindSpeed);
+    void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
     void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
@@ -52,24 +53,34 @@ public:
     int getFuelModelNumber() const;
     int getFirstFuelModelNumber() const;
     int getSecondFuelModelNumber() const;
-    int getTwoFuelModelsMethod() const;
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum getTwoFuelModelsMethod() const;
+
     bool isWindAndSpreadAngleRelativeToNorth() const;
     bool isWindAndSpreadAngleRelativeToUpslope() const;
+    WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
+
     bool isSlopeInDegrees() const;
     bool isSlopeInPercent() const;
     bool isUsingTwoFuelModels() const;
+    bool hasUserEnteredWindAdjustmentFactor() const;
     double getMoistureDeadAtIndex(int index) const;
     double getMoistureLiveAtIndex(int index) const;
     double getSlope() const;
     double getSlopeAspect() const;
     double getWindDirection() const;
-    double getMidflameWindSpeed() const;
+    double getWindSpeed() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;
     double getMoistureLiveHerbaceous() const;
     double getMoistureLiveWoody() const;
-    double getCoverage() const;
+    double getFirstFuelModelCoverage() const;
+
+    double getCanopyCover() const;
+    double getCanopyHeight() const;
+    double getCrownRatio() const;
+    void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
+    double getUserProvidedWindAdjustmentFactor() const;
 
 private:
     double convertWindToUpslope(double windDirectionFromNorth);
@@ -84,7 +95,7 @@ private:
     double moistureHundredHour_;        // 1% to 60%
     double moistureLiveHerbaceous_;     // 30% to 300%
     double moistureLiveWoody_;          // 30% to 300%
-    double midflameWindSpeed_;          // in miles per hour
+    double windSpeed_;                  // measured wind speed in miles per hour
     double windDirection_;              // degrees, 0-360
     double slope_;                      // gradient 0-600 or degrees 0-80  
     double slopeAspect_;                // degrees, 0-360
@@ -98,12 +109,19 @@ private:
     double firstFuelModelCoverage_;     // percent of landscape occupied by first fuel in Two Fuel Models
 
     // Palmetto-Gallberry
-    bool    isUsingPalmettoGallberry_;  // Whether fuel spread calculation is using Palmetto-Gallbery
+    bool isUsingPalmettoGallberry_;     // Whether fuel spread calculation is using Palmetto-Gallbery
     double  ageOfRough_;
     double  heightOfUnderstory_;
     double  palmettoCoverage_;
     double  overstoryBasalArea_;
 
+    // Wind Adjustment Factor Parameters
+    double canopyCover_;
+    double canopyHeight_;
+    double crownRatio_;
+    double userProvidedWindAdjustmentFactor_;
+
+    // Input Modes
     SlopeInputMode::SlopeInputModeEnum slopeInputMode_;                         // Specifies whether slope is input as percent or degrees
     TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod_;          // Specifies method used in Two Fuel Models calculations
     WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode_; // Specifies how wind and spread directions are referenced

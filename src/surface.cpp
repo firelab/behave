@@ -91,10 +91,10 @@ void Surface::validateInputs()
 		// Using Fuel Model Zero indicates and error
 	}
 
-	double myWindSpeed = surfaceInputs_->getMidflameWindSpeed();
+	double myWindSpeed = surfaceInputs_->getWindSpeed();
 	if (myWindSpeed < 0)
 	{
-		surfaceInputs_->setMidflameWindSpeed(0); // can't have negative wind speed
+		surfaceInputs_->setWindSpeed(0); // can't have negative wind speed
 	}
 
 	// This section exists only to facilate automated testing with the same set

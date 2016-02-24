@@ -21,32 +21,32 @@ Behave::~Behave()
 
 void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, 
 	double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
-	double windSpeed, double windDirection, double slope, double slopeAspect)
+    double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
 	surfaceInputs_.updateInput(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-		moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, slopeAspect);
+        moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 	surfaceInputs_.setTwoFuelModelsMethod(TwoFuelModelsMethod::NO_METHOD);
 }
 
 void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 	double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
 	WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double firstFuelModelCoverage, 
-	TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double slopeAspect)
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
 	surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
 		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, firstFuelModelCoverage,
-		twoFuelModelsMethod, slope, slopeAspect);
+        twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
 void  Behave::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour, 
 	double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
 	double windSpeed,  double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, 
-	double slope, double slopeAspect)
+    double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
 	surfaceInputs_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour,
 		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
 		windHeightInputMode, windSpeed, windDirection, ageOfRough, heightOfUnderstory,
-		palmettoCoverage, overstoryBasalArea, slope, slopeAspect);
+        palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
 double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)

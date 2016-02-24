@@ -27,6 +27,7 @@ SET(SOURCE
 	src/surfaceInputs.cpp
 	src/surfaceFireSpread.cpp
 	src/surfaceTwoFuelModels.cpp
+    src/windAdjustmentFactor.cpp
 	# End of Surface Module
 )
 
@@ -46,6 +47,7 @@ SET(HEADERS
 	src/surfaceInputs.h
 	src/surfaceFireSpread.h
 	src/surfaceTwoFuelModels.h
+    src/windAdjustmentFactor.h
 	# End of Surface Module
 )
 	

@@ -154,7 +154,7 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 	fuelModelNumber[0] = surfaceInputs_->getFirstFuelModelNumber();
 	fuelModelNumber[1] = surfaceInputs_->getSecondFuelModelNumber();
 
-	coverage[0] = surfaceInputs_->getCoverage();
+	coverage[0] = surfaceInputs_->getFirstFuelModelCoverage();
 	coverage[1] = 1 - coverage[0];
 
 	// Calculate fire outputs for each fuel model
@@ -163,34 +163,12 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 		surfaceInputs_->setFuelModelNumber(fuelModelNumber[i]);
 		surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
 		fuelbedDepth[i] = surfaceFuelbedIntermediates_->getFuelbedDepth();
-		midFlameWindSpeed[i] = surfaceInputs_->getMidflameWindSpeed();
-		/*
-		// If necessary, calculate wind adjustment factor from canopy and fuel parameters
-		if (prop->boolean("surfaceConfWindSpeedAt10MCalc")
-			|| prop->boolean("surfaceConfWindSpeedAt20FtCalc"))
-		{
-			WindAdjFactor();
-		}
-		waf[i] = vWindAdjFactor->m_nativeValue;
-
-		// If necessary, calculate 20-ft wind speed from 10-m wind speed
-		if (prop->boolean("surfaceConfWindSpeedAt10M")
-			|| prop->boolean("surfaceConfWindSpeedAt10MCalc"))
-		{
-			WindSpeedAt20Ft();
-		}
-
-		// If necessary, calculate midflame wind speed from 20-ft wind speed and wind adj factor
-		if (!prop->boolean("surfaceConfWindSpeedAtMidflame"))
-		{
-			WindSpeedAtMidflame();
-		}
-		wmf[i] = vWindSpeedAtMidflame->m_nativeValue;
-		*/
-	
+		
 		ros[i] = surfaceFireSpread_->calculateForwardSpreadRate(directionOfInterest);
+
 		reactionIntensity[i] = surfaceFireSpread_->getReactionIntensity();
 		dirMaxSpread[i] = surfaceFireSpread_->getDirectionOfMaxSpread();
+        midFlameWindSpeed[i] = surfaceFireSpread_->getMidflameWindSpeed();
 		effectiveWindSpeed[i] = surfaceFireSpread_->getEffectiveWindSpeed();
 		windSpeedLimit[i] = surfaceFireSpread_->getWindSpeedLimit();
 		windLimitExceeded[i] = surfaceFireSpread_->getIsWindLimitExceeded();
@@ -212,41 +190,14 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 	{
 		spreadRate_ = (coverage[0] * ros[0]) + (coverage[1] * ros[1]);
 	}
-
-	/*
 	// else if harmonic mean spread rate...
-	else if (prop->boolean("surfaceConfFuelHarmonicMean"))
-	{
-		wtdv = 0.0;
-		wtdh = 0.0;
-		if (rosh[0] > 0.000001 && rosh[1] > 0.000001)
-		{
-			wtdh = 1. / ((cov[0] / rosh[0]) + (cov[1] / rosh[1]));
-			wtdv = 1. / ((cov[0] / rosv[0]) + (cov[1] / rosv[1]));
-		}
-	}*/
-
-	if (method == HARMONIC)
+	else if (method == HARMONIC)
 	{
 		if (ros[0] > 0.000001 && ros[1] > 0.000001)
 		{
 			spreadRate_ = 1.0 / ((coverage[0] / ros[0]) + (coverage[1] / ros[1]));
 		}
 	}
-
-	/*
-	// else if Finney's 2-dimensional spread rate...
-	else if (prop->boolean("surfaceConfFuel2Dimensional"))
-	{
-		double lbRatio = vSurfaceFireLengthToWidth->m_nativeValue;
-		int samples = prop->integer("surfaceConfFuel2DSamples");
-		int depth = prop->integer("surfaceConfFuel2DDepth");
-		int laterals = prop->integer("surfaceConfFuel2DLaterals");
-		wtdv = FBL_SurfaceFireExpectedSpreadRate(rosv, cov, 2, lbRatio,
-			samples, depth, laterals);
-	}
-	*/
-
 	// else if Finney's 2-dimensional spread rate...
 	else if (method == TWO_DIMENSIONAL)
 	{
@@ -283,7 +234,7 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 		surfaceFireSpread_->setWindAdjustmentFactor(windAdjustmentFactor_);
 
 		midFlameWindSpeed_ = midFlameWindSpeed[i]; // TODO:  Incorporate Wind Speed at Midflame model in Behave
-		surfaceInputs_->setMidflameWindSpeed(midFlameWindSpeed_);
+        surfaceFireSpread_->setMidflameWindSpeed(midFlameWindSpeed_);
 
 		effectiveWind_ = effectiveWindSpeed[i];
 		surfaceFireSpread_->setEffectiveWindSpeed(effectiveWind_);
@@ -326,7 +277,7 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 
 		// Midflame wind speed is for the FIRST (not necessarily dominant) fuel model
 		midFlameWindSpeed_ = midFlameWindSpeed[0]; // TODO:  Incorporate Wind Speed at Midflame model in Behave
-		surfaceInputs_->setMidflameWindSpeed(midFlameWindSpeed_);
+        surfaceFireSpread_->setMidflameWindSpeed(midFlameWindSpeed_);
 
 		// Effective wind speed is for the FIRST (not necessarily dominant) fuel model
 		effectiveWind_ = effectiveWindSpeed[0];

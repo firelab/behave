@@ -266,7 +266,13 @@ int main(int argc, char *argv[])
 	double directionOfMaxSpread = 0.0;
 	double flameLength = 0.0;
 	double directionOfInterest = 0.0;
-	double spreadRate = 0;
+	
+    // Wind adjustment factor parameters
+    double canopyCover = 0.0;
+    double canopyHeight = 0.0;
+    double crownRatio = 0.0;
+
+    double spreadRate = 0;
 
 	for (int index = 0; index < REQUIRED_ARG_COUNT; index++)
 	{
@@ -458,7 +464,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Feed input values to behave
-	behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect);
+    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
 	// Do the spread rate calculation
 	if (hasDirectionOfInterest)

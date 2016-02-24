@@ -3,24 +3,21 @@
 
 // Standard include files
 #include <math.h>
+#include "surfaceEnums.h"
 
 class WindAjustmentFactor
 {
 public:
-	void WindAdjFactor(void);
-	double FBL_WindAdjustmentFactor(double canopyCover, double canopyHt,
-		double crownRatio, double fuelDepth, double *fraction, int *method);
+	WindAjustmentFactor();
+	double calculateWindAdjustmentFactor(double canopyCover, double canopyHeight,
+		double crownRatio, double fuelBedDepth);
+    double getCanopyCrownFraction() const;
+    WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum getWindAdjustmentFactorMethod() const;
+
 private:
-	const double SMIDGEN = 1.0e-07; // Number used to test for "close enough to zero to prevent divide - by - zero, sqrt(0), etc.
-
-	double	vTreeCanopyCover;
-	double	vTreeCoverHt;
-	double	vTreeCrownRatio;
-	double	vSurfaceFuelBedDepth;
-	double	vWindAdjFactor;
-	double	vTreeCanopyCrownFraction;
-	int		vWindAdjMethod;
-
+	double	windAdjustmentFactor_;
+	double	canopyCrownFraction_;
+	WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;
 };
 
 #endif //WINDADJUSTMENTFACTOR_HEADER

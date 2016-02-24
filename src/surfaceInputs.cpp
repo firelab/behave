@@ -2,403 +2,443 @@
 
 SurfaceInputs::SurfaceInputs()
 {
-	initializeMembers();
+    initializeMembers();
 }
 
 void SurfaceInputs::initializeMembers()
 {
-	fuelModelNumber_ = 0;
-	secondFuelModelNumber_ = 0;
-	moistureOneHour_ = 0.0;
-	moistureTenHour_ = 0.0;
-	moistureHundredHour_ = 0.0;
-	moistureLiveHerbaceous_ = 0.0;
-	moistureLiveWoody_ = 0.0;
-	slope_ = 0.0;
-	slopeAspect_ = 0.0;
-	midflameWindSpeed_ = 0.0;
-	windDirection_ = 0.0;
+    fuelModelNumber_ = 0;
+    secondFuelModelNumber_ = 0;
+    moistureOneHour_ = 0.0;
+    moistureTenHour_ = 0.0;
+    moistureHundredHour_ = 0.0;
+    moistureLiveHerbaceous_ = 0.0;
+    moistureLiveWoody_ = 0.0;
+    slope_ = 0.0;
+    slopeAspect_ = 0.0;
+    windSpeed_ = 0.0;
+    windDirection_ = 0.0;
 
-	isUsingTwoFuelModels_ = false;
-	isUsingPalmettoGallberry_ = false;
+    isUsingTwoFuelModels_ = false;
+    isUsingPalmettoGallberry_ = false;
 
-	slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
-	windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
-	windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
-	twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
+    slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
+    windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
+    windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
+    twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
 
-	for (int i = 0; i < MAX_SIZES; i++)
-	{
-		moistureDead_[i] = 0.0;
-		moistureLive_[i] = 0.0;
-	}
+    canopyCover_ = 0.0;
+    canopyHeight_ = 0.0;
+    crownRatio_ = 0.0;
+
+    for (int i = 0; i < MAX_SIZES; i++)
+    {
+	    moistureDead_[i] = 0.0;
+	    moistureLive_[i] = 0.0;
+    }
+
+    userProvidedWindAdjustmentFactor_ = -1.0;
 }
 
-void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
-	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope, double slopeAspect)
+void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, 
+    double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
+    double windSpeed, double windDirection, double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-	for (int i = 0; i < MAX_SIZES; i++)
-	{
-		moistureDead_[i] = 0.0;
-		moistureLive_[i] = 0.0;
-	}
+    initializeMembers();
 
-	setSlope(slope);
-	slopeAspect_ = slopeAspect;
+    for (int i = 0; i < MAX_SIZES; i++)
+    {
+	    moistureDead_[i] = 0.0;
+	    moistureLive_[i] = 0.0;
+    }
 
-	//	To Fix Original BehavePlus's occasional reporting 360 as direction of max 
-	//	spread, just add an equaul sign after the less than or greater than sign 
-	//	in the next 2 conditional statements 
-	if (windDirection < 0.0)
-	{
-		windDirection += 360.0;
-	}
-	while (windDirection > 360.0)
-	{
-		windDirection -= 360.0;
-	}
+    setSlope(slope);
+    slopeAspect_ = slopeAspect;
 
-	if (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH)
-	{
-		windDirection = convertWindToUpslope(windDirection);
-	}
+    //	To Fix Original BehavePlus's occasional reporting 360 as direction of max 
+    //	spread, just add an equaul sign after the less than or greater than sign 
+    //	in the next 2 conditional statements 
+    if (windDirection < 0.0)
+    {
+	    windDirection += 360.0;
+    }
+    while (windDirection > 360.0)
+    {
+	    windDirection -= 360.0;
+    }
 
-	fuelModelNumber_ = fuelModelNumber;
-	moistureOneHour_ = moistureOneHour;
-	moistureTenHour_ = moistureTenHour;
-	moistureHundredHour_ = moistureHundredHour;
-	moistureLiveHerbaceous_ = moistureLiveHerbaceous;
-	moistureLiveWoody_ = moistureLiveWoody;
+    if (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH)
+    {
+	    windDirection = convertWindToUpslope(windDirection);
+    }
 
-	windHeightInputMode_ = windHeightInputMode;
+    fuelModelNumber_ = fuelModelNumber;
+    moistureOneHour_ = moistureOneHour;
+    moistureTenHour_ = moistureTenHour;
+    moistureHundredHour_ = moistureHundredHour;
+    moistureLiveHerbaceous_ = moistureLiveHerbaceous;
+    moistureLiveWoody_ = moistureLiveWoody;
 
-/****************************************************************************/
-// TEMPORARY PLACEHOLDER CODE!!!!
-	midflameWindSpeed_ = windSpeed; // TEMPORARY PLACEHOLDER CODE!!!!
-// TEMPORARY PLACEHOLDER CODE!!!!
-/****************************************************************************/
+    windHeightInputMode_ = windHeightInputMode;
+    windSpeed_ = windSpeed; 
+    windDirection_ = windDirection;
 
+    setMoistureDead();
+    setMoistureLive();
 
-	windDirection_ = windDirection;
+    isUsingTwoFuelModels_ = false;
+    twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
 
-	setMoistureDead();
-	setMoistureLive();
-
-	isUsingTwoFuelModels_ = false;
-	twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
-
-	isUsingPalmettoGallberry_ = false;
+    isUsingPalmettoGallberry_ = false;
+    
+    canopyCover_ = canopyCover;
+    canopyHeight_ = canopyHeight;
+    crownRatio_ = crownRatio;
 }
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
-	double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, 
-	double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
-	double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, 
-	double slope, double slopeAspect)
+    double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, 
+    double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
+    double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, 
+    double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-	int fuelModelNumber = firstfuelModelNumber;
-	updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
-		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-		windHeightInputMode, windSpeed, windDirection, slope, slopeAspect);
-	firstFuelModelNumber_ = firstfuelModelNumber;
-	secondFuelModelNumber_ = secondFuelModelNumber;
-	firstFuelModelCoverage_ = firstFuelModelCoverage;
+    int fuelModelNumber = firstfuelModelNumber;
+    updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
+	    moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
+        windHeightInputMode, windSpeed, windDirection, slope, slopeAspect, canopyCover, canopyHeight, crownRatio);
+    firstFuelModelNumber_ = firstfuelModelNumber;
+    secondFuelModelNumber_ = secondFuelModelNumber;
+    firstFuelModelCoverage_ = firstFuelModelCoverage;
 
-	isUsingTwoFuelModels_ = true;
+    isUsingTwoFuelModels_ = true;
 
-	twoFuelModelsMethod_ = twoFuelModelsMethod;
-	
+    twoFuelModelsMethod_ = twoFuelModelsMethod;
 }
 
 void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
-	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, 
-	double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, 
-	double slopeAspect)
+    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, 
+    double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, 
+    double slopeAspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-	updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-		moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, slopeAspect);
+    updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, slopeAspect, canopyCover, canopyHeight, crownRatio);
 
-	ageOfRough_ = ageOfRough;
-	heightOfUnderstory_ = heightOfUnderstory;
-	palmettoCoverage_ = palmettoCoverage;
-	overstoryBasalArea_ = overstoryBasalArea;
+    ageOfRough_ = ageOfRough;
+    heightOfUnderstory_ = heightOfUnderstory;
+    palmettoCoverage_ = palmettoCoverage;
+    overstoryBasalArea_ = overstoryBasalArea;
 
-	isUsingPalmettoGallberry_ = true;
+    isUsingPalmettoGallberry_ = true;
 }
 
 void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
-	windAndSpreadAngleMode_ = windAndSpreadAngleMode;
+    windAndSpreadAngleMode_ = windAndSpreadAngleMode;
 }
 
 double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
 {
-	// Important information: 
-	// when wind is given relativet to upslope, it is given as the direction the wind pushes the fire, not the direction from which is blowing - WMC 01/2016
-	double windDirectionFromUpslope = windDirectionFromNorth - slopeAspect_; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
-	return windDirectionFromUpslope;
+    // Important information: 
+    // when wind is given relative to upslope, it is given as the direction the wind pushes the fire, not the direction from which is blowing - WMC 01/2016
+    double windDirectionFromUpslope = windDirectionFromNorth - slopeAspect_; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
+    return windDirectionFromUpslope;
 }
 
 void SurfaceInputs::setFuelModelNumber(int fuelModelNumber)
 {
-	fuelModelNumber_ = fuelModelNumber;
+    fuelModelNumber_ = fuelModelNumber;
 }
 
 void SurfaceInputs::setMoistureDead()
 {
-	moistureDead_[0] = moistureOneHour_;
-	moistureDead_[1] = moistureTenHour_;
-	moistureDead_[2] = moistureHundredHour_;
-	moistureDead_[3] = moistureOneHour_;
+    moistureDead_[0] = moistureOneHour_;
+    moistureDead_[1] = moistureTenHour_;
+    moistureDead_[2] = moistureHundredHour_;
+    moistureDead_[3] = moistureOneHour_;
 }
 
 void SurfaceInputs::setMoistureLive()
 {
-	moistureLive_[0] = moistureLiveHerbaceous_;
-	moistureLive_[1] = moistureLiveWoody_;
+    moistureLive_[0] = moistureLiveHerbaceous_;
+    moistureLive_[1] = moistureLiveWoody_;
 }
 
 void SurfaceInputs::setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour)
 {
-	moistureDead_[0] = moistureOneHour;
-	moistureDead_[1] = moistureTenHour;
-	moistureDead_[2] = moistureHundredHour;
-	moistureDead_[3] = moistureOneHour;
+    moistureDead_[0] = moistureOneHour;
+    moistureDead_[1] = moistureTenHour;
+    moistureDead_[2] = moistureHundredHour;
+    moistureDead_[3] = moistureOneHour;
 }
 
 void SurfaceInputs::setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody)
 {
-	moistureLive_[0] = moistureLiveHerbaceous;
-	moistureLive_[1] = moistureLiveWoody;
+    moistureLive_[0] = moistureLiveHerbaceous;
+    moistureLive_[1] = moistureLiveWoody;
 }
 
 void SurfaceInputs::setMoistureOneHour(double moistureOneHour)
 {
-	moistureDead_[0] = moistureOneHour;
-	moistureDead_[3] = moistureOneHour;
+    moistureDead_[0] = moistureOneHour;
+    moistureDead_[3] = moistureOneHour;
 }
 
 void SurfaceInputs::setMoistureTenHour(double moistureTenHour)
 {
-	moistureDead_[1] = moistureTenHour;
+    moistureDead_[1] = moistureTenHour;
 }
 
 void SurfaceInputs::setMoistureHundredHour(double moistureHundredHour)
 {
-	moistureDead_[2] = moistureHundredHour;
+    moistureDead_[2] = moistureHundredHour;
 }
 
 void SurfaceInputs::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
-	moistureLive_[0] = moistureLiveHerbaceous_;
+    moistureLive_[0] = moistureLiveHerbaceous_;
 }
 
 void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 {
-	moistureLive_[1] = moistureLiveWoody_;
+    moistureLive_[1] = moistureLiveWoody_;
 }
 
 void SurfaceInputs::setSlope(double slope)
 {
-	if (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT)
-	{
-		const double PI = 3.141592653589793238463;
-		slope = (180 / PI) * atan(slope / 100); // slope is now in degees
-	}
-	slope_ = slope;
+    if (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT)
+    {
+	    const double PI = 3.141592653589793238463;
+	    slope = (180 / PI) * atan(slope / 100); // slope is now in degees
+    }
+    slope_ = slope;
 }
 
 void SurfaceInputs::setSlopeAspect(double slopeAspect)
 {
-	slopeAspect_ = slopeAspect;
+    slopeAspect_ = slopeAspect;
 }
 
 void SurfaceInputs::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
 {
-	slopeInputMode_ = slopeInputMode;
+    slopeInputMode_ = slopeInputMode;
 }
 
 void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod)
 {
-	twoFuelModelsMethod_ = twoFuelModelsMethod;
+    twoFuelModelsMethod_ = twoFuelModelsMethod;
 }
 
-//void SurfaceInputs::setIsUsingTwoFuelModels(bool isUsingTwoFuelModels)
-//{
-//	isUsingTwoFuelModels_ = isUsingTwoFuelModels;
-//}
+void  SurfaceInputs::setWindSpeed(double windSpeed)
+{
+    windSpeed_ = windSpeed;
+}
 
 void  SurfaceInputs::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
-	firstFuelModelNumber_ = firstFuelModelNumber;
+    firstFuelModelNumber_ = firstFuelModelNumber;
 }
 
 int  SurfaceInputs::getFirstFuelModelNumber() const
 {
-	return firstFuelModelNumber_;
+    return firstFuelModelNumber_;
 }
 
 int  SurfaceInputs::getSecondFuelModelNumber() const
 {
-	return secondFuelModelNumber_;
+    return secondFuelModelNumber_;
 }
 
 void  SurfaceInputs::setSecondFuelModelNumber(int secondFuelModelNumber)
 {
-	secondFuelModelNumber_ = secondFuelModelNumber;
-}
-
-void SurfaceInputs::setMidflameWindSpeed(double midflameWindSpeed)
-{
-	midflameWindSpeed_ = midflameWindSpeed;
+    secondFuelModelNumber_ = secondFuelModelNumber;
 }
 
 double SurfaceInputs::getMoistureDeadAtIndex(int index) const
 {
-	return moistureDead_[index];
+    return moistureDead_[index];
 }
 double SurfaceInputs::getMoistureLiveAtIndex(int index) const
 {
-	return moistureLive_[index];
+    return moistureLive_[index];
 }
 
 int SurfaceInputs::getFuelModelNumber() const
 {
-	return fuelModelNumber_;
+    return fuelModelNumber_;
 }
 
 double SurfaceInputs::getSlope() const
 {
-	return slope_;
+    return slope_;
 }
 
 double SurfaceInputs::getSlopeAspect() const
 {
-	return slopeAspect_;
+    return slopeAspect_;
 }
 
-double SurfaceInputs::getCoverage() const
+double SurfaceInputs::getFirstFuelModelCoverage() const
 {
-	return firstFuelModelCoverage_;
+    return firstFuelModelCoverage_;
 }
 
-int SurfaceInputs::getTwoFuelModelsMethod() const
+TwoFuelModelsMethod::TwoFuelModelsMethodEnum SurfaceInputs::getTwoFuelModelsMethod() const
 {
-	return twoFuelModelsMethod_;
+    return twoFuelModelsMethod_;
 }
 
 bool SurfaceInputs::isUsingTwoFuelModels() const
 {
-	return isUsingTwoFuelModels_;
+    return isUsingTwoFuelModels_;
 }
 
 void SurfaceInputs::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
 {
-	isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
+    isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
 }
 
 bool SurfaceInputs::isUsingPalmettoGallberry() const
 {
-	return isUsingPalmettoGallberry_;
+    return isUsingPalmettoGallberry_;
+}
+
+bool SurfaceInputs::hasUserEnteredWindAdjustmentFactor() const
+{
+    bool userHasEnteredWindAdjustmentFactor = false;
+
+    if (userProvidedWindAdjustmentFactor_ != -1.0)
+    {
+        userHasEnteredWindAdjustmentFactor = true;
+    }
+    return userHasEnteredWindAdjustmentFactor;
+}
+
+WindHeightInputMode::WindHeightInputModeEnum SurfaceInputs::getWindHeightInputMode() const
+{
+    return windHeightInputMode_;
 }
 
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
 {
-	bool isRelativeToNorth = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
-	return isRelativeToNorth;
+    bool isRelativeToNorth = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
+    return isRelativeToNorth;
 }
 
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToUpslope() const
 {
-	bool isRelativeToUpslope = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
-	return isRelativeToUpslope;
+    bool isRelativeToUpslope = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
+    return isRelativeToUpslope;
 }
 
 bool SurfaceInputs::isSlopeInDegrees() const
 {
-	bool isSlopeModeDegrees = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_DEGREES);
-	return isSlopeModeDegrees;
+    bool isSlopeModeDegrees = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_DEGREES);
+    return isSlopeModeDegrees;
 }
 
 bool SurfaceInputs::isSlopeInPercent() const
 {
-	bool isSlopeInPercent = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT);
-	return isSlopeInPercent;
+    bool isSlopeInPercent = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT);
+    return isSlopeInPercent;
 }
 
 double SurfaceInputs::getWindDirection() const
 {
-	return windDirection_;
+    return windDirection_;
 }
 
-double SurfaceInputs::getMidflameWindSpeed() const
+double SurfaceInputs::getWindSpeed() const
 {
-	return midflameWindSpeed_;
+	return windSpeed_;
 }
 
 double SurfaceInputs::getMoistureOneHour() const
 {
-	return moistureOneHour_;
+    return moistureOneHour_;
 }
 
 double SurfaceInputs::getMoistureTenHour() const
 {
-	return moistureTenHour_;
+    return moistureTenHour_;
 }
 
 double SurfaceInputs::getMoistureHundredHour() const
 {
-	return moistureHundredHour_;
+    return moistureHundredHour_;
 }
 
 double SurfaceInputs::getMoistureLiveHerbaceous() const
 {
-	return moistureLiveHerbaceous_;
+    return moistureLiveHerbaceous_;
 }
 
 double SurfaceInputs::getMoistureLiveWoody() const
 {
-	return moistureLiveWoody_;
+    return moistureLiveWoody_;
 }
 
 void SurfaceInputs::setAgeOfRough(double ageOfRough)
 {
-	ageOfRough_ = ageOfRough;
+    ageOfRough_ = ageOfRough;
 }
 
 double SurfaceInputs::getAgeOfRough() const
 {
-	return ageOfRough_;
+    return ageOfRough_;
 }
 
 void SurfaceInputs::setHeightOfUnderstory(double heightOfUnderstory)
 {
-	heightOfUnderstory_ = heightOfUnderstory;
+    heightOfUnderstory_ = heightOfUnderstory;
 }
 
 double SurfaceInputs::getHeightOfUnderstory() const
 {
-	return heightOfUnderstory_;
+    return heightOfUnderstory_;
 }
 
 void SurfaceInputs::setPalmettoCoverage(double palmettoCoverage)
 {
-	palmettoCoverage_ = palmettoCoverage;
+    palmettoCoverage_ = palmettoCoverage;
 }
 
 double SurfaceInputs::getPalmettoCoverage() const
 {
-	return palmettoCoverage_;
+    return palmettoCoverage_;
 }
 
 void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea)
 {
-	overstoryBasalArea_ = overstoryBasalArea;
+    overstoryBasalArea_ = overstoryBasalArea;
 }
 
 double SurfaceInputs::getOverstoryBasalArea() const
 {
-	return overstoryBasalArea_;
+    return overstoryBasalArea_;
+}
+
+double SurfaceInputs::getCanopyCover() const
+{
+    return canopyCover_;
+}
+
+double SurfaceInputs::getCanopyHeight() const
+{
+    return canopyHeight_;
+}
+
+double SurfaceInputs::getCrownRatio() const
+{
+    return crownRatio_;
+}
+
+void SurfaceInputs::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
+{
+    userProvidedWindAdjustmentFactor_ = userProvidedWindAdjustmentFactor;
+}
+
+double SurfaceInputs::getUserProvidedWindAdjustmentFactor() const
+{
+    return userProvidedWindAdjustmentFactor_;
 }
