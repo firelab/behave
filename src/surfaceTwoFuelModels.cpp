@@ -185,13 +185,13 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
 
     // Fire spread rate depends upon the weighting method...
     // If area weighted spread rate ... */
-    int method = surfaceInputs_->getTwoFuelModelsMethod();
-    if (method == ARITHMETIC)
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod = surfaceInputs_->getTwoFuelModelsMethod();
+    if (twoFuelModelsMethod == TwoFuelModelsMethod::ARITHMETIC)
     {
         spreadRate_ = (coverage[0] * ros[0]) + (coverage[1] * ros[1]);
     }
     // else if harmonic mean spread rate...
-    else if (method == HARMONIC)
+    else if (twoFuelModelsMethod == TwoFuelModelsMethod::HARMONIC)
     {
         if (ros[0] > 0.000001 && ros[1] > 0.000001)
         {
@@ -199,7 +199,7 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
         }
     }
     // else if Finney's 2-dimensional spread rate...
-    else if (method == TWO_DIMENSIONAL)
+    else if (twoFuelModelsMethod == TwoFuelModelsMethod::TWO_DIMENSIONAL)
     {
         //double lbRatio = lengthToWidthRatio[0]; // get first fuel model's length-to-width ratio
         double lbRatio = lengthToWidthRatio[1]; // get second? fuel model's length-to-width ratio, seems to agree with BehavePlus

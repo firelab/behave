@@ -5,8 +5,8 @@ struct WindAndSpreadAngleMode
 {
     enum WindAndSpreadAngleModeEnum
     {
-        RELATIVE_TO_UPSLOPE = 0,	// Wind and spread angles I/O are clockwise relative to upslope
-        RELATIVE_TO_NORTH = 1		// Wind direction angles I/O are clockwise relative to compass north
+        RELATIVE_TO_UPSLOPE = 0,    // Wind and spread angles I/O are clockwise relative to upslope
+        RELATIVE_TO_NORTH = 1       // Wind direction angles I/O are clockwise relative to compass north
     };
 };
 

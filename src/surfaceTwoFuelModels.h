@@ -5,6 +5,7 @@
 #include "newext.h"
 #include "randfuel.h"
 #include "randthread.h"
+#include "surfaceEnums.h"
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
@@ -34,14 +35,7 @@ public:
     double getFireLengthToWidthRatio() const;
 
 private:
-    enum MEAN_METHOD
-    {
-        NO_METHOD = 0,
-        ARITHMETIC = 1,
-        HARMONIC = 2,
-        TWO_DIMENSIONAL = 3
-    };
-
+  
     SurfaceInputs* surfaceInputs_;
     SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     SurfaceFireSpread* surfaceFireSpread_;
