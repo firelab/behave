@@ -30,9 +30,9 @@ void SurfaceInputs::initializeMembers()
 	isUsingTwoFuelModels_ = false;
 	isUsingPalmettoGallberry_ = false;
 
-	slopeInputMode_ = SLOPE_IN_PERCENT;
-	windAndSpreadAngleMode_ = RELATIVE_TO_UPSLOPE;
-	twoFuelModelsMethod_ = NO_METHOD;
+	slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
+	windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
+	twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
 
 	for (int i = 0; i < MAX_SIZES; i++)
 	{
@@ -66,7 +66,7 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 		windDirection -= 360.0;
 	}
 
-	if (windAndSpreadAngleMode_ == RELATIVE_TO_NORTH)
+	if (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH)
 	{
 		windDirection = convertWindToUpslope(windDirection);
 	}
@@ -84,7 +84,7 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 	setMoistureLive();
 
 	isUsingTwoFuelModels_ = false;
-	twoFuelModelsMethod_ = NO_METHOD;
+	twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
 
 	isUsingPalmettoGallberry_ = false;
 }
@@ -92,7 +92,7 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
 	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-	double windDirection, double coverage, int method, double slope, double slopeAspect)
+	double windDirection, double coverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double slopeAspect)
 {
 	int fuelModelNumber = firstfuelModelNumber;
 	updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
@@ -103,14 +103,9 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
 	coverage_ = coverage;
 
 	isUsingTwoFuelModels_ = true;
-	if (method == ARITHMETIC || method == HARMONIC || method == TWO_DIMENSIONAL)
-	{
-		twoFuelModelsMethod_ = (TwoFuelModelsMethod)method;
-	}
-	else
-	{
-		twoFuelModelsMethod_ = NO_METHOD;
-	}
+
+	twoFuelModelsMethod_ = twoFuelModelsMethod;
+	
 }
 
 void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
@@ -129,16 +124,9 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
 	isUsingPalmettoGallberry_ = true;
 }
 
-void SurfaceInputs::setWindAndSpreadDirectionMode(int mode)
+void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
-	if (mode == RELATIVE_TO_UPSLOPE)
-	{
-		windAndSpreadAngleMode_ = RELATIVE_TO_UPSLOPE;
-	}
-	if (mode == RELATIVE_TO_NORTH)
-	{
-		windAndSpreadAngleMode_ = RELATIVE_TO_NORTH;
-	}
+	windAndSpreadAngleMode_ = windAndSpreadAngleMode;
 }
 
 double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
@@ -210,7 +198,7 @@ void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 
 void SurfaceInputs::setSlope(double slope)
 {
-	if (slopeInputMode_ == SLOPE_IN_PERCENT)
+	if (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT)
 	{
 		const double PI = 3.141592653589793238463;
 		slope = (180 / PI) * atan(slope / 100); // slope is now in degees
@@ -223,36 +211,14 @@ void SurfaceInputs::setSlopeAspect(double slopeAspect)
 	slopeAspect_ = slopeAspect;
 }
 
-void SurfaceInputs::setSlopeInputMode(int mode)
+void SurfaceInputs::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
 {
-	if (mode == SLOPE_IN_PERCENT)
-	{
-		slopeInputMode_ = SLOPE_IN_PERCENT;
-	}
-	if (mode == SLOPE_IN_DEGREES)
-	{
-		slopeInputMode_ = SLOPE_IN_DEGREES;
-	}
+	slopeInputMode_ = slopeInputMode;
 }
 
-void SurfaceInputs::setTwoFuelModelsMethod(int method)
+void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod)
 {
-	if (method == ARITHMETIC)
-	{
-		twoFuelModelsMethod_ = ARITHMETIC;
-	}
-	if (method == HARMONIC)
-	{
-		twoFuelModelsMethod_ = HARMONIC;
-	}
-	if (method == TWO_DIMENSIONAL)
-	{
-		twoFuelModelsMethod_ = TWO_DIMENSIONAL;
-	}
-	if (method == NO_METHOD)
-	{
-		twoFuelModelsMethod_ = NO_METHOD;
-	}
+	twoFuelModelsMethod_ = twoFuelModelsMethod;
 }
 
 //void SurfaceInputs::setIsUsingTwoFuelModels(bool isUsingTwoFuelModels)
@@ -336,25 +302,25 @@ bool SurfaceInputs::isUsingPalmettoGallberry() const
 
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
 {
-	bool isRelativeToNorth = (windAndSpreadAngleMode_ == RELATIVE_TO_NORTH);
+	bool isRelativeToNorth = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
 	return isRelativeToNorth;
 }
 
 bool SurfaceInputs::isWindAndSpreadAngleRelativeToUpslope() const
 {
-	bool isRelativeToUpslope = (windAndSpreadAngleMode_ == RELATIVE_TO_UPSLOPE);
+	bool isRelativeToUpslope = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
 	return isRelativeToUpslope;
 }
 
 bool SurfaceInputs::isSlopeInDegrees() const
 {
-	bool isSlopeModeDegrees = (slopeInputMode_ == SLOPE_IN_DEGREES);
+	bool isSlopeModeDegrees = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_DEGREES);
 	return isSlopeModeDegrees;
 }
 
 bool SurfaceInputs::isSlopeInPercent() const
 {
-	bool isSlopeInPercent = (slopeInputMode_ == SLOPE_IN_PERCENT);
+	bool isSlopeInPercent = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT);
 	return isSlopeInPercent;
 }
 

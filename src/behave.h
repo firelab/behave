@@ -13,15 +13,8 @@
 class Behave
 {
 public:
-	// Public SURFACE Module Enum
-	enum TwoFuelModelsMethod
-	{
-		NO_METHOD = 0,			// Don't use Two Fuel Models
-		ARITHMETIC = 1,			// Use arithmetic mean
-		HARMONIC = 2,			// Use harmoic mean
-		TWO_DIMENSIONAL = 3,	// Use Finney's two dimensional method
-	};
 
+	
 	Behave();
 	explicit Behave(SurfaceInputs &surfaceInputs);
 	~Behave();
@@ -29,15 +22,15 @@ public:
 	// SURFACE Module Inputs 
 	void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-		double midflameWindSpeed, double windDirection, double slope, double slopeAspect = 0);
-	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, 
-		double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
-		double moistureLiveHerbaceous, double moistureLiveWoody,double midflameWindSpeed, 
-		double windDirection, double coverage, TwoFuelModelsMethod method, double slope, double slopeAspect = 0);
+		double windSpeed, double windDirection, double slope, double slopeAspect);
+	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
+		double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+		double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed,
+		double windDirection, double coverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method, double slope, double slopeAspect);
 	void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-		double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, 
-		double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect = 0);
+		double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
+		double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect);
 	double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
 	// SURFACE Module Getters
@@ -58,19 +51,9 @@ public:
 	void setSlopeInputToDegrees();
 	
 private:
-	// SURFACE Module Enums
-	enum SlopeInputModeEnumType {
-		SLOPE_IN_PERCENT = 0,		// Slope is input as a percent
-		SLOPE_IN_DEGREES = 1		// Slope is input as degrees
-	};
-	enum WindAndSpreadDirectionEnumType {
-		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction are clockwise relative to upslope
-		RELATIVE_TO_NORTH = 1		// Wind direction direction are clockwise relative to compass north
-	};
-
 	// SURFACE Module Private Setters
-	void setSlopeInputMode(SlopeInputModeEnumType mode);
-	void setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode);
+	void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
+	void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
 
 	// SURFACE Module Component Objects
 	FuelModels fuelModels_;			// Object containing data for fuel models

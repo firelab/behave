@@ -20,6 +20,7 @@ SET(SOURCE
 	src/randfuel.cpp
 	src/randthread.cpp
 	src/surface.cpp
+	src/surfaceEnums.cpp
 	src/surfaceFirePropogatingFlux.cpp
 	src/surfaceFireReactionIntensity.cpp
 	src/surfaceFuelbedIntermediates.cpp
@@ -38,6 +39,7 @@ SET(HEADERS
 	src/randfuel.h
 	src/randthread.h
 	src/surface.h
+	src/surfaceEnums.h
 	src/surfaceFirePropogatingFlux.h
 	src/surfaceFireReactionIntensity.h
 	src/surfaceFuelbedIntermediates.h

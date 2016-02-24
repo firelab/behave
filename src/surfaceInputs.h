@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cmath>
+#include "surfaceEnums.h"
 
 class SurfaceInputs
 {
@@ -19,7 +20,7 @@ public:
 	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 		double moistureOneHour, double moistureTenHour, double moistureHundredHour,
 		double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-		double windDirection, double coverage, int method, double slope,
+		double windDirection, double coverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope,
 		double slopeAspect);
 	void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
@@ -35,13 +36,13 @@ public:
 	void setMoistureLiveWoody(double moistureLiveWoody);
 	void setSlope(double slope);
 	void setSlopeAspect(double slopeAspect);
-	void setSlopeInputMode(int mode);  // slope in percent == 0, slope in degrees == 1
+	void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);  // slope in percent == 0, slope in degrees == 1
 	void setMidflameWindSpeed(double midflameWindSpeed);
 	void setWindDirection(double windDirection);
-	void setWindAndSpreadDirectionMode(int mode); // From upslope == 0, From north == 1
+	void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
 	void setFirstFuelModelNumber(int firstFuelModelNumber);
 	void setSecondFuelModelNumber(int secondFuelModelNumber);
-	void setTwoFuelModelsMethod(int method);
+	void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
 	
 	void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
 	bool isUsingPalmettoGallberry() const;
@@ -110,29 +111,9 @@ private:
 	double	palmettoCoverage_;
 	double	overstoryBasalArea_;
 
-	enum WindAndSpreadDirectionEnumType
-	{
-		RELATIVE_TO_UPSLOPE = 0,	// Wind and spread direction I/O are clockwise relative to upslope
-		RELATIVE_TO_NORTH = 1		// Wind direction direction I/O are clockwise relative to compass north
-	};
-
-	enum SlopeInputModeEnumType
-	{
-		SLOPE_IN_PERCENT = 0,	// Slope is input as a percent
-		SLOPE_IN_DEGREES = 1	// Slope is input as degrees
-	};
-
-	enum TwoFuelModelsMethod
-	{
-		NO_METHOD = 0,			// Don't use TwoFuel Model Method
-		ARITHMETIC = 1,			// Use arithmetic mean
-		HARMONIC = 2,			// Use harmoic mean
-		TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
-	};
-
-	WindAndSpreadDirectionEnumType windAndSpreadAngleMode_; // Determines how wind and spread directions are referenced
-	SlopeInputModeEnumType slopeInputMode_;	// Determines whether slope is input as percent or degrees
-	TwoFuelModelsMethod twoFuelModelsMethod_; // Determines method used in Two Fuel Models calculations
+	WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode_; // Determines how wind and spread directions are referenced
+	SlopeInputMode::SlopeInputModeEnum slopeInputMode_;	// Determines whether slope is input as percent or degrees
+	TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod_; // Determines method used in Two Fuel Models calculations
 };
 
 #endif // SURFACEINPUTS_HEADER

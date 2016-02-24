@@ -21,33 +21,32 @@ Behave::~Behave()
 
 void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
+	double windSpeed, double windDirection, double slope, double slopeAspect)
 {
 	surfaceInputs_.updateInput(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
-	surfaceInputs_.setTwoFuelModelsMethod(NO_METHOD);
+		moistureLiveWoody, windSpeed, windDirection, slope, slopeAspect);
+	surfaceInputs_.setTwoFuelModelsMethod(TwoFuelModelsMethod::NO_METHOD);
 }
 
 void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-	double windDirection, double coverage, TwoFuelModelsMethod method, double slope, double slopeAspect)
+	double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed,
+	double windDirection, double coverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method, double slope, double slopeAspect)
 {
-	int myMethod = (int) method;
 	surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
-		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, midflameWindSpeed, windDirection, coverage,
-		myMethod, slope, slopeAspect);
+		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,windSpeed, windDirection, coverage,
+		method, slope, slopeAspect);
 	surfaceInputs_.setTwoFuelModelsMethod(method);
 }
 
 void  Behave::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
+	double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
 	double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect)
 {
 	surfaceInputs_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour,
 		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-		midflameWindSpeed, windDirection, ageOfRough, heightOfUnderstory,
+		windSpeed, windDirection, ageOfRough, heightOfUnderstory,
 		palmettoCoverage, overstoryBasalArea, slope, slopeAspect);
 }
 
@@ -57,34 +56,34 @@ double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
 	return surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 }
 
-void Behave::setWindAndSpreadDirectionMode(WindAndSpreadDirectionEnumType mode)
+void Behave::setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
-	surfaceInputs_.setWindAndSpreadDirectionMode(mode);
+	surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
 }
 
-void Behave::setSlopeInputMode(SlopeInputModeEnumType mode)
+void Behave::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
 {
-	surfaceInputs_.setSlopeInputMode(mode);
+	surfaceInputs_.setSlopeInputMode(slopeInputMode);
 }
 
 void Behave::setWindAndSpreadAnglesRelativeToNorth()
 {
-	surfaceInputs_.setWindAndSpreadDirectionMode(Behave::RELATIVE_TO_NORTH);
+	surfaceInputs_.setWindAndSpreadAngleMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
 }
 
 void Behave::setWindAndSpreadAnglesRelativeToUpslope()
 {
-	surfaceInputs_.setWindAndSpreadDirectionMode(Behave::RELATIVE_TO_UPSLOPE);
+	surfaceInputs_.setWindAndSpreadAngleMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
 }
 
 void Behave::setSlopeInputToPercent()
 {
-	surfaceInputs_.setSlopeInputMode(SLOPE_IN_PERCENT);
+	surfaceInputs_.setSlopeInputMode(SlopeInputMode::SLOPE_IN_PERCENT);
 }
 
 void Behave::setSlopeInputToDegrees()
 {
-	surfaceInputs_.setSlopeInputMode(SLOPE_IN_DEGREES);
+	surfaceInputs_.setSlopeInputMode(SlopeInputMode::SLOPE_IN_DEGREES);
 }
 
 bool Behave::isWindAndSpreadAngleRelativeToNorth() const

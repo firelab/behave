@@ -9,10 +9,12 @@
 //	WMC - 11/2015
 
 #include "palmettoGallberry.h"
+#include "surfaceEnums.h"
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
 #include "surfaceTwoFuelModels.h"
+
 class Surface
 {
 	static const int MAX_SIZES = 4;
