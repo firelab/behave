@@ -25,7 +25,7 @@
 
 //------------------------------------------------------------------------------
 
-double pow2( double input ) ;
+double pow2(double input);
 
 //------------------------------------------------------------------------------
 /*! \typedef PathStruct
@@ -46,34 +46,34 @@ typedef struct
 
 class RandThread
 {
-// Public methods
+    // Public methods
 public:
     RandThread();
     ~RandThread();
-    void    calcSpreadPaths2( void ) ;
-    void    setThreadData( long p_samples, long p_depths, long p_combs,
-                double p_lbRatio, double **p_combArray, double **p_rosArray,
-                double *p_maxRosArray, long p_start, long p_end,
-                long p_firstSample, long p_lastSample,
-                double *p_m_latRosArray, long p_lessIgns ) ;
+    void    calcSpreadPaths2(void);
+    void    setThreadData(long p_samples, long p_depths, long p_combs,
+        double p_lbRatio, double **p_combArray, double **p_rosArray,
+        double *p_maxRosArray, long p_start, long p_end,
+        long p_firstSample, long p_lastSample,
+        double *p_m_latRosArray, long p_lessIgns);
 
-// Private methods:
+    // Private methods:
 private:
-    void    addNewPath( long *NumPath2, double p_time, long p_loc,
-                long p_ignitionPt, double p_relCellSize ) ;
-    void    calcEllipticalDimensions( void ) ;
-    double  calcFlankingTime( long p_numLayers, double p_separation,
-                double p_overlap, double *p_latDist, double *p_ros,
-                long p_refractDir ) ;
-    double  calcLateralRos( double p_forwardRos ) ;
-    void    calcStartDelay( long p_laterals, long p_leftRight ) ;
-    double  fastFlankTime( long XStart, long YStart, double Xmid,
-                long XEnd, long YEnd, long NumX, double **ros ) ;
-    double  spreadTime( long XStart, long YStart, double Xmid,
-                long XEnd, long YEnd, long NumX,
-                double **ros, long FastFlank ) ;
+    void    addNewPath(long *NumPath2, double p_time, long p_loc,
+        long p_ignitionPt, double p_relCellSize);
+    void    calcEllipticalDimensions(void);
+    double  calcFlankingTime(long p_numLayers, double p_separation,
+        double p_overlap, double *p_latDist, double *p_ros,
+        long p_refractDir);
+    double  calcLateralRos(double p_forwardRos);
+    void    calcStartDelay(long p_laterals, long p_leftRight);
+    double  fastFlankTime(long XStart, long YStart, double Xmid,
+        long XEnd, long YEnd, long NumX, double **ros);
+    double  spreadTime(long XStart, long YStart, double Xmid,
+        long XEnd, long YEnd, long NumX,
+        double **ros, long FastFlank);
 
-//Private data
+    //Private data
 private:
     double      m_lbRatio;      //!< elliptical fire length-to-breadth ratio
     double      m_a;            //!< elliptical fire spread rate dimensions

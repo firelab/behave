@@ -16,19 +16,19 @@ public:
     Behave();
     explicit Behave(SurfaceInputs &surfaceInputs);
     ~Behave();
-    
+
     // SURFACE Module Inputs 
-    void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, 
-        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
+    void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
         double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method,
         double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
-        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
-        double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,double palmettoCoverage, 
+    void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+        double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
         double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
@@ -42,18 +42,18 @@ public:
     bool isWindAndSpreadAngleRelativeToUpslope() const;
     bool isSlopeInDegrees() const;
     bool isSlopeInPercent() const;
-    
+
     // SURFACE Module Setters
     void setWindAndSpreadAnglesRelativeToNorth();
     void setWindAndSpreadAnglesRelativeToUpslope();
     void setSlopeInputToPercent();
     void setSlopeInputToDegrees();
-	
+
 private:
     // SURFACE Module Private Setters
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
-    
+
     // SURFACE Module Component Objects
     FuelModels fuelModels_;         // Object containing data for fuel models
     Surface surface_;               // SURFACE Moduel object

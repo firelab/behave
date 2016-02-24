@@ -16,14 +16,14 @@ PalmettoGallberry::PalmettoGallberry()
 
 double PalmettoGallberry::palmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory)
 {
-	double load = -0.00121
-		+ 0.00379 * log(ageOfRough)
-		+ 0.00118 * heightOfUnderstory * heightOfUnderstory;
-	if (load < 0.0)
-	{
-		load = 0.0;
-	}
-	return load;
+    double load = -0.00121
+        + 0.00379 * log(ageOfRough)
+        + 0.00118 * heightOfUnderstory * heightOfUnderstory;
+    if (load < 0.0)
+    {
+        load = 0.0;
+    }
+    return load;
 }
 
 //------------------------------------------------------------------------------
@@ -37,14 +37,14 @@ double PalmettoGallberry::palmettoGallberyDeadOneHourLoad(double ageOfRough, dou
 
 double PalmettoGallberry::palmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage)
 {
-	double load = -0.00775
-		+ 0.00021 * palmettoCoverage
-		+ 0.00007 * ageOfRough * ageOfRough;
-	if (load < 0.0)
-	{
-		load = 0.0;
-	}
-	return load;
+    double load = -0.00775
+        + 0.00021 * palmettoCoverage
+        + 0.00007 * ageOfRough * ageOfRough;
+    if (load < 0.0)
+    {
+        load = 0.0;
+    }
+    return load;
 }
 
 //------------------------------------------------------------------------------
@@ -58,8 +58,8 @@ double PalmettoGallberry::palmettoGallberyDeadTenHourLoad(double ageOfRough, dou
 
 double PalmettoGallberry::palmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage)
 {
-	double load = 0.00221 * pow(ageOfRough, 0.51263) * exp(0.02482 * palmettoCoverage);
-	return load;
+    double load = 0.00221 * pow(ageOfRough, 0.51263) * exp(0.02482 * palmettoCoverage);
+    return load;
 }
 
 //------------------------------------------------------------------------------
@@ -72,8 +72,8 @@ double PalmettoGallberry::palmettoGallberyDeadFoliageLoad(double ageOfRough, dou
 
 double PalmettoGallberry::palmettoGallberyFuelBedDepth(double heightOfUnderstory)
 {
-	double depth = 2.0 * heightOfUnderstory / 3.0;
-	return depth;
+    double depth = 2.0 * heightOfUnderstory / 3.0;
+    return depth;
 }
 
 //------------------------------------------------------------------------------
@@ -87,8 +87,8 @@ double PalmettoGallberry::palmettoGallberyFuelBedDepth(double heightOfUnderstory
 
 double PalmettoGallberry::palmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea)
 {
-	double load = (0.03632 + 0.0005336 * overstoryBasalArea) * (1.0 - pow(0.25, ageOfRough));
-	return load;
+    double load = (0.03632 + 0.0005336 * overstoryBasalArea) * (1.0 - pow(0.25, ageOfRough));
+    return load;
 }
 
 //------------------------------------------------------------------------------
@@ -102,8 +102,8 @@ double PalmettoGallberry::palmettoGallberyLitterLoad(double ageOfRough, double o
 
 double PalmettoGallberry::palmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory)
 {
-	double load = 0.00546 + 0.00092 * ageOfRough + 0.00212 * heightOfUnderstory * heightOfUnderstory;
-	return load;
+    double load = 0.00546 + 0.00092 * ageOfRough + 0.00212 * heightOfUnderstory * heightOfUnderstory;
+    return load;
 }
 
 //------------------------------------------------------------------------------
@@ -117,14 +117,14 @@ double PalmettoGallberry::palmettoGallberyLiveOneHourLoad(double ageOfRough, dou
 
 double PalmettoGallberry::palmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory)
 {
-	double load = -0.02128
-		+ 0.00014 * ageOfRough * ageOfRough
-		+ 0.00314 * heightOfUnderstory * heightOfUnderstory;
-	if (load < 0.0)
-	{
-		load = 0.0;
-	}
-	return load;
+    double load = -0.02128
+        + 0.00014 * ageOfRough * ageOfRough
+        + 0.00314 * heightOfUnderstory * heightOfUnderstory;
+    if (load < 0.0)
+    {
+        load = 0.0;
+    }
+    return load;
 }
 
 //------------------------------------------------------------------------------
@@ -138,15 +138,15 @@ double PalmettoGallberry::palmettoGallberyLiveTenHourLoad(double ageOfRough, dou
 */
 
 double PalmettoGallberry::palmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage,
-	double heightOfUnderstory)
+    double heightOfUnderstory)
 {
-	double load = -0.0036
-		+ 0.00253 * ageOfRough
-		+ 0.00049 * palmettoCoverage
-		+ 0.00282 * heightOfUnderstory * heightOfUnderstory;
-	if (load < 0.0)
-	{
-		load = 0.0;
-	}
-	return load;
+    double load = -0.0036
+        + 0.00253 * ageOfRough
+        + 0.00049 * palmettoCoverage
+        + 0.00282 * heightOfUnderstory * heightOfUnderstory;
+    if (load < 0.0)
+    {
+        load = 0.0;
+    }
+    return load;
 }

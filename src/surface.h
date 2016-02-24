@@ -17,41 +17,41 @@
 
 class Surface
 {
-	static const int MAX_SIZES = 4;
-	static const int MAX_LIFE_STATES = 2;
-	static const int DEAD = 0;
-	static const int LIVE = 1;
+    static const int MAX_SIZES = 4;
+    static const int MAX_LIFE_STATES = 2;
+    static const int DEAD = 0;
+    static const int LIVE = 1;
 
 public:
-	Surface(FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
-	double calculateSurfaceFireForwardSpreadRate(double directionOfinterest = -1.0);
-	double calculateSpreadRateAtVector(double directionOfinterest);
-	double getDirectionOfMaxSpread() const;
-	double getFlameLength() const;
-	double getFireLengthToWidthRatio() const;
-	double getFireEccentricity() const;
+    Surface(FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
+    double calculateSurfaceFireForwardSpreadRate(double directionOfinterest = -1.0);
+    double calculateSpreadRateAtVector(double directionOfinterest);
+    double getDirectionOfMaxSpread() const;
+    double getFlameLength() const;
+    double getFireLengthToWidthRatio() const;
+    double getFireEccentricity() const;
 
 private:
-	enum TwoFuelModelsMethod
-	{
-		NO_METHOD = 0,		// Don't use Two Fuel Models
-		ARITHMETIC = 1,		// Use arithmetic mean
-		HARMONIC = 2,		// Use harmoic mean
-		TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
-	};
+    enum TwoFuelModelsMethod
+    {
+        NO_METHOD = 0,		// Don't use Two Fuel Models
+        ARITHMETIC = 1,		// Use arithmetic mean
+        HARMONIC = 2,		// Use harmoic mean
+        TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
+    };
 
-	bool isUsingTwoFuelModels() const;
+    bool isUsingTwoFuelModels() const;
 
-	bool isUsingPalmettoGallberry() const;
+    bool isUsingPalmettoGallberry() const;
 
-	// SURFACE Module component objects
-	SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
-	SurfaceFireSpread surfaceFireSpread_;
-	SurfaceInputs* surfaceInputs_;
-	FuelModels*	fuelModels_;
+    // SURFACE Module component objects
+    SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
+    SurfaceFireSpread surfaceFireSpread_;
+    SurfaceInputs* surfaceInputs_;
+    FuelModels*	fuelModels_;
 
-	void initializeMembers();
-	void validateInputs();
+    void initializeMembers();
+    void validateInputs();
 };
 
 #endif //SURFACEFIRE_HEADER

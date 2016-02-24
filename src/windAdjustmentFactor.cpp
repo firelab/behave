@@ -28,7 +28,7 @@ WindAjustmentFactor::WindAjustmentFactor()
 */
 
 double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, double canopyHeight,
-	double crownRatio, double fuelbedDepth)
+    double crownRatio, double fuelbedDepth)
 {
     double windAdjustmentFactor = 1.0;
 
@@ -36,7 +36,7 @@ double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, do
     crownRatio = (crownRatio > 1.0) ? 1.0 : crownRatio;
     canopyCover = (canopyCover < 0.0) ? 0.0 : canopyCover;
     canopyCover = (canopyCover > 1.0) ? 1.0 : canopyCover;
-	
+
     // canopyCrownFraction == fraction of the volume under the canopy top that is filled with
     // tree crowns (division by 3 assumes conical crown shapes).
     canopyCrownFraction_ = crownRatio * canopyCover / 3.0;
@@ -59,7 +59,7 @@ double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, do
     // Results
     windAdjustmentFactor_ = (windAdjustmentFactor > 1.0) ? 1.0 : windAdjustmentFactor;
     windAdjustmentFactor_ = (windAdjustmentFactor < 0.0) ? 0.0 : windAdjustmentFactor;
-    
+
     return windAdjustmentFactor_;
 }
 

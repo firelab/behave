@@ -27,7 +27,7 @@
 //------------------------------------------------------------------------------
 /*! \typedef FuelType
  *  \brief Contains fuel types and their properties (RandFuel)
-  */
+ */
 
 typedef struct
 {
@@ -42,35 +42,35 @@ typedef struct
 
 class RandFuel
 {
-// Public methods
+    // Public methods
 public:
     RandFuel();
     ~RandFuel();
-    bool    allocFuels( long p_fuels );
-    bool    calcCombinations( long p_nX, long p_nY, long *p_nT,
-                double ***p_ca, double ***p_ra ) ;
-    void    calcExtendedSpreadRates2( long p_cols, long p_rows,
-                long p_latCombs, double **p_combArray, double **p_rosArray,
-                double *p_latRosArray, double *p_maxRosExtArray, long p_laterals ) ;
-    double  computeSpread2( long p_samples, long p_depths, double p_lbRatio,
-                long p_threads, double *p_maxRos, double *p_harmonicRos,
-                long p_exts, long p_lessIgns );
-    void    freeFuels( void );
-    double  recomputeSpread( double *p_harmonicRos );
-    void    setCellDimensions( double p_cellSize );
-    void    setFuelData( long p_type, double p_ros, double p_fract ) ;
+    bool    allocFuels(long p_fuels);
+    bool    calcCombinations(long p_nX, long p_nY, long *p_nT,
+        double ***p_ca, double ***p_ra);
+    void    calcExtendedSpreadRates2(long p_cols, long p_rows,
+        long p_latCombs, double **p_combArray, double **p_rosArray,
+        double *p_latRosArray, double *p_maxRosExtArray, long p_laterals);
+    double  computeSpread2(long p_samples, long p_depths, double p_lbRatio,
+        long p_threads, double *p_maxRos, double *p_harmonicRos,
+        long p_exts, long p_lessIgns);
+    void    freeFuels(void);
+    double  recomputeSpread(double *p_harmonicRos);
+    void    setCellDimensions(double p_cellSize);
+    void    setFuelData(long p_type, double p_ros, double p_fract);
     void    spliceExtensions2(double *p_ca, double *p_ra, double ***p_cs,
-                double ***p_rs, long p_oldCols ) ;
+        double ***p_rs, long p_oldCols);
 
-// Private methods
+    // Private methods
 private:
-    bool    allocRandThreads( void ) ;
-    void    calcSpreadRates( void ) ;
-    void    closeRandThreads( void ) ;
-    void    freeBlockArrays( void ) ;
-    void    init( void ) ;
+    bool    allocRandThreads(void);
+    void    calcSpreadRates(void);
+    void    closeRandThreads(void);
+    void    freeBlockArrays(void);
+    void    init(void);
 
-// Private data
+    // Private data
 private:
     long        m_samples;          //!< number of cols in block
     long        m_depths;           //!< number rows in block

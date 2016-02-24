@@ -59,7 +59,7 @@ private:
     void calculateFlameLength();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
-	void calculateBackingSpreadRate();
+    void calculateBackingSpreadRate();
     void calculateMidflameWindSpeed();
     void calculateEffectiveWindSpeed();
     void applyWindSpeedLimit();
@@ -72,13 +72,13 @@ private:
     // Pointers to other objects
     const SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     const SurfaceInputs* surfaceInputs_;
-	SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
+    SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
     SurfaceFirePropogatingFlux surfaceFirePropogatingFlux_;
 
     // Member variables
     bool   isWindLimitExceeded_;
     double effectiveWindSpeed_;
-    double windSpeedLimit_;					
+    double windSpeedLimit_;
     double phiS_;											// Slope factor, Rothermel 1972, equation 51
     double phiW_;											// Wind coefficient, Rothermel 1972, equation 47
     double windB_;											// Rothermel 1972, Equation 49
@@ -97,7 +97,7 @@ private:
     double firelineIntensity_;
     double flameLength_;
     double backingSpreadRate_;
-    
+
     double midflameWindSpeed_;
     double windAdjustmentFactor_;
     WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;

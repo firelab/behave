@@ -70,7 +70,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // maximum windspeed effect on ros
     if (effectiveWindSpeed_ > windSpeedLimit_)
     {
-	    applyWindSpeedLimit();
+        applyWindSpeedLimit();
     }
 
     // Convert wind speeds to mi/hr
@@ -86,7 +86,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // If needed, calculate spread rate in arbitrary direction of interest
     if (directionOfInterest != -1.0)
     {
-	    forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
+        forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
     }
 
     calculateFireFirelineIntensity();
@@ -110,30 +110,30 @@ double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest
 {
     if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
     {
-	    double slopeAspect = surfaceInputs_->getSlopeAspect();
-	    directionOfInterest -= slopeAspect + 180; // Direction of interest is now relative to north
+        double slopeAspect = surfaceInputs_->getSlopeAspect();
+        directionOfInterest -= slopeAspect + 180; // Direction of interest is now relative to north
     }
 
     double rosVector = forwardSpreadRate_;
     if (forwardSpreadRate_) // if forward spread rate is not zero
     {
-	    const double PI = 3.141592653589793238462643383279;
-	    // Calculate the fire spread rate in this azimuth
-	    // if it deviates more than a tenth degree from the maximum azimuth
+        const double PI = 3.141592653589793238462643383279;
+        // Calculate the fire spread rate in this azimuth
+        // if it deviates more than a tenth degree from the maximum azimuth
 
-	    // Calcualte beta: the angle between the direction of max spread and the direction of interest
-	    double beta = fabs(directionOfMaxSpread_ - directionOfInterest);
-	    // Calculate the fire spread rate in this azimuth
-	    // if it deviates more than a tenth degree from the maximum azimuth
-	    if (beta > 180.0)
-	    {
-		    beta = (360.0 - beta);
-	    }
-	    if (fabs(beta) > 0.1)
-	    {
-		    double radians = beta * PI / 180.0;
-		    rosVector = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 - eccentricity_ * cos(radians));
-	    }
+        // Calcualte beta: the angle between the direction of max spread and the direction of interest
+        double beta = fabs(directionOfMaxSpread_ - directionOfInterest);
+        // Calculate the fire spread rate in this azimuth
+        // if it deviates more than a tenth degree from the maximum azimuth
+        if (beta > 180.0)
+        {
+            beta = (360.0 - beta);
+        }
+        if (fabs(beta) > 0.1)
+        {
+            double radians = beta * PI / 180.0;
+            rosVector = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 - eccentricity_ * cos(radians));
+        }
     }
     return rosVector;
 }
@@ -185,13 +185,13 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     // If angle is negative, add 360 degrees
     if (azimuth < -1.0e-20)
     {
-	    azimuth += 360;
+        azimuth += 360;
     }
 
     // Undocumented hack from BehavePlus code
     if (fabs(azimuth) < 0.5)
     {
-	    azimuth = 0.0;
+        azimuth = 0.0;
     }
 
     // Azimuth is the direction of maximum spread
@@ -203,11 +203,11 @@ void  SurfaceFireSpread::calculateWindSpeedLimit()
     windSpeedLimit_ = 0.9 * reactionIntensity_; // windSpeedLimit is in ft/min
     if (phiS_ > 0.0)
     {
-	    if (phiS_ > windSpeedLimit_)
-	    {
-		    // can't have inifinite windspeed
-		    phiS_ = windSpeedLimit_;
-	    }
+        if (phiS_ > windSpeedLimit_)
+        {
+            // can't have inifinite windspeed
+            phiS_ = windSpeedLimit_;
+        }
     }
 }
 
@@ -227,11 +227,11 @@ void SurfaceFireSpread::calculateWindFactors()
     double windSpeedInFtPerMin = midflameWindSpeed_ * 88.0;		// ft/minute
     if (windSpeedInFtPerMin < SMIDGEN)
     {
-	    phiW_ = 0.0;
+        phiW_ = 0.0;
     }
     else
     {
-	    phiW_ = pow(windSpeedInFtPerMin, windB_) * windC_ * pow(relativePackingRatio, -windE_);
+        phiW_ = pow(windSpeedInFtPerMin, windB_) * windC_ * pow(relativePackingRatio, -windE_);
     }
 }
 
@@ -283,17 +283,17 @@ void SurfaceFireSpread::calculateSlopeFactor()
     double slope = surfaceInputs_->getSlope();
     double slopex = tan((double)slope / 180.0 * PI); // convert from degrees to tan
     phiS_ = 5.275 * pow(packingRatio, -0.3) * (slopex * slopex);
-    }
+}
 
 void SurfaceFireSpread::calculateFireLengthToWidthRatio()
 {
     if (effectiveWindSpeed_ > 1.0e-07)
     {
-	    fireLengthToWidthRatio_ = 1.0 + (0.25 * effectiveWindSpeed_);
+        fireLengthToWidthRatio_ = 1.0 + (0.25 * effectiveWindSpeed_);
     }
     else
     {
-	    fireLengthToWidthRatio_ = 1.0;
+        fireLengthToWidthRatio_ = 1.0;
     }
 }
 
@@ -303,7 +303,7 @@ void SurfaceFireSpread::calculateSurfaceFireEccentricity()
     double x = (fireLengthToWidthRatio_ * fireLengthToWidthRatio_) - 1.0;
     if (x > 0.0)
     {
-	    eccentricity_ = sqrt(x) / fireLengthToWidthRatio_;
+        eccentricity_ = sqrt(x) / fireLengthToWidthRatio_;
     }
 }
 
@@ -317,11 +317,11 @@ double SurfaceFireSpread::getDirectionOfMaxSpread() const
     double localDirMaxSpread = directionOfMaxSpread_;
     if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
     {
-	    localDirMaxSpread = convertDirectionOfSpreadToRelativeToNorth(localDirMaxSpread);
-	    while (localDirMaxSpread >= 360)
-	    {
-		    localDirMaxSpread -= 360;
-	    }
+        localDirMaxSpread = convertDirectionOfSpreadToRelativeToNorth(localDirMaxSpread);
+        while (localDirMaxSpread >= 360)
+        {
+            localDirMaxSpread -= 360;
+        }
     }
     return localDirMaxSpread;
 }
@@ -473,7 +473,7 @@ void SurfaceFireSpread::initializeMembers()
     residenceTime_ = 0.0;
     spreadRate_ = 0.0; // surface fire rate of spread in ft/min
     reactionIntensity_ = 0.0;
-	firelineIntensity_ = 0.0;
+    firelineIntensity_ = 0.0;
 
     windAdjustmentFactor_ = 0.0;
     midflameWindSpeed_ = 0.0;

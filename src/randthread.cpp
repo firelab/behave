@@ -32,38 +32,38 @@ static const double PI = acos(-1.0);
 
 //------------------------------------------------------------------------------
 
-double pow2( double input )
+double pow2(double input)
 {
-    return( input * input );
+    return(input * input);
 }
 
 //------------------------------------------------------------------------------
 
-RandThread::RandThread( void )
+RandThread::RandThread(void)
 {
-    m_lbRatio       = 0.0;
-    m_a             = 0.0;
-    m_b             = 0.0;
-    m_c             = 0.0;
-    m_cellSize      = 10.0;
-    m_samples       = 0;
-    m_depths        = 0;
-    m_combs         = 0;
-    m_lessIgns      = 0;
-    m_start         = 0;
-    m_end           = 0;
-    m_firstSample   = 0;
-    m_lastSample    = 0;
-    m_combArray     = 0;
-    m_rosArray      = 0;
-    m_maxRosArray   = 0;
-    m_latRos        = 0.0;
-    m_firstPath     = 0;
-    m_curPath       = 0;
-    m_newPath       = 0;
+    m_lbRatio = 0.0;
+    m_a = 0.0;
+    m_b = 0.0;
+    m_c = 0.0;
+    m_cellSize = 10.0;
+    m_samples = 0;
+    m_depths = 0;
+    m_combs = 0;
+    m_lessIgns = 0;
+    m_start = 0;
+    m_end = 0;
+    m_firstSample = 0;
+    m_lastSample = 0;
+    m_combArray = 0;
+    m_rosArray = 0;
+    m_maxRosArray = 0;
+    m_latRos = 0.0;
+    m_firstPath = 0;
+    m_curPath = 0;
+    m_newPath = 0;
     m_startDelay[0] = 0;
     m_startDelay[1] = 0;
-    m_latRosArray   = 0;
+    m_latRosArray = 0;
     return;
 }
 
@@ -76,18 +76,18 @@ RandThread::~RandThread()
 
 //------------------------------------------------------------------------------
 
-void RandThread::addNewPath( long *NumPath2, double p_time, long p_loc,
-        long p_ignitionPt, double p_relCellSize )
+void RandThread::addNewPath(long *NumPath2, double p_time, long p_loc,
+    long p_ignitionPt, double p_relCellSize)
 {
-    if ( p_loc < 0
-      || p_loc > m_samples - 1 )
+    if (p_loc < 0
+        || p_loc > m_samples - 1)
     {
         return;
     }
 
-    m_newPath[*NumPath2].m_pathTime    = p_time;
-    m_newPath[*NumPath2].m_loc         = p_loc;
-    m_newPath[*NumPath2].m_ignitionPt  = p_ignitionPt;
+    m_newPath[*NumPath2].m_pathTime = p_time;
+    m_newPath[*NumPath2].m_loc = p_loc;
+    m_newPath[*NumPath2].m_ignitionPt = p_ignitionPt;
     m_newPath[*NumPath2].m_relCellSize = p_relCellSize;
     *NumPath2 += 1;
     return;
@@ -99,16 +99,16 @@ void RandThread::addNewPath( long *NumPath2, double p_time, long p_loc,
  *  b+c = forward spread rate.
  */
 
-void RandThread::calcEllipticalDimensions( void )
+void RandThread::calcEllipticalDimensions(void)
 {
     double hbRatio, hfRatio;
-    hbRatio = ( m_lbRatio + sqrt( pow2( m_lbRatio ) - 1.0 ) )
-            / ( m_lbRatio - sqrt( pow2( m_lbRatio ) - 1.0 ) );
-    m_a     = 0.5 * ( 1.0 + 1.0 / hbRatio ) / m_lbRatio;
-    m_b     = ( 1.0 + 1.0 / hbRatio ) / 2.0;
-    m_c     = m_b - 1.0 / hbRatio;
-    hfRatio = ( m_b + m_c ) / m_a;
-    calcLateralRos( 1.0 );
+    hbRatio = (m_lbRatio + sqrt(pow2(m_lbRatio) - 1.0))
+        / (m_lbRatio - sqrt(pow2(m_lbRatio) - 1.0));
+    m_a = 0.5 * (1.0 + 1.0 / hbRatio) / m_lbRatio;
+    m_b = (1.0 + 1.0 / hbRatio) / 2.0;
+    m_c = m_b - 1.0 / hbRatio;
+    hfRatio = (m_b + m_c) / m_a;
+    calcLateralRos(1.0);
     return;
 }
 
@@ -122,41 +122,41 @@ void RandThread::calcEllipticalDimensions( void )
  *                      lateral direction.
  */
 
-double RandThread::calcFlankingTime( long p_numLayers, double p_separation,
-        double p_overlap, double *p_latDist, double *p_ros,
-        long /* p_refractDir */ )
+double RandThread::calcFlankingTime(long p_numLayers, double p_separation,
+    double p_overlap, double *p_latDist, double *p_ros,
+    long /* p_refractDir */)
 {
-    double beta  = atan2( p_overlap, p_separation );
-    double cosB  = cos( beta );
-    double sinB  = sin( beta );
-    double cosB2 = pow2( cosB );
-    double sinB2 = pow2( sinB );
+    double beta = atan2(p_overlap, p_separation);
+    double cosB = cos(beta);
+    double sinB = sin(beta);
+    double cosB2 = pow2(cosB);
+    double sinB2 = pow2(sinB);
 
     // calculate theta, angle from center of ellipse
-    double cosT  = ( m_a * cosB *
-        sqrt( pow2( m_a ) * cosB2 + ( pow2( m_b ) - pow2( m_c ) ) *sinB2 )
-        -m_b * m_c * sinB2 )
-        / ( pow2( m_a ) * cosB2 + pow2( m_b ) * sinB2 );
+    double cosT = (m_a * cosB *
+        sqrt(pow2(m_a) * cosB2 + (pow2(m_b) - pow2(m_c)) *sinB2)
+        - m_b * m_c * sinB2)
+        / (pow2(m_a) * cosB2 + pow2(m_b) * sinB2);
 
-    double theta = acos( cosT );
+    double theta = acos(cosT);
 
     double ros;
     double travelTime = 0.0;
-    for ( int i=0; i<p_numLayers; i++)
+    for (int i = 0; i < p_numLayers; i++)
     {
-        ros = m_a * sin( theta ) * p_ros[i];
+        ros = m_a * sin(theta) * p_ros[i];
         travelTime += p_latDist[i] / ros;
     }
-    return( travelTime );
+    return(travelTime);
 }
 
 //------------------------------------------------------------------------------
 
-double RandThread::calcLateralRos( double p_forwardRos )
+double RandThread::calcLateralRos(double p_forwardRos)
 {
-    double theta = acos( m_c / m_b );
-    m_latRos = fabs( m_a * sin( theta ) ) * p_forwardRos;
-    return( m_latRos );
+    double theta = acos(m_c / m_b);
+    m_latRos = fabs(m_a * sin(theta)) * p_forwardRos;
+    return(m_latRos);
 }
 
 //------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ double RandThread::calcLateralRos( double p_forwardRos )
  *  rather than linked list (it is probably slightly faster than version 1)
  */
 
-void RandThread::calcSpreadPaths2( void )
+void RandThread::calcSpreadPaths2(void)
 {
     bool Lateral = false;
     long i, j, k, m, n, p;
@@ -185,72 +185,72 @@ void RandThread::calcSpreadPaths2( void )
     double     Separation, Overlap, OldOverlap, OldSeparation, StraightTime;
     double    DirectTime, *ExitTime, *LateralDistances, *SpreadRates;
 
-    if ( m_firstSample != 0 )
+    if (m_firstSample != 0)
     {
         Lateral = true;
     }
 
     ExitTime = new double[m_samples];
-    memset( ExitTime, 0x0, m_samples*sizeof(double) );
-    if ( m_firstSample > 0 )
+    memset(ExitTime, 0x0, m_samples*sizeof(double));
+    if (m_firstSample > 0)
     {
         // store number of startdelays
         m_startDelay[0] = new double[m_firstSample];
         m_startDelay[1] = new double[m_firstSample];
-        memset( m_startDelay[0], 0x0, m_firstSample*sizeof(double));
-        memset( m_startDelay[1], 0x0, m_firstSample*sizeof(double));
+        memset(m_startDelay[0], 0x0, m_firstSample*sizeof(double));
+        memset(m_startDelay[1], 0x0, m_firstSample*sizeof(double));
     }
     SampleTime = new double[m_samples];
-    NumAlloc = (unsigned long) pow( (double) m_samples, (int) m_depths );
+    NumAlloc = (unsigned long)pow((double)m_samples, (int)m_depths);
     m_firstPath = new PathStruct[NumAlloc];
     m_newPath = new PathStruct[NumAlloc];
     NumMax = m_samples;
-    if ( m_depths > m_samples )
+    if (m_depths > m_samples)
     {
         NumMax = m_depths;
     }
     LateralDistances = new double[NumMax];
-    SpreadRates = new double[NumMax+1];
+    SpreadRates = new double[NumMax + 1];
     calcEllipticalDimensions();
-    if ( m_firstSample > 0 )
+    if (m_firstSample > 0)
     {
         // calculate all start delays for lateral extensions, left
-        calcStartDelay( m_firstSample, 0 );
+        calcStartDelay(m_firstSample, 0);
         // calculate all start delays for lateral extensions, right
-        calcStartDelay( m_firstSample, 1 );
+        calcStartDelay(m_firstSample, 1);
     }
-    for ( i=m_start; i<m_end; i++ )
+    for (i = m_start; i < m_end; i++)
     {
         m_maxRosArray[i] = 0.0;
-        for ( p=0; p<m_samples; p++ )   // make it very large
+        for (p = 0; p < m_samples; p++)   // make it very large
         {
             SampleTime[p] = 9e12;
         }
-        for ( k=m_lessIgns; k<m_samples-m_lessIgns; k++ )
+        for (k = m_lessIgns; k < m_samples - m_lessIgns; k++)
         {
             j = 0;
             m_curPath = m_firstPath;
             m_curPath->m_loc = k;
             Delay = 0.0;
-            if ( Lateral )
+            if (Lateral)
             {
-                if ( k < m_firstSample )
+                if (k < m_firstSample)
                 {
                     // centered=0, -1=left, 1=right
                     m_curPath->m_ignitionPt = -1;
-                    Delay = m_startDelay[ 0 ][ m_firstSample-k-1 ];
+                    Delay = m_startDelay[0][m_firstSample - k - 1];
                     // no delay possible because spread rate ==0.0
-                    if ( Delay < 0.0 )
+                    if (Delay < 0.0)
                     {
                         continue;
                     }
                 }
-                else if ( k >= m_lastSample )
+                else if (k >= m_lastSample)
                 {
                     m_curPath->m_ignitionPt = 1;
-                    Delay = m_startDelay[ 1 ][ k-m_lastSample ];
+                    Delay = m_startDelay[1][k - m_lastSample];
                     // no delay possible because spread rate ==0.0
-                    if ( Delay < 0.0 )
+                    if (Delay < 0.0)
                     {
                         continue;
                     }
@@ -269,15 +269,15 @@ void RandThread::calcSpreadPaths2( void )
             m_curPath->m_pathTime = Delay;
             NumPath1 = 1;
             NumPath2 = 0;
-            for ( n=0; n<NumPath1; n++ )
+            for (n = 0; n < NumPath1; n++)
             {
-                ParentRos = m_rosArray[ i ][ j * m_samples + m_curPath->m_loc ];
-                if ( ParentRos > 0.0 )
+                ParentRos = m_rosArray[i][j * m_samples + m_curPath->m_loc];
+                if (ParentRos > 0.0)
                 {
                     Separation = m_cellSize;
                     Overlap = m_cellSize;
                     // if not ignition point centered
-                    if ( m_curPath->m_ignitionPt == 0 )
+                    if (m_curPath->m_ignitionPt == 0)
                     {
                         Overlap /= 2.0;
                     }
@@ -286,45 +286,45 @@ void RandThread::calcSpreadPaths2( void )
                     do
                     {
                         LateralDistances[p] = Overlap;
-                        SpreadRates[p] = m_rosArray[i][p*m_samples+m_curPath->m_loc];
-                        if ( Separation > m_cellSize )
+                        SpreadRates[p] = m_rosArray[i][p*m_samples + m_curPath->m_loc];
+                        if (Separation > m_cellSize)
                         {
-                            LateralDistances[p] = Overlap / (double) (j+1);
+                            LateralDistances[p] = Overlap / (double)(j + 1);
                         }
                         p++;
-                    } while ( p <= j );
-                    Delay = calcFlankingTime( (long) (Separation/m_cellSize),
+                    } while (p <= j);
+                    Delay = calcFlankingTime((long)(Separation / m_cellSize),
                         Separation, Overlap, LateralDistances, SpreadRates,
                         REFRACT_FORWARD);
                     ParentLoc = m_curPath->m_loc;
                     ParentTime = m_curPath->m_pathTime;
-                    addNewPath( &NumPath2, ( ParentTime + m_cellSize / ParentRos ),
+                    addNewPath(&NumPath2, (ParentTime + m_cellSize / ParentRos),
                         ParentLoc, m_curPath->m_ignitionPt, Separation);  // go straight ahead
-                    if ( j < m_depths - 1 ) // && Delay<NextTime)
+                    if (j < m_depths - 1) // && Delay<NextTime)
                     {
-                        StraightNum = (long) ( m_curPath->m_relCellSize / m_cellSize );
+                        StraightNum = (long)(m_curPath->m_relCellSize / m_cellSize);
                         StraightTime = 0.0;
-                        for ( p=0; p<StraightNum; p++ )
+                        for (p = 0; p < StraightNum; p++)
                         {
                             StraightTime += m_cellSize
-                                         / m_rosArray[i]
-                                         [(j-p-1) * m_samples + m_curPath->m_loc];
+                                / m_rosArray[i]
+                                [(j - p - 1) * m_samples + m_curPath->m_loc];
                         }
-                        Delay += ( ParentTime - StraightTime );
+                        Delay += (ParentTime - StraightTime);
                         Separation = m_cellSize;
 
-                        switch ( m_curPath->m_ignitionPt )
+                        switch (m_curPath->m_ignitionPt)
                         {
-                            case -1:
-                                addNewPath( &NumPath2, Delay, ParentLoc-1, -1, 0.0 );
-                                break;
-                            case 1:
-                                addNewPath( &NumPath2, Delay, ParentLoc+1, 1, 0.0 );
-                                break;
-                            case 0:
-                                addNewPath( &NumPath2, Delay, ParentLoc-1, -1, 0.0 );
-                                addNewPath( &NumPath2, Delay, ParentLoc+1, 1, 0.0 );
-                                break;
+                        case -1:
+                            addNewPath(&NumPath2, Delay, ParentLoc - 1, -1, 0.0);
+                            break;
+                        case 1:
+                            addNewPath(&NumPath2, Delay, ParentLoc + 1, 1, 0.0);
+                            break;
+                        case 0:
+                            addNewPath(&NumPath2, Delay, ParentLoc - 1, -1, 0.0);
+                            addNewPath(&NumPath2, Delay, ParentLoc + 1, 1, 0.0);
+                            break;
                         }
 
                         // go left
@@ -332,65 +332,65 @@ void RandThread::calcSpreadPaths2( void )
                         OldOverlap = Overlap;
                         OldSeparation = Separation;
                         LateralDistances[0] = Overlap;
-                        for ( p=1; p<m_samples; p++ )
+                        for (p = 1; p < m_samples; p++)
                         {
-                            if ( j * m_samples + ParentLoc - p < 0 )
+                            if (j * m_samples + ParentLoc - p < 0)
                             {
                                 break;
                             }
                             SpreadRates[p] = m_rosArray[i]
-                                [ j * m_samples + ParentLoc - p ];
+                                [j * m_samples + ParentLoc - p];
                         }
-                        for ( p=1; p<m_samples-1; p++ )
+                        for (p = 1; p < m_samples - 1; p++)
                         {
-                            if ( m_curPath->m_ignitionPt > 0
-                              && m_curPath->m_relCellSize == 0 )
+                            if (m_curPath->m_ignitionPt > 0
+                                && m_curPath->m_relCellSize == 0)
                             {
                                 break;
                             }
-                            if ( j * m_samples + ParentLoc - p < 0 )
+                            if (j * m_samples + ParentLoc - p < 0)
                             {
                                 break;
                             }
                             LateralDistances[p] = m_cellSize;
                             //SpreadRates[p]=m_rosArray[i][j*m_samples+ParentLoc-p];
                             Overlap += m_cellSize;
-                            Delay = calcFlankingTime( p+1, Separation, Overlap,
-                                LateralDistances, SpreadRates, REFRACT_LATERAL );
-                            addNewPath( &NumPath2, (Delay + ParentTime),
-                                ParentLoc-(p+1), -1, 0.0 );
+                            Delay = calcFlankingTime(p + 1, Separation, Overlap,
+                                LateralDistances, SpreadRates, REFRACT_LATERAL);
+                            addNewPath(&NumPath2, (Delay + ParentTime),
+                                ParentLoc - (p + 1), -1, 0.0);
                         }
 
                         // go right
                         Overlap = OldOverlap;
                         Separation = OldSeparation;
-                        for ( p=1; p<m_samples; p++ )
+                        for (p = 1; p<m_samples; p++)
                         {
-                            if ( j*m_samples+ParentLoc+p >(long) NumAlloc-1 )
+                            if (j*m_samples + ParentLoc + p >(long) NumAlloc - 1)
                             {
                                 break;
                             }
                             SpreadRates[p] = m_rosArray[i]
-                                             [j*m_samples+ParentLoc+p];
+                                [j*m_samples + ParentLoc + p];
                         }
-                        for ( p=1; p<m_samples-1; p++ )
+                        for (p = 1; p < m_samples - 1; p++)
                         {
-                            if ( m_curPath->m_ignitionPt < 0
-                              && m_curPath->m_relCellSize == 0 )
+                            if (m_curPath->m_ignitionPt < 0
+                                && m_curPath->m_relCellSize == 0)
                             {
                                 break;
                             }
-                            if ( j*m_samples+ParentLoc+p > (long) NumAlloc-1)
+                            if (j*m_samples + ParentLoc + p >(long) NumAlloc - 1)
                             {
                                 break;
                             }
                             //SpreadRates[p]=m_rosArray[i][j*m_samples+ParentLoc+p];
                             LateralDistances[p] = m_cellSize;
                             Overlap += m_cellSize;
-                            Delay = calcFlankingTime( p+1, Separation, Overlap,
-                                LateralDistances, SpreadRates, REFRACT_LATERAL );
-                            addNewPath( &NumPath2, (Delay + ParentTime),
-                                ParentLoc+(p+1), 1, 0.0 );
+                            Delay = calcFlankingTime(p + 1, Separation, Overlap,
+                                LateralDistances, SpreadRates, REFRACT_LATERAL);
+                            addNewPath(&NumPath2, (Delay + ParentTime),
+                                ParentLoc + (p + 1), 1, 0.0);
                         }
                     }
                 }
@@ -400,10 +400,10 @@ void RandThread::calcSpreadPaths2( void )
                 }
 
                 // if this is the last one
-                if ( n == NumPath1 - 1 )
+                if (n == NumPath1 - 1)
                 {
                     // if there are more paths to process
-                    if ( NumPath2 > 0 )
+                    if (NumPath2 > 0)
                     {
                         NumPath1 = NumPath2;
                         NumPath2 = 0;
@@ -421,9 +421,9 @@ void RandThread::calcSpreadPaths2( void )
                 }
                 else
                 {
-                    m_curPath = &m_firstPath[n+1];
+                    m_curPath = &m_firstPath[n + 1];
                 }
-                if ( j >= m_depths )
+                if (j >= m_depths)
                 {
                     break;
                 }
@@ -431,16 +431,16 @@ void RandThread::calcSpreadPaths2( void )
             DirectTime = 9e12;
             p = -1;
 
-            for ( j=0; j<NumPath1; j++ )
+            for (j = 0; j<NumPath1; j++)
             {
-                if ( m_firstPath[j].m_pathTime >0.0
-                  && m_firstPath[j].m_pathTime < SampleTime[k] )
+                if (m_firstPath[j].m_pathTime >0.0
+                    && m_firstPath[j].m_pathTime < SampleTime[k])
                 {
-                    SampleTime[k]=m_firstPath[j].m_pathTime;
+                    SampleTime[k] = m_firstPath[j].m_pathTime;
                 }
-                if ( m_firstPath[j].m_loc == k )
+                if (m_firstPath[j].m_loc == k)
                 {
-                    if ( m_firstPath[j].m_pathTime < DirectTime )
+                    if (m_firstPath[j].m_pathTime < DirectTime)
                     {
                         DirectTime = m_firstPath[j].m_pathTime;
                         p = j;
@@ -450,17 +450,17 @@ void RandThread::calcSpreadPaths2( void )
         }   // all Depths are done
         // find min time of all samples (max spread rate)
         m = 0;
-        for ( j=0; j<m_samples; j++ )
+        for (j = 0; j < m_samples; j++)
         {
-            if ( SampleTime[j] == 0.0
-              || SampleTime[j] == 9e12 )
+            if (SampleTime[j] == 0.0
+                || SampleTime[j] == 9e12)
             {
                 m++;
                 continue;
             }
             // calculate overall spread rate
-            SampleTime[j] = (m_depths*m_cellSize)/SampleTime[j];
-            if ( SampleTime[j] > m_maxRosArray[i] )
+            SampleTime[j] = (m_depths*m_cellSize) / SampleTime[j];
+            if (SampleTime[j] > m_maxRosArray[i])
             {
                 m_maxRosArray[i] = SampleTime[j];
             }
@@ -470,9 +470,9 @@ void RandThread::calcSpreadPaths2( void )
     // Release resources
     delete[] SampleTime;
     delete[] ExitTime;
-    for ( i=0; i<2; i++ )
+    for (i = 0; i < 2; i++)
     {
-        if ( m_startDelay[i] )
+        if (m_startDelay[i])
         {
             delete[] m_startDelay[i];
             m_startDelay[i] = 0;
@@ -490,47 +490,47 @@ void RandThread::calcSpreadPaths2( void )
  *  within the additional lee-side row of fuels for lateral extensions.
  */
 
-void RandThread::calcStartDelay( long p_laterals, long p_leftRight )
+void RandThread::calcStartDelay(long p_laterals, long p_leftRight)
 {
     // reverse the spread rate orders
     double *lateralDist = new double[p_laterals];
     double *spreadRates = new double[p_laterals];
-    double  separation  = m_cellSize;
-    double  overlap     = m_cellSize / 2.0;
+    double  separation = m_cellSize;
+    double  overlap = m_cellSize / 2.0;
 
     lateralDist[0] = overlap;
-    if ( p_leftRight )
+    if (p_leftRight)
     {
-        spreadRates[0] = m_latRosArray[ p_leftRight * p_laterals ];
+        spreadRates[0] = m_latRosArray[p_leftRight * p_laterals];
     }
     else
     {
         spreadRates[0] =
-            m_latRosArray[ p_leftRight * p_laterals + p_laterals - 1 ];
+            m_latRosArray[p_leftRight * p_laterals + p_laterals - 1];
     }
 
     long i;
-    for ( i=1; i<p_laterals; i++ )
+    for (i = 1; i < p_laterals; i++)
     {
         lateralDist[i] = m_cellSize;
-        if ( p_leftRight )
+        if (p_leftRight)
         {
             // start from inside out
             spreadRates[i] =
-                m_latRosArray[ p_leftRight * p_laterals + i ];
+                m_latRosArray[p_leftRight * p_laterals + i];
         }
         else
         {
             // start from inside out
             spreadRates[i] =
-                m_latRosArray[ p_leftRight * p_laterals +( p_laterals - i - 1 ) ];
+                m_latRosArray[p_leftRight * p_laterals + (p_laterals - i - 1)];
         }
     }
-    for ( i=0; i<p_laterals; i++ )
+    for (i = 0; i < p_laterals; i++)
     {
         m_startDelay[p_leftRight][i] =
-            calcFlankingTime( i+1, separation, overlap, lateralDist,
-                spreadRates, REFRACT_LATERAL );
+            calcFlankingTime(i + 1, separation, overlap, lateralDist,
+            spreadRates, REFRACT_LATERAL);
         overlap += m_cellSize;
     }
     delete[] lateralDist;
@@ -540,29 +540,29 @@ void RandThread::calcStartDelay( long p_laterals, long p_leftRight )
 
 //------------------------------------------------------------------------------
 
-double RandThread::fastFlankTime( long XStart, long YStart, double Xmid,
-        long XEnd, long YEnd, long NumX, double **Ros )
+double RandThread::fastFlankTime(long XStart, long YStart, double Xmid,
+    long XEnd, long YEnd, long NumX, double **Ros)
 {
     long NumCells, loc, sX, sY, NumVert;
-    double TravelTime=0.0;
+    double TravelTime = 0.0;
     double Theta, TestDir, Fract, num;
     double SinG, CosG, Xc, Yc, aXmid;
     double dX, dY, ExpRate, dist, TravelDist, VertDist;
     double Dist[2] = { 0.0, 0.0 };
-    double TDist[2], nX=0.0, nY=0.0, ROS;
+    double TDist[2], nX = 0.0, nY = 0.0, ROS;
 
     // Calculate Travel Angle and total distance through cell (beta)
-    dX        = ( XEnd - XStart ) * m_cellSize + Xmid * m_cellSize;
-    dY        = m_c / m_a * fabs( dX );
-    VertDist  = ( YEnd - YStart ) * m_cellSize;
+    dX = (XEnd - XStart) * m_cellSize + Xmid * m_cellSize;
+    dY = m_c / m_a * fabs(dX);
+    VertDist = (YEnd - YStart) * m_cellSize;
     VertDist -= dY;
-    dist      = sqrt( pow2( dY ) + pow2( dX ) );
+    dist = sqrt(pow2(dY) + pow2(dX));
     // will be different than CosB and SinB because of reference angle
-    SinG      = fabs( dY / dist);
-    CosG      = fabs( dX / dist);
+    SinG = fabs(dY / dist);
+    CosG = fabs(dX / dist);
 
     // Calculate Theta from Beta
-    if ( dX < 0.0 )
+    if (dX < 0.0)
     {
         Theta = -PI / 2.0;
     }
@@ -572,14 +572,14 @@ double RandThread::fastFlankTime( long XStart, long YStart, double Xmid,
     }
 
     // Find quadrant
-    if ( Theta < 0.0 )
+    if (Theta < 0.0)
     {
         Theta += PI;
     }
-    ExpRate = sqrt( pow2( m_a ) + pow2( m_c ) );
+    ExpRate = sqrt(pow2(m_a) + pow2(m_c));
 
     // Obtain directional signs for sampling offsets from start point
-    if ( dX < 0.0 )
+    if (dX < 0.0)
     {
         sX = -1;
     }
@@ -587,7 +587,7 @@ double RandThread::fastFlankTime( long XStart, long YStart, double Xmid,
     {
         sX = 1;
     }
-    if ( dY < 0.0 )
+    if (dY < 0.0)
     {
         sY = -1;
     }
@@ -596,78 +596,78 @@ double RandThread::fastFlankTime( long XStart, long YStart, double Xmid,
         sY = 1;
     }
 
-    Fract = modf( fabs( dX ) / m_cellSize, &Xc );
+    Fract = modf(fabs(dX) / m_cellSize, &Xc);
     Xc -= 1;
-    if ( Fract > 0.0 )
+    if (Fract > 0.0)
     {
         Xc += 1.0;
     }
-    Fract = modf( dY / m_cellSize, &Yc );
+    Fract = modf(dY / m_cellSize, &Yc);
     Yc -= 1;
-    if ( Fract > 0.0 )
+    if (Fract > 0.0)
     {
         Yc += 1.0;
     }
-    NumCells = (long) ( Xc + Yc ) + 1;  //abs(XEnd-XStart)+abs(YEnd-YStart);
-    aXmid = fabs( Xmid );
+    NumCells = (long)(Xc + Yc) + 1;  //abs(XEnd-XStart)+abs(YEnd-YStart);
+    aXmid = fabs(Xmid);
 
-    while( ( nX + nY ) < NumCells )
+    while ((nX + nY) < NumCells)
     {
-        loc = (long) ( YStart + nY * sY ) * NumX + XStart + ( (long) nX ) * sX;
+        loc = (long)(YStart + nY * sY) * NumX + XStart + ((long)nX) * sX;
         ROS = (*Ros)[loc];
-        if ( ROS == 0.0 )
+        if (ROS == 0.0)
         {
             ROS = 1e-6;
         }
 
-        if ( fabs( CosG ) < 1e-9 )
+        if (fabs(CosG) < 1e-9)
         {
             TDist[0] = 1e9;
         }
         else
         {
-            TDist[0] = ( m_cellSize * ( aXmid + nX ) ) / CosG;    // hypotenuse
+            TDist[0] = (m_cellSize * (aXmid + nX)) / CosG;    // hypotenuse
         }
-        if ( fabs( SinG ) <1e-9 )
+        if (fabs(SinG) < 1e-9)
         {
             TDist[1] = 1e9;
         }
         else
         {
-            TDist[1] = ( m_cellSize * ( 1 + nY ) ) / SinG;    // hypotenuse
+            TDist[1] = (m_cellSize * (1 + nY)) / SinG;    // hypotenuse
         }
-        if ( fabs( TDist[1] ) < 1e-9 )
+        if (fabs(TDist[1]) < 1e-9)
         {
-            TestDir=0.5;    // just make if smaller than 1.0
-        }
-        else
-        {
-            TestDir = fabs( TDist[0] / TDist[1] );
-        }
-        if ( TestDir < 1.0 )
-        {
-            TDist[1] = sqrt( pow2( TDist[0] ) - pow2( m_cellSize * ( aXmid + nX ) ) );
-            TDist[0] = m_cellSize * ( aXmid + nX );
-            nX      += 1.0;
-        }
-        else if ( TestDir > 1.0 )
-        {
-            TDist[0] = sqrt( pow2( TDist[1] ) - pow2( m_cellSize * ( 1.0 + nY ) ) );
-            TDist[1] = m_cellSize * ( 1.0 + nY );
-            nY      += 1.0;
+            TestDir = 0.5;    // just make if smaller than 1.0
         }
         else
         {
-            TDist[1] = sqrt( pow2( TDist[0] ) - pow2( m_cellSize * ( aXmid + nX ) ) );
-            TDist[0] = m_cellSize * ( aXmid + nX );
-            nY      += 1.0;
-            nX      += 1.0;
+            TestDir = fabs(TDist[0] / TDist[1]);
+        }
+        if (TestDir < 1.0)
+        {
+            TDist[1] = sqrt(pow2(TDist[0]) - pow2(m_cellSize * (aXmid + nX)));
+            TDist[0] = m_cellSize * (aXmid + nX);
+            nX += 1.0;
+        }
+        else if (TestDir > 1.0)
+        {
+            TDist[0] = sqrt(pow2(TDist[1]) - pow2(m_cellSize * (1.0 + nY)));
+            TDist[1] = m_cellSize * (1.0 + nY);
+            nY += 1.0;
+        }
+        else
+        {
+            TDist[1] = sqrt(pow2(TDist[0]) - pow2(m_cellSize * (aXmid + nX)));
+            TDist[0] = m_cellSize * (aXmid + nX);
+            nY += 1.0;
+            nX += 1.0;
         }
         Dist[0] = TDist[0] - Dist[0];
         Dist[1] = TDist[1] - Dist[1];
 
-        TravelDist  = sqrt( pow2( Dist[0] ) + pow2( Dist[1] ) );
-        TravelTime += TravelDist / ( ExpRate * ROS );
+        TravelDist = sqrt(pow2(Dist[0]) + pow2(Dist[1]));
+        TravelTime += TravelDist / (ExpRate * ROS);
 
         // Copy new dimensions to old dimensions
         Dist[0] = TDist[0];
@@ -675,102 +675,102 @@ double RandThread::fastFlankTime( long XStart, long YStart, double Xmid,
     }
 
     // vertical stretch
-    Fract = modf( VertDist / m_cellSize, &num ) * m_cellSize;
-    num  += 1.0;
-    loc   = (long) ( YStart + nY * sY ) * NumX + XStart + ( (long) nX ) * sX;
+    Fract = modf(VertDist / m_cellSize, &num) * m_cellSize;
+    num += 1.0;
+    loc = (long)(YStart + nY * sY) * NumX + XStart + ((long)nX) * sX;
     NumVert = 0;
     do
     {
         ROS = (*Ros)[loc];
-        if ( ROS > 0.0 )
+        if (ROS > 0.0)
         {
             TravelTime += Fract / ROS;
         }
-        loc     += NumX;
-        Fract    = m_cellSize;
+        loc += NumX;
+        Fract = m_cellSize;
         NumVert += 1;
-    } while ( NumVert < ( (long) num) );
+    } while (NumVert < ((long)num));
 
-    return( TravelTime );
+    return(TravelTime);
 }
 
 //------------------------------------------------------------------------------
 
-void RandThread::setThreadData( long p_samples, long p_depths, long p_combs,
-        double p_lbRatio, double **p_combArray, double **p_rosArray,
-        double *p_maxRosArray, long p_start, long p_end, long p_firstSample,
-        long p_lastSample, double *p_m_latRosArray, long p_lessIgns )
+void RandThread::setThreadData(long p_samples, long p_depths, long p_combs,
+    double p_lbRatio, double **p_combArray, double **p_rosArray,
+    double *p_maxRosArray, long p_start, long p_end, long p_firstSample,
+    long p_lastSample, double *p_m_latRosArray, long p_lessIgns)
 {
-    m_samples     = p_samples;
-    m_depths      = p_depths;
-    m_combs       = p_combs;
-    m_lbRatio     = p_lbRatio;
-    m_combArray   = p_combArray;
-    m_rosArray    = p_rosArray;
+    m_samples = p_samples;
+    m_depths = p_depths;
+    m_combs = p_combs;
+    m_lbRatio = p_lbRatio;
+    m_combArray = p_combArray;
+    m_rosArray = p_rosArray;
     m_maxRosArray = p_maxRosArray;
-    m_start       = p_start;
-    m_end         = p_end;
+    m_start = p_start;
+    m_end = p_end;
     m_firstSample = p_firstSample;
-    m_lastSample  = p_lastSample;
+    m_lastSample = p_lastSample;
     m_latRosArray = p_m_latRosArray;
-    m_lessIgns    = p_lessIgns;
+    m_lessIgns = p_lessIgns;
     return;
 }
 
 //------------------------------------------------------------------------------
 
-double RandThread::spreadTime( long XStart, long YStart, double Xmid,
-        long XEnd, long YEnd, long NumX, double **Ros, long Flank )
+double RandThread::spreadTime(long XStart, long YStart, double Xmid,
+    long XEnd, long YEnd, long NumX, double **Ros, long Flank)
 {
     long   NumCells, loc, sX, sY;
     double TravelTime = 0.0, FlankTime;
     double Beta, Theta, TestDir, aXmid;
     double CosB, SinB, SinB2, CosB2, CosT, SinG, CosG, SinT;
     double dX, dY, ExpRate, dist, TravelDist;
-    double Dist[2] = {0.0, 0.0};
+    double Dist[2] = { 0.0, 0.0 };
     double TDist[2];
     double nX = 0.0, nY = 0.0, ROS;
 
     // Calculate Travel Angle and total distance through cell (beta)
-    dX    = ( XEnd - XStart ) * m_cellSize + Xmid * m_cellSize;
-    dY    = ( YEnd - YStart ) * m_cellSize;
-    dist  = sqrt( pow2( dY ) + pow2( dX ));
-    SinG  = fabs( dY / dist );  // will be different than CosB and SinB because of reference angle
-    CosG  = fabs( dX / dist );
-    Beta  = atan2( dX, dY );
-    CosB  = cos( Beta );
-    SinB  = sin( Beta );
-    CosB2 = pow2( CosB );
-    SinB2 = pow2( SinB );
+    dX = (XEnd - XStart) * m_cellSize + Xmid * m_cellSize;
+    dY = (YEnd - YStart) * m_cellSize;
+    dist = sqrt(pow2(dY) + pow2(dX));
+    SinG = fabs(dY / dist);  // will be different than CosB and SinB because of reference angle
+    CosG = fabs(dX / dist);
+    Beta = atan2(dX, dY);
+    CosB = cos(Beta);
+    SinB = sin(Beta);
+    CosB2 = pow2(CosB);
+    SinB2 = pow2(SinB);
 
     // Calculate Theta from Beta
-    CosT = ( m_a * CosB
-             * sqrt( pow2( m_a ) * CosB2 + ( pow2( m_b ) - pow2( m_c ) ) * SinB2 )
-             - m_b * m_c * SinB2 )
-         / ( pow2( m_a ) * CosB2 + pow2( m_b ) * SinB2 );
-    if ( CosT >= 1.0 )
+    CosT = (m_a * CosB
+        * sqrt(pow2(m_a) * CosB2 + (pow2(m_b) - pow2(m_c)) * SinB2)
+        - m_b * m_c * SinB2)
+        / (pow2(m_a) * CosB2 + pow2(m_b) * SinB2);
+    if (CosT >= 1.0)
     {
         Theta = 0.0;
     }
-    else if ( CosT <= -1.0 )
+    else if (CosT <= -1.0)
     {
         Theta = PI;
     }
     else
     {
-        Theta = acos( CosT );
+        Theta = acos(CosT);
     }
 
     // Find quadrant
-    if ( Theta < 0.0 )
+    if (Theta < 0.0)
     {
         Theta += PI;
     }
-    SinT = sin( Theta );
-    ExpRate = sqrt( pow2( m_a * SinT ) + pow2( m_b * CosT + m_c ) );
+    SinT = sin(Theta);
+    ExpRate = sqrt(pow2(m_a * SinT) + pow2(m_b * CosT + m_c));
 
     // Obtain directional signs for sampling offsets from start point
-    if ( dX < 0.0 )
+    if (dX < 0.0)
     {
         sX = -1;
     }
@@ -778,7 +778,7 @@ double RandThread::spreadTime( long XStart, long YStart, double Xmid,
     {
         sX = 1;
     }
-    if ( dY < 0.0 )
+    if (dY < 0.0)
     {
         sY = -1;
     }
@@ -787,91 +787,91 @@ double RandThread::spreadTime( long XStart, long YStart, double Xmid,
         sY = 1;
     }
 
-    NumCells = abs( XEnd - XStart ) + abs( YEnd - YStart );
-    aXmid = fabs( Xmid );
+    NumCells = abs(XEnd - XStart) + abs(YEnd - YStart);
+    aXmid = fabs(Xmid);
     //  if ( dX > 5.0 && dY != 0.0 )
     //      NumCells -= 1;
 
-    while( nX + nY < NumCells )
+    while (nX + nY < NumCells)
     {
-        loc = (long) ( YStart + nY * sY ) * NumX + XStart + ( (long) nX ) * sX;
+        loc = (long)(YStart + nY * sY) * NumX + XStart + ((long)nX) * sX;
         ROS = (*Ros)[loc];
 
-        if ( ROS == 0.0 )
+        if (ROS == 0.0)
         {
             ROS = 1e-6;
         }
 
-        if ( fabs( CosG ) < 1e-9 )
+        if (fabs(CosG) < 1e-9)
         {
             TDist[0] = 1e9;
         }
         else
         {
-            TDist[0] = ( m_cellSize * ( aXmid + nX ) ) / CosG;  // hyptenuse
+            TDist[0] = (m_cellSize * (aXmid + nX)) / CosG;  // hyptenuse
         }
 
-        if ( fabs( SinG ) < 1e-9 )
+        if (fabs(SinG) < 1e-9)
         {
             TDist[1] = 1e9;
         }
         else
         {
-            TDist[1] = ( m_cellSize * ( 1 + nY ) ) / SinG;    // hypotenuse
+            TDist[1] = (m_cellSize * (1 + nY)) / SinG;    // hypotenuse
         }
 
-        if ( fabs( TDist[1]) <1e-9 )
+        if (fabs(TDist[1]) < 1e-9)
         {
             TestDir = 0.5;    // just make if smaller than 1.0
         }
         else
         {
-            TestDir = fabs( TDist[0] / TDist[1] );
+            TestDir = fabs(TDist[0] / TDist[1]);
         }
 
         if (TestDir<1.0)
         {
-            TDist[1] = sqrt( pow2( TDist[0] ) - pow2( m_cellSize * ( aXmid + nX ) ) );
-            TDist[0] = m_cellSize * ( aXmid + nX );
-            nX      += 1.0;
+            TDist[1] = sqrt(pow2(TDist[0]) - pow2(m_cellSize * (aXmid + nX)));
+            TDist[0] = m_cellSize * (aXmid + nX);
+            nX += 1.0;
         }
-        else if ( TestDir > 1.0 )
+        else if (TestDir > 1.0)
         {
-            TDist[0] = sqrt( pow2( TDist[1]) - pow2( m_cellSize * ( 1.0 + nY ) ) );
-            TDist[1] = m_cellSize * ( 1.0 + nY );
-            nY      += 1.0;
+            TDist[0] = sqrt(pow2(TDist[1]) - pow2(m_cellSize * (1.0 + nY)));
+            TDist[1] = m_cellSize * (1.0 + nY);
+            nY += 1.0;
         }
         else
         {
-            TDist[1] = sqrt( pow2( TDist[0] ) - pow2( m_cellSize * ( aXmid + nX ) ) );
-            TDist[0] = m_cellSize * ( aXmid + nX );
+            TDist[1] = sqrt(pow2(TDist[0]) - pow2(m_cellSize * (aXmid + nX)));
+            TDist[0] = m_cellSize * (aXmid + nX);
             nY += 1.0;
             nX += 1.0;
         }
         Dist[0] = TDist[0] - Dist[0];
         Dist[1] = TDist[1] - Dist[1];
 
-        TravelDist  = sqrt( pow2( Dist[0] ) + pow2( Dist[1] ) );
-        TravelTime += TravelDist / ( ExpRate * ROS );
+        TravelDist = sqrt(pow2(Dist[0]) + pow2(Dist[1]));
+        TravelTime += TravelDist / (ExpRate * ROS);
 
         // Copy new dimensions to old dimensions
         Dist[0] = TDist[0];
         Dist[1] = TDist[1];
     }
-    if ( Flank && m_lbRatio > 1.0 )
+    if (Flank && m_lbRatio > 1.0)
     {
-        if ( fabs( Theta ) < PI / 2.0 )
+        if (fabs(Theta) < PI / 2.0)
         {
             FlankTime =
-                fastFlankTime( XStart, YStart, Xmid, XEnd, YEnd, NumX, Ros);
-            if ( FlankTime < TravelTime )
+                fastFlankTime(XStart, YStart, Xmid, XEnd, YEnd, NumX, Ros);
+            if (FlankTime < TravelTime)
             {
                 TravelTime = FlankTime;
             }
         }
     }
 
-    return( TravelTime );
+    return(TravelTime);
 }
 
 //------------------------------------------------------------------------------

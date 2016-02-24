@@ -15,10 +15,10 @@ SurfaceFirePropogatingFlux::SurfaceFirePropogatingFlux()
  *  \return Fire's propagating flux (fraction).
  */
 double SurfaceFirePropogatingFlux::calculatePropagatingFlux(double sigma,
-		double packingRatio )
+    double packingRatio)
 {
-	double propagatingFlux = (sigma < 1.0e-07)
-		? ( 0. )
-		: (exp((0.792 + 0.681 * sqrt(sigma)) * (packingRatio + 0.1)) / (192. + 0.2595 * sigma));
-	return propagatingFlux;
+    double propagatingFlux = (sigma < 1.0e-07)
+        ? (0.)
+        : (exp((0.792 + 0.681 * sqrt(sigma)) * (packingRatio + 0.1)) / (192. + 0.2595 * sigma));
+    return propagatingFlux;
 }

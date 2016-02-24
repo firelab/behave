@@ -35,8 +35,8 @@ struct WindHeightInputMode
     enum WindHeightInputModeEnum
     {
         DIRECT_MIDFLAME = 0,    // User enters midflame wind speed directy
-        TWENTY_FOOT = 1,		// User enters the 20 foot wind speed
-        TEN_METER = 2			// User enters the 10 meter wind speed
+        TWENTY_FOOT = 1,        // User enters the 20 foot wind speed
+        TEN_METER = 2           // User enters the 10 meter wind speed
     };
 };
 

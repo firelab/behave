@@ -5,9 +5,9 @@
 
 class SurfaceFirePropogatingFlux
 {
-public: 
-	SurfaceFirePropogatingFlux();
-	double calculatePropagatingFlux(double sigma, double packingRatio);
+public:
+    SurfaceFirePropogatingFlux();
+    double calculatePropagatingFlux(double sigma, double packingRatio);
 };
 
 #endif // SURFACEFIREPROPOGATINGFLUX_HEADER

@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 /*! \file newext.h
- *  \version BehavePlus3
- *  \author Copyright (C) 2002-2004 by Collin D. Bevins.  All rights reserved.
- *
- *  \brief Part of Mark Finney's EXRATE package for determining expected
- *  and harmonic mean spread rate in randomly arranged fuels.
- *
- *  Original code by Mark Finney.  CDB has renamed all functions and
- *  variables according to BehavePlus3 coding style.  The following files
- *  make up the entire code package:
- *  - newext.cpp
- *  - newext.h
- *  - randfuel.cpp
- *  - randfuel.h
- *  - randthread.cpp
- *  - randthread.h
- */
+    *  \version BehavePlus3
+    *  \author Copyright (C) 2002-2004 by Collin D. Bevins.  All rights reserved.
+    *
+    *  \brief Part of Mark Finney's EXRATE package for determining expected
+    *  and harmonic mean spread rate in randomly arranged fuels.
+    *
+    *  Original code by Mark Finney.  CDB has renamed all functions and
+    *  variables according to BehavePlus3 coding style.  The following files
+    *  make up the entire code package:
+    *  - newext.cpp
+    *  - newext.h
+    *  - randfuel.cpp
+    *  - randfuel.h
+    *  - randthread.cpp
+    *  - randthread.h
+    */
 
 #ifndef _NEWEXT_H_
 #define _NEWEXT_H_
