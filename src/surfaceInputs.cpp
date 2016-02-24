@@ -5,14 +5,6 @@ SurfaceInputs::SurfaceInputs()
 	initializeMembers();
 }
 
-SurfaceInputs::SurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
-	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirFromUpslope, double slope, double slopeAspect)
-{
-	updateInput(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-		moistureLiveWoody, midflameWindSpeed, windDirFromUpslope, slope, slopeAspect);
-}
-
 void SurfaceInputs::initializeMembers()
 {
 	fuelModelNumber_ = 0;
@@ -32,6 +24,7 @@ void SurfaceInputs::initializeMembers()
 
 	slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
 	windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
+	windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
 	twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
 
 	for (int i = 0; i < MAX_SIZES; i++)
@@ -43,7 +36,7 @@ void SurfaceInputs::initializeMembers()
 
 void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirection, double slope, double slopeAspect)
+	WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope, double slopeAspect)
 {
 	for (int i = 0; i < MAX_SIZES; i++)
 	{
@@ -77,7 +70,16 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 	moistureHundredHour_ = moistureHundredHour;
 	moistureLiveHerbaceous_ = moistureLiveHerbaceous;
 	moistureLiveWoody_ = moistureLiveWoody;
-	midflameWindSpeed_ = midflameWindSpeed;
+
+	windHeightInputMode_ = windHeightInputMode;
+
+/****************************************************************************/
+// TEMPORARY PLACEHOLDER CODE!!!!
+	midflameWindSpeed_ = windSpeed; // TEMPORARY PLACEHOLDER CODE!!!!
+// TEMPORARY PLACEHOLDER CODE!!!!
+/****************************************************************************/
+
+
 	windDirection_ = windDirection;
 
 	setMoistureDead();
@@ -90,17 +92,18 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 }
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
-	double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-	double moistureLiveHerbaceous, double moistureLiveWoody, double midflameWindSpeed,
-	double windDirection, double coverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double slopeAspect)
+	double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, 
+	double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
+	double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, 
+	double slope, double slopeAspect)
 {
 	int fuelModelNumber = firstfuelModelNumber;
 	updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
 		moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-		midflameWindSpeed, windDirection, slope, slopeAspect);
+		windHeightInputMode, windSpeed, windDirection, slope, slopeAspect);
 	firstFuelModelNumber_ = firstfuelModelNumber;
 	secondFuelModelNumber_ = secondFuelModelNumber;
-	coverage_ = coverage;
+	firstFuelModelCoverage_ = firstFuelModelCoverage;
 
 	isUsingTwoFuelModels_ = true;
 
@@ -110,11 +113,12 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
 
 void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
 	double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-	double midflameWindSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
-	double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect)
+	WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, 
+	double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, 
+	double slopeAspect)
 {
 	updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-		moistureLiveWoody, midflameWindSpeed, windDirection, slope, slopeAspect);
+		moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, slopeAspect);
 
 	ageOfRough_ = ageOfRough;
 	heightOfUnderstory_ = heightOfUnderstory;
@@ -277,7 +281,7 @@ double SurfaceInputs::getSlopeAspect() const
 
 double SurfaceInputs::getCoverage() const
 {
-	return coverage_;
+	return firstFuelModelCoverage_;
 }
 
 int SurfaceInputs::getTwoFuelModelsMethod() const

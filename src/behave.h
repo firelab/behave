@@ -20,17 +20,18 @@ public:
 	~Behave();
 	
 	// SURFACE Module Inputs 
-	void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
-		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+	void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, 
+		double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
 		double windSpeed, double windDirection, double slope, double slopeAspect);
 	void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
 		double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-		double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed,
-		double windDirection, double coverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method, double slope, double slopeAspect);
-	void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
-		double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-		double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
-		double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect);
+		double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
+		double windSpeed,double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum method, 
+		double slope, double slopeAspect);
+	void  updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,double moistureHundredHour, 
+		double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
+		double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,double palmettoCoverage, 
+		double overstoryBasalArea, double slope, double slopeAspect);
 	double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
 	// SURFACE Module Getters
@@ -56,9 +57,9 @@ private:
 	void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
 
 	// SURFACE Module Component Objects
-	FuelModels fuelModels_;			// Object containing data for fuel models
-	Surface surface_;				// SURFACE Moduel object
-	SurfaceInputs surfaceInputs_;	// Object that manages user input to SURFACE Module
+	FuelModels fuelModels_;         // Object containing data for fuel models
+	Surface surface_;               // SURFACE Moduel object
+	SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
 };
 
 #endif //BEHAVE_HEADER

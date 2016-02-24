@@ -458,7 +458,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Feed input values to behave
-	behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, windSpeed, windDirection, slope, aspect);
+	behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect);
 
 	// Do the spread rate calculation
 	if (hasDirectionOfInterest)
