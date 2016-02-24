@@ -52,7 +52,7 @@ private:
     struct FuelModelRecord
     {
         int fuelModelNumber_;               // Standard ID number for fuel model 
-        std::string	code_;                  // Fuel model code, usually 2 letters followed by number,(e.g., "GR1")
+        std::string code_;                  // Fuel model code, usually 2 letters followed by number,(e.g., "GR1")
         std::string name_;                  // Fuel model name, (e.g., "Humid Climate Grass")
         double fuelbedDepth_;               // Fuelbed depth in feet
         double moistureOfExtinctionDead_;   // Dead fuel extinction moisture content (fraction)
