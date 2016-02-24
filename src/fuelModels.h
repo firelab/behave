@@ -51,24 +51,24 @@ private:
     // TODO: Need to figure out best way of handling fuel codes (e.g., "GR1"), as well as name (e.g., "Humid Climate Grass") - WMC 10/2015 
     struct FuelModelRecord
     {
-        int			fuelModelNumber_;				// Standard ID number for fuel model 
-        std::string	code_;							// Fuel model code, usually 2 letters followed by number,(e.g., "GR1")
-        std::string name_;							// Fuel model name, (e.g., "Humid Climate Grass")
-        double		fuelbedDepth_;					// Fuelbed depth in feet
-        double		moistureOfExtinctionDead_;		// Dead fuel extinction moisture content (fraction)
-        double		heatOfCombustionDead_;			// Dead fuel heat of combustion (Btu/lb)
-        double		heatOfCombustionLive_;			// Live fuel heat of combustion (Btu/lb)
-        double		fuelLoadOneHour_;				// Dead 1 hour fuel loading (lb/ft^2)
-        double		fuelLoadTenHour_;				// Dead 10 hour fuel loading (lb/ft^2)
-        double		fuelLoadHundredHour_;			// Dead 100 hour fuel loading (lb/ft^2)
-        double		fuelLoadLiveHerbaceous_;		// Live herb fuel loading (lb/ft^2)
-        double		fuelLoadLiveWoody_;				// Live wood fuel loading (lb/ft^2)
-        double		savrOneHour_;					// Dead 1-h fuel surface area to volume ratio (ft^2/ft^3)
-        double		savrLiveHerbaceous_;			// Live herb surface area to volume ratio (ft^2/ft^3)
-        double		savrLiveWoody_;					// Live wood surface area to volume ratio (ft^2/ft^3)
-        bool		isDynamic_;						// If true, the fuel model is dynamic
-        bool		isReserved_;					// If true, record cannot be used for custom fuel model
-        bool		isDefined_;						// If true, record has been populated with values for its fields
+        int fuelModelNumber_;               // Standard ID number for fuel model 
+        std::string	code_;                  // Fuel model code, usually 2 letters followed by number,(e.g., "GR1")
+        std::string name_;                  // Fuel model name, (e.g., "Humid Climate Grass")
+        double fuelbedDepth_;               // Fuelbed depth in feet
+        double moistureOfExtinctionDead_;   // Dead fuel extinction moisture content (fraction)
+        double heatOfCombustionDead_;       // Dead fuel heat of combustion (Btu/lb)
+        double heatOfCombustionLive_;       // Live fuel heat of combustion (Btu/lb)
+        double fuelLoadOneHour_;            // Dead 1 hour fuel loading (lb/ft^2)
+        double fuelLoadTenHour_;            // Dead 10 hour fuel loading (lb/ft^2)
+        double fuelLoadHundredHour_;        // Dead 100 hour fuel loading (lb/ft^2)
+        double fuelLoadLiveHerbaceous_;     // Live herb fuel loading (lb/ft^2)
+        double fuelLoadLiveWoody_;          // Live wood fuel loading (lb/ft^2)
+        double savrOneHour_;                // Dead 1-h fuel surface area to volume ratio (ft^2/ft^3)
+        double savrLiveHerbaceous_;         // Live herb surface area to volume ratio (ft^2/ft^3)
+        double savrLiveWoody_;              // Live wood surface area to volume ratio (ft^2/ft^3)
+        bool isDynamic_;                    // If true, the fuel model is dynamic
+        bool isReserved_;                   // If true, record cannot be used for custom fuel model
+        bool isDefined_;                    // If true, record has been populated with values for its fields
     };
 
     //std::array<FuelModelRecord, 257> FuelModelArray;; // too big to be stack allocated
