@@ -461,9 +461,13 @@ void SurfaceFuelbedIntermediates::sumFractionOfTotalSurfaceAreaBySizeClass(const
         {
             summedFractionOfTotalSurfaceArea[2] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
-        else if (savrDeadOrLive[i] >= 16.0)
+        else if (savrDeadOrLive[i] >= 48.0)
         {
             summedFractionOfTotalSurfaceArea[3] += fractionOfTotalSurfaceAreaDeadOrLive[i];
+        }
+        else if (savrDeadOrLive[i] >= 16.0)
+        {
+            summedFractionOfTotalSurfaceArea[4] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
     }
 }
@@ -489,9 +493,13 @@ void SurfaceFuelbedIntermediates::assignFractionOfTotalSurfaceAreaBySizeClass(co
         {
             sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[2];
         }
-        else if (savrDeadOrLive[i] >= 16.0)
+        else if (savrDeadOrLive[i] >= 48.0)
         {
             sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[3];
+        }
+        else if (savrDeadOrLive[i] >= 16.0)
+        {
+            sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[4];
         }
         else
         {
@@ -558,10 +566,13 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
     heatSink_ = 0.0;
     totalSilicaContent_ = 0.0555;
 
+    for (int i = 0; i < MAX_SAVR_SIZE_CLASSES; i++)
+    {
+        sizeSortedFractionOfSurfaceAreaDead_[i] = 0;
+        sizeSortedFractionOfSurfaceAreaLive_[i] = 0; 
+    }
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
-        sizeSortedFractionOfSurfaceAreaDead_[i] = 0.0;
-        sizeSortedFractionOfSurfaceAreaLive_[i] = 0.0;
         fractionOfTotalSurfaceAreaDead_[i] = 0.0;
         fractionOfTotalSurfaceAreaLive_[i] = 0.0;
         surfaceAreaDead_[i] = 0.0;
