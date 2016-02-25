@@ -131,14 +131,14 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
 
     if (isUsingPalmettoGallberry)
     {
-        moistureDead_[0] = surfaceInputs_->getMoistureDeadAtIndex(0);
-        moistureDead_[1] = surfaceInputs_->getMoistureDeadAtIndex(1);
-        moistureDead_[2] = surfaceInputs_->getMoistureDeadAtIndex(0);
-        moistureDead_[3] = surfaceInputs_->getMoistureDeadAtIndex(2);
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour();
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour();
+        moistureDead_[2] = surfaceInputs_->getMoistureOneHour();
+        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour();
 
-        moistureLive_[0] = surfaceInputs_->getMoistureLiveAtIndex(1);
-        moistureLive_[1] = surfaceInputs_->getMoistureLiveAtIndex(1);
-        moistureLive_[2] = surfaceInputs_->getMoistureLiveAtIndex(0);
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveWoody();
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody();
+        moistureLive_[2] = surfaceInputs_->getMoistureLiveHerbaceous();
     }
     else
     {
