@@ -40,19 +40,19 @@ private:
     SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     SurfaceFireSpread* surfaceFireSpread_;
 
-    bool windLimitExceeded_;			// (flag)
-    double reactionIntensity_;			// (Btu / ft2 / min)
-    double spreadRate_;					// (ft / min)
-    double directionOfMaxSpread_;		// (clockwise from upslope or north)
-    double effectiveWind_;				// (mi / h)
+    bool windLimitExceeded_;        // (flag)
+    double reactionIntensity_;      // (Btu / ft2 / min)
+    double spreadRate_;             // (ft / min)
+    double directionOfMaxSpread_;   // (clockwise from upslope or north)
+    double effectiveWind_;          // (mi / h)
     double fuelbedDepth_;
     double heatPerUnitArea_;
     double midFlameWindSpeed_;
-    double windSpeedLimit_;				// (mi / h)
+    double windSpeedLimit_;         // (mi / h)
     double windAdjustmentFactor_;
-    double fireHeatPerUnitArea_;		// (Btu / ft2)
-    double fireLineIntensity_;			// (Btu / ft / s)
-    double fireFlameLength_;			// (ft)
+    double fireHeatPerUnitArea_;    // (Btu / ft2)
+    double fireLineIntensity_;      // (Btu / ft / s)
+    double fireFlameLength_;        // (ft)
     double fireLengthToWidthRatio_;
 };
 
