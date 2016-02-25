@@ -300,37 +300,32 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
 
 void SurfaceFuelbedIntermediates::countSizeClasses()
 {
-    const int NUMBER_OF_DEAD_SIZE_CLASSES = 4;
-    const int NUMBER_OF_LIVE_SIZE_CLASSES = 3;
     const int MAX_DEAD_SIZE_CLASSES = 4;
     const int MAX_LIVE_SIZE_CLASSES = 3;
-
+  
     // count number of fuels
-    for (int i = 0; i < NUMBER_OF_DEAD_SIZE_CLASSES; i++)
+    for (int i = 0; i < MAX_DEAD_SIZE_CLASSES; i++)
     {
         if (loadDead_[i])
         {
-            numberOfDead_++;
+            numberOfSizeClasses_[DEAD]++;
         }
     }
-    for (int i = 0; i < NUMBER_OF_LIVE_SIZE_CLASSES; i++)
+    for (int i = 0; i < MAX_LIVE_SIZE_CLASSES; i++)
     {
         if (loadLive_[i])
         {
-            numberOfLive_++;
+            numberOfSizeClasses_[LIVE]++;
         }
     }
-    if (numberOfLive_ > 0)
+    if (numberOfSizeClasses_[LIVE] > 0)
     {
-        numberOfLive_ = MAX_LIVE_SIZE_CLASSES;  // Boost to max number
+        numberOfSizeClasses_[LIVE] = MAX_LIVE_SIZE_CLASSES;  // Boost to max number
     }
-    if (numberOfDead_ > 0)
+    if (numberOfSizeClasses_[DEAD] > 0)
     {
-        numberOfDead_ = MAX_DEAD_SIZE_CLASSES;  // Boost to max number
+        numberOfSizeClasses_[DEAD] = MAX_DEAD_SIZE_CLASSES;  // Boost to max number
     }
-
-    numberOfSizeClasses[0] = numberOfDead_;
-    numberOfSizeClasses[1] = numberOfLive_;
 }
 
 void SurfaceFuelbedIntermediates::dynamicLoadTransfer()
@@ -355,7 +350,7 @@ void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceArea()
 
     for (int lifeState = 0; lifeState < MAX_LIFE_STATES; lifeState++)
     {
-        if (numberOfSizeClasses[lifeState] != 0)
+        if (numberOfSizeClasses_[lifeState] != 0)
         {
             calculateTotalSurfaceAreaForLifeState(lifeState);
             calculateFractionOfTotalSurfaceAreaForSizeClasses(lifeState);
@@ -394,7 +389,7 @@ void SurfaceFuelbedIntermediates::calculateTotalSurfaceAreaForLifeState(int life
         fuelDensity_[LIVE] = 46.0;
     }
 
-    for (int i = 0; i < numberOfSizeClasses[lifeState]; i++)
+    for (int i = 0; i < numberOfSizeClasses_[lifeState]; i++)
     {
         if (lifeState == DEAD)
         {
@@ -413,7 +408,7 @@ void SurfaceFuelbedIntermediates::calculateTotalSurfaceAreaForLifeState(int life
 
 void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceAreaForSizeClasses(int lifeState)
 {
-    for (int i = 0; i < numberOfSizeClasses[lifeState]; i++)
+    for (int i = 0; i < numberOfSizeClasses_[lifeState]; i++)
     {
         if (totalSurfaceArea_[lifeState] > 1.0e-7)
         {
@@ -515,7 +510,7 @@ void SurfaceFuelbedIntermediates::assignWeightingFactorBySizeClass(const double 
 
 void SurfaceFuelbedIntermediates::calculateLiveMoistureOfExtinction()
 {
-    if (numberOfLive_ != 0)
+    if (numberOfSizeClasses_[LIVE] != 0)
     {
         double fineDead = 0.0;					// Fine dead fuel load
         double fineLive = 0.0;					// Fine dead fuel load
@@ -537,7 +532,7 @@ void SurfaceFuelbedIntermediates::calculateLiveMoistureOfExtinction()
         {
             fineDeadMoisture = weightedMoistureFineDead / fineDead;
         }
-        for (int i = 0; i < numberOfLive_; i++)
+        for (int i = 0; i < numberOfSizeClasses_[LIVE]; i++)
         {
             if (savrLive_[i] > 1.0e-07)
             {
@@ -562,8 +557,6 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 
     relativePackingRatio_ = 0.0;
     fuelModelNumber_ = 0;
-    numberOfDead_ = 0;
-    numberOfLive_ = 0;
     liveFuelMois_ = 0.0;
     liveFuelMext_ = 0.0;
     sigma_ = 0.0;
@@ -601,6 +594,7 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
     }
     for (int i = 0; i < MAX_LIFE_STATES; i++)
     {
+        numberOfSizeClasses_[i] = 0;
         totalLoadForLifeState_[i] = 0.0;
         fractionOfTotalSurfaceArea_[i] = 0.0;
         moistureOfExtinction_[i] = 0.0;
