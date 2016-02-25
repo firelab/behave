@@ -27,12 +27,12 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
     initializeMemberVariables(); // Reset member variables to zero to forget previous state  
     const double PI = 3.14159265358979;
 
-    double depth = 0.0;						// Fuel bed depth in feet
-    double ovendryFuelLoad = 0.0;			// Ovendry fuel loading, Rothermel 1972
-    double optimumPackingRatio = 0.0;		// Optimum packing ratio, Rothermel 1972, equation 37
-    double ovendryFuelDensity = 32.0;		// Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
+    double depth = 0.0;                     // Fuel bed depth in feet
+    double ovendryFuelLoad = 0.0;           // Ovendry fuel loading, Rothermel 1972
+    double optimumPackingRatio = 0.0;       // Optimum packing ratio, Rothermel 1972, equation 37
+    double ovendryFuelDensity = 32.0;       // Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
 
-    bool isDynamic = false;					// Whether or not fuel model is dynamic
+    bool isDynamic = false;                 // Whether or not fuel model is dynamic
 
     fuelModelNumber_ = surfaceInputs_->getFuelModelNumber();
 
@@ -303,7 +303,7 @@ void SurfaceFuelbedIntermediates::countSizeClasses()
     const int NUMBER_OF_DEAD_SIZE_CLASSES = 4;
     const int NUMBER_OF_LIVE_SIZE_CLASSES = 3;
     const int MAX_DEAD_SIZE_CLASSES = 4;
-    const int MAX_LIVE_SIZE_CLASSES = 2;
+    const int MAX_LIVE_SIZE_CLASSES = 3;
 
     // count number of fuels
     for (int i = 0; i < NUMBER_OF_DEAD_SIZE_CLASSES; i++)
@@ -322,15 +322,12 @@ void SurfaceFuelbedIntermediates::countSizeClasses()
     }
     if (numberOfLive_ > 0)
     {
-        numberOfLive_ = MAX_LIVE_SIZE_CLASSES;	// Boost to max number
+        numberOfLive_ = MAX_LIVE_SIZE_CLASSES;  // Boost to max number
     }
     if (numberOfDead_ > 0)
     {
-        numberOfDead_ = MAX_DEAD_SIZE_CLASSES; // Boost to max number
+        numberOfDead_ = MAX_DEAD_SIZE_CLASSES;  // Boost to max number
     }
-
-    numberOfDead_ = 4;
-    numberOfLive_ = 3;
 
     numberOfSizeClasses[0] = numberOfDead_;
     numberOfSizeClasses[1] = numberOfLive_;
