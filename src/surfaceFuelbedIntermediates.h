@@ -8,12 +8,8 @@
 
 class SurfaceFuelbedIntermediates
 {
-    // TODO: Look into the possibility of storing invariant data for a given fuel model
-    // to reduce computing time in ensemble simulations -WMC 10/2015
-
     // Static constants
     static const int MAX_LIFE_STATES = 2;   //< Life state (dead or alive)
-    static const int MAX_SIZES = 6;         //< Fuel moisture time lag classes
     static const int MAX_PARTICLES = 4;     //< Maximum number of size classes within a life state (dead/live)
 
 public:
@@ -93,9 +89,9 @@ private:
     int fuelModelNumber_;           // The number associated with the current fuel model being used
     int numberOfLive_;              // number of live size classes in the current fuel model being used
     int numberOfDead_;              // number of dead size classes in the current fuel model being used
-    double liveFuelMois_;           // Live fuel moisture content */
-    double liveFuelMext_;           // Live fuel moisture of extinction */
-    double heatSink_;               // Rothermel 1972, Denominator of equation 52 */
+    double liveFuelMois_;           // Live fuel moisture content
+    double liveFuelMext_;           // Live fuel moisture of extinction 
+    double heatSink_;               // Rothermel 1972, Denominator of equation 52
     double sigma_;                  // Fuelbed characteristic SAVR, Rothermel 1972 
     double bulkDensity_;            // Ovendry bulk density in lbs/ft^2, Rothermale 1972, equation 40
     double packingRatio_;           // Packing ratio, Rothermel 1972, equation 31 
