@@ -227,12 +227,12 @@ void SurfaceFuelbedIntermediates::calculateHeatSink()
         if (savrDead_[i] > 1.0e-07)
         {
             qigDead[i] = 250.0 + 1116.0 * moistureDead_[i];
-            heatSink_ += fractionOfTotalSurfaceArea_[DEAD] * fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * qigDead[i] * exp(-138.0 / savrDead_[i]);
+            heatSink_ += fractionOfTotalSurfaceArea_[DEAD] * fractionOfTotalSurfaceAreaDead_[i] * qigDead[i] * exp(-138.0 / savrDead_[i]);
         }
         if (savrLive_[i] > 1.0e-07)
         {
             qigLive[i] = 250.0 + 1116.0 * moistureLive_[i];
-            heatSink_ += fractionOfTotalSurfaceArea_[LIVE] * fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * qigLive[i] * exp(-138.0 / savrLive_[i]);
+            heatSink_ += fractionOfTotalSurfaceArea_[LIVE] * fractionOfTotalSurfaceAreaLive_[i] * qigLive[i] * exp(-138.0 / savrLive_[i]);
         }
     }
     heatSink_ *= bulkDensity_;
@@ -273,23 +273,23 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
         if (savrDead_[i] > 1.0e-07)
         {
             wnDead[i] = loadDead_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
-            weightedHeat_[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * heatDead_[i]; // weighted heat content
-            weightedSilica_[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * silicaEffectiveDead_[i]; // weighted silica content
-            weightedMoisture_[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * moistureDead_[i]; // weighted moisture content
-            weightedSavr[DEAD] += fractionOfTotalSurfaceAreaForDeadSizeClass_[i] * savrDead_[i]; // weighted SAVR
+            weightedHeat_[DEAD] += fractionOfTotalSurfaceAreaDead_[i] * heatDead_[i]; // weighted heat content
+            weightedSilica_[DEAD] += fractionOfTotalSurfaceAreaDead_[i] * silicaEffectiveDead_[i]; // weighted silica content
+            weightedMoisture_[DEAD] += fractionOfTotalSurfaceAreaDead_[i] * moistureDead_[i]; // weighted moisture content
+            weightedSavr[DEAD] += fractionOfTotalSurfaceAreaDead_[i] * savrDead_[i]; // weighted SAVR
             totalLoadForLifeState_[DEAD] += loadDead_[i];
         }
         if (savrLive_[i] > 1.0e-07)
         {
             wnLive[i] = loadLive_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
-            weightedHeat_[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * heatLive_[i]; // weighted heat content
-            weightedSilica_[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * silicaEffectiveLive_[i]; // weighted silica content
-            weightedMoisture_[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * moistureLive_[i]; // weighted moisture content
-            weightedSavr[LIVE] += fractionOfTotalSurfaceAreaForLiveSizeClass_[i] * savrLive_[i]; // weighted SAVR
+            weightedHeat_[LIVE] += fractionOfTotalSurfaceAreaLive_[i] * heatLive_[i]; // weighted heat content
+            weightedSilica_[LIVE] += fractionOfTotalSurfaceAreaLive_[i] * silicaEffectiveLive_[i]; // weighted silica content
+            weightedMoisture_[LIVE] += fractionOfTotalSurfaceAreaLive_[i] * moistureLive_[i]; // weighted moisture content
+            weightedSavr[LIVE] += fractionOfTotalSurfaceAreaLive_[i] * savrLive_[i]; // weighted SAVR
             totalLoadForLifeState_[LIVE] += loadLive_[i];
         }
-        weightedFuelLoad_[DEAD] += sizeSortedWeightingFactorsDead_[i] * wnDead[i];
-        weightedFuelLoad_[LIVE] += sizeSortedWeightingFactorsLive_[i] * wnLive[i];
+        weightedFuelLoad_[DEAD] += sizeSortedFractionOfSurfaceAreaDead_[i] * wnDead[i];
+        weightedFuelLoad_[LIVE] += sizeSortedFractionOfSurfaceAreaLive_[i] * wnLive[i];
     }
 
     for (int lifeState = 0; lifeState < MAX_LIFE_STATES; lifeState++)
@@ -345,8 +345,8 @@ void SurfaceFuelbedIntermediates::dynamicLoadTransfer()
 
 void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceArea()
 {
-    const int SIZE_CLASSES = 5;
-    double summedWeightingFactors[SIZE_CLASSES];	// Intermediate weighting factors for each size class
+    const int SIZE_CLASSES = 5;                             // Number of SAVR size classes
+    double summedFractionOfTotalSurfaceArea[SIZE_CLASSES];	// Intermediate weighting factors for each size class
 
     for (int lifeState = 0; lifeState < MAX_LIFE_STATES; lifeState++)
     {
@@ -355,19 +355,19 @@ void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceArea()
             calculateTotalSurfaceAreaForLifeState(lifeState);
             calculateFractionOfTotalSurfaceAreaForSizeClasses(lifeState);
         }
-        for (int j = 0; j < SIZE_CLASSES; j++)
+        for (int i = 0; i < SIZE_CLASSES; i++)
         {
-            summedWeightingFactors[j] = 0.0;
+            summedFractionOfTotalSurfaceArea[i] = 0.0;
         }
         if (lifeState == DEAD)
         {
-            sumAreaWeightingFactorsBySizeClass(fractionOfTotalSurfaceAreaForDeadSizeClass_, savrDead_, summedWeightingFactors);
-            assignWeightingFactorBySizeClass(savrDead_, summedWeightingFactors, sizeSortedWeightingFactorsDead_);
+            sumFractionOfTotalSurfaceAreaBySizeClass(fractionOfTotalSurfaceAreaDead_, savrDead_, summedFractionOfTotalSurfaceArea);
+            assignFractionOfTotalSurfaceAreaBySizeClass(savrDead_, summedFractionOfTotalSurfaceArea, sizeSortedFractionOfSurfaceAreaDead_);
         }
         if (lifeState == LIVE)
         {
-            sumAreaWeightingFactorsBySizeClass(fractionOfTotalSurfaceAreaForLiveSizeClass_, savrLive_, summedWeightingFactors);
-            assignWeightingFactorBySizeClass(savrLive_, summedWeightingFactors, sizeSortedWeightingFactorsLive_);
+            sumFractionOfTotalSurfaceAreaBySizeClass(fractionOfTotalSurfaceAreaLive_, savrLive_, summedFractionOfTotalSurfaceArea);
+            assignFractionOfTotalSurfaceAreaBySizeClass(savrLive_, summedFractionOfTotalSurfaceArea, sizeSortedFractionOfSurfaceAreaLive_);
         }
     }
 
@@ -414,96 +414,88 @@ void SurfaceFuelbedIntermediates::calculateFractionOfTotalSurfaceAreaForSizeClas
         {
             if (lifeState == DEAD)
             {
-                fractionOfTotalSurfaceAreaForDeadSizeClass_[i] = surfaceAreaDead_[i] / totalSurfaceArea_[DEAD];
+                fractionOfTotalSurfaceAreaDead_[i] = surfaceAreaDead_[i] / totalSurfaceArea_[DEAD];
             }
             if (lifeState == LIVE)
             {
-                fractionOfTotalSurfaceAreaForLiveSizeClass_[i] = surfaceAreaLive_[i] / totalSurfaceArea_[LIVE];
+                fractionOfTotalSurfaceAreaLive_[i] = surfaceAreaLive_[i] / totalSurfaceArea_[LIVE];
             }
         }
         else
         {
             if (lifeState == DEAD)
             {
-                fractionOfTotalSurfaceAreaForDeadSizeClass_[i] = 0.0;
+                fractionOfTotalSurfaceAreaDead_[i] = 0.0;
             }
             if (lifeState == LIVE)
             {
-                fractionOfTotalSurfaceAreaForLiveSizeClass_[i] = 0.0;
+                fractionOfTotalSurfaceAreaLive_[i] = 0.0;
             }
         }
     }
 }
 
-void SurfaceFuelbedIntermediates::sumAreaWeightingFactorsBySizeClass(const double areaWeightingFactorDeadOrLive[MAX_PARTICLES], const double savrDeadOrLive[MAX_PARTICLES],
-    double summedWeightingFactors[MAX_PARTICLES])
+void SurfaceFuelbedIntermediates::sumFractionOfTotalSurfaceAreaBySizeClass(const double fractionOfTotalSurfaceAreaDeadOrLive[MAX_PARTICLES], const double savrDeadOrLive[MAX_PARTICLES],
+    double summedFractionOfTotalSurfaceArea[MAX_PARTICLES])
 {
     // savrDeadOrLive[] is an alias for savrDead[] or savrLive[], which is determined by the method caller 
-    // areaWeightingFactorDeadOrLive  is an alias for areaWeightingFactorDead[] or areaWeightingFactorLive[], 
+    // fractionOfTotalSurfaceAreaDeadOrLive  is an alias for fractionOfTotalSurfaceAreaDead[] or  fractionOfTotalSurfaceAreaLive[], 
     // which is determined by the method caller 
 
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
-        summedWeightingFactors[i] = 0.0;
+        summedFractionOfTotalSurfaceArea[i] = 0.0;
     }
 
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
         if (savrDeadOrLive[i] >= 1200.0)
         {
-            summedWeightingFactors[0] += areaWeightingFactorDeadOrLive[i];
+            summedFractionOfTotalSurfaceArea[0] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
         else if (savrDeadOrLive[i] >= 192.0)
         {
-            summedWeightingFactors[1] += areaWeightingFactorDeadOrLive[i];
+            summedFractionOfTotalSurfaceArea[1] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
         else if (savrDeadOrLive[i] >= 96.0)
         {
-            summedWeightingFactors[2] += areaWeightingFactorDeadOrLive[i];
-        }
-        else if (savrDeadOrLive[i] >= 48.0)
-        {
-            summedWeightingFactors[3] += areaWeightingFactorDeadOrLive[i];
+            summedFractionOfTotalSurfaceArea[2] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
         else if (savrDeadOrLive[i] >= 16.0)
         {
-            summedWeightingFactors[4] += areaWeightingFactorDeadOrLive[i];
+            summedFractionOfTotalSurfaceArea[3] += fractionOfTotalSurfaceAreaDeadOrLive[i];
         }
     }
 }
 
-void SurfaceFuelbedIntermediates::assignWeightingFactorBySizeClass(const double savrDeadOrLive[MAX_PARTICLES], const double summedWeightingFactors[MAX_PARTICLES],
-    double sizeSortedWeightingFactorsDeadOrLive[MAX_PARTICLES])
+void SurfaceFuelbedIntermediates::assignFractionOfTotalSurfaceAreaBySizeClass(const double savrDeadOrLive[MAX_PARTICLES], const double summedFractionOfTotalSurfaceArea[MAX_PARTICLES],
+    double sizeSortedFractionOfSurfaceAreaDeadOrLive[MAX_PARTICLES])
 {
     // savrDeadOrLive[] is an alias for savrDead[] or savrLive[], which is determined by the method caller 
-    // sizeSortedWeightingFactorsDeadOrLive[] is an alias for sizeSortedWeightingFactorsDead[] or sizeSortedWeightingFactorsLive[], 
+    // sizeSortedFractionOfSurfaceAreaDeadOrLive[] is an alias for sizeSortedFractionOfSurfaceAreaDead_[] or sizeSortedFractionOfSurfaceAreaLive_[], 
     // which is determined by the method caller
 
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
         if (savrDeadOrLive[i] >= 1200.0)
         {
-            sizeSortedWeightingFactorsDeadOrLive[i] = summedWeightingFactors[0];
+            sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[0];
         }
         else if (savrDeadOrLive[i] >= 192.0)
         {
-            sizeSortedWeightingFactorsDeadOrLive[i] = summedWeightingFactors[1];
+            sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[1];
         }
         else if (savrDeadOrLive[i] >= 96.0)
         {
-            sizeSortedWeightingFactorsDeadOrLive[i] = summedWeightingFactors[2];
-        }
-        else if (savrDeadOrLive[i] >= 48.0)
-        {
-            sizeSortedWeightingFactorsDeadOrLive[i] = summedWeightingFactors[3];
+            sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[2];
         }
         else if (savrDeadOrLive[i] >= 16.0)
         {
-            sizeSortedWeightingFactorsDeadOrLive[i] = summedWeightingFactors[4];
+            sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = summedFractionOfTotalSurfaceArea[3];
         }
         else
         {
-            sizeSortedWeightingFactorsDeadOrLive[i] = 0.0;
+            sizeSortedFractionOfSurfaceAreaDeadOrLive[i] = 0.0;
         }
     }
 }
@@ -568,10 +560,10 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
-        sizeSortedWeightingFactorsDead_[i] = 0.0;
-        sizeSortedWeightingFactorsLive_[i] = 0.0;
-        fractionOfTotalSurfaceAreaForDeadSizeClass_[i] = 0.0;
-        fractionOfTotalSurfaceAreaForLiveSizeClass_[i] = 0.0;
+        sizeSortedFractionOfSurfaceAreaDead_[i] = 0.0;
+        sizeSortedFractionOfSurfaceAreaLive_[i] = 0.0;
+        fractionOfTotalSurfaceAreaDead_[i] = 0.0;
+        fractionOfTotalSurfaceAreaLive_[i] = 0.0;
         surfaceAreaDead_[i] = 0.0;
         surfaceAreaLive_[i] = 0.0;
         moistureDead_[i] = 0.0;
