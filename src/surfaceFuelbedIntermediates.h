@@ -4,6 +4,7 @@
 #include <cmath>
 #include "fuelModels.h"
 #include "palmettoGallberry.h" 
+#include "westernAspen.h"
 #include "surfaceInputs.h"
 
 class SurfaceFuelbedIntermediates

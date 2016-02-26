@@ -99,7 +99,7 @@ int main()
         //double	heightOfUnderstory = 3;
         //double	palmettoCoverage = 25;
         //double	overstoryBasalArea = 100;
-        //behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::TEN_METER, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        //behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
         //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
         //std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
         //flameLength = behave.getFlameLength();
@@ -107,10 +107,10 @@ int main()
         //std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
 
         // Two Fuel Models test
-        firstFuelModelNumber = 7;
-        secondFuelModelNumber = 104;
+        firstFuelModelNumber = 1;
+        secondFuelModelNumber = 124;
         coverage = 0 + (.10 * i);
-        behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::TWENTY_FOOT, windSpeed, windDirection, coverage, TwoFuelModelsMethod::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, coverage, TwoFuelModelsMethod::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
         spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
         spreadRate = floor(spreadRate * 10 + 0.5) / 10;
         std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << std::setprecision(0) << coverage * 100 << "%" << std::endl;

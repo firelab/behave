@@ -32,6 +32,9 @@ void SurfaceInputs::initializeMembers()
     canopyHeight_ = 0.0;
     crownRatio_ = 0.0;
 
+    aspenFuelModelNumber_ = -1;
+    aspenCuringLevel_ = 0.0;
+
     for (int i = 0; i < MAX_SIZES; i++)
     {
         moistureDead_[i] = 0.0;
@@ -93,9 +96,7 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
     isUsingPalmettoGallberry_ = false;
 
     isUsingWesternAspen_ = false;
-    int apsenFuelModel_ = -1;
-    double aspenCuringLevel_ = 0.0;
-
+   
     canopyCover_ = canopyCover;
     canopyHeight_ = canopyHeight;
     crownRatio_ = crownRatio;
@@ -310,11 +311,6 @@ bool SurfaceInputs::isUsingTwoFuelModels() const
     return isUsingTwoFuelModels_;
 }
 
-void SurfaceInputs::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
-{
-    isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
-}
-
 bool SurfaceInputs::isUsingPalmettoGallberry() const
 {
     return isUsingPalmettoGallberry_;
@@ -448,6 +444,21 @@ double SurfaceInputs::getCanopyHeight() const
 double SurfaceInputs::getCrownRatio() const
 {
     return crownRatio_;
+}
+
+bool SurfaceInputs::isUsingWesternAspen() const
+{
+    return isUsingWesternAspen_;
+}
+
+int SurfaceInputs::getAspenFuelModelNumber() const
+{
+    return aspenFuelModelNumber_;
+}
+
+double SurfaceInputs::getAspenCuringLevel() const
+{
+    return aspenCuringLevel_;
 }
 
 void SurfaceInputs::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)

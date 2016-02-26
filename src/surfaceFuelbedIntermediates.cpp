@@ -84,6 +84,7 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 void SurfaceFuelbedIntermediates::setFuelLoad()
 {
     bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
+    bool isUsingWesternAspen = surfaceInputs_->isUsingWesternAspen();
 
     if (isUsingPalmettoGallberry)
     {
@@ -109,6 +110,23 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
         {
             silicaEffectiveLive_[i] = 0.015;
         }
+    }
+    else if (isUsingWesternAspen)
+    {
+        // Calculate load values for Western Aspen
+        WesternApsen westernAspen;
+        int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
+        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
+
+        loadDead_[0] = westernAspen.getAspenLoadDeadOneHour(aspenFuelModelNumber, aspenCuringLevel);
+        loadDead_[1] = westernAspen.getAspenLoadDeadTenHour(aspenFuelModelNumber);
+        loadDead_[2] = 0.0;
+        loadDead_[3] = 0.0;
+
+        loadLive_[0] = westernAspen.getAspenLoadLiveHerbaceous(aspenFuelModelNumber, aspenCuringLevel);
+        loadLive_[1] = westernAspen.getAspenSavrLiveWoody(aspenFuelModelNumber, aspenCuringLevel);
+        loadLive_[2] = 0.0;
+        loadLive_[3] = 0.0;
     }
     else
     {
@@ -139,6 +157,7 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
         moistureLive_[0] = surfaceInputs_->getMoistureLiveWoody();
         moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody();
         moistureLive_[2] = surfaceInputs_->getMoistureLiveHerbaceous();
+        moistureLive_[3] = 0.0;
     }
     else
     {
@@ -159,6 +178,7 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
 void SurfaceFuelbedIntermediates::setSAV()
 {
     bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
+    bool isUsingWesternAspen = surfaceInputs_->isUsingWesternAspen();
 
     if (isUsingPalmettoGallberry)
     {
@@ -171,6 +191,23 @@ void SurfaceFuelbedIntermediates::setSAV()
         savrLive_[0] = 350.0;
         savrLive_[1] = 140.0;
         savrLive_[2] = 2000.0;
+        savrLive_[3] = 0.0;
+    }
+    else if (isUsingWesternAspen)
+    {
+        // Calculate SAVR values for Western Aspen
+        WesternApsen westernAspen;
+        int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
+        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
+
+        savrDead_[0] = westernAspen.getAspenSavrDeadOneHour(aspenFuelModelNumber, aspenCuringLevel);
+        savrDead_[1] = westernAspen.getAspenSavrDeadTenHour();
+        savrDead_[2] = 0.0;
+        savrDead_[3] = 0.0;
+
+        savrLive_[0] = westernAspen.getAspenSavrLiveHerbaceous();
+        savrLive_[1] = westernAspen.getAspenSavrLiveWoody(aspenFuelModelNumber, aspenCuringLevel);
+        savrLive_[2] = 0.0;
         savrLive_[3] = 0.0;
     }
     else

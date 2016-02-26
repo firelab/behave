@@ -42,7 +42,7 @@ public:
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
 
-    void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
+//    void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
     bool isUsingPalmettoGallberry() const;
     void setAgeOfRough(double ageOfRough);
     double getAgeOfRough() const;
@@ -53,8 +53,9 @@ public:
     void setOverstoryBasalArea(double overstoryBasalArea);
     double getOverstoryBasalArea() const;
 
-    void setIsUsingWesternAspen(bool isUsingWesternAspen);
     bool isUsingWesternAspen() const;
+    int getAspenFuelModelNumber() const;
+    double getAspenCuringLevel() const;
 
     int getFuelModelNumber() const;
     int getFirstFuelModelNumber() const;
@@ -123,7 +124,7 @@ private:
 
     // Western Aspen
     bool isUsingWesternAspen_;          // Whether fuel spread calculation is using Western Aspen
-    int apsenFuelModel_;
+    int aspenFuelModelNumber_;
     double aspenCuringLevel_;
 
     // Wind Adjustment Factor Parameters
