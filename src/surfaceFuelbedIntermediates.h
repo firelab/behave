@@ -59,6 +59,7 @@ private:
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object
 
     // Member variables
+    int numberOfSizeClasses_[MAX_LIFE_STATES];                          // Number of size classes represented in the currently used fuel model (dead/live)
     double weightedMoisture_[MAX_LIFE_STATES];                          // Weighted moisture content for both life and dead fuel categories (dead/live)
     double totalSurfaceArea_[MAX_LIFE_STATES];                          // Total surface area for life state (dead/live)
     double weightedHeat_[MAX_LIFE_STATES];                              // Weighted heat content for life state (dead/live)
@@ -66,7 +67,6 @@ private:
     double weightedFuelLoad_[MAX_LIFE_STATES];                          // Weighted fuel loading for life state (dead/live)
     double moistureOfExtinction_[MAX_LIFE_STATES];                      // Moisture of extinction for life state (dead/live)
     double fractionOfTotalSurfaceArea_[MAX_LIFE_STATES];                // Ratio of surface area for life category (dead/live) to total surface area
-    int numberOfSizeClasses_[MAX_LIFE_STATES];                          // Number of size classes represented in the currently used fuel model (dead/live)
     double fuelDensity_[MAX_LIFE_STATES];                               // Fuel density for live and dead fuels
     double totalLoadForLifeState_[MAX_LIFE_STATES];                     // Total fuel load for live and dead fuels
     double moistureDead_[MAX_PARTICLES];                                // Moisture content in fraction of oven-dry weight for dead fuels by size class

@@ -49,6 +49,15 @@ void  Behave::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, dou
         palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
+void Behave::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+    double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+    double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+{
+    surfaceInputs_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, moistureOneHour, moistureTenHour, moistureHundredHour,
+        moistureLiveHerbaceous, moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope,
+        aspect, canopyCover, canopyHeight, crownRatio);
+}
+
 double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
 {
     // Calculate Spread Rate

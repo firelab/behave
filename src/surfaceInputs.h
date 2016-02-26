@@ -21,6 +21,9 @@ public:
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
         double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio);
+    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+        double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour);
     void setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody);
@@ -49,6 +52,9 @@ public:
     double getPalmettoCoverage() const;
     void setOverstoryBasalArea(double overstoryBasalArea);
     double getOverstoryBasalArea() const;
+
+    void setIsUsingWesternAspen(bool isUsingWesternAspen);
+    bool isUsingWesternAspen() const;
 
     int getFuelModelNumber() const;
     int getFirstFuelModelNumber() const;
@@ -114,6 +120,11 @@ private:
     double  heightOfUnderstory_;
     double  palmettoCoverage_;
     double  overstoryBasalArea_;
+
+    // Western Aspen
+    bool isUsingWesternAspen_;          // Whether fuel spread calculation is using Western Aspen
+    int apsenFuelModel_;
+    double aspenCuringLevel_;
 
     // Wind Adjustment Factor Parameters
     double canopyCover_;

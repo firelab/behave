@@ -91,6 +91,10 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
 
     isUsingPalmettoGallberry_ = false;
 
+    isUsingWesternAspen_ = false;
+    int apsenFuelModel_ = -1;
+    double aspenCuringLevel_ = 0.0;
+
     canopyCover_ = canopyCover;
     canopyHeight_ = canopyHeight;
     crownRatio_ = crownRatio;
@@ -100,12 +104,12 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous,
     double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
     double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
-    double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio)
+    double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     int fuelModelNumber = firstfuelModelNumber;
     updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-        windHeightInputMode, windSpeed, windDirection, slope, slopeAspect, canopyCover, canopyHeight, crownRatio);
+        windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
     firstFuelModelNumber_ = firstfuelModelNumber;
     secondFuelModelNumber_ = secondFuelModelNumber;
     firstFuelModelCoverage_ = firstFuelModelCoverage;
@@ -119,10 +123,10 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
     double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope,
-    double slopeAspect, double canopyCover, double canopyHeight, double crownRatio)
+    double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-        moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, slopeAspect, canopyCover, canopyHeight, crownRatio);
+        moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
     ageOfRough_ = ageOfRough;
     heightOfUnderstory_ = heightOfUnderstory;
@@ -130,6 +134,18 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     overstoryBasalArea_ = overstoryBasalArea;
 
     isUsingPalmettoGallberry_ = true;
+}
+
+void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+    double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+    double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+{
+    updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+
+    aspenFuelModelNumber = aspenFuelModelNumber;
+    aspenCuringLevel_ = aspenCuringLevel;
+    isUsingWesternAspen_ = false;
 }
 
 void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
