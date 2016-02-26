@@ -21,6 +21,7 @@ void SurfaceInputs::initializeMembers()
 
     isUsingTwoFuelModels_ = false;
     isUsingPalmettoGallberry_ = false;
+    isUsingWesternAspen_ = false;
 
     slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
     windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
