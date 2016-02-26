@@ -12,14 +12,14 @@ public:
     // The following getter methods are used to populate FuelModel data fields 
     double getAspenFuelBedDepth(int typeIndex);
     double getAspenFuelMoistureOfExtinctionDead();
-    double getAspenLoadDeadOneHour(int typeIndex, double curing);
-    double getAspenLoadDeadTenHour(int typeIndex);
-    double getAspenLoadLiveHerbaceous(int typeIndex, double curing);
-    double getAspenLoadLiveWoody(int typeIndex, double curing);
-    double getAspenSavrDeadOneHour(int typeIndex, double curing);
+    double getAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
+    double getAspenLoadDeadTenHour(int aspenFuelModelNumber);
+    double getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel);
+    double getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
+    double getAspenSavrDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
     double getAspenSavrDeadTenHour();
     double getAspenSavrLiveHerbaceous();
-    double getAspenSavrLiveWoody(int typeIndex, double curing);
+    double getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
 
     // Mortality must be calculated AFTER spread rate
     double calculateAspenMortality(int severity, double flameLength, double dbh);
