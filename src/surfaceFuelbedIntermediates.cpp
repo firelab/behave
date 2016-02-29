@@ -556,16 +556,9 @@ void SurfaceFuelbedIntermediates::calculateLiveMoistureOfExtinction()
         double fineDeadMoisture = 0.0;			// Fine dead moisture content, Albini 1976, p. 89
         double fineDeadOverFineLive = 0.0;		// Ratio of fine fuel loadings, dead/living, Albini 1976, p. 89
 
-        int numDeadFuelClasses = MAX_PARTICLES;
-        bool isUsingWesternAspen = surfaceInputs_->isUsingWesternAspen();
-        if (isUsingWesternAspen)
+        for (int i = 0; i < MAX_PARTICLES; i++)
         {
-            numDeadFuelClasses = 2;
-        }
-       
-
-        for (int i = 0; i < numDeadFuelClasses; i++)
-        {
+            fineFuelsWeightingFactor = 0;
             if (savrDead_[i] > 1.0e-7)
             {
                 fineFuelsWeightingFactor = loadDead_[i] * exp(-138.0 / savrDead_[i]);
