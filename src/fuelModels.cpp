@@ -476,11 +476,28 @@ bool FuelModels::setPalmettoGallberryFuelModel(double depth)
     bool successStatus = false;
     if (FuelModelArray[0].isReserved_ == false)
     {
+        // SCP = Special Case Palmetto-Gallberry
         setFuelModelRecord(0, "SCP", "Palmetto-Gallbery",
             depth, 0.40, 8300, 8300,
             0, 0, 0, 0,
             0, 0, 0, 0, false,
-            FuelModelArray[0].isReserved_);
+            false);
+        successStatus = true;
+    }
+    return successStatus;
+}
+
+bool FuelModels::setWesternAspenFuelModel(double depth)
+{
+    bool successStatus = false;
+    if (FuelModelArray[0].isReserved_ == false)
+    {
+        // SCP = Special Case Western Aspen
+        setFuelModelRecord(0, "SCW", "Palmetto-Gallbery",
+            depth, 0.25, 8000, 8000,
+            0, 0, 0, 0,
+            0, 0, 2800, 0, false,
+            false);
         successStatus = true;
     }
     return successStatus;

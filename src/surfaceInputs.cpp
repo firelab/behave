@@ -145,9 +145,9 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
-    aspenFuelModelNumber = aspenFuelModelNumber;
+    aspenFuelModelNumber_ = aspenFuelModelNumber;
     aspenCuringLevel_ = aspenCuringLevel;
-    isUsingWesternAspen_ = false;
+    isUsingWesternAspen_ = true;
 }
 
 void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)

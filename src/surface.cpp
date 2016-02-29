@@ -23,6 +23,17 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
         surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
         spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
     }
+    else if (isUsingWesternAspen())
+    {
+        WesternApsen westernAspen;
+        int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
+        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
+        double depth = westernAspen.getAspenFuelBedDepth(aspenFuelModelNumber);
+        fuelModels_->setWesternAspenFuelModel(depth);
+        // Calculate fuel bed intermediates
+        surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
+        spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+    }
     else if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
@@ -76,6 +87,11 @@ bool Surface::isUsingTwoFuelModels() const
 bool Surface::isUsingPalmettoGallberry() const
 {
     return surfaceInputs_->isUsingPalmettoGallberry();
+}
+
+bool Surface::isUsingWesternAspen() const
+{
+    return surfaceInputs_->isUsingWesternAspen();
 }
 
 void Surface::validateInputs()

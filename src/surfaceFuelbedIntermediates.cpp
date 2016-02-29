@@ -124,7 +124,7 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
         loadDead_[3] = 0.0;
 
         loadLive_[0] = westernAspen.getAspenLoadLiveHerbaceous(aspenFuelModelNumber, aspenCuringLevel);
-        loadLive_[1] = westernAspen.getAspenSavrLiveWoody(aspenFuelModelNumber, aspenCuringLevel);
+        loadLive_[1] = westernAspen.getAspenLoadLiveWoody(aspenFuelModelNumber, aspenCuringLevel);
         loadLive_[2] = 0.0;
         loadLive_[3] = 0.0;
     }
@@ -146,7 +146,7 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
 void SurfaceFuelbedIntermediates::setMoistureContent()
 {
     bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
-
+ 
     if (isUsingPalmettoGallberry)
     {
         moistureDead_[0] = surfaceInputs_->getMoistureOneHour();
@@ -556,7 +556,15 @@ void SurfaceFuelbedIntermediates::calculateLiveMoistureOfExtinction()
         double fineDeadMoisture = 0.0;			// Fine dead moisture content, Albini 1976, p. 89
         double fineDeadOverFineLive = 0.0;		// Ratio of fine fuel loadings, dead/living, Albini 1976, p. 89
 
-        for (int i = 0; i < MAX_PARTICLES; i++)
+        int numDeadFuelClasses = MAX_PARTICLES;
+        bool isUsingWesternAspen = surfaceInputs_->isUsingWesternAspen();
+        if (isUsingWesternAspen)
+        {
+            numDeadFuelClasses = 2;
+        }
+       
+
+        for (int i = 0; i < numDeadFuelClasses; i++)
         {
             if (savrDead_[i] > 1.0e-7)
             {
@@ -599,7 +607,6 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
     sigma_ = 0.0;
     bulkDensity_ = 0.0;
     packingRatio_ = 0.0;
-    //totalLoad_ = 0.0;
     heatSink_ = 0.0;
     totalSilicaContent_ = 0.0555;
 

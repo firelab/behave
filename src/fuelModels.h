@@ -18,6 +18,7 @@ public:
         double fuelLoadLiveWoody, double savrOneHour, double savrLiveHerbaceous, double savrLiveWoody,
         bool isDynamic);
     bool setPalmettoGallberryFuelModel(double depth);
+    bool setWesternAspenFuelModel(double depth);
 
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;

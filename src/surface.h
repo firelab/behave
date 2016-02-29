@@ -14,6 +14,7 @@
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
 #include "surfaceTwoFuelModels.h"
+#include "westernAspen.h"
 
 class Surface
 {
@@ -43,6 +44,8 @@ private:
     bool isUsingTwoFuelModels() const;
 
     bool isUsingPalmettoGallberry() const;
+    
+    bool isUsingWesternAspen() const;
 
     // SURFACE Module component objects
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
