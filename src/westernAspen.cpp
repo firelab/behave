@@ -95,7 +95,7 @@ double WesternApsen::getAspenLoadDeadOneHour(int aspenFuelModelNumber, double as
         { 0.754, 0.797, 0.825, 0.854, 0.884, 0.8990 }
     };
     double load = 0.0;
-    if (aspenFuelModelNumber >= 0 && aspenFuelModelNumber < 5)
+    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex < 5)
     {
         load = aspenInterpolate(aspenCuringLevel, Load[aspenFuelModelIndex]);
     }
@@ -120,7 +120,7 @@ double WesternApsen::getAspenLoadDeadTenHour(int aspenFuelModelNumber)
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[] = { 0.975, 0.475, 1.035, 1.340, 1.115 };
     double load = 0.0;
-    if (aspenFuelModelNumber >= 0 && aspenFuelModelNumber < 5)
+    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex < 5)
     {
         load = Load[aspenFuelModelIndex];
     }
@@ -154,7 +154,7 @@ double WesternApsen::getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double
         { 0.150, 0.105, 0.075, 0.045, 0.015, 0.000 }
     };
     double load = 0.0;
-    if (aspenFuelModelNumber >= 0 && aspenFuelModelNumber < 5)
+    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex < 5)
     {
         load = aspenInterpolate(aspenCuringLevel, Load[aspenFuelModelIndex]);
     }
@@ -188,7 +188,7 @@ double WesternApsen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspe
         { 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 }
     };
     double load = 0.0;
-    if (aspenFuelModelNumber >= 0 && aspenFuelModelNumber < 5)
+    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex <= 5)
     {
         load = aspenInterpolate(aspenCuringLevel, Load[aspenFuelModelIndex]);
     }
@@ -249,7 +249,7 @@ double WesternApsen::getAspenSavrDeadOneHour(int aspenFuelModelNumber, double as
         { 1420., 1540., 1610., 1670., 1720., 1745. }
     };
     double savr = 1440.;
-    if (aspenFuelModelNumber >= 0 && aspenFuelModelNumber < 5)
+    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex <= 5)
     {
         savr = aspenInterpolate(aspenCuringLevel, Savr[aspenFuelModelIndex]);
     }
@@ -304,7 +304,7 @@ double WesternApsen::getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspe
         { 2440., 2440., 2440., 2440., 2440., 2440. }
     };
     double savr = 2440.;
-    if (aspenFuelModelNumber >= 0 && aspenFuelModelNumber < 5)
+    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex <= 5)
     {
         savr = aspenInterpolate(aspenCuringLevel, Savr[aspenFuelModelIndex]);
     }

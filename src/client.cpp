@@ -107,8 +107,8 @@ int main()
         //std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
 
         // Western Apsen test
-        int aspenFuelModelNumber = 1;
-        double aspenCuringLevel = 0.90;
+        int aspenFuelModelNumber = 5;
+        double aspenCuringLevel = 0.45;
         behave.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
         spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
         std::cout << "Spread rate for Western is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
