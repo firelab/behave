@@ -8,7 +8,6 @@
 //	10 meter wind and input wind adjustment factor, 10 meter wind calculate wind adjustment factor
 //	WMC - 11/2015
 
-#include "palmettoGallberry.h"
 #include "surfaceEnums.h"
 #include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
@@ -33,14 +32,6 @@ public:
     double getFireEccentricity() const;
 
 private:
-    enum TwoFuelModelsMethod
-    {
-        NO_METHOD = 0,		// Don't use Two Fuel Models
-        ARITHMETIC = 1,		// Use arithmetic mean
-        HARMONIC = 2,		// Use harmoic mean
-        TWO_DIMENSIONAL = 3	// Use Finney's two dimensional method
-    };
-
     bool isUsingTwoFuelModels() const;
 
     bool isUsingPalmettoGallberry() const;
@@ -48,10 +39,12 @@ private:
     bool isUsingWesternAspen() const;
 
     // SURFACE Module component objects
+    FuelModels*	fuelModels_;
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs* surfaceInputs_;
-    FuelModels*	fuelModels_;
+    PalmettoGallberry palmettoGallberry_;
+    WesternAspen westernAspen_;
 
     void initializeMembers();
     void validateInputs();

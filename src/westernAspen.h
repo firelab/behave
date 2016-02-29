@@ -3,11 +3,13 @@
 
 #include <cmath>
 
-class WesternApsen
+class WesternAspen
 {
 public:
-    WesternApsen();
-    ~WesternApsen();
+    WesternAspen();
+    ~WesternAspen();
+
+    void initialize();
 
     // The following getter methods are used to populate FuelModel data fields 
     double getAspenFuelBedDepth(int typeIndex);

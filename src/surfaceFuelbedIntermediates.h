@@ -18,6 +18,7 @@ public:
     SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
     ~SurfaceFuelbedIntermediates();
     void calculateFuelbedIntermediates();
+    void calculateFuelbedIntermediates(const PalmettoGallberry& palmettoGallberry);
 
     // Public Getters
     double getFuelbedDepth() const;
@@ -32,11 +33,22 @@ public:
     double getWeightedSilicaByLifeState(int lifeState) const;
     double getWeightedFuelLoadByLifeState(int lifeState) const;
 
+    // Palmetto-Gallberry
+    double getPalmettoGallberyDeadOneHourLoad() const;
+    double getPalmettoGallberyDeadTenHourLoad() const;
+    double getPalmettoGallberyDeadFoliageLoad() const;
+    double getPalmettoGallberyFuelBedDepth() const;
+    double getPalmettoGallberyLitterLoad() const;
+    double getPalmettoGallberyLiveOneHourLoad() const;
+    double getPalmettoGallberyLiveTenHourLoad() const;
+    double getPalmettoGallberyLiveFoliageLoad() const;
+
 private:
     void initializeMemberVariables();
     void setFuelLoad();
     void setMoistureContent();
     void setSAV();
+    void setSAV(const PalmettoGallberry& palmettoGallberry);
     void countSizeClasses();
     void dynamicLoadTransfer();
     void calculateFractionOfTotalSurfaceArea();
@@ -58,6 +70,8 @@ private:
 
     const FuelModels* fuelModels_;          // Pointer to FuelModels object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object
+    PalmettoGallberry palmettoGallberry_;
+    WesternAspen westernAspen_;
 
     // Member variables
     int numberOfSizeClasses_[MAX_LIFE_STATES];                          // Number of size classes represented in the currently used fuel model (dead/live)

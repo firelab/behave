@@ -102,6 +102,8 @@ private:
     double windAdjustmentFactor_;
     WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;
     double canopyCrownFraction_;
+
+    double aspenMortality_;
 };
 
 #endif // SURFACEFIRE_HEADER

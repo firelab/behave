@@ -7,17 +7,41 @@ class PalmettoGallberry
 {
 public:
     PalmettoGallberry();
+    void initialize();
 
-    double palmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory);
-    double palmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage);
-    double palmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage);
-    double palmettoGallberyFuelBedDepth(double heightOfUnderstory);
-    double palmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea);
-    double palmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory);
-    double palmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory);
-    double palmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage, double heightOfUnderstory);
+    double calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory);
+    double calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage);
+    double calculatePalmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage);
+    double calculatePalmettoGallberyFuelBedDepth(double heightOfUnderstory);
+    double calculatePalmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea);
+    double calculatePalmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory);
+    double calculatePalmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory);
+    double calculatePalmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage, double heightOfUnderstory);
+
+    double getMoistureOfExtinctionDead() const;
+    double getHeatOfCombustionDead() const;
+    double getHeatOfCombustionLive() const;
+    double getPalmettoGallberyDeadOneHourLoad() const;
+    double getPalmettoGallberyDeadTenHourLoad() const;
+    double getPalmettoGallberyDeadFoliageLoad() const;
+    double getPalmettoGallberyFuelBedDepth() const;
+    double getPalmettoGallberyLitterLoad() const;
+    double getPalmettoGallberyLiveOneHourLoad() const;
+    double getPalmettoGallberyLiveTenHourLoad() const;
+    double getPalmettoGallberyLiveFoliageLoad() const;
 
 private:
+    double moistureOfExtinctionDead_;
+    double heatOfCombustionDead_;
+    double heatOfCombustionLive_;
+    double palmettoGallberyDeadOneHourLoad_;
+    double palmettoGallberyDeadTenHourLoad_;
+    double palmettoGallberyDeadFoliageLoad_;
+    double palmettoGallberyFuelBedDepth_;
+    double palmettoGallberyLitterLoad_;
+    double palmettoGallberyLiveOneHourLoad_;
+    double palmettoGallberyLiveTenHourLoad_;
+    double palmettoGallberyLiveFoliageLoad_;
 };
 
 #endif //PALMETTOGALLBERRY_HEADER

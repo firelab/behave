@@ -138,7 +138,7 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     isUsingPalmettoGallberry_ = true;
 }
 
-void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
@@ -147,6 +147,7 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
 
     aspenFuelModelNumber_ = aspenFuelModelNumber;
     aspenCuringLevel_ = aspenCuringLevel;
+    aspenFireSeverity_ = aspenFireSeverity;
     isUsingWesternAspen_ = true;
 }
 

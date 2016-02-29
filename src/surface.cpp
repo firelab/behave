@@ -13,22 +13,12 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 {
     double spreadRate = 0.0;
 
-    if (isUsingPalmettoGallberry())
+    if (isUsingWesternAspen())
     {
-        PalmettoGallberry palmettoGallberry;
-        double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory();
-        double depth = palmettoGallberry.palmettoGallberyFuelBedDepth(heightOfUnderstory);
-        fuelModels_->setPalmettoGallberryFuelModel(depth);
-        // Calculate fuel bed intermediates
-        surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
-        spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
-    }
-    else if (isUsingWesternAspen())
-    {
-        WesternApsen westernAspen;
+        westernAspen_.initialize();
         int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
         double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
-        double depth = westernAspen.getAspenFuelBedDepth(aspenFuelModelNumber);
+        double depth = westernAspen_.getAspenFuelBedDepth(aspenFuelModelNumber);
         fuelModels_->setWesternAspenFuelModel(depth);
         // Calculate fuel bed intermediates
         surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();

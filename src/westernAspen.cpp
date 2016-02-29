@@ -1,13 +1,18 @@
 #include "westernAspen.h"
 
-WesternApsen::WesternApsen()
+WesternAspen::WesternAspen()
 {
 
 }
 
-WesternApsen::~WesternApsen()
+WesternAspen::~WesternAspen()
 {
 
+}
+
+void WesternAspen::initialize()
+{
+    mortality_ = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -18,7 +23,7 @@ WesternApsen::~WesternApsen()
 *
 *  \return Interpolated value.
 */
-double WesternApsen::aspenInterpolate(double curing, double *valueArray)
+double WesternAspen::aspenInterpolate(double curing, double *valueArray)
 {
     static double curingArray[] = { 0.0, 0.3, 0.5, 0.7, 0.9, 1.000000001 };
     curing = (curing < 0.0) ? 0.0 : curing;
@@ -50,7 +55,7 @@ double WesternApsen::aspenInterpolate(double curing, double *valueArray)
 *  \return Aspen fuel bed depth (ft).
 */
 
-double WesternApsen::getAspenFuelBedDepth(int aspenFuelModelNumber)
+double WesternAspen::getAspenFuelBedDepth(int aspenFuelModelNumber)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     double Depth[] = { 0.65, 0.30, 0.18, 0.50, 0.18 };
@@ -63,7 +68,7 @@ double WesternApsen::getAspenFuelBedDepth(int aspenFuelModelNumber)
 *  \return Aspen fuel bed depth (ft).
 */
 
-double WesternApsen::getAspenFuelMoistureOfExtinctionDead()
+double WesternAspen::getAspenFuelMoistureOfExtinctionDead()
 {
     return(0.25);
 }
@@ -83,7 +88,7 @@ double WesternApsen::getAspenFuelMoistureOfExtinctionDead()
 *  \return Aspen dead 0.0 - 0.25" load (lb/ft2).
 */
 
-double WesternApsen::getAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel)
+double WesternAspen::getAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[5][6] = 
@@ -115,7 +120,7 @@ double WesternApsen::getAspenLoadDeadOneHour(int aspenFuelModelNumber, double as
 *  \return Aspen dead 0.25 - 1.0" load (lb/ft2).
 */
 
-double WesternApsen::getAspenLoadDeadTenHour(int aspenFuelModelNumber)
+double WesternAspen::getAspenLoadDeadTenHour(int aspenFuelModelNumber)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[] = { 0.975, 0.475, 1.035, 1.340, 1.115 };
@@ -142,7 +147,7 @@ double WesternApsen::getAspenLoadDeadTenHour(int aspenFuelModelNumber)
 *  \return Aspen live herbaceous load (lb/ft2).
 */
 
-double WesternApsen::getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel)
+double WesternAspen::getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[5][6] = 
@@ -176,7 +181,7 @@ double WesternApsen::getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double
 *  \return Aspen live woody load (lb/ft2).
 */
 
-double WesternApsen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel)
+double WesternAspen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[5][6] = 
@@ -205,7 +210,7 @@ double WesternApsen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspe
 *  \return Aspen mortality rate (fraction).
 */
 
-double WesternApsen::calculateAspenMortality(int severity, double flameLength, double dbh)
+double WesternAspen::calculateAspenMortality(int severity, double flameLength, double dbh)
 {
     double mortality = 1.0;
     double charHeight = flameLength / 1.8;
@@ -237,7 +242,7 @@ double WesternApsen::calculateAspenMortality(int severity, double flameLength, d
 *  \return Aspen dead 0.0 - 0.25" savr (ft2/ft3).
 */
 
-double WesternApsen::getAspenSavrDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel)
+double WesternAspen::getAspenSavrDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Savr[5][6] = 
@@ -262,7 +267,7 @@ double WesternApsen::getAspenSavrDeadOneHour(int aspenFuelModelNumber, double as
 *  \return Aspen dead 0.25 - 1.0" savr (ft2/ft3).
 */
 
-double WesternApsen::getAspenSavrDeadTenHour()
+double WesternAspen::getAspenSavrDeadTenHour()
 {
     return(109.0);
 }
@@ -273,7 +278,7 @@ double WesternApsen::getAspenSavrDeadTenHour()
 *  \return Aspen live herbaceous savr (ft2/ft3).
 */
 
-double WesternApsen::getAspenSavrLiveHerbaceous()
+double WesternAspen::getAspenSavrLiveHerbaceous()
 {
     return(2800.0);
 }
@@ -292,7 +297,7 @@ double WesternApsen::getAspenSavrLiveHerbaceous()
 *
 *  \return Aspen live woody savr (ft2/ft3).
 */
-double WesternApsen::getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel)
+double WesternAspen::getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     double Savr[5][6] = 

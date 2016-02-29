@@ -37,7 +37,16 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
     fuelModelNumber_ = surfaceInputs_->getFuelModelNumber();
 
     setFuelLoad();
-    depth = fuelModels_->getFuelbedDepth(fuelModelNumber_);
+    bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
+    if (isUsingPalmettoGallberry)
+    {
+        double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory();
+        depth = palmettoGallberry_.calculatePalmettoGallberyFuelBedDepth(heightOfUnderstory);
+    }
+    else
+    {
+        depth = fuelModels_->getFuelbedDepth(fuelModelNumber_);
+    }
 
     countSizeClasses();
 
@@ -58,7 +67,14 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
     calculateFractionOfTotalSurfaceArea();
 
     // Moisture of extinction
-    moistureOfExtinction_[DEAD] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_);
+    if (isUsingPalmettoGallberry)
+    {
+        moistureOfExtinction_[DEAD] = palmettoGallberry_.getMoistureOfExtinctionDead();
+    }
+    else
+    {
+        moistureOfExtinction_[DEAD] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_);
+    }
     calculateLiveMoistureOfExtinction();
 
     // Intermediate calculations, summing parameters by fuel component
@@ -89,21 +105,20 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     if (isUsingPalmettoGallberry)
     {
         // Calculate load values for Palmetto-Gallberry
-        PalmettoGallberry palmettoGallberry;
-
+        palmettoGallberry_.initialize();
         double ageOfRough = surfaceInputs_->getAgeOfRough();
         double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory();
         double palmettoCoverage = surfaceInputs_->getPalmettoCoverage();
         double overstoryBasalArea = surfaceInputs_->getOverstoryBasalArea();
 
-        loadDead_[0] = palmettoGallberry.palmettoGallberyDeadOneHourLoad(ageOfRough, heightOfUnderstory);
-        loadDead_[1] = palmettoGallberry.palmettoGallberyDeadTenHourLoad(ageOfRough, palmettoCoverage);
-        loadDead_[2] = palmettoGallberry.palmettoGallberyDeadFoliageLoad(ageOfRough, palmettoCoverage);
-        loadDead_[3] = palmettoGallberry.palmettoGallberyLitterLoad(ageOfRough, overstoryBasalArea);
+        loadDead_[0] = palmettoGallberry_.calculatePalmettoGallberyDeadOneHourLoad(ageOfRough, heightOfUnderstory);
+        loadDead_[1] = palmettoGallberry_.calculatePalmettoGallberyDeadTenHourLoad(ageOfRough, palmettoCoverage);
+        loadDead_[2] = palmettoGallberry_.calculatePalmettoGallberyDeadFoliageLoad(ageOfRough, palmettoCoverage);
+        loadDead_[3] = palmettoGallberry_.calculatePalmettoGallberyLitterLoad(ageOfRough, overstoryBasalArea);
 
-        loadLive_[0] = palmettoGallberry.palmettoGallberyLiveOneHourLoad(ageOfRough, heightOfUnderstory);
-        loadLive_[1] = palmettoGallberry.palmettoGallberyLiveTenHourLoad(ageOfRough, heightOfUnderstory);
-        loadLive_[2] = palmettoGallberry.palmettoGallberyLiveFoliageLoad(ageOfRough, palmettoCoverage, heightOfUnderstory);
+        loadLive_[0] = palmettoGallberry_.calculatePalmettoGallberyLiveOneHourLoad(ageOfRough, heightOfUnderstory);
+        loadLive_[1] = palmettoGallberry_.calculatePalmettoGallberyLiveTenHourLoad(ageOfRough, heightOfUnderstory);
+        loadLive_[2] = palmettoGallberry_.calculatePalmettoGallberyLiveFoliageLoad(ageOfRough, palmettoCoverage, heightOfUnderstory);
         loadLive_[3] = 0.0;
 
         for (int i = 0; i < 3; i++)
@@ -114,17 +129,16 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     else if (isUsingWesternAspen)
     {
         // Calculate load values for Western Aspen
-        WesternApsen westernAspen;
         int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
         double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
 
-        loadDead_[0] = westernAspen.getAspenLoadDeadOneHour(aspenFuelModelNumber, aspenCuringLevel);
-        loadDead_[1] = westernAspen.getAspenLoadDeadTenHour(aspenFuelModelNumber);
+        loadDead_[0] = westernAspen_.getAspenLoadDeadOneHour(aspenFuelModelNumber, aspenCuringLevel);
+        loadDead_[1] = westernAspen_.getAspenLoadDeadTenHour(aspenFuelModelNumber);
         loadDead_[2] = 0.0;
         loadDead_[3] = 0.0;
 
-        loadLive_[0] = westernAspen.getAspenLoadLiveHerbaceous(aspenFuelModelNumber, aspenCuringLevel);
-        loadLive_[1] = westernAspen.getAspenLoadLiveWoody(aspenFuelModelNumber, aspenCuringLevel);
+        loadLive_[0] = westernAspen_.getAspenLoadLiveHerbaceous(aspenFuelModelNumber, aspenCuringLevel);
+        loadLive_[1] = westernAspen_.getAspenLoadLiveWoody(aspenFuelModelNumber, aspenCuringLevel);
         loadLive_[2] = 0.0;
         loadLive_[3] = 0.0;
     }
@@ -196,7 +210,7 @@ void SurfaceFuelbedIntermediates::setSAV()
     else if (isUsingWesternAspen)
     {
         // Calculate SAVR values for Western Aspen
-        WesternApsen westernAspen;
+        WesternAspen westernAspen;
         int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
         double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
 
@@ -229,9 +243,21 @@ void SurfaceFuelbedIntermediates::setHeatOfCombustion()
 {
     const int NUMBER_OF_LIVE_SIZE_CLASSES = 3;
 
-    double heatOfCombustionDead = fuelModels_->getHeatOfCombustionDead(fuelModelNumber_);
-    double heatOfCombustionLive = fuelModels_->getHeatOfCombustionLive(fuelModelNumber_);
+    double heatOfCombustionDead = 0.0;
+    double heatOfCombustionLive = 0.0;
 
+    bool isUsingPalmettoGallberry = surfaceInputs_->isUsingPalmettoGallberry();
+    if (isUsingPalmettoGallberry)
+    {
+        heatOfCombustionDead = palmettoGallberry_.getHeatOfCombustionDead();
+        heatOfCombustionLive = palmettoGallberry_.getHeatOfCombustionLive();
+    }
+    else
+    {
+        heatOfCombustionDead = fuelModels_->getHeatOfCombustionDead(fuelModelNumber_);
+        heatOfCombustionLive = fuelModels_->getHeatOfCombustionLive(fuelModelNumber_);
+    }
+   
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
         heatDead_[i] = heatOfCombustionDead;
@@ -558,7 +584,7 @@ void SurfaceFuelbedIntermediates::calculateLiveMoistureOfExtinction()
 
         for (int i = 0; i < MAX_PARTICLES; i++)
         {
-            fineFuelsWeightingFactor = 0;
+            fineFuelsWeightingFactor = 0.0;
             if (savrDead_[i] > 1.0e-7)
             {
                 fineFuelsWeightingFactor = loadDead_[i] * exp(-138.0 / savrDead_[i]);
@@ -699,4 +725,44 @@ double SurfaceFuelbedIntermediates::getWeightedSilicaByLifeState(int lifeState) 
 double SurfaceFuelbedIntermediates::getWeightedFuelLoadByLifeState(int lifeState) const
 {
     return weightedFuelLoad_[lifeState];
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadOneHourLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyDeadOneHourLoad();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadTenHourLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyDeadTenHourLoad();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadFoliageLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyDeadFoliageLoad();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyFuelBedDepth() const
+{
+    return palmettoGallberry_.getPalmettoGallberyFuelBedDepth();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyLitterLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyLitterLoad();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveOneHourLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyLiveOneHourLoad();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveTenHourLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyLiveTenHourLoad();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveFoliageLoad() const
+{
+    return palmettoGallberry_.getPalmettoGallberyLiveFoliageLoad();
 }

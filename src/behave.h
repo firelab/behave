@@ -30,7 +30,7 @@ public:
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
         double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);

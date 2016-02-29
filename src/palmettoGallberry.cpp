@@ -2,7 +2,7 @@
 
 PalmettoGallberry::PalmettoGallberry()
 {
-
+    initialize();
 }
 
 //------------------------------------------------------------------------------
@@ -14,16 +14,31 @@ PalmettoGallberry::PalmettoGallberry()
 *  \return Palmetto-gallbery dead 0.0 - 0.25" load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory)
+void PalmettoGallberry::initialize()
 {
-    double load = -0.00121
+    moistureOfExtinctionDead_ = 0.40;
+    heatOfCombustionDead_ = 8300;
+    heatOfCombustionLive_ = 8300;
+    palmettoGallberyDeadOneHourLoad_ = 0.0;
+    palmettoGallberyDeadTenHourLoad_ = 0.0;
+    palmettoGallberyDeadFoliageLoad_ = 0.0;
+    palmettoGallberyFuelBedDepth_ = 0.0;
+    palmettoGallberyLitterLoad_ = 0.0;
+    palmettoGallberyLiveOneHourLoad_ = 0.0;
+    palmettoGallberyLiveTenHourLoad_ = 0.0;
+    palmettoGallberyLiveFoliageLoad_ = 0.0;
+}
+
+double PalmettoGallberry::calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory)
+{
+    palmettoGallberyDeadOneHourLoad_ = -0.00121
         + 0.00379 * log(ageOfRough)
         + 0.00118 * heightOfUnderstory * heightOfUnderstory;
-    if (load < 0.0)
+    if (palmettoGallberyDeadOneHourLoad_ < 0.0)
     {
-        load = 0.0;
+        palmettoGallberyDeadOneHourLoad_ = 0.0;
     }
-    return load;
+    return palmettoGallberyDeadOneHourLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -35,16 +50,16 @@ double PalmettoGallberry::palmettoGallberyDeadOneHourLoad(double ageOfRough, dou
 *  \return Palmetto-gallbery dead 0.25 - 1.0" load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage)
+double PalmettoGallberry::calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage)
 {
-    double load = -0.00775
+    palmettoGallberyDeadTenHourLoad_ = -0.00775
         + 0.00021 * palmettoCoverage
         + 0.00007 * ageOfRough * ageOfRough;
-    if (load < 0.0)
+    if (palmettoGallberyDeadTenHourLoad_ < 0.0)
     {
-        load = 0.0;
+        palmettoGallberyDeadTenHourLoad_ = 0.0;
     }
-    return load;
+    return palmettoGallberyDeadTenHourLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -56,10 +71,10 @@ double PalmettoGallberry::palmettoGallberyDeadTenHourLoad(double ageOfRough, dou
 *  \return Palmetto-gallbery dead foliage load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage)
+double PalmettoGallberry::calculatePalmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage)
 {
-    double load = 0.00221 * pow(ageOfRough, 0.51263) * exp(0.02482 * palmettoCoverage);
-    return load;
+    palmettoGallberyDeadFoliageLoad_ = 0.00221 * pow(ageOfRough, 0.51263) * exp(0.02482 * palmettoCoverage);
+    return palmettoGallberyDeadFoliageLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -70,10 +85,10 @@ double PalmettoGallberry::palmettoGallberyDeadFoliageLoad(double ageOfRough, dou
 *  \return Palmetto-gallbery fuel bed depth (ft).
 */
 
-double PalmettoGallberry::palmettoGallberyFuelBedDepth(double heightOfUnderstory)
+double PalmettoGallberry::calculatePalmettoGallberyFuelBedDepth(double heightOfUnderstory)
 {
-    double depth = 2.0 * heightOfUnderstory / 3.0;
-    return depth;
+    palmettoGallberyFuelBedDepth_ = 2.0 * heightOfUnderstory / 3.0;
+    return palmettoGallberyFuelBedDepth_;
 }
 
 //------------------------------------------------------------------------------
@@ -85,10 +100,10 @@ double PalmettoGallberry::palmettoGallberyFuelBedDepth(double heightOfUnderstory
 *  \return Palmetto-gallbery L layer load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea)
+double PalmettoGallberry::calculatePalmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea)
 {
-    double load = (0.03632 + 0.0005336 * overstoryBasalArea) * (1.0 - pow(0.25, ageOfRough));
-    return load;
+    palmettoGallberyLitterLoad_ = (0.03632 + 0.0005336 * overstoryBasalArea) * (1.0 - pow(0.25, ageOfRough));
+    return palmettoGallberyLitterLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -100,10 +115,10 @@ double PalmettoGallberry::palmettoGallberyLitterLoad(double ageOfRough, double o
 *  \return Palmetto-gallbery live 0.0 - 0.25" load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory)
+double PalmettoGallberry::calculatePalmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory)
 {
-    double load = 0.00546 + 0.00092 * ageOfRough + 0.00212 * heightOfUnderstory * heightOfUnderstory;
-    return load;
+    palmettoGallberyLiveOneHourLoad_ = 0.00546 + 0.00092 * ageOfRough + 0.00212 * heightOfUnderstory * heightOfUnderstory;
+    return palmettoGallberyLiveOneHourLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -115,16 +130,16 @@ double PalmettoGallberry::palmettoGallberyLiveOneHourLoad(double ageOfRough, dou
 *  \return Palmetto-gallbery live 0.25 - 1.0" load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory)
+double PalmettoGallberry::calculatePalmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory)
 {
-    double load = -0.02128
+    palmettoGallberyLiveTenHourLoad_ = -0.02128
         + 0.00014 * ageOfRough * ageOfRough
         + 0.00314 * heightOfUnderstory * heightOfUnderstory;
-    if (load < 0.0)
+    if (palmettoGallberyLiveTenHourLoad_ < 0.0)
     {
-        load = 0.0;
+        palmettoGallberyLiveTenHourLoad_ = 0.0;
     }
-    return load;
+    return palmettoGallberyLiveTenHourLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -137,16 +152,71 @@ double PalmettoGallberry::palmettoGallberyLiveTenHourLoad(double ageOfRough, dou
 *  \return Palmetto-gallbery live foliage load (lb/ft2).
 */
 
-double PalmettoGallberry::palmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage,
+double PalmettoGallberry::calculatePalmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage,
     double heightOfUnderstory)
 {
-    double load = -0.0036
+    palmettoGallberyLiveFoliageLoad_ = -0.0036
         + 0.00253 * ageOfRough
         + 0.00049 * palmettoCoverage
         + 0.00282 * heightOfUnderstory * heightOfUnderstory;
-    if (load < 0.0)
+    if (palmettoGallberyLiveFoliageLoad_ < 0.0)
     {
-        load = 0.0;
+        palmettoGallberyLiveFoliageLoad_ = 0.0;
     }
-    return load;
+    return palmettoGallberyLiveFoliageLoad_;
+}
+
+double PalmettoGallberry::getMoistureOfExtinctionDead() const
+{
+    return moistureOfExtinctionDead_;
+}
+
+double PalmettoGallberry::getHeatOfCombustionDead() const
+{
+    return heatOfCombustionDead_;
+}
+
+double PalmettoGallberry::getHeatOfCombustionLive() const
+{
+    return heatOfCombustionLive_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyDeadOneHourLoad() const
+{
+    return palmettoGallberyDeadOneHourLoad_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyDeadTenHourLoad() const
+{
+    return palmettoGallberyDeadTenHourLoad_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyDeadFoliageLoad() const
+{
+    return palmettoGallberyDeadFoliageLoad_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyFuelBedDepth() const
+{
+    return palmettoGallberyFuelBedDepth_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyLitterLoad() const
+{
+    return palmettoGallberyLitterLoad_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyLiveOneHourLoad() const
+{
+    return palmettoGallberyLiveOneHourLoad_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyLiveTenHourLoad() const
+{
+    return palmettoGallberyLiveTenHourLoad_;
+}
+
+double PalmettoGallberry::getPalmettoGallberyLiveFoliageLoad() const
+{
+    return palmettoGallberyLiveFoliageLoad_;
 }

@@ -31,6 +31,17 @@ int main()
     int secondFuelModelNumber = 0;
     double coverage = 0.0;
 
+    // Palmetto-Gallberry
+    double	ageOfRough = 0.0;
+    double	heightOfUnderstory = 0.0;
+    double	palmettoCoverage = 0.0;
+    double	overstoryBasalArea = 0.0;
+
+    // Western Aspen
+    int aspenFuelModelNumber = 0;
+    double aspenCuringLevel = 0.0;
+    double DBH = 0.0;
+
     // Wind adjustment factor parameters
     double canopyCover = 0.0;
     double canopyHeight = 0.0;
@@ -95,26 +106,27 @@ int main()
         //std::cout << "Flame length for fuel model " << fuelModelNumber << " ft" << std::endl << std::endl;
 
         // Palmetto-Gallbury test
-        //double	ageOfRough = 20;
-        //double	heightOfUnderstory = 3;
-        //double	palmettoCoverage = 25;
-        //double	overstoryBasalArea = 100;
-        //behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
-        //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-        //std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
-        //flameLength = behave.getFlameLength();
-        //flameLength = floor(flameLength * 10 + 0.5) / 10;
-        //std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
-
-        // Western Apsen test
-        int aspenFuelModelNumber = 5;
-        double aspenCuringLevel = 0.45;
-        behave.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        ageOfRough = 20;
+        heightOfUnderstory = 3;
+        palmettoCoverage = 25;
+        overstoryBasalArea = 100;
+        behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
         spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-        std::cout << "Spread rate for Western is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+        std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
         flameLength = behave.getFlameLength();
         flameLength = floor(flameLength * 10 + 0.5) / 10;
-        std::cout << "Flame length for Western Aspen is " << flameLength << " ft" << std::endl << std::endl;
+        std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
+
+        // Western Apsen test
+        //aspenFuelModelNumber = 5;
+        //aspenCuringLevel = 0.45;
+        //DBH = 2;
+        //behave.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, AspenFireSeverity::LOW, DBH, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+        //std::cout << "Spread rate for Western is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+        //flameLength = behave.getFlameLength();
+        //flameLength = floor(flameLength * 10 + 0.5) / 10;
+        //std::cout << "Flame length for Western Aspen is " << flameLength << " ft" << std::endl << std::endl;
 
         // Two Fuel Models test
         //firstFuelModelNumber = 1;
