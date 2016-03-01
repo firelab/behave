@@ -39,7 +39,7 @@ double WesternAspen::aspenInterpolate(double curing, double *valueArray)
         }
     }
     double value = valueArray[i - 1] + fraction * (valueArray[i] - valueArray[i - 1]);
-    return(value);
+    return value;
 }
 
 //------------------------------------------------------------------------------
@@ -59,18 +59,40 @@ double WesternAspen::getAspenFuelBedDepth(int aspenFuelModelNumber)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     double Depth[] = { 0.65, 0.30, 0.18, 0.50, 0.18 };
-    return(Depth[aspenFuelModelIndex]);
+    return Depth[aspenFuelModelIndex];
 }
 
 //------------------------------------------------------------------------------
-/*! \brief Calculates the aspen fuel bed depth.
+/*! \brief Calculates the aspen dead fuel moisture of extinction
 *
-*  \return Aspen fuel bed depth (ft).
+*  \return dead fuel moisture of extinction.
 */
 
-double WesternAspen::getAspenFuelMoistureOfExtinctionDead()
+double WesternAspen::getAspenMoistureOfExtinctionDead()
 {
-    return(0.25);
+    return 0.25;
+}
+
+//------------------------------------------------------------------------------
+/*! \brief Calculates the aspen dead fuel heat of combustion
+*
+*  \return dead fuel heat of combustion.
+*/
+
+double WesternAspen::getAspenHeatOfCombustionDead()
+{
+    return 8000.0;
+}
+
+//------------------------------------------------------------------------------
+/*! \brief Calculates the aspen live fuel heat of combustion
+*
+*  \return live fuel heat of combustion.
+*/
+
+double WesternAspen::getAspenHeatOfCombustionLive()
+{
+    return 8000.0;
 }
 
 //------------------------------------------------------------------------------
@@ -100,11 +122,11 @@ double WesternAspen::getAspenLoadDeadOneHour(int aspenFuelModelNumber, double as
         { 0.754, 0.797, 0.825, 0.854, 0.884, 0.8990 }
     };
     double load = 0.0;
-    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex < 5)
+    if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)
     {
         load = aspenInterpolate(aspenCuringLevel, Load[aspenFuelModelIndex]);
     }
-    return(load * 2000.0 / 43560.0);
+    return load * 2000.0 / 43560.0;
 }
 
 //------------------------------------------------------------------------------
@@ -125,11 +147,11 @@ double WesternAspen::getAspenLoadDeadTenHour(int aspenFuelModelNumber)
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[] = { 0.975, 0.475, 1.035, 1.340, 1.115 };
     double load = 0.0;
-    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex < 5)
+    if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)
     {
         load = Load[aspenFuelModelIndex];
     }
-    return(load * 2000.0 / 43560.0);
+    return load * 2000.0 / 43560.0;
 }
 
 //------------------------------------------------------------------------------
@@ -159,11 +181,11 @@ double WesternAspen::getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double
         { 0.150, 0.105, 0.075, 0.045, 0.015, 0.000 }
     };
     double load = 0.0;
-    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex < 5)
+    if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)
     {
         load = aspenInterpolate(aspenCuringLevel, Load[aspenFuelModelIndex]);
     }
-    return(load * 2000.0 / 43560.0);
+    return load * 2000.0 / 43560.0;
 }
 
 //------------------------------------------------------------------------------
@@ -193,11 +215,11 @@ double WesternAspen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspe
         { 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 }
     };
     double load = 0.0;
-    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex <= 5)
+    if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)
     {
         load = aspenInterpolate(aspenCuringLevel, Load[aspenFuelModelIndex]);
     }
-    return(load * 2000. / 43560.);
+    return load * 2000. / 43560.0;
 }
 
 //------------------------------------------------------------------------------
@@ -224,7 +246,7 @@ double WesternAspen::calculateAspenMortality(int severity, double flameLength, d
     }
     mortality_ = (mortality < 0.0) ? 0.0 : mortality;
     mortality_ = (mortality > 1.0) ? 1.0 : mortality;
-    return(mortality_);
+    return mortality_;
 }
 
 //------------------------------------------------------------------------------
@@ -254,11 +276,11 @@ double WesternAspen::getAspenSavrDeadOneHour(int aspenFuelModelNumber, double as
         { 1420., 1540., 1610., 1670., 1720., 1745. }
     };
     double savr = 1440.;
-    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex <= 5)
+    if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)
     {
         savr = aspenInterpolate(aspenCuringLevel, Savr[aspenFuelModelIndex]);
     }
-    return(savr);
+    return savr;
 }
 
 //------------------------------------------------------------------------------
@@ -269,7 +291,7 @@ double WesternAspen::getAspenSavrDeadOneHour(int aspenFuelModelNumber, double as
 
 double WesternAspen::getAspenSavrDeadTenHour()
 {
-    return(109.0);
+    return 109.0;
 }
 
 //------------------------------------------------------------------------------
@@ -280,7 +302,7 @@ double WesternAspen::getAspenSavrDeadTenHour()
 
 double WesternAspen::getAspenSavrLiveHerbaceous()
 {
-    return(2800.0);
+    return 2800.0;
 }
 
 //------------------------------------------------------------------------------
@@ -309,9 +331,9 @@ double WesternAspen::getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspe
         { 2440., 2440., 2440., 2440., 2440., 2440. }
     };
     double savr = 2440.;
-    if (aspenFuelModelIndex >= 1 && aspenFuelModelIndex <= 5)
+    if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)
     {
         savr = aspenInterpolate(aspenCuringLevel, Savr[aspenFuelModelIndex]);
     }
-    return(savr);
+    return savr;
 }

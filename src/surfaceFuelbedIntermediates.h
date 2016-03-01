@@ -47,11 +47,13 @@ private:
     void initializeMemberVariables();
     void setFuelLoad();
     void setMoistureContent();
+    void setDeadFuelMoistureOfExtinction();
+    void setFuelbedDepth();
     void setSAV();
     void setSAV(const PalmettoGallberry& palmettoGallberry);
     void countSizeClasses();
     void dynamicLoadTransfer();
-    void calculateFractionOfTotalSurfaceArea();
+    void calculateFractionOfTotalSurfaceAreaForLifeStates();
     void calculateTotalSurfaceAreaForLifeState(int lifeCategory);
     void calculateFractionOfTotalSurfaceAreaForSizeClasses(int lifeCategory);
     void sumFractionOfTotalSurfaceAreaBySizeClass(const double areaWeightingFactorDeadOrLive[MAX_PARTICLES], const double savrDeadOrLive[MAX_PARTICLES],
@@ -75,6 +77,7 @@ private:
 
     // Member variables
     int numberOfSizeClasses_[MAX_LIFE_STATES];                          // Number of size classes represented in the currently used fuel model (dead/live)
+    double depth_;                                                      // Depth of fuelbed in feet
     double weightedMoisture_[MAX_LIFE_STATES];                          // Weighted moisture content for both life and dead fuel categories (dead/live)
     double totalSurfaceArea_[MAX_LIFE_STATES];                          // Total surface area for life state (dead/live)
     double weightedHeat_[MAX_LIFE_STATES];                              // Weighted heat content for life state (dead/live)
@@ -100,6 +103,9 @@ private:
     double fractionOfTotalSurfaceAreaLive_[MAX_PARTICLES];              // Fraction of the total surface area in a fuel bed occupied by live size classes
     double sizeSortedFractionOfSurfaceAreaDead_[MAX_SAVR_SIZE_CLASSES]; // Intermediate fuel weighting values for dead fuels sorted by size class
     double sizeSortedFractionOfSurfaceAreaLive_[MAX_SAVR_SIZE_CLASSES]; // Intermediate fuel weighting values for live fuels sorted by size class
+
+    bool isUsingPalmettoGallberry_;
+    bool isUsingWesternAspen_;
 
     int fuelModelNumber_;           // The number associated with the current fuel model being used
     double liveFuelMois_;           // Live fuel moisture content

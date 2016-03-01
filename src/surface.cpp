@@ -13,18 +13,7 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 {
     double spreadRate = 0.0;
 
-    if (isUsingWesternAspen())
-    {
-        westernAspen_.initialize();
-        int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
-        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
-        double depth = westernAspen_.getAspenFuelBedDepth(aspenFuelModelNumber);
-        fuelModels_->setWesternAspenFuelModel(depth);
-        // Calculate fuel bed intermediates
-        surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
-        spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
-    }
-    else if (isUsingTwoFuelModels())
+    if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(*surfaceInputs_, surfaceFuelbedIntermediates_, surfaceFireSpread_);
@@ -101,29 +90,5 @@ void Surface::validateInputs()
     if (myWindSpeed < 0)
     {
         surfaceInputs_->setWindSpeed(0); // can't have negative wind speed
-    }
-
-    // This section exists only to facilate automated testing with the same set
-    // of input values, making it necessary only to increment the fuel model
-    // and still have valid data for that fuel models - WMC - 11/2015
-    if (fuelModels_->getFuelLoadOneHour(myFuelModelNumber) == 0)
-    {
-        surfaceInputs_->setMoistureOneHour(0);
-    }
-    if (fuelModels_->getFuelLoadTenHour(myFuelModelNumber) == 0)
-    {
-        surfaceInputs_->setMoistureTenHour(0);
-    }
-    if (fuelModels_->getFuelLoadHundredHour(myFuelModelNumber) == 0)
-    {
-        surfaceInputs_->setMoistureHundredHour(0);
-    }
-    if (fuelModels_->getFuelLoadLiveHerbaceous(myFuelModelNumber) == 0)
-    {
-        surfaceInputs_->setMoistureLiveHerbaceous(0);
-    }
-    if (fuelModels_->getFuelLoadLiveWoody(myFuelModelNumber) == 0)
-    {
-        surfaceInputs_->setMoistureLiveWoody(0);
-    }
+    } 
 }

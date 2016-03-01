@@ -13,7 +13,9 @@ public:
 
     // The following getter methods are used to populate FuelModel data fields 
     double getAspenFuelBedDepth(int typeIndex);
-    double getAspenFuelMoistureOfExtinctionDead();
+    double getAspenHeatOfCombustionDead();
+    double getAspenHeatOfCombustionLive();
+    double getAspenMoistureOfExtinctionDead();
     double getAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
     double getAspenLoadDeadTenHour(int aspenFuelModelNumber);
     double getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel);

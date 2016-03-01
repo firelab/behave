@@ -13,7 +13,6 @@
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
 #include "surfaceTwoFuelModels.h"
-#include "westernAspen.h"
 
 class Surface
 {
@@ -43,8 +42,6 @@ private:
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs* surfaceInputs_;
-    PalmettoGallberry palmettoGallberry_;
-    WesternAspen westernAspen_;
 
     void initializeMembers();
     void validateInputs();
