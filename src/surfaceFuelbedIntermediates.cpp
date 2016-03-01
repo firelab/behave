@@ -14,10 +14,6 @@ SurfaceFuelbedIntermediates::~SurfaceFuelbedIntermediates()
 
 void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 {
-
-    // TODO: Basically need to refactor and break down this method, this should
-    // be aided by the new OOD - WMC 08/2015
-
     // TODO: Look into the creation of two new classes, FuelBed and Particle, these
     // new classes should aid in refactoring and also improve the overall design - WMC 08/2015
 
