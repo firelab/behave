@@ -174,7 +174,7 @@ void SurfaceFuelbedIntermediates::setDeadFuelMoistureOfExtinction()
     {
         moistureOfExtinction_[DEAD] = palmettoGallberry_.getMoistureOfExtinctionDead();
     }
-    if (isUsingWesternAspen_)
+    else if (isUsingWesternAspen_)
     {
         moistureOfExtinction_[DEAD] = westernAspen_.getAspenMoistureOfExtinctionDead();
     }
