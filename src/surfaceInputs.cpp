@@ -15,7 +15,7 @@ void SurfaceInputs::initializeMembers()
     moistureLiveHerbaceous_ = 0.0;
     moistureLiveWoody_ = 0.0;
     slope_ = 0.0;
-    slopeAspect_ = 0.0;
+    aspect_ = 0.0;
     windSpeed_ = 0.0;
     windDirection_ = 0.0;
 
@@ -44,9 +44,9 @@ void SurfaceInputs::initializeMembers()
     userProvidedWindAdjustmentFactor_ = -1.0;
 }
 
-void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-    double windSpeed, double windDirection, double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio)
+    double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     initializeMembers();
 
@@ -57,7 +57,7 @@ void SurfaceInputs::updateInput(int fuelModelNumber, double moistureOneHour, dou
     }
 
     setSlope(slope);
-    slopeAspect_ = slopeAspect;
+    aspect_ = aspect;
 
     //	To Fix Original BehavePlus's occasional reporting 360 as direction of max 
     //	spread, just add an equaul sign after the less than or greater than sign 
@@ -109,7 +109,7 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     int fuelModelNumber = firstfuelModelNumber;
-    updateInput(fuelModelNumber, moistureOneHour, moistureTenHour,
+    updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
     firstFuelModelNumber_ = firstfuelModelNumber;
@@ -127,7 +127,7 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope,
     double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-    updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+    updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
     ageOfRough_ = ageOfRough;
@@ -142,7 +142,7 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-    updateInput(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+    updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
     aspenFuelModelNumber_ = aspenFuelModelNumber;
@@ -160,7 +160,7 @@ double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
 {
     // Important information: 
     // when wind is given relative to upslope, it is given as the direction the wind pushes the fire, not the direction from which is blowing - WMC 01/2016
-    double windDirectionFromUpslope = windDirectionFromNorth - slopeAspect_; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
+    double windDirectionFromUpslope = windDirectionFromNorth - aspect_; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
     return windDirectionFromUpslope;
 }
 
@@ -233,9 +233,9 @@ void SurfaceInputs::setSlope(double slope)
     slope_ = slope;
 }
 
-void SurfaceInputs::setSlopeAspect(double slopeAspect)
+void SurfaceInputs::setSlopeAspect(double aspect)
 {
-    slopeAspect_ = slopeAspect;
+    aspect_ = aspect;
 }
 
 void SurfaceInputs::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
@@ -292,9 +292,9 @@ double SurfaceInputs::getSlope() const
     return slope_;
 }
 
-double SurfaceInputs::getSlopeAspect() const
+double SurfaceInputs::getAspect() const
 {
-    return slopeAspect_;
+    return aspect_;
 }
 
 double SurfaceInputs::getFirstFuelModelCoverage() const

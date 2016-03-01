@@ -24,14 +24,13 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
     // Rothermel spread equation based on BEHAVE source code,
     // support for dynamic fuel models added 10/13/2004
 
-    initializeMemberVariables(); // Reset member variables to zero to forget previous state  
     const double PI = 3.14159265358979;
 
     double ovendryFuelLoad = 0.0;           // Ovendry fuel loading, Rothermel 1972
     double optimumPackingRatio = 0.0;       // Optimum packing ratio, Rothermel 1972, equation 37
-    double ovendryFuelDensity = 32.0;       // Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
-
     bool isDynamic = false;                 // Whether or not fuel model is dynamic
+
+    initializeMemberVariables(); // Reset member variables to zero to forget previous state  
 
     fuelModelNumber_ = surfaceInputs_->getFuelModelNumber();
 
@@ -86,7 +85,6 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     if (isUsingPalmettoGallberry_)
     {
         // Calculate load values for Palmetto-Gallberry
-        
         double ageOfRough = surfaceInputs_->getAgeOfRough();
         double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory();
         double palmettoCoverage = surfaceInputs_->getPalmettoCoverage();

@@ -110,8 +110,8 @@ double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest
 {
     if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
     {
-        double slopeAspect = surfaceInputs_->getSlopeAspect();
-        directionOfInterest -= slopeAspect + 180; // Direction of interest is now relative to north
+        double aspect = surfaceInputs_->getAspect();
+        directionOfInterest -= aspect + 180; // Direction of interest is now relative to north
     }
 
     double rosVector = forwardSpreadRate_;
@@ -331,8 +331,8 @@ double SurfaceFireSpread::getEffectiveWindSpeed() const
 double SurfaceFireSpread::convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const
 {
     double dirMaxSpreadRelativeToNorth = directionOfMaxSpreadFromUpslope;
-    double slopeAspect = surfaceInputs_->getSlopeAspect();
-    dirMaxSpreadRelativeToNorth += slopeAspect + 180; // spread direction is now relative to north
+    double aspect = surfaceInputs_->getAspect();
+    dirMaxSpreadRelativeToNorth += aspect + 180; // spread direction is now relative to north
     return dirMaxSpreadRelativeToNorth;
 }
 

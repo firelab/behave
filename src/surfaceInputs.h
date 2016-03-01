@@ -11,16 +11,16 @@ public:
     SurfaceInputs();
 
     void initializeMembers();
-    void updateInput(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous,
+    void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous,
         double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
-        double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio);
+        double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour, double moistureTenHour,
         double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-        double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double slopeAspect,
+        double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double aspect,
         double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory,
-        double palmettoCoverage, double overstoryBasalArea, double slope, double slopeAspect, double canopyCover, double canopyHeight, double crownRatio);
+        double palmettoCoverage, double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
@@ -73,7 +73,7 @@ public:
     double getMoistureDeadAtIndex(int index) const;
     double getMoistureLiveAtIndex(int index) const;
     double getSlope() const;
-    double getSlopeAspect() const;
+    double getAspect() const;
     double getWindDirection() const;
     double getWindSpeed() const;
     double getMoistureOneHour() const;
@@ -105,7 +105,7 @@ private:
     double windSpeed_;                  // measured wind speed in miles per hour
     double windDirection_;              // degrees, 0-360
     double slope_;                      // gradient 0-600 or degrees 0-80  
-    double slopeAspect_;                // degrees, 0-360
+    double aspect_;                     // aspect of slope in degrees, 0-360
     double moistureDead_[MAX_SIZES];    // dead fuel moisture content
     double moistureLive_[MAX_SIZES];    // live fuel moisture content
 
