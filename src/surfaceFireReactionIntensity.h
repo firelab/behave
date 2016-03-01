@@ -16,7 +16,7 @@ public:
     double getReactionIntensity() const;
 
 private:
-    const double SMIDGEN = 1.0e-07;                         //< Number used to test for "close enough to zero" to prevent divide - by - zero, sqrt(0), etc.
+    const double SMIDGEN = 1.0e-07;                         //< Number used to prevent division by zero, sqrt(0), etc.
     const int DEAD = 0;                                     //< Dead life state index
     const int LIVE = 1;                                     //< Live life state index
 

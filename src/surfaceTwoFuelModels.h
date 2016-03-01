@@ -13,7 +13,8 @@
 class SurfaceTwoFuelModels
 {
 public:
-    SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, SurfaceFireSpread& surfaceFireSpread);
+    SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates,
+        SurfaceFireSpread& surfaceFireSpread);
     double FuelBedWeighted(double directionOfInterest);
     double FBL_SurfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals,

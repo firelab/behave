@@ -81,7 +81,8 @@ void SurfaceFireReactionIntensity::calculateEtaM()
         }
         else
         {
-            etaM_[i] = 1.0 - (2.59 * relativeMoisture) + (5.11 * relativeMoisture * relativeMoisture) - (3.52 * relativeMoisture * relativeMoisture * relativeMoisture);
+            etaM_[i] = 1.0 - (2.59 * relativeMoisture) + (5.11 * relativeMoisture * relativeMoisture) - 
+                (3.52 * relativeMoisture * relativeMoisture * relativeMoisture);
         }
     }
 }

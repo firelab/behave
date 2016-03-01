@@ -138,9 +138,11 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     isUsingPalmettoGallberry_ = true;
 }
 
-void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-    double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, 
+    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
+    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope, double aspect,
+    double canopyCover, double canopyHeight, double crownRatio)
 {
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
@@ -159,8 +161,10 @@ void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpr
 double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
 {
     // Important information: 
-    // when wind is given relative to upslope, it is given as the direction the wind pushes the fire, not the direction from which is blowing - WMC 01/2016
-    double windDirectionFromUpslope = windDirectionFromNorth - aspect_; // wind direction is now in degrees clockwise relative to blowing in the upslope direction
+    // when wind is given relative to upslope, it is given as the direction the wind pushes the fire, 
+    // not the direction from which is blowing - WMC 01/2016
+    double windDirectionFromUpslope = windDirectionFromNorth - aspect_; // wind direction is now in degrees 
+        //clockwise relative to blowing in the upslope direction
     return windDirectionFromUpslope;
 }
 

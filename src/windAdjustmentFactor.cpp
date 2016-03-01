@@ -53,7 +53,8 @@ double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, do
     // Sheltered
     else
     {
-        windAdjustmentFactor = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight) / (0.13 * canopyHeight)));
+        windAdjustmentFactor = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight)
+            / (0.13 * canopyHeight)));
         windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::SHELTERED;
     }
     // Results
