@@ -18,7 +18,6 @@ public:
     double calculateSpreadRateAtVector(double directionOfInterest);
 
     // Public getters
-
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
     double getFirelineIntensity() const;
@@ -50,7 +49,7 @@ public:
 private:
     void initializeMembers();
     void calculateWindAdjustmentFactor();
-    void calculateWindFactors();
+    void calculateWindFactor();
     void calculateSlopeFactor();
     void calculateFireLengthToWidthRatio();
     void calculateSurfaceFireEccentricity();
@@ -69,7 +68,7 @@ private:
     static const int LIVE = 1;
     static const int MAX_LIFE_STATES = 2;
 
-    // Pointers to other objects
+    // Pointers and references to other objects
     const SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     const SurfaceInputs* surfaceInputs_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
@@ -80,7 +79,7 @@ private:
     double effectiveWindSpeed_;
     double windSpeedLimit_;
     double phiS_;											// Slope factor, Rothermel 1972, equation 51
-    double phiW_;											// Wind coefficient, Rothermel 1972, equation 47
+    double phiW_;											// Wind factor, Rothermel 1972, equation 47
     double windB_;											// Rothermel 1972, Equation 49
     double windC_;											// Rothermel 1972, Equation 48
     double windE_;											// Rothermel 1972, Equation 50

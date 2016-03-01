@@ -52,7 +52,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
 
     // Calculate Wind and Slope Factors
     calculateMidflameWindSpeed();
-    calculateWindFactors();
+    calculateWindFactor();
     calculateSlopeFactor();
 
     // No-wind no-slope spread rate and parameters
@@ -211,19 +211,16 @@ void  SurfaceFireSpread::calculateWindSpeedLimit()
     }
 }
 
-void SurfaceFireSpread::calculateWindFactors()
+void SurfaceFireSpread::calculateWindFactor()
 {
     double sigma = surfaceFuelbedIntermediates_->getSigma();
     double relativePackingRatio = surfaceFuelbedIntermediates_->getRelativePackingRatio();
     const double SMIDGEN = 1.0e-07; // Number used to test for "close enough to zero" to prevent divide - by - zero, sqrt(0), etc
 
-    // Wind factors
     windC_ = 7.47 * exp(-0.133 * pow(sigma, 0.55));
     windB_ = 0.02526 * pow(sigma, 0.54);
     windE_ = 0.715 * exp(-0.000359*sigma);
 
-    // Wind coefficient
-    //double windSpeedInFtPerMin = surfaceInputs_->getMidflameWindSpeed() * 88.0;		// ft/minute
     double windSpeedInFtPerMin = midflameWindSpeed_ * 88.0;		// ft/minute
     if (windSpeedInFtPerMin < SMIDGEN)
     {
