@@ -18,7 +18,6 @@ public:
     SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
     ~SurfaceFuelbedIntermediates();
     void calculateFuelbedIntermediates();
-    void calculateFuelbedIntermediates(const PalmettoGallberry& palmettoGallberry);
 
     // Public Getters
     double getFuelbedDepth() const;
