@@ -1,6 +1,6 @@
 #include "surfaceFireSpread.h"
 
-SurfaceFireSpread::SurfaceFireSpread(const SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs)
+SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs)
     : surfaceFireReactionIntensity_{ surfaceFuelbedIntermediates }, surfaceFirePropogatingFlux_{}
 {
     surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
@@ -42,6 +42,9 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     initializeMembers();
 
     const double PI = 3.141592653589793238462643383279;
+
+    // Calculate fuelbed intermediates
+    surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
 
     // Get needed fuelbed intermediates
     double sigma = surfaceFuelbedIntermediates_->getSigma();
@@ -410,11 +413,6 @@ void SurfaceFireSpread::setFlameLength(double flameLength)
 void SurfaceFireSpread::setFireLengthToWidthRatio(double lengthToWidthRatio)
 {
     fireLengthToWidthRatio_ = lengthToWidthRatio;
-}
-
-void SurfaceFireSpread::setFireEccentricity(double eccentricity)
-{
-    eccentricity_ = eccentricity;
 }
 
 void SurfaceFireSpread::setResidenceTime(double residenceTime)

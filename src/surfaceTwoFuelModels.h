@@ -15,8 +15,8 @@ class SurfaceTwoFuelModels
 public:
     SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates,
         SurfaceFireSpread& surfaceFireSpread);
-    double FuelBedWeighted(double directionOfInterest);
-    double FBL_SurfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
+    double calculateWeightedSpreadRate(double directionOfInterest);
+    double surfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals,
         double *harmonicRos = 0);
 

@@ -40,7 +40,6 @@ private:
     SurfaceInputs* surfaceInputs_;
 
     void initializeMembers();
-    void validateInputs();
 };
 
 #endif //SURFACEFIRE_HEADER

@@ -104,35 +104,8 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
 *      SurfaceFireVectorDirFromUpslope (deg)
 */
 
-double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
+double SurfaceTwoFuelModels::calculateWeightedSpreadRate(double directionOfInterest)
 {
-    /*
-        // Get the primary and secondary fuel models
-        FuelModel *fm[2];
-        fm[0] = currentFuelModel(1);
-        fm[1] = currentFuelModel(2);
-
-        // Get the primary and secondary fuel model coverages
-        double cov[2];
-        cov[0] = vSurfaceFuelBedCoverage1->m_nativeValue;
-        cov[1] = 1. - cov[0];
-
-        //----------------------------------------
-        // Determine individual fuel model outputs
-        //----------------------------------------
-
-        // Intermediate outputs for each fuel model
-        double ros[2];					// rate of spread
-        double fli[2];					// fireline intensity
-        double fl[2];					// flame length
-        double ewsh[2];					// effective wind speed
-        double flw[2];					// fire length-to-width ratio
-        double rxi[2], hua[2], mxd[2];	// reaction intensity, heat per unit area, dir of max spread
-        double waf[2], wmf[2];			// wind adjustment factor and wind speed at midflame
-        double wsl[2];					// wind speed limit
-        int    wsf[2];					// wind speed flag
-        */
-
     // For all arrays below: 
     // index 0 = first fuel model, index 1 = second fuel model
     int		fuelModelNumber[2];			// fuel model number
@@ -203,19 +176,10 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
     {
         //double lbRatio = lengthToWidthRatio[0]; // get first fuel model's length-to-width ratio
         double lbRatio = lengthToWidthRatio[1]; // get second? fuel model's length-to-width ratio, seems to agree with BehavePlus
-        //double lbRatio = 0;
-        //if (lengthToWidthRatio[0] <= lengthToWidthRatio[1])
-        //{
-        //	lbRatio = lengthToWidthRatio[0]; // lbRatio is the minimum of two fuel models
-        //}
-        //else
-        //{
-        //	lbRatio = lengthToWidthRatio[1];  // lbRatio is the minimum of two fuel models
-        //}
         int samples = 2; // from behavePlus.xml
         int depth = 2; // from behavePlus.xml
         int laterals = 0; // from behavePlus.xml
-        spreadRate_ = FBL_SurfaceFireExpectedSpreadRate(ros, coverage, 2, lbRatio,
+        spreadRate_ = surfaceFireExpectedSpreadRate(ros, coverage, 2, lbRatio,
             samples, depth, laterals);
     }
 
@@ -314,7 +278,7 @@ double SurfaceTwoFuelModels::FuelBedWeighted(double directionOfInterest)
     return spreadRate_;
 }
 
-double SurfaceTwoFuelModels::FBL_SurfaceFireExpectedSpreadRate(double *ros, double *cov, int fuels,
+double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *cov, int fuels,
     double lbRatio, int samples, int depth, int laterals, double *harmonicRos)
 {
     // Initialize results

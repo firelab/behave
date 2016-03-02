@@ -17,14 +17,10 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(*surfaceInputs_, surfaceFuelbedIntermediates_, surfaceFireSpread_);
-        spreadRate = surfaceTwoFuelModels.FuelBedWeighted(directionOfInterest);
+        spreadRate = surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
     }
     else // Use only one fuel model
     {
-        // Make sure inputs are within valid ranges
-        validateInputs();
-        // Calculate fuel bed intermediates
-        surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
         // Calculate spread rate
         spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
     }
@@ -61,24 +57,4 @@ double Surface::getFireEccentricity() const
 bool Surface::isUsingTwoFuelModels() const
 {
     return surfaceInputs_->isUsingTwoFuelModels();
-}
-
-void Surface::validateInputs()
-{
-    const int MINIMUM_FUEL_MODEL_NUMBER = 1;
-    const int MAXIMUM_FUEL_MODEL_NUMBER = 255;
-
-    int myFuelModelNumber = surfaceInputs_->getFuelModelNumber();
-    if (myFuelModelNumber < MINIMUM_FUEL_MODEL_NUMBER || myFuelModelNumber > MAXIMUM_FUEL_MODEL_NUMBER)
-    {
-        // TODO: Add proper error handling
-        surfaceInputs_->setFuelModelNumber(0); // prevent access out of index bounds
-        // Using Fuel Model Zero indicates and error
-    }
-
-    double myWindSpeed = surfaceInputs_->getWindSpeed();
-    if (myWindSpeed < 0)
-    {
-        surfaceInputs_->setWindSpeed(0); // can't have negative wind speed
-    } 
 }
