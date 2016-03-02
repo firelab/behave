@@ -63,16 +63,6 @@ bool Surface::isUsingTwoFuelModels() const
     return surfaceInputs_->isUsingTwoFuelModels();
 }
 
-bool Surface::isUsingPalmettoGallberry() const
-{
-    return surfaceInputs_->isUsingPalmettoGallberry();
-}
-
-bool Surface::isUsingWesternAspen() const
-{
-    return surfaceInputs_->isUsingWesternAspen();
-}
-
 void Surface::validateInputs()
 {
     const int MINIMUM_FUEL_MODEL_NUMBER = 1;

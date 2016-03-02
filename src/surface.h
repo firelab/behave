@@ -33,10 +33,6 @@ public:
 private:
     bool isUsingTwoFuelModels() const;
 
-    bool isUsingPalmettoGallberry() const;
-    
-    bool isUsingWesternAspen() const;
-
     // SURFACE Module component objects
     FuelModels*	fuelModels_;
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
