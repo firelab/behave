@@ -1,7 +1,5 @@
 #include "behave.h"
 
-#include <iostream>
-
 Behave::Behave()
     : surfaceInputs_{}, surface_{ fuelModels_, surfaceInputs_ }
 {
