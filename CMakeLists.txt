@@ -14,9 +14,8 @@ ENDIF(CLI)
 SET(SOURCE
     src/behave.cpp
     src/fuelModels.cpp
-    # Start of Surface Module
     src/newext.cpp
-    src/palmettoGallberry.h
+    src/palmettoGallberry.cpp
     src/randfuel.cpp
     src/randthread.cpp
     src/surface.cpp
@@ -27,16 +26,13 @@ SET(SOURCE
     src/surfaceFireSpread.cpp
     src/surfaceTwoFuelModels.cpp
     src/westernAspen.cpp
-    src/windAdjustmentFactor.cpp
-    # End of Surface Module
-)
+    src/windAdjustmentFactor.cpp)
 
 SET(HEADERS
     src/behave.h
     src/fuelModels.h
-    # Start of Surface Module
     src/newext.h
-    src/palmettoGallberry.cpp
+    src/palmettoGallberry.h
     src/randfuel.h
     src/randthread.h
     src/surface.h
@@ -48,9 +44,7 @@ SET(HEADERS
     src/surfaceFireSpread.h
     src/surfaceTwoFuelModels.h
     src/westernAspen.h
-    src/windAdjustmentFactor.h
-    # End of Surface Module
-)
+    src/windAdjustmentFactor.h)
 	
 ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})
 
