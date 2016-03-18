@@ -66,23 +66,6 @@ IF(CLI)
         ${HEADERS})
 ENDIF(CLI)
 
-ADD_EXECUTABLE(canopy_flow 
-    ${SOURCE} 
-    src/canopyFlow/src/canopy.cpp
-    src/canopyFlow/src/canopyFlow.cpp 
-    src/canopyFlow/src/canopy_normal_distribution.cpp
-    src/canopyFlow/src/canopy_triangle_distribution.cpp
-    src/canopyFlow/src/massman_distribution.cpp
-    src/canopyFlow/src/measured_distribution.cpp
-    src/canopyFlow/src/main.cpp
-    ${HEADERS}
-    src/canopyFlow/src/canopy.h
-    src/canopyFlow/src/canopyFlow.h
-    src/canopyFlow/src/canopy_normal_distribution.h
-    src/canopyFlow/src/canopy_triangle_distribution.h
-    src/canopyFlow/src/massman_distribution.h
-    src/canopyFlow/src/measured_distribution.h)
-
 IF(GUI)
     # Set up Qt
     SET(CMAKE_INCLUDE_CURRENT_DIR ON)
