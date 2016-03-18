@@ -22,9 +22,10 @@ BehaveQtMainWindow::BehaveQtMainWindow(QWidget *parent)
     ui.fuelModelLineEdit->setProperty("ID", 0);
 }
 
-void BehaveQtMainWindow::fuelInputChanged(const QString& text)
+void BehaveQtMainWindow::fuelModelInputChanged(const QString& text)
 {
     int fuelModelNumber = text.toInt();
+    behave.setFirstFuelModelNumber(fuelModelNumber);
 }
 
 BehaveQtMainWindow::~BehaveQtMainWindow()

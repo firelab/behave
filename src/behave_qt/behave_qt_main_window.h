@@ -15,7 +15,7 @@ public:
     ~BehaveQtMainWindow();
 
 public slots:
-    void fuelInputChanged(const QString& text);
+    void fuelModelInputChanged(const QString& text);
 
 private:
     Ui::behave_qt_main_windowClass ui;
