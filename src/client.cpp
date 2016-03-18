@@ -7,8 +7,6 @@
 int main()
 {
     //clock_t tStart = clock();
-    //double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
-    //std::cout << "Total execution time for " << 1000 << " program run is " << executionTimeInSeconds << " seconds." << std::endl;
 
     // Surface Fire Inputs;
     int fuelModelNumber = 0;
@@ -79,7 +77,7 @@ int main()
         std::cout << "degrees" << std::endl << std::endl;
     }
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 11; i++)
     {
         fuelModelNumber = i;
         moistureOneHour = 0.06;
@@ -112,44 +110,45 @@ int main()
         //overstoryBasalArea = 100;
         //behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
         //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+
         //std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
         //flameLength = behave.getFlameLength();
         //flameLength = floor(flameLength * 10 + 0.5) / 10;
         //std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
 
         // Western Apsen test
-        aspenFuelModelNumber = 5;
-        aspenCuringLevel = 0.0;
-        DBH = 2;
-        behave.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, AspenFireSeverity::LOW, DBH, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-        spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-        std::cout << "Spread rate for Western is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
-        flameLength = behave.getFlameLength();
-        flameLength = floor(flameLength * 10 + 0.5) / 10;
-        std::cout << "Flame length for Western Aspen is " << flameLength << " ft" << std::endl << std::endl;
-
-        // Two Fuel Models test
-        //firstFuelModelNumber = 1;
-        //secondFuelModelNumber = 124;
-        //coverage = 0 + (.10 * i);
-        //behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, coverage, TwoFuelModelsMethod::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        //aspenFuelModelNumber = 5;
+        //aspenCuringLevel = 0.0;
+        //DBH = 2;
+        //behave.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, AspenFireSeverity::LOW, DBH, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
         //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-        //spreadRate = floor(spreadRate * 10 + 0.5) / 10;
-        //std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << std::setprecision(0) << coverage * 100 << "%" << std::endl;
-        //std::cout << "is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+        //std::cout << "Spread rate for Western is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
         //flameLength = behave.getFlameLength();
         //flameLength = floor(flameLength * 10 + 0.5) / 10;
-        //std::cout << "Flame length for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " is " << flameLength << " ft" << std::endl << std::endl;
+        //std::cout << "Flame length for Western Aspen is " << flameLength << " ft" << std::endl << std::endl;
+
+        // Two Fuel Models test
+        firstFuelModelNumber = 1;
+        secondFuelModelNumber = 124;
+        coverage = 0 + (.10 * i);
+        behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, coverage, TwoFuelModelsMethod::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+        spreadRate = floor(spreadRate * 10 + 0.5) / 10;
+        std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << std::setprecision(0) << coverage * 100 << "%" << std::endl;
+        std::cout << "is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+        flameLength = behave.getFlameLength();
+        flameLength = floor(flameLength * 10 + 0.5) / 10;
+        std::cout << "Flame length for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " is " << flameLength << " ft" << std::endl << std::endl;
 
         // Direction of Max Spread test
         //directionOfMaxSpread = behave.getDirectionOfMaxSpread();
         //std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread)
-        //	<< " degrees" << std::endl;
+        //	<< " degrees" << std::endl09
     }
 
     // Used for debug
     //double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
-    //std::cout << "Total execution time for " << 1000 << " program run is " << executionTimeInSeconds << " seconds." << std::endl;
+    //std::cout << "Total execution time for " << 1000000 << " fire spread calculations is " << executionTimeInSeconds << " seconds." << std::endl;
     std::cout << "Press Enter to continue";
     std::cin.get();
 

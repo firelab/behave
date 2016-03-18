@@ -257,6 +257,11 @@ void  SurfaceInputs::setWindSpeed(double windSpeed)
     windSpeed_ = windSpeed;
 }
 
+void  SurfaceInputs::setWindDirection(double windDirection)
+{
+    windDirection_ = windDirection;
+}
+
 void  SurfaceInputs::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
     firstFuelModelNumber_ = firstFuelModelNumber;

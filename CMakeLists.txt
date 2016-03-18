@@ -1,15 +1,23 @@
 
 # ****************************************************************************/
-# This is set arbitrarily at 2.6.  If there is proof that it works better, 
-# set it.  Also set all sub CMakeLists.txt
+# This is set to 2.8.11 to use the target_link_libraries command. In CMake 
+# 2.8.11 and later versions, this command automatically adds appropriate 
+# include directories, compile definitions, the position-independent-code flag, 
+# and links to the qtmain.lib library on Windows.
 # *****************************************************************************
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 PROJECT(behave)
 
 OPTION(CLI "Enable CLI boost parser" OFF)
 IF(CLI)
     ADD_DEFINITIONS(-DCLI)
 ENDIF(CLI)
+
+OPTION(GUI "Enable Qt Gui" OFF)
+IF(GUI)
+    ADD_DEFINITIONS(-DGUI)
+ENDIF(GUI)
 
 SET(SOURCE
     src/behave.cpp
@@ -45,9 +53,83 @@ SET(HEADERS
     src/surfaceTwoFuelModels.h
     src/westernAspen.h
     src/windAdjustmentFactor.h)
-	
-ADD_EXECUTABLE(behave ${SOURCE} src/client.cpp ${HEADERS})
+
+ADD_EXECUTABLE(behave 
+    ${SOURCE} 
+    src/client.cpp 
+    ${HEADERS})
 
 IF(CLI)
-    ADD_EXECUTABLE(behave-cli ${SOURCE} src/cli.cpp ${HEADERS})
+    ADD_EXECUTABLE(behave-cli 
+        ${SOURCE}
+        src/cli.cpp
+        ${HEADERS})
 ENDIF(CLI)
+
+ADD_EXECUTABLE(canopy_flow 
+    ${SOURCE} 
+    src/canopyFlow/src/canopy.cpp
+    src/canopyFlow/src/canopyFlow.cpp 
+    src/canopyFlow/src/canopy_normal_distribution.cpp
+    src/canopyFlow/src/canopy_triangle_distribution.cpp
+    src/canopyFlow/src/massman_distribution.cpp
+    src/canopyFlow/src/measured_distribution.cpp
+    src/canopyFlow/src/main.cpp
+    ${HEADERS}
+    src/canopyFlow/src/canopy.h
+    src/canopyFlow/src/canopyFlow.h
+    src/canopyFlow/src/canopy_normal_distribution.h
+    src/canopyFlow/src/canopy_triangle_distribution.h
+    src/canopyFlow/src/massman_distribution.h
+    src/canopyFlow/src/measured_distribution.h)
+
+IF(GUI)
+    # Set up Qt
+    SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+    SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
+
+    SET(CMAKE_AUTOMOC ON)
+
+    FIND_PACKAGE(Qt5Core REQUIRED)
+
+    GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
+
+    # Find the QtWidgets library
+    FIND_PACKAGE(Qt5Widgets REQUIRED)
+
+    SET(BEHAVE_QT_SOURCE
+        src/behave_qt/behave_qt_main_window.cpp
+        src/behave_qt/behave_qtree_widget.cpp
+        src/behave_qt/main.cpp)
+
+    SET(BEHAVE_QT_HEADERS
+        src/behave_qt/behave_qt_main_window.h
+        src/behave_qt/behave_qt_main_window_enums.h
+        src/behave_qt/behave_qtree_widget.h)
+
+    QT5_WRAP_UI(UIS_HDRS 
+        src/behave_qt/behave_qt_main_window.ui
+        src/behave_qt/surface_inputs.ui)
+
+    SOURCE_GROUP("UI Files"  FILES
+        src/behave_qt/behave_qt_main_window.ui
+        src/behave_qt/surface_inputs.ui)
+
+    SOURCE_GROUP("Behave Qt Source Files" FILES ${BEHAVE_QT_SOURCE})
+
+    SOURCE_GROUP("Behave Qt Header Files" FILES ${BEHAVE_QT_HEADERS})
+
+    SOURCE_GROUP("Behave Source Files" FILES ${SOURCE})
+
+    SOURCE_GROUP("Behave Header Files" FILES ${HEADERS})
+
+    ADD_EXECUTABLE(behave_qt
+        ${SOURCE}
+        ${HEADERS}
+        ${BEHAVE_QT_SOURCE}
+        ${BEHAVE_QT_HEADERS}
+        ${UIS_HDRS})
+
+    TARGET_LINK_LIBRARIES(behave_qt Qt5::Widgets)
+ENDIF(GUI)

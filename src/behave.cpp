@@ -17,6 +17,76 @@ Behave::~Behave()
     // Default Destructor
 }
 
+void Behave::updateFuelModelNumber(int fuelModelNumber)
+{
+    surfaceInputs_.setFuelModelNumber(fuelModelNumber);
+}
+
+void Behave::setMoistureOneHour(double moistureOneHour)
+{
+    surfaceInputs_.setMoistureOneHour(moistureOneHour);
+}
+
+void Behave::setMoistureTenHour(double moistureTenHour)
+{
+    surfaceInputs_.setMoistureTenHour(moistureTenHour);
+}
+
+void Behave::setMoistureHundredHour(double moistureHundredHour)
+{
+    surfaceInputs_.setMoistureHundredHour(moistureHundredHour);
+}
+
+void Behave::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
+{
+    surfaceInputs_.setMoistureLiveHerbaceous(moistureLiveHerbaceous);
+}
+
+void Behave::setMoistureLiveWoody(double moistureLiveWoody)
+{
+    surfaceInputs_.setMoistureLiveWoody(moistureLiveWoody);
+}
+
+void Behave::setSlope(double slope)
+{
+    surfaceInputs_.setSlope(slope);
+}
+
+void Behave::setSlopeAspect(double slopeAspect)
+{
+    surfaceInputs_.setSlopeAspect(slopeAspect);
+}
+
+void Behave::setWindSpeed(double windSpeed)
+{
+    surfaceInputs_.setWindSpeed(windSpeed);
+}
+
+void Behave::setWindDirection(double windDirection)
+{
+    surfaceInputs_.setWindDirection(windDirection);
+}
+
+void Behave::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
+{
+    surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
+}
+
+void Behave::setFirstFuelModelNumber(int firstFuelModelNumber)
+{
+    surfaceInputs_.setFirstFuelModelNumber(firstFuelModelNumber);
+}
+
+void Behave::setSecondFuelModelNumber(int secondFuelModelNumber)
+{
+    surfaceInputs_.setSecondFuelModelNumber(secondFuelModelNumber);
+}
+
+void Behave::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod)
+{
+    surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
+}
+
 void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)

@@ -17,7 +17,22 @@ public:
     explicit Behave(SurfaceInputs &surfaceInputs);
     ~Behave();
 
-    // SURFACE Module Inputs 
+    // SURFACE Module Inputs
+    void updateFuelModelNumber(int fuelModelNumber);
+    void setMoistureOneHour(double moistureOneHour);
+    void setMoistureTenHour(double moistureTenHour);
+    void setMoistureHundredHour(double moistureHundredHour);
+    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous);
+    void setMoistureLiveWoody(double moistureLiveWoody);
+    void setSlope(double slope);
+    void setSlopeAspect(double slopeAspect);
+    void setWindSpeed(double windSpeed);
+    void setWindDirection(double windDirection);
+    void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
+    void setFirstFuelModelNumber(int firstFuelModelNumber);
+    void setSecondFuelModelNumber(int secondFuelModelNumber);
+    void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
+
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
