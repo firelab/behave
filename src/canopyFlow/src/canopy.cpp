@@ -154,43 +154,44 @@ void canopy::initialize()
 
 void canopy::plot()
 {
-    double max = haz[0];
-    for(int i=0; i<numNodes; i++)
-    {
-        if(haz[i]>max)
-            max = haz[i];
-    }
-    printf("max = %lf\n", max);
+
+    //double max = haz[0];
+    //for(int i=0; i<numNodes; i++)
+    //{
+    //    if(haz[i]>max)
+    //        max = haz[i];
+    //}
+//    printf("max = %lf\n", max);
 
 //    PLFLT xmin =0, ymin=0, xmax=1, ymax=1,
 //            x[6]= {0.0, 1.0, 2.0, 3.0, 4.0, 5.0},
 //            y[6] = {0., 1.0, 4.0, 9.1, 15.5, 25.3};
 
-    double* y = new double[numNodes];
-    for(int i=0; i<numNodes; i++)
-    {
-        y[i] = i*cellsize;
-    }
+    //double* y = new double[numNodes];
+    //for(int i=0; i<numNodes; i++)
+    //{
+    //    y[i] = i*cellsize;
+    //}
 
-    double* x = new double[numNodes];
-    for(int i=0; i<numNodes; i++)
-    {
+    //double* x = new double[numNodes];
+    //for(int i=0; i<numNodes; i++)
+    //{
 
 
 
 
         //---------------FIX THIS------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //x[i] = haz[i]/max;
-        x[i] = haz[i];
+        //x[i] = haz[i];
         //---------------FIX THIS------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
 
 
-        if(i%100 == 0)
-            printf("%lf\t%lf\n",x[i], y[i]);
-    }
+        //if(i%100 == 0)
+        //    printf("%lf\t%lf\n",x[i], y[i]);
+    //}
 
     //PLFLT xmin =0, ymin=0, xmax=0.001, ymax=1;
 
@@ -237,10 +238,10 @@ void canopy::plot()
 
     //delete pls; // close plot
 
-    delete x;
-    x = NULL;
-    delete y;
-    y = NULL;
+    //delete x;
+    //x = NULL;
+    //delete y;
+    //y = NULL;
 }
 
 double canopy::get_dragCoef(double zOverh)
