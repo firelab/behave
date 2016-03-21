@@ -9,7 +9,6 @@ class BehaveTree: public QTreeWidget
 
 public:
     BehaveTree(QWidget* parent);
-    BehaveTree(const BehaveTree& other);
     void establishConnections();
 
 signals :

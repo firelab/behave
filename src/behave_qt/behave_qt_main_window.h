@@ -18,6 +18,9 @@ public slots:
     void fuelModelInputChanged(const QString& text);
 
 private:
+    void establishConnections();
+    void populateTree();
+
     Ui::behave_qt_main_windowClass ui;
     Behave behave;
 };
