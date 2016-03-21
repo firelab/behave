@@ -25,39 +25,39 @@ IF(CANOPY)
 ENDIF(CANOPY)
 
 SET(SOURCE
-    src/behave.cpp
-    src/fuelModels.cpp
-    src/newext.cpp
-    src/palmettoGallberry.cpp
-    src/randfuel.cpp
-    src/randthread.cpp
-    src/surface.cpp
-    src/surfaceFirePropogatingFlux.cpp
-    src/surfaceFireReactionIntensity.cpp
-    src/surfaceFuelbedIntermediates.cpp
-    src/surfaceInputs.cpp
-    src/surfaceFireSpread.cpp
-    src/surfaceTwoFuelModels.cpp
-    src/westernAspen.cpp
-    src/windAdjustmentFactor.cpp)
+    ${PROJECT_SOURCE_DIR}/src/behave.cpp
+    ${PROJECT_SOURCE_DIR}/src/fuelModels.cpp
+    ${PROJECT_SOURCE_DIR}/src/newext.cpp
+    ${PROJECT_SOURCE_DIR}/src/palmettoGallberry.cpp
+    ${PROJECT_SOURCE_DIR}/src/randfuel.cpp
+    ${PROJECT_SOURCE_DIR}/src/randthread.cpp
+    ${PROJECT_SOURCE_DIR}/src/surface.cpp
+    ${PROJECT_SOURCE_DIR}/src/surfaceFirePropogatingFlux.cpp
+    ${PROJECT_SOURCE_DIR}/src/surfaceFireReactionIntensity.cpp
+    ${PROJECT_SOURCE_DIR}/src/surfaceFuelbedIntermediates.cpp
+    ${PROJECT_SOURCE_DIR}/src/surfaceInputs.cpp
+    ${PROJECT_SOURCE_DIR}/src/surfaceFireSpread.cpp
+    ${PROJECT_SOURCE_DIR}/src/surfaceTwoFuelModels.cpp
+    ${PROJECT_SOURCE_DIR}/src/westernAspen.cpp
+    ${PROJECT_SOURCE_DIR}/src/windAdjustmentFactor.cpp)
 
 SET(HEADERS
-    src/behave.h
-    src/fuelModels.h
-    src/newext.h
-    src/palmettoGallberry.h
-    src/randfuel.h
-    src/randthread.h
-    src/surface.h
-    src/surfaceEnums.h
-    src/surfaceFirePropogatingFlux.h
-    src/surfaceFireReactionIntensity.h
-    src/surfaceFuelbedIntermediates.h
-    src/surfaceInputs.h
-    src/surfaceFireSpread.h
-    src/surfaceTwoFuelModels.h
-    src/westernAspen.h
-    src/windAdjustmentFactor.h)
+    ${PROJECT_SOURCE_DIR}/src/behave.h
+    ${PROJECT_SOURCE_DIR}/src/fuelModels.h
+    ${PROJECT_SOURCE_DIR}/src/newext.h
+    ${PROJECT_SOURCE_DIR}/src/palmettoGallberry.h
+    ${PROJECT_SOURCE_DIR}/src/randfuel.h
+    ${PROJECT_SOURCE_DIR}/src/randthread.h
+    ${PROJECT_SOURCE_DIR}/src/surface.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceEnums.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceFirePropogatingFlux.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceFireReactionIntensity.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceFuelbedIntermediates.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceInputs.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceFireSpread.h
+    ${PROJECT_SOURCE_DIR}/src/surfaceTwoFuelModels.h
+    ${PROJECT_SOURCE_DIR}/src/westernAspen.h
+    ${PROJECT_SOURCE_DIR}/src/windAdjustmentFactor.h)
 
 ADD_EXECUTABLE(behave 
     ${SOURCE} 
@@ -67,26 +67,26 @@ ADD_EXECUTABLE(behave
 IF(CANOPY)
     ADD_EXECUTABLE(canopy_flow 
         ${SOURCE} 
-        src/canopyFlow/src/canopy.cpp
-        src/canopyFlow/src/canopyFlow.cpp 
-        src/canopyFlow/src/canopy_normal_distribution.cpp
-        src/canopyFlow/src/canopy_triangle_distribution.cpp
-        src/canopyFlow/src/massman_distribution.cpp
-        src/canopyFlow/src/measured_distribution.cpp
-        src/canopyFlow/src/main.cpp
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopy.cpp
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopyFlow.cpp 
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopy_normal_distribution.cpp
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopy_triangle_distribution.cpp
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/massman_distribution.cpp
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/measured_distribution.cpp
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/main.cpp
         ${HEADERS}
-        src/canopyFlow/src/canopy.h
-        src/canopyFlow/src/canopyFlow.h
-        src/canopyFlow/src/canopy_normal_distribution.h
-        src/canopyFlow/src/canopy_triangle_distribution.h
-        src/canopyFlow/src/massman_distribution.h
-        src/canopyFlow/src/measured_distribution.h)
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopy.h
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopyFlow.h
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopy_normal_distribution.h
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/canopy_triangle_distribution.h
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/massman_distribution.h
+        ${PROJECT_SOURCE_DIR}/src/canopyFlow/src/measured_distribution.h)
 ENDIF(CANOPY)
 
 IF(CLI)
     ADD_EXECUTABLE(behave-cli 
         ${SOURCE}
-        src/cli/behaveCli.cpp
+        ${PROJECT_SOURCE_DIR}/src/cli/behaveCli.cpp
         ${HEADERS})
 ENDIF(CLI)
 
@@ -106,20 +106,20 @@ IF(GUI)
     FIND_PACKAGE(Qt5Widgets REQUIRED)
 
     SET(BEHAVE_QT_SOURCE
-        src/behave_qt/behave_qt_main_window.cpp
-        src/behave_qt/behave_qtree_widget.cpp
-        src/behave_qt/main.cpp)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.cpp
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qtree_widget.cpp
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/main.cpp)
 
     SET(BEHAVE_QT_HEADERS
-        src/behave_qt/behave_qt_main_window.h
-        src/behave_qt/behave_qt_main_window_enums.h
-        src/behave_qt/behave_qtree_widget.h)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.h
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window_enums.h
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qtree_widget.h)
 
     QT5_WRAP_UI(UIS_HDRS 
-        src/behave_qt/behave_qt_main_window.ui)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.ui)
 
     SOURCE_GROUP("UI Files"  FILES
-        src/behave_qt/behave_qt_main_window.ui)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.ui)
 
     SOURCE_GROUP("Behave Qt Source Files" FILES ${BEHAVE_QT_SOURCE})
 
