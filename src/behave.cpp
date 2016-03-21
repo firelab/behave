@@ -72,6 +72,11 @@ void Behave::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngl
     surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
 }
 
+void Behave::setFuelModelNumber(int fuelModelNumber)
+{
+    surfaceInputs_.setFuelModelNumber(fuelModelNumber);
+}
+
 void Behave::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
     surfaceInputs_.setFirstFuelModelNumber(firstFuelModelNumber);
