@@ -87,7 +87,22 @@ IF(CLI)
     ADD_EXECUTABLE(behave-cli 
         ${SOURCE}
         ${PROJECT_SOURCE_DIR}/src/cli/src/behaveCli.cpp
-        ${HEADERS})
+        ${PROJECT_SOURCE_DIR}/src/behave.h
+        ${PROJECT_SOURCE_DIR}/src/fuelModels.h
+        ${PROJECT_SOURCE_DIR}/src/newext.h
+        ${PROJECT_SOURCE_DIR}/src/palmettoGallberry.h
+        ${PROJECT_SOURCE_DIR}/src/randfuel.h
+        ${PROJECT_SOURCE_DIR}/src/randthread.h
+        ${PROJECT_SOURCE_DIR}/src/surface.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceEnums.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceFirePropogatingFlux.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceFireReactionIntensity.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceFuelbedIntermediates.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceInputs.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceFireSpread.h
+        ${PROJECT_SOURCE_DIR}/src/surfaceTwoFuelModels.h
+        ${PROJECT_SOURCE_DIR}/src/westernAspen.h
+        ${PROJECT_SOURCE_DIR}/src/windAdjustmentFactor.h)
 ENDIF(CLI)
 
 IF(GUI)
