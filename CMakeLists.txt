@@ -7,6 +7,9 @@
 # *****************************************************************************
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
+
 PROJECT(behave)
 
 OPTION(CLI "Enable CLI boost parser" OFF)
