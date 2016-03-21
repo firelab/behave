@@ -4,7 +4,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_behave_qt_main_window.h"
 #include "src/behave.h"
-#include "src/behave_qt/behave_qt_main_window_enums.h"
+#include "src/behave_qt/src/behave_qt_main_window_enums.h"
 
 class BehaveQtMainWindow : public QMainWindow
 {
@@ -16,6 +16,14 @@ public:
 
 public slots:
     void fuelModelInputChanged(const QString& text);
+    void oneHourMoistureInputChanged(const QString& text);
+    void tenHourMoistureInputChanged(const QString& text);
+    void hundredHourMoistureInputChanged(const QString& text);
+    void liveHerbaceousMoistureInputChanged(const QString& text);
+    void liveWoodyMoistureInputChanged(const QString& text);
+    void windSpeedInputChanged(const QString& text);
+    void slopeInputChanged(const QString& text);
+    void calculateClicked();
 
 private:
     void establishConnections();

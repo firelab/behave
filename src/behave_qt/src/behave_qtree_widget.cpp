@@ -14,5 +14,5 @@ void BehaveTree::currentItemChanged(QTreeWidgetItem *item)
 
 void BehaveTree::establishConnections()
 {
-    connect(this, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(currentItemChanged(QTreeWidgetItem*)));
+    connect(this, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), this, SLOT(currentItemChanged(QTreeWidgetItem*)));
 }

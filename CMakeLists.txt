@@ -86,7 +86,7 @@ ENDIF(CANOPY)
 IF(CLI)
     ADD_EXECUTABLE(behave-cli 
         ${SOURCE}
-        ${PROJECT_SOURCE_DIR}/src/cli/behaveCli.cpp
+        ${PROJECT_SOURCE_DIR}/src/cli/src/behaveCli.cpp
         ${HEADERS})
 ENDIF(CLI)
 
@@ -106,20 +106,20 @@ IF(GUI)
     FIND_PACKAGE(Qt5Widgets REQUIRED)
 
     SET(BEHAVE_QT_SOURCE
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.cpp
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qtree_widget.cpp
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/main.cpp)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.cpp
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qtree_widget.cpp
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/main.cpp)
 
     SET(BEHAVE_QT_HEADERS
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.h
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window_enums.h
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qtree_widget.h)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.h
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window_enums.h
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qtree_widget.h)
 
     QT5_WRAP_UI(UIS_HDRS 
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.ui)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.ui)
 
     SOURCE_GROUP("UI Files"  FILES
-        ${PROJECT_SOURCE_DIR}/src/behave_qt/behave_qt_main_window.ui)
+        ${PROJECT_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.ui)
 
     SOURCE_GROUP("Behave Qt Source Files" FILES ${BEHAVE_QT_SOURCE})
 
