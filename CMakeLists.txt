@@ -8,9 +8,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src
-                    ${PROJECT_SOURCE_DIR}/src/cli/src
-                    ${PROJECT_SOURCE_DIR}/src/canopy_flow/src)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src
+                    ${CMAKE_SOURCE_DIR}/src/cli/src
+                    ${CMAKE_SOURCE_DIR}/src/canopy_flow/src)
 
 PROJECT(behave)
 

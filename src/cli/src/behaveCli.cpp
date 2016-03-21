@@ -9,7 +9,7 @@
 #include <string.h>
 #include <algorithm>
 
-#include "../../behave.h"
+#include "behave.h"
 
 #define EQUAL(a,b) (strcmp(a,b)==0)
 
