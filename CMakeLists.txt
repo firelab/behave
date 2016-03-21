@@ -8,7 +8,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src
+                    ${PROJECT_SOURCE_DIR}/src/cli/src
+                    ${PROJECT_SOURCE_DIR}/src/canopy_flow/src)
 
 PROJECT(behave)
 
@@ -28,39 +30,39 @@ IF(CANOPY)
 ENDIF(CANOPY)
 
 SET(SOURCE
-    ${CMAKE_SOURCE_DIR}/src/behave.cpp
-    ${CMAKE_SOURCE_DIR}/src/fuelModels.cpp
-    ${CMAKE_SOURCE_DIR}/src/newext.cpp
-    ${CMAKE_SOURCE_DIR}/src/palmettoGallberry.cpp
-    ${CMAKE_SOURCE_DIR}/src/randfuel.cpp
-    ${CMAKE_SOURCE_DIR}/src/randthread.cpp
-    ${CMAKE_SOURCE_DIR}/src/surface.cpp
-    ${CMAKE_SOURCE_DIR}/src/surfaceFirePropogatingFlux.cpp
-    ${CMAKE_SOURCE_DIR}/src/surfaceFireReactionIntensity.cpp
-    ${CMAKE_SOURCE_DIR}/src/surfaceFuelbedIntermediates.cpp
-    ${CMAKE_SOURCE_DIR}/src/surfaceInputs.cpp
-    ${CMAKE_SOURCE_DIR}/src/surfaceFireSpread.cpp
-    ${CMAKE_SOURCE_DIR}/src/surfaceTwoFuelModels.cpp
-    ${CMAKE_SOURCE_DIR}/src/westernAspen.cpp
-    ${CMAKE_SOURCE_DIR}/src/windAdjustmentFactor.cpp)
+    src/behave.cpp
+    src/fuelModels.cpp
+    src/newext.cpp
+    src/palmettoGallberry.cpp
+    src/randfuel.cpp
+    src/randthread.cpp
+    src/surface.cpp
+    src/surfaceFirePropogatingFlux.cpp
+    src/surfaceFireReactionIntensity.cpp
+    src/surfaceFuelbedIntermediates.cpp
+    src/surfaceInputs.cpp
+    src/surfaceFireSpread.cpp
+    src/surfaceTwoFuelModels.cpp
+    src/westernAspen.cpp
+    src/windAdjustmentFactor.cpp)
 
 SET(HEADERS
-    ${CMAKE_SOURCE_DIR}/src/behave.h
-    ${CMAKE_SOURCE_DIR}/src/fuelModels.h
-    ${CMAKE_SOURCE_DIR}/src/newext.h
-    ${CMAKE_SOURCE_DIR}/src/palmettoGallberry.h
-    ${CMAKE_SOURCE_DIR}/src/randfuel.h
-    ${CMAKE_SOURCE_DIR}/src/randthread.h
-    ${CMAKE_SOURCE_DIR}/src/surface.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceEnums.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceFirePropogatingFlux.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceFireReactionIntensity.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceFuelbedIntermediates.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceInputs.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceFireSpread.h
-    ${CMAKE_SOURCE_DIR}/src/surfaceTwoFuelModels.h
-    ${CMAKE_SOURCE_DIR}/src/westernAspen.h
-    ${CMAKE_SOURCE_DIR}/src/windAdjustmentFactor.h)
+    src/behave.h
+    src/fuelModels.h
+    src/newext.h
+    src/palmettoGallberry.h
+    src/randfuel.h
+    src/randthread.h
+    src/surface.h
+    src/surfaceEnums.h
+    src/surfaceFirePropogatingFlux.h
+    src/surfaceFireReactionIntensity.h
+    src/surfaceFuelbedIntermediates.h
+    src/surfaceInputs.h
+    src/surfaceFireSpread.h
+    src/surfaceTwoFuelModels.h
+    src/westernAspen.h
+    src/windAdjustmentFactor.h)
 
 ADD_EXECUTABLE(behave 
     ${SOURCE} 
@@ -70,26 +72,26 @@ ADD_EXECUTABLE(behave
 IF(CANOPY)
     ADD_EXECUTABLE(canopy_flow 
         ${SOURCE} 
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopy.cpp
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopyFlow.cpp 
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopy_normal_distribution.cpp
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopy_triangle_distribution.cpp
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/massman_distribution.cpp
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/measured_distribution.cpp
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/main.cpp
+        src/canopyFlow/src/canopy.cpp
+        src/canopyFlow/src/canopyFlow.cpp 
+        src/canopyFlow/src/canopy_normal_distribution.cpp
+        src/canopyFlow/src/canopy_triangle_distribution.cpp
+        src/canopyFlow/src/massman_distribution.cpp
+        src/canopyFlow/src/measured_distribution.cpp
+        src/canopyFlow/src/main.cpp
         ${HEADERS}
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopy.h
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopyFlow.h
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopy_normal_distribution.h
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/canopy_triangle_distribution.h
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/massman_distribution.h
-        ${CMAKE_SOURCE_DIR}/src/canopyFlow/src/measured_distribution.h)
+        src/canopyFlow/src/canopy.h
+        src/canopyFlow/src/canopyFlow.h
+        src/canopyFlow/src/canopy_normal_distribution.h
+        src/canopyFlow/src/canopy_triangle_distribution.h
+        src/canopyFlow/src/massman_distribution.h
+        src/canopyFlow/src/measured_distribution.h)
 ENDIF(CANOPY)
 
 IF(CLI)
     ADD_EXECUTABLE(behave-cli 
         ${SOURCE}
-        ${PROJECT_SOURCE_DIR}/src/cli/src/behaveCli.cpp
+        src/cli/src/behaveCli.cpp
         ${HEADERS})
 ENDIF(CLI)
 
@@ -109,20 +111,20 @@ IF(GUI)
     FIND_PACKAGE(Qt5Widgets REQUIRED)
 
     SET(BEHAVE_QT_SOURCE
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.cpp
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qtree_widget.cpp
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/main.cpp)
+        src/behave_qt/src/behave_qt_main_window.cpp
+        src/behave_qt/src/behave_qtree_widget.cpp
+        src/behave_qt/src/main.cpp)
 
     SET(BEHAVE_QT_HEADERS
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.h
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window_enums.h
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qtree_widget.h)
+       src/behave_qt/src/behave_qt_main_window.h
+        src/behave_qt/src/behave_qt_main_window_enums.h
+        src/behave_qt/src/behave_qtree_widget.h)
 
     QT5_WRAP_UI(UIS_HDRS 
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.ui)
+        src/behave_qt/src/behave_qt_main_window.ui)
 
     SOURCE_GROUP("UI Files"  FILES
-        ${CMAKE_SOURCE_DIR}/src/behave_qt/src/behave_qt_main_window.ui)
+        src/behave_qt/src/behave_qt_main_window.ui)
 
     SOURCE_GROUP("Behave Qt Source Files" FILES ${BEHAVE_QT_SOURCE})
 
