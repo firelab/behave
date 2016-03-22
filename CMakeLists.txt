@@ -11,8 +11,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 PROJECT(behave)
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src
-                    ${CMAKE_SOURCE_DIR}/src/cli/src
-                    ${CMAKE_SOURCE_DIR}/src/canopy_flow/src)
+                    ${CMAKE_SOURCE_DIR}/src/behave_qt/src
+                    ${CMAKE_SOURCE_DIR}/src/canopy_flow/src
+                    ${CMAKE_SOURCE_DIR}/src/cli/src)      
 
 OPTION(CLI "Enable CLI boost parser" OFF)
 IF(CLI)
