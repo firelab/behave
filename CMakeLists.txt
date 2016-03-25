@@ -10,7 +10,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 PROJECT(behave)
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
                     ${CMAKE_SOURCE_DIR}/src/behave_qt
                     ${CMAKE_SOURCE_DIR}/src/canopy_flow
                     ${CMAKE_SOURCE_DIR}/src/cli)      
@@ -31,43 +31,43 @@ IF(CANOPY)
 ENDIF(CANOPY)
 
 SET(SOURCE
-    src/behave.cpp
-    src/fuelModels.cpp
-    src/newext.cpp
-    src/palmettoGallberry.cpp
-    src/randfuel.cpp
-    src/randthread.cpp
-    src/surface.cpp
-    src/surfaceFirePropogatingFlux.cpp
-    src/surfaceFireReactionIntensity.cpp
-    src/surfaceFuelbedIntermediates.cpp
-    src/surfaceInputs.cpp
-    src/surfaceFireSpread.cpp
-    src/surfaceTwoFuelModels.cpp
-    src/westernAspen.cpp
-    src/windAdjustmentFactor.cpp)
+    src/behave/behave.cpp
+    src/behave/fuelModels.cpp
+    src/behave/newext.cpp
+    src/behave/palmettoGallberry.cpp
+    src/behave/randfuel.cpp
+    src/behave/randthread.cpp
+    src/behave/surface.cpp
+    src/behave/surfaceFirePropogatingFlux.cpp
+    src/behave/surfaceFireReactionIntensity.cpp
+    src/behave/surfaceFuelbedIntermediates.cpp
+    src/behave/surfaceInputs.cpp
+    src/behave/surfaceFireSpread.cpp
+    src/behave/surfaceTwoFuelModels.cpp
+    src/behave/westernAspen.cpp
+    src/behave/windAdjustmentFactor.cpp)
 
 SET(HEADERS
-    src/behave.h
-    src/fuelModels.h
-    src/newext.h
-    src/palmettoGallberry.h
-    src/randfuel.h
-    src/randthread.h
-    src/surface.h
-    src/surfaceEnums.h
-    src/surfaceFirePropogatingFlux.h
-    src/surfaceFireReactionIntensity.h
-    src/surfaceFuelbedIntermediates.h
-    src/surfaceInputs.h
-    src/surfaceFireSpread.h
-    src/surfaceTwoFuelModels.h
-    src/westernAspen.h
-    src/windAdjustmentFactor.h)
+    src/behave/behave.h
+    src/behave/fuelModels.h
+    src/behave/newext.h
+    src/behave/palmettoGallberry.h
+    src/behave/randfuel.h
+    src/behave/randthread.h
+    src/behave/surface.h
+    src/behave/surfaceEnums.h
+    src/behave/surfaceFirePropogatingFlux.h
+    src/behave/surfaceFireReactionIntensity.h
+    src/behave/surfaceFuelbedIntermediates.h
+    src/behave/surfaceInputs.h
+    src/behave/surfaceFireSpread.h
+    src/behave/surfaceTwoFuelModels.h
+    src/behave/westernAspen.h
+    src/behave/windAdjustmentFactor.h)
 
 ADD_EXECUTABLE(behave 
     ${SOURCE} 
-    src/client.cpp 
+    src/behave/client.cpp 
     ${HEADERS})
 
 IF(CANOPY)
