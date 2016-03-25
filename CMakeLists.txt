@@ -11,9 +11,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 PROJECT(behave)
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src
-                    ${CMAKE_SOURCE_DIR}/src/behave_qt/src
-                    ${CMAKE_SOURCE_DIR}/src/canopy_flow/src
-                    ${CMAKE_SOURCE_DIR}/src/cli/src)      
+                    ${CMAKE_SOURCE_DIR}/src/behave_qt
+                    ${CMAKE_SOURCE_DIR}/src/canopy_flow
+                    ${CMAKE_SOURCE_DIR}/src/cli)      
 
 OPTION(CLI "Enable CLI boost parser" OFF)
 IF(CLI)
@@ -73,26 +73,26 @@ ADD_EXECUTABLE(behave
 IF(CANOPY)
     ADD_EXECUTABLE(canopy_flow 
         ${SOURCE} 
-        src/canopyFlow/src/canopy.cpp
-        src/canopyFlow/src/canopyFlow.cpp 
-        src/canopyFlow/src/canopy_normal_distribution.cpp
-        src/canopyFlow/src/canopy_triangle_distribution.cpp
-        src/canopyFlow/src/massman_distribution.cpp
-        src/canopyFlow/src/measured_distribution.cpp
-        src/canopyFlow/src/main.cpp
+        src/canopyFlow/canopy.cpp
+        src/canopyFlow/canopyFlow.cpp 
+        src/canopyFlow/canopy_normal_distribution.cpp
+        src/canopyFlow/canopy_triangle_distribution.cpp
+        src/canopyFlow/massman_distribution.cpp
+        src/canopyFlow/measured_distribution.cpp
+        src/canopyFlow/main.cpp
         ${HEADERS}
-        src/canopyFlow/src/canopy.h
-        src/canopyFlow/src/canopyFlow.h
-        src/canopyFlow/src/canopy_normal_distribution.h
-        src/canopyFlow/src/canopy_triangle_distribution.h
-        src/canopyFlow/src/massman_distribution.h
-        src/canopyFlow/src/measured_distribution.h)
+        src/canopyFlow/canopy.h
+        src/canopyFlow/canopyFlow.h
+        src/canopyFlow/canopy_normal_distribution.h
+        src/canopyFlow/canopy_triangle_distribution.h
+        src/canopyFlow/massman_distribution.h
+        src/canopyFlow/measured_distribution.h)
 ENDIF(CANOPY)
 
 IF(CLI)
     ADD_EXECUTABLE(behave-cli 
         ${SOURCE}
-        src/cli/src/behaveCli.cpp
+        src/cli/behaveCli.cpp
         ${HEADERS})
 ENDIF(CLI)
 
@@ -112,20 +112,20 @@ IF(GUI)
     FIND_PACKAGE(Qt5Widgets REQUIRED)
 
     SET(BEHAVE_QT_SOURCE
-        src/behave_qt/src/behave_qt_main_window.cpp
-        src/behave_qt/src/behave_qtree_widget.cpp
-        src/behave_qt/src/main.cpp)
+        src/behave_qt/behave_qt_main_window.cpp
+        src/behave_qt/behave_qtree_widget.cpp
+        src/behave_qt/main.cpp)
 
     SET(BEHAVE_QT_HEADERS
-       src/behave_qt/src/behave_qt_main_window.h
-        src/behave_qt/src/behave_qt_main_window_enums.h
-        src/behave_qt/src/behave_qtree_widget.h)
+       src/behave_qt/behave_qt_main_window.h
+        src/behave_qt/behave_qt_main_window_enums.h
+        src/behave_qt/behave_qtree_widget.h)
 
     QT5_WRAP_UI(UIS_HDRS 
-        src/behave_qt/src/behave_qt_main_window.ui)
+        src/behave_qt/behave_qt_main_window.ui)
 
     SOURCE_GROUP("UI Files"  FILES
-        src/behave_qt/src/behave_qt_main_window.ui)
+        src/behave_qt/behave_qt_main_window.ui)
 
     SOURCE_GROUP("Behave Qt Source Files" FILES ${BEHAVE_QT_SOURCE})
 
