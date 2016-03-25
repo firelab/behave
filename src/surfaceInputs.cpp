@@ -1,8 +1,92 @@
 #include "surfaceInputs.h"
 
+// Default Ctor
 SurfaceInputs::SurfaceInputs()
 {
     initializeMembers();
+}
+
+// Copy Ctor
+SurfaceInputs::SurfaceInputs(const SurfaceInputs &rhs)
+{
+    fuelModelNumber_ = rhs.fuelModelNumber_;
+    secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
+    moistureOneHour_ = rhs.moistureOneHour_;
+    moistureTenHour_ = rhs.moistureTenHour_;
+    moistureHundredHour_ = rhs.moistureHundredHour_;
+    moistureLiveHerbaceous_ = rhs.moistureLiveHerbaceous_;
+    moistureLiveWoody_ = rhs.moistureLiveWoody_;
+    slope_ = rhs.slope_;
+    aspect_ = rhs.aspect_;
+    windSpeed_ = rhs.windSpeed_;
+    windDirection_ = rhs.windDirection_;
+
+    isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
+    isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
+    isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
+
+    slopeInputMode_ = rhs.slopeInputMode_;
+    windAndSpreadAngleMode_ = rhs.windAndSpreadAngleMode_;
+    windHeightInputMode_ = rhs.windHeightInputMode_;
+    twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
+
+    canopyCover_ = rhs.canopyCover_;
+    canopyHeight_ = rhs.canopyHeight_;
+    crownRatio_ = rhs.crownRatio_;
+
+    aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
+    aspenCuringLevel_ = rhs.aspenCuringLevel_;
+
+    for (int i = 0; i < MAX_SIZES; i++)
+    {
+        moistureDead_[i] = rhs.moistureDead_[i];
+        moistureLive_[i] = rhs.moistureLive_[i];
+    }
+
+    userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
+}
+
+SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
+{
+    if (this != &rhs)
+    {
+        fuelModelNumber_ = rhs.fuelModelNumber_;
+        secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
+        moistureOneHour_ = rhs.moistureOneHour_;
+        moistureTenHour_ = rhs.moistureTenHour_;
+        moistureHundredHour_ = rhs.moistureHundredHour_;
+        moistureLiveHerbaceous_ = rhs.moistureLiveHerbaceous_;
+        moistureLiveWoody_ = rhs.moistureLiveWoody_;
+        slope_ = rhs.slope_;
+        aspect_ = rhs.aspect_;
+        windSpeed_ = rhs.windSpeed_;
+        windDirection_ = rhs.windDirection_;
+
+        isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
+        isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
+        isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
+
+        slopeInputMode_ = rhs.slopeInputMode_;
+        windAndSpreadAngleMode_ = rhs.windAndSpreadAngleMode_;
+        windHeightInputMode_ = rhs.windHeightInputMode_;
+        twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
+
+        canopyCover_ = rhs.canopyCover_;
+        canopyHeight_ = rhs.canopyHeight_;
+        crownRatio_ = rhs.crownRatio_;
+
+        aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
+        aspenCuringLevel_ = rhs.aspenCuringLevel_;
+
+        for (int i = 0; i < MAX_SIZES; i++)
+        {
+            moistureDead_[i] = rhs.moistureDead_[i];
+            moistureLive_[i] = rhs.moistureLive_[i];
+        }
+
+        userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
+    }
+    return *this;
 }
 
 void SurfaceInputs::initializeMembers()
@@ -96,7 +180,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     isUsingPalmettoGallberry_ = false;
 
     isUsingWesternAspen_ = false;
-   
+
     canopyCover_ = canopyCover;
     canopyHeight_ = canopyHeight;
     crownRatio_ = crownRatio;
@@ -138,7 +222,7 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     isUsingPalmettoGallberry_ = true;
 }
 
-void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, 
+void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope, double aspect,
@@ -164,7 +248,7 @@ double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
     // when wind is given relative to upslope, it is given as the direction the wind pushes the fire, 
     // not the direction from which is blowing - WMC 01/2016
     double windDirectionFromUpslope = windDirectionFromNorth - aspect_; // wind direction is now in degrees 
-        //clockwise relative to blowing in the upslope direction
+    //clockwise relative to blowing in the upslope direction
     return windDirectionFromUpslope;
 }
 

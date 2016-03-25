@@ -7,6 +7,9 @@ class PalmettoGallberry
 {
 public:
     PalmettoGallberry();
+    PalmettoGallberry(const PalmettoGallberry &rhs);
+    PalmettoGallberry& operator= (const PalmettoGallberry& rhs);
+
     void initialize();
 
     double calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory);

@@ -6,6 +6,25 @@ Behave::Behave()
     // Default Constructor
 }
 
+Behave::Behave(const Behave &rhs)
+    : surfaceInputs_{}, surface_{ fuelModels_, surfaceInputs_ }
+{
+    fuelModels_ = rhs.fuelModels_;
+    surface_ = rhs.surface_;
+    surfaceInputs_ = rhs.surfaceInputs_;
+}
+
+Behave& Behave::operator= (const Behave& rhs)
+{
+    if (this != &rhs)
+    {
+        fuelModels_ = rhs.fuelModels_;
+        surface_ = rhs.surface_;
+        surfaceInputs_ = rhs.surfaceInputs_;
+    }
+    return *this;
+}
+
 Behave::Behave(SurfaceInputs &surfaceInputs)
     : surface_{ fuelModels_, surfaceInputs }
 {
@@ -17,7 +36,7 @@ Behave::~Behave()
     // Default Destructor
 }
 
-void Behave::updateFuelModelNumber(int fuelModelNumber)
+void Behave::setFuelModelNumber(int fuelModelNumber)
 {
     surfaceInputs_.setFuelModelNumber(fuelModelNumber);
 }
@@ -70,11 +89,6 @@ void Behave::setWindDirection(double windDirection)
 void Behave::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
     surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
-}
-
-void Behave::setFuelModelNumber(int fuelModelNumber)
-{
-    surfaceInputs_.setFuelModelNumber(fuelModelNumber);
 }
 
 void Behave::setFirstFuelModelNumber(int firstFuelModelNumber)
@@ -229,6 +243,11 @@ bool Behave::isSlopeInPercent() const
 {
     bool isSlopeInPercent = surfaceInputs_.isSlopeInPercent();
     return isSlopeInPercent;
+}
+
+double Behave::getSpreadRate() const
+{
+    return surface_.getSpreadRate();
 }
 
 double Behave::getDirectionOfMaxSpread() const

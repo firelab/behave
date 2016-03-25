@@ -22,9 +22,13 @@ class Surface
     static const int LIVE = 1;
 
 public:
-    Surface(FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
+    Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
+    Surface(const Surface &rhs);
+    Surface& operator= (const Surface& rhs);
+
     double calculateSurfaceFireForwardSpreadRate(double directionOfinterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfinterest);
+    double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
     double getFireLengthToWidthRatio() const;
@@ -34,12 +38,11 @@ private:
     bool isUsingTwoFuelModels() const;
 
     // SURFACE Module component objects
-    FuelModels*	fuelModels_;
+    const FuelModels*	fuelModels_;
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs* surfaceInputs_;
 
-    void initializeMembers();
 };
 
 #endif //SURFACEFIRE_HEADER

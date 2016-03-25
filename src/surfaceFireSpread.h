@@ -12,12 +12,16 @@
 class SurfaceFireSpread
 {
 public:
+    SurfaceFireSpread();
+    SurfaceFireSpread(const SurfaceFireSpread &rhs);
+    SurfaceFireSpread& operator= (const SurfaceFireSpread& rhs);
     SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
 
     // Public getters
+    double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
     double getFirelineIntensity() const;
@@ -89,7 +93,6 @@ private:
     double fireLengthToWidthRatio_;
     double eccentricity_;
     double residenceTime_;
-    double spreadRate_;                                     // surface fire rate of spread in ft/min
     double reactionIntensity_;
     double firelineIntensity_;
     double flameLength_;

@@ -7,9 +7,12 @@ class WesternAspen
 {
 public:
     WesternAspen();
+    WesternAspen(const WesternAspen &rhs);
+    WesternAspen& operator= (const WesternAspen& rhs);
     ~WesternAspen();
 
     void initialize();
+    double getAspenMortality() const;
 
     // The following getter methods are used to populate FuelModel data fields 
     double getAspenFuelBedDepth(int typeIndex);
@@ -24,6 +27,7 @@ public:
     double getAspenSavrDeadTenHour();
     double getAspenSavrLiveHerbaceous();
     double getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
+    
 
     // Mortality must be calculated AFTER spread rate
     double calculateAspenMortality(int severity, double flameLength, double dbh);

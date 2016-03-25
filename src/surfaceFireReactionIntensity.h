@@ -9,7 +9,11 @@ public:
     // Class constants
     static const int MAX_LIFE_STATES = 2;                   //< Life state, live or dead
 
+    SurfaceFireReactionIntensity();
+    SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity &rhs);
+    SurfaceFireReactionIntensity& operator= (const SurfaceFireReactionIntensity& rhs);
     SurfaceFireReactionIntensity(const SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates);
+
     double calculateReactionIntensity();
     void calculateEtaM();
     void calculateEtaS();

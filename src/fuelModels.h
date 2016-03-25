@@ -12,7 +12,10 @@ public:
     // applications -WMC 10/2015
 
     FuelModels();
+    FuelModels& operator= (const FuelModels& rhs);
+    FuelModels(const FuelModels &rhs);
     ~FuelModels();
+   
     bool setCustomFuelModel(int fuelModelNumberIn, std::string code, std::string name,
         double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
         double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,

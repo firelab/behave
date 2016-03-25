@@ -15,7 +15,11 @@ class SurfaceFuelbedIntermediates
     static const int MAX_SAVR_SIZE_CLASSES = 5; //< Maximum number of SAVR size classes
 
 public:
+    SurfaceFuelbedIntermediates();
+    SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs);
+    SurfaceFuelbedIntermediates& operator= (const SurfaceFuelbedIntermediates& rhs);
     SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
+
     ~SurfaceFuelbedIntermediates();
     void calculateFuelbedIntermediates();
 
@@ -41,6 +45,9 @@ public:
     double getPalmettoGallberyLiveOneHourLoad() const;
     double getPalmettoGallberyLiveTenHourLoad() const;
     double getPalmettoGallberyLiveFoliageLoad() const;
+
+    // Western Aspen
+    double getAspenMortality() const;
 
 private:
     void initializeMemberVariables();

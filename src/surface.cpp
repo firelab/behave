@@ -1,12 +1,29 @@
 #include "surface.h"
 
-Surface::Surface(FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
-// Surface Module initialiazation list
+Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
 : surfaceFuelbedIntermediates_{ fuelModels, surfaceInputs },
 surfaceFireSpread_{ surfaceFuelbedIntermediates_, surfaceInputs }
 {
     fuelModels_ = &fuelModels;
     surfaceInputs_ = &surfaceInputs;
+}
+
+// Copy Ctor
+Surface::Surface(const Surface &rhs)
+    : surfaceFuelbedIntermediates_{}, surfaceFireSpread_{}
+{
+    surfaceFuelbedIntermediates_ = rhs.surfaceFuelbedIntermediates_;
+    surfaceFireSpread_ = rhs.surfaceFireSpread_;
+}
+
+Surface& Surface::operator= (const Surface& rhs)
+{
+    if (this != &rhs)
+    {
+        surfaceFuelbedIntermediates_ = rhs.surfaceFuelbedIntermediates_;
+        surfaceFireSpread_ = rhs.surfaceFireSpread_;
+    }
+    return *this;
 }
 
 double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
@@ -31,6 +48,11 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
 double Surface::calculateSpreadRateAtVector(double directionOfinterest)
 {
     return surfaceFireSpread_.calculateSpreadRateAtVector(directionOfinterest);
+}
+
+double Surface::getSpreadRate() const
+{
+    return surfaceFireSpread_.getSpreadRate();
 }
 
 double Surface::getDirectionOfMaxSpread() const

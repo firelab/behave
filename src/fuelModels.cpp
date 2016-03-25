@@ -15,6 +15,60 @@ FuelModels::FuelModels()
     populateFuelModels();
 }
 
+FuelModels::FuelModels(const FuelModels &rhs)
+{
+    const int NUM_FUEL_MODELS = 257;
+    for (int i = 0; i < NUM_FUEL_MODELS; i++)
+    {
+        FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
+        FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
+        FuelModelArray[i].name_ = rhs.FuelModelArray[i].name_;
+        FuelModelArray[i].fuelbedDepth_ = rhs.FuelModelArray[i].fuelbedDepth_;
+        FuelModelArray[i].moistureOfExtinctionDead_ = rhs.FuelModelArray[i].moistureOfExtinctionDead_;
+        FuelModelArray[i].heatOfCombustionDead_ = rhs.FuelModelArray[i].heatOfCombustionDead_;
+        FuelModelArray[i].heatOfCombustionLive_ = rhs.FuelModelArray[i].heatOfCombustionLive_;
+        FuelModelArray[i].fuelLoadOneHour_ = rhs.FuelModelArray[i].fuelLoadOneHour_;
+        FuelModelArray[i].fuelLoadTenHour_ = rhs.FuelModelArray[i].fuelLoadTenHour_;
+        FuelModelArray[i].fuelLoadHundredHour_ = rhs.FuelModelArray[i].fuelLoadHundredHour_;
+        FuelModelArray[i].fuelLoadLiveHerbaceous_ = rhs.FuelModelArray[i].fuelLoadLiveHerbaceous_;
+        FuelModelArray[i].fuelLoadLiveWoody_ = rhs.FuelModelArray[i].fuelLoadLiveWoody_;
+        FuelModelArray[i].savrOneHour_ = rhs.FuelModelArray[i].savrOneHour_;
+        FuelModelArray[i].savrLiveHerbaceous_ = rhs.FuelModelArray[i].savrLiveHerbaceous_;
+        FuelModelArray[i].savrLiveWoody_ = rhs.FuelModelArray[i].savrLiveWoody_;
+        FuelModelArray[i].isReserved_ = rhs.FuelModelArray[i].isReserved_;
+        FuelModelArray[i].isDefined_ = rhs.FuelModelArray[i].isDefined_;
+    }
+}
+
+FuelModels& FuelModels::operator= (const FuelModels& rhs)
+{
+    if (this != &rhs)
+    {
+        const int NUM_FUEL_MODELS = 257;
+        for (int i = 0; i < NUM_FUEL_MODELS; i++)
+        {
+            FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
+            FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
+            FuelModelArray[i].name_ = rhs.FuelModelArray[i].name_;
+            FuelModelArray[i].fuelbedDepth_ = rhs.FuelModelArray[i].fuelbedDepth_;
+            FuelModelArray[i].moistureOfExtinctionDead_ = rhs.FuelModelArray[i].moistureOfExtinctionDead_;
+            FuelModelArray[i].heatOfCombustionDead_ = rhs.FuelModelArray[i].heatOfCombustionDead_;
+            FuelModelArray[i].heatOfCombustionLive_ = rhs.FuelModelArray[i].heatOfCombustionLive_;
+            FuelModelArray[i].fuelLoadOneHour_ = rhs.FuelModelArray[i].fuelLoadOneHour_;
+            FuelModelArray[i].fuelLoadTenHour_ = rhs.FuelModelArray[i].fuelLoadTenHour_;
+            FuelModelArray[i].fuelLoadHundredHour_ = rhs.FuelModelArray[i].fuelLoadHundredHour_;
+            FuelModelArray[i].fuelLoadLiveHerbaceous_ = rhs.FuelModelArray[i].fuelLoadLiveHerbaceous_;
+            FuelModelArray[i].fuelLoadLiveWoody_ = rhs.FuelModelArray[i].fuelLoadLiveWoody_;
+            FuelModelArray[i].savrOneHour_ = rhs.FuelModelArray[i].savrOneHour_;
+            FuelModelArray[i].savrLiveHerbaceous_ = rhs.FuelModelArray[i].savrLiveHerbaceous_;
+            FuelModelArray[i].savrLiveWoody_ = rhs.FuelModelArray[i].savrLiveWoody_;
+            FuelModelArray[i].isReserved_ = rhs.FuelModelArray[i].isReserved_; 
+            FuelModelArray[i].isDefined_ = rhs.FuelModelArray[i].isDefined_;
+        }
+    }
+    return *this;
+}
+
 FuelModels::~FuelModels()
 {
 

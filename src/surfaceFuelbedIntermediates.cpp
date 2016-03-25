@@ -1,5 +1,141 @@
 #include "surfaceFuelbedIntermediates.h"
 
+SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates()
+{
+
+}
+
+// Copy Ctor
+SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates &rhs)
+{
+    const int NUMBER_OF_LIVE_SIZE_CLASSES = 2;
+
+    palmettoGallberry_ = rhs.palmettoGallberry_;
+    westernAspen_ = rhs.westernAspen_;
+
+    isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
+    isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
+
+    depth_ = rhs.depth_;
+    relativePackingRatio_ = rhs.relativePackingRatio_;
+    fuelModelNumber_ = rhs.fuelModelNumber_;
+    liveFuelMois_ = rhs.liveFuelMois_;
+    liveFuelMext_ = rhs.liveFuelMext_;
+    sigma_ = rhs.sigma_;
+    bulkDensity_ = rhs.bulkDensity_;
+    packingRatio_ = rhs.packingRatio_;
+    heatSink_ = rhs.heatSink_;
+    totalSilicaContent_ = 0.0555;
+
+    for (int i = 0; i < MAX_SAVR_SIZE_CLASSES; i++)
+    {
+        sizeSortedFractionOfSurfaceAreaDead_[i] = rhs.sizeSortedFractionOfSurfaceAreaDead_[i];
+        sizeSortedFractionOfSurfaceAreaLive_[i] = rhs.sizeSortedFractionOfSurfaceAreaLive_[i];
+    }
+    for (int i = 0; i < MAX_PARTICLES; i++)
+    {
+        fractionOfTotalSurfaceAreaDead_[i] = rhs.fractionOfTotalSurfaceAreaDead_[i];
+        fractionOfTotalSurfaceAreaLive_[i] = rhs.fractionOfTotalSurfaceAreaLive_[i];
+        surfaceAreaDead_[i] = rhs.surfaceAreaDead_[i];
+        surfaceAreaLive_[i] = rhs.surfaceAreaLive_[i];
+        moistureDead_[i] = rhs.moistureDead_[i];
+        moistureLive_[i] = rhs.moistureLive_[i];
+        loadDead_[i] = rhs.loadDead_[i];
+        loadLive_[i] = rhs.loadLive_[i];
+        savrDead_[i] = rhs.savrDead_[i];
+        savrLive_[i] = rhs.savrLive_[i];
+        heatDead_[i] = rhs.heatDead_[i];
+        heatLive_[i] = rhs.heatLive_[i];
+        silicaEffectiveDead_[i] = 0.01;
+        if (i < NUMBER_OF_LIVE_SIZE_CLASSES)
+        {
+            silicaEffectiveLive_[i] = 0.01;
+        }
+        else
+        {
+            silicaEffectiveLive_[i] = 0.0;
+        }
+    }
+    for (int i = 0; i < MAX_LIFE_STATES; i++)
+    {
+        numberOfSizeClasses_[i] = rhs.numberOfSizeClasses_[i];
+        totalLoadForLifeState_[i] = rhs.totalLoadForLifeState_[i];
+        fractionOfTotalSurfaceArea_[i] = rhs.fractionOfTotalSurfaceArea_[i];
+        moistureOfExtinction_[i] = rhs.moistureOfExtinction_[i];
+        totalSurfaceArea_[i] = rhs.totalSurfaceArea_[i];
+        weightedMoisture_[i] = rhs.weightedMoisture_[i];
+        weightedSilica_[i] = rhs.weightedSilica_[i];
+        fuelDensity_[i] = 32; // Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
+    }
+}
+
+SurfaceFuelbedIntermediates& SurfaceFuelbedIntermediates::operator= (const SurfaceFuelbedIntermediates& rhs)
+{
+    if (this != &rhs)
+    {
+        const int NUMBER_OF_LIVE_SIZE_CLASSES = 2;
+
+        palmettoGallberry_ = rhs.palmettoGallberry_;
+        westernAspen_ = rhs.westernAspen_;
+
+        isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
+        isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
+
+        depth_ = rhs.depth_;
+        relativePackingRatio_ = rhs.relativePackingRatio_;
+        fuelModelNumber_ = rhs.fuelModelNumber_;
+        liveFuelMois_ = rhs.liveFuelMois_;
+        liveFuelMext_ = rhs.liveFuelMext_;
+        sigma_ = rhs.sigma_;
+        bulkDensity_ = rhs.bulkDensity_;
+        packingRatio_ = rhs.packingRatio_;
+        heatSink_ = rhs.heatSink_;
+        totalSilicaContent_ = 0.0555;
+
+        for (int i = 0; i < MAX_SAVR_SIZE_CLASSES; i++)
+        {
+            sizeSortedFractionOfSurfaceAreaDead_[i] = rhs.sizeSortedFractionOfSurfaceAreaDead_[i];
+            sizeSortedFractionOfSurfaceAreaLive_[i] = rhs.sizeSortedFractionOfSurfaceAreaLive_[i];
+        }
+        for (int i = 0; i < MAX_PARTICLES; i++)
+        {
+            fractionOfTotalSurfaceAreaDead_[i] = rhs.fractionOfTotalSurfaceAreaDead_[i];
+            fractionOfTotalSurfaceAreaLive_[i] = rhs.fractionOfTotalSurfaceAreaLive_[i];
+            surfaceAreaDead_[i] = rhs.surfaceAreaDead_[i];
+            surfaceAreaLive_[i] = rhs.surfaceAreaLive_[i];
+            moistureDead_[i] = rhs.moistureDead_[i];
+            moistureLive_[i] = rhs.moistureLive_[i];
+            loadDead_[i] = rhs.loadDead_[i];
+            loadLive_[i] = rhs.loadLive_[i];
+            savrDead_[i] = rhs.savrDead_[i];
+            savrLive_[i] = rhs.savrLive_[i];
+            heatDead_[i] = rhs.heatDead_[i];
+            heatLive_[i] = rhs.heatLive_[i];
+            silicaEffectiveDead_[i] = 0.01;
+            if (i < NUMBER_OF_LIVE_SIZE_CLASSES)
+            {
+                silicaEffectiveLive_[i] = 0.01;
+            }
+            else
+            {
+                silicaEffectiveLive_[i] = 0.0;
+            }
+        }
+        for (int i = 0; i < MAX_LIFE_STATES; i++)
+        {
+            numberOfSizeClasses_[i] = rhs.numberOfSizeClasses_[i];
+            totalLoadForLifeState_[i] = rhs.totalLoadForLifeState_[i];
+            fractionOfTotalSurfaceArea_[i] = rhs.fractionOfTotalSurfaceArea_[i];
+            moistureOfExtinction_[i] = rhs.moistureOfExtinction_[i];
+            totalSurfaceArea_[i] = rhs.totalSurfaceArea_[i];
+            weightedMoisture_[i] = rhs.weightedMoisture_[i];
+            weightedSilica_[i] = rhs.weightedSilica_[i];
+            fuelDensity_[i] = 32; // Average density of dry fuel in lbs/ft^3, Albini 1976, p. 91
+        }
+    }
+    return *this;
+}
+
 SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs)
 {
     fuelModels_ = &fuelModels;
@@ -266,7 +402,7 @@ void SurfaceFuelbedIntermediates::setHeatOfCombustion()
         heatOfCombustionDead = fuelModels_->getHeatOfCombustionDead(fuelModelNumber_);
         heatOfCombustionLive = fuelModels_->getHeatOfCombustionLive(fuelModelNumber_);
     }
-   
+
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
         heatDead_[i] = heatOfCombustionDead;
@@ -373,7 +509,7 @@ void SurfaceFuelbedIntermediates::countSizeClasses()
 {
     const int MAX_DEAD_SIZE_CLASSES = 4;
     const int MAX_LIVE_SIZE_CLASSES = 3;
-  
+
     // count number of fuels
     for (int i = 0; i < MAX_DEAD_SIZE_CLASSES; i++)
     {
@@ -647,7 +783,7 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
     for (int i = 0; i < MAX_SAVR_SIZE_CLASSES; i++)
     {
         sizeSortedFractionOfSurfaceAreaDead_[i] = 0;
-        sizeSortedFractionOfSurfaceAreaLive_[i] = 0; 
+        sizeSortedFractionOfSurfaceAreaLive_[i] = 0;
     }
     for (int i = 0; i < MAX_PARTICLES; i++)
     {
@@ -780,4 +916,9 @@ double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveTenHourLoad() const
 double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveFoliageLoad() const
 {
     return palmettoGallberry_.getPalmettoGallberyLiveFoliageLoad();
+}
+
+double SurfaceFuelbedIntermediates::getAspenMortality() const
+{
+    return westernAspen_.getAspenMortality();
 }

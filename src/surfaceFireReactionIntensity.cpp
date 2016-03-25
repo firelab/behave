@@ -1,16 +1,48 @@
 #include <cmath>
 #include "surfaceFireReactionIntensity.h"
 
+SurfaceFireReactionIntensity::SurfaceFireReactionIntensity()
+{
+
+}
+
+SurfaceFireReactionIntensity::SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity &rhs)
+{
+    
+    for (int i = 0; i < MAX_LIFE_STATES; i++)
+    {
+        etaM_[i] = rhs.etaM_[i];
+        etaS_[i] = rhs.etaS_[i];
+        reactionIntensityForLifeState_[i] = rhs.reactionIntensityForLifeState_[i];
+    }
+    reactionIntensity_ = rhs.reactionIntensity_;
+}
+
 SurfaceFireReactionIntensity::SurfaceFireReactionIntensity(const SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates)
 {
     surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
     for (int i = 0; i < MAX_LIFE_STATES; i++)
     {
         etaM_[i] = 0.0;
-        etaS_[i] = 0.0;;
-        reactionIntensityForLifeState_[i] = 0.0;;
+        etaS_[i] = 0.0;
+        reactionIntensityForLifeState_[i] = 0.0;
     }
-    reactionIntensity_ = 0.0;;
+    reactionIntensity_ = 0.0;
+}
+
+SurfaceFireReactionIntensity& SurfaceFireReactionIntensity::operator= (const SurfaceFireReactionIntensity& rhs)
+{
+    if (this != &rhs)
+    {
+        for (int i = 0; i < MAX_LIFE_STATES; i++)
+        {
+            etaM_[i] = rhs.etaM_[i];
+            etaS_[i] = rhs.etaS_[i];
+            reactionIntensityForLifeState_[i] = rhs.reactionIntensityForLifeState_[i];
+        }
+        reactionIntensity_ = rhs.reactionIntensity_;
+    }
+    return *this;
 }
 
 //------------------------------------------------------------------------------

@@ -9,6 +9,8 @@ class SurfaceInputs
 {
 public:
     SurfaceInputs();
+    SurfaceInputs(const SurfaceInputs &rhs);
+    SurfaceInputs& operator= (const SurfaceInputs& rhs);
 
     void initializeMembers();
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,

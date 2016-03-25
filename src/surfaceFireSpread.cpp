@@ -1,11 +1,89 @@
 #include "surfaceFireSpread.h"
 
+SurfaceFireSpread::SurfaceFireSpread()
+    : surfaceFireReactionIntensity_{}, surfaceFirePropogatingFlux_{}
+{
+
+}
+
 SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs)
     : surfaceFireReactionIntensity_{ surfaceFuelbedIntermediates }, surfaceFirePropogatingFlux_{}
 {
     surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
     surfaceInputs_ = &surfaceInputs;
     initializeMembers();
+}
+
+// Copy Ctor
+SurfaceFireSpread::SurfaceFireSpread(const SurfaceFireSpread &rhs)
+    : surfaceFireReactionIntensity_{}, surfaceFirePropogatingFlux_{}
+{
+    surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
+    
+    isWindLimitExceeded_ = rhs.isWindLimitExceeded_;
+    effectiveWindSpeed_ = rhs.effectiveWindSpeed_;
+    windSpeedLimit_ = rhs.windSpeedLimit_;
+    phiS_ = rhs.phiS_;
+    phiW_ = rhs.phiW_;
+    windB_ = rhs.windB_;
+    windC_ = rhs.windC_;
+    windE_ = rhs.windE_;
+
+    directionOfMaxSpread_ = rhs.directionOfMaxSpread_;
+    noWindNoSlopeSpreadRate_ = rhs.noWindNoSlopeSpreadRate_;
+    forwardSpreadRate_ = rhs.forwardSpreadRate_;
+    heatPerUnitArea_ = rhs.heatPerUnitArea_;
+    fireLengthToWidthRatio_ = rhs.fireLengthToWidthRatio_;
+    eccentricity_ = rhs.eccentricity_;
+    residenceTime_ = rhs.residenceTime_;
+    reactionIntensity_ = rhs.reactionIntensity_;
+    firelineIntensity_ = rhs.firelineIntensity_;
+    flameLength_ = rhs.flameLength_;
+    backingSpreadRate_ = rhs.backingSpreadRate_;
+
+    midflameWindSpeed_ = rhs.midflameWindSpeed_;
+    windAdjustmentFactor_ = rhs.windAdjustmentFactor_;
+    windAdjustmentFactorMethod_ = rhs.windAdjustmentFactorMethod_;
+    canopyCrownFraction_ = rhs.canopyCrownFraction_;
+
+    aspenMortality_ = rhs.aspenMortality_;
+}
+
+SurfaceFireSpread& SurfaceFireSpread::operator= (const SurfaceFireSpread& rhs)
+{
+    if (this != &rhs)
+    {
+        surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
+   
+        isWindLimitExceeded_ = rhs.isWindLimitExceeded_;
+        effectiveWindSpeed_ = rhs.effectiveWindSpeed_;
+        windSpeedLimit_ = rhs.windSpeedLimit_;
+        phiS_ = rhs.phiS_;
+        phiW_ = rhs.phiW_;
+        windB_ = rhs.windB_;
+        windC_ = rhs.windC_;
+        windE_ = rhs.windE_;
+
+        directionOfMaxSpread_ = rhs.directionOfMaxSpread_;
+        noWindNoSlopeSpreadRate_ = rhs.noWindNoSlopeSpreadRate_;
+        forwardSpreadRate_ = rhs.forwardSpreadRate_;
+        heatPerUnitArea_ = rhs.heatPerUnitArea_;
+        fireLengthToWidthRatio_ = rhs.fireLengthToWidthRatio_;
+        eccentricity_ = rhs.eccentricity_;
+        residenceTime_ = rhs.residenceTime_;
+        reactionIntensity_ = rhs.reactionIntensity_;
+        firelineIntensity_ = rhs.firelineIntensity_;
+        flameLength_ = rhs.flameLength_;
+        backingSpreadRate_ = rhs.backingSpreadRate_;
+
+        midflameWindSpeed_ = rhs.midflameWindSpeed_;
+        windAdjustmentFactor_ = rhs.windAdjustmentFactor_;
+        windAdjustmentFactorMethod_ = rhs.windAdjustmentFactorMethod_;
+        canopyCrownFraction_ = rhs.canopyCrownFraction_;
+
+        aspenMortality_ = rhs.aspenMortality_;
+    }
+    return *this;
 }
 
 double SurfaceFireSpread::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink)
@@ -312,6 +390,11 @@ void SurfaceFireSpread::calculateBackingSpreadRate()
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
 }
 
+double SurfaceFireSpread::getSpreadRate() const
+{
+    return forwardSpreadRate_;
+}
+
 double SurfaceFireSpread::getDirectionOfMaxSpread() const
 {
     double localDirMaxSpread = directionOfMaxSpread_;
@@ -453,23 +536,29 @@ void SurfaceFireSpread::setMidflameWindSpeed(double midflameWindSpeed)
 void SurfaceFireSpread::initializeMembers()
 {
     isWindLimitExceeded_ = false;
-    directionOfMaxSpread_ = 0.0;
     effectiveWindSpeed_ = 0.0;
     windSpeedLimit_ = 0.0;
-    phiS_ = 0.0;
-    phiW_ = 0.0;
+    phiS_ = 0.0;											
+    phiW_ = 0.0;											
     windB_ = 0.0;
     windC_ = 0.0;
     windE_ = 0.0;
+    directionOfMaxSpread_ = 0.0;
     noWindNoSlopeSpreadRate_ = 0.0;
     forwardSpreadRate_ = 0.0;
+    heatPerUnitArea_ = 0.0;
     fireLengthToWidthRatio_ = 0.0;
     eccentricity_ = 0.0;
     residenceTime_ = 0.0;
-    spreadRate_ = 0.0; // surface fire rate of spread in ft/min
     reactionIntensity_ = 0.0;
     firelineIntensity_ = 0.0;
+    flameLength_ = 0.0;
+    backingSpreadRate_ = 0.0;
 
-    windAdjustmentFactor_ = 0.0;
     midflameWindSpeed_ = 0.0;
+    windAdjustmentFactor_ = 0.0;
+    windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum::UNSHELTERED;
+    canopyCrownFraction_ = 0.0;
+
+    aspenMortality_ = 0.0;
 }

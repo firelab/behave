@@ -10,15 +10,18 @@
 #include "fuelModels.h"
 #include "surface.h"
 
+
 class Behave
 {
 public:
     Behave();
     explicit Behave(SurfaceInputs &surfaceInputs);
+    Behave(const Behave &rhs);
+    Behave& operator= (const Behave& rhs);
     ~Behave();
 
     // SURFACE Module Inputs
-    void updateFuelModelNumber(int fuelModelNumber);
+    void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
     void setMoistureHundredHour(double moistureHundredHour);
@@ -29,7 +32,6 @@ public:
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
     void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
-    void setFuelModelNumber(int fuelModelNumber);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
@@ -70,6 +72,7 @@ public:
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
     // SURFACE Module Getters
+    double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
     double getFireLengthToWidthRatio() const;
@@ -93,8 +96,10 @@ private:
 
     // SURFACE Module Component Objects
     FuelModels fuelModels_;         // Object containing data for fuel models
-    Surface surface_;               // SURFACE Moduel object
+    Surface surface_;               // SURFACE Module object
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
+
+    // std::vector<SurfaceInputs> behaveSurfaceRuns;
 };
 
 #endif //BEHAVE_HEADER
