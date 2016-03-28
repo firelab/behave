@@ -303,12 +303,12 @@ void SurfaceInputs::setMoistureHundredHour(double moistureHundredHour)
 
 void SurfaceInputs::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
-    moistureLive_[0] = moistureLiveHerbaceous_;
+    moistureLive_[0] = moistureLiveHerbaceous;
 }
 
 void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 {
-    moistureLive_[1] = moistureLiveWoody_;
+    moistureLive_[1] = moistureLiveWoody;
 }
 
 void SurfaceInputs::setSlope(double slope)
