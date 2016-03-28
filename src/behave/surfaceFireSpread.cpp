@@ -557,7 +557,7 @@ void SurfaceFireSpread::initializeMembers()
 
     midflameWindSpeed_ = 0.0;
     windAdjustmentFactor_ = 0.0;
-    windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum::UNSHELTERED;
+    windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
     canopyCrownFraction_ = 0.0;
 
     aspenMortality_ = 0.0;
