@@ -76,8 +76,6 @@ public:
     bool isSlopeInPercent() const;
     bool isUsingTwoFuelModels() const;
     bool hasUserEnteredWindAdjustmentFactor() const;
-    double getMoistureDeadAtIndex(int index) const;
-    double getMoistureLiveAtIndex(int index) const;
     double getSlope() const;
     double getAspect() const;
     double getWindDirection() const;
@@ -97,10 +95,6 @@ public:
 
 private:
     double convertWindToUpslope(double windDirectionFromNorth);
-    void setMoistureDead();
-    void setMoistureLive();
-
-    static const int MAX_SIZES = 4;     // Max number of fuel size classes
 
     int fuelModelNumber_;               // 1 to 256
     double moistureOneHour_;            // 1% to 60%
@@ -112,8 +106,6 @@ private:
     double windDirection_;              // degrees, 0-360
     double slope_;                      // gradient 0-600 or degrees 0-80  
     double aspect_;                     // aspect of slope in degrees, 0-360
-    double moistureDead_[MAX_SIZES];    // dead fuel moisture content
-    double moistureLive_[MAX_SIZES];    // live fuel moisture content
 
     // Two Fuel Models
     bool isUsingTwoFuelModels_;         // Whether fuel spread calculation is using Two Fuel Models

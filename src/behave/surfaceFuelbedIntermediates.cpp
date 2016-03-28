@@ -290,11 +290,13 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
             moistureLive_[i] = 0;
         }
 
-        for (int i = 0; i < MAX_PARTICLES; i++)
-        {
-            moistureDead_[i] = surfaceInputs_->getMoistureDeadAtIndex(i);
-            moistureLive_[i] = surfaceInputs_->getMoistureLiveAtIndex(i);
-        }
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour();
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour();
+        moistureDead_[2] = surfaceInputs_->getMoistureHundredHour();
+        moistureDead_[3] = surfaceInputs_->getMoistureOneHour();
+
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous();
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody();
     }
 }
 

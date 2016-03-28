@@ -37,12 +37,6 @@ SurfaceInputs::SurfaceInputs(const SurfaceInputs &rhs)
     aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
     aspenCuringLevel_ = rhs.aspenCuringLevel_;
 
-    for (int i = 0; i < MAX_SIZES; i++)
-    {
-        moistureDead_[i] = rhs.moistureDead_[i];
-        moistureLive_[i] = rhs.moistureLive_[i];
-    }
-
     userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
 }
 
@@ -77,12 +71,6 @@ SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
 
         aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
         aspenCuringLevel_ = rhs.aspenCuringLevel_;
-
-        for (int i = 0; i < MAX_SIZES; i++)
-        {
-            moistureDead_[i] = rhs.moistureDead_[i];
-            moistureLive_[i] = rhs.moistureLive_[i];
-        }
 
         userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
     }
@@ -119,12 +107,6 @@ void SurfaceInputs::initializeMembers()
     aspenFuelModelNumber_ = -1;
     aspenCuringLevel_ = 0.0;
 
-    for (int i = 0; i < MAX_SIZES; i++)
-    {
-        moistureDead_[i] = 0.0;
-        moistureLive_[i] = 0.0;
-    }
-
     userProvidedWindAdjustmentFactor_ = -1.0;
 }
 
@@ -133,12 +115,6 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     initializeMembers();
-
-    for (int i = 0; i < MAX_SIZES; i++)
-    {
-        moistureDead_[i] = 0.0;
-        moistureLive_[i] = 0.0;
-    }
 
     setSlope(slope);
     aspect_ = aspect;
@@ -170,9 +146,6 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     windHeightInputMode_ = windHeightInputMode;
     windSpeed_ = windSpeed;
     windDirection_ = windDirection;
-
-    setMoistureDead();
-    setMoistureLive();
 
     isUsingTwoFuelModels_ = false;
     twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
@@ -257,58 +230,42 @@ void SurfaceInputs::setFuelModelNumber(int fuelModelNumber)
     fuelModelNumber_ = fuelModelNumber;
 }
 
-void SurfaceInputs::setMoistureDead()
-{
-    moistureDead_[0] = moistureOneHour_;
-    moistureDead_[1] = moistureTenHour_;
-    moistureDead_[2] = moistureHundredHour_;
-    moistureDead_[3] = moistureOneHour_;
-}
-
-void SurfaceInputs::setMoistureLive()
-{
-    moistureLive_[0] = moistureLiveHerbaceous_;
-    moistureLive_[1] = moistureLiveWoody_;
-}
-
 void SurfaceInputs::setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour)
 {
-    moistureDead_[0] = moistureOneHour;
-    moistureDead_[1] = moistureTenHour;
-    moistureDead_[2] = moistureHundredHour;
-    moistureDead_[3] = moistureOneHour;
+    moistureOneHour_ = moistureOneHour;
+    moistureTenHour_ = moistureTenHour;
+    moistureHundredHour_ = moistureHundredHour;
 }
 
 void SurfaceInputs::setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody)
 {
-    moistureLive_[0] = moistureLiveHerbaceous;
-    moistureLive_[1] = moistureLiveWoody;
+    moistureLiveHerbaceous_ = moistureLiveHerbaceous;
+    moistureLiveWoody_ = moistureLiveWoody;
 }
 
 void SurfaceInputs::setMoistureOneHour(double moistureOneHour)
 {
-    moistureDead_[0] = moistureOneHour;
-    moistureDead_[3] = moistureOneHour;
+    moistureOneHour_ = moistureOneHour;
 }
 
 void SurfaceInputs::setMoistureTenHour(double moistureTenHour)
 {
-    moistureDead_[1] = moistureTenHour;
+    moistureTenHour_ = moistureTenHour;
 }
 
 void SurfaceInputs::setMoistureHundredHour(double moistureHundredHour)
 {
-    moistureDead_[2] = moistureHundredHour;
+    moistureHundredHour_ = moistureHundredHour;
 }
 
 void SurfaceInputs::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
-    moistureLive_[0] = moistureLiveHerbaceous;
+    moistureLiveHerbaceous_ = moistureLiveHerbaceous;
 }
 
 void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 {
-    moistureLive_[1] = moistureLiveWoody;
+    moistureLiveWoody_ = moistureLiveWoody;
 }
 
 void SurfaceInputs::setSlope(double slope)
@@ -365,15 +322,15 @@ void  SurfaceInputs::setSecondFuelModelNumber(int secondFuelModelNumber)
 {
     secondFuelModelNumber_ = secondFuelModelNumber;
 }
-
-double SurfaceInputs::getMoistureDeadAtIndex(int index) const
-{
-    return moistureDead_[index];
-}
-double SurfaceInputs::getMoistureLiveAtIndex(int index) const
-{
-    return moistureLive_[index];
-}
+//
+//double SurfaceInputs::getMoistureDeadAtIndex(int index) const
+//{
+//    return moistureDead_[index];
+//}
+//double SurfaceInputs::getMoistureLiveAtIndex(int index) const
+//{
+//    return moistureLive_[index];
+//}
 
 int SurfaceInputs::getFuelModelNumber() const
 {
