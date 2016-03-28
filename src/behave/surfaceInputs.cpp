@@ -322,15 +322,6 @@ void  SurfaceInputs::setSecondFuelModelNumber(int secondFuelModelNumber)
 {
     secondFuelModelNumber_ = secondFuelModelNumber;
 }
-//
-//double SurfaceInputs::getMoistureDeadAtIndex(int index) const
-//{
-//    return moistureDead_[index];
-//}
-//double SurfaceInputs::getMoistureLiveAtIndex(int index) const
-//{
-//    return moistureLive_[index];
-//}
 
 int SurfaceInputs::getFuelModelNumber() const
 {

@@ -115,10 +115,10 @@ private:
 
     // Palmetto-Gallberry
     bool isUsingPalmettoGallberry_;     // Whether fuel spread calculation is using Palmetto-Gallbery
-    double  ageOfRough_;
-    double  heightOfUnderstory_;
-    double  palmettoCoverage_;
-    double  overstoryBasalArea_;
+    double ageOfRough_;
+    double heightOfUnderstory_;
+    double palmettoCoverage_;
+    double overstoryBasalArea_;
 
     // Western Aspen
     bool isUsingWesternAspen_;          // Whether fuel spread calculation is using Western Aspen
