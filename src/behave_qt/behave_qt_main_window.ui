@@ -553,7 +553,7 @@
   <customwidget>
    <class>BehaveTree</class>
    <extends>QTreeWidget</extends>
-   <header>src/behave_qt/src/behave_qtree_widget.h</header>
+   <header>src/behave_qt/behave_qtree_widget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

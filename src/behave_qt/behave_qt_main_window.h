@@ -3,8 +3,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_behave_qt_main_window.h"
-#include "src/behave.h"
-#include "src/behave_qt/src/behave_qt_main_window_enums.h"
+#include "src/behave/behave.h"
+#include "src/behave_qt/behave_qt_main_window_enums.h"
 
 class BehaveQtMainWindow : public QMainWindow
 {
