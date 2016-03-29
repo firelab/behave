@@ -1,13 +1,15 @@
 #include "behave.h"
 
 Behave::Behave()
-    : surfaceInputs_{}, surface_{ fuelModels_, surfaceInputs_ }
+    : surfaceInputs_(), 
+      surface_(fuelModels_, surfaceInputs_)
 {
     // Default Constructor
 }
 
 Behave::Behave(const Behave &rhs)
-    : surfaceInputs_{}, surface_{ fuelModels_, surfaceInputs_ }
+    : surfaceInputs_(), 
+      surface_(fuelModels_, surfaceInputs_)
 {
     fuelModels_ = rhs.fuelModels_;
     surface_ = rhs.surface_;
@@ -26,7 +28,7 @@ Behave& Behave::operator= (const Behave& rhs)
 }
 
 Behave::Behave(SurfaceInputs &surfaceInputs)
-    : surface_{ fuelModels_, surfaceInputs }
+    : surface_(fuelModels_, surfaceInputs)
 {
     // Constructor taking a SurfaceInputs object as a parameter
 }

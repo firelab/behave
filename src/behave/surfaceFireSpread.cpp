@@ -1,13 +1,15 @@
 #include "surfaceFireSpread.h"
 
 SurfaceFireSpread::SurfaceFireSpread()
-    : surfaceFireReactionIntensity_{}, surfaceFirePropogatingFlux_{}
+    : surfaceFireReactionIntensity_(), 
+      surfaceFirePropogatingFlux_()
 {
 
 }
 
 SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs)
-    : surfaceFireReactionIntensity_{ surfaceFuelbedIntermediates }, surfaceFirePropogatingFlux_{}
+    : surfaceFireReactionIntensity_(surfaceFuelbedIntermediates), 
+      surfaceFirePropogatingFlux_()
 {
     surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
     surfaceInputs_ = &surfaceInputs;
@@ -16,7 +18,8 @@ SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbed
 
 // Copy Ctor
 SurfaceFireSpread::SurfaceFireSpread(const SurfaceFireSpread &rhs)
-    : surfaceFireReactionIntensity_{}, surfaceFirePropogatingFlux_{}
+    : surfaceFireReactionIntensity_(),
+      surfaceFirePropogatingFlux_()
 {
     surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
     

@@ -1,8 +1,8 @@
 #include "surface.h"
 
-Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
-: surfaceFuelbedIntermediates_{ fuelModels, surfaceInputs },
-surfaceFireSpread_{ surfaceFuelbedIntermediates_, surfaceInputs }
+Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs) 
+    : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
+      surfaceFireSpread_(surfaceFuelbedIntermediates_, surfaceInputs)
 {
     fuelModels_ = &fuelModels;
     surfaceInputs_ = &surfaceInputs;
@@ -10,7 +10,8 @@ surfaceFireSpread_{ surfaceFuelbedIntermediates_, surfaceInputs }
 
 // Copy Ctor
 Surface::Surface(const Surface &rhs)
-    : surfaceFuelbedIntermediates_{}, surfaceFireSpread_{}
+    : surfaceFuelbedIntermediates_(),
+      surfaceFireSpread_()
 {
     surfaceFuelbedIntermediates_ = rhs.surfaceFuelbedIntermediates_;
     surfaceFireSpread_ = rhs.surfaceFireSpread_;
