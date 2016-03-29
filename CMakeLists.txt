@@ -127,13 +127,13 @@ IF(GUI)
     SOURCE_GROUP("UI Files"  FILES
         src/behave_qt/behave_qt_main_window.ui)
 
-    SOURCE_GROUP("Behave Qt Source Files" FILES ${BEHAVE_QT_SOURCE})
+    SOURCE_GROUP("Behave Qt GUI Source Files" FILES ${BEHAVE_QT_SOURCE})
 
-    SOURCE_GROUP("Behave Qt Header Files" FILES ${BEHAVE_QT_HEADERS})
+    SOURCE_GROUP("Behave Qt GUI Header Files" FILES ${BEHAVE_QT_HEADERS})
 
-    SOURCE_GROUP("Behave Source Files" FILES ${SOURCE})
+    SOURCE_GROUP("Behave Core Source Files" FILES ${SOURCE})
 
-    SOURCE_GROUP("Behave Header Files" FILES ${HEADERS})
+    SOURCE_GROUP("Behave Core Header Files" FILES ${HEADERS})
 
     ADD_EXECUTABLE(behave_qt
         ${SOURCE}
