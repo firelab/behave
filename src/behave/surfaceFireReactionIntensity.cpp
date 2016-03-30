@@ -45,15 +45,6 @@ SurfaceFireReactionIntensity& SurfaceFireReactionIntensity::operator= (const Sur
     return *this;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the fire's propagating flux.
- *
- *  \param fuelBedPackingRatio Surface fuel bed packing ratio (beta) (ft3/ft3).
- *  \param fuelBedSavr         Surface fuel bed's characteristic surface area-
- *                             to-volume ratio (sigma) (ft2/ft3).
- *
- *  \return Fire's propagating flux (fraction).
- */
 double SurfaceFireReactionIntensity::calculateReactionIntensity()
 {
     double aa = 0.0; // Alternate "arbitrary variable" A value for Rothermel equations for use in computer models, Albini 1976, p. 88
