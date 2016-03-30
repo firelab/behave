@@ -210,6 +210,7 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
     relativePackingRatio_ = packingRatio_ / optimumPackingRatio;
 
     calculateHeatSink();
+    calculatePropagatingFlux();
 }
 
 void SurfaceFuelbedIntermediates::setFuelLoad()
@@ -417,6 +418,13 @@ void SurfaceFuelbedIntermediates::setHeatOfCombustion()
             heatLive_[i] = 0.0;
         }
     }
+}
+
+void SurfaceFuelbedIntermediates::calculatePropagatingFlux()
+{
+    propagatingFlux_ = (sigma_ < 1.0e-07)
+        ? (0.)
+        : (exp((0.792 + 0.681 * sqrt(sigma_)) * (packingRatio_ + 0.1)) / (192. + 0.2595 * sigma_));
 }
 
 void SurfaceFuelbedIntermediates::calculateHeatSink()
@@ -838,6 +846,11 @@ double SurfaceFuelbedIntermediates::getBulkDensity() const
 double SurfaceFuelbedIntermediates::getPackingRatio() const
 {
     return packingRatio_;
+}
+
+double SurfaceFuelbedIntermediates::getPropagatingFlux() const
+{
+    return propagatingFlux_;
 }
 
 double SurfaceFuelbedIntermediates::getRelativePackingRatio() const

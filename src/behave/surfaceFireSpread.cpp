@@ -1,15 +1,13 @@
 #include "surfaceFireSpread.h"
 
 SurfaceFireSpread::SurfaceFireSpread()
-    : surfaceFireReactionIntensity_(), 
-      surfaceFirePropogatingFlux_()
+    : surfaceFireReactionIntensity_()
 {
 
 }
 
 SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs)
-    : surfaceFireReactionIntensity_(surfaceFuelbedIntermediates), 
-      surfaceFirePropogatingFlux_()
+    : surfaceFireReactionIntensity_(surfaceFuelbedIntermediates) 
 {
     surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
     surfaceInputs_ = &surfaceInputs;
@@ -18,8 +16,7 @@ SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbed
 
 // Copy Ctor
 SurfaceFireSpread::SurfaceFireSpread(const SurfaceFireSpread &rhs)
-    : surfaceFireReactionIntensity_(),
-      surfaceFirePropogatingFlux_()
+    : surfaceFireReactionIntensity_()
 {
     surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
     
@@ -130,7 +127,8 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Get needed fuelbed intermediates
     double sigma = surfaceFuelbedIntermediates_->getSigma();
     double packingRatio = surfaceFuelbedIntermediates_->getPackingRatio();
-    double propagatingFlux = surfaceFirePropogatingFlux_.calculatePropagatingFlux(sigma, packingRatio);
+    //double propagatingFlux = surfaceFirePropogatingFlux_.calculatePropagatingFlux(sigma, packingRatio);
+    double propagatingFlux = surfaceFuelbedIntermediates_->getPropagatingFlux();
     double heatSink = surfaceFuelbedIntermediates_->getHeatSink();
     reactionIntensity_ = surfaceFireReactionIntensity_.calculateReactionIntensity();
 

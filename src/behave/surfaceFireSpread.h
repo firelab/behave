@@ -4,7 +4,6 @@
 #include <cmath>
 #include "surfaceEnums.h"
 #include "surfaceFuelbedIntermediates.h"
-#include "surfaceFirePropogatingFlux.h"
 #include "surfaceFireReactionIntensity.h"
 #include "surfaceInputs.h"
 #include "windAdjustmentFactor.h"
@@ -75,7 +74,7 @@ private:
     const SurfaceInputs* surfaceInputs_;
     SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
-    SurfaceFirePropogatingFlux surfaceFirePropogatingFlux_;
+    //SurfaceFirePropogatingFlux surfaceFirePropogatingFlux_;
 
     // Member variables
     bool   isWindLimitExceeded_;
@@ -97,6 +96,8 @@ private:
     double firelineIntensity_;
     double flameLength_;
     double backingSpreadRate_;
+   
+
 
     double midflameWindSpeed_;
     double windAdjustmentFactor_;

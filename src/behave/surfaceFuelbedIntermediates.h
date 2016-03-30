@@ -27,6 +27,7 @@ public:
     double getFuelbedDepth() const;
     double getBulkDensity() const;
     double getPackingRatio()const;
+    double getPropagatingFlux() const;
     double getRelativePackingRatio() const;
     double getSigma() const;
     double getHeatSink() const;
@@ -70,6 +71,7 @@ private:
     void calculateCharacteristicSAVR();
     void calculateHeatSink();
     void calculateLiveMoistureOfExtinction();
+    void calculatePropagatingFlux();
     void calculateResidenceTime();
 
     // Class Constants
@@ -122,6 +124,7 @@ private:
     double packingRatio_;           // Packing ratio, Rothermel 1972, equation 31 
     double relativePackingRatio_;   // Packing ratio divided by the optimum packing ratio, Rothermel 1972, term in RHS equation 47
     double totalSilicaContent_;     // Total silica content in percent, Albini 1976, p. 91
+    double propagatingFlux_;
 };
 
 #endif	// SURFACEFUELBEDINTERMEDIATES_HEADER
