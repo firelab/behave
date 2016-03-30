@@ -74,8 +74,7 @@ private:
     const SurfaceInputs* surfaceInputs_;
     SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
-    //SurfaceFirePropogatingFlux surfaceFirePropogatingFlux_;
-
+  
     // Member variables
     bool   isWindLimitExceeded_;
     double effectiveWindSpeed_;
@@ -97,8 +96,6 @@ private:
     double flameLength_;
     double backingSpreadRate_;
    
-
-
     double midflameWindSpeed_;
     double windAdjustmentFactor_;
     WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;

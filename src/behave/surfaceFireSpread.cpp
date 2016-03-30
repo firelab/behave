@@ -127,7 +127,6 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Get needed fuelbed intermediates
     double sigma = surfaceFuelbedIntermediates_->getSigma();
     double packingRatio = surfaceFuelbedIntermediates_->getPackingRatio();
-    //double propagatingFlux = surfaceFirePropogatingFlux_.calculatePropagatingFlux(sigma, packingRatio);
     double propagatingFlux = surfaceFuelbedIntermediates_->getPropagatingFlux();
     double heatSink = surfaceFuelbedIntermediates_->getHeatSink();
     reactionIntensity_ = surfaceFireReactionIntensity_.calculateReactionIntensity();
