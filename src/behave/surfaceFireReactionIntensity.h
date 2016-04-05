@@ -6,9 +6,6 @@
 class SurfaceFireReactionIntensity
 {
 public:
-    // Class constants
-    static const int MAX_LIFE_STATES = 2;                   //< Life state, live or dead
-
     SurfaceFireReactionIntensity();
     SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity &rhs);
     SurfaceFireReactionIntensity& operator= (const SurfaceFireReactionIntensity& rhs);
@@ -20,10 +17,6 @@ public:
     double getReactionIntensity() const;
 
 private:
-    const double SMIDGEN = 1.0e-07;                         //< Number used to prevent division by zero, sqrt(0), etc.
-    const int DEAD = 0;                                     //< Dead life state index
-    const int LIVE = 1;                                     //< Live life state index
-
     double etaM_[MAX_LIFE_STATES];                          //< Moisture damping coefficient for  i-th categort (dead/live)
     double etaS_[MAX_LIFE_STATES];                          //< Mineral(silica) damping coefficient for i - th categort(dead / live)
     double reactionIntensityForLifeState_[MAX_LIFE_STATES]; //< Reaction intensity for i-th category (dead/live)

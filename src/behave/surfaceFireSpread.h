@@ -66,10 +66,6 @@ private:
     void applyWindSpeedLimit();
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
 
-    static const int DEAD = 0;
-    static const int LIVE = 1;
-    static const int MAX_LIFE_STATES = 2;
-
     // Pointers and references to other objects
     const SurfaceInputs* surfaceInputs_;
     SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;

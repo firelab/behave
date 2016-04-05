@@ -9,11 +9,6 @@
 
 class SurfaceFuelbedIntermediates
 {
-    // Static constants
-    static const int MAX_LIFE_STATES = 2;       //< Life state (dead or alive)
-    static const int MAX_PARTICLES = 4;         //< Maximum number of size classes within a life state (dead/live)
-    static const int MAX_SAVR_SIZE_CLASSES = 5; //< Maximum number of SAVR size classes
-
 public:
     SurfaceFuelbedIntermediates();
     SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs);
@@ -73,10 +68,6 @@ private:
     void calculateLiveMoistureOfExtinction();
     void calculatePropagatingFlux();
     void calculateResidenceTime();
-
-    // Class Constants
-    const int DEAD = 0;     // Dead life category index
-    const int LIVE = 1;     // Live life category index
 
     const FuelModels* fuelModels_;          // Pointer to FuelModels object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object

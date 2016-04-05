@@ -16,11 +16,6 @@
 
 class Surface
 {
-    static const int MAX_SIZES = 4;
-    static const int MAX_LIFE_STATES = 2;
-    static const int DEAD = 0;
-    static const int LIVE = 1;
-
 public:
     Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
     Surface(const Surface &rhs);
@@ -42,7 +37,6 @@ private:
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs* surfaceInputs_;
-
 };
 
 #endif //SURFACEFIRE_HEADER
