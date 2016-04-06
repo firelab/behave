@@ -55,35 +55,35 @@ void BehaveQtMainWindow::fuelModelInputChanged(const QString& text)
 // Slot
 void BehaveQtMainWindow::oneHourMoistureInputChanged(const QString& text)
 {
-    double oneHourMoisture = text.toDouble();
+    double oneHourMoisture = text.toDouble() / 100.0;
     behave.setMoistureOneHour(oneHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::tenHourMoistureInputChanged(const QString& text)
 {
-    double tenHourMoisture = text.toDouble();
+    double tenHourMoisture = text.toDouble() / 100.0;
     behave.setMoistureTenHour(tenHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::hundredHourMoistureInputChanged(const QString& text)
 {
-    double hundredHourMoisture = text.toDouble();
+    double hundredHourMoisture = text.toDouble() / 100.0;
     behave.setMoistureHundredHour(hundredHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::liveHerbaceousMoistureInputChanged(const QString& text)
 {
-    double liveHerbaceousMoisture = text.toDouble();
+    double liveHerbaceousMoisture = text.toDouble() / 100.0;
     behave.setMoistureLiveHerbaceous(liveHerbaceousMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::liveWoodyMoistureInputChanged(const QString& text)
 {
-    double liveWoodyMoisture = text.toDouble();
+    double liveWoodyMoisture = text.toDouble() / 100.0;
     behave.setMoistureLiveWoody(liveWoodyMoisture);
 }
 
