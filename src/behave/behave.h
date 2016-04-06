@@ -10,6 +10,7 @@
 #include "fuelModels.h"
 #include "surface.h"
 
+static FuelModels fuelModels_;         // Object containing data for fuel models
 
 class Behave
 {
@@ -95,7 +96,7 @@ private:
     void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
 
     // SURFACE Module Component Objects
-    FuelModels fuelModels_;         // Object containing data for fuel models
+    //FuelModels fuelModels_;         // Object containing data for fuel models
     Surface surface_;               // SURFACE Module object
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
 

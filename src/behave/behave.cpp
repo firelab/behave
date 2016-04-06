@@ -11,7 +11,7 @@ Behave::Behave(const Behave &rhs)
     : surfaceInputs_(), 
       surface_(fuelModels_, surfaceInputs_)
 {
-    fuelModels_ = rhs.fuelModels_;
+    //fuelModels_ = rhs.fuelModels_;
     surface_ = rhs.surface_;
     surfaceInputs_ = rhs.surfaceInputs_;
 }
@@ -20,7 +20,7 @@ Behave& Behave::operator= (const Behave& rhs)
 {
     if (this != &rhs)
     {
-        fuelModels_ = rhs.fuelModels_;
+        //fuelModels_ = rhs.fuelModels_;
         surface_ = rhs.surface_;
         surfaceInputs_ = rhs.surfaceInputs_;
     }
