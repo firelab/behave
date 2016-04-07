@@ -1,15 +1,17 @@
 #include "behave.h"
 
+static FuelModels fuelModels;         // Object containing data for fuel models
+
 Behave::Behave()
     : surfaceInputs_(), 
-      surface_(fuelModels_, surfaceInputs_)
+      surface_(fuelModels, surfaceInputs_)
 {
     // Default Constructor
 }
 
 Behave::Behave(const Behave &rhs)
     : surfaceInputs_(), 
-      surface_(fuelModels_, surfaceInputs_)
+      surface_(fuelModels, surfaceInputs_)
 {
     //fuelModels_ = rhs.fuelModels_;
     surface_ = rhs.surface_;
@@ -28,7 +30,7 @@ Behave& Behave::operator= (const Behave& rhs)
 }
 
 Behave::Behave(SurfaceInputs &surfaceInputs)
-    : surface_(fuelModels_, surfaceInputs)
+    : surface_(fuelModels, surfaceInputs)
 {
     // Constructor taking a SurfaceInputs object as a parameter
 }
@@ -274,5 +276,5 @@ double Behave::getFireEccentricity() const
 
 bool Behave::isFuelModelDefined(int fuelModelNumber) const
 {
-    return fuelModels_.isFuelModelDefined(fuelModelNumber);
+    return fuelModels.isFuelModelDefined(fuelModelNumber);
 }

@@ -10,8 +10,6 @@
 #include "fuelModels.h"
 #include "surface.h"
 
-static FuelModels fuelModels_;         // Object containing data for fuel models
-
 class Behave
 {
 public:
