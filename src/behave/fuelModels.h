@@ -1,6 +1,7 @@
 #ifndef FUELMODELS_HEADER
 #define FUELMODELS_HEADER
 
+#include <omp.h>
 #include <string>
 #include <vector>
 
