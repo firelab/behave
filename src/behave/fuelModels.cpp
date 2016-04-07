@@ -76,8 +76,8 @@ FuelModels& FuelModels::operator= (const FuelModels& rhs)
                 FuelModelArray[i].isDefined_ = rhs.FuelModelArray[i].isDefined_;
             }
         }
-        return *this;
     }
+    return *this;
 }
 
 FuelModels::~FuelModels()
@@ -529,6 +529,7 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
     double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadliveHerb,
     double fuelLoadliveWoody, double savrOneHour, double savrLiveHerb, double savrLiveWoody, bool isDynamic)
 {
+    bool successStatus;
     #pragma omp critical
     {
         bool successStatus = false;
@@ -541,8 +542,8 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
                 FuelModelArray[fuelModelNumber].isReserved_);
             successStatus = true;
         }
-        return successStatus;
     }
+    return successStatus;
 }
 
 void FuelModels::markAsCustomModel(int fuelModelNumber)
