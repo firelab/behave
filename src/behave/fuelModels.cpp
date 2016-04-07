@@ -529,10 +529,10 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
     double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadliveHerb,
     double fuelLoadliveWoody, double savrOneHour, double savrLiveHerb, double savrLiveWoody, bool isDynamic)
 {
-    bool successStatus;
+    bool successStatus = false;
     #pragma omp critical
     {
-        bool successStatus = false;
+        successStatus = false;
         if (FuelModelArray[fuelModelNumber].isReserved_ == false)
         {
             setFuelModelRecord(fuelModelNumber, code, name,
