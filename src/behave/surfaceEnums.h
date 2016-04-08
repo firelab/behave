@@ -32,8 +32,11 @@ struct TwoFuelModelsMethod
 {
     enum TwoFuelModelsMethodEnum
     {
+        FIRST = 0,              // Index of the first fuel model
         NO_METHOD = 0,          // Don't use TwoFuel Models method
         ARITHMETIC = 1,         // Use arithmetic mean
+        SECOND = 1,             // Index of the second fuel model
+        NUMBER_OF_MODELS = 2,   // Numbe of fuel models used in TwoFuel Models method
         HARMONIC = 2,           // Use harmoic mean
         TWO_DIMENSIONAL = 3     // Use Finney's two dimensional method
     };
