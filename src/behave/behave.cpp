@@ -2,18 +2,18 @@
 
 static FuelModels fuelModels;         // Object containing data for fuel models
 
-Behave::Behave()
-    : surfaceInputs_(), 
-      surface_(fuelModels, surfaceInputs_)
-{
-    // Default Constructor
-}
+//Behave::Behave()
+//    : surfaceInputs_(), 
+//      surface_(fuelModels, surfaceInputs_)
+//{
+//    // Default Constructor
+//}
 
 Behave::Behave(const Behave &rhs)
     : surfaceInputs_(), 
       surface_(fuelModels, surfaceInputs_)
 {
-    //fuelModels_ = rhs.fuelModels_;
+    fuelModels_ = rhs.fuelModels_;
     surface_ = rhs.surface_;
     surfaceInputs_ = rhs.surfaceInputs_;
 }
@@ -22,11 +22,18 @@ Behave& Behave::operator= (const Behave& rhs)
 {
     if (this != &rhs)
     {
-        //fuelModels_ = rhs.fuelModels_;
+        fuelModels_ = rhs.fuelModels_;
         surface_ = rhs.surface_;
         surfaceInputs_ = rhs.surfaceInputs_;
     }
     return *this;
+}
+
+Behave::Behave(FuelModels &fuelModels)
+    : surfaceInputs_(),
+      surface_(fuelModels, surfaceInputs_)
+{
+    fuelModels_ = &fuelModels;
 }
 
 Behave::Behave(SurfaceInputs &surfaceInputs)
@@ -105,7 +112,7 @@ void Behave::setSecondFuelModelNumber(int secondFuelModelNumber)
     surfaceInputs_.setSecondFuelModelNumber(secondFuelModelNumber);
 }
 
-void Behave::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod)
+void Behave::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
 {
     surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
 }
@@ -116,7 +123,7 @@ void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, do
 {
     surfaceInputs_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    surfaceInputs_.setTwoFuelModelsMethod(TwoFuelModelsMethod::NO_METHOD);
+    surfaceInputs_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
 }
 
 void Behave::updateSurfaceInputsWithMoistureByLifeState(int fuelModelNumber, double moistureDead, double moistureLive,
@@ -130,7 +137,7 @@ void Behave::updateSurfaceInputsWithMoistureByLifeState(int fuelModelNumber, dou
 void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
     double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
-    double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double aspect, 
+    double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
     double canopyCover, double canopyHeight, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
@@ -140,7 +147,7 @@ void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int 
 
 void Behave::updateSurfaceInputsForTwoFuelModelsWithMoistureByLifeState(int firstfuelModelNumber, int secondFuelModelNumber,
     double moistureDead, double moistureLive, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
-    double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
+    double windDirection, double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod,
     double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureDead, moistureDead,

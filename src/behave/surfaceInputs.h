@@ -19,7 +19,7 @@ public:
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, 
-        double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double aspect,
+        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
         double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
@@ -46,7 +46,7 @@ public:
     void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
-    void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
+    void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
 
 //    void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
     bool isUsingPalmettoGallberry() const;
@@ -66,7 +66,7 @@ public:
     int getFuelModelNumber() const;
     int getFirstFuelModelNumber() const;
     int getSecondFuelModelNumber() const;
-    TwoFuelModelsMethod::TwoFuelModelsMethodEnum getTwoFuelModelsMethod() const;
+    TwoFuelModels::TwoFuelModelsEnum getTwoFuelModelsMethod() const;
 
     bool isWindAndSpreadAngleRelativeToNorth() const;
     bool isWindAndSpreadAngleRelativeToUpslope() const;
@@ -134,7 +134,7 @@ private:
 
     // Input Modes
     SlopeInputMode::SlopeInputModeEnum slopeInputMode_;                         // Whether slope is input as percent or degrees
-    TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod_;          // Method used in Two Fuel Models calculations
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;          // Method used in Two Fuel Models calculations
     WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode_; // How wind and spread directions are referenced
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;          // Height above canopy from which wind speed is measured
 };

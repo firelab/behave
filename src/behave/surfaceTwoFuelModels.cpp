@@ -106,11 +106,11 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
 
 double SurfaceTwoFuelModels::calculateWeightedSpreadRate(double directionOfInterest)
 {   
-    fuelModelNumber_[TwoFuelModelsMethod::FIRST] = surfaceInputs_->getFirstFuelModelNumber();
-    fuelModelNumber_[TwoFuelModelsMethod::SECOND] = surfaceInputs_->getSecondFuelModelNumber();
+    fuelModelNumber_[TwoFuelModels::FIRST] = surfaceInputs_->getFirstFuelModelNumber();
+    fuelModelNumber_[TwoFuelModels::SECOND] = surfaceInputs_->getSecondFuelModelNumber();
 
-    coverageForFuelModel_[TwoFuelModelsMethod::FIRST] = surfaceInputs_->getFirstFuelModelCoverage();
-    coverageForFuelModel_[TwoFuelModelsMethod::SECOND] = 1 - coverageForFuelModel_[TwoFuelModelsMethod::FIRST];
+    coverageForFuelModel_[TwoFuelModels::FIRST] = surfaceInputs_->getFirstFuelModelCoverage();
+    coverageForFuelModel_[TwoFuelModels::SECOND] = 1 - coverageForFuelModel_[TwoFuelModels::FIRST];
 
     // Calculate fire outputs for each fuel model
     calculateFireOutputsForEachModel(directionOfInterest);
@@ -123,9 +123,9 @@ double SurfaceTwoFuelModels::calculateWeightedSpreadRate(double directionOfInter
 
     // The following assignments are based on Pat's rules:
     // If only 1 fuel is present (whether primary or secondary), use its values exclusively
-    if (coverageForFuelModel_[TwoFuelModelsMethod::FIRST] > 0.999 || coverageForFuelModel_[TwoFuelModelsMethod::SECOND] > 0.999)
+    if (coverageForFuelModel_[TwoFuelModels::FIRST] > 0.999 || coverageForFuelModel_[TwoFuelModels::SECOND] > 0.999)
     {
-        int i = (coverageForFuelModel_[TwoFuelModelsMethod::FIRST] > 0.999) ? 0 : 1;
+        int i = (coverageForFuelModel_[TwoFuelModels::FIRST] > 0.999) ? 0 : 1;
         reactionIntensity_ = reactionIntensityForFuelModel_[i];
         surfaceFireSpread_->setReactionIntensity(reactionIntensity_);
 
@@ -166,57 +166,58 @@ double SurfaceTwoFuelModels::calculateWeightedSpreadRate(double directionOfInter
     else
     {
         // Reaction intensity is the maximum of the two models
-        reactionIntensity_ = (reactionIntensityForFuelModel_[TwoFuelModelsMethod::FIRST] > reactionIntensityForFuelModel_[TwoFuelModelsMethod::SECOND]) ?
-            reactionIntensityForFuelModel_[TwoFuelModelsMethod::FIRST] : reactionIntensityForFuelModel_[TwoFuelModelsMethod::SECOND];
+        reactionIntensity_ = (reactionIntensityForFuelModel_[TwoFuelModels::FIRST] > 
+            reactionIntensityForFuelModel_[TwoFuelModels::SECOND]) ?
+            reactionIntensityForFuelModel_[TwoFuelModels::FIRST] : reactionIntensityForFuelModel_[TwoFuelModels::SECOND];
         surfaceFireSpread_->setReactionIntensity(reactionIntensity_);
 
         // Direction of maximum spread is for the FIRST (not necessarily dominant) fuel model
-        directionOfMaxSpread_ = dirMaxSpreadForFuelModel_[TwoFuelModelsMethod::FIRST];
+        directionOfMaxSpread_ = dirMaxSpreadForFuelModel_[TwoFuelModels::FIRST];
         surfaceFireSpread_->setDirectionOfMaxSpread(directionOfMaxSpread_);
 
         // Wind adjustment factor is for the FIRST (not necessarily dominant) fuel model
-        windAdjustmentFactor_ = windAdjustmentFactorForFuelModel_[TwoFuelModelsMethod::FIRST]; // TODO: Incorporate Wind Adjustment Factor model in Behave
+        windAdjustmentFactor_ = windAdjustmentFactorForFuelModel_[TwoFuelModels::FIRST]; // TODO: Incorporate Wind Adjustment Factor model in Behave
         //		surfaceFireSpread_->setWindAdjustmentFactor[windAdjustmentFactor_];
 
         // Midflame wind speed is for the FIRST (not necessarily dominant) fuel model
-        midFlameWindSpeed_ = midFlameWindSpeedForFuelModel_[TwoFuelModelsMethod::FIRST]; // TODO:  Incorporate Wind Speed at Midflame model in Behave
+        midFlameWindSpeed_ = midFlameWindSpeedForFuelModel_[TwoFuelModels::FIRST]; // TODO:  Incorporate Wind Speed at Midflame model in Behave
         surfaceFireSpread_->setMidflameWindSpeed(midFlameWindSpeed_);
 
         // Effective wind speed is for the FIRST (not necessarily dominant) fuel model
-        effectiveWind_ = effectiveWindSpeedForFuelModel_[TwoFuelModelsMethod::FIRST];
+        effectiveWind_ = effectiveWindSpeedForFuelModel_[TwoFuelModels::FIRST];
         surfaceFireSpread_->setEffectiveWindSpeed(effectiveWind_);
 
         // Maximum reliable wind speed is the minimum of the two models
-        windSpeedLimit_ = (windSpeedLimitForFuelModel_[TwoFuelModelsMethod::FIRST] < windSpeedLimitForFuelModel_[TwoFuelModelsMethod::SECOND]) ?
-            windSpeedLimitForFuelModel_[TwoFuelModelsMethod::FIRST] : windSpeedLimitForFuelModel_[TwoFuelModelsMethod::SECOND];
+        windSpeedLimit_ = (windSpeedLimitForFuelModel_[TwoFuelModels::FIRST] < windSpeedLimitForFuelModel_[TwoFuelModels::SECOND]) ?
+            windSpeedLimitForFuelModel_[TwoFuelModels::FIRST] : windSpeedLimitForFuelModel_[TwoFuelModels::SECOND];
         surfaceFireSpread_->setWindSpeedLimit(windSpeedLimit_);
 
         // If either wind limit is exceeded, set the flag
-        windLimitExceeded_ = (windLimitExceededForFuelModel_[TwoFuelModelsMethod::FIRST] || windLimitExceededForFuelModel_[TwoFuelModelsMethod::SECOND]);
+        windLimitExceeded_ = (windLimitExceededForFuelModel_[TwoFuelModels::FIRST] || windLimitExceededForFuelModel_[TwoFuelModels::SECOND]);
         surfaceFireSpread_->setIsWindLimitExceeded(windLimitExceeded_);
 
         // Fire length-to-width ratio is for the FIRST (not necessarily dominant) fuel model
-        fireLengthToWidthRatio_ = lengthToWidthRatioForFuelModel_[TwoFuelModelsMethod::FIRST];
+        fireLengthToWidthRatio_ = lengthToWidthRatioForFuelModel_[TwoFuelModels::FIRST];
         surfaceFireSpread_->setFireLengthToWidthRatio(fireLengthToWidthRatio_);
 
         // Heat per unit area is the maximum of the two models
-        heatPerUnitArea_ = (heatPerUnitAreaForFuelModel_[TwoFuelModelsMethod::FIRST] > heatPerUnitAreaForFuelModel_[TwoFuelModelsMethod::SECOND]) ?
-            heatPerUnitAreaForFuelModel_[TwoFuelModelsMethod::FIRST] : heatPerUnitAreaForFuelModel_[TwoFuelModelsMethod::SECOND];
+        heatPerUnitArea_ = (heatPerUnitAreaForFuelModel_[TwoFuelModels::FIRST] > heatPerUnitAreaForFuelModel_[TwoFuelModels::SECOND]) ?
+            heatPerUnitAreaForFuelModel_[TwoFuelModels::FIRST] : heatPerUnitAreaForFuelModel_[TwoFuelModels::SECOND];
         surfaceFireSpread_->setHeatPerUnitArea(heatPerUnitArea_);
 
         // Fireline intensity is the maximum of the two models
-        fireLineIntensity_ = (firelineIntensityForFuelModel_[TwoFuelModelsMethod::FIRST] > firelineIntensityForFuelModel_[TwoFuelModelsMethod::SECOND]) ?
-            firelineIntensityForFuelModel_[TwoFuelModelsMethod::FIRST] : firelineIntensityForFuelModel_[1];
+        fireLineIntensity_ = (firelineIntensityForFuelModel_[TwoFuelModels::FIRST] > firelineIntensityForFuelModel_[TwoFuelModels::SECOND]) ?
+            firelineIntensityForFuelModel_[TwoFuelModels::FIRST] : firelineIntensityForFuelModel_[1];
         surfaceFireSpread_->setFirelineIntensity(fireLineIntensity_);
 
         // Flame length is the maximum of the two models
-        fireFlameLength_ = (flameLengthForFuelModel_[TwoFuelModelsMethod::FIRST] > flameLengthForFuelModel_[TwoFuelModelsMethod::SECOND]) ?
-            flameLengthForFuelModel_[TwoFuelModelsMethod::FIRST] : flameLengthForFuelModel_[TwoFuelModelsMethod::SECOND];
+        fireFlameLength_ = (flameLengthForFuelModel_[TwoFuelModels::FIRST] > flameLengthForFuelModel_[TwoFuelModels::SECOND]) ?
+            flameLengthForFuelModel_[TwoFuelModels::FIRST] : flameLengthForFuelModel_[TwoFuelModels::SECOND];
         surfaceFireSpread_->setFlameLength(fireFlameLength_);
 
         // Fuel bed depth is the maximum of the two fuel bed depths
-        fuelbedDepth_ = (fuelbedDepthForFuelModel_[TwoFuelModelsMethod::FIRST] > fuelbedDepthForFuelModel_[TwoFuelModelsMethod::SECOND]) ?
-            fuelbedDepthForFuelModel_[TwoFuelModelsMethod::FIRST] : fuelbedDepthForFuelModel_[TwoFuelModelsMethod::SECOND];
+        fuelbedDepth_ = (fuelbedDepthForFuelModel_[TwoFuelModels::FIRST] > fuelbedDepthForFuelModel_[TwoFuelModels::SECOND]) ?
+            fuelbedDepthForFuelModel_[TwoFuelModels::FIRST] : fuelbedDepthForFuelModel_[TwoFuelModels::SECOND];
     }
 
     return spreadRate_;
@@ -285,7 +286,7 @@ double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *
 
 void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(double directionOfInterest)
 {
-    for (int i = 0; i < TwoFuelModelsMethod::NUMBER_OF_MODELS; i++)
+    for (int i = 0; i < TwoFuelModels::NUMBER_OF_MODELS; i++)
     {
         surfaceInputs_->setFuelModelNumber(fuelModelNumber_[i]);
         surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
@@ -310,30 +311,30 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(double directionOfIn
 void SurfaceTwoFuelModels::calculateSpreadRateBasedOnMethod()
 {
     // If area weighted spread rate ...
-    TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod = surfaceInputs_->getTwoFuelModelsMethod();
-    if (twoFuelModelsMethod == TwoFuelModelsMethod::ARITHMETIC)
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_->getTwoFuelModelsMethod();
+    if (twoFuelModelsMethod == TwoFuelModels::ARITHMETIC)
     {
-        spreadRate_ = (coverageForFuelModel_[TwoFuelModelsMethod::FIRST] * rosForFuelModel_[TwoFuelModelsMethod::FIRST]) +
-            (coverageForFuelModel_[TwoFuelModelsMethod::SECOND] * rosForFuelModel_[TwoFuelModelsMethod::SECOND]);
+        spreadRate_ = (coverageForFuelModel_[TwoFuelModels::FIRST] * rosForFuelModel_[TwoFuelModels::FIRST]) +
+            (coverageForFuelModel_[TwoFuelModels::SECOND] * rosForFuelModel_[TwoFuelModels::SECOND]);
     }
     // else if harmonic mean spread rate...
-    else if (twoFuelModelsMethod == TwoFuelModelsMethod::HARMONIC)
+    else if (twoFuelModelsMethod == TwoFuelModels::HARMONIC)
     {
-        if (rosForFuelModel_[TwoFuelModelsMethod::FIRST] > 0.000001 && rosForFuelModel_[TwoFuelModelsMethod::SECOND] > 0.000001)
+        if (rosForFuelModel_[TwoFuelModels::FIRST] > 0.000001 && rosForFuelModel_[TwoFuelModels::SECOND] > 0.000001)
         {
-            spreadRate_ = 1.0 / ((coverageForFuelModel_[TwoFuelModelsMethod::FIRST] / rosForFuelModel_[TwoFuelModelsMethod::FIRST]) +
-                (coverageForFuelModel_[TwoFuelModelsMethod::SECOND] / rosForFuelModel_[TwoFuelModelsMethod::SECOND]));
+            spreadRate_ = 1.0 / ((coverageForFuelModel_[TwoFuelModels::FIRST] / rosForFuelModel_[TwoFuelModels::FIRST]) +
+                (coverageForFuelModel_[TwoFuelModels::SECOND] / rosForFuelModel_[TwoFuelModels::SECOND]));
         }
     }
     // else if Finney's 2-dimensional spread rate...
-    else if (twoFuelModelsMethod == TwoFuelModelsMethod::TWO_DIMENSIONAL)
+    else if (twoFuelModelsMethod == TwoFuelModels::TWO_DIMENSIONAL)
     {
         //double lbRatio = lengthToWidthRatio[0]; // get first fuel model's length-to-width ratio
-        double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModelsMethod::SECOND]; // get second fuel model's length-to-width ratio, seems to agree with BehavePlus
+        double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::SECOND]; // get second fuel model's length-to-width ratio, seems to agree with BehavePlus
         int samples = 2; // from behavePlus.xml
         int depth = 2; // from behavePlus.xml
         int laterals = 0; // from behavePlus.xml
-        spreadRate_ = surfaceFireExpectedSpreadRate(rosForFuelModel_, coverageForFuelModel_, TwoFuelModelsMethod::NUMBER_OF_MODELS, lbRatio,
+        spreadRate_ = surfaceFireExpectedSpreadRate(rosForFuelModel_, coverageForFuelModel_, TwoFuelModels::NUMBER_OF_MODELS, lbRatio,
             samples, depth, laterals);
     }
 }

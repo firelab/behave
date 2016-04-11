@@ -98,7 +98,7 @@ void SurfaceInputs::initializeMembers()
     slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
     windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
-    twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
+    twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
 
     canopyCover_ = 0.0;
     canopyHeight_ = 0.0;
@@ -148,7 +148,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     windDirection_ = windDirection;
 
     isUsingTwoFuelModels_ = false;
-    twoFuelModelsMethod_ = TwoFuelModelsMethod::NO_METHOD;
+    twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
 
     isUsingPalmettoGallberry_ = false;
 
@@ -162,7 +162,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
     double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous,
     double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
-    double windDirection, double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
+    double windDirection, double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod,
     double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     int fuelModelNumber = firstfuelModelNumber;
@@ -288,7 +288,7 @@ void SurfaceInputs::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeIn
     slopeInputMode_ = slopeInputMode;
 }
 
-void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod)
+void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
 {
     twoFuelModelsMethod_ = twoFuelModelsMethod;
 }
@@ -343,7 +343,7 @@ double SurfaceInputs::getFirstFuelModelCoverage() const
     return firstFuelModelCoverage_;
 }
 
-TwoFuelModelsMethod::TwoFuelModelsMethodEnum SurfaceInputs::getTwoFuelModelsMethod() const
+TwoFuelModels::TwoFuelModelsEnum SurfaceInputs::getTwoFuelModelsMethod() const
 {
     return twoFuelModelsMethod_;
 }

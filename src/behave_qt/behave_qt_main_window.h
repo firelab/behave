@@ -3,7 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_behave_qt_main_window.h"
-#include "src/behave/behave.h"
+#include "src/behave/behaveVector.h"
 #include "src/behave_qt/behave_qt_main_window_enums.h"
 
 class BehaveQtMainWindow : public QMainWindow
@@ -30,6 +30,6 @@ private:
     void populateTree();
 
     Ui::behave_qt_main_windowClass ui;
-    Behave behave;
+    BehaveVector behaveVector;
 };
 #endif // BEHAVE_QT_GUI_H

@@ -28,9 +28,9 @@ struct SlopeInputMode
     };
 };
 
-struct TwoFuelModelsMethod
+struct TwoFuelModels
 {
-    enum TwoFuelModelsMethodEnum
+    enum TwoFuelModelsEnum
     {
         FIRST = 0,              // Index of the first fuel model
         NO_METHOD = 0,          // Don't use TwoFuel Models method

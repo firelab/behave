@@ -13,8 +13,10 @@
 class Behave
 {
 public:
-    Behave();
+    Behave() = delete; // There is no default constructor
     explicit Behave(SurfaceInputs &surfaceInputs);
+    explicit Behave(FuelModels &fuelModels);
+    
     Behave(const Behave &rhs);
     Behave& operator= (const Behave& rhs);
     ~Behave();
@@ -33,7 +35,7 @@ public:
     void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
-    void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
+    void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
@@ -44,12 +46,12 @@ public:
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
-        double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double aspect,
+        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
         double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForTwoFuelModelsWithMoistureByLifeState(int firstfuelModelNumber, int secondFuelModelNumber,
         double moistureDead, double moistureLive,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
-        double firstFuelModelCoverage, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, double aspect,
+        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
         double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
@@ -94,9 +96,11 @@ private:
     void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
 
     // SURFACE Module Component Objects
-    //FuelModels fuelModels_;         // Object containing data for fuel models
+    FuelModels* fuelModels_;        // This must point to a valid reference passed to the constructor
     Surface surface_;               // SURFACE Module object
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
+
+    void resize(std::allocator<Behave>::size_type new_size);
 
     // std::vector<SurfaceInputs> behaveSurfaceRuns;
 };
