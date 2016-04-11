@@ -1,15 +1,12 @@
 #include <iostream>
 #include <iomanip>
 #include "behave.h"
-#include "behaveVector.h"
 #include <time.h>
 #include <cmath>
 
 int main()
 {
     //clock_t tStart = clock();
-
-    BehaveVector behaveVector;
 
     // Surface Fire Inputs;
     int fuelModelNumber = 0;

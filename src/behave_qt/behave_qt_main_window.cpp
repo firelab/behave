@@ -1,7 +1,8 @@
 #include "behave_qt_main_window.h"
 
 BehaveQtMainWindow::BehaveQtMainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent),
+      behave(fuelModels)
 {
     ui.setupUi(this);
     populateTree();
@@ -49,62 +50,62 @@ void BehaveQtMainWindow::populateTree()
 void BehaveQtMainWindow::fuelModelInputChanged(const QString& text)
 {
     int fuelModelNumber = text.toInt();
-    behaveVector.behave[0].setFuelModelNumber(fuelModelNumber);
+    behave.setFuelModelNumber(fuelModelNumber);
 }
 
 // Slot
 void BehaveQtMainWindow::oneHourMoistureInputChanged(const QString& text)
 {
     double oneHourMoisture = text.toDouble() / 100.0;
-    behaveVector.behave[0].setMoistureOneHour(oneHourMoisture);
+    behave.setMoistureOneHour(oneHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::tenHourMoistureInputChanged(const QString& text)
 {
     double tenHourMoisture = text.toDouble() / 100.0;
-    behaveVector.behave[0].setMoistureTenHour(tenHourMoisture);
+    behave.setMoistureTenHour(tenHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::hundredHourMoistureInputChanged(const QString& text)
 {
     double hundredHourMoisture = text.toDouble() / 100.0;
-    behaveVector.behave[0].setMoistureHundredHour(hundredHourMoisture);
+    behave.setMoistureHundredHour(hundredHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::liveHerbaceousMoistureInputChanged(const QString& text)
 {
     double liveHerbaceousMoisture = text.toDouble() / 100.0;
-    behaveVector.behave[0].setMoistureLiveHerbaceous(liveHerbaceousMoisture);
+    behave.setMoistureLiveHerbaceous(liveHerbaceousMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::liveWoodyMoistureInputChanged(const QString& text)
 {
     double liveWoodyMoisture = text.toDouble() / 100.0;
-    behaveVector.behave[0].setMoistureLiveWoody(liveWoodyMoisture);
+    behave.setMoistureLiveWoody(liveWoodyMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::windSpeedInputChanged(const QString& text)
 {
     double windSpeed = text.toDouble();
-    behaveVector.behave[0].setWindSpeed(windSpeed);
+    behave.setWindSpeed(windSpeed);
 }
 
 // Slot
 void BehaveQtMainWindow::slopeInputChanged(const QString& text)
 {
     double slope = text.toDouble();
-    behaveVector.behave[0].setSlope(slope);
+    behave.setSlope(slope);
 }
 
 // Slot
 void BehaveQtMainWindow::calculateClicked()
 {
-    double spreadRate = behaveVector.behave[0].calculateSurfaceFireForwardSpreadRate();
+    double spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
     ui.spreadRateLineEdit->setText(QString::number(spreadRate, 10, 2));
 }
 

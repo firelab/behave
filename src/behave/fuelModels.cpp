@@ -1,9 +1,5 @@
 #include "fuelModels.h"
 
-// TODO: Look into whether or not it is beneficial or needed for this array to be static
-// the idea is that during ensemble simulations too many copies of this array might 
-// take up quite a bit of system resources - WMC 09/2015
-
 FuelModels::FuelModels()
 {
     const int NUM_FUEL_MODELS = 257;
@@ -17,8 +13,33 @@ FuelModels::FuelModels(const FuelModels &rhs)
 {
     const int NUM_FUEL_MODELS = 257;
 
-    #pragma omp critical
+    for (int i = 0; i < NUM_FUEL_MODELS; i++)
     {
+        FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
+        FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
+        FuelModelArray[i].name_ = rhs.FuelModelArray[i].name_;
+        FuelModelArray[i].fuelbedDepth_ = rhs.FuelModelArray[i].fuelbedDepth_;
+        FuelModelArray[i].moistureOfExtinctionDead_ = rhs.FuelModelArray[i].moistureOfExtinctionDead_;
+        FuelModelArray[i].heatOfCombustionDead_ = rhs.FuelModelArray[i].heatOfCombustionDead_;
+        FuelModelArray[i].heatOfCombustionLive_ = rhs.FuelModelArray[i].heatOfCombustionLive_;
+        FuelModelArray[i].fuelLoadOneHour_ = rhs.FuelModelArray[i].fuelLoadOneHour_;
+        FuelModelArray[i].fuelLoadTenHour_ = rhs.FuelModelArray[i].fuelLoadTenHour_;
+        FuelModelArray[i].fuelLoadHundredHour_ = rhs.FuelModelArray[i].fuelLoadHundredHour_;
+        FuelModelArray[i].fuelLoadLiveHerbaceous_ = rhs.FuelModelArray[i].fuelLoadLiveHerbaceous_;
+        FuelModelArray[i].fuelLoadLiveWoody_ = rhs.FuelModelArray[i].fuelLoadLiveWoody_;
+        FuelModelArray[i].savrOneHour_ = rhs.FuelModelArray[i].savrOneHour_;
+        FuelModelArray[i].savrLiveHerbaceous_ = rhs.FuelModelArray[i].savrLiveHerbaceous_;
+        FuelModelArray[i].savrLiveWoody_ = rhs.FuelModelArray[i].savrLiveWoody_;
+        FuelModelArray[i].isReserved_ = rhs.FuelModelArray[i].isReserved_;
+        FuelModelArray[i].isDefined_ = rhs.FuelModelArray[i].isDefined_;
+    }
+}
+
+FuelModels& FuelModels::operator= (const FuelModels& rhs)
+{
+    if (this != &rhs)
+    {
+        const int NUM_FUEL_MODELS = 257;
         for (int i = 0; i < NUM_FUEL_MODELS; i++)
         {
             FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
@@ -40,37 +61,6 @@ FuelModels::FuelModels(const FuelModels &rhs)
             FuelModelArray[i].isDefined_ = rhs.FuelModelArray[i].isDefined_;
         }
     }
-}
-
-FuelModels& FuelModels::operator= (const FuelModels& rhs)
-{
-    #pragma omp critical
-    {
-        if (this != &rhs)
-        {
-            const int NUM_FUEL_MODELS = 257;
-            for (int i = 0; i < NUM_FUEL_MODELS; i++)
-            {
-                FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
-                FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
-                FuelModelArray[i].name_ = rhs.FuelModelArray[i].name_;
-                FuelModelArray[i].fuelbedDepth_ = rhs.FuelModelArray[i].fuelbedDepth_;
-                FuelModelArray[i].moistureOfExtinctionDead_ = rhs.FuelModelArray[i].moistureOfExtinctionDead_;
-                FuelModelArray[i].heatOfCombustionDead_ = rhs.FuelModelArray[i].heatOfCombustionDead_;
-                FuelModelArray[i].heatOfCombustionLive_ = rhs.FuelModelArray[i].heatOfCombustionLive_;
-                FuelModelArray[i].fuelLoadOneHour_ = rhs.FuelModelArray[i].fuelLoadOneHour_;
-                FuelModelArray[i].fuelLoadTenHour_ = rhs.FuelModelArray[i].fuelLoadTenHour_;
-                FuelModelArray[i].fuelLoadHundredHour_ = rhs.FuelModelArray[i].fuelLoadHundredHour_;
-                FuelModelArray[i].fuelLoadLiveHerbaceous_ = rhs.FuelModelArray[i].fuelLoadLiveHerbaceous_;
-                FuelModelArray[i].fuelLoadLiveWoody_ = rhs.FuelModelArray[i].fuelLoadLiveWoody_;
-                FuelModelArray[i].savrOneHour_ = rhs.FuelModelArray[i].savrOneHour_;
-                FuelModelArray[i].savrLiveHerbaceous_ = rhs.FuelModelArray[i].savrLiveHerbaceous_;
-                FuelModelArray[i].savrLiveWoody_ = rhs.FuelModelArray[i].savrLiveWoody_;
-                FuelModelArray[i].isReserved_ = rhs.FuelModelArray[i].isReserved_;
-                FuelModelArray[i].isDefined_ = rhs.FuelModelArray[i].isDefined_;
-            }
-        }
-    }
     return *this;
 }
 
@@ -82,28 +72,25 @@ FuelModels::~FuelModels()
 void FuelModels::initializeFuelModelRecords()
 {
     const int NUM_FUEL_MODELS = 257;
-    #pragma omp critical
+    for (int i = 0; i < NUM_FUEL_MODELS; i++)
     {
-        for (int i = 0; i < NUM_FUEL_MODELS; i++)
-        {
-            FuelModelArray[i].fuelModelNumber_ = 0;
-            FuelModelArray[i].code_ = "NO_CODE";
-            FuelModelArray[i].name_ = "NO_NAME";
-            FuelModelArray[i].fuelbedDepth_ = 0;
-            FuelModelArray[i].moistureOfExtinctionDead_ = 0;
-            FuelModelArray[i].heatOfCombustionDead_ = 0;
-            FuelModelArray[i].heatOfCombustionLive_ = 0;
-            FuelModelArray[i].fuelLoadOneHour_ = 0;
-            FuelModelArray[i].fuelLoadTenHour_ = 0;
-            FuelModelArray[i].fuelLoadHundredHour_ = 0;
-            FuelModelArray[i].fuelLoadLiveHerbaceous_ = 0;
-            FuelModelArray[i].fuelLoadLiveWoody_ = 0;
-            FuelModelArray[i].savrOneHour_ = 0;
-            FuelModelArray[i].savrLiveHerbaceous_ = 0;
-            FuelModelArray[i].savrLiveWoody_ = 0;
-            FuelModelArray[i].isReserved_ = false;
-            FuelModelArray[i].isDefined_ = false;
-        }
+        FuelModelArray[i].fuelModelNumber_ = 0;
+        FuelModelArray[i].code_ = "NO_CODE";
+        FuelModelArray[i].name_ = "NO_NAME";
+        FuelModelArray[i].fuelbedDepth_ = 0;
+        FuelModelArray[i].moistureOfExtinctionDead_ = 0;
+        FuelModelArray[i].heatOfCombustionDead_ = 0;
+        FuelModelArray[i].heatOfCombustionLive_ = 0;
+        FuelModelArray[i].fuelLoadOneHour_ = 0;
+        FuelModelArray[i].fuelLoadTenHour_ = 0;
+        FuelModelArray[i].fuelLoadHundredHour_ = 0;
+        FuelModelArray[i].fuelLoadLiveHerbaceous_ = 0;
+        FuelModelArray[i].fuelLoadLiveWoody_ = 0;
+        FuelModelArray[i].savrOneHour_ = 0;
+        FuelModelArray[i].savrLiveHerbaceous_ = 0;
+        FuelModelArray[i].savrLiveWoody_ = 0;
+        FuelModelArray[i].isReserved_ = false;
+        FuelModelArray[i].isDefined_ = false;
     }
 }
 
@@ -113,27 +100,24 @@ void FuelModels::setFuelModelRecord(int fuelModelNumber, std::string code, std::
     double fuelLoadliveWoody, double savrOneHour, double savrLiveHerbaceous, double savrLiveWoody,
     bool isDynamic, bool isReserved)
 {
-    #pragma omp critical
-    {
-        FuelModelArray[fuelModelNumber].fuelModelNumber_ = fuelModelNumber;
-        FuelModelArray[fuelModelNumber].code_ = code;
-        FuelModelArray[fuelModelNumber].name_ = name;
-        FuelModelArray[fuelModelNumber].fuelbedDepth_ = fuelBedDepth;
-        FuelModelArray[fuelModelNumber].moistureOfExtinctionDead_ = moistureOfExtinctionDead;
-        FuelModelArray[fuelModelNumber].heatOfCombustionDead_ = heatOfCombustionDead;
-        FuelModelArray[fuelModelNumber].heatOfCombustionLive_ = heatOfCombustionLive;
-        FuelModelArray[fuelModelNumber].fuelLoadOneHour_ = fuelLoadOneHour;
-        FuelModelArray[fuelModelNumber].fuelLoadTenHour_ = fuelLoadTenHour;
-        FuelModelArray[fuelModelNumber].fuelLoadHundredHour_ = fuelLoadHundredHour;
-        FuelModelArray[fuelModelNumber].fuelLoadLiveHerbaceous_ = fuelLoadliveHerbaceous;
-        FuelModelArray[fuelModelNumber].fuelLoadLiveWoody_ = fuelLoadliveWoody;
-        FuelModelArray[fuelModelNumber].savrOneHour_ = savrOneHour;
-        FuelModelArray[fuelModelNumber].savrLiveHerbaceous_ = savrLiveHerbaceous;
-        FuelModelArray[fuelModelNumber].savrLiveWoody_ = savrLiveWoody;
-        FuelModelArray[fuelModelNumber].isDynamic_ = isDynamic;
-        FuelModelArray[fuelModelNumber].isReserved_ = isReserved;
-        FuelModelArray[fuelModelNumber].isDefined_ = true;
-    }
+    FuelModelArray[fuelModelNumber].fuelModelNumber_ = fuelModelNumber;
+    FuelModelArray[fuelModelNumber].code_ = code;
+    FuelModelArray[fuelModelNumber].name_ = name;
+    FuelModelArray[fuelModelNumber].fuelbedDepth_ = fuelBedDepth;
+    FuelModelArray[fuelModelNumber].moistureOfExtinctionDead_ = moistureOfExtinctionDead;
+    FuelModelArray[fuelModelNumber].heatOfCombustionDead_ = heatOfCombustionDead;
+    FuelModelArray[fuelModelNumber].heatOfCombustionLive_ = heatOfCombustionLive;
+    FuelModelArray[fuelModelNumber].fuelLoadOneHour_ = fuelLoadOneHour;
+    FuelModelArray[fuelModelNumber].fuelLoadTenHour_ = fuelLoadTenHour;
+    FuelModelArray[fuelModelNumber].fuelLoadHundredHour_ = fuelLoadHundredHour;
+    FuelModelArray[fuelModelNumber].fuelLoadLiveHerbaceous_ = fuelLoadliveHerbaceous;
+    FuelModelArray[fuelModelNumber].fuelLoadLiveWoody_ = fuelLoadliveWoody;
+    FuelModelArray[fuelModelNumber].savrOneHour_ = savrOneHour;
+    FuelModelArray[fuelModelNumber].savrLiveHerbaceous_ = savrLiveHerbaceous;
+    FuelModelArray[fuelModelNumber].savrLiveWoody_ = savrLiveWoody;
+    FuelModelArray[fuelModelNumber].isDynamic_ = isDynamic;
+    FuelModelArray[fuelModelNumber].isReserved_ = isReserved;
+    FuelModelArray[fuelModelNumber].isDefined_ = true;
 }
 
 // PopulateFuelModels() fills FuelModelArray[] with the standard fuel model parameters
@@ -526,36 +510,27 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
     double fuelLoadliveWoody, double savrOneHour, double savrLiveHerb, double savrLiveWoody, bool isDynamic)
 {
     bool successStatus = false;
-    #pragma omp critical
+    
+    if (FuelModelArray[fuelModelNumber].isReserved_ == false)
     {
-        successStatus = false;
-        if (FuelModelArray[fuelModelNumber].isReserved_ == false)
-        {
-            setFuelModelRecord(fuelModelNumber, code, name,
-                fuelbedDepth, moistureOfExtinctionDead, heatOfCombustionDead, heatOfCombustionLive,
-                fuelLoadOneHour, fuelLoadTenHour, fuelLoadHundredHour, fuelLoadliveHerb,
-                fuelLoadliveWoody, savrOneHour, savrLiveHerb, savrLiveWoody, isDynamic,
-                FuelModelArray[fuelModelNumber].isReserved_);
-            successStatus = true;
-        }
+        setFuelModelRecord(fuelModelNumber, code, name,
+            fuelbedDepth, moistureOfExtinctionDead, heatOfCombustionDead, heatOfCombustionLive,
+            fuelLoadOneHour, fuelLoadTenHour, fuelLoadHundredHour, fuelLoadliveHerb,
+            fuelLoadliveWoody, savrOneHour, savrLiveHerb, savrLiveWoody, isDynamic,
+            FuelModelArray[fuelModelNumber].isReserved_);
+        successStatus = true;
     }
     return successStatus;
 }
 
 void FuelModels::markAsCustomModel(int fuelModelNumber)
 {
-    #pragma omp critical
-    {
-        FuelModelArray[fuelModelNumber].isReserved_ = false;
-    }
+    FuelModelArray[fuelModelNumber].isReserved_ = false;
 }
 
 void FuelModels::markAsReservedModel(int fuelModelNumber)
 {
-    #pragma omp critical
-    {
-        FuelModelArray[fuelModelNumber].isReserved_ = true;
-    }
+    FuelModelArray[fuelModelNumber].isReserved_ = true;
 }
 
 double FuelModels::getFuelbedDepth(int fuelModelNumber) const
