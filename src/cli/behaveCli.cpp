@@ -278,7 +278,8 @@ int main(int argc, char *argv[])
         requiredArgumentArray[index] = false;
     }
 
-    Behave behave;
+    FuelModels fuelModels;
+    Behave behave(fuelModels);
     behave.setSlopeInputToDegrees();
     behave.setWindAndSpreadAnglesRelativeToNorth();
 

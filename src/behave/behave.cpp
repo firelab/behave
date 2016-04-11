@@ -2,13 +2,6 @@
 
 static FuelModels fuelModels;         // Object containing data for fuel models
 
-//Behave::Behave()
-//    : surfaceInputs_(), 
-//      surface_(fuelModels, surfaceInputs_)
-//{
-//    // Default Constructor
-//}
-
 Behave::Behave(const Behave &rhs)
     : surfaceInputs_(), 
       surface_(fuelModels, surfaceInputs_)
@@ -36,11 +29,11 @@ Behave::Behave(FuelModels &fuelModels)
     fuelModels_ = &fuelModels;
 }
 
-Behave::Behave(SurfaceInputs &surfaceInputs)
-    : surface_(fuelModels, surfaceInputs)
-{
-    // Constructor taking a SurfaceInputs object as a parameter
-}
+//Behave::Behave(SurfaceInputs &surfaceInputs)
+//    : surface_(fuelModels, surfaceInputs)
+//{
+//    // Constructor taking a SurfaceInputs object as a parameter
+//}
 
 Behave::~Behave()
 {

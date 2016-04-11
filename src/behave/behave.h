@@ -14,7 +14,7 @@ class Behave
 {
 public:
     Behave() = delete; // There is no default constructor
-    explicit Behave(SurfaceInputs &surfaceInputs);
+    //explicit Behave(SurfaceInputs &surfaceInputs);
     explicit Behave(FuelModels &fuelModels);
     
     Behave(const Behave &rhs);
@@ -99,10 +99,6 @@ private:
     FuelModels* fuelModels_;        // This must point to a valid reference passed to the constructor
     Surface surface_;               // SURFACE Module object
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
-
-    void resize(std::allocator<Behave>::size_type new_size);
-
-    // std::vector<SurfaceInputs> behaveSurfaceRuns;
 };
 
 #endif //BEHAVE_HEADER
