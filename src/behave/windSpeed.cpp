@@ -36,23 +36,10 @@ double WindSpeed::WindSpeedAtMidflame(double windSpeedAt20FtIn, double windAdjFa
 *      vWindSpeedAt10M (mi/h)
 */
 
-double WindSpeed::WindSpeedAt20Ft(double windSpeedAt10MIn)
+double WindSpeed::WindSpeedAtTwentyFtFromTenMeter(double windSpeedAt10MIn)
 {
 	// Calculate results
-	double windSpeedAt20Ft = FBL_WindSpeedAt20Ft(windSpeedAt10MIn);	
+    double windSpeedAt20Ft = (windSpeedAt10MIn / 1.15);
 	return windSpeedAt20Ft;
 }
 
-
-//------------------------------------------------------------------------------
-/*! \brief Calculates the wind speed at 20 ft from the wind speed at 10 m.
-*
-*  \param windSpeedAt10M Wind speed at 10 meter (mi/h).
-*
-*  \return Wind speed at 20 ft (mi/h).
-*/
-
-double WindSpeed::FBL_WindSpeedAt20Ft(double windSpeedAt10MIn)
-{
-	return( windSpeedAt10MIn / 1.15 );
-}
