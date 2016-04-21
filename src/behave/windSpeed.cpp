@@ -2,9 +2,9 @@
 
 WindSpeed::WindSpeed()
 {
-	windSpeedAt10M = 0;
-	windSpeedAt20Ft = 0;
-	windSpeedAtMidflame = 0;
+    windSpeedAtTenMeters_ = 0;
+    windSpeedAtTwentyFeet_ = 0;
+    windSpeedAtMidflame_ = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -18,12 +18,11 @@ WindSpeed::WindSpeed()
 *      vWindAdjFactor (fraction)
 */
 
-double WindSpeed::WindSpeedAtMidflame(double windSpeedAt20FtIn, double windAdjFactor)
+double WindSpeed::WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor)
 {
-	// Calculate results
-	windSpeedAtMidflame = windSpeedAt20FtIn * windAdjFactor;
-	
-	return windSpeedAtMidflame;
+    // Calculate results
+    windSpeedAtMidflame_ = windSpeedAtTwentyFeet * windAdjustmentFactor;
+    return windSpeedAtMidflame_;
 }
 
 //------------------------------------------------------------------------------
@@ -36,10 +35,9 @@ double WindSpeed::WindSpeedAtMidflame(double windSpeedAt20FtIn, double windAdjFa
 *      vWindSpeedAt10M (mi/h)
 */
 
-double WindSpeed::WindSpeedAtTwentyFtFromTenMeter(double windSpeedAt10MIn)
+double WindSpeed::WindSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters)
 {
-	// Calculate results
-    double windSpeedAt20Ft = (windSpeedAt10MIn / 1.15);
-	return windSpeedAt20Ft;
+    // Calculate results
+    double windSpeedAt20Ft_ = windSpeedAtTenMeters / 1.15;
+    return windSpeedAt20Ft_;
 }
-
