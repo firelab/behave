@@ -3,7 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_behave_qt_main_window.h"
-#include "behave.h"
+#include "behaveRun.h"
 #include "behave_qt_main_window_enums.h"
 
 class BehaveQtMainWindow : public QMainWindow
@@ -31,6 +31,6 @@ private:
 
     Ui::behave_qt_main_windowClass ui;
     FuelModels fuelModels;
-    Behave behave;
+    BehaveRun behave;
 };
 #endif // BEHAVE_QT_GUI_H

@@ -39,7 +39,8 @@ ENDIF(CANOPY)
 #ENDIF(OPENMP_FOUND)
 
 SET(SOURCE
-    src/behave/behave.cpp
+    src/behave/behaveRun.cpp
+    src/behave/behaveVector.cpp
     src/behave/fuelModels.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
@@ -55,7 +56,8 @@ SET(SOURCE
     src/behave/windAdjustmentFactor.cpp)
 
 SET(HEADERS
-    src/behave/behave.h
+    src/behave/behaveRun.h
+    src/behave/behaveVector.h
     src/behave/fuelModels.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h

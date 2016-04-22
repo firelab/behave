@@ -4,22 +4,22 @@
 // TODO: Need to revisit how the Two Fuel Models module is organized and handled - WMC 02/2016
 
 
-#ifndef BEHAVE_HEADER
-#define BEHAVE_HEADER
+#ifndef BEHAVERUN_HEADER
+#define BEHAVERUN_HEADER
 
 #include "fuelModels.h"
 #include "surface.h"
 
-class Behave
+class BehaveRun
 {
 public:
-    Behave() = delete; // There is no default constructor
+    BehaveRun() = delete; // There is no default constructor
     //explicit Behave(SurfaceInputs &surfaceInputs);
-    explicit Behave(FuelModels &fuelModels);
+    explicit BehaveRun(FuelModels &fuelModels);
     
-    Behave(const Behave &rhs);
-    Behave& operator= (const Behave& rhs);
-    ~Behave();
+    BehaveRun(const BehaveRun &rhs);
+    BehaveRun& operator= (const BehaveRun& rhs);
+    ~BehaveRun();
 
     // SURFACE Module Inputs
     void setFuelModelNumber(int fuelModelNumber);
@@ -101,4 +101,4 @@ private:
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
 };
 
-#endif //BEHAVE_HEADER
+#endif //BehaveRun_HEADER

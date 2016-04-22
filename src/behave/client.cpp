@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "behave.h"
+#include "behaveRun.h"
 #include <time.h>
 #include <cmath>
 
@@ -46,7 +46,7 @@ int main()
     double crownRatio = 0.0;
 
     FuelModels fuelModels;
-    Behave behave(fuelModels);
+    BehaveRun behave(fuelModels);
 
     // Setting the wind and spread angle input mode (default is upslope)
     //behavePlus.setWindAndSpreadAnglesRelativeToUpslope();

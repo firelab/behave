@@ -1,8 +1,8 @@
-#include "behave.h"
+#include "behaveRun.h"
 
 static FuelModels fuelModels;         // Object containing data for fuel models
 
-Behave::Behave(const Behave &rhs)
+BehaveRun::BehaveRun(const BehaveRun &rhs)
     : surfaceInputs_(), 
       surface_(fuelModels, surfaceInputs_)
 {
@@ -11,7 +11,7 @@ Behave::Behave(const Behave &rhs)
     surfaceInputs_ = rhs.surfaceInputs_;
 }
 
-Behave& Behave::operator= (const Behave& rhs)
+BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
 {
     if (this != &rhs)
     {
@@ -22,95 +22,95 @@ Behave& Behave::operator= (const Behave& rhs)
     return *this;
 }
 
-Behave::Behave(FuelModels &fuelModels)
+BehaveRun::BehaveRun(FuelModels &fuelModels)
     : surfaceInputs_(),
       surface_(fuelModels, surfaceInputs_)
 {
     fuelModels_ = &fuelModels;
 }
 
-//Behave::Behave(SurfaceInputs &surfaceInputs)
+//BehaveRun::BehaveRun(SurfaceInputs &surfaceInputs)
 //    : surface_(fuelModels, surfaceInputs)
 //{
 //    // Constructor taking a SurfaceInputs object as a parameter
 //}
 
-Behave::~Behave()
+BehaveRun::~BehaveRun()
 {
     // Default Destructor
 }
 
-void Behave::setFuelModelNumber(int fuelModelNumber)
+void BehaveRun::setFuelModelNumber(int fuelModelNumber)
 {
     surfaceInputs_.setFuelModelNumber(fuelModelNumber);
 }
 
-void Behave::setMoistureOneHour(double moistureOneHour)
+void BehaveRun::setMoistureOneHour(double moistureOneHour)
 {
     surfaceInputs_.setMoistureOneHour(moistureOneHour);
 }
 
-void Behave::setMoistureTenHour(double moistureTenHour)
+void BehaveRun::setMoistureTenHour(double moistureTenHour)
 {
     surfaceInputs_.setMoistureTenHour(moistureTenHour);
 }
 
-void Behave::setMoistureHundredHour(double moistureHundredHour)
+void BehaveRun::setMoistureHundredHour(double moistureHundredHour)
 {
     surfaceInputs_.setMoistureHundredHour(moistureHundredHour);
 }
 
-void Behave::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
+void BehaveRun::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
     surfaceInputs_.setMoistureLiveHerbaceous(moistureLiveHerbaceous);
 }
 
-void Behave::setMoistureLiveWoody(double moistureLiveWoody)
+void BehaveRun::setMoistureLiveWoody(double moistureLiveWoody)
 {
     surfaceInputs_.setMoistureLiveWoody(moistureLiveWoody);
 }
 
-void Behave::setSlope(double slope)
+void BehaveRun::setSlope(double slope)
 {
     surfaceInputs_.setSlope(slope);
 }
 
-void Behave::setSlopeAspect(double slopeAspect)
+void BehaveRun::setSlopeAspect(double slopeAspect)
 {
     surfaceInputs_.setSlopeAspect(slopeAspect);
 }
 
-void Behave::setWindSpeed(double windSpeed)
+void BehaveRun::setWindSpeed(double windSpeed)
 {
     surfaceInputs_.setWindSpeed(windSpeed);
 }
 
-void Behave::setWindDirection(double windDirection)
+void BehaveRun::setWindDirection(double windDirection)
 {
     surfaceInputs_.setWindDirection(windDirection);
 }
 
-void Behave::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
+void BehaveRun::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
     surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
 }
 
-void Behave::setFirstFuelModelNumber(int firstFuelModelNumber)
+void BehaveRun::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
     surfaceInputs_.setFirstFuelModelNumber(firstFuelModelNumber);
 }
 
-void Behave::setSecondFuelModelNumber(int secondFuelModelNumber)
+void BehaveRun::setSecondFuelModelNumber(int secondFuelModelNumber)
 {
     surfaceInputs_.setSecondFuelModelNumber(secondFuelModelNumber);
 }
 
-void Behave::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
+void BehaveRun::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
 {
     surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
 }
 
-void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
@@ -119,7 +119,7 @@ void Behave::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, do
     surfaceInputs_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
 }
 
-void Behave::updateSurfaceInputsWithMoistureByLifeState(int fuelModelNumber, double moistureDead, double moistureLive,
+void BehaveRun::updateSurfaceInputsWithMoistureByLifeState(int fuelModelNumber, double moistureDead, double moistureLive,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
     double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
@@ -127,7 +127,7 @@ void Behave::updateSurfaceInputsWithMoistureByLifeState(int fuelModelNumber, dou
         moistureLive, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
+void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
     double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
     double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
@@ -138,7 +138,7 @@ void  Behave::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int 
         firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void Behave::updateSurfaceInputsForTwoFuelModelsWithMoistureByLifeState(int firstfuelModelNumber, int secondFuelModelNumber,
+void BehaveRun::updateSurfaceInputsForTwoFuelModelsWithMoistureByLifeState(int firstfuelModelNumber, int secondFuelModelNumber,
     double moistureDead, double moistureLive, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
     double windDirection, double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod,
     double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
@@ -148,7 +148,7 @@ void Behave::updateSurfaceInputsForTwoFuelModelsWithMoistureByLifeState(int firs
         twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void Behave::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
     double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
@@ -158,7 +158,7 @@ void Behave::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, doub
         heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void Behave::updateSurfaceInputsForPalmettoGallberyModelsWithMoistureByLifeState(double moistureDead, double moistureLive,
+void BehaveRun::updateSurfaceInputsForPalmettoGallberyModelsWithMoistureByLifeState(double moistureDead, double moistureLive,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
     double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
@@ -168,7 +168,7 @@ void Behave::updateSurfaceInputsForPalmettoGallberyModelsWithMoistureByLifeState
         palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void Behave::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
+void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
@@ -179,7 +179,7 @@ void Behave::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double
         slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void Behave::updateSurfaceInputsForWesternAspenWithMoistureByLifeState(int aspenFuelModelNumber, double aspenCuringLevel, 
+void BehaveRun::updateSurfaceInputsForWesternAspenWithMoistureByLifeState(int aspenFuelModelNumber, double aspenCuringLevel, 
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureDead, double moistureLive, 
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope, 
     double aspect, double canopyCover, double canopyHeight, double crownRatio)
@@ -189,92 +189,92 @@ void Behave::updateSurfaceInputsForWesternAspenWithMoistureByLifeState(int aspen
         canopyCover, canopyHeight, crownRatio);
 }
 
-double Behave::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
+double BehaveRun::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
 {
     // Calculate Spread Rate
     return surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
 }
 
-void Behave::setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
+void BehaveRun::setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
     surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
 }
 
-void Behave::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
+void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
 {
     surfaceInputs_.setSlopeInputMode(slopeInputMode);
 }
 
-void Behave::setWindAndSpreadAnglesRelativeToNorth()
+void BehaveRun::setWindAndSpreadAnglesRelativeToNorth()
 {
     surfaceInputs_.setWindAndSpreadAngleMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
 }
 
-void Behave::setWindAndSpreadAnglesRelativeToUpslope()
+void BehaveRun::setWindAndSpreadAnglesRelativeToUpslope()
 {
     surfaceInputs_.setWindAndSpreadAngleMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
 }
 
-void Behave::setSlopeInputToPercent()
+void BehaveRun::setSlopeInputToPercent()
 {
     surfaceInputs_.setSlopeInputMode(SlopeInputMode::SLOPE_IN_PERCENT);
 }
 
-void Behave::setSlopeInputToDegrees()
+void BehaveRun::setSlopeInputToDegrees()
 {
     surfaceInputs_.setSlopeInputMode(SlopeInputMode::SLOPE_IN_DEGREES);
 }
 
-bool Behave::isWindAndSpreadAngleRelativeToNorth() const
+bool BehaveRun::isWindAndSpreadAngleRelativeToNorth() const
 {
     bool isRelativeToNorth = surfaceInputs_.isWindAndSpreadAngleRelativeToNorth();
     return isRelativeToNorth;
 }
 
-bool Behave::isWindAndSpreadAngleRelativeToUpslope() const
+bool BehaveRun::isWindAndSpreadAngleRelativeToUpslope() const
 {
     bool isRelativeToUpslope = surfaceInputs_.isWindAndSpreadAngleRelativeToUpslope();
     return isRelativeToUpslope;
 }
 
-bool Behave::isSlopeInDegrees() const
+bool BehaveRun::isSlopeInDegrees() const
 {
     bool isSlopeModeDegrees = surfaceInputs_.isSlopeInDegrees();
     return isSlopeModeDegrees;
 }
 
-bool Behave::isSlopeInPercent() const
+bool BehaveRun::isSlopeInPercent() const
 {
     bool isSlopeInPercent = surfaceInputs_.isSlopeInPercent();
     return isSlopeInPercent;
 }
 
-double Behave::getSpreadRate() const
+double BehaveRun::getSpreadRate() const
 {
     return surface_.getSpreadRate();
 }
 
-double Behave::getDirectionOfMaxSpread() const
+double BehaveRun::getDirectionOfMaxSpread() const
 {
     return surface_.getDirectionOfMaxSpread();
 }
 
-double Behave::getFlameLength() const
+double BehaveRun::getFlameLength() const
 {
     return surface_.getFlameLength();
 }
 
-double Behave::getFireLengthToWidthRatio() const
+double BehaveRun::getFireLengthToWidthRatio() const
 {
     return surface_.getFireLengthToWidthRatio();
 }
 
-double Behave::getFireEccentricity() const
+double BehaveRun::getFireEccentricity() const
 {
     return surface_.getFireEccentricity();
 }
 
-bool Behave::isFuelModelDefined(int fuelModelNumber) const
+bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModels.isFuelModelDefined(fuelModelNumber);
 }
