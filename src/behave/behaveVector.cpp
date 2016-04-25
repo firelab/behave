@@ -76,14 +76,14 @@ std::vector <BehaveRun>::reverse_iterator BehaveVector::rbegin()
 
 std::vector<BehaveRun>::const_reverse_iterator BehaveVector::rbegin() const
 {
-    std::vector <BehaveRun>::const_reverse_iterator myconstantIterator = behaveRun.crbegin();
-    return myconstantIterator;
+    std::vector <BehaveRun>::const_reverse_iterator myconstantReverseIterator = behaveRun.crbegin();
+    return myconstantReverseIterator;
 }
 
 std::vector<BehaveRun>::const_reverse_iterator BehaveVector::crbegin() const
 {
-    std::vector <BehaveRun>::const_reverse_iterator myconstantIterator = behaveRun.crbegin();
-    return myconstantIterator;
+    std::vector <BehaveRun>::const_reverse_iterator myconstantReverseIterator = behaveRun.crbegin();
+    return myconstantReverseIterator;
 }
 
 std::vector <BehaveRun>::reverse_iterator BehaveVector::rend()
@@ -94,12 +94,12 @@ std::vector <BehaveRun>::reverse_iterator BehaveVector::rend()
 
 std::vector<BehaveRun>::const_reverse_iterator BehaveVector::rend() const
 {
-    std::vector <BehaveRun>::const_reverse_iterator myconstantIterator = behaveRun.crend();
-    return myconstantIterator;
+    std::vector <BehaveRun>::const_reverse_iterator myconstantReverseIterator = behaveRun.crend();
+    return myconstantReverseIterator;
 }
 
 std::vector<BehaveRun>::const_reverse_iterator BehaveVector::crend() const
 {
-    std::vector <BehaveRun>::const_reverse_iterator myconstantIterator = behaveRun.crend();
-    return myconstantIterator;
+    std::vector <BehaveRun>::const_reverse_iterator myconstantReverseIterator = behaveRun.crend();
+    return myconstantReverseIterator;
 }
