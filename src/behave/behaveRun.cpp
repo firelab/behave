@@ -1,10 +1,15 @@
 #include "behaveRun.h"
 
-static FuelModels fuelModels;         // Object containing data for fuel models
+BehaveRun::BehaveRun(FuelModels &fuelModels)
+    : surfaceInputs_(),
+    surface_(fuelModels, surfaceInputs_)
+{
+    fuelModels_ = &fuelModels;
+}
 
 BehaveRun::BehaveRun(const BehaveRun &rhs)
     : surfaceInputs_(), 
-      surface_(fuelModels, surfaceInputs_)
+      surface_(*rhs.fuelModels_, surfaceInputs_)
 {
     fuelModels_ = rhs.fuelModels_;
     surface_ = rhs.surface_;
@@ -21,19 +26,6 @@ BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
     }
     return *this;
 }
-
-BehaveRun::BehaveRun(FuelModels &fuelModels)
-    : surfaceInputs_(),
-      surface_(fuelModels, surfaceInputs_)
-{
-    fuelModels_ = &fuelModels;
-}
-
-//BehaveRun::BehaveRun(SurfaceInputs &surfaceInputs)
-//    : surface_(fuelModels, surfaceInputs)
-//{
-//    // Constructor taking a SurfaceInputs object as a parameter
-//}
 
 BehaveRun::~BehaveRun()
 {
@@ -276,5 +268,5 @@ double BehaveRun::getFireEccentricity() const
 
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
-    return fuelModels.isFuelModelDefined(fuelModelNumber);
+    return fuelModels_->isFuelModelDefined(fuelModelNumber);
 }
