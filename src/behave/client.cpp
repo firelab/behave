@@ -81,11 +81,11 @@ int main()
     for (int i = 0; i <= 10; i++)
     {
         fuelModelNumber = i;
-        moistureOneHour = 0.06;
-        moistureTenHour = 0.07;
-        moistureHundredHour = 0.08;
-        moistureLiveHerbaceous = 0.60;
-        moistureLiveWoody = 0.90;
+        moistureOneHour = 6;
+        moistureTenHour = 7;
+        moistureHundredHour = 8;
+        moistureLiveHerbaceous = 60;
+        moistureLiveWoody = 90;
         windSpeed = 5;
         windDirection = 0;
         slope = 30;
@@ -148,11 +148,11 @@ int main()
     }
 
     //fuelModelNumber = 1;
-    //moistureOneHour = 0.06;
-    //moistureTenHour = 0.07;
-    //moistureHundredHour = 0.08;
-    //moistureLiveHerbaceous = 0.60;
-    //moistureLiveWoody = 0.90;
+    //moistureOneHour = 6;
+    //moistureTenHour = 7;
+    //moistureHundredHour = 8;
+    //moistureLiveHerbaceous = 60;
+    //moistureLiveWoody = 90;
     //windSpeed = 5;
     //windDirection = 0;
     //slope = 30;
