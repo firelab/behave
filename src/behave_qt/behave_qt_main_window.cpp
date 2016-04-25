@@ -2,9 +2,10 @@
 
 BehaveQtMainWindow::BehaveQtMainWindow(QWidget *parent)
     : QMainWindow(parent),
-      behave(fuelModels)
+      behaveRun(fuelModels)
 {
     ui.setupUi(this);
+    qcustomplotTest_ = NULL;
     populateTree();
     establishConnections();
 }
@@ -50,62 +51,69 @@ void BehaveQtMainWindow::populateTree()
 void BehaveQtMainWindow::fuelModelInputChanged(const QString& text)
 {
     int fuelModelNumber = text.toInt();
-    behave.setFuelModelNumber(fuelModelNumber);
+    behaveRun.setFuelModelNumber(fuelModelNumber);
 }
 
 // Slot
 void BehaveQtMainWindow::oneHourMoistureInputChanged(const QString& text)
 {
     double oneHourMoisture = text.toDouble();
-    behave.setMoistureOneHour(oneHourMoisture);
+    behaveRun.setMoistureOneHour(oneHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::tenHourMoistureInputChanged(const QString& text)
 {
     double tenHourMoisture = text.toDouble();
-    behave.setMoistureTenHour(tenHourMoisture);
+    behaveRun.setMoistureTenHour(tenHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::hundredHourMoistureInputChanged(const QString& text)
 {
     double hundredHourMoisture = text.toDouble();
-    behave.setMoistureHundredHour(hundredHourMoisture);
+    behaveRun.setMoistureHundredHour(hundredHourMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::liveHerbaceousMoistureInputChanged(const QString& text)
 {
     double liveHerbaceousMoisture = text.toDouble();
-    behave.setMoistureLiveHerbaceous(liveHerbaceousMoisture);
+    behaveRun.setMoistureLiveHerbaceous(liveHerbaceousMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::liveWoodyMoistureInputChanged(const QString& text)
 {
     double liveWoodyMoisture = text.toDouble();
-    behave.setMoistureLiveWoody(liveWoodyMoisture);
+    behaveRun.setMoistureLiveWoody(liveWoodyMoisture);
 }
 
 // Slot
 void BehaveQtMainWindow::windSpeedInputChanged(const QString& text)
 {
     double windSpeed = text.toDouble();
-    behave.setWindSpeed(windSpeed);
+    behaveRun.setWindSpeed(windSpeed);
 }
 
 // Slot
 void BehaveQtMainWindow::slopeInputChanged(const QString& text)
 {
     double slope = text.toDouble();
-    behave.setSlope(slope);
+    behaveRun.setSlope(slope);
 }
 
 // Slot
 void BehaveQtMainWindow::calculateClicked()
 {
-    double spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+    double spreadRate = behaveRun.calculateSurfaceFireForwardSpreadRate();
     ui.spreadRateLineEdit->setText(QString::number(spreadRate, 10, 2));
+
+    if (!qcustomplotTest_) 
+    {
+        qcustomplotTest_ = new QcustomplotTest(this);
+        qcustomplotTest_->show();
+        hide();
+    }
 }
 

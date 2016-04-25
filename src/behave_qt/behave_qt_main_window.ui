@@ -557,7 +557,9 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="behave_qt_main_window.qrc"/>
+  <!--
+   <include location="dummy.qrc"/>
+  -->
  </resources>
  <connections/>
 </ui>

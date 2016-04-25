@@ -13,7 +13,8 @@ PROJECT(behave)
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
                     ${CMAKE_SOURCE_DIR}/src/behave_qt
                     ${CMAKE_SOURCE_DIR}/src/canopy_flow
-                    ${CMAKE_SOURCE_DIR}/src/cli)      
+                    ${CMAKE_SOURCE_DIR}/src/cli
+                    ${CMAKE_SOURCE_DIR}/src/qcustomplot)      
 
 OPTION(CLI "Enable CLI boost parser" OFF)
 IF(CLI)
@@ -119,21 +120,31 @@ IF(GUI)
     # Find the QtWidgets library
     FIND_PACKAGE(Qt5Widgets REQUIRED)
 
+    FIND_PACKAGE(Qt5PrintSupport REQUIRED)
+
     SET(BEHAVE_QT_SOURCE
         src/behave_qt/behave_qt_main_window.cpp
         src/behave_qt/behave_qtree_widget.cpp
-        src/behave_qt/main.cpp)
+        src/behave_qt/main.cpp
+        src/behave_qt/qcustomplotTest.cpp)
 
     SET(BEHAVE_QT_HEADERS
-       src/behave_qt/behave_qt_main_window.h
+        src/behave_qt/behave_qt_main_window.h
         src/behave_qt/behave_qt_main_window_enums.h
-        src/behave_qt/behave_qtree_widget.h)
+        src/behave_qt/behave_qtree_widget.h
+        src/behave_qt/qcustomplotTest.h)
+
+    SET(QCUSTOMPLOT
+        src/qcustomplot/qcustomplot.h
+        src/qcustomplot/qcustomplot.cpp)
 
     QT5_WRAP_UI(UIS_HDRS 
-        src/behave_qt/behave_qt_main_window.ui)
+        src/behave_qt/behave_qt_main_window.ui
+        src/behave_qt/qcustomplot_test.ui)
 
     SOURCE_GROUP("UI Files"  FILES
-        src/behave_qt/behave_qt_main_window.ui)
+        src/behave_qt/behave_qt_main_window.ui
+        src/behave_qt/qcustomplot_test.ui)
 
     SOURCE_GROUP("Behave Qt GUI Source Files" FILES ${BEHAVE_QT_SOURCE})
 
@@ -143,12 +154,15 @@ IF(GUI)
 
     SOURCE_GROUP("Behave Core Header Files" FILES ${HEADERS})
 
+    SOURCE_GROUP("qcustomplot Files" FILES ${QCUSTOMPLOT})
+
     ADD_EXECUTABLE(behave_qt
         ${SOURCE}
         ${HEADERS}
         ${BEHAVE_QT_SOURCE}
         ${BEHAVE_QT_HEADERS}
+        ${QCUSTOMPLOT}
         ${UIS_HDRS})
 
-    TARGET_LINK_LIBRARIES(behave_qt Qt5::Widgets)
+    TARGET_LINK_LIBRARIES(behave_qt Qt5::Widgets Qt5::PrintSupport)
 ENDIF(GUI)

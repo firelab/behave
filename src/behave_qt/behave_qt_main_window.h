@@ -5,6 +5,8 @@
 #include "ui_behave_qt_main_window.h"
 #include "behaveRun.h"
 #include "behave_qt_main_window_enums.h"
+#include "qcustomplotTest.h"
+
 
 class BehaveQtMainWindow : public QMainWindow
 {
@@ -30,7 +32,8 @@ private:
     void populateTree();
 
     Ui::behave_qt_main_windowClass ui;
+    QcustomplotTest* qcustomplotTest_;
     FuelModels fuelModels;
-    BehaveRun behave;
+    BehaveRun behaveRun;
 };
 #endif // BEHAVE_QT_GUI_H
