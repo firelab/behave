@@ -1,5 +1,7 @@
 #include "surfaceInputs.h"
 
+#include <cmath>
+
 // Default Ctor
 SurfaceInputs::SurfaceInputs()
 {

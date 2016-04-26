@@ -1,7 +1,6 @@
 #ifndef SURFACEINPUTS_HEADER
 #define SURFACEINPUTS_HEADER
 
-#include <string>
 #include "surfaceEnums.h"
 
 class SurfaceInputs

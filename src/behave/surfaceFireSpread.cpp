@@ -1,5 +1,7 @@
 #include "surfaceFireSpread.h"
 
+#include <cmath>
+
 #include "surfaceEnums.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
