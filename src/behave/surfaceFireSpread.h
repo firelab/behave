@@ -1,12 +1,9 @@
 #ifndef SURFACEFIRE_HEADER
 #define SURFACEFIRE_HEADER
 
-#include <cmath>
-#include "surfaceEnums.h"
-#include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireReactionIntensity.h"
-#include "surfaceInputs.h"
-#include "windAdjustmentFactor.h"
+
+class SurfaceInputs;
 
 class SurfaceFireSpread
 {

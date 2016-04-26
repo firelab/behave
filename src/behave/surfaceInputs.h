@@ -2,7 +2,6 @@
 #define SURFACEINPUTS_HEADER
 
 #include <string>
-#include <cmath>
 #include "surfaceEnums.h"
 
 class SurfaceInputs
@@ -48,7 +47,6 @@ public:
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
 
-//    void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
     bool isUsingPalmettoGallberry() const;
     void setAgeOfRough(double ageOfRough);
     double getAgeOfRough() const;

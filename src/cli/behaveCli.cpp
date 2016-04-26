@@ -9,6 +9,7 @@
 #include <string.h>
 #include <algorithm>
 
+#include "fuelModels.h"
 #include "behaveRun.h"
 
 #define EQUAL(a,b) (strcmp(a,b)==0)

@@ -1,5 +1,8 @@
 #include "surfaceFuelbedIntermediates.h"
 
+#include "fuelModels.h"
+#include "surfaceInputs.h"
+
 SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates()
 {
 

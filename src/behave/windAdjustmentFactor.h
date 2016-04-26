@@ -1,8 +1,6 @@
 #ifndef WINDADJUSTMENTFACTOR_HEADER
 #define WINDADJUSTMENTFACTOR_HEADER
 
-// Standard include files
-#include <math.h>
 #include "surfaceEnums.h"
 
 class WindAjustmentFactor

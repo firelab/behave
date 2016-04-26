@@ -1,7 +1,9 @@
 #ifndef SURFACEFIREREACTIONINTENSITY_HEADER
 #define SURFACEFIREREACTIONINTENSITY_HEADER
 
-#include "surfaceFuelbedIntermediates.h"
+#include "surfaceEnums.h"
+
+class SurfaceFuelbedIntermediates;
 
 class SurfaceFireReactionIntensity
 {

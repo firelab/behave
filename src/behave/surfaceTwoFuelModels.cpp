@@ -1,5 +1,12 @@
 #include "surfaceTwoFuelModels.h"
 
+#include "newext.h"
+#include "randfuel.h"
+#include "randthread.h"
+#include "surfaceFireSpread.h"
+#include "surfaceFuelbedIntermediates.h"
+#include "surfaceInputs.h"
+
 SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates,
     SurfaceFireSpread& surfaceFireSpread)
 {

@@ -1,5 +1,7 @@
 #include "behaveRun.h"
 
+#include "fuelModels.h"
+
 BehaveRun::BehaveRun(FuelModels &fuelModels)
     : surfaceInputs_(),
     surface_(fuelModels, surfaceInputs_)

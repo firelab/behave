@@ -1,8 +1,6 @@
 #ifndef WESTERNASPEN_HEADER
 #define WESTERNASPEN_HEADER
 
-#include <cmath>
-
 class WesternAspen
 {
 public:

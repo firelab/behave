@@ -8,11 +8,10 @@
 //	10 meter wind and input wind adjustment factor, 10 meter wind calculate wind adjustment factor
 //	WMC - 11/2015
 
-#include "surfaceEnums.h"
-#include "surfaceInputs.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
-#include "surfaceTwoFuelModels.h"
+
+class SurfaceInputs;
 
 class Surface
 {

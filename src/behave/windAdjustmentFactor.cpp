@@ -1,5 +1,7 @@
 #include "windAdjustmentFactor.h"
 
+#include <cmath>
+
 WindAjustmentFactor::WindAjustmentFactor()
 {
     windAdjustmentFactor_ = 0.0;

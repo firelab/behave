@@ -1,11 +1,12 @@
 #ifndef SURFACEFUELBEDINTERMEDIATES_HEADER
 #define SURFACEFUELBEDINTERMEDIATES_HEADER
 
-#include <cmath>
-#include "fuelModels.h"
 #include "palmettoGallberry.h" 
 #include "westernAspen.h"
-#include "surfaceInputs.h"
+#include "surfaceEnums.h"
+
+class FuelModels;
+class SurfaceInputs;
 
 class SurfaceFuelbedIntermediates
 {

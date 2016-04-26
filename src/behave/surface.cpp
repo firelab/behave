@@ -1,5 +1,8 @@
 #include "surface.h"
 
+#include "surfaceTwoFuelModels.h"
+#include "surfaceInputs.h"
+
 Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs) 
     : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
       surfaceFireSpread_(surfaceFuelbedIntermediates_, surfaceInputs)

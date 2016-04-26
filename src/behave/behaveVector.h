@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "behaveRun.h" 
+#include "fuelModels.h"
 
 class BehaveVector
 {

@@ -1,5 +1,7 @@
 #include "westernAspen.h"
 
+#include <cmath>
+
 WesternAspen::WesternAspen()
 {
 

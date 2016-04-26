@@ -1,8 +1,6 @@
 #ifndef PALMETTOGALLBERRY_HEADER
 #define PALMETTOGALLBERRY_HEADER
 
-#include <cmath>
-
 class PalmettoGallberry
 {
 public:

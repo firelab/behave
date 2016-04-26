@@ -1,5 +1,7 @@
-#include <cmath>
 #include "surfaceFireReactionIntensity.h"
+
+#include <cmath>
+#include "surfaceFuelbedIntermediates.h"
 
 SurfaceFireReactionIntensity::SurfaceFireReactionIntensity()
 {

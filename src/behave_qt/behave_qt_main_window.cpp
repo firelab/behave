@@ -1,5 +1,7 @@
 #include "behave_qt_main_window.h"
 
+#include "qcustomplotTest.h"
+
 BehaveQtMainWindow::BehaveQtMainWindow(QWidget *parent)
     : QMainWindow(parent),
       behaveRun(fuelModels)

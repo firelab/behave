@@ -1,14 +1,14 @@
 #ifndef SURFACETWOFUELMODELS_HEADER
 #define SURFACETWOFUELMODELS_HEADER
 
-#include "fuelModels.h"
-#include "newext.h"
-#include "randfuel.h"
-#include "randthread.h"
+
 #include "surfaceEnums.h"
-#include "surfaceInputs.h"
-#include "surfaceFuelbedIntermediates.h"
-#include "surfaceFireSpread.h"
+
+
+
+class SurfaceInputs;
+class SurfaceFuelbedIntermediates;
+class SurfaceFireSpread;
 
 class SurfaceTwoFuelModels
 {

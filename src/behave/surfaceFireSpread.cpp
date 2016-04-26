@@ -1,5 +1,10 @@
 #include "surfaceFireSpread.h"
 
+#include "surfaceEnums.h"
+#include "surfaceFuelbedIntermediates.h"
+#include "surfaceInputs.h"
+#include "windAdjustmentFactor.h"
+
 SurfaceFireSpread::SurfaceFireSpread()
     : surfaceFireReactionIntensity_()
 {

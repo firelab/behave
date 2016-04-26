@@ -3,12 +3,13 @@
 
 // TODO: Need to revisit how the Two Fuel Models module is organized and handled - WMC 02/2016
 
-
 #ifndef BEHAVERUN_HEADER
 #define BEHAVERUN_HEADER
 
-#include "fuelModels.h"
 #include "surface.h"
+#include "surfaceInputs.h"
+
+class FuelModels;
 
 class BehaveRun
 {

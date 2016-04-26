@@ -1,5 +1,7 @@
 #include "palmettoGallberry.h"
 
+#include <cmath>
+
 PalmettoGallberry::PalmettoGallberry()
 {
     initialize();

@@ -2,11 +2,15 @@
 #define BEHAVE_QT_GUI_H
 
 #include <QtWidgets/QMainWindow>
-#include "ui_behave_qt_main_window.h"
+
+
 #include "behaveRun.h"
 #include "behave_qt_main_window_enums.h"
-#include "qcustomplotTest.h"
+#include "fuelModels.h"
 
+#include "ui_behave_qt_main_window.h"
+
+class QcustomplotTest;
 
 class BehaveQtMainWindow : public QMainWindow
 {

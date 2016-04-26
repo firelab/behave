@@ -1,8 +1,10 @@
-#include <iostream>
-#include <iomanip>
-#include "behaveRun.h"
-#include <time.h>
 #include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <time.h>
+
+#include "behaveRun.h"
+#include "fuelModels.h"
 
 int main()
 {
