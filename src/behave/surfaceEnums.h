@@ -1,13 +1,19 @@
 #ifndef SURFACEENUMS_H
 #define SURFACEENUMS_H
 
-enum FuelConstants
+struct FuelConstants
 {
-    DEAD = 0,                   // Index associated with dead fuels
-    LIVE = 1,                   // Index associated with live fuels
-    MAX_LIFE_STATES = 2,        // Number of life states, live and dead
-    MAX_PARTICLES = 4,          // Maximum number of size classes within a life state (dead/live)
-    MAX_SAVR_SIZE_CLASSES = 5   // Maximum number of SAVR size classes
+    enum FuelConstantsEnum
+    {
+        DEAD = 0,                   // Index associated with dead fuels
+        LIVE = 1,                   // Index associated with live fuels
+        MAX_LIFE_STATES = 2,        // Number of life states, live and dead
+        MAX_LIVE_SIZE_CLASSES = 3,  // Maximum number of live size classes
+        MAX_DEAD_SIZE_CLASSES = 4,  // Maximum number of dead size classes
+        MAX_PARTICLES = 4,          // Maximum number of size classes within a life state (dead/live)
+        MAX_SAVR_SIZE_CLASSES = 5,  // Maximum number of SAVR size classes
+        NUM_FUEL_MODELS = 267       // Maximum number of fuel models
+    };
 };
 
 struct AspenFireSeverity

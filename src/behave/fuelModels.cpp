@@ -1,19 +1,17 @@
 #include "fuelModels.h"
 
+#include "surfaceEnums.h"
+
 FuelModels::FuelModels()
 {
-    const int NUM_FUEL_MODELS = 257;
-
-    FuelModelArray.resize(NUM_FUEL_MODELS);
+    FuelModelArray.resize(FuelConstants::NUM_FUEL_MODELS);
     initializeFuelModelRecords();
     populateFuelModels();
 }
 
 FuelModels::FuelModels(const FuelModels &rhs)
 {
-    const int NUM_FUEL_MODELS = 257;
-
-    for (int i = 0; i < NUM_FUEL_MODELS; i++)
+    for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
     {
         FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
         FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
@@ -39,8 +37,7 @@ FuelModels& FuelModels::operator= (const FuelModels& rhs)
 {
     if (this != &rhs)
     {
-        const int NUM_FUEL_MODELS = 257;
-        for (int i = 0; i < NUM_FUEL_MODELS; i++)
+        for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
         {
             FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
             FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
@@ -71,8 +68,7 @@ FuelModels::~FuelModels()
 
 void FuelModels::initializeFuelModelRecords()
 {
-    const int NUM_FUEL_MODELS = 257;
-    for (int i = 0; i < NUM_FUEL_MODELS; i++)
+    for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
     {
         FuelModelArray[i].fuelModelNumber_ = 0;
         FuelModelArray[i].code_ = "NO_CODE";
