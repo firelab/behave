@@ -28,7 +28,7 @@ void BehaveVector::resize(std::vector<BehaveRun>::size_type newSize)
 
 const std::vector<BehaveRun>::size_type BehaveVector::size()
 {
-    size_t size = behaveRun.size();
+    std::vector<BehaveRun>::size_type size = behaveRun.size();
     return size;
 }
 
