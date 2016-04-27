@@ -9,12 +9,12 @@ class BehaveVector
 {
 public:
     BehaveVector();
-    BehaveRun& operator[] (const size_t i);
+    BehaveRun& operator[] (const std::vector<BehaveRun>::size_type index);
     
     void clear();
     bool empty();
-    void resize(size_t i);
-    const size_t size();
+    void resize(std::vector<BehaveRun>::size_type new_size);
+    const std::vector<BehaveRun>::size_type size();
 
     std::vector<BehaveRun>::iterator begin();
     std::vector<BehaveRun>::const_iterator begin() const;

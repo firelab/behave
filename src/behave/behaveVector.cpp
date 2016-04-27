@@ -6,9 +6,9 @@ BehaveVector::BehaveVector()
    
 }
 
-BehaveRun& BehaveVector::operator[] (const size_t i)
+BehaveRun& BehaveVector::operator[] (const std::vector<BehaveRun>::size_type index)
 { 
-    return behaveRun[i]; 
+    return behaveRun[index]; 
 }
 
 void BehaveVector::clear()
@@ -21,12 +21,12 @@ bool BehaveVector::empty()
     return behaveRun.empty();
 }
 
-void BehaveVector::resize(size_t i)
+void BehaveVector::resize(std::vector<BehaveRun>::size_type newSize)
 {
-    behaveRun.resize(i, behaveRun[0]);
+    behaveRun.resize(newSize, behaveRun[0]);
 }
 
-const size_t BehaveVector::size()
+const std::vector<BehaveRun>::size_type BehaveVector::size()
 {
     size_t size = behaveRun.size();
     return size;
