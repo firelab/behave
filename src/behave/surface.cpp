@@ -4,8 +4,7 @@
 #include "surfaceInputs.h"
 
 Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs) 
-    : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
-      surfaceFireSpread_(surfaceFuelbedIntermediates_, surfaceInputs)
+    : surfaceFireSpread_(fuelModels, surfaceInputs)
 {
     fuelModels_ = &fuelModels;
     surfaceInputs_ = &surfaceInputs;
@@ -13,10 +12,8 @@ Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs)
 
 // Copy Ctor
 Surface::Surface(const Surface &rhs)
-    : surfaceFuelbedIntermediates_(),
-      surfaceFireSpread_()
+    : surfaceFireSpread_()
 {
-    surfaceFuelbedIntermediates_ = rhs.surfaceFuelbedIntermediates_;
     surfaceFireSpread_ = rhs.surfaceFireSpread_;
 }
 
@@ -24,7 +21,6 @@ Surface& Surface::operator= (const Surface& rhs)
 {
     if (this != &rhs)
     {
-        surfaceFuelbedIntermediates_ = rhs.surfaceFuelbedIntermediates_;
         surfaceFireSpread_ = rhs.surfaceFireSpread_;
     }
     return *this;
@@ -37,7 +33,7 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
-        SurfaceTwoFuelModels surfaceTwoFuelModels(*surfaceInputs_, surfaceFuelbedIntermediates_, surfaceFireSpread_);
+        SurfaceTwoFuelModels surfaceTwoFuelModels(*surfaceInputs_, surfaceFireSpread_);
         spreadRate = surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
     }
     else // Use only one fuel model

@@ -8,7 +8,6 @@
 //	10 meter wind and input wind adjustment factor, 10 meter wind calculate wind adjustment factor
 //	WMC - 11/2015
 
-#include "surfaceFuelbedIntermediates.h"
 #include "surfaceFireSpread.h"
 
 class SurfaceInputs;
@@ -33,7 +32,6 @@ private:
 
     // SURFACE Module component objects
     const FuelModels*	fuelModels_;
-    SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs* surfaceInputs_;
 };

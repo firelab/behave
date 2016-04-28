@@ -13,8 +13,7 @@ class SurfaceFireSpread;
 class SurfaceTwoFuelModels
 {
 public:
-    SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates,
-        SurfaceFireSpread& surfaceFireSpread);
+    SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFireSpread& surfaceFireSpread);
     double calculateWeightedSpreadRate(double directionOfInterest);
 
     //public getters
@@ -35,7 +34,7 @@ public:
 private:
   
     SurfaceInputs* surfaceInputs_;
-    SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
+    //SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
     SurfaceFireSpread* surfaceFireSpread_;
 
     double surfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,

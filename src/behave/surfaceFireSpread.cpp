@@ -1,7 +1,9 @@
 #include "surfaceFireSpread.h"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 
+#include "fuelModels.h"
 #include "surfaceEnums.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
@@ -13,10 +15,12 @@ SurfaceFireSpread::SurfaceFireSpread()
 
 }
 
-SurfaceFireSpread::SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs)
-    : surfaceFireReactionIntensity_(surfaceFuelbedIntermediates) 
+SurfaceFireSpread::SurfaceFireSpread(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs)
+    : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
+      surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
 {
-    surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
+    //surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
+    fuelModels_ = &fuelModels;
     surfaceInputs_ = &surfaceInputs;
     initializeMembers();
 }
@@ -103,7 +107,7 @@ double SurfaceFireSpread::calculateNoWindNoSlopeSpreadRate(double reactionIntens
 
 void SurfaceFireSpread::calculateResidenceTime()
 {
-    double sigma = surfaceFuelbedIntermediates_->getSigma();
+    double sigma = surfaceFuelbedIntermediates_.getSigma();
     residenceTime_ = ((sigma < 1.0e-07)
         ? (0.0)
         : (384. / sigma));
@@ -129,13 +133,13 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     const double PI = 3.141592653589793238462643383279;
 
     // Calculate fuelbed intermediates
-    surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
+    surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
 
     // Get needed fuelbed intermediates
-    double sigma = surfaceFuelbedIntermediates_->getSigma();
-    double packingRatio = surfaceFuelbedIntermediates_->getPackingRatio();
-    double propagatingFlux = surfaceFuelbedIntermediates_->getPropagatingFlux();
-    double heatSink = surfaceFuelbedIntermediates_->getHeatSink();
+    double sigma = surfaceFuelbedIntermediates_.getSigma();
+    double packingRatio = surfaceFuelbedIntermediates_.getPackingRatio();
+    double propagatingFlux = surfaceFuelbedIntermediates_.getPropagatingFlux();
+    double heatSink = surfaceFuelbedIntermediates_.getHeatSink();
     reactionIntensity_ = surfaceFireReactionIntensity_.calculateReactionIntensity();
 
     // Calculate Wind and Slope Factors
@@ -231,7 +235,7 @@ void SurfaceFireSpread::applyWindSpeedLimit()
     isWindLimitExceeded_ = true;
     effectiveWindSpeed_ = windSpeedLimit_;
 
-    double relativePackingRatio = surfaceFuelbedIntermediates_->getRelativePackingRatio();
+    double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
     double phiEffectiveWind = windC_ * pow(windSpeedLimit_, windB_) * pow(relativePackingRatio, -windE_);
     forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1 + phiEffectiveWind);
 }
@@ -239,17 +243,15 @@ void SurfaceFireSpread::applyWindSpeedLimit()
 void SurfaceFireSpread::calculateEffectiveWindSpeed()
 {
     double phiEffectiveWind = forwardSpreadRate_ / noWindNoSlopeSpreadRate_ - 1.0;
-    double relativePackingRatio = surfaceFuelbedIntermediates_->getRelativePackingRatio();
+    double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
     effectiveWindSpeed_ = pow(((phiEffectiveWind * pow(relativePackingRatio, windE_)) / windC_), 1.0 / windB_);
 }
 
 void SurfaceFireSpread::calculateDirectionOfMaxSpread()
 {
-    const double PI = 3.141592653589793238462643383279;
-
     //Calculate directional components (direction is clockwise from upslope)
     double windDir = surfaceInputs_->getWindDirection();
-    double windDirRadians = windDir * PI / 180.;
+    double windDirRadians = windDir * M_PI / 180.;
 
     // Calculate wind and slope rate
     double slopeRate = noWindNoSlopeSpreadRate_ * phiS_;
@@ -268,7 +270,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     azimuth = atan2(y, x);
 
     // Recalculate azimuth in degrees
-    azimuth *= 180.0 / PI;
+    azimuth *= 180.0 / M_PI;
 
     // If angle is negative, add 360 degrees
     if (azimuth < -1.0e-20)
@@ -301,8 +303,8 @@ void  SurfaceFireSpread::calculateWindSpeedLimit()
 
 void SurfaceFireSpread::calculateWindFactor()
 {
-    double sigma = surfaceFuelbedIntermediates_->getSigma();
-    double relativePackingRatio = surfaceFuelbedIntermediates_->getRelativePackingRatio();
+    double sigma = surfaceFuelbedIntermediates_.getSigma();
+    double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
     const double SMIDGEN = 1.0e-07; // Number used to test for "close enough to zero" to prevent divide - by - zero, sqrt(0), etc
 
     windC_ = 7.47 * exp(-0.133 * pow(sigma, 0.55));
@@ -327,7 +329,7 @@ void SurfaceFireSpread::calculateWindAdjustmentFactor()
     double canopyCover = surfaceInputs_->getCanopyCover();
     double canopyHeight = surfaceInputs_->getCanopyHeight();
     double crownRatio = surfaceInputs_->getCrownRatio();
-    double fuelbedDepth = surfaceFuelbedIntermediates_->getFuelbedDepth();
+    double fuelbedDepth = surfaceFuelbedIntermediates_.getFuelbedDepth();
 
     windAdjustmentFactor_ = windAdjustmentFactor.calculateWindAdjustmentFactor(canopyCover, canopyHeight, crownRatio, fuelbedDepth);
 }
@@ -363,7 +365,7 @@ void SurfaceFireSpread::calculateMidflameWindSpeed()
 void SurfaceFireSpread::calculateSlopeFactor()
 {
     const double PI = 3.141592653589793238462643383279;
-    double packingRatio = surfaceFuelbedIntermediates_->getPackingRatio();
+    double packingRatio = surfaceFuelbedIntermediates_.getPackingRatio();
     // Slope factor
     double slope = surfaceInputs_->getSlope();
     double slopex = tan((double)slope / 180.0 * PI); // convert from degrees to tan
@@ -395,6 +397,13 @@ void SurfaceFireSpread::calculateSurfaceFireEccentricity()
 void SurfaceFireSpread::calculateBackingSpreadRate()
 {
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
+}
+
+double SurfaceFireSpread::getFuelbedDepth() const
+{
+    int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
+    double fuelbedDepth = fuelModels_->getFuelbedDepth(fuelModelNumber);
+    return fuelbedDepth;
 }
 
 double SurfaceFireSpread::getSpreadRate() const

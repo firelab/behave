@@ -2,21 +2,21 @@
 #define SURFACEFIRE_HEADER
 
 #include "surfaceFireReactionIntensity.h"
-
-class SurfaceInputs;
+#include "surfaceFuelbedIntermediates.h"
 
 class SurfaceFireSpread
 {
 public:
     SurfaceFireSpread();
-    SurfaceFireSpread(const SurfaceFireSpread &rhs);
+    SurfaceFireSpread(const SurfaceFireSpread& rhs);
     SurfaceFireSpread& operator= (const SurfaceFireSpread& rhs);
-    SurfaceFireSpread(SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates, const SurfaceInputs& surfaceInputs);
+    SurfaceFireSpread(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
 
     // Public getters
+    double getFuelbedDepth() const;
     double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
@@ -64,8 +64,9 @@ private:
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
 
     // Pointers and references to other objects
+    const FuelModels* fuelModels_;
     const SurfaceInputs* surfaceInputs_;
-    SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
+    SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
   
     // Member variables

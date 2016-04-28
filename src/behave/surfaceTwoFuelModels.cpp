@@ -7,11 +7,9 @@
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
 
-SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates,
-    SurfaceFireSpread& surfaceFireSpread)
+SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFireSpread& surfaceFireSpread)
 {
     surfaceInputs_ = &surfaceInputs;
-    surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
     surfaceFireSpread_ = &surfaceFireSpread;
 }
 
@@ -296,8 +294,8 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(double directionOfIn
     for (int i = 0; i < TwoFuelModels::NUMBER_OF_MODELS; i++)
     {
         surfaceInputs_->setFuelModelNumber(fuelModelNumber_[i]);
-        surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
-        fuelbedDepthForFuelModel_[i] = surfaceFuelbedIntermediates_->getFuelbedDepth();
+        //surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
+        fuelbedDepthForFuelModel_[i] = surfaceFireSpread_->getFuelbedDepth();
 
         rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(directionOfInterest);
 
