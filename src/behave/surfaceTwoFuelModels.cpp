@@ -216,14 +216,10 @@ double SurfaceTwoFuelModels::calculateWeightedSpreadRate(double directionOfInter
 }
 
 double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *cov, int fuels,
-    double lbRatio, int samples, int depth, int laterals, double *harmonicRos)
+    double lbRatio, int samples, int depth, int laterals)
 {
     // Initialize results
     double expectedRos = 0.0;
-    if (harmonicRos)
-    {
-        *harmonicRos = 0.0;
-    }
 
     // Create a RandFuel instance
     RandFuel randFuel;
@@ -254,8 +250,11 @@ double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *
         cov[i] = cov[i] / totalCov;
         randFuel.setFuelData(i, ros[i], cov[i]);
     }
-    // Compute the expected and harmonic spread rates
+    
     double maximumRos;
+    double* harmonicRos; // only exists to match computeSpread2's parameter list
+    harmonicRos = 0; // point harmonicRos to null
+    // Compute the expected rate
     expectedRos = randFuel.computeSpread2(
         samples,        // columns
         depth,          // rows
@@ -267,12 +266,9 @@ double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *
         0);            // less ignitions
     randFuel.freeFuels();
 
-    // Determine expected and harmonic spread rates.
+    // Determine expected spread rates.
     expectedRos *= maximumRos;
-    if (harmonicRos)
-    {
-        *harmonicRos *= maximumRos;
-    }
+
     return(expectedRos);
 }
 
