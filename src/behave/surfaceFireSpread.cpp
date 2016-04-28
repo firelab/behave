@@ -1,6 +1,5 @@
 #include "surfaceFireSpread.h"
 
-#define _USE_MATH_DEFINES
 #include <cmath>
 
 #include "fuelModels.h"
@@ -8,6 +7,8 @@
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
 #include "windAdjustmentFactor.h"
+
+static const double PI = 3.14159265358979323846;
 
 SurfaceFireSpread::SurfaceFireSpread()
     : surfaceFireReactionIntensity_()
@@ -130,8 +131,6 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Reset member variables to prepare for next calculation
     initializeMembers();
 
-    const double PI = 3.141592653589793238462643383279;
-
     // Calculate fuelbed intermediates
     surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
 
@@ -207,7 +206,6 @@ double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest
     double rosVector = forwardSpreadRate_;
     if (forwardSpreadRate_) // if forward spread rate is not zero
     {
-        const double PI = 3.141592653589793238462643383279;
         // Calculate the fire spread rate in this azimuth
         // if it deviates more than a tenth degree from the maximum azimuth
 
@@ -249,7 +247,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
 {
     //Calculate directional components (direction is clockwise from upslope)
     double windDir = surfaceInputs_->getWindDirection();
-    double windDirRadians = windDir * M_PI / 180.;
+    double windDirRadians = windDir * PI / 180.;
 
     // Calculate wind and slope rate
     double slopeRate = noWindNoSlopeSpreadRate_ * phiS_;
@@ -268,7 +266,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     azimuth = atan2(y, x);
 
     // Recalculate azimuth in degrees
-    azimuth *= 180.0 / M_PI;
+    azimuth *= 180.0 / PI;
 
     // If angle is negative, add 360 degrees
     if (azimuth < -1.0e-20)
@@ -303,14 +301,13 @@ void SurfaceFireSpread::calculateWindFactor()
 {
     double sigma = surfaceFuelbedIntermediates_.getSigma();
     double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
-    const double SMIDGEN = 1.0e-07; // Number used to test for "close enough to zero" to prevent divide - by - zero, sqrt(0), etc
-
+ 
     windC_ = 7.47 * exp(-0.133 * pow(sigma, 0.55));
     windB_ = 0.02526 * pow(sigma, 0.54);
     windE_ = 0.715 * exp(-0.000359*sigma);
 
     double windSpeedInFtPerMin = midflameWindSpeed_ * 88.0;		// ft/minute
-    if (windSpeedInFtPerMin < SMIDGEN)
+    if (windSpeedInFtPerMin < 1.0e-07)
     {
         phiW_ = 0.0;
     }
@@ -362,7 +359,6 @@ void SurfaceFireSpread::calculateMidflameWindSpeed()
 
 void SurfaceFireSpread::calculateSlopeFactor()
 {
-    const double PI = 3.141592653589793238462643383279;
     double packingRatio = surfaceFuelbedIntermediates_.getPackingRatio();
     // Slope factor
     double slope = surfaceInputs_->getSlope();
