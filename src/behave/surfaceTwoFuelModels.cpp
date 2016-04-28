@@ -82,31 +82,18 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
 /*! \brief FuelBedWeighted
 *
 *  Dependent Variables (Outputs)
-*      SurfaceReactionIntensity (Btu/ft2/min)
-*      SurfaceFireSpreadRate (ft/min)
-*      SurfaceFireMaxDirFromUpslope (clockwise from upslope)
-*      SurfaceFireEffectiveWind (mi/h)
-*      SurfaceFireWindSpeedLimit (mi/h)
-*      SurfaceFireWindSpeedFlag (flag)
-*      SurfaceFireHeatPerUnitArea (Btu/ft2)
-*      SurfaceFireLineIntensity (Btu/ft/s)
-*      SurfaceFireFlameLength (ft)
+*       reactionIntensity_ (Btu/ft2/min)
+*       spreadRate_ (ft/min)
+*       directionOfMaxSpread_ (clockwise from upslope)
+*       effectiveWind_ (mi/h)
+*       windSpeedLimit_ (mi/h)
+*       windLimitExceeded_ (flag)
+*       heatPerUnitArea_ (Btu/ft2)
+*       fireLineIntensity_ (Btu/ft/s)
+*       fireFlameLength_ (ft)
 *
 *  Independent Variables (Inputs)
-*      SurfaceFuelBedModel1 (item)
-*      SurfaceFuelBedModel2 (item)
-*      SurfaceFuelBedCoverage1 (fraction)
-*      SiteSlopeFraction (rise/reach)
-*      WindDirFromUpslope (degrees)
-*      WindSpeedAtMidflame (mi/h)
-*      SurfaceFuelMoisDead1 (fraction)
-*      SurfaceFuelMoisDead10 (fraction)
-*      SurfaceFuelMoisDead100 (fraction)
-*      SurfaceFuelMoisDead1000 (fraction)
-*      SurfaceFuelMoisLiveHerb (fraction)
-*      SurfaceFuelMoisLiveWood (fraction)
-*      SurfaceFuelLoadTransferFraction (fraction)
-*      SurfaceFireVectorDirFromUpslope (deg)
+*       SurfaceInputs (object)
 */
 
 double SurfaceTwoFuelModels::calculateWeightedSpreadRate(double directionOfInterest)
@@ -294,7 +281,6 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(double directionOfIn
     for (int i = 0; i < TwoFuelModels::NUMBER_OF_MODELS; i++)
     {
         surfaceInputs_->setFuelModelNumber(fuelModelNumber_[i]);
-        //surfaceFuelbedIntermediates_->calculateFuelbedIntermediates();
         fuelbedDepthForFuelModel_[i] = surfaceFireSpread_->getFuelbedDepth();
 
         rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(directionOfInterest);
