@@ -41,16 +41,8 @@ public:
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsWithMoistureByLifeState(int fuelModelNumber, double moistureDead, double moistureLive,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
-        double slopeAspect, double canopyCover, double canopyHeight, double crownRatio);
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
-        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
-        double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForTwoFuelModelsWithMoistureByLifeState(int firstfuelModelNumber, int secondFuelModelNumber,
-        double moistureDead, double moistureLive,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
         double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
         double canopyCover, double canopyHeight, double crownRatio);
@@ -65,10 +57,6 @@ public:
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, 
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, 
         double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
-        double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForWesternAspenWithMoistureByLifeState(int aspenFuelModelNumber, double aspenCuringLevel,
-        AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureDead, double moistureLive,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
