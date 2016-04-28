@@ -20,7 +20,6 @@ SurfaceFireSpread::SurfaceFireSpread(const FuelModels& fuelModels, const Surface
     : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
       surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
 {
-    //surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
     fuelModels_ = &fuelModels;
     surfaceInputs_ = &surfaceInputs;
     initializeMembers();
@@ -153,7 +152,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Slope and wind adjusted spread rate
     calculateWindSpeedLimit();
 
-    forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1 + phiW_ + phiS_);
+    forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1.0 + phiW_ + phiS_);
 
     // Calculate spread rate in optimal direction.
     calculateDirectionOfMaxSpread();
@@ -200,7 +199,7 @@ double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest
     if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
     {
         double aspect = surfaceInputs_->getAspect();
-        directionOfInterest -= aspect + 180; // Direction of interest is now relative to north
+        directionOfInterest -= aspect + 180.0; // Direction of interest is now relative to north
     }
 
     double rosVector = forwardSpreadRate_;
@@ -247,7 +246,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
 {
     //Calculate directional components (direction is clockwise from upslope)
     double windDir = surfaceInputs_->getWindDirection();
-    double windDirRadians = windDir * PI / 180.;
+    double windDirRadians = windDir * PI / 180.0;
 
     // Calculate wind and slope rate
     double slopeRate = noWindNoSlopeSpreadRate_ * phiS_;
@@ -262,7 +261,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     forwardSpreadRate_ = noWindNoSlopeSpreadRate_ + rateVector;
 
     // Calculate azimuth
-    double azimuth = 0;
+    double azimuth = 0.0;
     azimuth = atan2(y, x);
 
     // Recalculate azimuth in degrees
@@ -271,7 +270,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     // If angle is negative, add 360 degrees
     if (azimuth < -1.0e-20)
     {
-        azimuth += 360;
+        azimuth += 360.0;
     }
 
     // Undocumented hack from BehavePlus code
@@ -380,7 +379,7 @@ void SurfaceFireSpread::calculateFireLengthToWidthRatio()
 
 void SurfaceFireSpread::calculateSurfaceFireEccentricity()
 {
-    eccentricity_ = 0;
+    eccentricity_ = 0.0;
     double x = (fireLengthToWidthRatio_ * fireLengthToWidthRatio_) - 1.0;
     if (x > 0.0)
     {
@@ -411,9 +410,9 @@ double SurfaceFireSpread::getDirectionOfMaxSpread() const
     if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
     {
         localDirMaxSpread = convertDirectionOfSpreadToRelativeToNorth(localDirMaxSpread);
-        while (localDirMaxSpread >= 360)
+        while (localDirMaxSpread >= 360.0)
         {
-            localDirMaxSpread -= 360;
+            localDirMaxSpread -= 360.0;
         }
     }
     return localDirMaxSpread;
@@ -428,7 +427,7 @@ double SurfaceFireSpread::convertDirectionOfSpreadToRelativeToNorth(double direc
 {
     double dirMaxSpreadRelativeToNorth = directionOfMaxSpreadFromUpslope;
     double aspect = surfaceInputs_->getAspect();
-    dirMaxSpreadRelativeToNorth += aspect + 180; // spread direction is now relative to north
+    dirMaxSpreadRelativeToNorth += aspect + 180.0; // spread direction is now relative to north
     return dirMaxSpreadRelativeToNorth;
 }
 
