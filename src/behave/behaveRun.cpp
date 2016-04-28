@@ -242,7 +242,10 @@ void BehaveRun::updateSurfaceInputsForWesternAspenWithMoistureByLifeState(int as
 double BehaveRun::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
 {
     // Calculate Spread Rate
-    return surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
+    double surfaceFireForwardSpreadRate = surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+    surfaceFireForwardSpreadRate *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
+    return surfaceFireForwardSpreadRate;
 }
 
 void BehaveRun::setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
