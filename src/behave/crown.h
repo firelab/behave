@@ -12,7 +12,7 @@ public:
     Crown(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
 	~Crown();
 
-	double calculateCrownFireSpreadRate();
+    double calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet);
 
 private:
     const FuelModels* fuelModels_;

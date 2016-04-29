@@ -26,26 +26,24 @@ Crown::~Crown()
 *  \return Crown fire average spread rate (ft/min).
 */
 
-double Crown::calculateCrownFireSpreadRate()
+double Crown::calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet)
 {
 	//--------------------------------------------------------------------------
 	// Step 1: Create the crown fuel model (fire behavior fuel model 10)
 	//--------------------------------------------------------------------------
-    crownInputs_.setFuelModelNumber(10);
-    double windAtTwentyFeet = surfaceInputs_->getWindSpeed();
-    crownInputs_.setSlope(0.0); // slope is always assumed to be zero in crown ROS
-    crownInputs_.setWindDirection(0.0); // wind direction is assumed to be upslope in crown ROS
-    double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
-    double midflameWindSpeed = 0.4 * windAtTwentyFeet;
+    crownInputs_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
+    crownInputs_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
+    crownInputs_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
+    double windAdjustmentFactor = 0.4;      // wind adjustment factor is assumed to be 0.4 for crown ROS
+    double midflameWindSpeed = 0.4 * windSpeedAtTwentyFeet;
     crownInputs_.setWindSpeed(midflameWindSpeed);
 
-	////--------------------------------------------------------------------------
-	//// Step 2: Determine fire behavior.
-	////--------------------------------------------------------------------------
-    double ros = 0;
-    ros = crownFireSpread_.calculateForwardSpreadRate();
+	//--------------------------------------------------------------------------
+	// Step 2: Determine fire behavior.
+	//--------------------------------------------------------------------------
+    double ros = crownFireSpread_.calculateForwardSpreadRate();
 
-	//// Rothermel 1991
+	// Rothermel 1991
 	double crownRos = 3.34 * ros;
 
 	return crownRos;

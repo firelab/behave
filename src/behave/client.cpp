@@ -178,11 +178,12 @@ int main()
     moistureHundredHour /= 100.0;
     moistureLiveHerbaceous /= 100.0;
     moistureLiveWoody /= 100.0;
+    double windSpeedAtTwentyFeet = 5;
 
     const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
     crownInputs.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
     Crown crown(fuelModels, crownInputs);
-    double crownRos = FEET_PER_MIN_TO_CHAINS_PER_HOUR * crown.CrownFireSpreadRate();
+    double crownRos = FEET_PER_MIN_TO_CHAINS_PER_HOUR * crown.calculateCrownFireSpreadRate(windSpeedAtTwentyFeet);
    
 
     std::cout << "Press Enter to continue";
