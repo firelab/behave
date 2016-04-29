@@ -9,8 +9,9 @@ class FuelModels;
 class Crown
 {
 public:
+    Crown() = delete;
     Crown(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
-	~Crown();
+    ~Crown();
 
     double calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet);
 

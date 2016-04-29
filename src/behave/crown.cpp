@@ -1,7 +1,5 @@
 #include "crown.h"
 
-#include <iostream> // Test
-
 #include "fuelModels.h"
 #include "surfaceFireSpread.h"
 
@@ -25,12 +23,9 @@ Crown::~Crown()
 *
 *  \return Crown fire average spread rate (ft/min).
 */
-
 double Crown::calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet)
 {
-	//--------------------------------------------------------------------------
-	// Step 1: Create the crown fuel model (fire behavior fuel model 10)
-	//--------------------------------------------------------------------------
+    // Step 1: Create the crown fuel model (fire behavior fuel model 10)
     crownInputs_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
     crownInputs_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
     crownInputs_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
@@ -38,13 +33,9 @@ double Crown::calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet)
     double midflameWindSpeed = 0.4 * windSpeedAtTwentyFeet;
     crownInputs_.setWindSpeed(midflameWindSpeed);
 
-	//--------------------------------------------------------------------------
-	// Step 2: Determine fire behavior.
-	//--------------------------------------------------------------------------
+    // Step 2: Determine fire behavior.
     double ros = crownFireSpread_.calculateForwardSpreadRate();
+    double crownRos = 3.34 * ros; // Rothermel 1991
 
-	// Rothermel 1991
-	double crownRos = 3.34 * ros;
-
-	return crownRos;
+    return crownRos;
 }
