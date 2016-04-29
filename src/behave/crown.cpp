@@ -30,7 +30,7 @@ double Crown::calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet)
     crownInputs_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
     crownInputs_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
     double windAdjustmentFactor = 0.4;      // wind adjustment factor is assumed to be 0.4 for crown ROS
-    double midflameWindSpeed = 0.4 * windSpeedAtTwentyFeet;
+    double midflameWindSpeed = windAdjustmentFactor * windSpeedAtTwentyFeet;
     crownInputs_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior.
