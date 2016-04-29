@@ -6,6 +6,8 @@
 #include "behaveRun.h"
 #include "fuelModels.h"
 
+#include "crown.h"
+
 int main()
 {
     //clock_t tStart = clock();
@@ -131,7 +133,7 @@ int main()
     crownRatio = 0.50;
 
     // Single fuel model test
-    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::TWENTY_FOOT, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
     spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
     flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
     std::cout << "Spread rate for fuel model " << fuelModelNumber << " is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
@@ -164,6 +166,25 @@ int main()
     // Used for debug
     //double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
     //std::cout << "Total execution time for " << 1000000 << " fire spread calculations is " << executionTimeInSeconds << " seconds." << std::endl;
+
+    canopyCover = 0.50; // 50%
+    canopyHeight = 6;
+    crownRatio = 0.50;
+
+    SurfaceInputs crownInputs;
+    // Covert moisture from percent to decimal
+    moistureOneHour /= 100.0;
+    moistureTenHour /= 100.0;
+    moistureHundredHour /= 100.0;
+    moistureLiveHerbaceous /= 100.0;
+    moistureLiveWoody /= 100.0;
+
+    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
+    crownInputs.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+    Crown crown(fuelModels, crownInputs);
+    double crownRos = FEET_PER_MIN_TO_CHAINS_PER_HOUR * crown.CrownFireSpreadRate();
+   
+
     std::cout << "Press Enter to continue";
     std::cin.get();
 
