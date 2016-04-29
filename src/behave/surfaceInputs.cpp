@@ -32,12 +32,20 @@ SurfaceInputs::SurfaceInputs(const SurfaceInputs &rhs)
     windHeightInputMode_ = rhs.windHeightInputMode_;
     twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
 
+    firstFuelModelCoverage_ = 0.0;
+
+    ageOfRough_ = rhs.ageOfRough_;
+    heightOfUnderstory_ = rhs.heightOfUnderstory_;
+    palmettoCoverage_ = rhs.palmettoCoverage_;
+    overstoryBasalArea_ = rhs.overstoryBasalArea_;
+
     canopyCover_ = rhs.canopyCover_;
     canopyHeight_ = rhs.canopyHeight_;
     crownRatio_ = rhs.crownRatio_;
 
     aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
     aspenCuringLevel_ = rhs.aspenCuringLevel_;
+    aspenFireSeverity_ = rhs.aspenFireSeverity_;
 
     userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
 }
@@ -67,12 +75,20 @@ SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
         windHeightInputMode_ = rhs.windHeightInputMode_;
         twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
 
+        firstFuelModelCoverage_ = 0.0;
+
+        ageOfRough_ = rhs.ageOfRough_;
+        heightOfUnderstory_ = rhs.heightOfUnderstory_;
+        palmettoCoverage_ = rhs.palmettoCoverage_;
+        overstoryBasalArea_ = rhs.overstoryBasalArea_;
+
         canopyCover_ = rhs.canopyCover_;
         canopyHeight_ = rhs.canopyHeight_;
         crownRatio_ = rhs.crownRatio_;
 
         aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
         aspenCuringLevel_ = rhs.aspenCuringLevel_;
+        aspenFireSeverity_ = rhs.aspenFireSeverity_;
 
         userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
     }
@@ -102,12 +118,20 @@ void SurfaceInputs::initializeMembers()
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
 
+    firstFuelModelCoverage_ = 0.0;
+
+    ageOfRough_ = 0.0;
+    heightOfUnderstory_ = 0.0;
+    palmettoCoverage_ = 0.0;
+    overstoryBasalArea_ = 0.0;
+
     canopyCover_ = 0.0;
     canopyHeight_ = 0.0;
     crownRatio_ = 0.0;
 
     aspenFuelModelNumber_ = -1;
     aspenCuringLevel_ = 0.0;
+    aspenFireSeverity_ = AspenFireSeverity::LOW;
 
     userProvidedWindAdjustmentFactor_ = -1.0;
 }
@@ -151,9 +175,8 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
 
     isUsingTwoFuelModels_ = false;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
-
+   
     isUsingPalmettoGallberry_ = false;
-
     isUsingWesternAspen_ = false;
 
     canopyCover_ = canopyCover;
@@ -171,7 +194,7 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    firstFuelModelNumber_ = firstfuelModelNumber;
+    //firstFuelModelNumber_ = firstfuelModelNumber;
     secondFuelModelNumber_ = secondFuelModelNumber;
     firstFuelModelCoverage_ = firstFuelModelCoverage;
 
@@ -307,12 +330,12 @@ void  SurfaceInputs::setWindDirection(double windDirection)
 
 void  SurfaceInputs::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
-    firstFuelModelNumber_ = firstFuelModelNumber;
+    fuelModelNumber_ = firstFuelModelNumber;
 }
 
 int  SurfaceInputs::getFirstFuelModelNumber() const
 {
-    return firstFuelModelNumber_;
+    return fuelModelNumber_;
 }
 
 int  SurfaceInputs::getSecondFuelModelNumber() const

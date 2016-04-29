@@ -106,7 +106,6 @@ private:
 
     // Two Fuel Models
     bool isUsingTwoFuelModels_;         // Whether fuel spread calculation is using Two Fuel Models
-    int firstFuelModelNumber_;          // 1 to 256, first fuel used in Two Fuel Models
     int secondFuelModelNumber_;         // 1 to 256, second fuel used in Two Fuel Models
     double firstFuelModelCoverage_;     // percent of landscape occupied by first fuel in Two Fuel Models
 
