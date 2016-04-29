@@ -6,6 +6,7 @@
 
 class SurfaceFireSpread
 {
+    friend class SurfaceTwoFuelModels;
 public:
     SurfaceFireSpread();
     SurfaceFireSpread(const SurfaceFireSpread& rhs);
@@ -31,7 +32,8 @@ public:
     double getMidflameWindSpeed() const;
     bool getIsWindLimitExceeded() const;
 
-    // public setters
+private:
+    // Private setters
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
     void setEffectiveWindSpeed(double effectiveWindSpeed);
     void setFirelineIntensity(double firelineIntensity);
@@ -45,7 +47,6 @@ public:
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
 
-private:
     void initializeMembers();
     void calculateWindAdjustmentFactor();
     void calculateWindFactor();
