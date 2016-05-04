@@ -25,6 +25,7 @@ public:
     double getFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
+    double getHeatPerUnitArea() const;
     double getResidenceTime() const;
     double getHeatPerUnitArea() const;
     double getWindSpeedLimit() const;

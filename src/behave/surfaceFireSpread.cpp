@@ -451,6 +451,11 @@ double SurfaceFireSpread::getFireEccentricity() const
     return eccentricity_;
 }
 
+double SurfaceFireSpread::getHeatPerUnitArea() const
+{
+    return heatPerUnitArea_;
+}
+
 double  SurfaceFireSpread::getResidenceTime() const
 {
     return residenceTime_;
