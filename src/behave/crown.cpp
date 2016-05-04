@@ -1,7 +1,6 @@
 #include "crown.h"
 
 #include "fuelModels.h"
-#include "surfaceFireSpread.h"
 
 Crown::Crown(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs)
     : crownFireSpread_(fuelModels, crownInputs_)
