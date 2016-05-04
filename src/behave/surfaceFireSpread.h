@@ -27,7 +27,6 @@ public:
     double getFireEccentricity() const;
     double getHeatPerUnitArea() const;
     double getResidenceTime() const;
-    double getHeatPerUnitArea() const;
     double getWindSpeedLimit() const;
     double getReactionIntensity() const;
     double getMidflameWindSpeed() const;
@@ -49,6 +48,7 @@ private:
     void setMidflameWindSpeed(double midflameWindSpeed);
 
     void initializeMembers();
+    void calculateHeatPerUnitArea();
     void calculateWindAdjustmentFactor();
     void calculateWindFactor();
     void calculateSlopeFactor();

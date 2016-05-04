@@ -181,6 +181,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
 
     calculateFireFirelineIntensity();
     calculateFlameLength();
+    calculateHeatPerUnitArea();
 
     return forwardSpreadRate_;
 }
@@ -281,6 +282,11 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
 
     // Azimuth is the direction of maximum spread
     directionOfMaxSpread_ = azimuth;
+}
+
+void SurfaceFireSpread::calculateHeatPerUnitArea()
+{
+    heatPerUnitArea_ = reactionIntensity_ * residenceTime_;
 }
 
 void  SurfaceFireSpread::calculateWindSpeedLimit()
@@ -459,12 +465,6 @@ double SurfaceFireSpread::getHeatPerUnitArea() const
 double  SurfaceFireSpread::getResidenceTime() const
 {
     return residenceTime_;
-}
-
-double SurfaceFireSpread::getHeatPerUnitArea() const
-{
-    double heatPerUnitArea = reactionIntensity_ * residenceTime_;
-    return heatPerUnitArea;
 }
 
 double SurfaceFireSpread::getWindSpeedLimit() const
