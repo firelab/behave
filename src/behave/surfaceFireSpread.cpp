@@ -118,6 +118,14 @@ void SurfaceFireSpread::calculateFireFirelineIntensity()
     firelineIntensity_ = forwardSpreadRate_ * reactionIntensity_ * residenceTime_ / 60.0;
 }
 
+double  SurfaceFireSpread::calculateFlameLength(double firelineIntensity)
+{
+    double flameLength = ((firelineIntensity < 1.0e-07)
+        ? (0.0)
+        : (0.45 * pow(firelineIntensity, 0.46)));
+    return flameLength;
+}
+
 void SurfaceFireSpread::calculateFlameLength()
 {
     flameLength_ = ((firelineIntensity_ < 1.0e-07)

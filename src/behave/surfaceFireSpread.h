@@ -15,6 +15,7 @@ public:
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
+    double calculateFlameLength(double firelineIntensity);
 
     // Public getters
     double getFuelbedDepth() const;

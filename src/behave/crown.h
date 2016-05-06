@@ -14,12 +14,15 @@ public:
     Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, double surfaceHeatPerUnitArea, double surfaceFirelineIntensity);
     ~Crown();
 
-    void calculateCanopyHeatPerUnitArea();
-    void calculateCrownFireHeatPerUnitArea();
+    double calculateCanopyHeatPerUnitArea();
+    double calculateCrownFireHeatPerUnitArea();
     double calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet);
-    void calculateCrownFuelLoad();
-    double Crown::calculateCrownFireTransitionRatio(double surfaceFireIntensity, double criticalFireIntensity);
-    double Crown::calculateCrownFireFirelineIntensity();
+    double calculateCrownFuelLoad();
+    double calculateCrownFireTransitionRatio();
+    double calculateCrownFireFirelineIntensity();
+    double calculateCrownFireCriticalSurfaceFireIntensity();
+    double calculateCrownFireCriticalSurfaceFlameLength();
+    double calculateCrownFireFlameLength();
 
 private:
     const FuelModelSet* fuelModelSet_;
@@ -30,10 +33,12 @@ private:
     SurfaceFireSpread crownFireSpread_; // stores and operates on Crown's surface fire data to allow parallel runs in Surface
 
     double crownCopyOfSurfaceHeatPerUnitArea_;
+    double crownCopyOfSurfaceFirelineIntensity_;
     double crownFuelLoad_;
     double canopyHeatPerUnitArea_;
     double crownFireHeatPerUnitArea_;
     double crownFireSpreadRate_;
+    double crownCriticalSurfaceFireIntensity_;
 };
 
 #endif // CROWN_HEADER
