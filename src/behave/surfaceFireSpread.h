@@ -11,7 +11,7 @@ public:
     SurfaceFireSpread();
     SurfaceFireSpread(const SurfaceFireSpread& rhs);
     SurfaceFireSpread& operator= (const SurfaceFireSpread& rhs);
-    SurfaceFireSpread(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
+    SurfaceFireSpread(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
@@ -66,7 +66,7 @@ private:
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
 
     // Pointers and references to other objects
-    const FuelModels* fuelModels_;
+    const FuelModelSet* fuelModelSet_;
     const SurfaceInputs* surfaceInputs_;
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;

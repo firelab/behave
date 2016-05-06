@@ -42,7 +42,7 @@ ENDIF(CANOPY)
 SET(SOURCE
     src/behave/behaveRun.cpp
     src/behave/behaveVector.cpp
-    src/behave/fuelModels.cpp
+    src/behave/fuelModelSet.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
@@ -59,7 +59,7 @@ SET(SOURCE
 SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveVector.h
-    src/behave/fuelModels.h
+    src/behave/fuelModelSet.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h

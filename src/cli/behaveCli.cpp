@@ -9,7 +9,7 @@
 #include <string.h>
 #include <algorithm>
 
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 #include "behaveRun.h"
 
 #define EQUAL(a,b) (strcmp(a,b)==0)
@@ -277,8 +277,8 @@ int main(int argc, char *argv[])
         requiredArgumentArray[index] = false;
     }
 
-    FuelModels fuelModels;
-    BehaveRun behave(fuelModels);
+    FuelModelSet fuelModelSet;
+    BehaveRun behave(fuelModelSet);
     behave.setSlopeInputToDegrees();
     behave.setWindAndSpreadAnglesRelativeToNorth();
 

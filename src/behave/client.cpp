@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "behaveRun.h"
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 
 #include "crown.h"
 
@@ -49,8 +49,8 @@ int main()
     double canopyHeight = 0.0;
     double crownRatio = 0.0;
 
-    FuelModels fuelModels;
-    BehaveRun behave(fuelModels);
+    FuelModelSet fuelModelSet;
+    BehaveRun behave(fuelModelSet);
 
     // Setting the wind and spread angle input mode (default is upslope)
     //behavePlus.setWindAndSpreadAnglesRelativeToUpslope();
@@ -163,28 +163,9 @@ int main()
     //flameLength = floor(flameLength * 10 + 0.5) / 10;
     //std::cout << "Flame length for fuel model " << fuelModelNumber << " is " << flameLength << " ft" << std::endl << std::endl;
 
-    // Used for debug
+    // Used for testing performance
     //double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
     //std::cout << "Total execution time for " << 1000000 << " fire spread calculations is " << executionTimeInSeconds << " seconds." << std::endl;
-
-    canopyCover = 0.50; // 50%
-    canopyHeight = 6;
-    crownRatio = 0.50;
-
-    SurfaceInputs crownInputs;
-    // Covert moisture from percent to decimal
-    moistureOneHour /= 100.0;
-    moistureTenHour /= 100.0;
-    moistureHundredHour /= 100.0;
-    moistureLiveHerbaceous /= 100.0;
-    moistureLiveWoody /= 100.0;
-    double windSpeedAtTwentyFeet = 5;
-
-    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-    crownInputs.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    Crown crown(fuelModels, crownInputs);
-    double crownRos = FEET_PER_MIN_TO_CHAINS_PER_HOUR * crown.calculateCrownFireSpreadRate(windSpeedAtTwentyFeet);
-   
 
     std::cout << "Press Enter to continue";
     std::cin.get();

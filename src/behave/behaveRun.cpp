@@ -1,19 +1,19 @@
 #include "behaveRun.h"
 
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 
-BehaveRun::BehaveRun(FuelModels &fuelModels)
+BehaveRun::BehaveRun(FuelModelSet &fuelModelSet)
     : surfaceInputs_(),
-    surface_(fuelModels, surfaceInputs_)
+    surface_(fuelModelSet, surfaceInputs_)
 {
-    fuelModels_ = &fuelModels;
+    fuelModelSet_ = &fuelModelSet;
 }
 
 BehaveRun::BehaveRun(const BehaveRun &rhs)
     : surfaceInputs_(), 
-      surface_(*rhs.fuelModels_, surfaceInputs_)
+      surface_(*rhs.fuelModelSet_, surfaceInputs_)
 {
-    fuelModels_ = rhs.fuelModels_;
+    fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
     surfaceInputs_ = rhs.surfaceInputs_;
 }
@@ -22,7 +22,7 @@ BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
 {
     if (this != &rhs)
     {
-        fuelModels_ = rhs.fuelModels_;
+        fuelModelSet_ = rhs.fuelModelSet_;
         surface_ = rhs.surface_;
         surfaceInputs_ = rhs.surfaceInputs_;
     }
@@ -33,6 +33,8 @@ BehaveRun::~BehaveRun()
 {
     // Default Destructor
 }
+
+
 
 void BehaveRun::setFuelModelNumber(int fuelModelNumber)
 {
@@ -292,5 +294,5 @@ double BehaveRun::getFireEccentricity() const
 
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
-    return fuelModels_->isFuelModelDefined(fuelModelNumber);
+    return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
 }

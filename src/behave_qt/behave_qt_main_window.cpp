@@ -4,7 +4,7 @@
 
 BehaveQtMainWindow::BehaveQtMainWindow(QWidget *parent)
     : QMainWindow(parent),
-      behaveRun(fuelModels)
+      behaveRun(fuelModelSet)
 {
     ui.setupUi(this);
     qcustomplotTest_ = NULL;

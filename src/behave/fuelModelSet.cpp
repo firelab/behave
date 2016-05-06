@@ -1,15 +1,15 @@
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 
 #include "surfaceEnums.h"
 
-FuelModels::FuelModels()
+FuelModelSet::FuelModelSet()
 {
     FuelModelArray.resize(FuelConstants::NUM_FUEL_MODELS);
     initializeFuelModelRecords();
     populateFuelModels();
 }
 
-FuelModels::FuelModels(const FuelModels &rhs)
+FuelModelSet::FuelModelSet(const FuelModelSet &rhs)
 {
     for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
     {
@@ -33,7 +33,7 @@ FuelModels::FuelModels(const FuelModels &rhs)
     }
 }
 
-FuelModels& FuelModels::operator= (const FuelModels& rhs)
+FuelModelSet& FuelModelSet::operator= (const FuelModelSet& rhs)
 {
     if (this != &rhs)
     {
@@ -61,12 +61,12 @@ FuelModels& FuelModels::operator= (const FuelModels& rhs)
     return *this;
 }
 
-FuelModels::~FuelModels()
+FuelModelSet::~FuelModelSet()
 {
 
 }
 
-void FuelModels::initializeFuelModelRecords()
+void FuelModelSet::initializeFuelModelRecords()
 {
     for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
     {
@@ -90,7 +90,7 @@ void FuelModels::initializeFuelModelRecords()
     }
 }
 
-void FuelModels::setFuelModelRecord(int fuelModelNumber, std::string code, std::string name,
+void FuelModelSet::setFuelModelRecord(int fuelModelNumber, std::string code, std::string name,
     double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
     double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadliveHerbaceous,
     double fuelLoadliveWoody, double savrOneHour, double savrLiveHerbaceous, double savrLiveWoody,
@@ -118,7 +118,7 @@ void FuelModels::setFuelModelRecord(int fuelModelNumber, std::string code, std::
 
 // PopulateFuelModels() fills FuelModelArray[] with the standard fuel model parameters
 // as well as earmarking which models are available for use as custom models
-void FuelModels::populateFuelModels()
+void FuelModelSet::populateFuelModels()
 {
     // Index 0 is not used
     setFuelModelRecord(0, "NO_CODE", "NO_NAME", 0, 0, 0, 0,
@@ -500,7 +500,7 @@ void FuelModels::populateFuelModels()
 // SetCustomFuelModel() is used by client code to define custom fuel types
 // The function can fail in the case of trying to set a record whose isReserve field is set to 1.
 // The return value is TRUE if successful, and FALSE in case of failure
-bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::string name,
+bool FuelModelSet::setCustomFuelModel(int fuelModelNumber, std::string code, std::string name,
     double fuelbedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
     double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadliveHerb,
     double fuelLoadliveWoody, double savrOneHour, double savrLiveHerb, double savrLiveWoody, bool isDynamic)
@@ -519,92 +519,92 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
     return successStatus;
 }
 
-void FuelModels::markAsCustomModel(int fuelModelNumber)
+void FuelModelSet::markAsCustomModel(int fuelModelNumber)
 {
     FuelModelArray[fuelModelNumber].isReserved_ = false;
 }
 
-void FuelModels::markAsReservedModel(int fuelModelNumber)
+void FuelModelSet::markAsReservedModel(int fuelModelNumber)
 {
     FuelModelArray[fuelModelNumber].isReserved_ = true;
 }
 
-double FuelModels::getFuelbedDepth(int fuelModelNumber) const
+double FuelModelSet::getFuelbedDepth(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].fuelbedDepth_;
 }
 
-std::string FuelModels::getFuelCode(int fuelModelNumber) const
+std::string FuelModelSet::getFuelCode(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].code_;
 }
 
-std::string FuelModels::getFuelName(int fuelModelNumber) const
+std::string FuelModelSet::getFuelName(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].name_;
 }
 
-double FuelModels::getMoistureOfExtinctionDead(int fuelModelNumber) const
+double FuelModelSet::getMoistureOfExtinctionDead(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].moistureOfExtinctionDead_;
 }
 
-double FuelModels::getHeatOfCombustionDead(int fuelModelNumber) const
+double FuelModelSet::getHeatOfCombustionDead(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].heatOfCombustionDead_;
 }
 
-double FuelModels::getHeatOfCombustionLive(int fuelModelNumber) const
+double FuelModelSet::getHeatOfCombustionLive(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].heatOfCombustionLive_;
 }
 
-double FuelModels::getFuelLoadOneHour(int fuelModelNumber) const
+double FuelModelSet::getFuelLoadOneHour(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].fuelLoadOneHour_;
 }
 
-double FuelModels::getFuelLoadTenHour(int fuelModelNumber) const
+double FuelModelSet::getFuelLoadTenHour(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].fuelLoadTenHour_;
 }
 
-double FuelModels::getFuelLoadHundredHour(int fuelModelNumber) const
+double FuelModelSet::getFuelLoadHundredHour(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].fuelLoadHundredHour_;
 }
 
-double FuelModels::getFuelLoadLiveHerbaceous(int fuelModelNumber) const
+double FuelModelSet::getFuelLoadLiveHerbaceous(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].fuelLoadLiveHerbaceous_;
 }
 
-double FuelModels::getFuelLoadLiveWoody(int fuelModelNumber) const
+double FuelModelSet::getFuelLoadLiveWoody(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].fuelLoadLiveWoody_;
 }
 
-double FuelModels::getSavrOneHour(int fuelModelNumber) const
+double FuelModelSet::getSavrOneHour(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].savrOneHour_;
 }
 
-double FuelModels::getSavrLiveHerbaceous(int fuelModelNumber) const
+double FuelModelSet::getSavrLiveHerbaceous(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].savrLiveHerbaceous_;
 }
 
-double FuelModels::getSavrLiveWoody(int fuelModelNumber) const
+double FuelModelSet::getSavrLiveWoody(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].savrLiveWoody_;
 }
 
-bool FuelModels::getIsDynamic(int fuelModelNumber) const
+bool FuelModelSet::getIsDynamic(int fuelModelNumber) const
 {
     return FuelModelArray[fuelModelNumber].isDynamic_;
 }
 
-bool FuelModels::isFuelModelDefined(int fuelModelNumber) const
+bool FuelModelSet::isFuelModelDefined(int fuelModelNumber) const
 {
     if (fuelModelNumber <= 0 || fuelModelNumber > 256)
     {

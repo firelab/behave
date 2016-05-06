@@ -3,10 +3,10 @@
 #include "surfaceTwoFuelModels.h"
 #include "surfaceInputs.h"
 
-Surface::Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs) 
+Surface::Surface(const FuelModelSet& fuelModels, SurfaceInputs& surfaceInputs) 
     : surfaceFireSpread_(fuelModels, surfaceInputs)
 {
-    fuelModels_ = &fuelModels;
+    fuelModelSet_ = &fuelModels;
     surfaceInputs_ = &surfaceInputs;
 }
 

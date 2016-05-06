@@ -1,6 +1,6 @@
 #include "surfaceFuelbedIntermediates.h"
 
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 #include "surfaceInputs.h"
 
 SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates()
@@ -139,9 +139,9 @@ SurfaceFuelbedIntermediates& SurfaceFuelbedIntermediates::operator= (const Surfa
     return *this;
 }
 
-SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs)
+SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs)
 {
-    fuelModels_ = &fuelModels;
+    fuelModelSet_ = &fuelModelSet;
     surfaceInputs_ = &surfaceInputs;
     initializeMemberVariables();
 }
@@ -179,7 +179,7 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 
     setSAV();
 
-    isDynamic = fuelModels_->getIsDynamic(fuelModelNumber_);
+    isDynamic = fuelModelSet_->getIsDynamic(fuelModelNumber_);
     if (isDynamic) // do the dynamic load transfer
     {
         dynamicLoadTransfer();
@@ -260,13 +260,13 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     else
     {
         // Proceed as normal
-        loadDead_[0] = fuelModels_->getFuelLoadOneHour(fuelModelNumber_);
-        loadDead_[1] = fuelModels_->getFuelLoadTenHour(fuelModelNumber_);
-        loadDead_[2] = fuelModels_->getFuelLoadHundredHour(fuelModelNumber_);
+        loadDead_[0] = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber_);
+        loadDead_[1] = fuelModelSet_->getFuelLoadTenHour(fuelModelNumber_);
+        loadDead_[2] = fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber_);
         loadDead_[3] = 0.0;
 
-        loadLive_[0] = fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber_);
-        loadLive_[1] = fuelModels_->getFuelLoadLiveWoody(fuelModelNumber_);
+        loadLive_[0] = fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber_);
+        loadLive_[1] = fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber_);
         loadLive_[2] = 0.0;
         loadLive_[3] = 0.0;
     }
@@ -316,7 +316,7 @@ void SurfaceFuelbedIntermediates::setDeadFuelMoistureOfExtinction()
     }
     else
     {
-        moistureOfExtinction_[FuelConstants::DEAD] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_);
+        moistureOfExtinction_[FuelConstants::DEAD] = fuelModelSet_->getMoistureOfExtinctionDead(fuelModelNumber_);
     }
 }
 
@@ -336,7 +336,7 @@ void SurfaceFuelbedIntermediates::setFuelbedDepth()
     }
     else
     {
-        depth_ = fuelModels_->getFuelbedDepth(fuelModelNumber_);
+        depth_ = fuelModelSet_->getFuelbedDepth(fuelModelNumber_);
     }
 }
 
@@ -374,13 +374,13 @@ void SurfaceFuelbedIntermediates::setSAV()
     else
     {
         // Proceed as normal
-        savrDead_[0] = fuelModels_->getSavrOneHour(fuelModelNumber_);
+        savrDead_[0] = fuelModelSet_->getSavrOneHour(fuelModelNumber_);
         savrDead_[1] = 109.0;
         savrDead_[2] = 30.0;
-        savrDead_[3] = fuelModels_->getSavrLiveHerbaceous(fuelModelNumber_);
+        savrDead_[3] = fuelModelSet_->getSavrLiveHerbaceous(fuelModelNumber_);
 
-        savrLive_[0] = fuelModels_->getSavrLiveHerbaceous(fuelModelNumber_);
-        savrLive_[1] = fuelModels_->getSavrLiveWoody(fuelModelNumber_);
+        savrLive_[0] = fuelModelSet_->getSavrLiveHerbaceous(fuelModelNumber_);
+        savrLive_[1] = fuelModelSet_->getSavrLiveWoody(fuelModelNumber_);
         savrLive_[2] = 0.0;
         savrLive_[3] = 0.0;
     }
@@ -405,8 +405,8 @@ void SurfaceFuelbedIntermediates::setHeatOfCombustion()
     }
     else
     {
-        heatOfCombustionDead = fuelModels_->getHeatOfCombustionDead(fuelModelNumber_);
-        heatOfCombustionLive = fuelModels_->getHeatOfCombustionLive(fuelModelNumber_);
+        heatOfCombustionDead = fuelModelSet_->getHeatOfCombustionDead(fuelModelNumber_);
+        heatOfCombustionLive = fuelModelSet_->getHeatOfCombustionLive(fuelModelNumber_);
     }
 
     for (int i = 0; i < FuelConstants::MAX_PARTICLES; i++)
@@ -837,7 +837,7 @@ void SurfaceFuelbedIntermediates::initializeMemberVariables()
 
 double SurfaceFuelbedIntermediates::getFuelbedDepth() const
 {
-    double fuelbedDepth = fuelModels_->getFuelbedDepth(fuelModelNumber_);
+    double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber_);
     return fuelbedDepth;
 }
 

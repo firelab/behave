@@ -5,7 +5,7 @@
 #include "westernAspen.h"
 #include "surfaceEnums.h"
 
-class FuelModels;
+class FuelModelSet;
 class SurfaceInputs;
 
 class SurfaceFuelbedIntermediates
@@ -14,7 +14,7 @@ public:
     SurfaceFuelbedIntermediates();
     SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs);
     SurfaceFuelbedIntermediates& operator= (const SurfaceFuelbedIntermediates& rhs);
-    SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
+    SurfaceFuelbedIntermediates(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
 
     ~SurfaceFuelbedIntermediates();
     void calculateFuelbedIntermediates();
@@ -70,7 +70,7 @@ private:
     void calculatePropagatingFlux();
     void calculateResidenceTime();
 
-    const FuelModels* fuelModels_;          // Pointer to FuelModels object
+    const FuelModelSet* fuelModelSet_;      // Pointer to FuelModelSet object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object
     PalmettoGallberry palmettoGallberry_;
     WesternAspen westernAspen_;

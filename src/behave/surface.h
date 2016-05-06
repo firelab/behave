@@ -15,7 +15,7 @@ class SurfaceInputs;
 class Surface
 {
 public:
-    Surface(const FuelModels& fuelModels, SurfaceInputs& surfaceInputs);
+    Surface(const FuelModelSet& fuelModelSet, SurfaceInputs& surfaceInputs);
     Surface(const Surface &rhs);
     Surface& operator= (const Surface& rhs);
 
@@ -31,7 +31,7 @@ private:
     bool isUsingTwoFuelModels() const;
 
     // SURFACE Module component objects
-    const FuelModels*	fuelModels_;
+    const FuelModelSet*	fuelModelSet_;
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs* surfaceInputs_;
 };

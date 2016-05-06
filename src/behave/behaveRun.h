@@ -15,8 +15,7 @@ class BehaveRun
 {
 public:
     BehaveRun() = delete; // There is no default constructor
-    //explicit Behave(SurfaceInputs &surfaceInputs);
-    explicit BehaveRun(FuelModels &fuelModels);
+    explicit BehaveRun(FuelModelSet &fuelModelSet);
     
     BehaveRun(const BehaveRun &rhs);
     BehaveRun& operator= (const BehaveRun& rhs);
@@ -85,7 +84,7 @@ private:
     void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
 
     // SURFACE Module Component Objects
-    FuelModels* fuelModels_;        // This must point to a valid reference passed to the constructor
+    FuelModelSet* fuelModelSet_;        // This must point to a valid reference passed to the constructor
     Surface surface_;               // SURFACE Module object
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
 };

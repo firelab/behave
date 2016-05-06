@@ -5,37 +5,35 @@
 #include "surfaceInputs.h"
 #include "surfaceFireSpread.h"
 
-class FuelModels;
+class FuelModelSet;
 
 class Crown
 {
 public:
     Crown() = delete; // No default constructor
-    Crown(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs, const CrownInputs& crownInputs, const double surfaceHeatPerUnitArea);
+    Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, double surfaceHeatPerUnitArea, double surfaceFirelineIntensity);
     ~Crown();
 
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();
     double calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet);
     void calculateCrownFuelLoad();
+    double Crown::calculateCrownFireTransitionRatio(double surfaceFireIntensity, double criticalFireIntensity);
+    double Crown::calculateCrownFireFirelineIntensity();
 
 private:
-    const FuelModels* fuelModels_;
+    const FuelModelSet* fuelModelSet_;
     const CrownInputs* crownInputs_;
     const SurfaceInputs* surfaceInputs_;
    
-    const double LOW_HEAT_OF_COMBUSTION = 8000.0; // Low heat of combustion (hard coded to 8000 Btu/lb)
-
-    
-
     SurfaceInputs crownDeepCopyOfSurfaceInputs_; // deep copy of Surface's surface inputs to allow parallel runs in Surface
-    SurfaceFireSpread crownFireSpread_; // stores Crown's surface fire data to allow parallel runs in Surface
+    SurfaceFireSpread crownFireSpread_; // stores and operates on Crown's surface fire data to allow parallel runs in Surface
 
     double crownCopyOfSurfaceHeatPerUnitArea_;
     double crownFuelLoad_;
     double canopyHeatPerUnitArea_;
     double crownFireHeatPerUnitArea_;
-    double crownRateOfSpread_;
+    double crownFireSpreadRate_;
 };
 
 #endif // CROWN_HEADER

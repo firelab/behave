@@ -1,20 +1,20 @@
-#ifndef FUELMODELS_HEADER
-#define FUELMODELS_HEADER
+#ifndef FUELMODELSET_HEADER
+#define FUELMODELSET_HEADER
 
 #include <string>
 #include <vector>
 
-class FuelModels
+class FuelModelSet
 {
 public:
     // TODO: Formate comments in Doxygen style
     // TODO: Consider making a Freeze() method that marks all records as reserved to make the array read-only for threaded 
     // applications -WMC 10/2015
 
-    FuelModels();
-    FuelModels& operator= (const FuelModels& rhs);
-    FuelModels(const FuelModels &rhs);
-    ~FuelModels();
+    FuelModelSet();
+    FuelModelSet& operator= (const FuelModelSet& rhs);
+    FuelModelSet(const FuelModelSet &rhs);
+    ~FuelModelSet();
    
     bool setCustomFuelModel(int fuelModelNumberIn, std::string code, std::string name,
         double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
@@ -78,4 +78,4 @@ private:
 
 };
 
-#endif //FUELMODELS_HEADER
+#endif //FUELMODELSET_HEADER

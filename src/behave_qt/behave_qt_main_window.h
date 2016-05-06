@@ -6,7 +6,7 @@
 
 #include "behaveRun.h"
 #include "behave_qt_main_window_enums.h"
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 
 #include "ui_behave_qt_main_window.h"
 
@@ -37,7 +37,7 @@ private:
 
     Ui::behave_qt_main_windowClass ui;
     QcustomplotTest* qcustomplotTest_;
-    FuelModels fuelModels;
+    FuelModelSet fuelModelSet;
     BehaveRun behaveRun;
 };
 #endif // BEHAVE_QT_GUI_H

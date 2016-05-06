@@ -19,11 +19,11 @@ public:
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
 private:
-    double canopyBaseHeight_;
-    double canopyBulkDensity_;
-    double canopyUserProvidedFlameLength_;
-    double canopyUserProvidedFirelineIntensity_;
-    double foliarMoisture_;
+    double canopyBaseHeight_; //Canopy base height(ft)
+    double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
+    double canopyUserProvidedFlameLength_; // flame length(ft)
+    double canopyUserProvidedFirelineIntensity_; // fireline intensity(ft)
+    double foliarMoisture_; // foliar moisture(%)
 
 };
 

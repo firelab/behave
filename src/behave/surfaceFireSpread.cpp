@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 #include "surfaceEnums.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
@@ -16,11 +16,11 @@ SurfaceFireSpread::SurfaceFireSpread()
 
 }
 
-SurfaceFireSpread::SurfaceFireSpread(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs)
-    : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
+SurfaceFireSpread::SurfaceFireSpread(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs)
+    : surfaceFuelbedIntermediates_(fuelModelSet, surfaceInputs),
       surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
 {
-    fuelModels_ = &fuelModels;
+    fuelModelSet_ = &fuelModelSet;
     surfaceInputs_ = &surfaceInputs;
     initializeMembers();
 }
@@ -401,7 +401,7 @@ void SurfaceFireSpread::calculateBackingSpreadRate()
 double SurfaceFireSpread::getFuelbedDepth() const
 {
     int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
-    double fuelbedDepth = fuelModels_->getFuelbedDepth(fuelModelNumber);
+    double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber);
     return fuelbedDepth;
 }
 

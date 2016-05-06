@@ -1,12 +1,13 @@
 #include "crown.h"
 
-#include "fuelModels.h"
+#include "fuelModelSet.h"
 
-Crown::Crown(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs, const CrownInputs& crownInputs, double surfaceHeatPerUnitArea)
-    : crownFireSpread_(fuelModels, crownDeepCopyOfSurfaceInputs_)
+Crown::Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, 
+    double surfaceHeatPerUnitArea, double surfaceFirelineIntensity)
+    : crownFireSpread_(fuelModelSet, crownDeepCopyOfSurfaceInputs_)
 {
     crownInputs_ = &crownInputs;  // points to the same location as crownInputs
-    fuelModels_ = &fuelModels; // points to the same location as fuelModels
+    fuelModelSet_ = &fuelModelSet; // points to the same location as fuelModels
     surfaceInputs_ = &surfaceInputs; // points to the same location as surfaceInputs
     crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
 
@@ -24,6 +25,7 @@ Crown::~Crown()
 *  This uses Rothermel's 1991 crown fire correlation.
 *
 *  \return Crown fire average spread rate (ft/min).
+*
 */
 double Crown::calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet)
 {
@@ -37,8 +39,8 @@ double Crown::calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet)
 
     // Step 2: Determine fire behavior.
     double rateOfSpread = crownFireSpread_.calculateForwardSpreadRate();
-    crownRateOfSpread_ = 3.34 * rateOfSpread; // Rothermel 1991
-    return crownRateOfSpread_;
+    crownFireSpreadRate_ = 3.34 * rateOfSpread; // Rothermel 1991
+    return crownFireSpreadRate_;
 }
 
 //------------------------------------------------------------------------------
@@ -58,6 +60,7 @@ void Crown::calculateCrownFireHeatPerUnitArea()
 */
 void Crown::calculateCanopyHeatPerUnitArea()
 {
+    const double LOW_HEAT_OF_COMBUSTION = 8000.0; // Low heat of combustion (hard coded to 8000 Btu/lbs)
     canopyHeatPerUnitArea_ = crownFuelLoad_ * LOW_HEAT_OF_COMBUSTION;
 }
 
@@ -72,4 +75,36 @@ void Crown::calculateCrownFuelLoad()
     double canopyBaseHeight = crownInputs_->getCanopyBaseHeight();
     double canopyHeight = surfaceInputs_->getCanopyHeight();
     crownFuelLoad_ = canopyBulkDensity * (canopyHeight - canopyBaseHeight);
+}
+
+//------------------------------------------------------------------------------
+/*! \brief Calculates the crown fire transition ratio.
+*
+*  \param surfaceFireInt   Surface fireline intensity (Btu/ft/s).
+*  \param criticalFireInt  Critical crown fire fireline intensity (Btu/ft/s).
+*
+*  \return Transition ratio.
+*/
+double Crown::calculateCrownFireTransitionRatio(double surfaceFireIntensity,
+    double criticalFireIntensity)
+{
+    return((criticalFireIntensity < 1.0e-7)
+        ? (0.00)
+        : (surfaceFireIntensity / criticalFireIntensity));
+}
+
+//------------------------------------------------------------------------------
+/*! \brief Calculates the crown fire fireline intensity
+*  given the surface fire and crown fire heats per unit area
+*  and the crown fire spread rate.
+*
+*  \param crownFireHpua Crown fire (surface + canopy) heat per unit area (Btu/ft2).
+*  \param crownFireSpreadRate Crown fire rate of spread (ft/min).
+*
+*  \return Crown fire fireline intensity (Btu/ft/s).
+*/
+
+double Crown::calculateCrownFireFirelineIntensity()
+{
+    return((crownFireSpreadRate_ / 60.) * (crownFireHeatPerUnitArea_));
 }

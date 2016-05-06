@@ -1,14 +1,52 @@
 #include "BehaveVector.h"
+#include <assert.h>
 
 BehaveVector::BehaveVector()
-    :behaveRun(20, BehaveRun(fuelModels_))
+    :behaveRun(20, BehaveRun(fuelModelSet_))
 {    
    
 }
 
+BehaveVector::~BehaveVector()
+{
+
+}
+
+BehaveVector::BehaveVector(const BehaveVector &rhs)
+    :behaveRun(rhs.size(), BehaveRun(fuelModelSet_))
+{
+    for (int i = 0; i < rhs.size(); i++)
+    {
+        behaveRun[i] = rhs.behaveRun[i];
+    }
+}
+
+BehaveVector& BehaveVector::operator = (const BehaveVector& rhs)
+{
+    if (this != &rhs)
+    {
+        for (int i = 0; i < rhs.size(); i++)
+        {
+            behaveRun[i] = rhs.behaveRun[i];
+        }
+    }
+    return *this;
+}
+
 BehaveRun& BehaveVector::operator[] (const std::vector<BehaveRun>::size_type index)
 { 
+    assert(index >= 0 && index < behaveRun.size()); // for bounds checking in debug
     return behaveRun[index]; 
+}
+
+BehaveRun&  BehaveVector::at(const std::vector<BehaveRun>::size_type index)
+{
+    return behaveRun.at(index);
+}
+
+const BehaveRun&  BehaveVector::at(const std::vector<BehaveRun>::size_type index) const
+{
+    return behaveRun.at(index);
 }
 
 void BehaveVector::clear()
@@ -26,7 +64,7 @@ void BehaveVector::resize(std::vector<BehaveRun>::size_type newSize)
     behaveRun.resize(newSize, behaveRun[0]);
 }
 
-const std::vector<BehaveRun>::size_type BehaveVector::size()
+std::vector<BehaveRun>::size_type BehaveVector::size() const
 {
     std::vector<BehaveRun>::size_type size = behaveRun.size();
     return size;
