@@ -34,7 +34,12 @@ BehaveRun::~BehaveRun()
     // Default Destructor
 }
 
-
+// setFuelModelSet(const FuelModelSet& fuelModelSet) makes this behaveRun's pointer
+//  fuelModelSet_ point to the FuelModelSet given to this method as a parameter   
+void BehaveRun::setFuelModelSet(FuelModelSet& fuelModelSet)
+{
+    fuelModelSet_ = &fuelModelSet;
+}
 
 void BehaveRun::setFuelModelNumber(int fuelModelNumber)
 {

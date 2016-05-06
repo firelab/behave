@@ -22,6 +22,7 @@ public:
     ~BehaveRun();
 
     // SURFACE Module Inputs
+    void setFuelModelSet(FuelModelSet& fuelModelSet);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);

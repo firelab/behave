@@ -11,7 +11,8 @@ FuelModelSet::FuelModelSet()
 
 FuelModelSet::FuelModelSet(const FuelModelSet &rhs)
 {
-    for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
+    FuelModelArray.resize(rhs.FuelModelArray.size());
+    for (int i = 0; i < rhs.FuelModelArray.size(); i++)
     {
         FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
         FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
@@ -37,7 +38,8 @@ FuelModelSet& FuelModelSet::operator= (const FuelModelSet& rhs)
 {
     if (this != &rhs)
     {
-        for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
+        FuelModelArray.resize(rhs.FuelModelArray.size());
+        for (int i = 0; i < rhs.FuelModelArray.size(); i++)
         {
             FuelModelArray[i].fuelModelNumber_ = rhs.FuelModelArray[i].fuelModelNumber_;
             FuelModelArray[i].code_ = rhs.FuelModelArray[i].code_;
