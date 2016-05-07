@@ -16,6 +16,10 @@ BehaveVector::BehaveVector(const BehaveVector &rhs)
     :behaveRun(rhs.size(), BehaveRun(fuelModelSet_))
 {
     fuelModelSet_ = rhs.fuelModelSet_;
+    if(size() < rhs.size())
+    {
+        resize(rhs.size());
+    }
     for (int i = 0; i < rhs.size(); i++)
     {
         behaveRun[i] = rhs.behaveRun[i];
@@ -30,6 +34,10 @@ BehaveVector& BehaveVector::operator = (const BehaveVector& rhs)
     if (this != &rhs)
     {
         fuelModelSet_ = rhs.fuelModelSet_;
+        if(size() < rhs.size())
+        {
+            resize(rhs.size());
+        }
         for (int i = 0; i < rhs.size(); i++)
         {
             behaveRun[i] = rhs.behaveRun[i];
