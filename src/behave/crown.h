@@ -16,13 +16,15 @@ public:
 
     double calculateCanopyHeatPerUnitArea();
     double calculateCrownFireHeatPerUnitArea();
-    double calculateCrownFireSpreadRate(double windSpeedAtTwentyFeet);
+    double calculateCrownFireSpreadRate();
     double calculateCrownFuelLoad();
     double calculateCrownFireTransitionRatio();
     double calculateCrownFireFirelineIntensity();
     double calculateCrownFireCriticalSurfaceFireIntensity();
     double calculateCrownFireCriticalSurfaceFlameLength();
     double calculateCrownFireFlameLength();
+    double calculateCrownPowerOfFire();
+    double calcuateCrownPowerOfWind();
 
 private:
     const FuelModelSet* fuelModelSet_;
@@ -31,6 +33,8 @@ private:
    
     SurfaceInputs crownDeepCopyOfSurfaceInputs_; // deep copy of Surface's surface inputs to allow parallel runs in Surface
     SurfaceFireSpread crownFireSpread_; // stores and operates on Crown's surface fire data to allow parallel runs in Surface
+
+    double calculateWindSpeedAtTwentyFeet();
 
     double crownCopyOfSurfaceHeatPerUnitArea_;
     double crownCopyOfSurfaceFirelineIntensity_;
@@ -41,6 +45,9 @@ private:
     double crownFireFlameLength_;
     double crownFireSpreadRate_;
     double crownCriticalSurfaceFireIntensity_;
+    double crownPowerOfFire_;
+    double crownPowerOfWind_;
+    double windSpeedAtTwentyFeet_;
 };
 
 #endif // CROWN_HEADER

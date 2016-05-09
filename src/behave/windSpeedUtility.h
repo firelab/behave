@@ -1,10 +1,10 @@
 #ifndef WINDSPEED_HEADER
 #define WINDSPEED_HEADER
 
-class WindSpeed
+class WindSpeedUtility
 {
 public:
-    WindSpeed();
+    WindSpeedUtility();
     double WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor);
     double WindSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters);
 

@@ -23,7 +23,7 @@ private:
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
     double canopyUserProvidedFlameLength_; // flame length(ft)
     double canopyUserProvidedFirelineIntensity_; // fireline intensity(ft)
-    double foliarMoisture_; // foliar moisture(%)
+    double foliarMoisture_; // Tree foliar moisture content (lb water/lb foliage)
 
 };
 

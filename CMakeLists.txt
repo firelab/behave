@@ -42,6 +42,8 @@ ENDIF(CANOPY)
 SET(SOURCE
     src/behave/behaveRun.cpp
     src/behave/behaveVector.cpp
+    src/behave/crown.cpp
+    src/behave/crownInputs.cpp
     src/behave/fuelModelSet.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
@@ -54,11 +56,14 @@ SET(SOURCE
     src/behave/surfaceFireSpread.cpp
     src/behave/surfaceTwoFuelModels.cpp
     src/behave/westernAspen.cpp
-    src/behave/windAdjustmentFactor.cpp)
+    src/behave/windAdjustmentFactor.cpp
+    src/behave/windSpeedUtility.cpp)
 
 SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveVector.h
+    src/behave/crown.h
+    src/behave/crownInputs.h
     src/behave/fuelModelSet.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
@@ -72,7 +77,8 @@ SET(HEADERS
     src/behave/surfaceFireSpread.h
     src/behave/surfaceTwoFuelModels.h
     src/behave/westernAspen.h
-    src/behave/windAdjustmentFactor.h)
+    src/behave/windAdjustmentFactor.h
+    src/behave/windSpeedUtility.h)
 
 ADD_EXECUTABLE(behave 
     ${SOURCE} 

@@ -1,6 +1,6 @@
-#include "windSpeed.h"
+#include "windSpeedUtility.h"
 
-WindSpeed::WindSpeed()
+WindSpeedUtility::WindSpeedUtility()
 {
     windSpeedAtTenMeters_ = 0;
     windSpeedAtTwentyFeet_ = 0;
@@ -18,7 +18,7 @@ WindSpeed::WindSpeed()
 *      vWindAdjFactor (fraction)
 */
 
-double WindSpeed::WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor)
+double WindSpeedUtility::WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor)
 {
     // Calculate results
     windSpeedAtMidflame_ = windSpeedAtTwentyFeet * windAdjustmentFactor;
@@ -35,7 +35,7 @@ double WindSpeed::WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windA
 *      vWindSpeedAt10M (mi/h)
 */
 
-double WindSpeed::WindSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters)
+double WindSpeedUtility::WindSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters)
 {
     // Calculate results
     double windSpeedAt20Ft_ = windSpeedAtTenMeters / 1.15;
