@@ -16,7 +16,7 @@ BehaveVector::BehaveVector(const BehaveVector &rhs)
     :behaveRun(rhs.size(), BehaveRun(fuelModelSet_))
 {
     fuelModelSet_ = rhs.fuelModelSet_;
-    if(size() < rhs.size())
+    if (size() != rhs.size())
     {
         resize(rhs.size());
     }
@@ -34,7 +34,7 @@ BehaveVector& BehaveVector::operator = (const BehaveVector& rhs)
     if (this != &rhs)
     {
         fuelModelSet_ = rhs.fuelModelSet_;
-        if(size() < rhs.size())
+        if (size() != rhs.size())
         {
             resize(rhs.size());
         }
