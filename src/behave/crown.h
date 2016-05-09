@@ -37,6 +37,8 @@ private:
     double crownFuelLoad_;
     double canopyHeatPerUnitArea_;
     double crownFireHeatPerUnitArea_;
+    double crownFireFirelineIntensity_;
+    double crownFireFlameLength_;
     double crownFireSpreadRate_;
     double crownCriticalSurfaceFireIntensity_;
 };

@@ -115,7 +115,8 @@ double Crown::calculateCrownFireTransitionRatio()
 
 double Crown::calculateCrownFireFirelineIntensity()
 {
-    return (crownFireSpreadRate_ / 60.0) * crownFireHeatPerUnitArea_;
+    crownFireFirelineIntensity_ = (crownFireSpreadRate_ / 60.0) * crownFireHeatPerUnitArea_;
+    return crownFireFirelineIntensity_;
 }
 
 //------------------------------------------------------------------------------
@@ -158,7 +159,9 @@ double Crown::calculateCrownFireCriticalSurfaceFlameLength()
     return criticalSurfaceFlameLength;
 }
 
-double FBL_CrownFireFlameLength(double crownFirelineIntensity)
+double Crown::calculateCrownFireFlameLength()
 {
-    return(0.2 * pow(crownFirelineIntensity, (2. / 3.)));
+    crownFireFlameLength_ = 0.2 * pow(crownFireFirelineIntensity_, (2.0 / 3.0));
+    //return(0.2 * pow(crownFireFirelineIntensity_, (2.0 / 3.0)));
+    return crownFireFlameLength_;
 }

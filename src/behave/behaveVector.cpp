@@ -29,7 +29,7 @@ BehaveVector::BehaveVector(const BehaveVector &rhs)
     }
 }
 
-BehaveVector& BehaveVector::operator = (const BehaveVector& rhs)
+BehaveVector& BehaveVector::operator= (const BehaveVector& rhs)
 {
     if (this != &rhs)
     {
