@@ -20,12 +20,14 @@ public:
     double calculateCrownFuelLoad();
     double calculateCrownFireTransitionRatio();
     double calculateCrownFireFirelineIntensity();
-    double calculateCrownFireCriticalSurfaceFireIntensity();
-    double calculateCrownFireCriticalSurfaceFlameLength();
+    double calculateCriticalCrownFireSpreadRate();
+    double calculateCriticalCrownSurfaceFireIntensity();
+    double calculateCriticalCrownSurfaceFlameLength();
     double calculateCrownFireFlameLength();
-    double calculateCrownPowerOfFire();
-    double calcuateCrownPowerOfWind();
+    double calculateCrownFirePowerOfFire();
+    double calcuateCrownFirePowerOfWind();
     double calcualteCrownFirePowerRatio();
+    double calculateCrownFireActiveRatio();
 
 private:
     const FuelModelSet* fuelModelSet_;
@@ -45,10 +47,12 @@ private:
     double crownFireFirelineIntensity_;
     double crownFireFlameLength_;
     double crownFireSpreadRate_;
-    double crownCriticalSurfaceFireIntensity_;
-    double crownPowerOfFire_;
-    double crownPowerOfWind_;
-    double crownPowerRatio_;
+    double criticalCrownSurfaceFireIntensity_;
+    double criticalCrownFireSpreadRate_;
+    double crownFirePowerOfFire_;
+    double crownFirePowerOfWind_;
+    double crownFirePowerRatio_;
+    double crownFireActiveRatio_;
     double windSpeedAtTwentyFeet_;
 };
 
