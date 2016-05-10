@@ -214,6 +214,17 @@ double Crown::calcuateCrownPowerOfWind()
     return crownPowerOfWind_;
 }
 
+//------------------------------------------------------------------------------
+/*! \brief Calculates the crown fire 'power-of-fire to power-of-wind' ratio
+*
+*  \return Ratio of the crown fire 'power-of-the-fire' to 'power-of-the-wind).
+*/
+double Crown::calcualteCrownFirePowerRatio()
+{
+    crownPowerRatio_ = (crownPowerOfWind_ > 1e-07) ? (crownPowerOfFire_ / crownPowerOfWind_) : 0.0;
+    return crownPowerRatio_;
+}
+
 double Crown::calculateWindSpeedAtTwentyFeet()
 {
     windSpeedAtTwentyFeet_ = -1; // If negative 1 is returned, there is an error

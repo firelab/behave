@@ -297,6 +297,11 @@ double BehaveRun::getFireEccentricity() const
     return surface_.getFireEccentricity();
 }
 
+double BehaveRun::getSurfaceFirelineIntensity() const
+{
+    return surface_.getFirelineIntensity();
+}
+
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);

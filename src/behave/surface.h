@@ -26,6 +26,7 @@ public:
     double getFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
+    double getFirelineIntensity() const;
 
 private:
     bool isUsingTwoFuelModels() const;

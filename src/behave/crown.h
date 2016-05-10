@@ -25,6 +25,7 @@ public:
     double calculateCrownFireFlameLength();
     double calculateCrownPowerOfFire();
     double calcuateCrownPowerOfWind();
+    double calcualteCrownFirePowerRatio();
 
 private:
     const FuelModelSet* fuelModelSet_;
@@ -47,6 +48,7 @@ private:
     double crownCriticalSurfaceFireIntensity_;
     double crownPowerOfFire_;
     double crownPowerOfWind_;
+    double crownPowerRatio_;
     double windSpeedAtTwentyFeet_;
 };
 

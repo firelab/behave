@@ -76,6 +76,11 @@ double Surface::getFireEccentricity() const
     return surfaceFireSpread_.getFireEccentricity();
 }
 
+double Surface::getFirelineIntensity() const
+{
+    return surfaceFireSpread_.getFirelineIntensity();
+}
+
 bool Surface::isUsingTwoFuelModels() const
 {
     return surfaceInputs_->isUsingTwoFuelModels();

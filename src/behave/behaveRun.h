@@ -67,6 +67,7 @@ public:
     double getFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
+    double getSurfaceFirelineIntensity() const;
     bool isFuelModelDefined(int fuelModelNumber) const;
     bool isWindAndSpreadAngleRelativeToNorth() const;
     bool isWindAndSpreadAngleRelativeToUpslope() const;
