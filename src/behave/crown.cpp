@@ -100,9 +100,9 @@ double Crown::calculateCrownFuelLoad()
 */
 double Crown::calculateCrownFireTransitionRatio()
 {
-    double crownFireTransitionRatio = ((criticalCrownSurfaceFireIntensity_ < 1.0e-7)
+    double crownFireTransitionRatio = ((crownCriticalSurfaceFireIntensity_ < 1.0e-7)
         ? (0.00)
-        : (crownCopyOfSurfaceFirelineIntensity_ / criticalCrownSurfaceFireIntensity_));
+        : (crownCopyOfSurfaceFirelineIntensity_ / crownCriticalSurfaceFireIntensity_));
 
     return crownFireTransitionRatio;
 }
@@ -129,7 +129,7 @@ double Crown::calculateCrownFireFirelineIntensity()
 *
 *  \return Critical surface fire intensity (Btu/ft/s).
 */
-double Crown::calculateCriticalCrownSurfaceFireIntensity()
+double Crown::calculateCrownCriticalSurfaceFireIntensity()
 {
     const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.288672;
     const double FEET_TO_METERS = 0.3048;
@@ -146,12 +146,12 @@ double Crown::calculateCriticalCrownSurfaceFireIntensity()
     crownBaseHeight = (crownBaseHeight < 0.1) ? 0.1 : crownBaseHeight;
     // Critical surface fireline intensity (kW/m)
     // Need to changed value in calculation below from 450 to 460 at some point
-    criticalCrownSurfaceFireIntensity_ = pow((0.010 * crownBaseHeight * (450.0 + 25.9 * foliarMoisture)), 1.5);
+    crownCriticalSurfaceFireIntensity_ = pow((0.010 * crownBaseHeight * (450.0 + 25.9 * foliarMoisture)), 1.5);
 
     // Return as Btu/ft/s
-    criticalCrownSurfaceFireIntensity_ *= KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND;
+    crownCriticalSurfaceFireIntensity_ *= KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND;
 
-    return criticalCrownSurfaceFireIntensity_;
+    return crownCriticalSurfaceFireIntensity_;
 }
 
 //------------------------------------------------------------------------------
@@ -160,9 +160,9 @@ double Crown::calculateCriticalCrownSurfaceFireIntensity()
 *
 *  \return Critical surface fire flame length (ft).
 */
-double Crown::calculateCriticalCrownSurfaceFlameLength()
+double Crown::calculateCrownCriticalSurfaceFlameLength()
 {
-    double criticalSurfaceFlameLength = crownFireSpread_.calculateFlameLength(criticalCrownSurfaceFireIntensity_);
+    double criticalSurfaceFlameLength = crownFireSpread_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
     return criticalSurfaceFlameLength;
 }
 
@@ -231,17 +231,17 @@ double Crown::calcualteCrownFirePowerRatio()
 *
 *  \return Critical crown fire spread rate (ft/min).
 */
-double Crown::calculateCriticalCrownFireSpreadRate()
+double Crown::calculateCrownCriticalFireSpreadRate()
 {
     double canopyBulkDensity = crownInputs_->getCanopyBulkDensity();
     const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.0185;
     // Convert to Kg/m3
     double convertedBulkDensity = LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER * canopyBulkDensity;
-    criticalCrownFireSpreadRate_ = (convertedBulkDensity < 1e-07) ? 0.00 : (3.0 / convertedBulkDensity);
+    crownCriticalFireSpreadRate_ = (convertedBulkDensity < 1e-07) ? 0.00 : (3.0 / convertedBulkDensity);
     const double METERS_PER_MIN_TO_FEET_PER_MIN = 3.28084;
     // Convert to ft/min
-    criticalCrownFireSpreadRate_ *= METERS_PER_MIN_TO_FEET_PER_MIN;
-    return criticalCrownFireSpreadRate_;
+    crownCriticalFireSpreadRate_ *= METERS_PER_MIN_TO_FEET_PER_MIN;
+    return crownCriticalFireSpreadRate_;
 }
 
 //------------------------------------------------------------------------------
@@ -252,9 +252,9 @@ double Crown::calculateCriticalCrownFireSpreadRate()
 */
 double Crown::calculateCrownFireActiveRatio()
 {
-    crownFireActiveRatio_ = (criticalCrownFireSpreadRate_ < 1e-07)
+    crownFireActiveRatio_ = (crownCriticalFireSpreadRate_ < 1e-07)
         ? (0.00)
-        : (crownFireSpreadRate_ / criticalCrownFireSpreadRate_);
+        : (crownFireSpreadRate_ / crownCriticalFireSpreadRate_);
     return crownFireActiveRatio_;
 }
 

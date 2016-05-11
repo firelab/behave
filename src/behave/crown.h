@@ -20,9 +20,9 @@ public:
     double calculateCrownFuelLoad();
     double calculateCrownFireTransitionRatio();
     double calculateCrownFireFirelineIntensity();
-    double calculateCriticalCrownFireSpreadRate();
-    double calculateCriticalCrownSurfaceFireIntensity();
-    double calculateCriticalCrownSurfaceFlameLength();
+    double calculateCrownCriticalFireSpreadRate();
+    double calculateCrownCriticalSurfaceFireIntensity();
+    double calculateCrownCriticalSurfaceFlameLength();
     double calculateCrownFireFlameLength();
     double calculateCrownFirePowerOfFire();
     double calcuateCrownFirePowerOfWind();
@@ -47,8 +47,8 @@ private:
     double crownFireFirelineIntensity_;
     double crownFireFlameLength_;
     double crownFireSpreadRate_;
-    double criticalCrownSurfaceFireIntensity_;
-    double criticalCrownFireSpreadRate_;
+    double crownCriticalSurfaceFireIntensity_;
+    double crownCriticalFireSpreadRate_;
     double crownFirePowerOfFire_;
     double crownFirePowerOfWind_;
     double crownFirePowerRatio_;
