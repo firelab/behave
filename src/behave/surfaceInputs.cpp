@@ -163,11 +163,12 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     }
 
     fuelModelNumber_ = fuelModelNumber;
-    moistureOneHour_ = moistureOneHour;
-    moistureTenHour_ = moistureTenHour;
-    moistureHundredHour_ = moistureHundredHour;
-    moistureLiveHerbaceous_ = moistureLiveHerbaceous;
-    moistureLiveWoody_ = moistureLiveWoody;
+
+    setMoistureOneHour(moistureOneHour);
+    setMoistureTenHour(moistureTenHour);
+    setMoistureHundredHour(moistureHundredHour);
+    setMoistureLiveHerbaceous(moistureLiveHerbaceous);
+    setMoistureLiveWoody(moistureLiveWoody);
 
     windHeightInputMode_ = windHeightInputMode;
     windSpeed_ = windSpeed;
@@ -255,41 +256,38 @@ void SurfaceInputs::setFuelModelNumber(int fuelModelNumber)
     fuelModelNumber_ = fuelModelNumber;
 }
 
-void SurfaceInputs::setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour)
-{
-    moistureOneHour_ = moistureOneHour;
-    moistureTenHour_ = moistureTenHour;
-    moistureHundredHour_ = moistureHundredHour;
-}
-
-void SurfaceInputs::setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody)
-{
-    moistureLiveHerbaceous_ = moistureLiveHerbaceous;
-    moistureLiveWoody_ = moistureLiveWoody;
-}
-
 void SurfaceInputs::setMoistureOneHour(double moistureOneHour)
 {
+    // Convert moisture input from percent to decimal fraction
+    moistureOneHour /= 100.0;
     moistureOneHour_ = moistureOneHour;
 }
 
 void SurfaceInputs::setMoistureTenHour(double moistureTenHour)
 {
+    // Convert moisture input from percent to decimal fraction
+    moistureTenHour_ /= 100.0;
     moistureTenHour_ = moistureTenHour;
 }
 
 void SurfaceInputs::setMoistureHundredHour(double moistureHundredHour)
 {
+    // Convert moisture input from percent to decimal fraction
+    moistureHundredHour /= 100.0;
     moistureHundredHour_ = moistureHundredHour;
 }
 
 void SurfaceInputs::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
+    // Convert moisture input from percent to decimal fraction
+    moistureLiveHerbaceous /= 100.0;
     moistureLiveHerbaceous_ = moistureLiveHerbaceous;
 }
 
 void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 {
+    // Convert moisture input from percent to decimal fraction
+    moistureLiveWoody /= 100.0;
     moistureLiveWoody_ = moistureLiveWoody;
 }
 

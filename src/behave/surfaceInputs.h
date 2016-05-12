@@ -29,8 +29,6 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
-    void setMoistureDead(double moistureOneHour, double moistureTenHour, double moistureHundredHour);
-    void setMoistureLive(double moistureLiveHerbaceous, double moistureLiveWoody);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
     void setMoistureHundredHour(double moistureHundredHour);
@@ -92,7 +90,7 @@ public:
 
 private:
     double convertWindToUpslope(double windDirectionFromNorth);
-
+   
     int fuelModelNumber_;               // 1 to 256
     double moistureOneHour_;            // 1% to 60%
     double moistureTenHour_;            // 1% to 60%		
