@@ -135,7 +135,7 @@ void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour,
     moistureTenHour /= 100.0;
     moistureHundredHour /= 100.0;
     moistureLiveHerbaceous /= 100.0;
-    moistureLiveHerbaceous /= 100.0;
+    moistureLiveWoody /= 100.0;
 
     surfaceInputs_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
