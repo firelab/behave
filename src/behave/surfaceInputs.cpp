@@ -266,7 +266,7 @@ void SurfaceInputs::setMoistureOneHour(double moistureOneHour)
 void SurfaceInputs::setMoistureTenHour(double moistureTenHour)
 {
     // Convert moisture input from percent to decimal fraction
-    moistureTenHour_ /= 100.0;
+    moistureTenHour /= 100.0;
     moistureTenHour_ = moistureTenHour;
 }
 
