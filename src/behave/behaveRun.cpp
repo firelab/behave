@@ -255,6 +255,26 @@ double BehaveRun::getSurfaceFirelineIntensity() const
     return surface_.getFirelineIntensity();
 }
 
+double BehaveRun::getMidflameWindspeed() const
+{
+    return surface_.getMidflameWindspeed();
+}
+
+double BehaveRun::getEllipticalA() const
+{
+    return surface_.getEllipticalA();
+}
+
+double BehaveRun::getEllipticalB() const
+{
+    return surface_.getEllipticalB();
+}
+
+double BehaveRun::getEllipticalC() const
+{
+    return surface_.getEllipticalC();
+}
+
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);

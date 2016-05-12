@@ -31,6 +31,9 @@ public:
     double getWindSpeedLimit() const;
     double getReactionIntensity() const;
     double getMidflameWindSpeed() const;
+    double getEllipticalA() const;
+    double getEllipticalB() const;
+    double getEllipticalC() const;
     bool getIsWindLimitExceeded() const;
 
 private:
@@ -64,6 +67,7 @@ private:
     void calculateMidflameWindSpeed();
     void calculateEffectiveWindSpeed();
     void applyWindSpeedLimit();
+    void calculateEllipticalDimensions();
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
 
     // Pointers and references to other objects
@@ -86,13 +90,18 @@ private:
     double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
     double heatPerUnitArea_;
     double fireLengthToWidthRatio_;
-    double eccentricity_;
     double residenceTime_;
     double reactionIntensity_;
     double firelineIntensity_;
     double flameLength_;
     double backingSpreadRate_;
    
+    // Elliptical dimensions
+    double eccentricity_;   // commonly reffered to a 'e' in mathematics, not be confused with Euler's number
+    double ellipticalA_;  // semiminor axis, commonly refered to as 'a' in mathematics and 'b' in fire literature
+    double ellipticalB_;  // semimajor axis, commonly refered to as 'b' in mathematics and 'a' in fire literature
+    double ellipticalC_; // distance from center of ellipse to one of its focii, commonly referered to a 'c' in mathematics
+
     double midflameWindSpeed_;
     double windAdjustmentFactor_;
     WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;

@@ -81,6 +81,26 @@ double Surface::getFirelineIntensity() const
     return surfaceFireSpread_.getFirelineIntensity();
 }
 
+double Surface::getMidflameWindspeed() const
+{
+    return surfaceFireSpread_.getMidflameWindSpeed();
+}
+
+double Surface::getEllipticalA() const
+{
+    return surfaceFireSpread_.getEllipticalA();
+}
+
+double Surface::getEllipticalB() const
+{
+    return surfaceFireSpread_.getEllipticalB();
+}
+
+double Surface::getEllipticalC() const
+{
+    return surfaceFireSpread_.getEllipticalC();
+}
+
 bool Surface::isUsingTwoFuelModels() const
 {
     return surfaceInputs_->isUsingTwoFuelModels();

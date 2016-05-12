@@ -180,12 +180,12 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Calculate fire ellipse
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
-
-    // If needed, calculate spread rate in arbitrary direction of interest
-    if (directionOfInterest != -1.0)
+    if (directionOfInterest != -1.0) // If needed, calculate spread rate in arbitrary direction of interest
     {
         forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
     }
+    calculateBackingSpreadRate();
+    calculateEllipticalDimensions();
 
     calculateFireFirelineIntensity();
     calculateFlameLength();
@@ -401,6 +401,20 @@ void SurfaceFireSpread::calculateSurfaceFireEccentricity()
     }
 }
 
+void SurfaceFireSpread::calculateEllipticalDimensions()
+{
+    ellipticalA_ = 0.0;
+    ellipticalB_ = 0.0;
+    ellipticalC_ = 0.0;
+
+    ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2;
+    if (fireLengthToWidthRatio_ > 1e-07)
+    {
+        ellipticalA_ = ellipticalB_ / fireLengthToWidthRatio_;
+    }
+    ellipticalC_ = ellipticalB_ - backingSpreadRate_;
+}
+
 void SurfaceFireSpread::calculateBackingSpreadRate()
 {
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
@@ -490,6 +504,21 @@ double SurfaceFireSpread::getMidflameWindSpeed() const
     return midflameWindSpeed_;
 }
 
+double SurfaceFireSpread::getEllipticalA() const
+{
+    return ellipticalA_;
+}
+
+double SurfaceFireSpread::getEllipticalB() const
+{
+    return ellipticalB_;
+}
+
+double SurfaceFireSpread::getEllipticalC() const
+{
+    return ellipticalC_;
+}
+
 bool SurfaceFireSpread::getIsWindLimitExceeded() const
 {
     return isWindLimitExceeded_;
@@ -570,7 +599,6 @@ void SurfaceFireSpread::initializeMembers()
     forwardSpreadRate_ = 0.0;
     heatPerUnitArea_ = 0.0;
     fireLengthToWidthRatio_ = 0.0;
-    eccentricity_ = 0.0;
     residenceTime_ = 0.0;
     reactionIntensity_ = 0.0;
     firelineIntensity_ = 0.0;
@@ -581,6 +609,11 @@ void SurfaceFireSpread::initializeMembers()
     windAdjustmentFactor_ = 0.0;
     windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
     canopyCrownFraction_ = 0.0;
+
+    eccentricity_ = 0.0; 
+    ellipticalA_ = 0.0; 
+    ellipticalB_ = 0.0;
+    ellipticalC_ = 0.0;
 
     aspenMortality_ = 0.0;
 }
