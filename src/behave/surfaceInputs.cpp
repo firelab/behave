@@ -140,7 +140,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-    initializeMembers();
+    //initializeMembers();
 
     setSlope(slope);
     aspect_ = aspect;
