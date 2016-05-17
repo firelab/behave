@@ -288,6 +288,16 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
         azimuth = 0.0;
     }
 
+    // Convert azimuth to be relative to North if necessary
+    if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
+    {
+        azimuth = convertDirectionOfSpreadToRelativeToNorth(azimuth);
+        while (azimuth >= 360.0)
+        {
+            azimuth -= 360.0;
+        }
+    }
+
     // Azimuth is the direction of maximum spread
     directionOfMaxSpread_ = azimuth;
 }
@@ -434,16 +444,7 @@ double SurfaceFireSpread::getSpreadRate() const
 
 double SurfaceFireSpread::getDirectionOfMaxSpread() const
 {
-    double localDirMaxSpread = directionOfMaxSpread_;
-    if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
-    {
-        localDirMaxSpread = convertDirectionOfSpreadToRelativeToNorth(localDirMaxSpread);
-        while (localDirMaxSpread >= 360.0)
-        {
-            localDirMaxSpread -= 360.0;
-        }
-    }
-    return localDirMaxSpread;
+    return directionOfMaxSpread_;
 }
 
 double SurfaceFireSpread::getEffectiveWindSpeed() const
