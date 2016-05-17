@@ -205,11 +205,11 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
 
 double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest)
 {
-    if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
-    {
-        double aspect = surfaceInputs_->getAspect();
-        directionOfInterest -= aspect + 180.0; // Direction of interest is now relative to north
-    }
+    //if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
+    //{
+    //    double aspect = surfaceInputs_->getAspect();
+    //    directionOfInterest -= aspect + 180.0; // Direction of interest is now relative to north
+    //}
 
     double rosVector = forwardSpreadRate_;
     if (forwardSpreadRate_) // if forward spread rate is not zero
