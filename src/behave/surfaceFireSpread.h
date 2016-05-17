@@ -97,12 +97,12 @@ private:
     double backingSpreadRate_;
    
     // Elliptical dimensions
-    double eccentricity_;   // commonly reffered to a 'e' in mathematics, not be confused with Euler's number
-    double ellipticalA_;  // semiminor axis, commonly refered to as 'b' in mathematics and 'a' in fire literature (ft)
-    double ellipticalB_;  // semimajor axis, commonly refered to as 'a' in mathematics and 'b' in fire literature (ft)
-    double ellipticalC_; // distance from center of ellipse to one of its foci, commonly referered to a 'c' in mathematics (ft)
+    double eccentricity_;   // deviation from a perfect circle being zero in the case of a perfect circle, unitless real in interval [0,1) 
+    double ellipticalA_;    // semiminor axis, commonly refered to as 'b' in mathematics and 'a' in fire literature (ft)
+    double ellipticalB_;    // semimajor axis, commonly refered to as 'a' in mathematics and 'b' in fire literature (ft)
+    double ellipticalC_;    // distance from center of ellipse to one of its foci, commonly referered to a 'c' in mathematics (ft)
 
-    double midflameWindSpeed_;
+    double midflameWindSpeed_; 
     double windAdjustmentFactor_;
     WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;
     double canopyCrownFraction_;
