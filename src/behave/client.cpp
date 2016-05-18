@@ -28,21 +28,11 @@ int main()
     double directionOfInterest = 0;
     double spreadRate = 0;
 
-    // Two Fuel Models
-    int firstFuelModelNumber = 0;
-    int secondFuelModelNumber = 0;
-    double coverage = 0.0;
+ 
 
-    // Palmetto-Gallberry
-    double	ageOfRough = 0.0;
-    double	heightOfUnderstory = 0.0;
-    double	palmettoCoverage = 0.0;
-    double	overstoryBasalArea = 0.0;
 
-    // Western Aspen
-    int aspenFuelModelNumber = 0;
-    double aspenCuringLevel = 0.0;
-    double DBH = 0.0;
+
+   
 
     // Wind adjustment factor parameters
     double canopyCover = 0.0;
@@ -54,7 +44,7 @@ int main()
 
     // Setting the wind and spread angle input mode (default is upslope)
     //behavePlus.setWindAndSpreadAnglesRelativeToUpslope();
-    //behave.setWindAndSpreadAnglesRelativeToNorth();
+    behave.setWindAndSpreadAnglesRelativeToNorth();
 
     // Checking  wind and spread angle input mode
     std::cout << "Wind and spread direction are in degrees clockwise relative to ";
@@ -91,29 +81,32 @@ int main()
     //    moistureLiveHerbaceous = 60;
     //    moistureLiveWoody = 90;
     //    windSpeed = 5;
-    //    windDirection = 0;
+    //    windDirection = 180;
     //    slope = 30;
-    //    aspect = 0;
-    //    directionOfInterest = -1;
-    //
+    //    aspect = 250;
+    //    directionOfInterest = 0;
+
     //    // std::cout << "The direction of interest is " << directionOfInterest << " degrees" << std::endl;
-    //
+
     //    // Two Fuel Models test
+    //    int firstFuelModelNumber = 0;
+    //    int secondFuelModelNumber = 0;
+    //    double coverage = 0.0;
     //    firstFuelModelNumber = 1;
     //    secondFuelModelNumber = 124;
     //    coverage = 0 + (.10 * i);
     //    behave.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, coverage, TwoFuelModels::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
     //    spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-    //    spreadRate = floor(spreadRate * 10 + 0.5) / 10;
-    //    std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << std::setprecision(0) << coverage * 100 << "%" << std::endl;
-    //    std::cout << "is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
+    //    //spreadRate = floor(spreadRate * 10 + 0.5) / 10;
+    //    std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << coverage * 100 << "%" << std::endl;
+    //    std::cout << "is " << spreadRate << " ch/hr" << std::endl;
     //    flameLength = behave.getFlameLength();
-    //    flameLength = floor(flameLength * 10 + 0.5) / 10;
-    //    std::cout << "Flame length for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " is " << flameLength << " ft" << std::endl << std::endl;
-    //
+    //    //flameLength = floor(flameLength * 10 + 0.5) / 10;
+    //    std::cout << "Flame length for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " is " << flameLength << " ft" << std::endl;
+
     //    // Direction of Max Spread test
     //    directionOfMaxSpread = behave.getDirectionOfMaxSpread();
-    //    std::cout << "Direction of maximum spread is for fuel model " << i << " is " << std::setprecision(0) << std::fixed << round(directionOfMaxSpread) << " degrees" << std::endl;
+    //    std::cout << "Direction of maximum spread is " << directionOfMaxSpread << " degrees" << std::endl << std::endl;
     //}
 
     fuelModelNumber = 1;
@@ -123,10 +116,10 @@ int main()
     moistureLiveHerbaceous = 60;
     moistureLiveWoody = 90;
     windSpeed = 5;
-    windDirection = 0;
+    windDirection = 42;
     slope = 30;
-    aspect = 0;
-    directionOfInterest = -1;
+    aspect = 291;
+    directionOfInterest = 63;
 
     canopyCover = 0.50; // 50%
     canopyHeight = 6;
@@ -135,11 +128,19 @@ int main()
     // Single fuel model test
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
     spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-    flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
-    std::cout << "Spread rate for fuel model " << fuelModelNumber << " is " << std::setprecision(1) << std::fixed	<< spreadRate << " ch/hr" << std::endl;
-    std::cout << "Flame length for fuel model " << fuelModelNumber << " is " << flameLength << " ft" << std::endl << std::endl;
+    //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
+    flameLength = behave.getFlameLength();
+    std::cout << "Spread rate for fuel model " << fuelModelNumber << " is " << std::setprecision(8) << spreadRate << " ch/hr" << std::endl;
+    std::cout << "Flame length for fuel model " << fuelModelNumber << " is " << std::setprecision(8) << flameLength << " ft" << std::endl << std::endl;
+    // Direction of Max Spread test
+    directionOfMaxSpread = behave.getDirectionOfMaxSpread();
+    std::cout << "Direction of maximum spread is " << round(directionOfMaxSpread) << " degrees" << std::endl << std::endl;
 
     // Palmetto-Gallbury test
+    //double	ageOfRough = 0.0;
+    //double	heightOfUnderstory = 0.0;
+    //double	palmettoCoverage = 0.0;
+    //double	overstoryBasalArea = 0.0;
     //ageOfRough = 20;
     //heightOfUnderstory = 3;
     //palmettoCoverage = 25;
@@ -152,7 +153,10 @@ int main()
     //flameLength = floor(flameLength * 10 + 0.5) / 10;
     //std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
 
-    // Western Apsen test
+    // Western Aspen test
+    //int aspenFuelModelNumber = 0;
+    //double aspenCuringLevel = 0.0;
+    //double DBH = 0.0;
     //aspenFuelModelNumber = 5;
     //aspenCuringLevel = 0.0;
     //DBH = 2;

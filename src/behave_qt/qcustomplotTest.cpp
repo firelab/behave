@@ -17,9 +17,9 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
         y[i].resize(NO_OF_COLS);
     }
 
-    double oneHourMoisture = 0;
-    double oneHourMoistureMin = 1;
-    double oneHourMoistureMax = 10;
+    //double oneHourMoisture = 0;
+    //double oneHourMoistureMin = 1;
+    //double oneHourMoistureMax = 10;
 
     double windSpeed = 0;
     double windSpeedMin = 0;

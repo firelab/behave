@@ -119,6 +119,7 @@ private:
     int aspenFuelModelNumber_;
     double aspenCuringLevel_;
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity_;
+    double DBH_;
 
     // Wind Adjustment Factor Parameters
     double canopyCover_;

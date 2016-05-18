@@ -459,6 +459,15 @@ void canopyFlow::plotWind(double inputSpeed, double inputHeight)
 
 void canopyFlow::plotDimensionalWind(double inputSpeed, double inputHeight)
 {
+    // NOPs for parameters to silence C4100
+    if (inputHeight == 0)
+    {
+
+    }
+    if (inputSpeed == 0)
+    {
+
+    }
 
 //    double* measured_windSpeed;
 //    double* measured_shear;
@@ -873,6 +882,12 @@ void canopyFlow::plotWAFvsCdLAI(double inputHeight, double midFlameHeight, doubl
 
 void canopyFlow::plotz0ohvsCdLAI(double inputHeight, double lowLAI, double highLAI)
 {
+    // NOPs for parameters to silence C4100
+    if (inputHeight == 0)
+    {
+
+    }
+
     int plotNodes = 1000;
     double* cdLAI = new double[plotNodes];
     double* z0ohArray = new double[plotNodes];
@@ -942,6 +957,12 @@ void canopyFlow::plotz0ohvsCdLAI(double inputHeight, double lowLAI, double highL
 
 void canopyFlow::plotdohvsCdLAI(double inputHeight, double lowLAI, double highLAI)
 {
+    // NOPs for parameters to silence C4100
+    if (inputHeight == 0)
+    {
+
+    }
+
     int plotNodes = 10000;
     double* cdLAI = new double[plotNodes];
     double* dohArray = new double[plotNodes];
@@ -1011,6 +1032,12 @@ void canopyFlow::plotdohvsCdLAI(double inputHeight, double lowLAI, double highLA
 
 void canopyFlow::plotz0ohvsone_doh(double inputHeight, double lowLAI, double highLAI)
 {
+    // NOPs for parameters to silence C4100
+    if (inputHeight == 0)
+    {
+
+    }
+
     int plotNodes = 1000;
     double* z0ohArray = new double[plotNodes];
     double* one_dohArray = new double[plotNodes];
@@ -1087,6 +1114,12 @@ void canopyFlow::plotz0ohvsone_doh(double inputHeight, double lowLAI, double hig
 
 void canopyFlow::plotz0ohvsdoh(double inputHeight, double lowLAI, double highLAI)
 {
+    // NOPs for parameters to silence C4100
+    if (inputHeight == 0)
+    {
+
+    }
+
     int plotNodes = 1000;
     double* z0ohArray = new double[plotNodes];
     double* dohArray = new double[plotNodes];
@@ -1334,7 +1367,7 @@ double canopyFlow::get_windAdjustmentFactorShelteredMidFlame(double inputHeight,
 double canopyFlow::get_windAdjustmentFactorShelteredIntegral(double inputHeight, double flameHeight)
 {
     double WAF;
-    double inter1;
+    double inter1 = 0.0;
     if(flameHeight < C->z0g)
     {
         WAF = 0.0;

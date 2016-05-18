@@ -234,6 +234,7 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     aspenCuringLevel_ = aspenCuringLevel;
     aspenFireSeverity_ = aspenFireSeverity;
     isUsingWesternAspen_ = true;
+    DBH_ = DBH;
 }
 
 void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)

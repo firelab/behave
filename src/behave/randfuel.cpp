@@ -1,3 +1,8 @@
+// Ignore C4706
+#ifdef _MSC_VER
+#pragma warning( disable : 4706 )
+#endif
+
 //------------------------------------------------------------------------------
 /*! \file randfuel.cpp
  *  \version BehavePlus3
@@ -690,6 +695,11 @@ void RandFuel::spliceExtensions2(double *p_ca, double *p_ra, double ***p_cs,
     }
     return;
 }
+
+// Stop ignoring C4706
+#ifdef _MSC_VER
+#pragma warning( default : 4706) /* Reset to default state */
+#endif
 
 //------------------------------------------------------------------------------
 // End of randfuel.cpp

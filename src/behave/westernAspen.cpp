@@ -253,17 +253,17 @@ double WesternAspen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspe
 *  \return Aspen mortality rate (fraction).
 */
 
-double WesternAspen::calculateAspenMortality(int severity, double flameLength, double dbh)
+double WesternAspen::calculateAspenMortality(int severity, double flameLength, double DBH)
 {
     double mortality = 1.0;
     double charHeight = flameLength / 1.8;
     if (severity == 0)
     {
-        mortality = 1.0 / (1.0 + exp(-4.407 + 0.638 * dbh - 2.134 * charHeight));
+        mortality = 1.0 / (1.0 + exp(-4.407 + 0.638 * DBH - 2.134 * charHeight));
     }
     else if (severity == 1)
     {
-        mortality = 1.0 / (1.0 + exp(-2.157 + 0.218 * dbh - 3.600 * charHeight));
+        mortality = 1.0 / (1.0 + exp(-2.157 + 0.218 * DBH - 3.600 * charHeight));
     }
     mortality_ = (mortality < 0.0) ? 0.0 : mortality;
     mortality_ = (mortality > 1.0) ? 1.0 : mortality;

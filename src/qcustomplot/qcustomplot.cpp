@@ -1,3 +1,8 @@
+// Ignore C4456, C4458
+#ifdef _MSC_VER
+#pragma warning( disable : 4456 4458)
+#endif
+
 /***************************************************************************
 **                                                                        **
 **  QCustomPlot, an easy to use, modern plotting widget for Qt            **
@@ -23551,3 +23556,7 @@ QPen QCPItemBracket::mainPen() const
     return mSelected ? mSelectedPen : mPen;
 }
 
+// Stop ignoring C4456, C4458
+#ifdef _MSC_VER
+#pragma warning( default : 4456 4458) /* Reset to default state */
+#endif

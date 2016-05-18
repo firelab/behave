@@ -10,6 +10,8 @@ public:
     ~WesternAspen();
 
     void initialize();
+    void setDBH(const double DBH);
+
     double getAspenMortality() const;
 
     // The following getter methods are used to populate FuelModel data fields 
@@ -26,13 +28,14 @@ public:
     double getAspenSavrLiveHerbaceous();
     double getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
     
-
     // Mortality must be calculated AFTER spread rate
-    double calculateAspenMortality(int severity, double flameLength, double dbh);
+    double calculateAspenMortality(int severity, double flameLength, double DBH);
 
 private:
     double aspenInterpolate(double curing, double *valueArray);
+
     // Member variables
+    double DBH_;
     double mortality_;
 };
 

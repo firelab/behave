@@ -31,6 +31,11 @@ IF(CANOPY)
     ADD_DEFINITIONS(-DCANOPY)
 ENDIF(CANOPY)
 
+OPTION(TEST_BEHAVE "Enable Testing" OFF)
+IF(TEST_BEHAVE)
+    ADD_DEFINITIONS(-DTEST_BEHAVE)
+ENDIF(TEST_BEHAVE)
+
 # Commented out OpenMP requirement for now
 #Make sure OpenMP is supported by compiler
 #FIND_PACKAGE(OpenMP REQUIRED)
@@ -84,6 +89,26 @@ ADD_EXECUTABLE(behave
     ${SOURCE} 
     src/behave/client.cpp 
     ${HEADERS})
+
+IF(TEST_BEHAVE)
+    SET(Boost_USE_STATIC_LIBS       ON) # only find static libs
+    SET(Boost_USE_MULTITHREADED     ON)
+    FIND_PACKAGE(Boost REQUIRED)
+    IF(Boost_FOUND)
+        FIND_PACKAGE(Boost 1.61.0 
+            COMPONENTS unit_test_framework REQUIRED)
+        INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+        SET(LINK_LIBS ${Boost_LIBRARIES})
+        SET(BOOST_TEST_SOURCE
+            src/testBehave/testBehave.cpp)
+        ADD_EXECUTABLE(testBehave 
+            ${SOURCE}
+            ${BOOST_TEST_SOURCE}
+            ${HEADERS})
+        TARGET_LINK_LIBRARIES(testBehave ${Boost_LIBRARIES})
+    ENDIF()
+ENDIF(TEST_BEHAVE)
+
 
 IF(CANOPY)
     ADD_EXECUTABLE(canopy_flow 

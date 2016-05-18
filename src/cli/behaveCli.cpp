@@ -244,7 +244,7 @@ int main(int argc, char *argv[])
     bool hasDirectionOfInterest = false;
     bool isUsingEnglish = false;
     bool isUsingMetric = false;
-    int i;
+    int argIndex;
 
     std::string fileName = "output.txt"; // default output file name
     std::string runIdentifier = "no-run-identifier";
@@ -287,14 +287,14 @@ int main(int argc, char *argv[])
     {
         Usage();
     }
-    i = 1;
+    argIndex = 1;
 
     // Parse commandline arguments
-    while (i < argc)
+    while (argIndex < argc)
     {
-        if (EQUAL(argv[i], "--fuel-model-number"))
+        if (EQUAL(argv[argIndex], "--fuel-model-number"))
         {
-            fuelModelNumber = parseFuelModelNumber(i, MAX_ARGUMENT_INDEX, argv);
+            fuelModelNumber = parseFuelModelNumber(argIndex, MAX_ARGUMENT_INDEX, argv);
             // Check if fuel model is defined
             if (!behave.isFuelModelDefined(fuelModelNumber))
             {
@@ -304,115 +304,115 @@ int main(int argc, char *argv[])
             }
             requiredArgumentArray[FUEL_MODEL_NUMBER] = true;
         }
-        else if (EQUAL(argv[i], "--1hr"))
+        else if (EQUAL(argv[argIndex], "--1hr"))
         {
             argumentName = "1-hr moisture";
-            moistureOneHr = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            moistureOneHr = parseMoisture(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             requiredArgumentArray[ONE_HOUR] = true;
         }
-        else if (EQUAL(argv[i], "--10hr"))
+        else if (EQUAL(argv[argIndex], "--10hr"))
         {
             argumentName = "10-hr moisture";
-            moistureTenHr = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            moistureTenHr = parseMoisture(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             requiredArgumentArray[TEN_HOUR] = true;
         }
-        else if (EQUAL(argv[i], "--100hr"))
+        else if (EQUAL(argv[argIndex], "--100hr"))
         {
             argumentName = "100-hr moisture";
-            moistureHundredHr = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            moistureHundredHr = parseMoisture(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             requiredArgumentArray[HUNDRED_HOUR] = true;
         }
-        else if (EQUAL(argv[i], "--live-herb"))
+        else if (EQUAL(argv[argIndex], "--live-herb"))
         {
             argumentName = "live herbaceous moisture";
-            moistureLiveHerb = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            moistureLiveHerb = parseMoisture(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             requiredArgumentArray[LIVE_HERB] = true;
         }
-        else if (EQUAL(argv[i], "--live-woody"))
+        else if (EQUAL(argv[argIndex], "--live-woody"))
         {
             argumentName = "live woody moisture";
-            moistureLiveWoody = parseMoisture(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            moistureLiveWoody = parseMoisture(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             requiredArgumentArray[LIVE_WOODY] = true;
         }
-        else if (EQUAL(argv[i], "--wind-speed"))
+        else if (EQUAL(argv[argIndex], "--wind-speed"))
         {
             argumentName = "wind speed";
-            windSpeed = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            windSpeed = parseDouble(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             requiredArgumentArray[WIND_SPEED] = true;
         }
-        else if (EQUAL(argv[i], "--wind-direction"))
+        else if (EQUAL(argv[argIndex], "--wind-direction"))
         {
             argumentName = "wind direction";
-            windDirection = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            windDirection = parseDouble(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             checkAngleBound(windDirection);
             requiredArgumentArray[WIND_DIRECTION] = true;
         }
-        else if (EQUAL(argv[i], "--slope"))
+        else if (EQUAL(argv[argIndex], "--slope"))
         {
             argumentName = "slope";
-            slope = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            slope = parseDouble(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             checkSlopeBound(slope);
             requiredArgumentArray[SLOPE] = true;
         }
-        else if (EQUAL(argv[i], "--aspect"))
+        else if (EQUAL(argv[argIndex], "--aspect"))
         {
             argumentName = "aspect";
-            aspect = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            aspect = parseDouble(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             checkAngleBound(aspect);
             requiredArgumentArray[ASPECT] = true;
         }
-        else if (EQUAL(argv[i], "--metric"))
+        else if (EQUAL(argv[argIndex], "--metric"))
         {
             isUsingMetric = true;
         }
-        else if (EQUAL(argv[i], "--english"))
+        else if (EQUAL(argv[argIndex], "--english"))
         {
             isUsingEnglish = true;
         }
-        else if (EQUAL(argv[i], "--direction-of-interest"))
+        else if (EQUAL(argv[argIndex], "--direction-of-interest"))
         {
             argumentName = "direction of interest";
-            directionOfInterest = parseDouble(i, MAX_ARGUMENT_INDEX, argv, argumentName);
+            directionOfInterest = parseDouble(argIndex, MAX_ARGUMENT_INDEX, argv, argumentName);
             checkAngleBound(directionOfInterest);
             hasDirectionOfInterest = true;
         }
-        else if (EQUAL(argv[i], "--output-to-file"))
+        else if (EQUAL(argv[argIndex], "--output-to-file"))
         {
             isOutputtingToFile = true;
         }
-        else if (EQUAL(argv[i], "--file-name"))
+        else if (EQUAL(argv[argIndex], "--file-name"))
         {
-            if ((i + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
+            if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
             {
                 // Report error
                 printf("ERROR: No file name entered\n");
                 Usage(); // Exits program
             }
             hasSpecifiedFileName = true;
-            fileName = argv[++i];
+            fileName = argv[++argIndex];
             if (!(fileName.substr(fileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
             {
                 // Give the file a .txt extension
                 fileName += ".txt";
             }
         }
-        else if (EQUAL(argv[i], "--append"))
+        else if (EQUAL(argv[argIndex], "--append"))
         {
             isAppending = true;
         }
-        else if (EQUAL(argv[i], "--run-identifier"))
+        else if (EQUAL(argv[argIndex], "--run-identifier"))
         {
-            if ((i + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
+            if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
             {
                 // Report error
                 printf("ERROR: No run identifier entered\n");
                 Usage(); // Exits program
             }
-            runIdentifier = argv[++i];
+            runIdentifier = argv[++argIndex];
             // in case user somehow feeds in a whitespace in the argument
             std::replace(runIdentifier.begin(), runIdentifier.end(), ' ', '-');
         }
-        i++;
+        argIndex++;
     }
 
     // Check for required arguments

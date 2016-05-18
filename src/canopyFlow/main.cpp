@@ -73,12 +73,12 @@ int main() {
     //std::cout << wind.get_windAdjustmentFactorShelteredIntegral(6.096, 2.0) << std::endl;
     //std::cout << wind.get_windAdjustmentFactorUnshelteredIntegral(6.096, 22.19) << std::endl;
 
-    double inputHeight = wind.C->canopyHeight + 6.096;
-    double midFlameHeight = 7.0;
-    double inputSpeed = 10.0;
+    //double inputHeight = wind.C->canopyHeight + 6.096;
+    //double midFlameHeight = 7.0;
+    //double inputSpeed = 10.0;
     //double lowLAI = 0.001;
     //double highLAI = 10.0;
-    int profileType = 1;    //  0 => sheltered;  1 => unsheltered;
+    //int profileType = 1;    //  0 => sheltered;  1 => unsheltered;
 
 //    wind.plotDimensionalWind(inputSpeed, inputHeight);
 //    wind.plotWAFvsCdLAI(inputHeight, midFlameHeight, lowLAI, highLAI, profileType);

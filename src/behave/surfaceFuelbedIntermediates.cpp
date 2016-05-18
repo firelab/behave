@@ -161,7 +161,7 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 
     const double PI = 3.14159265358979;
 
-    double ovendryFuelLoad = 0.0;           // Ovendry fuel loading, Rothermel 1972
+    //double ovendryFuelLoad = 0.0;           // Ovendry fuel loading, Rothermel 1972
     double optimumPackingRatio = 0.0;       // Optimum packing ratio, Rothermel 1972, equation 37
     bool isDynamic = false;                 // Whether or not fuel model is dynamic
 
@@ -329,9 +329,7 @@ void SurfaceFuelbedIntermediates::setFuelbedDepth()
     }
     else if (isUsingWesternAspen_)
     {
-
         int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
-        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel();
         depth_ = westernAspen_.getAspenFuelBedDepth(aspenFuelModelNumber);
     }
     else
