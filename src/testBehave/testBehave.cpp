@@ -1,10 +1,14 @@
 #define BOOST_TEST_MODULE BehaveTest
-#include <boost/test/unit_test.hpp>
 
-#include "behaveVector.h"
+#include <boost/test/unit_test.hpp>
+#include <iostream>
+#include "fuelModelSet.h"
+#include "behaveRun.h"
 
 int add(int i, int j) { return i + j; }
-BehaveVector behaveTest;
+
+FuelModelSet fuelModelSet;
+BehaveRun behave(fuelModelSet);
 
 BOOST_AUTO_TEST_CASE(BehaveTest)
 {
@@ -27,9 +31,10 @@ BOOST_AUTO_TEST_CASE(BehaveTest)
         "add(..) result: " << add(2, 2));
 
     BOOST_CHECK_EQUAL(add(2, 2), 4);	  // #7 continues on error
-}
 
-//int main()
-//{
-//	return 0;
-//}
+    // Make Visual Studio wait while in debug mode
+#ifndef NDEBUG
+    std::cout << "Press Enter to continue";
+    std::cin.get();
+#endif
+}

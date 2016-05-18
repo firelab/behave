@@ -171,8 +171,10 @@ int main()
     //double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
     //std::cout << "Total execution time for " << 1000000 << " fire spread calculations is " << executionTimeInSeconds << " seconds." << std::endl;
 
+#ifndef NDEBUG
     std::cout << "Press Enter to continue";
     std::cin.get();
+#endif
 
     return 0;
 }

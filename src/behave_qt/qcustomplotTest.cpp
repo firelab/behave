@@ -55,7 +55,7 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
         //behaveVector[i].updateSurfaceInputs(fuelModelNumber, 6, 7, 8, 60, 90, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, 0, 0, 0, 0, 0, 0);
         behaveVector[i].updateSurfaceInputs(fuelModelNumber, 6, 7, 8, 60, 90, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, 0, 0, 0, 0, 0, 0);
         customPlot->addGraph(); // add a graph to the plot
-        fuelModelNumber += incrementAmount; // Update the value of the secondary independently ranged variable
+        fuelModelNumber += (int)incrementAmount; // Update the value of the secondary independently ranged variable
     }
 
     xMin = windSpeedMin;
@@ -142,3 +142,7 @@ QcustomplotTest::~QcustomplotTest()
 {
 
 }
+
+#ifdef _MSC_VER
+#pragma warning( default: 4244 4800 )   
+#endif

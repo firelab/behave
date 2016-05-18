@@ -141,7 +141,7 @@ IF(GUI)
     SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
     SET(CMAKE_AUTOMOC ON)
-
+    
     FIND_PACKAGE(Qt5Core REQUIRED)
 
     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
@@ -150,7 +150,7 @@ IF(GUI)
     FIND_PACKAGE(Qt5Widgets REQUIRED)
 
     FIND_PACKAGE(Qt5PrintSupport REQUIRED)
-
+    
     SET(BEHAVE_QT_SOURCE
         src/behave_qt/behave_qt_main_window.cpp
         src/behave_qt/behave_qtree_widget.cpp

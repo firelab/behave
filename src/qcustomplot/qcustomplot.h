@@ -1,3 +1,8 @@
+// Ignore C4244, C4456, C4458, C4718 and C4800
+#ifdef _MSC_VER
+#pragma warning( disable: 4244 4456 4458 4718 4800 )
+#endif
+
 /***************************************************************************
 **                                                                        **
 **  QCustomPlot, an easy to use, modern plotting widget for Qt            **
@@ -26,6 +31,8 @@
 #ifndef QCUSTOMPLOT_H
 #define QCUSTOMPLOT_H
 
+#ifdef _MSC_VER
+#pragma warning(push, 3)      
 #include <QObject>
 #include <QPointer>
 #include <QWidget>
@@ -45,6 +52,7 @@
 #include <QMargins>
 #include <qmath.h>
 #include <limits>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #  include <qnumeric.h>
 #  include <QPrinter>
@@ -52,6 +60,9 @@
 #else
 #  include <QtNumeric>
 #  include <QtPrintSupport/QtPrintSupport>
+#endif
+
+#pragma warning(pop)
 #endif
 
 class QCPPainter;
@@ -3766,3 +3777,7 @@ protected:
 
 #endif // QCUSTOMPLOT_H
 
+// Ignore C4244, C4456, C4458, C4718 and C4800
+#ifdef _MSC_VER
+#pragma warning( default: 4244 4456 4458 4718 4800 )
+#endif

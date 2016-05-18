@@ -1,14 +1,16 @@
 #ifndef BEHAVE_QT_GUI_H
 #define BEHAVE_QT_GUI_H
 
+#ifdef _MSC_VER
+#pragma warning(push, 3)       
 #include <QtWidgets/QMainWindow>
-
+#include "ui_behave_qt_main_window.h"
+#pragma warning(pop)
+#endif
 
 #include "behaveRun.h"
 #include "behave_qt_main_window_enums.h"
 #include "fuelModelSet.h"
-
-#include "ui_behave_qt_main_window.h"
 
 class QcustomplotTest;
 

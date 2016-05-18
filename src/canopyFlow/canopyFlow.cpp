@@ -170,7 +170,8 @@ void canopyFlow::readData(std::string filename)
     char* p;
     //int count;
 
-    double ummd, uwmd;
+    double ummd = 0;
+    double uwmd = 0;
 
     while(fgets(buff, 1024, f) != NULL)
     {

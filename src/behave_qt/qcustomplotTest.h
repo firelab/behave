@@ -1,9 +1,14 @@
 #ifndef QCUSTOMPLOTTEST_HEADER
 #define QCUSTOMPLOTTEST_HEADER
 
-#include <QtWidgets/QMainWindow>
-#include "ui_qcustomplot_test.h"
 #include "behaveVector.h"
+
+#ifdef _MSC_VER
+#pragma warning(push, 3)      
+#include "ui_qcustomplot_test.h"
+#include <QtWidgets/QMainWindow>
+#pragma warning(pop)
+#endif
 
 class QcustomplotTest : public QMainWindow
 {
