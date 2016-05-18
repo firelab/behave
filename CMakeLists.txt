@@ -5,7 +5,6 @@
 # include directories, compile definitions, the position-independent-code flag, 
 # and links to the qtmain.lib library on Windows.
 # *****************************************************************************
-
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 PROJECT(behave)
