@@ -92,7 +92,7 @@ ADD_EXECUTABLE(behave
 
 IF(TEST_BEHAVE)
     SET(Boost_USE_STATIC_LIBS       ON) # only find static libs
-    SET(Boost_USE_MULTITHREADED     ON)
+    SET(Boost_USE_MULTITHREADED     OFF)
     FIND_PACKAGE(Boost REQUIRED)
     IF(Boost_FOUND)
         FIND_PACKAGE(Boost 1.61.0 
@@ -108,7 +108,6 @@ IF(TEST_BEHAVE)
         TARGET_LINK_LIBRARIES(testBehave ${Boost_LIBRARIES})
     ENDIF()
 ENDIF(TEST_BEHAVE)
-
 
 IF(CANOPY)
     ADD_EXECUTABLE(canopy_flow 
