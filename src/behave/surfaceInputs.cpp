@@ -157,10 +157,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
         windDirection -= 360.0;
     }
 
-    if (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH)
-    {
-        windDirection = convertWindToUpslope(windDirection);
-    }
+    setWindDirection(windDirection);
 
     fuelModelNumber_ = fuelModelNumber;
 
