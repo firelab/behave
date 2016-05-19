@@ -1,5 +1,9 @@
 #include "qcustomplotTest.h"
 
+#ifdef _MSC_VER
+#pragma warning( disable: 4244 4800 )   
+#endif
+
 QcustomplotTest::QcustomplotTest(QWidget* parent)
     : QMainWindow(parent)
 {

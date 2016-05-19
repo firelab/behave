@@ -2,8 +2,10 @@
 #define BEHAVE_TREE_HEADER
 
 #ifdef _MSC_VER
-#pragma warning(push, 3)      
+#pragma warning(push, 3) 
+#endif
 #include <QTreeWidget>
+#ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 

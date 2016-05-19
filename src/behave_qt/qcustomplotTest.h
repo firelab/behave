@@ -4,9 +4,11 @@
 #include "behaveVector.h"
 
 #ifdef _MSC_VER
-#pragma warning(push, 3)      
+#pragma warning(push, 3)
+#endif
 #include "ui_qcustomplot_test.h"
 #include <QtWidgets/QMainWindow>
+#ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 

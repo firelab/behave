@@ -2,9 +2,11 @@
 #define BEHAVE_QT_GUI_H
 
 #ifdef _MSC_VER
-#pragma warning(push, 3)       
+#pragma warning(push, 3)
+#endif
 #include <QtWidgets/QMainWindow>
 #include "ui_behave_qt_main_window.h"
+#ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 
