@@ -1,4 +1,4 @@
-#include "BehaveVector.h"
+#include "behaveVector.h"
 #include <assert.h>
 
 BehaveVector::BehaveVector()

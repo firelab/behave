@@ -324,6 +324,10 @@ void  SurfaceInputs::setWindSpeed(double windSpeed)
 
 void  SurfaceInputs::setWindDirection(double windDirection)
 {
+    if (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH)
+    {
+        windDirection = convertWindToUpslope(windDirection);
+    }
     windDirection_ = windDirection;
 }
 

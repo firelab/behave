@@ -4,6 +4,7 @@
 #include <iostream>
 #include "fuelModelSet.h"
 #include "behaveRun.h"
+#include <vector>
 
 // Define the error tolerance for double values
 static const double ERROR_TOLERANCE = 1e-05;
@@ -51,33 +52,55 @@ BOOST_FIXTURE_TEST_SUITE(BehaveTest, SingleFuelModelTest)
 // Setup low moisture content test case
 BOOST_AUTO_TEST_CASE(lowMoistureContent)
 {
-    //Inputs
-    fuelModelNumber = 1;
+    //Low Moisture Inputs 
+    // 5 mph twenty ft wind, 30% slope, 50% canopy cover and crown ratio, 30 ft canopy cover
+    fuelModelNumber = 124;
     moistureOneHour = 6.0;
     moistureTenHour = 7.0;
     moistureHundredHour = 8.0;
     moistureLiveHerbaceous = 60.0;
     moistureLiveWoody = 90.0;
-    windHeightInputMode = WindHeightInputMode::DIRECT_MIDFLAME;
+    windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     windSpeed = 5.0;
     windDirection = 0;
     slope = 30.0;
     aspect = 0;
-    canopyCover = 0.0;
-    canopyHeight = 0.0;
-    crownRatio = 0.0;
+    canopyCover = .50;
+    canopyHeight = 30.0;
+    crownRatio = 0.50;
 
     // Outputs
     observedSpreadRate = 0.0;
     expectedSpreadRate = 0.0;
 
-    behaveSingleFuelModelTest.updateSurfaceInputs(fuelModelNumber, moistureOneHour, 
-        moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 
-        windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, 
+    behaveSingleFuelModelTest.updateSurfaceInputs(fuelModelNumber, moistureOneHour,
+        moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
+        windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover,
         canopyHeight, crownRatio);
 
+    // Test upslope oriented mode, uplsope wind 
     observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
-    expectedSpreadRate = 109.394614;
+    expectedSpreadRate = 8.876216;
+    BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
+
+    // Test upslope oriented mode,  wind cross-slope left to right (90 degrees)
+    behaveSingleFuelModelTest.setWindDirection(90);
+    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    expectedSpreadRate = 7.091665;
+    BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
+
+    // Test oriented to North mode, North wind, zero aspect
+    behaveSingleFuelModelTest.setWindAndSpreadAnglesRelativeToNorth();
+    behaveSingleFuelModelTest.setWindDirection(0);
+    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    expectedSpreadRate = 8.876216;
+    BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
+
+    // Test oriented to North mode, North-East wind (45 degree), 270 degree aspect
+    behaveSingleFuelModelTest.setAspect(270);
+    behaveSingleFuelModelTest.setWindDirection(45);
+    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    expectedSpreadRate = 5.259449;
     BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
 
     // Make Visual Studio wait while in debug mode

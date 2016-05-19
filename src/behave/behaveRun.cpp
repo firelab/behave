@@ -76,9 +76,9 @@ void BehaveRun::setSlope(double slope)
     surfaceInputs_.setSlope(slope);
 }
 
-void BehaveRun::setAspect(double slopeAspect)
+void BehaveRun::setAspect(double aspect)
 {
-    surfaceInputs_.setAspect(slopeAspect);
+    surfaceInputs_.setAspect(aspect);
 }
 
 void BehaveRun::setWindSpeed(double windSpeed)
