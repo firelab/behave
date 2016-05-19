@@ -302,7 +302,7 @@ void SurfaceInputs::setSlope(double slope)
     slope_ = slope;
 }
 
-void SurfaceInputs::setSlopeAspect(double aspect)
+void SurfaceInputs::setAspect(double aspect)
 {
     aspect_ = aspect;
 }

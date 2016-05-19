@@ -35,7 +35,7 @@ public:
     void setMoistureLiveHerbaceous(double moistureLiveHerbaceous);
     void setMoistureLiveWoody(double moistureLiveWoody);
     void setSlope(double slope);
-    void setSlopeAspect(double slopeAspect);
+    void setAspect(double slopeAspect);
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);

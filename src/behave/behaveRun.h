@@ -30,7 +30,7 @@ public:
     void setMoistureLiveHerbaceous(double moistureLiveHerbaceous);
     void setMoistureLiveWoody(double moistureLiveWoody);
     void setSlope(double slope);
-    void setSlopeAspect(double slopeAspect);
+    void setAspect(double slopeAspect);
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
     void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
