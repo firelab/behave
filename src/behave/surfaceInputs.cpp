@@ -239,6 +239,11 @@ void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpr
     windAndSpreadAngleMode_ = windAndSpreadAngleMode;
 }
 
+void SurfaceInputs::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
+{
+    windHeightInputMode_ = windHeightInputMode;
+}
+
 double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
 {
     // Important information: 

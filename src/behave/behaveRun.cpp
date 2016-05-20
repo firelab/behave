@@ -91,7 +91,12 @@ void BehaveRun::setWindDirection(double windDirection)
     surfaceInputs_.setWindDirection(windDirection);
 }
 
-void BehaveRun::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
+void BehaveRun::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
+{
+    surfaceInputs_.setWindHeightInputMode(windHeightInputMode);
+}
+
+void BehaveRun::setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
 {
     surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
 }
@@ -171,34 +176,9 @@ double BehaveRun::calculateSurfaceFireForwardSpreadRate(double directionOfIntere
     return surfaceFireForwardSpreadRate;
 }
 
-void BehaveRun::setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
-{
-    surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
-}
-
 void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
 {
     surfaceInputs_.setSlopeInputMode(slopeInputMode);
-}
-
-void BehaveRun::setWindAndSpreadAnglesRelativeToNorth()
-{
-    surfaceInputs_.setWindAndSpreadAngleMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
-}
-
-void BehaveRun::setWindAndSpreadAnglesRelativeToUpslope()
-{
-    surfaceInputs_.setWindAndSpreadAngleMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
-}
-
-void BehaveRun::setSlopeInputToPercent()
-{
-    surfaceInputs_.setSlopeInputMode(SlopeInputMode::SLOPE_IN_PERCENT);
-}
-
-void BehaveRun::setSlopeInputToDegrees()
-{
-    surfaceInputs_.setSlopeInputMode(SlopeInputMode::SLOPE_IN_DEGREES);
 }
 
 bool BehaveRun::isWindAndSpreadAngleRelativeToNorth() const

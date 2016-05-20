@@ -33,10 +33,12 @@ public:
     void setAspect(double aspect);
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
-    void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
+    void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
+    void setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
+    void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
+    void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
-    void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
@@ -78,18 +80,9 @@ public:
     bool isWindAndSpreadAngleRelativeToUpslope() const;
     bool isSlopeInDegrees() const;
     bool isSlopeInPercent() const;
-
-    // SURFACE Module Setters
-    void setWindAndSpreadAnglesRelativeToNorth();
-    void setWindAndSpreadAnglesRelativeToUpslope();
-    void setSlopeInputToPercent();
-    void setSlopeInputToDegrees();
+    
 
 private:
-    // SURFACE Module Private Setters
-    void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
-    void setWindAndSpreadDirectionMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
-
     // SURFACE Module Component Objects
     FuelModelSet* fuelModelSet_;        // This must point to a valid reference passed to the constructor
     Surface surface_;               // SURFACE Module object

@@ -43,8 +43,8 @@ int main()
     BehaveRun behave(fuelModelSet);
 
     // Setting the wind and spread angle input mode (default is upslope)
-    //behavePlus.setWindAndSpreadAnglesRelativeToUpslope();
-    behave.setWindAndSpreadAnglesRelativeToNorth();
+    //behave.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
+    behave.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
 
     // Checking  wind and spread angle input mode
     std::cout << "Wind and spread direction are in degrees clockwise relative to ";
