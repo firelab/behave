@@ -1,5 +1,6 @@
 #include "surfaceFuelbedIntermediates.h"
 
+#include <cmath>
 #include "fuelModelSet.h"
 #include "surfaceInputs.h"
 

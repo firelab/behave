@@ -1,5 +1,6 @@
 #include "crown.h"
 
+#include <cmath>
 #include "fuelModelSet.h"
 #include "surfaceEnums.h"
 #include "windSpeedUtility.h"
