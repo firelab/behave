@@ -51,7 +51,6 @@ void setInputsForLowMoistureScenario(BehaveRun& behaveRun)
         canopyHeight, crownRatio);
 }
 
-// Setup test suite
 BOOST_FIXTURE_TEST_SUITE(BehaveTest, SingleFuelModelTest)
 
 // Setup low moisture content test case
@@ -114,12 +113,11 @@ BOOST_AUTO_TEST_CASE(lowMoistureContent)
     observedC = behaveSingleFuelModelTest.getEllipticalC();
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
 
-    // Make Visual Studio wait while in debug mode
+// Make Visual Studio wait while in debug mode
 #ifndef NDEBUG
     std::cout << "Press Enter to continue . . .";
     std::cin.get();
 #endif
 }
 
-// Teardown test suite
 BOOST_AUTO_TEST_SUITE_END()
