@@ -84,6 +84,10 @@ SET(HEADERS
     src/behave/windAdjustmentFactor.h
     src/behave/windSpeedUtility.h)
 
+SOURCE_GROUP("Behave Core Source Files" FILES ${SOURCE})
+
+SOURCE_GROUP("Behave Core Header Files" FILES ${HEADERS})
+
 ADD_EXECUTABLE(behave 
     ${SOURCE} 
     src/behave/client.cpp 
@@ -178,10 +182,6 @@ IF(GUI)
     SOURCE_GROUP("Behave Qt GUI Source Files" FILES ${BEHAVE_QT_SOURCE})
 
     SOURCE_GROUP("Behave Qt GUI Header Files" FILES ${BEHAVE_QT_HEADERS})
-
-    SOURCE_GROUP("Behave Core Source Files" FILES ${SOURCE})
-
-    SOURCE_GROUP("Behave Core Header Files" FILES ${HEADERS})
 
     SOURCE_GROUP("qcustomplot Files" FILES ${QCUSTOMPLOT})
 
