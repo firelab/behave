@@ -6,21 +6,40 @@
 #include "windSpeedUtility.h"
 
 Crown::Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, 
-    double surfaceHeatPerUnitArea, double surfaceFirelineIntensity)
+    const Surface& surface)
     : crownFireSpread_(fuelModelSet, crownDeepCopyOfSurfaceInputs_)
 {
-    crownInputs_ = &crownInputs;  // points to the same location as crownInputs
-    fuelModelSet_ = &fuelModelSet; // points to the same location as fuelModels
-    surfaceInputs_ = &surfaceInputs; // points to the same location as surfaceInputs
-    crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
+    crownInputs_ = &crownInputs;  // point to the same location as crownInputs
+    fuelModelSet_ = &fuelModelSet; // point to the same location as fuelModels
+    surfaceInputs_ = &surfaceInputs; // point to the same location as surfaceInputs
+    surface_ = &surface; // point to the same location as surface
 
-    crownCopyOfSurfaceHeatPerUnitArea_ = surfaceHeatPerUnitArea;
-    crownCopyOfSurfaceFirelineIntensity_ = surfaceFirelineIntensity;
+    crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
 }
 
 Crown::~Crown()
 {
 
+}
+
+Crown::Crown(const Crown &rhs)
+{
+    fuelModelSet_ = rhs.fuelModelSet_;
+    surface_ = rhs.surface_;
+    surfaceInputs_ = rhs.surfaceInputs_;
+    crownInputs_ = rhs.crownInputs_;
+}
+
+Crown& Crown::operator= (const Crown& rhs)
+{
+    if (this != &rhs)
+    {
+        fuelModelSet_ = rhs.fuelModelSet_;
+        surface_ = rhs.surface_;
+        surfaceInputs_ = rhs.surfaceInputs_;
+        crownInputs_ = rhs.crownInputs_;
+    }
+    return *this;
 }
 
 //------------------------------------------------------------------------------
@@ -44,8 +63,25 @@ double Crown::calculateCrownFireSpreadRate()
     crownDeepCopyOfSurfaceInputs_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior.
-    double rateOfSpread = crownFireSpread_.calculateForwardSpreadRate();
-    crownFireSpreadRate_ = 3.34 * rateOfSpread; // Rothermel 1991
+    crownFireSpreadRate_ = 3.34 * crownFireSpread_.calculateForwardSpreadRate();  // Rothermel 1991
+
+    //  Step 3:  Get values from Surface needed for further calculations 
+    crownCopyOfSurfaceHeatPerUnitArea_ = surface_->getHeatPerUnitArea();
+    crownCopyOfSurfaceFirelineIntensity_ = surface_->getFirelineIntensity();
+
+    //  Step 4: Calculate remaining crown fire characteristics
+    calculateCrownFuelLoad();
+    calculateCanopyHeatPerUnitArea();
+    calculateCrownFireHeatPerUnitArea();
+    calculateCrownFirelineIntensity();
+    calculateCrownFlameLength();
+
+    calculateCrownCriticalFireSpreadRate();
+    calculateCrownCriticalSurfaceFireIntensity();
+    calculateCrownCriticalSurfaceFlameLength();
+
+    calculateCrownPowerOfFire();
+    calcuateCrownPowerOfWind();
 
     return crownFireSpreadRate_;
 }
@@ -55,12 +91,10 @@ double Crown::calculateCrownFireSpreadRate()
 *  given the crown fire fuel load and low heat of combustion.
 *
 */
-double Crown::calculateCanopyHeatPerUnitArea()
+void Crown::calculateCanopyHeatPerUnitArea()
 {
     const double LOW_HEAT_OF_COMBUSTION = 8000.0; // Low heat of combustion (hard coded to 8000 Btu/lbs)
     canopyHeatPerUnitArea_ = crownFuelLoad_ * LOW_HEAT_OF_COMBUSTION;
-
-    return canopyHeatPerUnitArea_;
 }
 
 //------------------------------------------------------------------------------
@@ -68,11 +102,9 @@ double Crown::calculateCanopyHeatPerUnitArea()
 *  by summing surface HPUA and canopy HPUA.
 *
 */
-double Crown::calculateCrownFireHeatPerUnitArea()
+void Crown::calculateCrownFireHeatPerUnitArea()
 {
     crownFireHeatPerUnitArea_ = crownCopyOfSurfaceHeatPerUnitArea_ + canopyHeatPerUnitArea_;
-
-    return crownFireHeatPerUnitArea_;
 }
 
 //------------------------------------------------------------------------------
@@ -81,14 +113,12 @@ double Crown::calculateCrownFireHeatPerUnitArea()
 *
 *  \return Crown fire fuel load (lb/ft2).
 */
-double Crown::calculateCrownFuelLoad()
+void Crown::calculateCrownFuelLoad()
 {
     double canopyBulkDensity = crownInputs_->getCanopyBulkDensity();
     double canopyBaseHeight = crownInputs_->getCanopyBaseHeight();
     double canopyHeight = surfaceInputs_->getCanopyHeight();
     crownFuelLoad_ = canopyBulkDensity * (canopyHeight - canopyBaseHeight);
-
-    return crownFuelLoad_;
 }
 
 //------------------------------------------------------------------------------
@@ -118,10 +148,9 @@ double Crown::calculateCrownFireTransitionRatio()
 *
 *  \return Crown fire fireline intensity (Btu/ft/s).
 */
-double Crown::calculateCrownFireFirelineIntensity()
+void Crown::calculateCrownFirelineIntensity()
 {
-    crownFireFirelineIntensity_ = (crownFireSpreadRate_ / 60.0) * crownFireHeatPerUnitArea_;
-    return crownFireFirelineIntensity_;
+    crownFirelineIntensity_ = (crownFireSpreadRate_ / 60.0) * crownFireHeatPerUnitArea_;
 }
 
 //------------------------------------------------------------------------------
@@ -173,11 +202,10 @@ double Crown::calculateCrownCriticalSurfaceFlameLength()
 *
 *  \return Crown fire flame length (ft).
 */
-double Crown::calculateCrownFireFlameLength()
+double Crown::calculateCrownFlameLength()
 {
-    crownFireFlameLength_ = 0.2 * pow(crownFireFirelineIntensity_, (2.0 / 3.0));
-    //return(0.2 * pow(crownFireFirelineIntensity_, (2.0 / 3.0)));
-    return crownFireFlameLength_;
+    crownFlameLength_ = 0.2 * pow(crownFirelineIntensity_, (2.0 / 3.0));
+    return crownFlameLength_;
 }
 
 //------------------------------------------------------------------------------
@@ -186,10 +214,9 @@ double Crown::calculateCrownFireFlameLength()
 *
 *  \return Crown fire 'power of the fire' (ft-lb/s/ft2).
 */
-double Crown::calculateCrownFirePowerOfFire()
+void Crown::calculateCrownPowerOfFire()
 {
-    crownFirePowerOfFire_ = crownFireFirelineIntensity_ / 129.0;
-    return crownFirePowerOfFire_;
+    crownPowerOfFire_ = crownFirelineIntensity_ / 129.0;
 }
 
 //------------------------------------------------------------------------------
@@ -198,7 +225,7 @@ double Crown::calculateCrownFirePowerOfFire()
 *
 *  \return Crown fire 'power of the wind' (ft-lb/s/ft2).
 */
-double Crown::calcuateCrownFirePowerOfWind()
+void Crown::calcuateCrownPowerOfWind()
 {
     const double MILES_PER_HOUR_TO_FEET_PER_MINUTE = 5280.0 / 60.0;
     const double SECONDS_PER_MINUTE = 60.0;
@@ -211,8 +238,7 @@ double Crown::calcuateCrownFirePowerOfWind()
 
     WindspeedMinusCrownROS = (windSpeedInFeetPerMinute - crownFireSpreadRate_) / SECONDS_PER_MINUTE;
     WindspeedMinusCrownROS = (WindspeedMinusCrownROS < 1e-07) ? 0.0 : WindspeedMinusCrownROS;
-    crownFirePowerOfWind_ = 0.00106 * (WindspeedMinusCrownROS * WindspeedMinusCrownROS * WindspeedMinusCrownROS);
-    return crownFirePowerOfWind_;
+    crownPowerOfWind_ = 0.00106 * (WindspeedMinusCrownROS * WindspeedMinusCrownROS * WindspeedMinusCrownROS);
 }
 
 //------------------------------------------------------------------------------
@@ -222,7 +248,7 @@ double Crown::calcuateCrownFirePowerOfWind()
 */
 double Crown::calcualteCrownFirePowerRatio()
 {
-    crownFirePowerRatio_ = (crownFirePowerOfWind_ > 1e-07) ? (crownFirePowerOfFire_ / crownFirePowerOfWind_) : 0.0;
+    crownFirePowerRatio_ = (crownPowerOfWind_ > 1e-07) ? (crownPowerOfFire_ / crownPowerOfWind_) : 0.0;
     return crownFirePowerRatio_;
 }
 

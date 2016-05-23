@@ -4,18 +4,24 @@
 
 BehaveRun::BehaveRun(FuelModelSet &fuelModelSet)
     : surfaceInputs_(),
-    surface_(fuelModelSet, surfaceInputs_)
+    surface_(fuelModelSet, surfaceInputs_),
+    crownInputs_(),
+    crown_(fuelModelSet, crownInputs_, surfaceInputs_, surface_)
 {
     fuelModelSet_ = &fuelModelSet;
 }
 
 BehaveRun::BehaveRun(const BehaveRun &rhs)
     : surfaceInputs_(), 
-      surface_(*rhs.fuelModelSet_, surfaceInputs_)
+    surface_(*rhs.fuelModelSet_, surfaceInputs_),
+    crownInputs_(),
+    crown_(*rhs.fuelModelSet_, crownInputs_, surfaceInputs_, surface_)
 {
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
     surfaceInputs_ = rhs.surfaceInputs_;
+    crownInputs_ = rhs.crownInputs_;
+    crown_ = rhs.crown_;
 }
 
 BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
@@ -25,6 +31,8 @@ BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
         fuelModelSet_ = rhs.fuelModelSet_;
         surface_ = rhs.surface_;
         surfaceInputs_ = rhs.surfaceInputs_;
+        crownInputs_ = rhs.crownInputs_;
+        crown_ = rhs.crown_;
     }
     return *this;
 }
@@ -172,6 +180,7 @@ double BehaveRun::calculateSurfaceFireForwardSpreadRate(double directionOfIntere
     // Calculate Spread Rate
     const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
     double surfaceFireForwardSpreadRate = surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+
     surfaceFireForwardSpreadRate *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
     return surfaceFireForwardSpreadRate;
 }

@@ -1,5 +1,24 @@
 #include "crownInputs.h"
 
+CrownInputs::CrownInputs()
+{
+    initialize();
+}
+
+CrownInputs::~CrownInputs()
+{
+
+}
+
+void CrownInputs::initialize()
+{
+    canopyBaseHeight_ = 0;
+    canopyBulkDensity_ = 0;
+    canopyUserProvidedFlameLength_ = 0;
+    canopyUserProvidedFirelineIntensity_ = 0;
+    foliarMoisture_ = 0;
+}
+
 double CrownInputs::getCanopyBaseHeight() const
 {
     return canopyBaseHeight_;

@@ -4,6 +4,9 @@
 class CrownInputs
 {
 public:
+    CrownInputs();
+    ~CrownInputs();
+
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setCanopyFlameLength(double canopyUserProvidedFlameLength);
@@ -19,6 +22,8 @@ public:
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
 private:
+    void initialize();
+
     double canopyBaseHeight_; //Canopy base height(ft)
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
     double canopyUserProvidedFlameLength_; // flame length(ft)

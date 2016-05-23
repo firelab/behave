@@ -81,6 +81,11 @@ double Surface::getFirelineIntensity() const
     return surfaceFireSpread_.getFirelineIntensity();
 }
 
+double Surface::getHeatPerUnitArea() const
+{
+    return surfaceFireSpread_.getHeatPerUnitArea();
+}
+
 double Surface::getMidflameWindspeed() const
 {
     return surfaceFireSpread_.getMidflameWindSpeed();

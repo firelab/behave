@@ -21,10 +21,12 @@ public:
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getFirelineIntensity() const;
+    double getHeatPerUnitArea() const;
     double getMidflameWindspeed() const;
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;
+   
 
 private:
     bool isUsingTwoFuelModels() const;
