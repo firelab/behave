@@ -5,8 +5,8 @@ class WindSpeedUtility
 {
 public:
     WindSpeedUtility();
-    double WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor);
-    double WindSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters);
+    double windSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor);
+    double windSpeedAtMidflame(double windSpeedAtTenMeters);
 
 private:
     double windSpeedAtMidflame_;

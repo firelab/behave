@@ -2,12 +2,6 @@
 #define SURFACE_HEADER
 
 // The SURFACE module of BehavePlus
-
-//	TODO: Need to add logic to handle the following wind speed input methods: Midflame height, 
-//	20 ft wind and input wind adjustment factor, 20 foot wind and calculate wind adjustment factor, 
-//	10 meter wind and input wind adjustment factor, 10 meter wind calculate wind adjustment factor
-//	WMC - 11/2015
-
 #include "surfaceFireSpread.h"
 
 class SurfaceInputs;

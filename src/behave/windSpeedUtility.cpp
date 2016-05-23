@@ -18,7 +18,7 @@ WindSpeedUtility::WindSpeedUtility()
 *      vWindAdjFactor (fraction)
 */
 
-double WindSpeedUtility::WindSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor)
+double WindSpeedUtility::windSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor)
 {
     // Calculate results
     windSpeedAtMidflame_ = windSpeedAtTwentyFeet * windAdjustmentFactor;
@@ -35,7 +35,7 @@ double WindSpeedUtility::WindSpeedAtMidflame(double windSpeedAtTwentyFeet, doubl
 *      vWindSpeedAt10M (mi/h)
 */
 
-double WindSpeedUtility::WindSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters)
+double WindSpeedUtility::windSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters)
 {
     // Calculate results
     double windSpeedAt20Ft_ = windSpeedAtTenMeters / 1.15;

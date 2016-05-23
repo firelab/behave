@@ -81,10 +81,9 @@ public:
     bool isSlopeInDegrees() const;
     bool isSlopeInPercent() const;
     
-
 private:
     // SURFACE Module Component Objects
-    FuelModelSet* fuelModelSet_;        // This must point to a valid reference passed to the constructor
+    FuelModelSet* fuelModelSet_;    // This must point to a valid reference passed to the constructor
     Surface surface_;               // SURFACE Module object
     SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
 };
