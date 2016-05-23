@@ -273,7 +273,7 @@ double Crown::calculateWindSpeedAtTwentyFeet()
     {
         WindSpeedUtility windSpeedUtility;
         double windSpeedAtTenMeters = surfaceInputs_->getWindSpeed();
-        windSpeedAtTwentyFeet_ = windSpeedUtility.WindSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
+        windSpeedAtTwentyFeet_ = windSpeedUtility.windSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
     }
     return windSpeedAtTwentyFeet_;
 }
