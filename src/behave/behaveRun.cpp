@@ -259,3 +259,25 @@ bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
 }
+
+void BehaveRun::setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode)
+{
+    crown_.setCrownModuleActivationMode(crownModuleActivationMode);
+}
+
+CrownModuleActivationMode::CrownModuleActivationModeEnum BehaveRun::getCrownModuleActivationMode() const
+{
+    return crown_.getCrownModuleActivationMode();
+}
+
+void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
+{
+    crown_.updateCrownInputs(surfaceInputs_, canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+}
+
+double BehaveRun::calculateCrownFireSpreadRate()
+{
+    // Calculate Spread Rate
+    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
+    return FEET_PER_MIN_TO_CHAINS_PER_HOUR * crown_.calculateCrownFireSpreadRate();
+}

@@ -68,6 +68,8 @@ public:
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
+    bool isFuelModelDefined(int fuelModelNumber) const;
+
     // SURFACE Module Getters
     double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
@@ -84,9 +86,14 @@ public:
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
-    bool isFuelModelDefined(int fuelModelNumber) const;
-    
+    // CROWN Module
+    void setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode);
+    CrownModuleActivationMode::CrownModuleActivationModeEnum getCrownModuleActivationMode() const;
+    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+    double calculateCrownFireSpreadRate();
+
 private:
+    // Fuel models (orginal 13, 40 and custom)
     FuelModelSet* fuelModelSet_;    // This must point to a valid reference passed to the constructor
 
     // SURFACE Module Components

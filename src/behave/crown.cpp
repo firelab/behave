@@ -5,7 +5,7 @@
 #include "surfaceEnums.h"
 #include "windSpeedUtility.h"
 
-Crown::Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, 
+Crown::Crown(const FuelModelSet& fuelModelSet, CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, 
     const Surface& surface)
     : crownFireSpread_(fuelModelSet, crownDeepCopyOfSurfaceInputs_)
 {
@@ -14,7 +14,7 @@ Crown::Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, c
     surfaceInputs_ = &surfaceInputs; // point to the same location as BehaveRun's surfaceInputs
     surface_ = &surface; // point to the same location as BehaveRun's surface
 
-    crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
+    //crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
 }
 
 Crown::~Crown()
@@ -285,4 +285,21 @@ double Crown::calculateWindSpeedAtTwentyFeet()
         windSpeedAtTwentyFeet_ = windSpeedUtility.windSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
     }
     return windSpeedAtTwentyFeet_;
+}
+
+void Crown::setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode)
+{
+    crownModuleActivationMode_ = crownModuleActivationMode;
+}
+
+CrownModuleActivationMode::CrownModuleActivationModeEnum Crown::getCrownModuleActivationMode() const
+{
+    return crownModuleActivationMode_;
+}
+
+void Crown::updateCrownInputs(const SurfaceInputs& surfaceInputs, double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
+{
+    const SurfaceInputs* surfaceInputsPtr = &surfaceInputs;  // copy the actual data surfaceInputs is pointing to
+    crownDeepCopyOfSurfaceInputs_ = *surfaceInputsPtr; // copy the actual data surfaceInputs is pointing to
+    crownInputs_->updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }

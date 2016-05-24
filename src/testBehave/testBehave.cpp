@@ -9,24 +9,24 @@
 // Define the error tolerance for double values
 static const double ERROR_TOLERANCE = 1e-05;
 
-struct SingleFuelModelTest
+struct BehaveTest
 {
     FuelModelSet fuelModelSet;
-    BehaveRun behaveSingleFuelModelTest;
+    BehaveRun behaveTest;
 
-    SingleFuelModelTest()
-        : behaveSingleFuelModelTest(fuelModelSet)
+    BehaveTest()
+        : behaveTest(fuelModelSet)
     {
-        BOOST_TEST_MESSAGE("Setup single fuel model test");
+        BOOST_TEST_MESSAGE("Setup Behave test");
     }
 
-    ~SingleFuelModelTest()
+    ~BehaveTest()
     {
-        BOOST_TEST_MESSAGE("Teardown single fuel model test");
+        BOOST_TEST_MESSAGE("Teardown Behave test");
     }
 };
 
-void setInputsForLowMoistureScenario(BehaveRun& behaveRun)
+void setSurfaceInputsForLowMoistureScenario(BehaveRun& behaveRun)
 {
     //Low Moisture Inputs 
     // 5 mph twenty ft wind, 30% slope, 50% canopy cover and crown ratio, 30 ft canopy cover
@@ -51,46 +51,46 @@ void setInputsForLowMoistureScenario(BehaveRun& behaveRun)
         canopyHeight, crownRatio);
 }
 
-BOOST_FIXTURE_TEST_SUITE(BehaveTest, SingleFuelModelTest)
+BOOST_FIXTURE_TEST_SUITE(BehaveRunTest, BehaveTest)
 
 // Setup low moisture content test case
-BOOST_AUTO_TEST_CASE(lowMoistureContent)
+BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 {
     // Observed and expected output
     double observedSpreadRate = 0.0;
     double expectedSpreadRate = 0.0;
 
-    setInputsForLowMoistureScenario(behaveSingleFuelModelTest);
+    setSurfaceInputsForLowMoistureScenario(behaveTest);
 
     // Test upslope oriented mode, 20 foot uplsope wind 
-    behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
-    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    behaveTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    observedSpreadRate = behaveTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
 
     // Test upslope oriented mode,  20 foot wind cross-slope left to right (90 degrees)
-    behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
-    behaveSingleFuelModelTest.setWindDirection(90);
-    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    behaveTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveTest.setWindDirection(90);
+    observedSpreadRate = behaveTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 7.091665;
     BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
 
     // Test oriented to North mode, 20 foot North wind, zero aspect
-    behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
-    behaveSingleFuelModelTest.setWindDirection(0);
-    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    behaveTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveTest.setWindDirection(0);
+    observedSpreadRate = behaveTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
 
     // Test oriented to North mode, 20 foot North-East wind (45 degree), 270 degree aspect
-    behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
-    behaveSingleFuelModelTest.setAspect(270);
-    behaveSingleFuelModelTest.setWindDirection(45);
-    observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
+    behaveTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveTest.setAspect(270);
+    behaveTest.setWindDirection(45);
+    observedSpreadRate = behaveTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 5.259449;
     BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
 
@@ -102,22 +102,44 @@ BOOST_AUTO_TEST_CASE(lowMoistureContent)
     double expectedC = 16.187176;
 
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
-    setInputsForLowMoistureScenario(behaveSingleFuelModelTest);
-    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
-    behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
-    behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
-    observedA = behaveSingleFuelModelTest.getEllipticalA();
+    setSurfaceInputsForLowMoistureScenario(behaveTest);
+    behaveTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveTest.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
+    behaveTest.calculateSurfaceFireForwardSpreadRate();
+    observedA = behaveTest.getEllipticalA();
     BOOST_CHECK_CLOSE(observedA, expectedA, ERROR_TOLERANCE);
-    observedB = behaveSingleFuelModelTest.getEllipticalB();
+    observedB = behaveTest.getEllipticalB();
     BOOST_CHECK_CLOSE(observedB, expectedB, ERROR_TOLERANCE);
-    observedC = behaveSingleFuelModelTest.getEllipticalC();
+    observedC = behaveTest.getEllipticalC();
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
+}
 
-// Make Visual Studio wait while in debug mode
+BOOST_AUTO_TEST_CASE(crownModuleTest)
+{
+    double canopyBaseHeight = 6; 
+    double canopyBulkDensity = 0.03;
+    double foliarMoisture = 120;
+
+    setSurfaceInputsForLowMoistureScenario(behaveTest);
+
+    behaveTest.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveTest.calculateSurfaceFireForwardSpreadRate();
+
+    double observedCrownROS = 0;
+    double expectedCrownROS = 10.259921;
+    observedCrownROS = behaveTest.calculateCrownFireSpreadRate();
+    BOOST_CHECK_CLOSE(observedCrownROS, expectedCrownROS
+        , ERROR_TOLERANCE);
+}
+
 #ifndef NDEBUG
+BOOST_AUTO_TEST_CASE(waitInDebug)
+{
+    // Make Visual Studio wait while in debug mode
+
     std::cout << "Press Enter to continue . . .";
     std::cin.get();
-#endif
 }
+#endif
 
 BOOST_AUTO_TEST_SUITE_END()

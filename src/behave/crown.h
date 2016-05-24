@@ -2,6 +2,7 @@
 #define CROWN_HEADER
 
 #include "crownInputs.h"
+#include "crownEnums.h"
 #include "surfaceInputs.h"
 #include "surface.h"
 
@@ -11,7 +12,7 @@ class Crown
 {
 public:
     Crown() = delete; // No default constructor
-    Crown(const FuelModelSet& fuelModelSet, const CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, const Surface& surface);
+    Crown(const FuelModelSet& fuelModelSet, CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, const Surface& surface);
     ~Crown();
 
     Crown(const Crown &rhs);
@@ -19,9 +20,13 @@ public:
 
     double calculateCrownFireSpreadRate();
 
+    void setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode);
+    void updateCrownInputs(const SurfaceInputs& surfaceInputs, double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+    CrownModuleActivationMode::CrownModuleActivationModeEnum getCrownModuleActivationMode() const;
+
 private:
     const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object
-    const CrownInputs* crownInputs_;    // pointer to BehaveRun's CrownInputs object
+    CrownInputs* crownInputs_;    // pointer to BehaveRun's CrownInputs object
     
     // SURFACE module objects and pointers
     const SurfaceInputs* surfaceInputs_;            // pointer to the BehaveRun's SurfaceInputs object
@@ -63,6 +68,8 @@ private:
     double crownFireActiveRatio_;                   // Crown fire active ratio
     double crownFireTransitionRatio_;
     double windSpeedAtTwentyFeet_;
+
+    CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode_; // signifies whether user wants to use Crown module in a run
 };
 
 #endif // CROWN_HEADER
