@@ -8,7 +8,7 @@ public:
     PalmettoGallberry(const PalmettoGallberry &rhs);
     PalmettoGallberry& operator= (const PalmettoGallberry& rhs);
 
-    void initialize();
+    void initializeMembers();
 
     double calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory);
     double calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage);

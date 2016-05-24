@@ -9,7 +9,7 @@ public:
     WesternAspen& operator= (const WesternAspen& rhs);
     ~WesternAspen();
 
-    void initialize();
+    void initializeMembers();
     void setDBH(const double DBH);
 
     double getAspenMortality() const;

@@ -26,7 +26,7 @@ WesternAspen::~WesternAspen()
 
 }
 
-void WesternAspen::initialize()
+void WesternAspen::initializeMembers()
 {
     mortality_ = 0.0;
 }

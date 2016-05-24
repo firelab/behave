@@ -4,7 +4,7 @@
 
 PalmettoGallberry::PalmettoGallberry()
 {
-    initialize();
+    initializeMembers();
 }
 
 PalmettoGallberry::PalmettoGallberry(const PalmettoGallberry &rhs)
@@ -41,7 +41,7 @@ PalmettoGallberry& PalmettoGallberry::operator= (const PalmettoGallberry& rhs)
     return *this;
 }
 
-void PalmettoGallberry::initialize()
+void PalmettoGallberry::initializeMembers()
 {
     moistureOfExtinctionDead_ = 0.40;
     heatOfCombustionDead_ = 8300;

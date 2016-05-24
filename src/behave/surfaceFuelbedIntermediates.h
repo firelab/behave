@@ -47,13 +47,12 @@ public:
     double getAspenMortality() const;
 
 private:
-    void initializeMemberVariables();
+    void initializeMembers();
     void setFuelLoad();
     void setMoistureContent();
     void setDeadFuelMoistureOfExtinction();
     void setFuelbedDepth();
     void setSAV();
-    void setSAV(const PalmettoGallberry& palmettoGallberry);
     void countSizeClasses();
     void dynamicLoadTransfer();
     void calculateFractionOfTotalSurfaceAreaForLifeStates();
@@ -68,7 +67,6 @@ private:
     void calculateHeatSink();
     void calculateLiveMoistureOfExtinction();
     void calculatePropagatingFlux();
-    void calculateResidenceTime();
 
     const FuelModelSet* fuelModelSet_;      // Pointer to FuelModelSet object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object

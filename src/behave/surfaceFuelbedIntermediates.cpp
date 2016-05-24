@@ -144,7 +144,7 @@ SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const FuelModelSet& fue
 {
     fuelModelSet_ = &fuelModelSet;
     surfaceInputs_ = &surfaceInputs;
-    initializeMemberVariables();
+    initializeMembers();
 }
 
 SurfaceFuelbedIntermediates::~SurfaceFuelbedIntermediates()
@@ -166,7 +166,7 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
     double optimumPackingRatio = 0.0;       // Optimum packing ratio, Rothermel 1972, equation 37
     bool isDynamic = false;                 // Whether or not fuel model is dynamic
 
-    initializeMemberVariables(); // Reset member variables to zero to forget previous state  
+    initializeMembers(); // Reset member variables to zero to forget previous state  
 
     fuelModelNumber_ = surfaceInputs_->getFuelModelNumber();
 
@@ -771,12 +771,12 @@ void SurfaceFuelbedIntermediates::calculateLiveMoistureOfExtinction()
     }
 }
 
-void SurfaceFuelbedIntermediates::initializeMemberVariables()
+void SurfaceFuelbedIntermediates::initializeMembers()
 {
     const int NUMBER_OF_LIVE_SIZE_CLASSES = 2;
 
-    palmettoGallberry_.initialize();
-    westernAspen_.initialize();
+    palmettoGallberry_.initializeMembers();
+    westernAspen_.initializeMembers();
 
     isUsingPalmettoGallberry_ = surfaceInputs_->isUsingPalmettoGallberry();
     isUsingWesternAspen_ = surfaceInputs_->isUsingWesternAspen();
