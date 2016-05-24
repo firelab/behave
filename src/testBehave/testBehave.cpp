@@ -121,9 +121,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double foliarMoisture = 120;
 
     setSurfaceInputsForLowMoistureScenario(behaveTest);
-
     behaveTest.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
-    behaveTest.calculateSurfaceFireForwardSpreadRate();
 
     double observedCrownROS = 0;
     double expectedCrownROS = 10.259921;

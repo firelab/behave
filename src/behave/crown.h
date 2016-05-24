@@ -2,7 +2,6 @@
 #define CROWN_HEADER
 
 #include "crownInputs.h"
-#include "crownEnums.h"
 #include "surfaceInputs.h"
 #include "surface.h"
 
