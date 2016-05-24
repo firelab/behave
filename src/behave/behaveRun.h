@@ -80,13 +80,11 @@ public:
     double getEllipticalB() const;
     double getEllipticalC() const;
 
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode();
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
+    WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
+    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
     bool isFuelModelDefined(int fuelModelNumber) const;
-    bool isWindAndSpreadAngleRelativeToNorth() const;
-    bool isWindAndSpreadAngleRelativeToUpslope() const;
-    bool isSlopeInDegrees() const;
-    bool isSlopeInPercent() const;
     
 private:
     FuelModelSet* fuelModelSet_;    // This must point to a valid reference passed to the constructor

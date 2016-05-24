@@ -409,16 +409,9 @@ WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum SurfaceInputs::ge
     return windAndSpreadOrientationMode_;
 }
 
-bool SurfaceInputs::isSlopeInDegrees() const
+SlopeInputMode::SlopeInputModeEnum SurfaceInputs::getSlopeInputMode() const
 {
-    bool isSlopeModeDegrees = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_DEGREES);
-    return isSlopeModeDegrees;
-}
-
-bool SurfaceInputs::isSlopeInPercent() const
-{
-    bool isSlopeInPercent = (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT);
-    return isSlopeInPercent;
+    return slopeInputMode_;
 }
 
 double SurfaceInputs::getWindDirection() const

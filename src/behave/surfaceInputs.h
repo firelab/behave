@@ -66,9 +66,8 @@ public:
 
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
+    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
-    bool isSlopeInDegrees() const;
-    bool isSlopeInPercent() const;
     bool isUsingTwoFuelModels() const;
     bool hasUserEnteredWindAdjustmentFactor() const;
     double getSlope() const;

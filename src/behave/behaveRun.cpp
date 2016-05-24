@@ -190,21 +190,19 @@ void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputM
     surfaceInputs_.setSlopeInputMode(slopeInputMode);
 }
 
-WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum BehaveRun::getWindAndSpreadOrientationMode()
+WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum BehaveRun::getWindAndSpreadOrientationMode() const
 {
     return surfaceInputs_.getWindAndSpreadOrientationMode();
 }
 
-bool BehaveRun::isSlopeInDegrees() const
+WindHeightInputMode::WindHeightInputModeEnum BehaveRun::getWindHeightInputMode() const
 {
-    bool isSlopeModeDegrees = surfaceInputs_.isSlopeInDegrees();
-    return isSlopeModeDegrees;
+    return surfaceInputs_.getWindHeightInputMode();
 }
 
-bool BehaveRun::isSlopeInPercent() const
+SlopeInputMode::SlopeInputModeEnum BehaveRun::getSlopeInputMode() const
 {
-    bool isSlopeInPercent = surfaceInputs_.isSlopeInPercent();
-    return isSlopeInPercent;
+    return surfaceInputs_.getSlopeInputMode();
 }
 
 double BehaveRun::getSpreadRate() const
