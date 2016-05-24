@@ -287,7 +287,8 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     }
 
     // Convert azimuth to be relative to North if necessary
-    if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientation = surfaceInputs_->getWindAndSpreadOrientationMode();
+    if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
     {
         azimuth = convertDirectionOfSpreadToRelativeToNorth(azimuth);
         while (azimuth >= 360.0)

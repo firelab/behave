@@ -39,7 +39,7 @@ public:
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
-    void setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
+    void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
@@ -64,8 +64,7 @@ public:
     int getSecondFuelModelNumber() const;
     TwoFuelModels::TwoFuelModelsEnum getTwoFuelModelsMethod() const;
 
-    bool isWindAndSpreadAngleRelativeToNorth() const;
-    bool isWindAndSpreadAngleRelativeToUpslope() const;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
 
     bool isSlopeInDegrees() const;
@@ -129,10 +128,10 @@ private:
     double userProvidedWindAdjustmentFactor_;
 
     // Input Modes
-    SlopeInputMode::SlopeInputModeEnum slopeInputMode_;                         // Whether slope is input as percent or degrees
-    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;          // Method used in Two Fuel Models calculations
-    WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode_; // How wind and spread directions are referenced
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;          // Height above canopy from which wind speed is measured
+    SlopeInputMode::SlopeInputModeEnum slopeInputMode_;                 // Whether slope is input as percent or degrees
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              // Method used in Two Fuel Models calculations
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;  // Height above canopy from which wind speed is measured
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode_; // How wind and spread directions are referenced
 };
 
 #endif // SURFACEINPUTS_HEADER

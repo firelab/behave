@@ -28,7 +28,7 @@ SurfaceInputs::SurfaceInputs(const SurfaceInputs &rhs)
     isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
 
     slopeInputMode_ = rhs.slopeInputMode_;
-    windAndSpreadAngleMode_ = rhs.windAndSpreadAngleMode_;
+    windAndSpreadOrientationMode_ = rhs.windAndSpreadOrientationMode_;
     windHeightInputMode_ = rhs.windHeightInputMode_;
     twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
 
@@ -71,7 +71,7 @@ SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
         isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
 
         slopeInputMode_ = rhs.slopeInputMode_;
-        windAndSpreadAngleMode_ = rhs.windAndSpreadAngleMode_;
+        windAndSpreadOrientationMode_ = rhs.windAndSpreadOrientationMode_;
         windHeightInputMode_ = rhs.windHeightInputMode_;
         twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
 
@@ -114,7 +114,7 @@ void SurfaceInputs::initializeMembers()
     isUsingWesternAspen_ = false;
 
     slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
-    windAndSpreadAngleMode_ = WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE;
+    windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE;
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
 
@@ -234,9 +234,9 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     DBH_ = DBH;
 }
 
-void SurfaceInputs::setWindAndSpreadAngleMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
+void SurfaceInputs::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode)
 {
-    windAndSpreadAngleMode_ = windAndSpreadAngleMode;
+    windAndSpreadOrientationMode_ = windAndSpreadOrientationMode;
 }
 
 void SurfaceInputs::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
@@ -326,7 +326,7 @@ void  SurfaceInputs::setWindSpeed(double windSpeed)
 
 void  SurfaceInputs::setWindDirection(double windDirection)
 {
-    if (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH)
+    if (windAndSpreadOrientationMode_ == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
     {
         windDirection = convertWindToUpslope(windDirection);
     }
@@ -404,16 +404,9 @@ WindHeightInputMode::WindHeightInputModeEnum SurfaceInputs::getWindHeightInputMo
     return windHeightInputMode_;
 }
 
-bool SurfaceInputs::isWindAndSpreadAngleRelativeToNorth() const
+WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum SurfaceInputs::getWindAndSpreadOrientationMode() const
 {
-    bool isRelativeToNorth = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
-    return isRelativeToNorth;
-}
-
-bool SurfaceInputs::isWindAndSpreadAngleRelativeToUpslope() const
-{
-    bool isRelativeToUpslope = (windAndSpreadAngleMode_ == WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
-    return isRelativeToUpslope;
+    return windAndSpreadOrientationMode_;
 }
 
 bool SurfaceInputs::isSlopeInDegrees() const

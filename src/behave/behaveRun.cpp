@@ -104,9 +104,9 @@ void BehaveRun::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeE
     surfaceInputs_.setWindHeightInputMode(windHeightInputMode);
 }
 
-void BehaveRun::setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode)
+void BehaveRun::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode)
 {
-    surfaceInputs_.setWindAndSpreadAngleMode(windAndSpreadAngleMode);
+    surfaceInputs_.setWindAndSpreadOrientationMode(windAndSpreadOrientationMode);
 }
 
 void BehaveRun::setFirstFuelModelNumber(int firstFuelModelNumber)
@@ -190,16 +190,9 @@ void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputM
     surfaceInputs_.setSlopeInputMode(slopeInputMode);
 }
 
-bool BehaveRun::isWindAndSpreadAngleRelativeToNorth() const
+WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum BehaveRun::getWindAndSpreadOrientationMode()
 {
-    bool isRelativeToNorth = surfaceInputs_.isWindAndSpreadAngleRelativeToNorth();
-    return isRelativeToNorth;
-}
-
-bool BehaveRun::isWindAndSpreadAngleRelativeToUpslope() const
-{
-    bool isRelativeToUpslope = surfaceInputs_.isWindAndSpreadAngleRelativeToUpslope();
-    return isRelativeToUpslope;
+    return surfaceInputs_.getWindAndSpreadOrientationMode();
 }
 
 bool BehaveRun::isSlopeInDegrees() const

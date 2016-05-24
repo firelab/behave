@@ -39,7 +39,7 @@ public:
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
-    void setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::WindAndSpreadAngleModeEnum windAndSpreadAngleMode);
+    void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
@@ -79,6 +79,8 @@ public:
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;
+
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode();
 
     bool isFuelModelDefined(int fuelModelNumber) const;
     bool isWindAndSpreadAngleRelativeToNorth() const;

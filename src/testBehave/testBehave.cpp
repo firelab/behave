@@ -64,14 +64,14 @@ BOOST_AUTO_TEST_CASE(lowMoistureContent)
 
     // Test upslope oriented mode, 20 foot uplsope wind 
     behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
+    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSpreadRate, expectedSpreadRate, ERROR_TOLERANCE);
 
     // Test upslope oriented mode,  20 foot wind cross-slope left to right (90 degrees)
     behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
+    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveSingleFuelModelTest.setWindDirection(90);
     observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 7.091665;
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(lowMoistureContent)
 
     // Test oriented to North mode, 20 foot North wind, zero aspect
     behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
+    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
     behaveSingleFuelModelTest.setWindDirection(0);
     observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
     expectedSpreadRate = 8.876216;
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(lowMoistureContent)
 
     // Test oriented to North mode, 20 foot North-East wind (45 degree), 270 degree aspect
     behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveSingleFuelModelTest.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
+    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
     behaveSingleFuelModelTest.setAspect(270);
     behaveSingleFuelModelTest.setWindDirection(45);
     observedSpreadRate = behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(lowMoistureContent)
 
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
     setInputsForLowMoistureScenario(behaveSingleFuelModelTest);
-    behaveSingleFuelModelTest.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
+    behaveSingleFuelModelTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveSingleFuelModelTest.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
     behaveSingleFuelModelTest.calculateSurfaceFireForwardSpreadRate();
     observedA = behaveSingleFuelModelTest.getEllipticalA();

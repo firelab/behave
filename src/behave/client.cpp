@@ -28,12 +28,6 @@ int main()
     double directionOfInterest = 0;
     double spreadRate = 0;
 
- 
-
-
-
-   
-
     // Wind adjustment factor parameters
     double canopyCover = 0.0;
     double canopyHeight = 0.0;
@@ -43,16 +37,16 @@ int main()
     BehaveRun behave(fuelModelSet);
 
     // Setting the wind and spread angle input mode (default is upslope)
-    //behave.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_UPSLOPE);
-    behave.setWindAndSpreadAngleOrientationMode(WindAndSpreadAngleMode::RELATIVE_TO_NORTH);
+    behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
 
     // Checking  wind and spread angle input mode
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = behave.getWindAndSpreadOrientationMode();
     std::cout << "Wind and spread direction are in degrees clockwise relative to ";
-    if (behave.isWindAndSpreadAngleRelativeToUpslope())
+    if (windAndSpreadOrientationMode == WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE)
     {
         std::cout << "upslope" << std::endl << std::endl;
     }
-    if (behave.isWindAndSpreadAngleRelativeToNorth())
+    if (windAndSpreadOrientationMode == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
     {
         std::cout << "compass north" << std::endl << std::endl;
     }
