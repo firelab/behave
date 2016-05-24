@@ -19,10 +19,7 @@ public:
     Crown& operator= (const Crown& rhs);
 
     double calculateCrownFireSpreadRate();
-
-    void setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode);
     void updateCrownInputs(const SurfaceInputs& surfaceInputs, double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
-    CrownModuleActivationMode::CrownModuleActivationModeEnum getCrownModuleActivationMode() const;
 
 private:
     const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object
@@ -69,7 +66,6 @@ private:
     double crownFireTransitionRatio_;
     double windSpeedAtTwentyFeet_;
 
-    CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode_; // signifies whether user wants to use Crown module in a run
 };
 
 #endif // CROWN_HEADER

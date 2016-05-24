@@ -87,8 +87,6 @@ public:
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
     // CROWN Module
-    void setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode);
-    CrownModuleActivationMode::CrownModuleActivationModeEnum getCrownModuleActivationMode() const;
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
     double calculateCrownFireSpreadRate();
 

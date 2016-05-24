@@ -67,7 +67,6 @@ SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveVector.h
     src/behave/crown.h
-    src/behave/crownEnums.h
     src/behave/crownInputs.h
     src/behave/fuelModelSet.h
     src/behave/newext.h

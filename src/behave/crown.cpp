@@ -287,16 +287,6 @@ double Crown::calculateWindSpeedAtTwentyFeet()
     return windSpeedAtTwentyFeet_;
 }
 
-void Crown::setCrownModuleActivationMode(CrownModuleActivationMode::CrownModuleActivationModeEnum crownModuleActivationMode)
-{
-    crownModuleActivationMode_ = crownModuleActivationMode;
-}
-
-CrownModuleActivationMode::CrownModuleActivationModeEnum Crown::getCrownModuleActivationMode() const
-{
-    return crownModuleActivationMode_;
-}
-
 void Crown::updateCrownInputs(const SurfaceInputs& surfaceInputs, double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
     const SurfaceInputs* surfaceInputsPtr = &surfaceInputs;  // copy the actual data surfaceInputs is pointing to
