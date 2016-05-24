@@ -2,7 +2,7 @@
 
 CrownInputs::CrownInputs()
 {
-    initialize();
+    initializeMembers();
 }
 
 CrownInputs::~CrownInputs()
@@ -10,7 +10,7 @@ CrownInputs::~CrownInputs()
 
 }
 
-void CrownInputs::initialize()
+void CrownInputs::initializeMembers()
 {
     canopyBaseHeight_ = 0;
     canopyBulkDensity_ = 0;

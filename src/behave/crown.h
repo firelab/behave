@@ -19,49 +19,49 @@ public:
 
     double calculateCrownFireSpreadRate();
 
-   
-    double calculateCrownFireTransitionRatio();
-    
-    double calculateCrownCriticalFireSpreadRate();
-    double calculateCrownCriticalSurfaceFireIntensity();
-    double calculateCrownCriticalSurfaceFlameLength();
-    double calculateCrownFlameLength();
-    
-    double calcualteCrownFirePowerRatio();
-    double calculateCrownFireActiveRatio();
-
 private:
-    const FuelModelSet* fuelModelSet_;
-    const CrownInputs* crownInputs_;
-    const SurfaceInputs* surfaceInputs_;
-    const Surface* surface_;
+    const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object
+    const CrownInputs* crownInputs_;    // pointer to BehaveRun's CrownInputs object
+    
+    // SURFACE module objects and pointers
+    const SurfaceInputs* surfaceInputs_;            // pointer to the BehaveRun's SurfaceInputs object
+    const Surface* surface_;                        // pointer to the BehaveRun's Surface object
+    SurfaceInputs crownDeepCopyOfSurfaceInputs_;    // deep copy of Surface's surface inputs to allow parallel runs in Surface
+    SurfaceFireSpread crownFireSpread_;             // stores and operates on Crown's surface fire data to allow parallel runs in Surface
 
-    SurfaceInputs crownDeepCopyOfSurfaceInputs_; // deep copy of Surface's surface inputs to allow parallel runs in Surface
-    SurfaceFireSpread crownFireSpread_; // stores and operates on Crown's surface fire data to allow parallel runs in Surface
-
+    // Private methods
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();
     void calculateCrownFuelLoad();
     void calculateCrownFirelineIntensity();
+    void calculateCrownFlameLength();
     void calculateCrownPowerOfFire();
     void calcuateCrownPowerOfWind();
-
+    void calculateCrownCriticalFireSpreadRate();
+    void calculateCrownCriticalSurfaceFireIntensity();
+    void calculateCrownCriticalSurfaceFlameLength();
+    void calculateCrownFireTransitionRatio();
+    void calcualteCrownFirePowerRatio();
+    void calculateCrownFireActiveRatio();
     double calculateWindSpeedAtTwentyFeet();
 
+    // Member variables
     double crownCopyOfSurfaceHeatPerUnitArea_;
     double crownCopyOfSurfaceFirelineIntensity_;
-    double crownFuelLoad_;
+    double crownFuelLoad_;                          // return Crown fire fuel load (lb / ft2)
     double canopyHeatPerUnitArea_;
     double crownFireHeatPerUnitArea_;
-    double crownFirelineIntensity_;
-    double crownFlameLength_;
+    double crownFirelineIntensity_;                 // Crown fire fireline intensity (Btu / ft / s)
+    double crownFlameLength_;                       // Crown fire flame length (ft)
     double crownFireSpreadRate_;
-    double crownCriticalSurfaceFireIntensity_;
-    double crownCriticalFireSpreadRate_;
-    double crownPowerOfFire_;
-    double crownPowerOfWind_;
+    double crownCriticalSurfaceFireIntensity_;      // Critical surface fire intensity (Btu / ft / s)
+    double crownCriticalFireSpreadRate_;            // Critical crown fire spread rate (ft / min)
+    double crownCriticalSurfaceFlameLength_;        // Critical surface fire flame length (ft)
+    double crownPowerOfFire_;                       // Crown fire 'power of the fire' ( ft*lb / s / ft2)
+    double crownPowerOfWind_;                       // Crown fire 'power of the wind' ( ft*lb / s / ft2)
     double crownFirePowerRatio_;
-    double crownFireActiveRatio_;
+    double crownFireActiveRatio_;                   // Crown fire active ratio
+    double crownFireTransitionRatio_;
     double windSpeedAtTwentyFeet_;
 };
 

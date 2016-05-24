@@ -22,7 +22,7 @@ public:
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
 private:
-    void initialize();
+    void initializeMembers();
 
     double canopyBaseHeight_; //Canopy base height(ft)
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
