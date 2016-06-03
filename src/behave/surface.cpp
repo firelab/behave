@@ -14,6 +14,7 @@ Surface::Surface(const FuelModelSet& fuelModels)
 Surface::Surface(const Surface &rhs)
     : surfaceFireSpread_()
 {
+    surfaceInputs_ = rhs.surfaceInputs_;
     surfaceFireSpread_ = rhs.surfaceFireSpread_;
 }
 
@@ -21,6 +22,7 @@ Surface& Surface::operator= (const Surface& rhs)
 {
     if (this != &rhs)
     {
+        surfaceInputs_ = rhs.surfaceInputs_;
         surfaceFireSpread_ = rhs.surfaceFireSpread_;
     }
     return *this;
@@ -48,6 +50,11 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
     }
     // Return results
     return spreadRate;
+}
+
+double Surface::calculateFlameLength(double firelineIntensity)
+{
+    return surfaceFireSpread_.calculateFlameLength(firelineIntensity);
 }
 
 double Surface::calculateSpreadRateAtVector(double directionOfinterest)

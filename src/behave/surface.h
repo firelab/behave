@@ -14,6 +14,7 @@ public:
 
     double calculateSurfaceFireForwardSpreadRate(double directionOfinterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfinterest);
+    double calculateFlameLength(double firelineIntensity);
     double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;

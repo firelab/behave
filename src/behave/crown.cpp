@@ -6,12 +6,12 @@
 #include "windSpeedUtility.h"
 
 Crown::Crown(const FuelModelSet& fuelModelSet, const Surface& surface)
-    : crownFireSpread_(fuelModelSet, crownDeepCopyOfSurfaceInputs_)
+    : crownDeepCopyOfSurface_(fuelModelSet)
 {
     fuelModelSet_ = &fuelModelSet; // point to the same location as BehaveRun'sfuelModels
     surface_ = &surface; // point to the same location as BehaveRun's surface
 
-    //crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
+    crownDeepCopyOfSurface_ = *surface_; // copy the actual data surfaceInputs is pointing to
 }
 
 Crown::~Crown()
@@ -20,9 +20,11 @@ Crown::~Crown()
 }
 
 Crown::Crown(const Crown &rhs)
+    : crownDeepCopyOfSurface_(*rhs.fuelModelSet_)
 {
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
+    crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
     crownInputs_ = rhs.crownInputs_;
 }
 
@@ -32,6 +34,7 @@ Crown& Crown::operator= (const Crown& rhs)
     {
         fuelModelSet_ = rhs.fuelModelSet_;
         surface_ = rhs.surface_;
+        crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
         crownInputs_ = rhs.crownInputs_;
     }
     return *this;
@@ -48,17 +51,17 @@ Crown& Crown::operator= (const Crown& rhs)
 double Crown::calculateCrownFireSpreadRate()
 {
     // Step 1: Create the crown fuel model (fire behavior fuel model 10)
-    crownDeepCopyOfSurfaceInputs_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
-    crownDeepCopyOfSurfaceInputs_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
-    crownDeepCopyOfSurfaceInputs_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
+    crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
+    crownDeepCopyOfSurface_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
+    crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
     double windAdjustmentFactor = 0.4;      // wind adjustment factor is assumed to be 0.4 for crown ROS
 
     windSpeedAtTwentyFeet_ = calculateWindSpeedAtTwentyFeet();
     double midflameWindSpeed = windAdjustmentFactor * windSpeedAtTwentyFeet_;
-    crownDeepCopyOfSurfaceInputs_.setWindSpeed(midflameWindSpeed);
+    crownDeepCopyOfSurface_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior.
-    crownFireSpreadRate_ = 3.34 * crownFireSpread_.calculateForwardSpreadRate();  // Rothermel 1991
+    crownFireSpreadRate_ = 3.34 * crownDeepCopyOfSurface_.calculateSurfaceFireForwardSpreadRate();  // Rothermel 1991
 
     //  Step 3:  Get values from Surface needed for further calculations 
     crownCopyOfSurfaceHeatPerUnitArea_ = surface_->getHeatPerUnitArea();
@@ -180,7 +183,7 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
 */
 void Crown::calculateCrownCriticalSurfaceFlameLength()
 {
-    crownCriticalSurfaceFlameLength_ = crownFireSpread_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
+    crownCriticalSurfaceFlameLength_ = crownDeepCopyOfSurface_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
 }
 
 //------------------------------------------------------------------------------
@@ -284,7 +287,7 @@ double Crown::calculateWindSpeedAtTwentyFeet()
 
 void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
-    const SurfaceInputs *const surfaceInputsPtr = &(surface_->getSurfaceInputs()); // copy the actual data surfaceInputs is pointing to
-    crownDeepCopyOfSurfaceInputs_ = *surfaceInputsPtr; // copy the actual data surfaceInputs is pointing to
+    //const SurfaceInputs *const surfaceInputsPtr = &(surface_->getSurfaceInputs()); // copy the actual data surfaceInputs is pointing to
+    crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface_ is pointing to
     crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }

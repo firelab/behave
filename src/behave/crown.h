@@ -2,7 +2,6 @@
 #define CROWN_HEADER
 
 #include "crownInputs.h"
-#include "surfaceInputs.h"
 #include "surface.h"
 
 class FuelModelSet;
@@ -26,8 +25,8 @@ private:
     
     // SURFACE module objects and pointers
     const Surface* surface_;                              // pointer to the BehaveRun's Surface object
-    SurfaceInputs crownDeepCopyOfSurfaceInputs_;    // deep copy of Surface's surface inputs to allow parallel runs in Surface
-    SurfaceFireSpread crownFireSpread_;             // stores and operates on Crown's surface fire data to allow parallel runs in Surface
+    Surface crownDeepCopyOfSurface_;    // deep copy of Surface's surface inputs to allow parallel runs in Surface
+    //SurfaceFireSpread crownFireSpread_;             // stores and operates on Crown's surface fire data to allow parallel runs in Surface
 
     // Private methods
     void calculateCanopyHeatPerUnitArea();

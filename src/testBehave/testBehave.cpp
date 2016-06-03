@@ -26,7 +26,7 @@ struct BehaveTest
     }
 };
 
-void setSurfaceInputsForLowMoistureScenario(BehaveRun& behaveRun)
+void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
 {
     //Low Moisture Inputs 
     // 5 mph twenty ft wind, 30% slope, 50% canopy cover and crown ratio, 30 ft canopy cover
@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     double observedSpreadRate = 0.0;
     double expectedSpreadRate = 0.0;
 
-    setSurfaceInputsForLowMoistureScenario(behaveTest);
+    setSurfaceInputsForGS4LowMoistureScenario(behaveTest);
 
     // Test upslope oriented mode, 20 foot uplsope wind 
     behaveTest.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     double expectedC = 16.187176;
 
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
-    setSurfaceInputsForLowMoistureScenario(behaveTest);
+    setSurfaceInputsForGS4LowMoistureScenario(behaveTest);
     behaveTest.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveTest.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
     behaveTest.calculateSurfaceFireForwardSpreadRate();
@@ -120,7 +120,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double canopyBulkDensity = 0.03;
     double foliarMoisture = 120;
 
-    setSurfaceInputsForLowMoistureScenario(behaveTest);
+    setSurfaceInputsForGS4LowMoistureScenario(behaveTest);
     behaveTest.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 
     double observedCrownROS = 0;
