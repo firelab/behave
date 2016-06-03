@@ -125,6 +125,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 
     double observedCrownROS = 0;
     double expectedCrownROS = 10.259921;
+    double ros = behaveTest.calculateSurfaceFireForwardSpreadRate();
     observedCrownROS = behaveTest.calculateCrownFireSpreadRate();
     BOOST_CHECK_CLOSE(observedCrownROS, expectedCrownROS , ERROR_TOLERANCE);
 }
