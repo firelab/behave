@@ -8,6 +8,7 @@
 class Surface
 {
 public:
+    Surface() = delete; // no default constructor
     Surface(const FuelModelSet& fuelModelSet);
     Surface(const Surface &rhs);
     Surface& operator= (const Surface& rhs);
