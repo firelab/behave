@@ -6,13 +6,8 @@
 #ifndef BEHAVERUN_HEADER
 #define BEHAVERUN_HEADER
 
-// Surface
 #include "surface.h"
-#include "surfaceInputs.h"
-
-// Crown
 #include "crown.h"
-#include "crownInputs.h"
 
 class FuelModels;
 
@@ -44,7 +39,6 @@ public:
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
-
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
@@ -57,15 +51,12 @@ public:
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
         double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForPalmettoGallberyModelsWithMoistureByLifeState(double moistureDead, double moistureLive, 
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double ageOfRough,
-        double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, double aspect, double canopyCover,
-        double canopyHeight, double crownRatio);
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, 
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, 
         double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
+
     double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
 
     bool isFuelModelDefined(int fuelModelNumber) const;
@@ -94,13 +85,11 @@ private:
     // Fuel models (orginal 13, 40 and custom)
     FuelModelSet* fuelModelSet_;    // This must point to a valid reference passed to the constructor
 
-    // SURFACE Module Components
+    // SURFACE Module
     Surface surface_;               // SURFACE Module object
-    SurfaceInputs surfaceInputs_;   // Object that manages user input to SURFACE Module
 
-    // CROWN Module Components
+    // CROWN Module
     Crown crown_;
-    CrownInputs crownInputs_;
 };
 
 #endif //BehaveRun_HEADER

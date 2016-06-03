@@ -126,9 +126,10 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double observedCrownROS = 0;
     double expectedCrownROS = 10.259921;
     observedCrownROS = behaveTest.calculateCrownFireSpreadRate();
-    BOOST_CHECK_CLOSE(observedCrownROS, expectedCrownROS
-        , ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedCrownROS, expectedCrownROS , ERROR_TOLERANCE);
 }
+
+BOOST_AUTO_TEST_SUITE_END()
 
 #ifndef NDEBUG
 BOOST_AUTO_TEST_CASE(waitInDebug)
@@ -139,5 +140,3 @@ BOOST_AUTO_TEST_CASE(waitInDebug)
     std::cin.get();
 }
 #endif
-
-BOOST_AUTO_TEST_SUITE_END()

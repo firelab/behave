@@ -11,22 +11,21 @@ class Crown
 {
 public:
     Crown() = delete; // No default constructor
-    Crown(const FuelModelSet& fuelModelSet, CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, const Surface& surface);
+    Crown(const FuelModelSet& fuelModelSet, const Surface& surface);
     ~Crown();
 
     Crown(const Crown &rhs);
     Crown& operator= (const Crown& rhs);
 
     double calculateCrownFireSpreadRate();
-    void updateCrownInputs(const SurfaceInputs& surfaceInputs, double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
 private:
     const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object
-    CrownInputs* crownInputs_;    // pointer to BehaveRun's CrownInputs object
+    CrownInputs crownInputs_;    // pointer to BehaveRun's CrownInputs object
     
     // SURFACE module objects and pointers
-    const SurfaceInputs* surfaceInputs_;            // pointer to the BehaveRun's SurfaceInputs object
-    const Surface* surface_;                        // pointer to the BehaveRun's Surface object
+    const Surface* surface_;                              // pointer to the BehaveRun's Surface object
     SurfaceInputs crownDeepCopyOfSurfaceInputs_;    // deep copy of Surface's surface inputs to allow parallel runs in Surface
     SurfaceFireSpread crownFireSpread_;             // stores and operates on Crown's surface fire data to allow parallel runs in Surface
 
@@ -64,7 +63,6 @@ private:
     double crownFireActiveRatio_;                   // Crown fire active ratio
     double crownFireTransitionRatio_;
     double windSpeedAtTwentyFeet_;
-
 };
 
 #endif // CROWN_HEADER

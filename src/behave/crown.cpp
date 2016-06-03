@@ -5,13 +5,10 @@
 #include "surfaceEnums.h"
 #include "windSpeedUtility.h"
 
-Crown::Crown(const FuelModelSet& fuelModelSet, CrownInputs& crownInputs, const SurfaceInputs& surfaceInputs, 
-    const Surface& surface)
+Crown::Crown(const FuelModelSet& fuelModelSet, const Surface& surface)
     : crownFireSpread_(fuelModelSet, crownDeepCopyOfSurfaceInputs_)
 {
-    crownInputs_ = &crownInputs;  // point to the same location as BehaveRun's crownInputs
     fuelModelSet_ = &fuelModelSet; // point to the same location as BehaveRun'sfuelModels
-    surfaceInputs_ = &surfaceInputs; // point to the same location as BehaveRun's surfaceInputs
     surface_ = &surface; // point to the same location as BehaveRun's surface
 
     //crownDeepCopyOfSurfaceInputs_ = *surfaceInputs_; // copy the actual data surfaceInputs is pointing to
@@ -26,7 +23,6 @@ Crown::Crown(const Crown &rhs)
 {
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
-    surfaceInputs_ = rhs.surfaceInputs_;
     crownInputs_ = rhs.crownInputs_;
 }
 
@@ -36,7 +32,6 @@ Crown& Crown::operator= (const Crown& rhs)
     {
         fuelModelSet_ = rhs.fuelModelSet_;
         surface_ = rhs.surface_;
-        surfaceInputs_ = rhs.surfaceInputs_;
         crownInputs_ = rhs.crownInputs_;
     }
     return *this;
@@ -118,9 +113,9 @@ void Crown::calculateCrownFireHeatPerUnitArea()
 */
 void Crown::calculateCrownFuelLoad()
 {
-    double canopyBulkDensity = crownInputs_->getCanopyBulkDensity();
-    double canopyBaseHeight = crownInputs_->getCanopyBaseHeight();
-    double canopyHeight = surfaceInputs_->getCanopyHeight();
+    double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
+    double canopyBaseHeight = crownInputs_.getCanopyBaseHeight();
+    double canopyHeight = surface_->getCanopyHeight();
     crownFuelLoad_ = canopyBulkDensity * (canopyHeight - canopyBaseHeight);
 }
 
@@ -160,13 +155,13 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
     const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.288672;
     const double FEET_TO_METERS = 0.3048;
 
-    double foliarMoisture = crownInputs_->getFoliarMoisture();
+    double foliarMoisture = crownInputs_.getFoliarMoisture();
 
     // Convert foliar moisture content to percent and constrain lower limit
     // double foliarMoisture *= 100.0;
     foliarMoisture = (foliarMoisture < 30.0) ? 30.0 : foliarMoisture;
 
-    double crownBaseHeight = crownInputs_->getCanopyBaseHeight();
+    double crownBaseHeight = crownInputs_.getCanopyBaseHeight();
     // Convert crown base heigt to meters and constrain lower limit
     crownBaseHeight *= FEET_TO_METERS;
     crownBaseHeight = (crownBaseHeight < 0.1) ? 0.1 : crownBaseHeight;
@@ -246,7 +241,7 @@ void Crown::calcualteCrownFirePowerRatio()
 */
 void Crown::calculateCrownCriticalFireSpreadRate()
 {
-    double canopyBulkDensity = crownInputs_->getCanopyBulkDensity();
+    double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
     const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.0185;
     // Convert to Kg/m3
     double convertedBulkDensity = LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER * canopyBulkDensity;
@@ -272,24 +267,24 @@ double Crown::calculateWindSpeedAtTwentyFeet()
 {
     windSpeedAtTwentyFeet_ = -1; // If negative 1 is returned, there is an error
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode;
-    windHeightInputMode = surfaceInputs_->getWindHeightInputMode();
+    windHeightInputMode = surface_->getWindHeightInputMode();
 
     if (windHeightInputMode == WindHeightInputMode::TWENTY_FOOT)
     {
-        windSpeedAtTwentyFeet_ = surfaceInputs_->getWindSpeed();
+        windSpeedAtTwentyFeet_ = surface_->getWindSpeed();
     }
     else if (windHeightInputMode == WindHeightInputMode::TEN_METER)
     {
         WindSpeedUtility windSpeedUtility;
-        double windSpeedAtTenMeters = surfaceInputs_->getWindSpeed();
+        double windSpeedAtTenMeters = surface_->getWindSpeed();
         windSpeedAtTwentyFeet_ = windSpeedUtility.windSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
     }
     return windSpeedAtTwentyFeet_;
 }
 
-void Crown::updateCrownInputs(const SurfaceInputs& surfaceInputs, double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
+void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
-    const SurfaceInputs* surfaceInputsPtr = &surfaceInputs;  // copy the actual data surfaceInputs is pointing to
+    const SurfaceInputs *const surfaceInputsPtr = &(surface_->getSurfaceInputs()); // copy the actual data surfaceInputs is pointing to
     crownDeepCopyOfSurfaceInputs_ = *surfaceInputsPtr; // copy the actual data surfaceInputs is pointing to
-    crownInputs_->updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }
