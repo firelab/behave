@@ -16,8 +16,10 @@ public:
     Crown(const Crown &rhs);
     Crown& operator= (const Crown& rhs);
 
-    double calculateCrownFireSpreadRate();
+    void doCrownRun(double directionOfInterest = -1.0);
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+
+    double getCrownFireSpreadRate() const;
 
 private:
     const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object

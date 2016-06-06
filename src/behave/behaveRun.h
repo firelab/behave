@@ -57,12 +57,12 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
 
-    double calculateSurfaceFireForwardSpreadRate(double directionOfInterest = -1.0);
+    void doSurfaceRun(double directionOfInterest = -1.0);
 
     bool isFuelModelDefined(int fuelModelNumber) const;
 
     // SURFACE Module Getters
-    double getSpreadRate() const;
+    double getSurfaceFireSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
     double getFireLengthToWidthRatio() const;
@@ -79,7 +79,10 @@ public:
 
     // CROWN Module
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
-    double calculateCrownFireSpreadRate();
+    void doCrownRun(double directionOfInterest = -1.0);
+
+    // CROWN Module Getters
+    double getCrownFireSpreadRate() const;
 
 private:
     // Fuel models (orginal 13, 40 and custom)

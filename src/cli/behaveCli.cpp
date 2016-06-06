@@ -468,12 +468,16 @@ int main(int argc, char *argv[])
     // Do the spread rate calculation
     if (hasDirectionOfInterest)
     {
-        spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+        behave.doSurfaceRun(directionOfInterest);
+       
     }
     else
     {
-        spreadRate = behave.calculateSurfaceFireForwardSpreadRate();
+        behave.doSurfaceRun();
     }
+
+    // Get the surface fire spread rate
+    spreadRate = behave.getSurfaceFireSpreadRate();
 
     // Get other required outputs
     flameLength = behave.getFlameLength();

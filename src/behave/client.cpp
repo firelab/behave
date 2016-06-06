@@ -122,7 +122,8 @@ int main()
 
     // Single fuel model test
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
+    behave.doSurfaceRun(directionOfInterest);
+    spreadRate = behave.getSurfaceFireSpreadRate();
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
     flameLength = behave.getFlameLength();
     std::cout << "Spread rate for fuel model " << fuelModelNumber << " is " << std::setprecision(8) << spreadRate << " ch/hr" << std::endl;

@@ -108,7 +108,9 @@ void BehaveQtMainWindow::slopeInputChanged(const QString& text)
 // Slot
 void BehaveQtMainWindow::calculateClicked()
 {
-    double spreadRate = behaveRun.calculateSurfaceFireForwardSpreadRate();
+    behaveRun.doSurfaceRun();
+    double spreadRate = behaveRun.getSurfaceFireSpreadRate();
+
     ui.spreadRateLineEdit->setText(QString::number(spreadRate, 10, 2));
 
     if (!qcustomplotTest_) 

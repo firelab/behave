@@ -157,14 +157,10 @@ void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, dou
         slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-double BehaveRun::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
+void BehaveRun::doSurfaceRun(double directionOfInterest)
 {
-    // Calculate Spread Rate
-    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-    double surfaceFireForwardSpreadRate = surface_.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-
-    surfaceFireForwardSpreadRate *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
-    return surfaceFireForwardSpreadRate;
+    // Calculate SURFACE Module outputs
+    surface_.doSurfaceRun(directionOfInterest);
 }
 
 void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
@@ -187,9 +183,11 @@ SlopeInputMode::SlopeInputModeEnum BehaveRun::getSlopeInputMode() const
     return surface_.getSlopeInputMode();
 }
 
-double BehaveRun::getSpreadRate() const
+double BehaveRun::getSurfaceFireSpreadRate() const
 {
-    return surface_.getSpreadRate();
+    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
+    double surfaceFireForwardSpreadRate = surface_.getSpreadRate();
+    return surfaceFireForwardSpreadRate *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
 }
 
 double BehaveRun::getDirectionOfMaxSpread() const
@@ -247,9 +245,14 @@ void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDens
     crown_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }
 
-double BehaveRun::calculateCrownFireSpreadRate()
+void BehaveRun::doCrownRun(double directionOfInterest)
 {
-    // Calculate Spread Rate
+    // Calculate Crown module outputs
+    crown_.doCrownRun();
+}
+
+double BehaveRun::getCrownFireSpreadRate() const
+{
     const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-    return FEET_PER_MIN_TO_CHAINS_PER_HOUR * crown_.calculateCrownFireSpreadRate();
+    return crown_.getCrownFireSpreadRate() * FEET_PER_MIN_TO_CHAINS_PER_HOUR;
 }

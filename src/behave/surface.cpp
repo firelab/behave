@@ -33,7 +33,7 @@ const SurfaceInputs& Surface::getSurfaceInputs() const
     return surfaceInputs_;
 }
 
-double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest)
+void Surface::doSurfaceRun(double directionOfInterest)
 {
     double spreadRate = 0.0;
 
@@ -41,15 +41,13 @@ double Surface::calculateSurfaceFireForwardSpreadRate(double directionOfInterest
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceInputs_, surfaceFireSpread_);
-        spreadRate = surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
+        surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
     }
     else // Use only one fuel model
     {
         // Calculate spread rate
-        spreadRate = surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+        surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
     }
-    // Return results
-    return spreadRate;
 }
 
 double Surface::calculateFlameLength(double firelineIntensity)
