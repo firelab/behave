@@ -180,6 +180,9 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     calculateSurfaceFireEccentricity();
     if (directionOfInterest != -1.0) // If needed, calculate spread rate in arbitrary direction of interest
     {
+        calculateFireFirelineIntensity();
+        calculateFlameLength();
+        maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
         forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
     }
     calculateBackingSpreadRate();
@@ -474,6 +477,11 @@ double SurfaceFireSpread::getFirelineIntensity() const
 double SurfaceFireSpread::getFlameLength() const
 {
     return flameLength_;
+}
+
+double SurfaceFireSpread::getMaxFlameLength() const
+{
+    return maxFlameLength_;
 }
 
 double SurfaceFireSpread::getFireLengthToWidthRatio() const

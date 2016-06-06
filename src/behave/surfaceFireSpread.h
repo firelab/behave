@@ -24,6 +24,7 @@ public:
     double getEffectiveWindSpeed() const;
     double getFirelineIntensity() const;
     double getFlameLength() const;
+    double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getHeatPerUnitArea() const;
@@ -93,6 +94,7 @@ private:
     double residenceTime_;
     double reactionIntensity_;
     double firelineIntensity_;
+    double maxFlameLength_;                                 // Flame length computed from spread rate in max direction, used in SAFETY
     double flameLength_;
     double backingSpreadRate_;
    
