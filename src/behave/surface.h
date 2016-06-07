@@ -16,6 +16,8 @@ public:
     void doSurfaceRun(double directionOfinterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfinterest);
     double calculateFlameLength(double firelineIntensity);
+
+    // SurfaceFireSpread getters
     double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
@@ -28,7 +30,8 @@ public:
     double getEllipticalB() const;
     double getEllipticalC() const;
    
-    // Surface Inputs setters
+    // SurfaceInputs setters
+    bool isUsingTwoFuelModels() const;
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
@@ -63,19 +66,18 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
 
-    // Surface Inputs getters
+    // SurfaceInputs getters
+    //const SurfaceInputs& getSurfaceInputs() const;
     double getCanopyHeight() const;
     double getWindSpeed() const;
-    const SurfaceInputs& getSurfaceInputs() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
 private:
-    bool isUsingTwoFuelModels() const;
-
-    // SURFACE Module component objects
     const FuelModelSet*	fuelModelSet_;
+
+    // Surface Module components
     SurfaceFireSpread surfaceFireSpread_;
     SurfaceInputs surfaceInputs_;
 };

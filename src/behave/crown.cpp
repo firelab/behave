@@ -291,7 +291,6 @@ double Crown::calculateWindSpeedAtTwentyFeet()
 
 void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
-    //const SurfaceInputs *const surfaceInputsPtr = &(surface_->getSurfaceInputs()); // copy the actual data surfaceInputs is pointing to
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface_ is pointing to
     crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }

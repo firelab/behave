@@ -117,7 +117,6 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     double observedA = 0;
     double observedB = 0;
     double observedC = 0;
-    double expectedSpreadRate = 0.0;
     double expectedA = 7.461858;
     double expectedB = 17.824253;
     double expectedC = 16.187176;
@@ -174,7 +173,6 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double canopyBaseHeight = 6; 
     double canopyBulkDensity = 0.03;
     double foliarMoisture = 120;
-    double surfaceROS = 0;
     double observedCrownROS = 0;
     double expectedCrownROS = 10.259921;
 

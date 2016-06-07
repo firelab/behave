@@ -248,7 +248,7 @@ void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDens
 void BehaveRun::doCrownRun(double directionOfInterest)
 {
     // Calculate Crown module outputs
-    crown_.doCrownRun();
+    crown_.doCrownRun(directionOfInterest);
 }
 
 double BehaveRun::getCrownFireSpreadRate() const

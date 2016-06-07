@@ -28,15 +28,8 @@ Surface& Surface::operator= (const Surface& rhs)
     return *this;
 }
 
-const SurfaceInputs& Surface::getSurfaceInputs() const
-{
-    return surfaceInputs_;
-}
-
 void Surface::doSurfaceRun(double directionOfInterest)
 {
-    double spreadRate = 0.0;
-
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
