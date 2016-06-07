@@ -67,6 +67,14 @@ struct WindAndSpreadOrientationMode
     };
 };
 
+struct DirectionOFInterest
+{
+    enum DirectionOFInterestEnum
+    {
+        DIRECTION_OF_MAXIMUM_SPREAD = -1   // Signifies spread rate is in the direction of max spread 
+    };
+};
+
 struct WindHeightInputMode
 {
     enum WindHeightInputModeEnum

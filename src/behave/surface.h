@@ -13,7 +13,7 @@ public:
     Surface(const Surface &rhs);
     Surface& operator= (const Surface& rhs);
 
-    void doSurfaceRun(double directionOfinterest = -1.0);
+    void doSurfaceRun(double directionOfinterest = DirectionOFInterest::DIRECTION_OF_MAXIMUM_SPREAD);
     double calculateSpreadRateAtVector(double directionOfinterest);
     double calculateFlameLength(double firelineIntensity);
 

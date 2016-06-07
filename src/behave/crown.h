@@ -25,10 +25,9 @@ private:
     const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object
     CrownInputs crownInputs_;    // pointer to BehaveRun's CrownInputs object
     
-    // SURFACE module objects and pointers
-    const Surface* surface_;                              // pointer to the BehaveRun's Surface object
-    Surface crownDeepCopyOfSurface_;    // deep copy of Surface's surface inputs to allow parallel runs in Surface
-    //SurfaceFireSpread crownFireSpread_;             // stores and operates on Crown's surface fire data to allow parallel runs in Surface
+    // SURFACE module components
+    const Surface* surface_;                            // pointer to the BehaveRun's Surface object
+    Surface crownDeepCopyOfSurface_;                    // deep copy of Surface's surface inputs to allow parallel runs in Surface
 
     // Private methods
     void calculateCanopyHeatPerUnitArea();
