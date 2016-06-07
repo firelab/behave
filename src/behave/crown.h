@@ -16,7 +16,7 @@ public:
     Crown(const Crown &rhs);
     Crown& operator= (const Crown& rhs);
 
-    void doCrownRun(double directionOfInterest = -1.0);
+    void doCrownRun();
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
     double getCrownFireSpreadRate() const;

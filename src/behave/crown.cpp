@@ -48,7 +48,7 @@ Crown& Crown::operator= (const Crown& rhs)
 *  \return Crown fire average spread rate (ft/min).
 *
 */
-void Crown::doCrownRun(double directionOfInterest)
+void Crown::doCrownRun()
 {
     // Step 1: Create the crown fuel model (fire behavior fuel model 10)
     crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
@@ -61,7 +61,7 @@ void Crown::doCrownRun(double directionOfInterest)
     crownDeepCopyOfSurface_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior
-    crownDeepCopyOfSurface_.doSurfaceRun(directionOfInterest);
+    crownDeepCopyOfSurface_.doSurfaceRun();
     crownFireSpreadRate_ = 3.34 * crownDeepCopyOfSurface_.getSpreadRate(); // Rothermel 1991
 
     //  Step 3:  Get values from Surface needed for further calculations 

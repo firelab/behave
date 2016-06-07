@@ -79,7 +79,7 @@ public:
 
     // CROWN Module
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
-    void doCrownRun(double directionOfInterest = -1.0);
+    void doCrownRun();
 
     // CROWN Module Getters
     double getCrownFireSpreadRate() const;
