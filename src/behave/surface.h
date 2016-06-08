@@ -49,6 +49,7 @@ public:
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
+    void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
@@ -76,8 +77,6 @@ public:
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
 private:
-    void setHasDirectionOfInterest(bool hasDirectionOfInterest);
-
     const FuelModelSet*	fuelModelSet_;
 
     // Surface Module components

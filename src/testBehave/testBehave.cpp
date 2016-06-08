@@ -64,6 +64,31 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
         canopyHeight, crownRatio);
 }
 
+void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
+{
+    int firstFuelModelNumber = 1; // fuel model 1 chosen arbitrarily
+    int secondFuelModelNumber = 124; // fuel model gs4(124) chosen as it is dynamic and has values for all moisture classes
+    double moistureOneHour = 6.0;
+    double moistureTenHour = 7.0;
+    double moistureHundredHour = 8.0;
+    double moistureLiveHerbaceous = 60.0;
+    double moistureLiveWoody = 90.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+    double windSpeed = 5.0;
+    double windDirection = 0;
+    double firstFuelModelCoverage = 0;
+    double slope = 30.0;
+    double aspect = 0;
+    double canopyCover = 0.50;
+    double canopyHeight = 30.0;
+    double crownRatio = 0.50;
+
+    int fuelModelNumber = 124; // fuel model gs4(124) chosen as it is dynamic and has values for all moisture classes
+    behaveRun.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
+        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::TWENTY_FOOT, windSpeed, windDirection, 
+        firstFuelModelCoverage, TwoFuelModels::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
+}
+
 BOOST_FIXTURE_TEST_SUITE(BehaveRunTest, BehaveTest)
 
 BOOST_AUTO_TEST_CASE(singleFuelModelTest)
@@ -163,6 +188,21 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
     expectedSurfaceFireSpreadRate = 1.632054;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+}
+
+BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
+{
+    double firstFuelModelCoverage = 0;
+    double observedSurfaceFireSpreadRate = 0.0;
+    double expectedSurfaceFireSpreadRate = 0.0;
+
+    // Test upslope oriented mode, 20 foot wind, low moisture conditions
+    setSurfaceInputsForTwoFuelModelsLowMoistureScenario(behaveRun);
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(0);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 

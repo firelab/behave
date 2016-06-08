@@ -50,8 +50,9 @@ SurfaceFireSpread::SurfaceFireSpread(const SurfaceFireSpread &rhs)
     reactionIntensity_ = rhs.reactionIntensity_;
     firelineIntensity_ = rhs.firelineIntensity_;
     flameLength_ = rhs.flameLength_;
-    backingSpreadRate_ = rhs.backingSpreadRate_;
+    maxFlameLength_ = rhs.maxFlameLength_;
 
+    backingSpreadRate_ = rhs.backingSpreadRate_;
     midflameWindSpeed_ = rhs.midflameWindSpeed_;
     windAdjustmentFactor_ = rhs.windAdjustmentFactor_;
     windAdjustmentFactorMethod_ = rhs.windAdjustmentFactorMethod_;
@@ -85,6 +86,7 @@ SurfaceFireSpread& SurfaceFireSpread::operator= (const SurfaceFireSpread& rhs)
         reactionIntensity_ = rhs.reactionIntensity_;
         firelineIntensity_ = rhs.firelineIntensity_;
         flameLength_ = rhs.flameLength_;
+        maxFlameLength_ = rhs.maxFlameLength_;
         backingSpreadRate_ = rhs.backingSpreadRate_;
 
         midflameWindSpeed_ = rhs.midflameWindSpeed_;
@@ -95,11 +97,6 @@ SurfaceFireSpread& SurfaceFireSpread::operator= (const SurfaceFireSpread& rhs)
         aspenMortality_ = rhs.aspenMortality_;
     }
     return *this;
-}
-
-void SurfaceFireSpread::setHasDirectionOfInterest(bool hasDirectionOfInterest)
-{
-    hasDirectionOfInterest_ = hasDirectionOfInterest;
 }
 
 double SurfaceFireSpread::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink)
@@ -138,7 +135,7 @@ void SurfaceFireSpread::calculateFlameLength()
         : (0.45 * pow(firelineIntensity_, 0.46)));
 }
 
-double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
+double SurfaceFireSpread::calculateForwardSpreadRate(bool hasDirectionOfInterest, double directionOfInterest)
 {
     // Reset member variables to prepare for next calculation
     initializeMembers();
@@ -183,18 +180,21 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Calculate fire ellipse
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
-    if (hasDirectionOfInterest_) // If needed, calculate spread rate in arbitrary direction of interest
+    if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
         calculateFireFirelineIntensity();
         calculateFlameLength();
         maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
         forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
     }
+    else
+    {
+        calculateFireFirelineIntensity();
+        calculateFlameLength();
+        maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
+    }
     calculateBackingSpreadRate();
     calculateEllipticalDimensions();
-
-    calculateFireFirelineIntensity();
-    calculateFlameLength();
     calculateHeatPerUnitArea();
 
     //hasDirectionOfInterest_ = false;
@@ -539,6 +539,11 @@ double SurfaceFireSpread::getEllipticalB() const
 double SurfaceFireSpread::getEllipticalC() const
 {
     return ellipticalC_;
+}
+
+double SurfaceFireSpread::getWindAdjustmentFactor() const
+{
+    return windAdjustmentFactor_;
 }
 
 bool SurfaceFireSpread::getIsWindLimitExceeded() const

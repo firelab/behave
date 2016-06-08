@@ -44,6 +44,7 @@ public:
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
+    void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
 
     bool isUsingPalmettoGallberry() const;
     void setAgeOfRough(double ageOfRough);

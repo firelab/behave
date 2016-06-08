@@ -319,6 +319,11 @@ void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoF
     twoFuelModelsMethod_ = twoFuelModelsMethod;
 }
 
+void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
+{
+    firstFuelModelCoverage_ = firstFuelModelCoverage;
+}
+
 void  SurfaceInputs::setWindSpeed(double windSpeed)
 {
     windSpeed_ = windSpeed;

@@ -34,10 +34,9 @@ BehaveRun::~BehaveRun()
     // Default Destructor
 }
 
-// setFuelModelSet(const FuelModelSet& fuelModelSet) makes this behaveRun's pointer
-//  fuelModelSet_ point to the FuelModelSet given to this method as a parameter   
 void BehaveRun::setFuelModelSet(FuelModelSet& fuelModelSet)
 {
+    // makes this behaveRun's fuelModelSet_ point to the FuelModelSet given to this method as a parameter
     fuelModelSet_ = &fuelModelSet;
 }
 
@@ -109,6 +108,11 @@ void BehaveRun::setFirstFuelModelNumber(int firstFuelModelNumber)
 void BehaveRun::setSecondFuelModelNumber(int secondFuelModelNumber)
 {
     surface_.setSecondFuelModelNumber(secondFuelModelNumber);
+}
+
+void BehaveRun::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
+{
+    surface_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
 }
 
 void BehaveRun::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)

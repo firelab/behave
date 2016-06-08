@@ -14,7 +14,7 @@ class SurfaceTwoFuelModels
 {
 public:
     SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFireSpread& surfaceFireSpread);
-    double calculateWeightedSpreadRate(double directionOfInterest);
+    double calculateWeightedSpreadRate(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
 
     //public getters
     bool getWindLimitExceeded() const;
@@ -28,7 +28,7 @@ public:
     double getWindSpeedLimit() const;
     double WindAdjustmentFactor() const;
     double getFireLineIntensity() const;
-    double getFireFlameLength() const;
+    double getflameLength() const;
     double getFireLengthToWidthRatio() const;
 
 private:
@@ -39,7 +39,7 @@ private:
 
     double surfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals);
-    void calculateFireOutputsForEachModel(double directionOfInterest);
+    void calculateFireOutputsForEachModel(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
     void calculateSpreadRateBasedOnMethod();
 
     // Member arrays
@@ -47,6 +47,7 @@ private:
     double coverageForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];                // percent coverage of fuel model
     double rosForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];                     // rate of spread
     double firelineIntensityForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];       // fireline intensity
+    double maxFlameLengthForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];          // flame length in direction of max spread
     double flameLengthForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];             // flame length
     double fuelbedDepthForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];            // fuel bed depth in feet
     double effectiveWindSpeedForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];      // effective wind speed
@@ -71,7 +72,8 @@ private:
     double windSpeedLimit_;         // (mi / h)
     double windAdjustmentFactor_;
     double fireLineIntensity_;      // (Btu / ft / s)
-    double fireFlameLength_;        // (ft)
+    double flameLength_;            // (ft)
+    double maxFlameLength_;         // flame length in direction of maximum spread (ft)
     double fireLengthToWidthRatio_;
 };
 

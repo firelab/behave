@@ -6,18 +6,16 @@
 
 class SurfaceFireSpread
 {
-    friend class SurfaceTwoFuelModels;
+    friend class SurfaceTwoFuelModels; // to keep setters for outputs out of public interface
 public:
     SurfaceFireSpread();
     SurfaceFireSpread(const SurfaceFireSpread& rhs);
     SurfaceFireSpread& operator= (const SurfaceFireSpread& rhs);
     SurfaceFireSpread(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
-    double calculateForwardSpreadRate(double directionOfInterest = -1.0);
+    double calculateForwardSpreadRate(bool hasDirectionOfInterest = false, double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
     double calculateFlameLength(double firelineIntensity);
-
-    void setHasDirectionOfInterest(bool hasDirectionOfInterest);
 
     // Public getters
     double getFuelbedDepth() const;
@@ -37,13 +35,15 @@ public:
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;
+    double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
  
-private:
-    // Private setters
+protected:
+    // Protected setters accessible to friend classes
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
     void setEffectiveWindSpeed(double effectiveWindSpeed);
     void setFirelineIntensity(double firelineIntensity);
+    void setMaxFlameLength(double maxFlameLength);
     void setFlameLength(double flameLength);
     void setFireLengthToWidthRatio(double lengthToWidthRatio);
     void setResidenceTime(double residenceTime);
@@ -54,6 +54,7 @@ private:
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
 
+private:
     void initializeMembers();
     void calculateHeatPerUnitArea();
     void calculateWindAdjustmentFactor();
@@ -80,7 +81,6 @@ private:
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
   
     // Member variables
-    bool hasDirectionOfInterest_;
     bool isWindLimitExceeded_;
     double directionOfInterest_;
     double effectiveWindSpeed_;

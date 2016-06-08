@@ -28,43 +28,37 @@ Surface& Surface::operator= (const Surface& rhs)
     return *this;
 }
 
-void Surface::setHasDirectionOfInterest(bool hasDirectionOfInterest)
-{
-    surfaceFireSpread_.setHasDirectionOfInterest(hasDirectionOfInterest);
-}
-
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
 {
     double directionOfInterest = -1;
-    setHasDirectionOfInterest(false);
+    bool hasDirectionOfInterest = false;
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceInputs_, surfaceFireSpread_);
-        surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
+        surfaceTwoFuelModels.calculateWeightedSpreadRate(hasDirectionOfInterest, directionOfInterest);
     }
     else // Use only one fuel model
     {
         // Calculate spread rate
-        surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+        surfaceFireSpread_.calculateForwardSpreadRate(hasDirectionOfInterest, directionOfInterest);
     }
 }
 
 void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
 {
-    setHasDirectionOfInterest(true);
+    bool hasDirectionOfInterest = true;
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceInputs_, surfaceFireSpread_);
-        surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
+        surfaceTwoFuelModels.calculateWeightedSpreadRate(hasDirectionOfInterest, directionOfInterest);
     }
     else // Use only one fuel model
     {
         // Calculate spread rate
-        surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+        surfaceFireSpread_.calculateForwardSpreadRate(hasDirectionOfInterest, directionOfInterest);
     }
-    setHasDirectionOfInterest(false);
 }
 
 double Surface::calculateFlameLength(double firelineIntensity)
@@ -241,6 +235,11 @@ void Surface::setSecondFuelModelNumber(int secondFuelModelNumber)
 void Surface::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
 {
     surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
+}
+
+void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
+{
+    surfaceInputs_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
 }
 
 void Surface::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
