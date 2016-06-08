@@ -468,12 +468,12 @@ int main(int argc, char *argv[])
     // Do the spread rate calculation
     if (hasDirectionOfInterest)
     {
-        behave.doSurfaceRun(directionOfInterest);
+        behave.doSurfaceRunInDirectionOfInterest(directionOfInterest);
        
     }
     else
     {
-        behave.doSurfaceRun();
+        //behave.doSurfaceRun();
     }
 
     // Get the surface fire spread rate

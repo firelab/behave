@@ -108,7 +108,8 @@ void BehaveQtMainWindow::slopeInputChanged(const QString& text)
 // Slot
 void BehaveQtMainWindow::calculateClicked()
 {
-    behaveRun.doSurfaceRun();
+    double directionOfInterest = 0;
+    behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     double spreadRate = behaveRun.getSurfaceFireSpreadRate();
 
     ui.spreadRateLineEdit->setText(QString::number(spreadRate, 10, 2));

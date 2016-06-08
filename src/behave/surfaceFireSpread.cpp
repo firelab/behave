@@ -97,6 +97,11 @@ SurfaceFireSpread& SurfaceFireSpread::operator= (const SurfaceFireSpread& rhs)
     return *this;
 }
 
+void SurfaceFireSpread::setHasDirectionOfInterest(bool hasDirectionOfInterest)
+{
+    hasDirectionOfInterest_ = hasDirectionOfInterest;
+}
+
 double SurfaceFireSpread::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink)
 {
     noWindNoSlopeSpreadRate_ = (heatSink < 1.0e-07)
@@ -178,7 +183,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     // Calculate fire ellipse
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
-    if (directionOfInterest != -1.0) // If needed, calculate spread rate in arbitrary direction of interest
+    if (hasDirectionOfInterest_) // If needed, calculate spread rate in arbitrary direction of interest
     {
         calculateFireFirelineIntensity();
         calculateFlameLength();
@@ -191,6 +196,8 @@ double SurfaceFireSpread::calculateForwardSpreadRate(double directionOfInterest)
     calculateFireFirelineIntensity();
     calculateFlameLength();
     calculateHeatPerUnitArea();
+
+    //hasDirectionOfInterest_ = false;
 
     return forwardSpreadRate_;
 }
@@ -601,6 +608,7 @@ void SurfaceFireSpread::setMidflameWindSpeed(double midflameWindSpeed)
 
 void SurfaceFireSpread::initializeMembers()
 {
+    //hasDirectionOfInterest_ = getHasDirectionOfInterest();
     isWindLimitExceeded_ = false;
     effectiveWindSpeed_ = 0.0;
     windSpeedLimit_ = 0.0;
@@ -609,6 +617,7 @@ void SurfaceFireSpread::initializeMembers()
     windB_ = 0.0;
     windC_ = 0.0;
     windE_ = 0.0;
+    directionOfInterest_ = 0.0;
     directionOfMaxSpread_ = 0.0;
     noWindNoSlopeSpreadRate_ = 0.0;
     forwardSpreadRate_ = 0.0;

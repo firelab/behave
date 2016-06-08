@@ -61,7 +61,8 @@ void Crown::doCrownRun()
     crownDeepCopyOfSurface_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior
-    crownDeepCopyOfSurface_.doSurfaceRun();
+    double directionOfInterest = 0;
+    crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     crownFireSpreadRate_ = 3.34 * crownDeepCopyOfSurface_.getSpreadRate(); // Rothermel 1991
 
     //  Step 3:  Get values from Surface needed for further calculations 

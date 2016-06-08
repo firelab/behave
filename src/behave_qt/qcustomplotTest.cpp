@@ -73,7 +73,8 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
             windSpeed += incrementAmount; // update the x variable's value
             x[j] = windSpeed; // x goes from xMin to xMax
             behaveVector[i].setWindSpeed(windSpeed); // This is where you make use of the x value in the function being graphed
-            behaveVector[i].doSurfaceRun();
+            double directionOfInterest = 0;
+            behaveVector[i].doSurfaceRunInDirectionOfInterest(directionOfInterest);
             y[i][j] = behaveVector[i].getSurfaceFireSpreadRate(); // This updates the y value
         }
     }

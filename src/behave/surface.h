@@ -13,7 +13,8 @@ public:
     Surface(const Surface &rhs);
     Surface& operator= (const Surface& rhs);
 
-    void doSurfaceRun(double directionOfinterest = DirectionOFInterest::DIRECTION_OF_MAXIMUM_SPREAD);
+    void doSurfaceRunInDirectionOfMaxSpread();
+    void doSurfaceRunInDirectionOfInterest(double directionOfinterest);
     double calculateSpreadRateAtVector(double directionOfinterest);
     double calculateFlameLength(double firelineIntensity);
 
@@ -75,6 +76,8 @@ public:
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
 private:
+    void setHasDirectionOfInterest(bool hasDirectionOfInterest);
+
     const FuelModelSet*	fuelModelSet_;
 
     // Surface Module components

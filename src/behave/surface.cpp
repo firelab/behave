@@ -28,8 +28,15 @@ Surface& Surface::operator= (const Surface& rhs)
     return *this;
 }
 
-void Surface::doSurfaceRun(double directionOfInterest)
+void Surface::setHasDirectionOfInterest(bool hasDirectionOfInterest)
 {
+    surfaceFireSpread_.setHasDirectionOfInterest(hasDirectionOfInterest);
+}
+
+void Surface::doSurfaceRunInDirectionOfMaxSpread()
+{
+    double directionOfInterest = -1;
+    setHasDirectionOfInterest(false);
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
@@ -41,6 +48,23 @@ void Surface::doSurfaceRun(double directionOfInterest)
         // Calculate spread rate
         surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
     }
+}
+
+void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
+{
+    setHasDirectionOfInterest(true);
+    if (isUsingTwoFuelModels())
+    {
+        // Calculate spread rate for Two Fuel Models
+        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceInputs_, surfaceFireSpread_);
+        surfaceTwoFuelModels.calculateWeightedSpreadRate(directionOfInterest);
+    }
+    else // Use only one fuel model
+    {
+        // Calculate spread rate
+        surfaceFireSpread_.calculateForwardSpreadRate(directionOfInterest);
+    }
+    setHasDirectionOfInterest(false);
 }
 
 double Surface::calculateFlameLength(double firelineIntensity)

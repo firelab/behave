@@ -57,7 +57,8 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
 
-    void doSurfaceRun(double directionOfInterest = DirectionOFInterest::DIRECTION_OF_MAXIMUM_SPREAD);
+    void doSurfaceRunInDirectionOfMaxSpread();
+    void doSurfaceRunInDirectionOfInterest(double directionOfInterest);
 
     bool isFuelModelDefined(int fuelModelNumber) const;
 

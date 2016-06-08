@@ -17,6 +17,8 @@ public:
     double calculateSpreadRateAtVector(double directionOfInterest);
     double calculateFlameLength(double firelineIntensity);
 
+    void setHasDirectionOfInterest(bool hasDirectionOfInterest);
+
     // Public getters
     double getFuelbedDepth() const;
     double getSpreadRate() const;
@@ -36,7 +38,7 @@ public:
     double getEllipticalB() const;
     double getEllipticalC() const;
     bool getIsWindLimitExceeded() const;
-
+ 
 private:
     // Private setters
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
@@ -78,7 +80,9 @@ private:
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
   
     // Member variables
-    bool   isWindLimitExceeded_;
+    bool hasDirectionOfInterest_;
+    bool isWindLimitExceeded_;
+    double directionOfInterest_;
     double effectiveWindSpeed_;
     double windSpeedLimit_;
     double phiS_;											// Slope factor, Rothermel 1972, equation 51

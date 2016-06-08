@@ -157,10 +157,15 @@ void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, dou
         slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-void BehaveRun::doSurfaceRun(double directionOfInterest)
+void BehaveRun::doSurfaceRunInDirectionOfMaxSpread()
+{
+    surface_.doSurfaceRunInDirectionOfMaxSpread();
+}
+
+void BehaveRun::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
 {
     // Calculate SURFACE Module outputs
-    surface_.doSurfaceRun(directionOfInterest);
+    surface_.doSurfaceRunInDirectionOfInterest(directionOfInterest);
 }
 
 void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
