@@ -140,8 +140,6 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-    //initializeMembers();
-
     setSlope(slope);
     aspect_ = aspect;
 
@@ -192,9 +190,8 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    //firstFuelModelNumber_ = firstfuelModelNumber;
     secondFuelModelNumber_ = secondFuelModelNumber;
-    firstFuelModelCoverage_ = firstFuelModelCoverage;
+    firstFuelModelCoverage_ = firstFuelModelCoverage / 100.0;
 
     isUsingTwoFuelModels_ = true;
 
@@ -299,7 +296,7 @@ void SurfaceInputs::setSlope(double slope)
     if (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT)
     {
         const double PI = 3.141592653589793238463;
-        slope = (180 / PI) * atan(slope / 100); // slope is now in degees
+        slope = (180 / PI) * atan(slope / 100.0); // slope is now in degees
     }
     slope_ = slope;
 }
@@ -321,7 +318,7 @@ void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoF
 
 void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
 {
-    firstFuelModelCoverage_ = firstFuelModelCoverage;
+    firstFuelModelCoverage_ = firstFuelModelCoverage / 100.0;
 }
 
 void  SurfaceInputs::setWindSpeed(double windSpeed)

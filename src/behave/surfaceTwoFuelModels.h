@@ -14,7 +14,7 @@ class SurfaceTwoFuelModels
 {
 public:
     SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFireSpread& surfaceFireSpread);
-    double calculateWeightedSpreadRate(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
+    void calculateWeightedSpreadRate(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
 
     //public getters
     bool getWindLimitExceeded() const;

@@ -96,7 +96,7 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
 *       SurfaceInputs (object)
 */
 
-double SurfaceTwoFuelModels::calculateWeightedSpreadRate(bool hasDirectionOfInterest, double directionOfInterest)
+void SurfaceTwoFuelModels::calculateWeightedSpreadRate(bool hasDirectionOfInterest, double directionOfInterest)
 {   
     fuelModelNumber_[TwoFuelModels::FIRST] = surfaceInputs_->getFirstFuelModelNumber();
     fuelModelNumber_[TwoFuelModels::SECOND] = surfaceInputs_->getSecondFuelModelNumber();
@@ -152,7 +152,6 @@ double SurfaceTwoFuelModels::calculateWeightedSpreadRate(bool hasDirectionOfInte
         surfaceFireSpread_->setFlameLength(flameLength_);
 
         fuelbedDepth_ = fuelbedDepthForFuelModel_[i];
-
     }
     // Otherwise the wtd value depends upon Pat's criteria; could be wtd, min, max, or primary
     else
@@ -213,8 +212,7 @@ double SurfaceTwoFuelModels::calculateWeightedSpreadRate(bool hasDirectionOfInte
         fuelbedDepth_ = (fuelbedDepthForFuelModel_[TwoFuelModels::FIRST] > fuelbedDepthForFuelModel_[TwoFuelModels::SECOND]) ?
             fuelbedDepthForFuelModel_[TwoFuelModels::FIRST] : fuelbedDepthForFuelModel_[TwoFuelModels::SECOND];
     }
-
-    return spreadRate_;
+    surfaceFireSpread_->forwardSpreadRate_ = spreadRate_;
 }
 
 double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *cov, int fuels,
@@ -296,6 +294,8 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
         lengthToWidthRatioForFuelModel_[i] = surfaceFireSpread_->getFireLengthToWidthRatio();
         heatPerUnitAreaForFuelModel_[i] = surfaceFireSpread_->getHeatPerUnitArea();
     }
+    // Restore state of surfaceInputs
+    surfaceInputs_->setFuelModelNumber(fuelModelNumber_[TwoFuelModels::FIRST]);
 }
 
 void SurfaceTwoFuelModels::calculateSpreadRateBasedOnMethod()
@@ -319,8 +319,8 @@ void SurfaceTwoFuelModels::calculateSpreadRateBasedOnMethod()
     // else if Finney's 2-dimensional spread rate...
     else if (twoFuelModelsMethod == TwoFuelModels::TWO_DIMENSIONAL)
     {
-        //double lbRatio = lengthToWidthRatio[0]; // get first fuel model's length-to-width ratio
-        double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::SECOND]; // get second fuel model's length-to-width ratio, seems to agree with BehavePlus
+        //double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::FIRST]; // get first fuel model's length-to-width ratio
+        double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::SECOND]; // using fuel model's length-to-width ratio seems to agree with BehavePlus
         int samples = 2; // from behavePlus.xml
         int depth = 2; // from behavePlus.xml
         int laterals = 0; // from behavePlus.xml

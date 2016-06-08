@@ -100,6 +100,17 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     // Test upslope oriented mode, 20 foot uplsope wind 
+    behaveRun.setFuelModelNumber(1);
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 21.971217;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setFuelModelNumber(124);
+
+    // Test upslope oriented mode, 20 foot uplsope wind 
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
@@ -199,10 +210,72 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
 
     // Test upslope oriented mode, 20 foot wind, low moisture conditions
     setSurfaceInputsForTwoFuelModelsLowMoistureScenario(behaveRun);
+
+    // Do runs for first fuel model coverage 0-100 with step size 10
     behaveRun.setTwoFuelModelsFirstFuelModelCoverage(0);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
     expectedSurfaceFireSpreadRate = 8.876216;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(10);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 10.446373;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(20);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 12.112509;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(30);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 13.825904;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(40);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 15.532700;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(50);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 17.173897;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(60);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 18.685358;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(70);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 19.997806;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(80);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 21.036826;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(90);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 21.722861;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveRun.setTwoFuelModelsFirstFuelModelCoverage(100);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 21.971217;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 

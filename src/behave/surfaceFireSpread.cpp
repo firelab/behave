@@ -180,19 +180,15 @@ double SurfaceFireSpread::calculateForwardSpreadRate(bool hasDirectionOfInterest
     // Calculate fire ellipse
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
+    calculateFireFirelineIntensity();
+    calculateFlameLength();
+    maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
     if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
-        calculateFireFirelineIntensity();
-        calculateFlameLength();
-        maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
         forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
+        calculateFlameLength(); // recalculate flame length in direction of interest
     }
-    else
-    {
-        calculateFireFirelineIntensity();
-        calculateFlameLength();
-        maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
-    }
+    
     calculateBackingSpreadRate();
     calculateEllipticalDimensions();
     calculateHeatPerUnitArea();
@@ -613,7 +609,6 @@ void SurfaceFireSpread::setMidflameWindSpeed(double midflameWindSpeed)
 
 void SurfaceFireSpread::initializeMembers()
 {
-    //hasDirectionOfInterest_ = getHasDirectionOfInterest();
     isWindLimitExceeded_ = false;
     effectiveWindSpeed_ = 0.0;
     windSpeedLimit_ = 0.0;
