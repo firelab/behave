@@ -290,6 +290,53 @@ double Crown::calculateWindSpeedAtTwentyFeet()
     return windSpeedAtTwentyFeet_;
 }
 
+//----------------------------------------------------------------------------------
+/*! \brief Calculates the fire type; surface, passive, or active.
+*
+*  \param transitionRatio  Crown fire transition ratio.
+*  \param activeRatio      Crown fire active ratio.
+*
+*  \retval SURFACE                  == Surface: surface fire with no torching or
+*                                       crown fire spread.
+*  \retval TORCHING                 == Torching: surface fire with torching.
+*  \retval CONDITIONAL_CROWN_FIRE   == Conditional crown fire: conditions indicate 
+*                                       the fire will not transition from the 
+*                                       surface to the crown. But if it does, an 
+*                                       active crown fire may result.
+*  \retval CROWNING                 == Crowing: active crown fire, fire is spreading
+*                                       through the canopy.
+*/
+
+FireType::FireTypeEnum Crown::calculateFireType()
+{
+    FireType::FireTypeEnum status = FireType::SURFACE;
+    // If the fire CAN NOT transition to the crown ...
+    if (crownFireTransitionRatio_ < 1.0)
+    {
+        if (crownFireActiveRatio_ < 1.0)
+        {
+            status = FireType::SURFACE; // Surface fire
+        }
+        else // crownFireActiveRatio_ >= 1.0 
+        {
+            status = FireType::CONDITIONAL_CROWN_FIRE; // Conditional crown fire
+        }
+    }
+    // If the fire CAN transition to the crown ...
+    else // crownFireTransitionRatio_ >= 1.0 )
+    {
+        if (crownFireActiveRatio_ < 1.0)
+        {
+            status = FireType::TORCHING; // Torching
+        }
+        else // crownFireActiveRatio_ >= 1.0
+        {
+            status = FireType::CROWNING; // Crowning
+        }
+    }
+    return status;
+}
+
 void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface_ is pointing to

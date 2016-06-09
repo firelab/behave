@@ -2,6 +2,7 @@
 #define CROWN_HEADER
 
 #include "crownInputs.h"
+#include "crownEnums.h"
 #include "surface.h"
 
 class FuelModelSet;
@@ -43,6 +44,7 @@ private:
     void calculateCrownFireTransitionRatio();
     void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
+    FireType::FireTypeEnum calculateFireType();
     double calculateWindSpeedAtTwentyFeet();
 
     // Member variables
