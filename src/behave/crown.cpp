@@ -41,8 +41,9 @@ Crown::Crown(const FuelModelSet& fuelModelSet, const Surface& surface)
 {
     fuelModelSet_ = &fuelModelSet; // point to the same location as BehaveRun'sfuelModels
     surface_ = &surface; // point to the same location as BehaveRun's surface
-
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surfaceInputs is pointing to
+
+    initializeMemmbers();
 }
 
 Crown::~Crown()
@@ -57,6 +58,25 @@ Crown::Crown(const Crown &rhs)
     surface_ = rhs.surface_;
     crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
     crownInputs_ = rhs.crownInputs_;
+
+    fireType_ = rhs.fireType_;
+    crownCopyOfSurfaceHeatPerUnitArea_ = rhs.crownCopyOfSurfaceHeatPerUnitArea_;
+    crownCopyOfSurfaceFirelineIntensity_ = rhs.crownCopyOfSurfaceFirelineIntensity_;
+    crownFuelLoad_ = rhs.crownFuelLoad_;
+    canopyHeatPerUnitArea_ = rhs.canopyHeatPerUnitArea_;
+    crownFireHeatPerUnitArea_ = rhs.crownFireHeatPerUnitArea_;
+    crownFirelineIntensity_ = rhs.crownFirelineIntensity_;
+    crownFlameLength_ = rhs.crownFlameLength_;
+    crownFireSpreadRate_ = rhs.crownFireSpreadRate_;
+    crownCriticalSurfaceFireIntensity_ = rhs.crownCriticalSurfaceFireIntensity_;
+    crownCriticalFireSpreadRate_ = rhs.crownCriticalFireSpreadRate_;
+    crownCriticalSurfaceFlameLength_ = rhs.crownCriticalSurfaceFlameLength_;
+    crownPowerOfFire_ = rhs.crownPowerOfFire_;
+    crownPowerOfWind_ = rhs.crownPowerOfWind_;
+    crownFirePowerRatio_ = rhs.crownFirePowerRatio_;
+    crownFireActiveRatio_ = rhs.crownFireActiveRatio_;
+    crownFireTransitionRatio_ = rhs.crownFireTransitionRatio_;
+    windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
 }
 
 Crown& Crown::operator= (const Crown& rhs)
@@ -67,6 +87,25 @@ Crown& Crown::operator= (const Crown& rhs)
         surface_ = rhs.surface_;
         crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
         crownInputs_ = rhs.crownInputs_;
+
+        fireType_ = rhs.fireType_;
+        crownCopyOfSurfaceHeatPerUnitArea_ = rhs.crownCopyOfSurfaceHeatPerUnitArea_;
+        crownCopyOfSurfaceFirelineIntensity_ = rhs.crownCopyOfSurfaceFirelineIntensity_;
+        crownFuelLoad_ = rhs.crownFuelLoad_;
+        canopyHeatPerUnitArea_ = rhs.canopyHeatPerUnitArea_;
+        crownFireHeatPerUnitArea_ = rhs.crownFireHeatPerUnitArea_;
+        crownFirelineIntensity_ = rhs.crownFirelineIntensity_;
+        crownFlameLength_ = rhs.crownFlameLength_;
+        crownFireSpreadRate_ = rhs.crownFireSpreadRate_;
+        crownCriticalSurfaceFireIntensity_ = rhs.crownCriticalSurfaceFireIntensity_;
+        crownCriticalFireSpreadRate_ = rhs.crownCriticalFireSpreadRate_;
+        crownCriticalSurfaceFlameLength_ = rhs.crownCriticalSurfaceFlameLength_;
+        crownPowerOfFire_ = rhs.crownPowerOfFire_;
+        crownPowerOfWind_ = rhs.crownPowerOfWind_;
+        crownFirePowerRatio_ = rhs.crownFirePowerRatio_;
+        crownFireActiveRatio_ = rhs.crownFireActiveRatio_;
+        crownFireTransitionRatio_ = rhs.crownFireTransitionRatio_;
+        windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
     }
     return *this;
 }
@@ -85,15 +124,14 @@ void Crown::doCrownRun()
     crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
     crownDeepCopyOfSurface_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
     crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
-    double windAdjustmentFactor = 0.4;      // wind adjustment factor is assumed to be 0.4 for crown ROS
 
+    double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
     windSpeedAtTwentyFeet_ = calculateWindSpeedAtTwentyFeet();
     double midflameWindSpeed = windAdjustmentFactor * windSpeedAtTwentyFeet_;
     crownDeepCopyOfSurface_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior
-    double directionOfInterest = 0;
-    crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
     crownFireSpreadRate_ = 3.34 * crownDeepCopyOfSurface_.getSpreadRate(); // Rothermel 1991
 
     //  Step 3:  Get values from Surface needed for further calculations 
@@ -117,11 +155,35 @@ void Crown::doCrownRun()
     calculateCrownPowerOfFire();
     calcuateCrownPowerOfWind();
     calcualteCrownFirePowerRatio();
+
+    calculateFireType();
 }
 
 double Crown::getCrownFireSpreadRate() const
 {
     return crownFireSpreadRate_;
+}
+
+void Crown::initializeMemmbers()
+{
+    fireType_ = FireType::SURFACE;
+    crownCopyOfSurfaceHeatPerUnitArea_ = 0.0;
+    crownCopyOfSurfaceFirelineIntensity_ = 0.0;
+    crownFuelLoad_ = 0.0;
+    canopyHeatPerUnitArea_ = 0.0;
+    crownFireHeatPerUnitArea_ = 0.0;
+    crownFirelineIntensity_ = 0.0;
+    crownFlameLength_ = 0.0;
+    crownFireSpreadRate_ = 0.0;
+    crownCriticalSurfaceFireIntensity_ = 0.0;
+    crownCriticalFireSpreadRate_ = 0.0;
+    crownCriticalSurfaceFlameLength_ = 0.0;
+    crownPowerOfFire_ = 0.0;
+    crownPowerOfWind_ = 0.0;
+    crownFirePowerRatio_ = 0.0;
+    crownFireActiveRatio_ = 0.0;
+    crownFireTransitionRatio_ = 0.0;
+    windSpeedAtTwentyFeet_ = 0.0;;
 }
 
 //------------------------------------------------------------------------------
@@ -338,19 +400,19 @@ double Crown::calculateWindSpeedAtTwentyFeet()
 *                                       through the canopy.
 */
 
-FireType::FireTypeEnum Crown::calculateFireType()
+void Crown::calculateFireType()
 {
-    FireType::FireTypeEnum status = FireType::SURFACE;
+    fireType_ = FireType::SURFACE;
     // If the fire CAN NOT transition to the crown ...
     if (crownFireTransitionRatio_ < 1.0)
     {
         if (crownFireActiveRatio_ < 1.0)
         {
-            status = FireType::SURFACE; // Surface fire
+            fireType_ = FireType::SURFACE; // Surface fire
         }
         else // crownFireActiveRatio_ >= 1.0 
         {
-            status = FireType::CONDITIONAL_CROWN_FIRE; // Conditional crown fire
+            fireType_ = FireType::CONDITIONAL_CROWN_FIRE; // Conditional crown fire
         }
     }
     // If the fire CAN transition to the crown ...
@@ -358,14 +420,13 @@ FireType::FireTypeEnum Crown::calculateFireType()
     {
         if (crownFireActiveRatio_ < 1.0)
         {
-            status = FireType::TORCHING; // Torching
+            fireType_ = FireType::TORCHING; // Torching
         }
         else // crownFireActiveRatio_ >= 1.0
         {
-            status = FireType::CROWNING; // Crowning
+            fireType_ = FireType::CROWNING; // Crowning
         }
     }
-    return status;
 }
 
 void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)

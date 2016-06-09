@@ -62,6 +62,7 @@ private:
     Surface crownDeepCopyOfSurface_;                    // deep copy of Surface's surface inputs to allow parallel runs in Surface
 
     // Private methods
+    void initializeMemmbers();
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();
     void calculateCrownFuelLoad();
@@ -75,10 +76,11 @@ private:
     void calculateCrownFireTransitionRatio();
     void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
-    FireType::FireTypeEnum calculateFireType();
+    void calculateFireType();
     double calculateWindSpeedAtTwentyFeet();
 
     // Member variables
+    FireType::FireTypeEnum fireType_;
     double crownCopyOfSurfaceHeatPerUnitArea_;
     double crownCopyOfSurfaceFirelineIntensity_;
     double crownFuelLoad_;                          // return Crown fire fuel load (lb / ft2)
