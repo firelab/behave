@@ -166,13 +166,13 @@ void SurfaceFireSpread::calculateFlameLength()
         : (0.45 * pow(firelineIntensity_, 0.46)));
 }
 
-double SurfaceFireSpread::calculateForwardSpreadRate(bool hasDirectionOfInterest, double directionOfInterest)
+double SurfaceFireSpread::calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest, double directionOfInterest)
 {
     // Reset member variables to prepare for next calculation
     initializeMembers();
 
     // Calculate fuelbed intermediates
-    surfaceFuelbedIntermediates_.calculateFuelbedIntermediates();
+    surfaceFuelbedIntermediates_.calculateFuelbedIntermediates(fuelModelNumber);
 
     // Get needed fuelbed intermediates
     double propagatingFlux = surfaceFuelbedIntermediates_.getPropagatingFlux();

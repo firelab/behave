@@ -34,15 +34,16 @@
 
 #include "surfaceEnums.h"
 
-class SurfaceInputs;
 class SurfaceFuelbedIntermediates;
 class SurfaceFireSpread;
 
 class SurfaceTwoFuelModels
 {
 public:
-    SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFireSpread& surfaceFireSpread);
-    void calculateWeightedSpreadRate(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
+    SurfaceTwoFuelModels(SurfaceFireSpread& surfaceFireSpread);
+    void calculateWeightedSpreadRate(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, 
+        int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
+        bool hasDirectionOfInterest = false, double directionOfInterest = -1);
 
     //public getters
     bool getWindLimitExceeded() const;
@@ -60,8 +61,6 @@ public:
     double getFireLengthToWidthRatio() const;
 
 private:
-  
-    SurfaceInputs* surfaceInputs_;
     SurfaceFireSpread* surfaceFireSpread_;
 
     double surfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
@@ -88,6 +87,7 @@ private:
     bool windLimitExceededForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];       // wind speed exceeded flag
 
     // Member variables
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;
     bool windLimitExceeded_;        // (flag)
     double reactionIntensity_;      // (Btu / ft2 / min)
     double spreadRate_;             // (ft / min)

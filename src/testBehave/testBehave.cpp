@@ -193,7 +193,6 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
 
 BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
 {
-    double firstFuelModelCoverage = 0;
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 

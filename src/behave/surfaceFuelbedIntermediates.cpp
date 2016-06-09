@@ -182,7 +182,7 @@ SurfaceFuelbedIntermediates::~SurfaceFuelbedIntermediates()
 
 }
 
-void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
+void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates(int fuelModelNumber)
 {
     // TODO: Look into the creation of two new classes, FuelBed and Particle, these
     // new classes should aid in refactoring and also improve the overall design - WMC 08/2015
@@ -198,7 +198,7 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates()
 
     initializeMembers(); // Reset member variables to zero to forget previous state  
 
-    fuelModelNumber_ = surfaceInputs_->getFuelModelNumber();
+    fuelModelNumber_ = fuelModelNumber;
 
     setFuelLoad();
 

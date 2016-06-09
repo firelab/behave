@@ -44,7 +44,8 @@ public:
     SurfaceFireSpread& operator= (const SurfaceFireSpread& rhs);
     SurfaceFireSpread(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
-    double calculateForwardSpreadRate(bool hasDirectionOfInterest = false, double directionOfInterest = -1.0);
+    double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false, 
+        double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
     double calculateFlameLength(double firelineIntensity);
 
@@ -74,7 +75,6 @@ protected:
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
     void setEffectiveWindSpeed(double effectiveWindSpeed);
     void setFirelineIntensity(double firelineIntensity);
-    void setMaxFlameLength(double maxFlameLength);
     void setFlameLength(double flameLength);
     void setFireLengthToWidthRatio(double lengthToWidthRatio);
     void setResidenceTime(double residenceTime);

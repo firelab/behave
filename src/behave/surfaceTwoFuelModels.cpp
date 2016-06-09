@@ -36,11 +36,9 @@
 #include "randthread.h"
 #include "surfaceFireSpread.h"
 #include "surfaceFuelbedIntermediates.h"
-#include "surfaceInputs.h"
 
-SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceInputs& surfaceInputs, SurfaceFireSpread& surfaceFireSpread)
+SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceFireSpread& surfaceFireSpread)
 {
-    surfaceInputs_ = &surfaceInputs;
     surfaceFireSpread_ = &surfaceFireSpread;
 }
 
@@ -127,12 +125,14 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
 *       SurfaceInputs (object)
 */
 
-void SurfaceTwoFuelModels::calculateWeightedSpreadRate(bool hasDirectionOfInterest, double directionOfInterest)
+void SurfaceTwoFuelModels::calculateWeightedSpreadRate(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod,
+    int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
+    bool hasDirectionOfInterest, double directionOfInterest)
 {   
-    fuelModelNumber_[TwoFuelModels::FIRST] = surfaceInputs_->getFirstFuelModelNumber();
-    fuelModelNumber_[TwoFuelModels::SECOND] = surfaceInputs_->getSecondFuelModelNumber();
+    fuelModelNumber_[TwoFuelModels::FIRST] = firstFuelModelNumber;
+    fuelModelNumber_[TwoFuelModels::SECOND] = secondFuelModelNumber;
 
-    coverageForFuelModel_[TwoFuelModels::FIRST] = surfaceInputs_->getFirstFuelModelCoverage();
+    coverageForFuelModel_[TwoFuelModels::FIRST] = firstFuelModelCoverage;
     coverageForFuelModel_[TwoFuelModels::SECOND] = 1 - coverageForFuelModel_[TwoFuelModels::FIRST];
 
     // Calculate fire outputs for each fuel model
@@ -142,6 +142,7 @@ void SurfaceTwoFuelModels::calculateWeightedSpreadRate(bool hasDirectionOfIntere
     // Determine and store combined fuel model outputs
     //------------------------------------------------
     // Fire spread rate depends upon the weighting method...
+    twoFuelModelsMethod_ = twoFuelModelsMethod;
     calculateSpreadRateBasedOnMethod();
 
     // The following assignments are based on Pat's rules:
@@ -307,10 +308,9 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
 {
     for (int i = 0; i < TwoFuelModels::NUMBER_OF_MODELS; i++)
     {
-        surfaceInputs_->setFuelModelNumber(fuelModelNumber_[i]);
         fuelbedDepthForFuelModel_[i] = surfaceFireSpread_->getFuelbedDepth();
 
-        rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(hasDirectionOfInterest, directionOfInterest);
+        rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(fuelModelNumber_[i], hasDirectionOfInterest, directionOfInterest);
 
         reactionIntensityForFuelModel_[i] = surfaceFireSpread_->getReactionIntensity();
         dirMaxSpreadForFuelModel_[i] = surfaceFireSpread_->getDirectionOfMaxSpread();
@@ -325,21 +325,18 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
         lengthToWidthRatioForFuelModel_[i] = surfaceFireSpread_->getFireLengthToWidthRatio();
         heatPerUnitAreaForFuelModel_[i] = surfaceFireSpread_->getHeatPerUnitArea();
     }
-    // Restore state of surfaceInputs
-    surfaceInputs_->setFuelModelNumber(fuelModelNumber_[TwoFuelModels::FIRST]);
 }
 
 void SurfaceTwoFuelModels::calculateSpreadRateBasedOnMethod()
 {
     // If area weighted spread rate ...
-    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_->getTwoFuelModelsMethod();
-    if (twoFuelModelsMethod == TwoFuelModels::ARITHMETIC)
+    if (twoFuelModelsMethod_ == TwoFuelModels::ARITHMETIC)
     {
         spreadRate_ = (coverageForFuelModel_[TwoFuelModels::FIRST] * rosForFuelModel_[TwoFuelModels::FIRST]) +
             (coverageForFuelModel_[TwoFuelModels::SECOND] * rosForFuelModel_[TwoFuelModels::SECOND]);
     }
     // else if harmonic mean spread rate...
-    else if (twoFuelModelsMethod == TwoFuelModels::HARMONIC)
+    else if (twoFuelModelsMethod_ == TwoFuelModels::HARMONIC)
     {
         if (rosForFuelModel_[TwoFuelModels::FIRST] > 0.000001 && rosForFuelModel_[TwoFuelModels::SECOND] > 0.000001)
         {
@@ -348,7 +345,7 @@ void SurfaceTwoFuelModels::calculateSpreadRateBasedOnMethod()
         }
     }
     // else if Finney's 2-dimensional spread rate...
-    else if (twoFuelModelsMethod == TwoFuelModels::TWO_DIMENSIONAL)
+    else if (twoFuelModelsMethod_ == TwoFuelModels::TWO_DIMENSIONAL)
     {
         //double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::FIRST]; // get first fuel model's length-to-width ratio
         double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::SECOND]; // using fuel model's length-to-width ratio seems to agree with BehavePlus

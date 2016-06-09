@@ -61,18 +61,24 @@ Surface& Surface::operator= (const Surface& rhs)
 
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
 {
-    double directionOfInterest = -1;
+    double directionOfInterest = -1; // dummy value
     bool hasDirectionOfInterest = false;
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
-        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceInputs_, surfaceFireSpread_);
-        surfaceTwoFuelModels.calculateWeightedSpreadRate(hasDirectionOfInterest, directionOfInterest);
+        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFireSpread_);
+        TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
+        int firstFuelModelNumber = surfaceInputs_.getFirstFuelModelNumber();
+        double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
+        int secondFuelModelNumber = surfaceInputs_.getSecondFuelModelNumber();
+        surfaceTwoFuelModels.calculateWeightedSpreadRate(twoFuelModelsMethod, firstFuelModelNumber, firstFuelModelCoverage, 
+            secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
     else // Use only one fuel model
     {
         // Calculate spread rate
-        surfaceFireSpread_.calculateForwardSpreadRate(hasDirectionOfInterest, directionOfInterest);
+        int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
+        surfaceFireSpread_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
 }
 
@@ -82,13 +88,19 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
-        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceInputs_, surfaceFireSpread_);
-        surfaceTwoFuelModels.calculateWeightedSpreadRate(hasDirectionOfInterest, directionOfInterest);
+        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFireSpread_);
+        TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
+        int firstFuelModelNumber = surfaceInputs_.getFirstFuelModelNumber();
+        double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
+        int secondFuelModelNumber = surfaceInputs_.getSecondFuelModelNumber();
+        surfaceTwoFuelModels.calculateWeightedSpreadRate(twoFuelModelsMethod, firstFuelModelNumber, firstFuelModelCoverage,
+            secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
     else // Use only one fuel model
     {
         // Calculate spread rate
-        surfaceFireSpread_.calculateForwardSpreadRate(hasDirectionOfInterest, directionOfInterest);
+        int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
+        surfaceFireSpread_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
 }
 
