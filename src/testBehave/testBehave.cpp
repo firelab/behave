@@ -336,7 +336,7 @@ BOOST_AUTO_TEST_SUITE_END()
 #ifndef NDEBUG
 BOOST_AUTO_TEST_CASE(waitInDebug)
 {
-    BOOST_CHECK_CLOSE(0.0, 0.0, ERROR_TOLERANCE);
+    BOOST_CHECK_EQUAL(0, 0);
     // Make Visual Studio wait while in debug mode
     std::cout << "Press Enter to continue . . .";
     std::cin.get();

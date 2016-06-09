@@ -124,7 +124,7 @@ private:
     double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
     double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
     double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
-    double heatPerUnitArea_;
+    double heatPerUnitArea_;                                // Heat per unit area (Btu/ft^2)
     double fireLengthToWidthRatio_;
     double residenceTime_;
     double reactionIntensity_;

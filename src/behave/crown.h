@@ -1,8 +1,7 @@
 /******************************************************************************
 *
 * Project:  CodeBlocks
-* Purpose:  Class for handling crown fire behavior based on the Facade OOP 
-*           Design Pattern and using the Rothermel spread model
+* Purpose:  Class for handling crown fire behavior
 * Author:   William Chatham <wchatham@fs.fed.us>
 * Credits:  Some portions of code in this file are, in part or in whole, from
 *           BehavePlus5 source originally authored by Collin D. Bevins and is
@@ -81,23 +80,23 @@ private:
     double calculateWindSpeedAtTwentyFeet();
 
     // Member variables
-    FireType::FireTypeEnum fireType_;
-    double crownCopyOfSurfaceHeatPerUnitArea_;
-    double crownCopyOfSurfaceFirelineIntensity_;
-    double crownFuelLoad_;                          // return Crown fire fuel load (lb / ft2)
-    double canopyHeatPerUnitArea_;
-    double crownFireHeatPerUnitArea_;
+    FireType::FireTypeEnum fireType_;               // Classification based on corwn fire active and transition ratios
+    double crownCopyOfSurfaceHeatPerUnitArea_;      // Copy of surface hpua used for parallel surface runs (Btu/ft^2)
+    double crownCopyOfSurfaceFirelineIntensity_;    // Copy of surface fireline intensity used for parallel surface runs
+    double crownFuelLoad_;                          // Crown fire fuel load (lb / ft^2)
+    double canopyHeatPerUnitArea_;                  // Canopy heat per unit area (Btu/ft^2)
+    double crownFireHeatPerUnitArea_;               // Crown fire heat per unit area (Btu/ft^2)
     double crownFirelineIntensity_;                 // Crown fire fireline intensity (Btu / ft / s)
     double crownFlameLength_;                       // Crown fire flame length (ft)
     double crownFireSpreadRate_;
     double crownCriticalSurfaceFireIntensity_;      // Critical surface fire intensity (Btu / ft / s)
     double crownCriticalFireSpreadRate_;            // Critical crown fire spread rate (ft / min)
     double crownCriticalSurfaceFlameLength_;        // Critical surface fire flame length (ft)
-    double crownPowerOfFire_;                       // Crown fire 'power of the fire' ( ft*lb / s / ft2)
-    double crownPowerOfWind_;                       // Crown fire 'power of the wind' ( ft*lb / s / ft2)
-    double crownFirePowerRatio_;
+    double crownPowerOfFire_;                       // Crown fire 'power of the fire' ( ft*lb / s / ft^2)
+    double crownPowerOfWind_;                       // Crown fire 'power of the wind' ( ft*lb / s / ft^2)
+    double crownFirePowerRatio_;                    // Crown fire power ratio
     double crownFireActiveRatio_;                   // Crown fire active ratio
-    double crownFireTransitionRatio_;
+    double crownFireTransitionRatio_;               // Crown fire transition ratio
     double windSpeedAtTwentyFeet_;
 };
 
