@@ -74,6 +74,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = TwoFuelModels::TWO_DIMENSIONAL;
     double windSpeed = 5.0;
     double windDirection = 0;
     double firstFuelModelCoverage = 0;
@@ -83,10 +84,9 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double canopyHeight = 30.0;
     double crownRatio = 0.50;
 
-    int fuelModelNumber = 124; // fuel model gs4(124) chosen as it is dynamic and has values for all moisture classes
     behaveRun.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
-        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::TWENTY_FOOT, windSpeed, windDirection, 
-        firstFuelModelCoverage, TwoFuelModels::TWO_DIMENSIONAL, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windHeightInputMode, windSpeed, windDirection,
+        firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
 BOOST_FIXTURE_TEST_SUITE(BehaveRunTest, BehaveTest)
@@ -98,17 +98,6 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     double expectedSurfaceFireSpreadRate = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-
-    // Test upslope oriented mode, 20 foot uplsope wind 
-    behaveRun.setFuelModelNumber(1);
-    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
-    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
-    expectedSurfaceFireSpreadRate = 21.971217;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
-
-    behaveRun.setFuelModelNumber(124);
 
     // Test upslope oriented mode, 20 foot uplsope wind 
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);

@@ -1,6 +1,35 @@
-#include "windAdjustmentFactor.h"
+/******************************************************************************
+*
+* Project:  CodeBlocks
+* Purpose:  Class for calculating wind adjustment factor
+* Author:   William Chatham <wchatham@fs.fed.us>
+* Credits:  Some portions of code in this file are, in part or in whole, from
+*           BehavePlus5 source originally authored by Collin D. Bevins and is
+*           used with or without modification.
+*
+******************************************************************************
+*
+* THIS SOFTWARE WAS DEVELOPED AT THE ROCKY MOUNTAIN RESEARCH STATION (RMRS)
+* MISSOULA FIRE SCIENCES LABORATORY BY EMPLOYEES OF THE FEDERAL GOVERNMENT
+* IN THE COURSE OF THEIR OFFICIAL DUTIES. PURSUANT TO TITLE 17 SECTION 105
+* OF THE UNITED STATES CODE, THIS SOFTWARE IS NOT SUBJECT TO COPYRIGHT
+* PROTECTION AND IS IN THE PUBLIC DOMAIN. RMRS MISSOULA FIRE SCIENCES
+* LABORATORY ASSUMES NO RESPONSIBILITY WHATSOEVER FOR ITS USE BY OTHER
+* PARTIES,  AND MAKES NO GUARANTEES, EXPRESSED OR IMPLIED, ABOUT ITS QUALITY,
+* RELIABILITY, OR ANY OTHER CHARACTERISTIC.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+* OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+* DEALINGS IN THE SOFTWARE.
+*
+*****************************************************************************/
 
 #include <cmath>
+#include "windAdjustmentFactor.h"
 
 WindAjustmentFactor::WindAjustmentFactor()
 {
@@ -11,22 +40,21 @@ WindAjustmentFactor::WindAjustmentFactor()
 
 //------------------------------------------------------------------------------
 /*! \brief Calculates the wind adjustment factor for scaling wind speed from
-* 20-ft to midflame height.
+*   20-ft to midflame height.
 *
-*  Original function used by BehavePlus by Collin Bevins
-*  For sheltered conditions under a canopy, Albini and Baughman (1979)
-*  equation 21 (page 9) is used for the wind adjustment factor.
+*   For sheltered conditions under a canopy, Albini and Baughman (1979)
+*   equation 21 (page 9) is used for the wind adjustment factor.
 *
-*  For unsheltered conditions, wind adjustment factor is calculated as an
+*   For unsheltered conditions, wind adjustment factor is calculated as an
 *	average from the top of the fuel bed to twice the fuel bed depth,
 *	using Albini and Baughman (1979) equation 9 (page 5).
 *
-*  \param canopyCover  Canopy cover projected onto ground [0..1].
-*  \param canopyHt     Tree canopy height from the ground (ft).
-*  \param crownRatio   Tree crown length-to-tree height ratio [0..1].
-*  \param fuelDepth    Fuel bed depth (ft).
+*   \param canopyCover  Canopy cover projected onto ground [0..1].
+*   \param canopyHeight Tree canopy height from the ground (ft).
+*   \param crownRatio   Tree crown length-to-tree height ratio [0..1].
+*   \param fuelbedDepth Fuel bed depth (ft).
 *
-*  \return Wind adjustment factor [0..1].
+*   \return Wind adjustment factor [0..1].
 */
 
 double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, double canopyHeight,
