@@ -63,6 +63,9 @@ public:
     double getEllipticalC() const;
    
     // SurfaceInputs setters
+    void setCanopyCover(double canopyCover);
+    void setCanopyHeight(double canopyHeight);
+    void setCrownRatio(double crownRatio);
     bool isUsingTwoFuelModels() const;
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour);
@@ -101,7 +104,9 @@ public:
 
     // SurfaceInputs getters
     //const SurfaceInputs& getSurfaceInputs() const;
+    double getCanopyCover() const;
     double getCanopyHeight() const;
+    double getCrownRatio() const;
     double getWindSpeed() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;

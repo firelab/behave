@@ -269,20 +269,66 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
 
 BOOST_AUTO_TEST_CASE(crownModuleTest)
 {
+    double canopyHeight = 30;
     double canopyBaseHeight = 6; 
     double canopyBulkDensity = 0.03;
     double foliarMoisture = 120;
     double observedCrownFireSpreadRate = 0;
     double expectedCrownFireSpreadRate = 0;
+    int expectedFireType = (int)FireType::SURFACE;
+    int observedFireType = (int)FireType::SURFACE;
 
+    // Test crown fire spread rate
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
-
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     behaveRun.doCrownRun();
     expectedCrownFireSpreadRate = 10.259921;
     observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getCrownFireSpreadRate());
     BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test fire type, Surface fire expected
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setMoistureOneHour(20);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.doCrownRun();
+    expectedFireType = (int)FireType::SURFACE;
+    observedFireType = (int)behaveRun.getFireType();
+    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+
+    // Test fire type, Torching fire expected
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.doCrownRun();
+    expectedFireType = (int)FireType::TORCHING;
+    observedFireType = (int)behaveRun.getFireType();
+    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+
+    // Test fire type, Crowning fire expected
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.setWindSpeed(10);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.doCrownRun();
+    expectedFireType = (int)FireType::CROWNING;
+    observedFireType = (int)behaveRun.getFireType();
+    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+
+    // Test fire type, Conditional crown fire expected
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    canopyHeight = 60;
+    behaveRun.setCanopyHeight(canopyHeight);
+    canopyBaseHeight = 30;
+    canopyBulkDensity = 0.06;
+    behaveRun.setWindSpeed(5);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.doCrownRun();
+    expectedFireType = (int)FireType::CONDITIONAL_CROWN_FIRE;
+    observedFireType = (int)behaveRun.getFireType();
+    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -62,6 +62,21 @@ BehaveRun::~BehaveRun()
     // Default Destructor
 }
 
+void BehaveRun::setCanopyCover(double canopyCover)
+{
+    surface_.setCanopyCover(canopyCover);
+}
+
+void BehaveRun::setCanopyHeight(double canopyHeight)
+{
+    surface_.setCanopyHeight(canopyHeight);
+}
+
+void BehaveRun::setCrownRatio(double crownRatio)
+{
+    surface_.setCrownRatio(crownRatio);
+}
+
 void BehaveRun::setFuelModelSet(FuelModelSet& fuelModelSet)
 {
     // makes this behaveRun's fuelModelSet_ point to the FuelModelSet given to this method as a parameter
@@ -277,6 +292,21 @@ bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
 }
 
+double BehaveRun::getCanopyCover() const
+{
+    return surface_.getCanopyCover();
+}
+
+double BehaveRun::getCanopyHeight() const
+{
+    return surface_.getCanopyHeight();
+}
+
+double BehaveRun::getCrownRatio() const
+{
+    return surface_.getCrownRatio();
+}
+
 void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
     crown_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
@@ -292,4 +322,9 @@ double BehaveRun::getCrownFireSpreadRate() const
 {
     const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
     return crown_.getCrownFireSpreadRate() * FEET_PER_MIN_TO_CHAINS_PER_HOUR;
+}
+
+FireType::FireTypeEnum BehaveRun::getFireType() const
+{
+    return crown_.getFireType();
 }

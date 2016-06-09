@@ -47,6 +47,9 @@ public:
     ~BehaveRun();
 
     // SURFACE Module Inputs
+    void setCanopyCover(double canopyCover);
+    void setCanopyHeight(double canopyHeight);
+    void setCrownRatio(double crownRatio);
     void setFuelModelSet(FuelModelSet& fuelModelSet);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour);
@@ -89,6 +92,9 @@ public:
     bool isFuelModelDefined(int fuelModelNumber) const;
 
     // SURFACE Module Getters
+    double getCanopyCover() const;
+    double getCanopyHeight() const;
+    double getCrownRatio() const;
     double getSurfaceFireSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
@@ -110,6 +116,7 @@ public:
 
     // CROWN Module Getters
     double getCrownFireSpreadRate() const;
+    FireType::FireTypeEnum getFireType() const;
 
 private:
     // Fuel models (orginal 13, 40 and custom)

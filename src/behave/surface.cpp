@@ -170,14 +170,39 @@ double Surface::getEllipticalC() const
     return surfaceFireSpread_.getEllipticalC();
 }
 
+void Surface::setCanopyCover(double canopyCover)
+{
+    surfaceInputs_.setCanopyCover(canopyCover);
+}
+
+void Surface::setCanopyHeight(double canopyHeight)
+{
+    surfaceInputs_.setCanopyHeight(canopyHeight);
+}
+
+void Surface::setCrownRatio(double crownRatio)
+{
+    surfaceInputs_.setCrownRatio(crownRatio);
+}
+
 bool Surface::isUsingTwoFuelModels() const
 {
     return surfaceInputs_.isUsingTwoFuelModels();
 }
 
+double Surface::getCanopyCover() const
+{
+    return surfaceInputs_.getCanopyCover();
+}
+
 double Surface::getCanopyHeight() const
 {
     return surfaceInputs_.getCanopyHeight();
+}
+
+double Surface::getCrownRatio() const
+{
+    return surfaceInputs_.getCrownRatio();
 }
 
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum Surface::getWindAndSpreadOrientationMode() const

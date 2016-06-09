@@ -259,6 +259,21 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     DBH_ = DBH;
 }
 
+void SurfaceInputs::setCanopyCover(double canopyCover)
+{
+    canopyCover_ = canopyCover;
+}
+
+void SurfaceInputs::setCanopyHeight(double canopyHeight)
+{
+    canopyHeight_ = canopyHeight;
+}
+
+void SurfaceInputs::setCrownRatio(double crownRatio)
+{
+    crownRatio_ = crownRatio;
+}
+
 void SurfaceInputs::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode)
 {
     windAndSpreadOrientationMode_ = windAndSpreadOrientationMode;

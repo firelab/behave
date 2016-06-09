@@ -52,6 +52,7 @@ public:
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
     double getCrownFireSpreadRate() const;
+    FireType::FireTypeEnum getFireType() const;
 
 private:
     const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object

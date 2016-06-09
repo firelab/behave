@@ -164,6 +164,11 @@ double Crown::getCrownFireSpreadRate() const
     return crownFireSpreadRate_;
 }
 
+FireType::FireTypeEnum Crown::getFireType() const
+{
+    return fireType_;
+}
+
 void Crown::initializeMemmbers()
 {
     fireType_ = FireType::SURFACE;
