@@ -4,9 +4,6 @@
 * Purpose:  Class for calculating values associated with surface fires used
 *           in Rothermel Model
 * Author:   William Chatham <wchatham@fs.fed.us>
-* Credits:  Some of the code in this file is, in part or in whole, from
-*           BehavePlus5 source originally authored by Collin D. Bevins and is
-*           used with or without modification.
 *
 *******************************************************************************
 *

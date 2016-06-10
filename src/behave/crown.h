@@ -3,9 +3,6 @@
 * Project:  CodeBlocks
 * Purpose:  Class for handling crown fire behavior
 * Author:   William Chatham <wchatham@fs.fed.us>
-* Credits:  Some of the code in this file is, in part or in whole, from
-*           BehavePlus5 source originally authored by Collin D. Bevins and is
-*           used with or without modification.
 *
 *******************************************************************************
 *
