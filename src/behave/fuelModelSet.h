@@ -4,11 +4,11 @@
 * Purpose:  Class for handling values associated with fuel models used in the
 *           Rothermel model
 * Author:   William Chatham <wchatham@fs.fed.us>
-* Credits:  Some portions of code in this file are, in part or in whole, from
+* Credits:  Some of the code in this file is, in part or in whole, from
 *           BehavePlus5 source originally authored by Collin D. Bevins and is
 *           used with or without modification.
 *
-******************************************************************************
+*******************************************************************************
 *
 * THIS SOFTWARE WAS DEVELOPED AT THE ROCKY MOUNTAIN RESEARCH STATION (RMRS)
 * MISSOULA FIRE SCIENCES LABORATORY BY EMPLOYEES OF THE FEDERAL GOVERNMENT
@@ -27,7 +27,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *
-*****************************************************************************/
+******************************************************************************/
 
 #ifndef FUELMODELSET_HEADER
 #define FUELMODELSET_HEADER

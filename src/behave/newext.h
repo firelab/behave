@@ -4,11 +4,12 @@
 * Purpose:  Part of Mark Finney's EXRATE package for determining expected
 *           and harmonic mean spread rate in randomly arranged fuels
 * Author:   William Chatham <wchatham@fs.fed.us>
-* Credits:  Some portions of code in this file are, in part or in whole, from
-*           BehavePlus5 source originally authored by Collin D. Bevins and
-*           Mark Finney, and is used with or without modification.
+* Credits:  Some of the code in this file is, in part or in whole, from
+*           BehavePlus5 and EXRATE source originally authored by Collin D. 
+*           Bevins and Mark Finney respectively, and is used with or without 
+*           modification.
 *
-******************************************************************************
+*******************************************************************************
 *
 * THIS SOFTWARE WAS DEVELOPED AT THE ROCKY MOUNTAIN RESEARCH STATION (RMRS)
 * MISSOULA FIRE SCIENCES LABORATORY BY EMPLOYEES OF THE FEDERAL GOVERNMENT
@@ -27,25 +28,25 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *
-*****************************************************************************/
-//------------------------------------------------------------------------------
+******************************************************************************/
+//-----------------------------------------------------------------------------
 /*! \file newext.h
-    *  \version BehavePlus3
-    *  \author Copyright (C) 2002-2004 by Collin D. Bevins.  All rights reserved.
-    *
-    *  \brief Part of Mark Finney's EXRATE package for determining expected
-    *  and harmonic mean spread rate in randomly arranged fuels.
-    *
-    *  Original code by Mark Finney.  CDB has renamed all functions and
-    *  variables according to BehavePlus3 coding style.  The following files
-    *  make up the entire code package:
-    *  - newext.cpp
-    *  - newext.h
-    *  - randfuel.cpp
-    *  - randfuel.h
-    *  - randthread.cpp
-    *  - randthread.h
-    */
+*  \version BehavePlus3
+*  \author Copyright (C) 2002-2004 by Collin D. Bevins.  All rights reserved.
+*
+*  \brief Part of Mark Finney's EXRATE package for determining expected
+*  and harmonic mean spread rate in randomly arranged fuels.
+*
+*  Original code by Mark Finney.  CDB has renamed all functions and
+*  variables according to BehavePlus3 coding style.  The following files
+*  make up the entire code package:
+*  - newext.cpp
+*  - newext.h
+*  - randfuel.cpp
+*  - randfuel.h
+*  - randthread.cpp
+*  - randthread.h
+*/
 
 #ifndef _NEWEXT_H_
 #define _NEWEXT_H_

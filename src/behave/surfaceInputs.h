@@ -5,7 +5,7 @@
 *           in the Rothermel Model
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
-******************************************************************************
+*******************************************************************************
 *
 * THIS SOFTWARE WAS DEVELOPED AT THE ROCKY MOUNTAIN RESEARCH STATION (RMRS)
 * MISSOULA FIRE SCIENCES LABORATORY BY EMPLOYEES OF THE FEDERAL GOVERNMENT
@@ -24,7 +24,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *
-*****************************************************************************/
+******************************************************************************/
 
 #ifndef SURFACEINPUTS_HEADER
 #define SURFACEINPUTS_HEADER

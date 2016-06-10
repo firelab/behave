@@ -4,7 +4,7 @@
 * Purpose:  Class for storing various constant values used by the Surface class
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
-******************************************************************************
+*******************************************************************************
 *
 * THIS SOFTWARE WAS DEVELOPED AT THE ROCKY MOUNTAIN RESEARCH STATION (RMRS)
 * MISSOULA FIRE SCIENCES LABORATORY BY EMPLOYEES OF THE FEDERAL GOVERNMENT
@@ -23,7 +23,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *
-*****************************************************************************/
+******************************************************************************/
 
 #ifndef SURFACEENUMS_H
 #define SURFACEENUMS_H

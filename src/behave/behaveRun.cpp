@@ -5,7 +5,7 @@
 Pattern used to tie together the modules and objects used by Behave
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
-******************************************************************************
+*******************************************************************************
 *
 * THIS SOFTWARE WAS DEVELOPED AT THE ROCKY MOUNTAIN RESEARCH STATION (RMRS)
 * MISSOULA FIRE SCIENCES LABORATORY BY EMPLOYEES OF THE FEDERAL GOVERNMENT
@@ -24,7 +24,7 @@ Pattern used to tie together the modules and objects used by Behave
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *
-*****************************************************************************/
+******************************************************************************/
 
 #include "behaveRun.h"
 
