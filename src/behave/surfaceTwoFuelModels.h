@@ -68,7 +68,7 @@ private:
     void calculateFireOutputsForEachModel(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
     void calculateSpreadRateBasedOnMethod();
 
-    // Member arrays
+    // Member arrays, stores data for each of the two fuel models
     int fuelModelNumber_[TwoFuelModels::NUMBER_OF_MODELS];                      // fuel model number
     double coverageForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];              // percent coverage of fuel model
     double rosForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];                   // rate of spread
@@ -89,12 +89,12 @@ private:
     // Member variables
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;
     bool windLimitExceeded_;        // (flag)
-    double reactionIntensity_;      // (Btu / ft2 / min)
+    double reactionIntensity_;      // (Btu / ft^2 / min)
     double spreadRate_;             // (ft / min)
     double directionOfMaxSpread_;   // (clockwise from upslope or north)
     double effectiveWind_;          // (mi / h)
     double fuelbedDepth_;           // (ft)
-    double heatPerUnitArea_;        // (Btu / ft2)
+    double heatPerUnitArea_;        // (Btu / ft^2)
     double midFlameWindSpeed_;
     double windSpeedLimit_;         // (mi / h)
     double windAdjustmentFactor_;
