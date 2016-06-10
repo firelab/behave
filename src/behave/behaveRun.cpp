@@ -2,7 +2,7 @@
 *
 * Project:  CodeBlocks
 * Purpose:  Interface for Behave application based on the Facade OOP Design
-Pattern used to tie together the modules and objects used by Behave
+*           Pattern used to tie together the modules and objects used by Behave
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************

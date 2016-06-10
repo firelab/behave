@@ -2,7 +2,7 @@
 *
 * Project:  CodeBlocks
 * Purpose:  Interface for Behave application based on the Facade OOP Design 
-            Pattern used to tie together the modules and objects used by Behave
+*           Pattern used to tie together the modules and objects used by Behave
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************
@@ -46,7 +46,14 @@ public:
     BehaveRun& operator= (const BehaveRun& rhs);
     ~BehaveRun();
 
-    // SURFACE Module Inputs
+    // FuelModelSet Methods
+    bool isFuelModelDefined(int fuelModelNumber) const;
+
+    // SURFACE 
+    void doSurfaceRunInDirectionOfMaxSpread();
+    void doSurfaceRunInDirectionOfInterest(double directionOfInterest);
+    
+    // SURFACE Module Inputs Setters
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight);
     void setCrownRatio(double crownRatio);
@@ -86,11 +93,6 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
 
-    void doSurfaceRunInDirectionOfMaxSpread();
-    void doSurfaceRunInDirectionOfInterest(double directionOfInterest);
-
-    bool isFuelModelDefined(int fuelModelNumber) const;
-
     // SURFACE Module Getters
     double getCanopyCover() const;
     double getCanopyHeight() const;
@@ -119,7 +121,7 @@ public:
     FireType::FireTypeEnum getFireType() const;
 
 private:
-    // Fuel models (orginal 13, 40 and custom)
+    // Fuel model set (orginal 13, 40 and custom)
     FuelModelSet* fuelModelSet_;    // This must point to a valid reference passed to the constructor
 
     // SURFACE Module

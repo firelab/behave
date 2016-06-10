@@ -4,6 +4,9 @@
 * Purpose:  Class for handling values associated with fuel models used in the
 *           Rothermel model
 * Author:   William Chatham <wchatham@fs.fed.us>
+* Credits:  Some of the code in this corresponding cpp file is, in part or in
+*           whole, from BehavePlus5 source originally authored by Collin D.
+*           Bevins and is used with or without modification.
 *
 *******************************************************************************
 *
