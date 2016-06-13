@@ -77,6 +77,7 @@ public:
     void setAspect(double aspect);
     void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
+    void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);

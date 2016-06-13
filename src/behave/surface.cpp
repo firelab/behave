@@ -275,6 +275,11 @@ void Surface::setWindSpeed(double windSpeed)
     surfaceInputs_.setWindSpeed(windSpeed);
 }
 
+void Surface::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
+{
+    surfaceInputs_.setUserProvidedWindAdjustmentFactor(userProvidedWindAdjustmentFactor);
+}
+
 void Surface::setWindDirection(double windDirection)
 {
     surfaceInputs_.setWindDirection(windDirection);

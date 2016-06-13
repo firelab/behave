@@ -295,8 +295,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 
     // Test crown fire spread rate
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedCrownFireSpreadRate = 10.259921;
     observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getCrownFireSpreadRate());
@@ -305,8 +305,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     // Test fire type, Surface fire expected
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.setMoistureOneHour(20);
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::SURFACE;
     observedFireType = (int)behaveRun.getFireType();
@@ -314,8 +314,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 
     // Test fire type, Torching fire expected
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::TORCHING;
     observedFireType = (int)behaveRun.getFireType();
@@ -323,9 +323,9 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 
     // Test fire type, Crowning fire expected
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.setWindSpeed(10);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::CROWNING;
     observedFireType = (int)behaveRun.getFireType();
@@ -356,6 +356,8 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
 
     double expectedWindSpeed = 0;
     double observedWindSpeed = 0;
+    double expectedSurfaceFireSpreadRate = 0;
+    double observedSurfaceFireSpreadRate = 0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[1]);
@@ -368,6 +370,26 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     expectedWindSpeed = 10;
     observedWindSpeed = behaveVector[1].getWindSpeed();
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
+
+    FuelModelSet fuelModelSet;
+    BehaveRun behaveRun(fuelModelSet);
+
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 8.876216;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveVector[0].doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[0].getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 8.876216;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    behaveVector[1].doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[1].getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 12.722191;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()

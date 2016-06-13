@@ -75,7 +75,7 @@ SurfaceInputs::SurfaceInputs(const SurfaceInputs &rhs)
     aspenCuringLevel_ = rhs.aspenCuringLevel_;
     aspenFireSeverity_ = rhs.aspenFireSeverity_;
 
-    userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
+    userProvidedWindAdjustmentFactor_ = rhs.userProvidedWindAdjustmentFactor_;
 }
 
 SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
@@ -118,7 +118,7 @@ SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
         aspenCuringLevel_ = rhs.aspenCuringLevel_;
         aspenFireSeverity_ = rhs.aspenFireSeverity_;
 
-        userProvidedWindAdjustmentFactor_ = -rhs.userProvidedWindAdjustmentFactor_;
+        userProvidedWindAdjustmentFactor_ = rhs.userProvidedWindAdjustmentFactor_;
     }
     return *this;
 }

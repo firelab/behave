@@ -125,9 +125,8 @@ void Crown::doCrownRun()
     crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
 
     double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
+    crownDeepCopyOfSurface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
     windSpeedAtTwentyFeet_ = calculateWindSpeedAtTwentyFeet();
-    double midflameWindSpeed = windAdjustmentFactor * windSpeedAtTwentyFeet_;
-    crownDeepCopyOfSurface_.setWindSpeed(midflameWindSpeed);
 
     // Step 2: Determine fire behavior
     crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread

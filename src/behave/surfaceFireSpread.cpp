@@ -658,6 +658,7 @@ void SurfaceFireSpread::initializeMembers()
     reactionIntensity_ = 0.0;
     firelineIntensity_ = 0.0;
     flameLength_ = 0.0;
+    maxFlameLength_ = 0.0;
     backingSpreadRate_ = 0.0;
 
     midflameWindSpeed_ = 0.0;
