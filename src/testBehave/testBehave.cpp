@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include "fuelModelSet.h"
-#include "behaveRun.h"
+#include "behaveVector.h"
 
 // Define the error tolerance for double values
 static const double ERROR_TOLERANCE = 1e-07;
@@ -22,20 +22,35 @@ double roundToSixDecimalPlaces(const double numberToBeRounded)
     return roundedValue;
 }
 
-struct BehaveTest
+struct BehaveRunTest
 {
     FuelModelSet fuelModelSet;
     BehaveRun behaveRun;
 
-    BehaveTest()
+    BehaveRunTest()
         : behaveRun(fuelModelSet)
     {
-        BOOST_TEST_MESSAGE("Setup Behave test");
+        BOOST_TEST_MESSAGE("Setup BehaveRun test");
     }
 
-    ~BehaveTest()
+    ~BehaveRunTest()
     {
-        BOOST_TEST_MESSAGE("Teardown Behave test");
+        BOOST_TEST_MESSAGE("Teardown BehaveRun test");
+    }
+};
+
+struct BehaveVectorTest
+{
+    BehaveVector behaveVector;
+
+    BehaveVectorTest()
+    {
+        BOOST_TEST_MESSAGE("Setup BehaveVector test");
+    }
+
+    ~BehaveVectorTest()
+    {
+        BOOST_TEST_MESSAGE("Teardown BehaveVector test");
     }
 };
 
@@ -89,7 +104,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
         firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
-BOOST_FIXTURE_TEST_SUITE(BehaveRunTest, BehaveTest)
+BOOST_FIXTURE_TEST_SUITE(BehaveRunTestSuite, BehaveRunTest)
 
 BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 {
@@ -329,6 +344,26 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     expectedFireType = (int)FireType::CONDITIONAL_CROWN_FIRE;
     observedFireType = (int)behaveRun.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_FIXTURE_TEST_SUITE(BehaveVectorTestSuite, BehaveVectorTest)
+
+BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
+{
+    // Test to make sure that changes in one element do not affect another
+
+    double expectedWindSpeed = 0;
+    double observedWindSpeed = 0;
+
+    setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
+    setSurfaceInputsForGS4LowMoistureScenario(behaveVector[1]);
+    behaveVector[1].setWindSpeed(10);
+
+    expectedWindSpeed = 5;
+    observedWindSpeed = behaveVector[0].getWindSpeed();
+    BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

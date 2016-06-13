@@ -287,6 +287,11 @@ double BehaveRun::getEllipticalC() const
     return surface_.getEllipticalC();
 }
 
+double BehaveRun::getWindSpeed() const
+{
+    return surface_.getWindSpeed();
+}
+
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);

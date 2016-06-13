@@ -107,6 +107,7 @@ public:
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;
+    double getWindSpeed() const;
 
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
