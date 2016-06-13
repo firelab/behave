@@ -364,6 +364,10 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     expectedWindSpeed = 5;
     observedWindSpeed = behaveVector[0].getWindSpeed();
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
+
+    expectedWindSpeed = 10;
+    observedWindSpeed = behaveVector[1].getWindSpeed();
+    BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
