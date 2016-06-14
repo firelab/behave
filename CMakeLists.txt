@@ -25,11 +25,6 @@ IF(GUI)
     ADD_DEFINITIONS(-DGUI)
 ENDIF(GUI)
 
-OPTION(CANOPY "Enable Canopy Flow Test" OFF)
-IF(CANOPY)
-    ADD_DEFINITIONS(-DCANOPY)
-ENDIF(CANOPY)
-
 OPTION(TEST_BEHAVE "Enable Testing" OFF)
 IF(TEST_BEHAVE)
     ADD_DEFINITIONS(-DTEST_BEHAVE)
@@ -112,25 +107,6 @@ IF(TEST_BEHAVE)
         TARGET_LINK_LIBRARIES(testBehave ${Boost_LIBRARIES})
     ENDIF()
 ENDIF(TEST_BEHAVE)
-
-IF(CANOPY)
-    ADD_EXECUTABLE(canopy_flow 
-        ${SOURCE} 
-        src/canopyFlow/canopy.cpp
-        src/canopyFlow/canopyFlow.cpp 
-        src/canopyFlow/canopy_normal_distribution.cpp
-        src/canopyFlow/canopy_triangle_distribution.cpp
-        src/canopyFlow/massman_distribution.cpp
-        src/canopyFlow/measured_distribution.cpp
-        src/canopyFlow/main.cpp
-        ${HEADERS}
-        src/canopyFlow/canopy.h
-        src/canopyFlow/canopyFlow.h
-        src/canopyFlow/canopy_normal_distribution.h
-        src/canopyFlow/canopy_triangle_distribution.h
-        src/canopyFlow/massman_distribution.h
-        src/canopyFlow/measured_distribution.h)
-ENDIF(CANOPY)
 
 IF(CLI)
     ADD_EXECUTABLE(behave-cli 
