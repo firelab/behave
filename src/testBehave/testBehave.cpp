@@ -35,7 +35,7 @@ struct BehaveRunTest
 
     ~BehaveRunTest()
     {
-        BOOST_TEST_MESSAGE("Teardown BehaveRun test");
+        BOOST_TEST_MESSAGE("Teardown BehaveRun test\n");
     }
 };
 
@@ -50,7 +50,7 @@ struct BehaveVectorTest
 
     ~BehaveVectorTest()
     {
-        BOOST_TEST_MESSAGE("Teardown BehaveVector test");
+        BOOST_TEST_MESSAGE("Teardown BehaveVector test\n");
     }
 };
 
@@ -346,23 +346,22 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite
 
 BOOST_FIXTURE_TEST_SUITE(BehaveVectorTestSuite, BehaveVectorTest)
 
 BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
 {
-    // Test to make sure that changes in one element do not affect another
-
     double expectedWindSpeed = 0;
     double observedWindSpeed = 0;
     double expectedSurfaceFireSpreadRate = 0;
     double observedSurfaceFireSpreadRate = 0;
 
+    // Make sure that changes in one behaveVector's elements surfaceInputs do not affect another's surfaceInputs
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[1]);
     behaveVector[1].setWindSpeed(10);
-
+  
     expectedWindSpeed = 5;
     observedWindSpeed = behaveVector[0].getWindSpeed();
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
@@ -370,15 +369,6 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     expectedWindSpeed = 10;
     observedWindSpeed = behaveVector[1].getWindSpeed();
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
-
-    FuelModelSet fuelModelSet;
-    BehaveRun behaveRun(fuelModelSet);
-
-    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
-    expectedSurfaceFireSpreadRate = 8.876216;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveVector[0].doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[0].getSurfaceFireSpreadRate());
@@ -389,10 +379,9 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[1].getSurfaceFireSpreadRate());
     expectedSurfaceFireSpreadRate = 12.722191;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
-
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END() // End BehaveVectorTestSuite
 
 #ifndef NDEBUG
 BOOST_AUTO_TEST_CASE(waitInDebug)

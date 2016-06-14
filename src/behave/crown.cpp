@@ -126,7 +126,6 @@ void Crown::doCrownRun()
 
     double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
     crownDeepCopyOfSurface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
-    windSpeedAtTwentyFeet_ = calculateWindSpeedAtTwentyFeet();
 
     // Step 2: Determine fire behavior
     crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
