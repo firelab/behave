@@ -437,7 +437,7 @@ bool SurfaceInputs::hasUserEnteredWindAdjustmentFactor() const
 {
     bool userHasEnteredWindAdjustmentFactor = false;
 
-    if (userProvidedWindAdjustmentFactor_ < 0.0) // Negative 1 indicates nothing has been entered
+    if (userProvidedWindAdjustmentFactor_ > 0.0) // Negative 1 indicates nothing has been entered
     {
         userHasEnteredWindAdjustmentFactor = true;
     }
