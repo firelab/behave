@@ -48,6 +48,7 @@ SET(SOURCE
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
+    src/behave/spot.cpp
     src/behave/surface.cpp
     src/behave/surfaceFireReactionIntensity.cpp
     src/behave/surfaceFuelbedIntermediates.cpp
@@ -69,6 +70,7 @@ SET(HEADERS
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
     src/behave/randthread.h
+    src/behave/spot.h
     src/behave/surface.h
     src/behave/surfaceEnums.h
     src/behave/surfaceFireReactionIntensity.h
