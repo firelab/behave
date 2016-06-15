@@ -89,11 +89,57 @@ Spot::Spot()
         { 4.70, 0.000 }
     };
     memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
+
+    initializeMembers();
 }
 
 Spot::~Spot()
 {
 
+}
+
+Spot::Spot(const Spot & rhs)
+{
+    coverHeightUsedForSurfaceFire_ = rhs.coverHeightUsedForSurfaceFire_;
+    coverHeightUsedForBurningPile_ = rhs.coverHeightUsedForBurningPile_;
+    coverHeightUsedForTorchingTrees_ = rhs.coverHeightUsedForTorchingTrees_;
+    flameHeightForTorchingTrees_ = rhs.flameHeightForTorchingTrees_;
+    flameRatio_ = rhs.flameRatio_;
+    firebrandDrift_ = rhs.firebrandDrift_;
+    flameDuration_ = rhs.flameDuration_;
+    firebrandHeightFromBurningPile_ = rhs.firebrandHeightFromBurningPile_;
+    firebrandHeightFromSurfaceFire_ = rhs.firebrandHeightFromSurfaceFire_;
+    firebrandHeightFromTorchingTrees_ = rhs.firebrandHeightFromTorchingTrees_;
+    flatDistanceFromBurningPile_ = rhs.flatDistanceFromBurningPile_;
+    flatDistanceFromSurfaceFire_ = rhs.flatDistanceFromSurfaceFire_;
+    flatDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
+    mountainDistanceFromBurningPile_ = rhs.mountainDistanceFromBurningPile_;
+    mountainDistanceFromSurfaceFire_ = rhs.mountainDistanceFromBurningPile_;
+    mountainDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
+}
+
+Spot & Spot::operator=(const Spot & rhs)
+{
+    if (this != &rhs)
+    {
+        coverHeightUsedForSurfaceFire_ = rhs.coverHeightUsedForSurfaceFire_;
+        coverHeightUsedForBurningPile_ = rhs.coverHeightUsedForBurningPile_;
+        coverHeightUsedForTorchingTrees_ = rhs.coverHeightUsedForTorchingTrees_;
+        flameHeightForTorchingTrees_ = rhs.flameHeightForTorchingTrees_;
+        flameRatio_ = rhs.flameRatio_;
+        firebrandDrift_ = rhs.firebrandDrift_;
+        flameDuration_ = rhs.flameDuration_;
+        firebrandHeightFromBurningPile_ = rhs.firebrandHeightFromBurningPile_;
+        firebrandHeightFromSurfaceFire_ = rhs.firebrandHeightFromSurfaceFire_;
+        firebrandHeightFromTorchingTrees_ = rhs.firebrandHeightFromTorchingTrees_;
+        flatDistanceFromBurningPile_ = rhs.flatDistanceFromBurningPile_;
+        flatDistanceFromSurfaceFire_ = rhs.flatDistanceFromSurfaceFire_;
+        flatDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
+        mountainDistanceFromBurningPile_ = rhs.mountainDistanceFromBurningPile_;
+        mountainDistanceFromSurfaceFire_ = rhs.mountainDistanceFromBurningPile_;
+        mountainDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
+    }
+    return *this;
 }
 
 //-------------------------------------------------------------------------------------
@@ -103,6 +149,26 @@ Spot::~Spot()
  *  \param coverHeight          Tree/vegetation cover height(ft).
  *
  */
+
+void Spot::initializeMembers()
+{
+    coverHeightUsedForSurfaceFire_ = 0.0;
+    coverHeightUsedForBurningPile_ = 0.0;
+    coverHeightUsedForTorchingTrees_ = 0.0;
+    flameHeightForTorchingTrees_ = 0.0;
+    flameRatio_ = 0.0;
+    firebrandDrift_ = 0.0;
+    flameDuration_ = 0.0;
+    firebrandHeightFromBurningPile_ = 0.0;
+    firebrandHeightFromSurfaceFire_ = 0.0;
+    firebrandHeightFromTorchingTrees_ = 0.0;
+    flatDistanceFromBurningPile_ = 0.0;
+    flatDistanceFromSurfaceFire_ = 0.0;
+    flatDistanceFromTorchingTrees_ = 0.0;
+    mountainDistanceFromBurningPile_ = 0.0;
+    mountainDistanceFromSurfaceFire_ = 0.0;
+    mountainDistanceFromTorchingTrees_ = 0.0;
+}
 
 double Spot::calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight)
 {

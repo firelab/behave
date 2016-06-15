@@ -38,6 +38,9 @@ public:
     Spot();
     ~Spot();
     
+    Spot(const Spot &rhs);
+    Spot& operator= (const Spot& rhs);
+
     void calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight);
     void calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
@@ -67,6 +70,7 @@ private:
     static const int NUM_COLS = 2;
     static const int NUM_FIREBRAND_ROWS = 4;
 
+    void initializeMembers();
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
     double spotDistanceMountainTerrain(double flatDistance, int location, double ridgeToValleyDistance,
@@ -76,9 +80,9 @@ private:
     double speciesFlameDurationParameters_[NUM_SPECIES][NUM_COLS];
     double firebrandHeightFactors_[NUM_FIREBRAND_ROWS][NUM_COLS];
 
-    bool doSpotDistanceForBurningPile_;
-    bool doSpotDistanceForSurfaceFire_;
-    bool doSpotDistanceForForTorchingTrees_;
+    //bool doSpotDistanceForBurningPile_;
+    //bool doSpotDistanceForSurfaceFire_;
+    //bool doSpotDistanceForForTorchingTrees_;
     double coverHeightUsedForSurfaceFire_;      // Actual tree / vegetation ht used for surface fire(ft)
     double coverHeightUsedForBurningPile_;      // Actual tree / vegetation ht used for burning pile(ft)
     double coverHeightUsedForTorchingTrees_;    // Actual tree / vegetation ht used for burning pile(ft)
