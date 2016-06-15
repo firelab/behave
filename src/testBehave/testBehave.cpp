@@ -346,6 +346,33 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 }
 
+BOOST_AUTO_TEST_CASE(spotModuleTest)
+{
+    /*Location of the surface fire :
+        * 0 == midslope, windward
+        * 1 == valley bottom
+        * 2 == midslope, leeward
+        * 3 == ridge top            */
+    int location = 3;
+    double ridgeToValleyDistance = 1.0;
+    double ridgeToValleyElevation = 2000.0;
+    double downwindCoverHeight = 30.0;
+    double windSpeedAtTwentyFeet = 5.0;
+    double burningPileflameHeight = 5.0;
+    double flameLength = 0.0;
+    double expectedSpottingDistance = 0.0;
+    double observedSpottingDistance = 0.0;
+
+    expectedSpottingDistance = 0.164401;
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    flameLength = behaveRun.getFlameLength();
+
+    behaveRun.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
+    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxMountainTerrainSpottingDistanceFromSurfaceFire());
+    BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
+}
+
 BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite
 
 BOOST_FIXTURE_TEST_SUITE(BehaveVectorTestSuite, BehaveVectorTest)

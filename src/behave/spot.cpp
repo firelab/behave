@@ -188,7 +188,7 @@ double Spot::spotDistanceFlatTerrain(
 //---------------------------------------------------------------------------------------
 /*! \brief Calculates maximum spotting distance from a surface fire.
  *
- *  \param location                 Location of the burning pile:
+ *  \param location                 Location of the surface fire:
  *                                      0 == midslope, windward
  *                                      1 == valley bottom
  *                                      2 == midslope, leeward
@@ -197,7 +197,7 @@ double Spot::spotDistanceFlatTerrain(
  *                                  (mi).
  *  \param ridgeToValleyElevation   Vertical distance from ridge top to valley bottom
  *                                  (ft).
- *  \param coverHeight              Tree/vegetation cover height (ft).
+ *  \param downwindCoverHeight      Downwind tree/vegetation cover height (ft).
  *  \param windSpeedAtTwentyFeet    Wind speed at 20 ft (mi/h).
  *  \param flameLength              Surface fire flame length (ft).
  *  \param[out] heightUsed_         Actual tree/vegetation ht used (ft).
@@ -208,17 +208,16 @@ double Spot::spotDistanceFlatTerrain(
  *  \return Maximum sptting distance from the surface fire (mi).
  */
 
-double Spot::calculateSpottingDistanceFromSurfaceFire(
+void Spot::calculateSpottingDistanceFromSurfaceFire(
     int    location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation,
-    double coverHeight,
+    double downwindCoverHeight,
     double windSpeedAtTwentyFeet,
     double flameLength)
 {
     // Initialize return values
     firebrandHeightFromSurfaceFire_ = 0.0;
-    flatDistanceFromSurfaceFire_ = 0.0;
     flatDistanceFromSurfaceFire_ = 0.0;
     firebrandDrift_ = 0.0;
 
@@ -237,7 +236,7 @@ double Spot::calculateSpottingDistanceFromSurfaceFire(
             : (1.055 * sqrt(f * byrams));
 
         // Cover height used in calculation of localflatDistance.
-        coverHeightUsedForSurfaceFire_ = calculateSpotCriticalCoverHeight(firebrandHeightFromSurfaceFire_, coverHeight);
+        coverHeightUsedForSurfaceFire_ = calculateSpotCriticalCoverHeight(firebrandHeightFromSurfaceFire_, downwindCoverHeight);
 
         if (coverHeightUsedForSurfaceFire_ > 1e-7)
         {
@@ -247,8 +246,6 @@ double Spot::calculateSpottingDistanceFromSurfaceFire(
                 location, ridgeToValleyDistance, ridgeToValleyElevation);
         }
     }
-
-    return mountainDistanceFromSurfaceFire_;
 }
 
 //---------------------------------------------------------------------------------------
@@ -263,9 +260,9 @@ double Spot::calculateSpottingDistanceFromSurfaceFire(
  *                                  (mi).
  *  \param ridgeToValleyElevation   Vertical distance from ridge top to valley bottom
  *                                  (ft).
- *  \param coverHeight              Tree/vegetation cover height (ft).
+ *  \param downwindCoverHeight      Downwind tree/vegetation cover height (ft).
  *  \param windSpeedAtTwentyFeet    Wind speed at 20 ft (mi/h).
- *  \param flameHeight              Burning pile's flame height (ft).
+ *  \param burningPileflameHeight   Burning pile's flame height (ft).
  *  \param[out] heightUsed_         Actual tree/vegetation ht used (ft).
  *  \param[out] firebrandHeight_    Initial maximum firebrand height (ft).
  *  \param[out] flatDistance_       Maximum spotting distance over flat terrain (mi).
@@ -273,13 +270,13 @@ double Spot::calculateSpottingDistanceFromSurfaceFire(
  *  \return Maximum spotting distance from the burning pile (mi).
  */
 
-double Spot::calculateSpottingDistanceFromBurningPile(
+void Spot::calculateSpottingDistanceFromBurningPile(
     int    location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation,
-    double coverHeight,
+    double downwindCoverHeight,
     double windSpeedAtTwentyFeet,
-    double flameHeight)
+    double burningPileflameHeight)
 {
     // Initialize return values
     firebrandHeightFromBurningPile_ = 0.0;
@@ -287,13 +284,13 @@ double Spot::calculateSpottingDistanceFromBurningPile(
     mountainDistanceFromBurningPile_ = 0.0;
 
     // Determine maximum firebrand height
-    if ((windSpeedAtTwentyFeet > 1e-7) && (flameHeight > 1e-7))
+    if ((windSpeedAtTwentyFeet > 1e-7) && (burningPileflameHeight > 1e-7))
     {
         // Determine maximum firebrand height
-        firebrandHeightFromBurningPile_ = 12.2 * flameHeight;
+        firebrandHeightFromBurningPile_ = 12.2 * burningPileflameHeight;
 
         // Cover height used in calculation of flatDist.
-        coverHeightUsedForBurningPile_ = calculateSpotCriticalCoverHeight(firebrandHeightFromBurningPile_, coverHeight);
+        coverHeightUsedForBurningPile_ = calculateSpotCriticalCoverHeight(firebrandHeightFromBurningPile_, downwindCoverHeight);
         if (coverHeightUsedForBurningPile_ > 1e-7)
         {
             // Flat terrain spotting distance.
@@ -305,14 +302,12 @@ double Spot::calculateSpottingDistanceFromBurningPile(
                 location, ridgeToValleyDistance, ridgeToValleyElevation);
         } // if ht > 1e-7
     } // if windSpeedAt20Ft > 1e-7 && z > 1e-7
-
-    return mountainDistanceFromBurningPile_;
 }
 
 //---------------------------------------------------------------------------------------
 /*! \brief Calculates maximum spotting distance from a group of torching trees.
  *
- *  \param location				Location of the burning pile:
+ *  \param location				Location of the torching trees:
  *									0 == midslope, windward
  *									1 == valley bottom
  *									2 == midslope, leeward
@@ -321,7 +316,7 @@ double Spot::calculateSpottingDistanceFromBurningPile(
  *								    (mi).
  *  \param ridgeToValleyElev	    Vertical distance from ridge top to valley bottom
  *								    (ft).
- *  \param coverHeight		        Tree/vegetation cover height (ft).
+ *  \param downwindCoverHeight      Downwind tree/vegetation cover height (ft).
  *  \param windSpeedAtTwentyFeet    Wind speed at 20 ft (mi/h).
  *  \param torchingTrees		    Number of torching trees.
  *  \param treeDbh				    Tree dbh (in).
@@ -337,14 +332,14 @@ double Spot::calculateSpottingDistanceFromBurningPile(
  *  \return Maximum spotting distance from the torching trees (mi).
  */
 
-double Spot::calculateSpottingDistanceFromTorchingTrees(
+void Spot::calculateSpottingDistanceFromTorchingTrees(
     int    location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation,
-    double coverHeight,
+    double downwindCoverHeight,
     double windSpeedAtTwentyFeet,
     double torchingTrees,
-    double treeDBH,
+    double DBH,
     double treeHeight,
     int    treeSpecies)
 {
@@ -357,54 +352,126 @@ double Spot::calculateSpottingDistanceFromTorchingTrees(
     mountainDistanceFromTorchingTrees_ = 0.0;
 
     // Determine maximum firebrand height
-    if (windSpeedAtTwentyFeet > 1e-7 && treeDBH > 1e-7 && torchingTrees >= 1.0)
+    if (windSpeedAtTwentyFeet > 1e-7 && DBH > 1e-7 && torchingTrees >= 1.0)
     {
         // Catch species errors.
-        if (treeSpecies < 0 || treeSpecies >= 14)
+        if (!(treeSpecies < 0 || treeSpecies >= 14))
         {
-            return(mountainDistanceFromTorchingTrees_);
-        }
-        // Steady flame height (ft).
-        flameHeightForTorchingTrees_ = speciesFlameHeightParameters_[treeSpecies][0]
-            * pow(treeDBH, speciesFlameHeightParameters_[treeSpecies][1])
-            * pow(torchingTrees, 0.4);
+            // Steady flame height (ft).
+            flameHeightForTorchingTrees_ = speciesFlameHeightParameters_[treeSpecies][0]
+                * pow(DBH, speciesFlameHeightParameters_[treeSpecies][1])
+                * pow(torchingTrees, 0.4);
 
-        flameRatio_ = treeHeight / flameHeightForTorchingTrees_;
-        // Steady flame duration.
-        flameDuration_ = speciesFlameDurationParameters_[treeSpecies][0]
-            * pow(treeDBH, speciesFlameDurationParameters_[treeSpecies][1])
-            * pow(torchingTrees, -0.2);
+            flameRatio_ = treeHeight / flameHeightForTorchingTrees_;
+            // Steady flame duration.
+            flameDuration_ = speciesFlameDurationParameters_[treeSpecies][0]
+                * pow(DBH, speciesFlameDurationParameters_[treeSpecies][1])
+                * pow(torchingTrees, -0.2);
 
-        int i;
-        if (flameRatio_ >= 1.0)
-        {
-            i = 0;
-        }
-        else if (flameRatio_ >= 0.5)
-        {
-            i = 1;
-        }
-        else if (flameDuration_ < 3.5)
-        {
-            i = 2;
-        }
-        else
-        {
-            i = 3;
-        }
+            int i;
+            if (flameRatio_ >= 1.0)
+            {
+                i = 0;
+            }
+            else if (flameRatio_ >= 0.5)
+            {
+                i = 1;
+            }
+            else if (flameDuration_ < 3.5)
+            {
+                i = 2;
+            }
+            else
+            {
+                i = 3;
+            }
 
-        // Initial firebrand height (ft).
-        firebrandHeightFromTorchingTrees_ = firebrandHeightFactors_[i][0] * pow(flameDuration_, firebrandHeightFactors_[i][1]) * flameHeightForTorchingTrees_ + treeHeight / 2.0;
+            // Initial firebrand height (ft).
+            firebrandHeightFromTorchingTrees_ = firebrandHeightFactors_[i][0] * pow(flameDuration_, firebrandHeightFactors_[i][1]) * flameHeightForTorchingTrees_ + treeHeight / 2.0;
 
-        // Cover ht used in calculation of flatDist.
-        coverHeightUsedForTorchingTrees_ = calculateSpotCriticalCoverHeight(firebrandHeightFromTorchingTrees_, coverHeight);
-        if (coverHeightUsedForTorchingTrees_ > 1e-7)
-        {
-            flatDistanceFromTorchingTrees_ = spotDistanceFlatTerrain(firebrandHeightFromTorchingTrees_, coverHeightUsedForTorchingTrees_, windSpeedAtTwentyFeet);
-            mountainDistanceFromTorchingTrees_ = spotDistanceMountainTerrain(flatDistanceFromTorchingTrees_, location, ridgeToValleyDistance,
-                ridgeToValleyElevation);
+            // Cover ht used in calculation of flatDist.
+            coverHeightUsedForTorchingTrees_ = calculateSpotCriticalCoverHeight(firebrandHeightFromTorchingTrees_, downwindCoverHeight);
+            if (coverHeightUsedForTorchingTrees_ > 1e-7)
+            {
+                flatDistanceFromTorchingTrees_ = spotDistanceFlatTerrain(firebrandHeightFromTorchingTrees_, coverHeightUsedForTorchingTrees_, windSpeedAtTwentyFeet);
+                mountainDistanceFromTorchingTrees_ = spotDistanceMountainTerrain(flatDistanceFromTorchingTrees_, location, ridgeToValleyDistance,
+                    ridgeToValleyElevation);
+            }
         }
     }
+}
 
+double Spot::getCoverHeightUsedForBurningPile()
+{
+    return coverHeightUsedForBurningPile_;
+}
+
+double Spot::getCoverHeightUsedForSurfaceFire()
+{
+    return coverHeightUsedForSurfaceFire_;
+}
+
+double Spot::getCoverHeightUsedForTorchingTrees()
+{
+    return coverHeightUsedForTorchingTrees_;
+}
+
+double Spot::getFlameHeightForTorchingTrees()
+{
+    return flameHeightForTorchingTrees_;
+}
+
+double Spot::getFlameRatioForTorchingTrees()
+{
+    return flameRatio_;
+}
+
+double Spot::getFlameDurationForTorchingTrees()
+{
+    return flameDuration_;
+}
+
+double Spot::getMaxFirebrandHeightFromBurningPile()
+{
+    return firebrandHeightFromBurningPile_;
+}
+
+double Spot::getMaxFirebrandHeightFromSurfaceFire()
+{
+    return firebrandHeightFromSurfaceFire_;
+}
+
+double Spot::getMaxFirebrandHeightFromTorchingTrees()
+{
+    return firebrandHeightFromTorchingTrees_;
+}
+
+double Spot::getMaxFlatTerrainSpottingDistanceFromBurningPile()
+{
+    return flatDistanceFromBurningPile_;
+}
+
+double Spot::getMaxFlatTerrainSpottingDistanceFromSurfaceFire()
+{
+    return flatDistanceFromSurfaceFire_;
+}
+
+double Spot::getMaxFlatTerrainSpottingDistanceFromTorchingTrees()
+{
+    return flatDistanceFromTorchingTrees_;
+}
+
+double Spot::getMaxMountainTerrainSpottingDistanceFromBurningPile()
+{
+    return mountainDistanceFromBurningPile_;
+}
+
+double Spot::getMaxMountainTerrainSpottingDistanceFromSurfaceFire()
+{
+    return mountainDistanceFromSurfaceFire_;
+}
+
+double Spot::getMaxMountainTerrainSpottingDistanceFromTorchingTrees()
+{
     return mountainDistanceFromTorchingTrees_;
 }

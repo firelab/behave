@@ -333,3 +333,33 @@ FireType::FireTypeEnum BehaveRun::getFireType() const
 {
     return crown_.getFireType();
 }
+
+void BehaveRun::calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight)
+{
+    spot_.calculateSpottingDistanceFromBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, buringPileflameHeight);
+}
+
+void BehaveRun::calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength)
+{
+    spot_.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
+}
+
+void BehaveRun::calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double DBH, double treeHeight, int treeSpecies)
+{
+    spot_.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpecies);
+}
+
+double BehaveRun::getMaxMountainTerrainSpottingDistanceFromBurningPile()
+{
+    return spot_.getMaxMountainTerrainSpottingDistanceFromBurningPile();
+}
+
+double BehaveRun::getMaxMountainTerrainSpottingDistanceFromSurfaceFire()
+{
+    return spot_.getMaxMountainTerrainSpottingDistanceFromSurfaceFire();
+}
+
+double BehaveRun::getMaxMountainTerrainSpottingDistanceFromTorchingTrees()
+{
+    return getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
+}

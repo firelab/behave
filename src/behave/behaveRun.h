@@ -33,6 +33,7 @@
 
 #include "surface.h"
 #include "crown.h"
+#include "spot.h"
 
 class FuelModels;
 
@@ -92,7 +93,6 @@ public:
         double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
-
     // SURFACE Module Getters
     double getCanopyCover() const;
     double getCanopyHeight() const;
@@ -108,7 +108,6 @@ public:
     double getEllipticalB() const;
     double getEllipticalC() const;
     double getWindSpeed() const;
-
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
@@ -116,10 +115,22 @@ public:
     // CROWN Module
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
     void doCrownRun();
-
     // CROWN Module Getters
     double getCrownFireSpreadRate() const;
     FireType::FireTypeEnum getFireType() const;
+
+    // SPOT Module
+    void calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+        double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight);
+    void calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+        double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength);
+    void calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+        double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double treeDBH, double treeHeight,
+        int treeSpecies);
+    // SPOT Module Getters
+    double getMaxMountainTerrainSpottingDistanceFromBurningPile();
+    double getMaxMountainTerrainSpottingDistanceFromSurfaceFire();
+    double getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
 
 private:
     // Fuel model set (orginal 13, 40 and custom)
@@ -130,6 +141,9 @@ private:
 
     // CROWN Module
     Crown crown_;
+
+    // SPOT Module
+    Spot spot_;
 };
 
 #endif //BehaveRun_HEADER

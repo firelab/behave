@@ -38,12 +38,12 @@ public:
     Spot();
     ~Spot();
     
-    double calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
-        double coverHeight, double windSpeedAtTwentyFeet, double flameLength);
-    double calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
-        double coverHeight, double windSpeedAtTwentyFeet, double flameHeight);
-    double calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
-        double coverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double treeDBH, double treeHeight,
+    void calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+        double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight);
+    void calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+        double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength);
+    void calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+        double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double DBH, double treeHeight,
         int treeSpecies);
 
     double getCoverHeightUsedForBurningPile();
@@ -55,8 +55,12 @@ public:
     double getMaxFirebrandHeightFromBurningPile();
     double getMaxFirebrandHeightFromSurfaceFire();
     double getMaxFirebrandHeightFromTorchingTrees();
-    double getMaxFlatTerrainSpottingDistance();
-    double getMaxMountainTerrainSpottingDistance();   
+    double getMaxFlatTerrainSpottingDistanceFromBurningPile();
+    double getMaxFlatTerrainSpottingDistanceFromSurfaceFire();
+    double getMaxFlatTerrainSpottingDistanceFromTorchingTrees();
+    double getMaxMountainTerrainSpottingDistanceFromBurningPile();
+    double getMaxMountainTerrainSpottingDistanceFromSurfaceFire();
+    double getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
 
 private:
     static const int NUM_SPECIES = 14;
