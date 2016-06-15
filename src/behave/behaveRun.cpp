@@ -361,5 +361,5 @@ double BehaveRun::getMaxMountainTerrainSpottingDistanceFromSurfaceFire()
 
 double BehaveRun::getMaxMountainTerrainSpottingDistanceFromTorchingTrees()
 {
-    return getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
+    return spot_.getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
 }

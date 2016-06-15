@@ -363,13 +363,18 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     double expectedSpottingDistance = 0.0;
     double observedSpottingDistance = 0.0;
 
-    expectedSpottingDistance = 0.164401;
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     flameLength = behaveRun.getFlameLength();
 
+    expectedSpottingDistance = 0.164401;
     behaveRun.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
     observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxMountainTerrainSpottingDistanceFromSurfaceFire());
+    BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
+
+    expectedSpottingDistance = 0.222396;
+    behaveRun.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, 15, 20, 30, 0);
+    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxMountainTerrainSpottingDistanceFromTorchingTrees());
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
 }
 
