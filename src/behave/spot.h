@@ -37,24 +37,24 @@ class Spot
 public:
     Spot();
     ~Spot();
-
-    double spotCriticalCoverHeight(double firebrandHeight, double coverHeightt);
-    double spotDistanceMountainTerrain(double flatDistance, int location, double ridgeToValleyDistance, 
-        double ridgeToValleyElevation);
-    double spotDistanceFlatTerrain(double firebrandHeight, double coverHeightt, double windSpeedAtTwentyFeet);
-    double spotDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    
+    double calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double coverHeight, double windSpeedAtTwentyFeet, double flameLength);
-    double spotDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    double calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double coverHeight, double windSpeedAtTwentyFeet, double flameHeight);
-    double spotDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    double calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double coverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double treeDBH, double treeHeight,
         int treeSpecies);
 
-    double getCoverHeightUsed();
-    double getFlameHeight();
-    double getFlameRatio();
-    double getFlameDuration();
-    double getMaxFirebrandHeight();
+    double getCoverHeightUsedForBurningPile();
+    double getCoverHeightUsedForSurfaceFire();
+    double getCoverHeightUsedForTorchingTrees();
+    double getFlameHeightForTorchingTrees();
+    double getFlameRatioForTorchingTrees();
+    double getFlameDurationForTorchingTrees();
+    double getMaxFirebrandHeightFromBurningPile();
+    double getMaxFirebrandHeightFromSurfaceFire();
+    double getMaxFirebrandHeightFromTorchingTrees();
     double getMaxFlatTerrainSpottingDistance();
     double getMaxMountainTerrainSpottingDistance();   
 
@@ -63,18 +63,34 @@ private:
     static const int NUM_COLS = 2;
     static const int NUM_FIREBRAND_ROWS = 4;
 
+    double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
+    double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
+    double spotDistanceMountainTerrain(double flatDistance, int location, double ridgeToValleyDistance,
+        double ridgeToValleyElevation);
+
     double speciesFlameHeightParameters_[NUM_SPECIES][NUM_COLS];
     double speciesFlameDurationParameters_[NUM_SPECIES][NUM_COLS];
     double firebrandHeightFactors_[NUM_FIREBRAND_ROWS][NUM_COLS];
 
-    double coverHeightUsed_;    // Actual tree / vegetation ht used(ft).
-    double flameHeight_;        // Steady state flame ht(ft).
-    double flameRatio_;         // Ratio of tree height to steady flame height(ft / ft).
-    double firebrandDrift_;     // Maximum firebrand drift(mi).
-    double flameDuration_;      // Flame duration(dimensionless).
-    double firebrandHeight_;    // Initial maximum firebrand height(ft).
-    double flatDistance_;       // Maximum spotting distance over flat terrain(mi).
-    double mountainDistance_;   // Maximum spotting distance over mountain terrain(mi).
+    bool doSpotDistanceForBurningPile_;
+    bool doSpotDistanceForSurfaceFire_;
+    bool doSpotDistanceForForTorchingTrees_;
+    double coverHeightUsedForSurfaceFire_;      // Actual tree / vegetation ht used for surface fire(ft)
+    double coverHeightUsedForBurningPile_;      // Actual tree / vegetation ht used for burning pile(ft)
+    double coverHeightUsedForTorchingTrees_;    // Actual tree / vegetation ht used for burning pile(ft)
+    double flameHeightForTorchingTrees_;        // Steady state flame height for torching trees(ft).
+    double flameRatio_;                         // Ratio of tree height to steady flame height(ft / ft).
+    double firebrandDrift_;                     // Maximum firebrand drift from surface fire(mi).
+    double flameDuration_;                      // Flame duration(dimensionless)
+    double firebrandHeightFromBurningPile_;     // Initial maximum firebrand height for burning pile(ft).
+    double firebrandHeightFromSurfaceFire_;     // Initial maximum firebrand height for surface fire(ft).
+    double firebrandHeightFromTorchingTrees_;   // Initial maximum firebrand height for torching trees(ft).
+    double flatDistanceFromBurningPile_;        // Maximum spotting distance over flat terrain for burning pile(mi).
+    double flatDistanceFromSurfaceFire_;        // Maximum spotting distance over flat terrain for surface fire(mi).
+    double flatDistanceFromTorchingTrees_;      // Maximum spotting distance over flat terrain for torching trees(mi).
+    double mountainDistanceFromBurningPile_;    // Maximum spotting distance over mountain terrain for burning pile(mi).
+    double mountainDistanceFromSurfaceFire_;    // Maximum spotting distance over mountain terrain surface fire(mi).
+    double mountainDistanceFromTorchingTrees_;  // Maximum spotting distance over mountain terrain torching trees(mi).
 };
 
 #endif // SPOT_HEADER
