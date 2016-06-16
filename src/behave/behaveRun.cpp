@@ -39,11 +39,12 @@ BehaveRun::BehaveRun(FuelModelSet &fuelModelSet)
 
 BehaveRun::BehaveRun(const BehaveRun &rhs)
     : surface_(*rhs.fuelModelSet_),
-    crown_(*rhs.fuelModelSet_, surface_)
+    crown_(*rhs.fuelModelSet_, surface_) 
 {
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
     crown_ = rhs.crown_;
+    spot_ = rhs.spot_;
 }
 
 BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
@@ -53,6 +54,7 @@ BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
         fuelModelSet_ = rhs.fuelModelSet_;
         surface_ = rhs.surface_;
         crown_ = rhs.crown_;
+        spot_ = rhs.spot_;
     }
     return *this;
 }
