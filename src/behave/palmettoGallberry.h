@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef PALMETTOGALLBERRY_HEADER
-#define PALMETTOGALLBERRY_HEADER
+#ifndef PALMETTOGALLBERRY_H
+#define PALMETTOGALLBERRY_H
 
 class PalmettoGallberry
 {
@@ -75,4 +75,4 @@ private:
     double palmettoGallberyLiveFoliageLoad_;
 };
 
-#endif //PALMETTOGALLBERRY_HEADER
+#endif // PALMETTOGALLBERRY_H

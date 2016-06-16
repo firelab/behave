@@ -28,8 +28,8 @@
 
 // TODO: Need to revisit how the Two Fuel Models module is organized and handled - WMC 02/2016
 
-#ifndef BEHAVERUN_HEADER
-#define BEHAVERUN_HEADER
+#ifndef BEHAVERUN_H
+#define BEHAVERUN_H
 
 #include "surface.h"
 #include "crown.h"
@@ -146,4 +146,4 @@ private:
     Spot spot_;
 };
 
-#endif //BehaveRun_HEADER
+#endif //BEHAVERUN_H

@@ -48,8 +48,8 @@
 *  - randthread.h
 */
 
-#ifndef _NEWEXT_H_
-#define _NEWEXT_H_
+#ifndef NEWEXT_H
+#define NEWEXT_H
 
 // Custom include files
 #include "randfuel.h"
@@ -104,7 +104,7 @@ private:
     double   **m_latCombArray;  //!< lee side spread rates and probabilities
 };
 
-#endif //  NEWEXT_HEADER
+#endif //  NEWEXT_H
 
 //------------------------------------------------------------------------------
 //  End of newext.h

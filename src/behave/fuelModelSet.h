@@ -29,8 +29,8 @@
 *
 ******************************************************************************/
 
-#ifndef FUELMODELSET_HEADER
-#define FUELMODELSET_HEADER
+#ifndef FUELMODELSET_H
+#define FUELMODELSET_H
 
 #include <string>
 #include <vector>
@@ -109,4 +109,4 @@ private:
 
 };
 
-#endif //FUELMODELSET_HEADER
+#endif // FUELMODELSET_H

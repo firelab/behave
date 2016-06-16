@@ -29,8 +29,8 @@
 *
 ******************************************************************************/
 
-#ifndef SURFACE_HEADER
-#define SURFACE_HEADER
+#ifndef SURFACE_H
+#define SURFACE_H
 
 // The SURFACE module of BehavePlus
 #include "surfaceFireSpread.h"
@@ -121,4 +121,4 @@ private:
     SurfaceInputs surfaceInputs_;
 };
 
-#endif //SURFACEFIRE_HEADER
+#endif // SURFACE_H

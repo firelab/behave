@@ -25,8 +25,8 @@
 *
 ******************************************************************************/
 
-#ifndef BEHAVEVECTOR_HEADER
-#define BEHAVEVECTOR_HEADER
+#ifndef BEHAVEVECTOR_H
+#define BEHAVEVECTOR_H
 
 #include <vector>
 #include "behaveRun.h" 
@@ -70,4 +70,4 @@ private:
     std::vector<BehaveRun> behaveRun;
 };
 
-#endif // BEHAVEVECTOR_HEADER
+#endif // BEHAVEVECTOR_H

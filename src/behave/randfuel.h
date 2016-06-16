@@ -48,8 +48,8 @@
  *  - randthread.h
  */
 
-#ifndef _RANDFUEL_H_
-#define _RANDFUEL_H_
+#ifndef RANDFUEL_H
+#define RANDFUEL_H
 
 // Custom include files
 #include "newext.h"
@@ -122,7 +122,7 @@ private:
     RandThread *m_randThread;       //!< array of RandThread classes=m_threads
 };
 
-#endif // RANDFUELHEADER
+#endif // RANDFUEL_H
 
 //------------------------------------------------------------------------------
 //  End of randfuel.h

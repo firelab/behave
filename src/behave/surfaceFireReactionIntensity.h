@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef SURFACEFIREREACTIONINTENSITY_HEADER
-#define SURFACEFIREREACTIONINTENSITY_HEADER
+#ifndef SURFACEFIREREACTIONINTENSITY_H
+#define SURFACEFIREREACTIONINTENSITY_H
 
 #include "surfaceEnums.h"
 
@@ -58,4 +58,4 @@ private:
 
 };
 
-#endif //SURFACEFIREREACTIONINTENSITY_HEADER
+#endif // SURFACEFIREREACTIONINTENSITY_H

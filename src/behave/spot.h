@@ -29,8 +29,8 @@
 *
 ******************************************************************************/
 
-#ifndef SPOT_HEADER
-#define SPOT_HEADER
+#ifndef SPOT_H
+#define SPOT_H
 
 class Spot
 {
@@ -101,4 +101,4 @@ private:
     double mountainDistanceFromTorchingTrees_;  // Maximum spotting distance over mountain terrain torching trees(mi).
 };
 
-#endif // SPOT_HEADER
+#endif // SPOT_H

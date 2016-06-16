@@ -48,8 +48,8 @@
  *  - randthread.h
  */
 
-#ifndef _RANDTHREAD_H_
-#define _RANDTHREAD_H_
+#ifndef RANDTHREAD_H
+#define RANDTHREAD_H
 
 #define REFRACT_LATERAL 0
 #define REFRACT_FORWARD 1
@@ -130,7 +130,7 @@ private:
     double     *m_latRosArray;  //!< pointer to delay data for extra row
 };
 
-#endif // RANDTHREADHEADER
+#endif // RANDTHREAD_H
 
 //------------------------------------------------------------------------------
 //  End of randthread.h

@@ -30,8 +30,8 @@
 *
 ******************************************************************************/
 
-#ifndef SURFACETWOFUELMODELS_HEADER
-#define SURFACETWOFUELMODELS_HEADER
+#ifndef SURFACETWOFUELMODELS_H
+#define SURFACETWOFUELMODELS_H
 
 #include "surfaceEnums.h"
 
@@ -105,4 +105,4 @@ private:
     double fireLengthToWidthRatio_;
 };
 
-#endif //SURFACETWOFUELMODELS_HEADER
+#endif // SURFACETWOFUELMODELS_H

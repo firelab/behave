@@ -26,8 +26,8 @@
 *
 ******************************************************************************/
 
-#ifndef SURFACEINPUTS_HEADER
-#define SURFACEINPUTS_HEADER
+#ifndef SURFACEINPUTS_H
+#define SURFACEINPUTS_H
 
 #include "surfaceEnums.h"
 
@@ -165,4 +165,4 @@ private:
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode_; // How wind and spread directions are referenced
 };
 
-#endif // SURFACEINPUTS_HEADER
+#endif // SURFACEINPUTS_H

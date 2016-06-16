@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef WINDSPEED_HEADER
-#define WINDSPEED_HEADER
+#ifndef WINDSPEED_H
+#define WINDSPEED_H
 
 class WindSpeedUtility
 {
@@ -44,4 +44,4 @@ private:
     double windSpeedAtTwentyFeet_;
 };
 
-#endif // WINDSPEED_HEADER
+#endif // WINDSPEED_H

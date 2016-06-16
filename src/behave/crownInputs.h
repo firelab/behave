@@ -25,8 +25,8 @@
 *
 ******************************************************************************/
 
-#ifndef CROWNINPUTS_HEADER
-#define CROWNINPUTS_HEADER
+#ifndef CROWNINPUTS_H
+#define CROWNINPUTS_H
 
 class CrownInputs
 {
@@ -59,4 +59,4 @@ private:
 
 };
 
-#endif // CROWNINPUTS_HEADER
+#endif // CROWNINPUTS_H

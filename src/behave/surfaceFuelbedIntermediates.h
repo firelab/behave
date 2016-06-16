@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef SURFACEFUELBEDINTERMEDIATES_HEADER
-#define SURFACEFUELBEDINTERMEDIATES_HEADER
+#ifndef SURFACEFUELBEDINTERMEDIATES_H
+#define SURFACEFUELBEDINTERMEDIATES_H
 
 #include "palmettoGallberry.h" 
 #include "westernAspen.h"
@@ -147,4 +147,4 @@ private:
     double propagatingFlux_;
 };
 
-#endif	// SURFACEFUELBEDINTERMEDIATES_HEADER
+#endif	// SURFACEFUELBEDINTERMEDIATES_H

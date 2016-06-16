@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef WINDADJUSTMENTFACTOR_HEADER
-#define WINDADJUSTMENTFACTOR_HEADER
+#ifndef WINDADJUSTMENTFACTOR_H
+#define WINDADJUSTMENTFACTOR_H
 
 #include "surfaceEnums.h"
 
@@ -48,4 +48,4 @@ private:
     WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;
 };
 
-#endif //WINDADJUSTMENTFACTOR_HEADER
+#endif // WINDADJUSTMENTFACTOR_H

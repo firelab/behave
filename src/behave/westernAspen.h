@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef WESTERNASPEN_HEADER
-#define WESTERNASPEN_HEADER
+#ifndef WESTERNASPEN_H
+#define WESTERNASPEN_H
 
 class WesternAspen
 {
@@ -67,4 +67,4 @@ private:
     double mortality_;
 };
 
-#endif //WESTERNASPEN_HEADER
+#endif // WESTERNASPEN_H

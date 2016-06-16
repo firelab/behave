@@ -104,4 +104,4 @@ struct WindHeightInputMode
     };
 };
 
-#endif //SURFACEENUMS_H
+#endif // SURFACEENUMS_H

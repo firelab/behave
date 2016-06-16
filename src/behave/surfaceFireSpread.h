@@ -29,8 +29,8 @@
 *
 ******************************************************************************/
 
-#ifndef SURFACEFIRE_HEADER
-#define SURFACEFIRE_HEADER
+#ifndef SURFACEFIRE_H
+#define SURFACEFIRE_H
 
 #include "surfaceFireReactionIntensity.h"
 #include "surfaceFuelbedIntermediates.h"
@@ -147,4 +147,4 @@ private:
     double aspenMortality_;
 };
 
-#endif // SURFACEFIRE_HEADER
+#endif // SURFACEFIRE_H

@@ -28,8 +28,8 @@
 *
 ******************************************************************************/
 
-#ifndef CROWN_HEADER
-#define CROWN_HEADER
+#ifndef CROWN_H
+#define CROWN_H
 
 #include "crownInputs.h"
 #include "crownEnums.h"
@@ -100,4 +100,4 @@ private:
     double windSpeedAtTwentyFeet_;
 };
 
-#endif // CROWN_HEADER
+#endif // CROWN_H
