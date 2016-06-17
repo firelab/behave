@@ -32,6 +32,8 @@
 #ifndef SPOT_H
 #define SPOT_H
 
+#include "spotEnums.h"
+
 class Spot
 {
 public:
@@ -41,13 +43,13 @@ public:
     Spot(const Spot &rhs);
     Spot& operator= (const Spot& rhs);
 
-    void calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    void calculateSpottingDistanceFromBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight);
-    void calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    void calculateSpottingDistanceFromSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength);
-    void calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    void calculateSpottingDistanceFromTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double DBH, double treeHeight,
-        int treeSpecies);
+        SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies);
 
     double getCoverHeightUsedForBurningPile();
     double getCoverHeightUsedForSurfaceFire();
@@ -66,19 +68,15 @@ public:
     double getMaxSpottingDistanceFromTorchingTrees();
 
 private:
-    static const int NUM_SPECIES = 14;
-    static const int NUM_COLS = 2;
-    static const int NUM_FIREBRAND_ROWS = 4;
-
     void initializeMembers();
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
-    double spotDistanceMountainTerrain(double flatDistance, int location, double ridgeToValleyDistance,
+    double spotDistanceMountainTerrain(double flatDistance, SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
         double ridgeToValleyElevation);
 
-    double speciesFlameHeightParameters_[NUM_SPECIES][NUM_COLS];
-    double speciesFlameDurationParameters_[NUM_SPECIES][NUM_COLS];
-    double firebrandHeightFactors_[NUM_FIREBRAND_ROWS][NUM_COLS];
+    double speciesFlameHeightParameters_[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS];
+    double speciesFlameDurationParameters_[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS];
+    double firebrandHeightFactors_[SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotArrayConstants::NUM_COLS];
 
     double coverHeightUsedForSurfaceFire_;      // Actual tree / vegetation ht used for surface fire(ft)
     double coverHeightUsedForBurningPile_;      // Actual tree / vegetation ht used for burning pile(ft)

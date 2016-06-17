@@ -336,19 +336,26 @@ FireType::FireTypeEnum BehaveRun::getFireType() const
     return crown_.getFireType();
 }
 
-void BehaveRun::calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight)
+void BehaveRun::calculateSpottingDistanceFromBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+    double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight)
 {
-    spot_.calculateSpottingDistanceFromBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, buringPileflameHeight);
+    spot_.calculateSpottingDistanceFromBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, 
+        downwindCoverHeight, windSpeedAtTwentyFeet, buringPileflameHeight);
 }
 
-void BehaveRun::calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength)
+void BehaveRun::calculateSpottingDistanceFromSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+    double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength)
 {
-    spot_.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
+    spot_.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, 
+        downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
 }
 
-void BehaveRun::calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double DBH, double treeHeight, int treeSpecies)
+void BehaveRun::calculateSpottingDistanceFromTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+    double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double DBH, 
+    double treeHeight, SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies)
 {
-    spot_.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpecies);
+    spot_.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, 
+        downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpecies);
 }
 
 double BehaveRun::getMaxSpottingDistanceFromBurningPile()

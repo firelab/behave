@@ -120,13 +120,13 @@ public:
     FireType::FireTypeEnum getFireType() const;
 
     // SPOT Module
-    void calculateSpottingDistanceFromBurningPile(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    void calculateSpottingDistanceFromBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight);
-    void calculateSpottingDistanceFromSurfaceFire(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    void calculateSpottingDistanceFromSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength);
-    void calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
+    void calculateSpottingDistanceFromTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double treeDBH, double treeHeight,
-        int treeSpecies);
+        SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies);
 
     // SPOT Module Getters
     double getMaxSpottingDistanceFromBurningPile();

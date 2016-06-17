@@ -71,6 +71,7 @@ SET(HEADERS
     src/behave/randfuel.h
     src/behave/randthread.h
     src/behave/spot.h
+    src/behave/spotEnums.h
     src/behave/surface.h
     src/behave/surfaceEnums.h
     src/behave/surfaceFireReactionIntensity.h

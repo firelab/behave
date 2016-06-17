@@ -37,7 +37,7 @@
 Spot::Spot()
 {
     // Set up speciesFlameHeightParameters_
-    const double tempSpeciesFlameHeightParameters[NUM_SPECIES][NUM_COLS] =
+    const double tempSpeciesFlameHeightParameters[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS] =
     {
         { 15.7, 0.451 },  //  0 Engelmann spruce
         { 15.7, 0.451 },  //  1 Douglas-fir
@@ -56,10 +56,10 @@ Spot::Spot()
         //{12.9, .453 },  // 14 western larch (guessed)
         //{15.7, .515 }   // 15 western red cedar (guessed)
     };
-    memcpy(speciesFlameHeightParameters_, tempSpeciesFlameHeightParameters, NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
+    memcpy(speciesFlameHeightParameters_, tempSpeciesFlameHeightParameters, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
 
     // Set up speciesFlameDurationParameters_
-    const double tempSpeciesFlameDurationParameters[NUM_SPECIES][NUM_COLS] =
+    const double tempSpeciesFlameDurationParameters[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS] =
     {
         { 12.6, -0.256 },  //  0 Engelmann spruce
         { 10.7, -0.278 },  //  1 Douglas-fir
@@ -78,17 +78,17 @@ Spot::Spot()
         //{ 6.3, -.249},   // 14 western larch (guessed)
         //{ 12.6, -.256}   // 15 western red cedar (guessed)
     };
-    memcpy(speciesFlameDurationParameters_, tempSpeciesFlameDurationParameters, NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
+    memcpy(speciesFlameDurationParameters_, tempSpeciesFlameDurationParameters, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
 
     // Set up firebrandHeightFactors_
-    const double tempFirebrandHeightFactors[NUM_FIREBRAND_ROWS][NUM_COLS] =
+    const double tempFirebrandHeightFactors[SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotArrayConstants::NUM_COLS] =
     {
         { 4.24, 0.332 },
         { 3.64, 0.391 },
         { 2.78, 0.418 },
         { 4.70, 0.000 }
     };
-    memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
+    memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
 
     initializeMembers();
 }
@@ -205,7 +205,7 @@ double Spot::calculateSpotCriticalCoverHeight(double firebrandHeight, double cov
 
 double Spot::spotDistanceMountainTerrain(
     double flatDistance,
-    int    location,
+    SpotFireLocation::SpotFireLocationEnum location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation)
 {
@@ -275,7 +275,7 @@ double Spot::spotDistanceFlatTerrain(
  */
 
 void Spot::calculateSpottingDistanceFromSurfaceFire(
-    int    location,
+    SpotFireLocation::SpotFireLocationEnum location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation,
     double downwindCoverHeight,
@@ -337,7 +337,7 @@ void Spot::calculateSpottingDistanceFromSurfaceFire(
  */
 
 void Spot::calculateSpottingDistanceFromBurningPile(
-    int    location,
+    SpotFireLocation::SpotFireLocationEnum location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation,
     double downwindCoverHeight,
@@ -399,7 +399,7 @@ void Spot::calculateSpottingDistanceFromBurningPile(
  */
 
 void Spot::calculateSpottingDistanceFromTorchingTrees(
-    int    location,
+    SpotFireLocation::SpotFireLocationEnum location,
     double ridgeToValleyDistance,
     double ridgeToValleyElevation,
     double downwindCoverHeight,
@@ -407,7 +407,7 @@ void Spot::calculateSpottingDistanceFromTorchingTrees(
     double torchingTrees,
     double DBH,
     double treeHeight,
-    int    treeSpecies)
+    SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies)
 {
     // Initialize return variables
     flameRatio_ = 0.0;
