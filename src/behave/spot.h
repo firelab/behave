@@ -61,9 +61,9 @@ public:
     double getMaxFlatTerrainSpottingDistanceFromBurningPile();
     double getMaxFlatTerrainSpottingDistanceFromSurfaceFire();
     double getMaxFlatTerrainSpottingDistanceFromTorchingTrees();
-    double getMaxMountainTerrainSpottingDistanceFromBurningPile();
-    double getMaxMountainTerrainSpottingDistanceFromSurfaceFire();
-    double getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
+    double getMaxSpottingDistanceFromBurningPile();
+    double getMaxSpottingDistanceFromSurfaceFire();
+    double getMaxSpottingDistanceFromTorchingTrees();
 
 private:
     static const int NUM_SPECIES = 14;
@@ -80,9 +80,6 @@ private:
     double speciesFlameDurationParameters_[NUM_SPECIES][NUM_COLS];
     double firebrandHeightFactors_[NUM_FIREBRAND_ROWS][NUM_COLS];
 
-    //bool doSpotDistanceForBurningPile_;
-    //bool doSpotDistanceForSurfaceFire_;
-    //bool doSpotDistanceForForTorchingTrees_;
     double coverHeightUsedForSurfaceFire_;      // Actual tree / vegetation ht used for surface fire(ft)
     double coverHeightUsedForBurningPile_;      // Actual tree / vegetation ht used for burning pile(ft)
     double coverHeightUsedForTorchingTrees_;    // Actual tree / vegetation ht used for burning pile(ft)

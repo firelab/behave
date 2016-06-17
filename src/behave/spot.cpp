@@ -294,7 +294,7 @@ void Spot::calculateSpottingDistanceFromSurfaceFire(
         double f = 322. * pow((0.474 * windSpeedAtTwentyFeet), -1.01);
 
         // Byram's fireline intensity is derived back from flame length.
-        double byrams = pow((flameLength / .45), (1. / 0.46));
+        double byrams = pow((flameLength / 0.45), (1. / 0.46));
 
         // Initial firebrand height (ft).
         firebrandHeightFromSurfaceFire_ = ((f * byrams) < 1e-7)
@@ -366,8 +366,8 @@ void Spot::calculateSpottingDistanceFromBurningPile(
             // Adjust for mountainous terrain.
             mountainDistanceFromBurningPile_ = spotDistanceMountainTerrain(flatDistanceFromBurningPile_,
                 location, ridgeToValleyDistance, ridgeToValleyElevation);
-        } // if ht > 1e-7
-    } // if windSpeedAt20Ft > 1e-7 && z > 1e-7
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------
@@ -527,17 +527,17 @@ double Spot::getMaxFlatTerrainSpottingDistanceFromTorchingTrees()
     return flatDistanceFromTorchingTrees_;
 }
 
-double Spot::getMaxMountainTerrainSpottingDistanceFromBurningPile()
+double Spot::getMaxSpottingDistanceFromBurningPile()
 {
     return mountainDistanceFromBurningPile_;
 }
 
-double Spot::getMaxMountainTerrainSpottingDistanceFromSurfaceFire()
+double Spot::getMaxSpottingDistanceFromSurfaceFire()
 {
     return mountainDistanceFromSurfaceFire_;
 }
 
-double Spot::getMaxMountainTerrainSpottingDistanceFromTorchingTrees()
+double Spot::getMaxSpottingDistanceFromTorchingTrees()
 {
     return mountainDistanceFromTorchingTrees_;
 }

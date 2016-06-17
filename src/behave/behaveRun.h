@@ -127,10 +127,11 @@ public:
     void calculateSpottingDistanceFromTorchingTrees(int location, double ridgeToValleyDistance, double ridgeToValleyElevation,
         double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double treeDBH, double treeHeight,
         int treeSpecies);
+
     // SPOT Module Getters
-    double getMaxMountainTerrainSpottingDistanceFromBurningPile();
-    double getMaxMountainTerrainSpottingDistanceFromSurfaceFire();
-    double getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
+    double getMaxSpottingDistanceFromBurningPile();
+    double getMaxSpottingDistanceFromSurfaceFire();
+    double getMaxSpottingDistanceFromTorchingTrees();
 
 private:
     // Fuel model set (orginal 13, 40 and custom)

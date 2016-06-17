@@ -351,17 +351,17 @@ void BehaveRun::calculateSpottingDistanceFromTorchingTrees(int location, double 
     spot_.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpecies);
 }
 
-double BehaveRun::getMaxMountainTerrainSpottingDistanceFromBurningPile()
+double BehaveRun::getMaxSpottingDistanceFromBurningPile()
 {
-    return spot_.getMaxMountainTerrainSpottingDistanceFromBurningPile();
+    return spot_.getMaxSpottingDistanceFromBurningPile();
 }
 
-double BehaveRun::getMaxMountainTerrainSpottingDistanceFromSurfaceFire()
+double BehaveRun::getMaxSpottingDistanceFromSurfaceFire()
 {
-    return spot_.getMaxMountainTerrainSpottingDistanceFromSurfaceFire();
+    return spot_.getMaxSpottingDistanceFromSurfaceFire();
 }
 
-double BehaveRun::getMaxMountainTerrainSpottingDistanceFromTorchingTrees()
+double BehaveRun::getMaxSpottingDistanceFromTorchingTrees()
 {
-    return spot_.getMaxMountainTerrainSpottingDistanceFromTorchingTrees();
+    return spot_.getMaxSpottingDistanceFromTorchingTrees();
 }

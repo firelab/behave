@@ -377,19 +377,19 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     // Test spotting distance from surface fire
     expectedSpottingDistance = 0.164401;
     behaveRun.calculateSpottingDistanceFromSurfaceFire(locationCode, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
-    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxMountainTerrainSpottingDistanceFromSurfaceFire());
+    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromSurfaceFire());
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
     
     // Test spotting distance from torching trees
     expectedSpottingDistance = 0.222396;
     behaveRun.calculateSpottingDistanceFromTorchingTrees(locationCode, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpeciesCode);
-    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxMountainTerrainSpottingDistanceFromTorchingTrees());
+    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromTorchingTrees());
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
 
     // Test spotting distance from a burning pile
     expectedSpottingDistance = 0.021330;
     behaveRun.calculateSpottingDistanceFromBurningPile(locationCode, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, burningPileflameHeight);
-    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxMountainTerrainSpottingDistanceFromBurningPile());
+    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromBurningPile());
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
 }
 
@@ -407,24 +407,35 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     // Make sure that changes in one behaveVector's elements surfaceInputs do not affect another's surfaceInputs
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[1]);
+
+    // Change behaveVector[1]'s surfaceInputs
     behaveVector[1].setWindSpeed(10);
   
+    // Check that behaveVector[0]'s surfaceInputs is unchanged
     expectedWindSpeed = 5;
     observedWindSpeed = behaveVector[0].getWindSpeed();
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
 
+    // Check that behaveVector[1]'s surfaceInputs has been changed correctly
     expectedWindSpeed = 10;
     observedWindSpeed = behaveVector[1].getWindSpeed();
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
 
+    // Do a surface run in behaveVector[0] and check that surface outputs are correct
     behaveVector[0].doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[0].getSurfaceFireSpreadRate());
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
+    // Do a surface run in behaveVector[1] and check that surface outputs are correct
     behaveVector[1].doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[1].getSurfaceFireSpreadRate());
     expectedSurfaceFireSpreadRate = 12.722191;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Check that behaveVector[0]'s surface outputs are unchanged
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveVector[0].getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
