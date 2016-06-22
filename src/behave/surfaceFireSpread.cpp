@@ -31,6 +31,7 @@
 
 #include "surfaceFireSpread.h"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 #include "fuelModelSet.h"
@@ -38,8 +39,6 @@
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
 #include "windAdjustmentFactor.h"
-
-static const double PI = 3.14159265358979323846;
 
 SurfaceFireSpread::SurfaceFireSpread()
     : surfaceFireReactionIntensity_()
@@ -262,7 +261,7 @@ double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest
         }
         if (fabs(beta) > 0.1)
         {
-            double radians = beta * PI / 180.0;
+            double radians = beta * M_PI / 180.0;
             rosVector = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 - eccentricity_ * cos(radians));
         }
     }
@@ -290,7 +289,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
 {
     //Calculate directional components (direction is clockwise from upslope)
     double windDir = surfaceInputs_->getWindDirection();
-    double windDirRadians = windDir * PI / 180.0;
+    double windDirRadians = windDir * M_PI / 180.0;
 
     // Calculate wind and slope rate
     double slopeRate = noWindNoSlopeSpreadRate_ * phiS_;
@@ -309,7 +308,7 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     azimuth = atan2(y, x);
 
     // Recalculate azimuth in degrees
-    azimuth *= 180.0 / PI;
+    azimuth *= 180.0 / M_PI;
 
     // If angle is negative, add 360 degrees
     if (azimuth < -1.0e-20)
@@ -421,7 +420,7 @@ void SurfaceFireSpread::calculateSlopeFactor()
     double packingRatio = surfaceFuelbedIntermediates_.getPackingRatio();
     // Slope factor
     double slope = surfaceInputs_->getSlope();
-    double slopex = tan((double)slope / 180.0 * PI); // convert from degrees to tan
+    double slopex = tan((double)slope / 180.0 * M_PI); // convert from degrees to tan
     phiS_ = 5.275 * pow(packingRatio, -0.3) * (slopex * slopex);
 }
 
