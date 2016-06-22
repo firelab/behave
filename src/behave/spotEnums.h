@@ -38,6 +38,14 @@ struct SpotArrayConstants
     };
 };
 
+struct SpotSurfaceInputs
+{
+	enum SpotSurfaceInputsEnum
+	{
+		NOT_SET = -1 // This indicates that the value used should be from Surface module
+	};
+};
+
 struct SpotTreeSpecies
 {
     enum SpotTreeSpeciesEnum

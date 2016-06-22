@@ -367,22 +367,28 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     double treeHeight = 30;
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = SpotTreeSpecies::ENGELMANN_SPRUCE;
    
+	// Test spotting distance from a burning pile
+	expectedSpottingDistance = 0.021330;
+	behaveRun.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, 
+		burningPileflameHeight, windSpeedAtTwentyFeet);
+	behaveRun.calculateSpottingDistanceFromBurningPile();
+	observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromBurningPile());
+	BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
+
     // Test spotting distance from surface fire
     expectedSpottingDistance = 0.164401;
-    behaveRun.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
+	behaveRun.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, 
+		flameLength, windSpeedAtTwentyFeet);
+    behaveRun.calculateSpottingDistanceFromSurfaceFire();
     observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromSurfaceFire());
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
     
     // Test spotting distance from torching trees
     expectedSpottingDistance = 0.222396;
-    behaveRun.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpecies);
+	behaveRun.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, 
+		torchingTrees, DBH, treeHeight, treeSpecies, windSpeedAtTwentyFeet);
+    behaveRun.calculateSpottingDistanceFromTorchingTrees();
     observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromTorchingTrees());
-    BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
-
-    // Test spotting distance from a burning pile
-    expectedSpottingDistance = 0.021330;
-    behaveRun.calculateSpottingDistanceFromBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight, windSpeedAtTwentyFeet, burningPileflameHeight);
-    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.getMaxSpottingDistanceFromBurningPile());
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
 }
 

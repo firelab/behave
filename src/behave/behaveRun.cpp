@@ -336,26 +336,41 @@ FireType::FireTypeEnum BehaveRun::getFireType() const
     return crown_.getFireType();
 }
 
-void BehaveRun::calculateSpottingDistanceFromBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-    double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight)
+void BehaveRun::calculateSpottingDistanceFromBurningPile()
 {
-    spot_.calculateSpottingDistanceFromBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, 
-        downwindCoverHeight, windSpeedAtTwentyFeet, buringPileflameHeight);
+    spot_.calculateSpottingDistanceFromBurningPile();
 }
 
-void BehaveRun::calculateSpottingDistanceFromSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-    double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength)
+void BehaveRun::calculateSpottingDistanceFromSurfaceFire()
 {
-    spot_.calculateSpottingDistanceFromSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, 
-        downwindCoverHeight, windSpeedAtTwentyFeet, flameLength);
+    spot_.calculateSpottingDistanceFromSurfaceFire();
 }
 
-void BehaveRun::calculateSpottingDistanceFromTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-    double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double DBH, 
-    double treeHeight, SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies)
+void BehaveRun::calculateSpottingDistanceFromTorchingTrees()
 {
-    spot_.calculateSpottingDistanceFromTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, 
-        downwindCoverHeight, windSpeedAtTwentyFeet, torchingTrees, DBH, treeHeight, treeSpecies);
+    spot_.calculateSpottingDistanceFromTorchingTrees();
+}
+
+void BehaveRun::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+	double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight, double windSpeedAtTwentyFeet)
+{
+	spot_.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
+		buringPileFlameHeight, windSpeedAtTwentyFeet);
+}
+
+void BehaveRun::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+	double ridgeToValleyElevation, double downwindCoverHeight, double flameLength, double windSpeedAtTwentyFeet)
+{
+	spot_.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
+		flameLength, windSpeedAtTwentyFeet);
+}
+
+void BehaveRun::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+	double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
+	SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet)
+{
+	spot_.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
+		torchingTrees, DBH, treeHeight, treeSpecies, windSpeedAtTwentyFeet);
 }
 
 double BehaveRun::getMaxSpottingDistanceFromBurningPile()

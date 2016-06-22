@@ -120,13 +120,20 @@ public:
     FireType::FireTypeEnum getFireType() const;
 
     // SPOT Module
-    void calculateSpottingDistanceFromBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
-        double downwindCoverHeight, double windSpeedAtTwentyFeet, double buringPileflameHeight);
-    void calculateSpottingDistanceFromSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
-        double downwindCoverHeight, double windSpeedAtTwentyFeet, double flameLength);
-    void calculateSpottingDistanceFromTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, double ridgeToValleyElevation,
-        double downwindCoverHeight, double windSpeedAtTwentyFeet, double torchingTrees, double treeDBH, double treeHeight,
-        SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies);
+    void calculateSpottingDistanceFromBurningPile();
+    void calculateSpottingDistanceFromSurfaceFire();
+    void calculateSpottingDistanceFromTorchingTrees();
+
+	// SPOT Module Setters
+	void updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+		double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight,
+		double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+	void updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+		double ridgeToValleyElevation, double downwindCoverHeight, double flameLength = SpotSurfaceInputs::NOT_SET,
+		double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+	void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+		double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
+		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
 
     // SPOT Module Getters
     double getMaxSpottingDistanceFromBurningPile();

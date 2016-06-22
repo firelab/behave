@@ -49,6 +49,7 @@ SET(SOURCE
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
     src/behave/spot.cpp
+    src/behave/spotInputs.cpp
     src/behave/surface.cpp
     src/behave/surfaceFireReactionIntensity.cpp
     src/behave/surfaceFuelbedIntermediates.cpp
@@ -72,6 +73,7 @@ SET(HEADERS
     src/behave/randthread.h
     src/behave/spot.h
     src/behave/spotEnums.h
+    src/behave/spotInputs.h
     src/behave/surface.h
     src/behave/surfaceEnums.h
     src/behave/surfaceFireReactionIntensity.h
