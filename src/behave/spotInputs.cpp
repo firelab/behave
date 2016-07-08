@@ -210,7 +210,7 @@ double SpotInputs::getWindSpeedAtTwentyFeet()
 void SpotInputs::initializeMembers()
 {
 	downwindCoverHeight_ = 0.0;
-	SpotFireLocation::SpotFireLocationEnum location_ = SpotFireLocation::MIDSLOPE_WINDWARD;
+	location_ = SpotFireLocation::MIDSLOPE_WINDWARD;
 	ridgeToValleyDistance_ = 0.0;
 	ridgeToValleyElevation_ = 0.0;
 	windSpeedAtTwentyFeet_ = SpotSurfaceInputs::NOT_SET;

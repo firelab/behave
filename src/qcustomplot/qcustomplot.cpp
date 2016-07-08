@@ -10539,11 +10539,17 @@ QList<QCPLegend*> QCustomPlot::selectedLegends() const
 */
 void QCustomPlot::deselectAll()
 {
+#ifdef _MSC_VER
+#pragma warning(disable: 4456)
+#endif
     foreach(QCPLayer *layer, mLayers)
     {
         foreach(QCPLayerable *layerable, layer->children())
             layerable->deselectEvent(0);
     }
+#ifdef _MSC_VER
+#pragma warning(default: 4456)
+#endif
 }
 
 /*!
@@ -10988,6 +10994,9 @@ void QCustomPlot::mouseReleaseEvent(QMouseEvent *event)
             // deselect all other layerables if not additive selection:
             if (!additive)
             {
+#ifdef _MSC_VER
+#pragma warning(disable: 4456)
+#endif
                 foreach(QCPLayer *layer, mLayers)
                 {
                     foreach(QCPLayerable *layerable, layer->children())
@@ -11001,6 +11010,9 @@ void QCustomPlot::mouseReleaseEvent(QMouseEvent *event)
                     }
                 }
             }
+#ifdef _MSC_VER
+#pragma warning(default: 4456)
+#endif
             if (clickedLayerable && mInteractions.testFlag(clickedLayerable->selectionCategory()))
             {
                 // a layerable was actually clicked, call its selectEvent:
@@ -11080,6 +11092,9 @@ void QCustomPlot::draw(QCPPainter *painter)
     drawBackground(painter);
 
     // draw all layered objects (grid, axes, plottables, items, legend,...):
+#ifdef _MSC_VER
+#pragma warning(disable: 4456)
+#endif
     foreach(QCPLayer *layer, mLayers)
     {
         foreach(QCPLayerable *child, layer->children())
@@ -11094,6 +11109,9 @@ void QCustomPlot::draw(QCPPainter *painter)
             }
         }
     }
+#ifdef _MSC_VER
+#pragma warning(default: 4456)
+#endif
 
     /* Debug code to draw all layout element rects
     foreach (QCPLayoutElement* el, findChildren<QCPLayoutElement*>())
@@ -11172,11 +11190,17 @@ void QCustomPlot::axisRemoved(QCPAxis *axis)
   This method is used by the QCPLegend destructor to report legend removal to the QCustomPlot so
   it may clear its QCustomPlot::legend member accordingly.
 */
+#ifdef _MSC_VER
+#pragma warning(push, 3)
+#endif
 void QCustomPlot::legendRemoved(QCPLegend *legend)
 {
     if (this->legend == legend)
         this->legend = 0;
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 /*! \internal
 
@@ -22188,11 +22212,11 @@ void QCPItemLine::draw(QCPPainter *painter)
 
   This is a helper function for \ref draw.
 */
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4458)
+#endif
 QLineF QCPItemLine::getRectClippedLine(const QVector2D &start, const QVector2D &end, const QRect &rect) const
 {
-#ifdef _MSC_VER
-#pragma warning(disable: 4244)
-#endif
     bool containsStart = rect.contains(start.x(), start.y());
     bool containsEnd = rect.contains(end.x(), end.y());
     if (containsStart && containsEnd)
@@ -22283,10 +22307,10 @@ QLineF QCPItemLine::getRectClippedLine(const QVector2D &start, const QVector2D &
         result.setPoints(pv1.toPointF(), pv2.toPointF());
     }
     return result;
-#ifdef _MSC_VER
-#pragma warning(default: 4244)
-#endif
 }
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4458)
+#endif
 
 /*! \internal
 
@@ -23055,6 +23079,9 @@ void QCPItemEllipse::setSelectedBrush(const QBrush &brush)
 /* inherits documentation from base class */
 double QCPItemEllipse::selectTest(const QPointF &pos, bool onlySelectable, QVariant *details) const
 {
+#ifdef _MSC_VER
+#pragma warning(disable: 4458)
+#endif
     Q_UNUSED(details)
         if (onlySelectable && !mSelectable)
             return -1;
@@ -23078,6 +23105,9 @@ double QCPItemEllipse::selectTest(const QPointF &pos, bool onlySelectable, QVari
             result = mParentPlot->selectionTolerance()*0.99;
     }
     return result;
+#ifdef _MSC_VER
+#pragma warning(default: 4458)
+#endif
 }
 
 /* inherits documentation from base class */
@@ -23366,6 +23396,9 @@ void QCPItemPixmap::updateScaledPixmap(QRect finalRect, bool flipHorz, bool flip
   If scaling is disabled, returns a rect with size of the original pixmap and the top left corner
   aligned with the item position \a topLeft. The position \a bottomRight is ignored.
 */
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4458)
+#endif
 QRect QCPItemPixmap::getFinalRect(bool *flippedHorz, bool *flippedVert) const
 {
     QRect result;
@@ -23405,6 +23438,9 @@ QRect QCPItemPixmap::getFinalRect(bool *flippedHorz, bool *flippedVert) const
         *flippedVert = flipVert;
     return result;
 }
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4458)
+#endif
 
 /*! \internal
 
