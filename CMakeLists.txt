@@ -147,7 +147,8 @@ IF(GUI)
         src/behave_qt/behave_qt_main_window.h
         src/behave_qt/behave_qt_main_window_enums.h
         src/behave_qt/behave_qtree_widget.h
-        src/behave_qt/qcustomplotTest.h)
+        src/behave_qt/qcustomplotTest.h
+        src/behave_qt/qtIncludesSilencedW4.h)
 
     SET(QCUSTOMPLOT
         src/qcustomplot/qcustomplot.h

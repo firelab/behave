@@ -190,6 +190,11 @@ bool Surface::isUsingTwoFuelModels() const
     return surfaceInputs_.isUsingTwoFuelModels();
 }
 
+int Surface::getFuelModelNumber() const
+{
+	return surfaceInputs_.getFuelModelNumber();
+}
+
 double Surface::getCanopyCover() const
 {
     return surfaceInputs_.getCanopyCover();

@@ -3,14 +3,8 @@
 
 #include "behaveVector.h"
 
-#ifdef _MSC_VER
-#pragma warning(push, 3)
-#endif
 #include "ui_qcustomplot_test.h"
-#include <QtWidgets/QMainWindow>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
+#include "qtIncludesSilencedW4.h"
 
 class QcustomplotTest : public QMainWindow
 {

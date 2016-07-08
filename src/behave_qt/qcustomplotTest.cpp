@@ -1,7 +1,7 @@
 #include "qcustomplotTest.h"
 
 #ifdef _MSC_VER
-#pragma warning( disable: 4244 4800 )   
+#pragma warning(push, 3)   
 #endif
 
 QcustomplotTest::QcustomplotTest(QWidget* parent)
@@ -150,5 +150,5 @@ QcustomplotTest::~QcustomplotTest()
 }
 
 #ifdef _MSC_VER
-#pragma warning( default: 4244 4800 )   
+#pragma warning(push, 3)   
 #endif

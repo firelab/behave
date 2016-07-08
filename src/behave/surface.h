@@ -105,6 +105,7 @@ public:
 
     // SurfaceInputs getters
     //const SurfaceInputs& getSurfaceInputs() const;
+	int getFuelModelNumber() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;

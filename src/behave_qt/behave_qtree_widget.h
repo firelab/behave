@@ -1,13 +1,7 @@
 #ifndef BEHAVE_TREE_HEADER
 #define BEHAVE_TREE_HEADER
 
-#ifdef _MSC_VER
-#pragma warning(push, 3) 
-#endif
-#include <QTreeWidget>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
+#include "qtIncludesSilencedW4.h"
 
 class BehaveTree: public QTreeWidget
 {

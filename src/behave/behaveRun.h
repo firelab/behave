@@ -94,6 +94,7 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
     // SURFACE Module Getters
+	int getFuelModelNumber() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;

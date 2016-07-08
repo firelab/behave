@@ -32,7 +32,9 @@
 #define QCUSTOMPLOT_H
 
 #ifdef _MSC_VER
-#pragma warning(push, 3)      
+#pragma warning(push, 3)
+#endif
+
 #include <QObject>
 #include <QPointer>
 #include <QWidget>
@@ -62,6 +64,7 @@
 #  include <QtPrintSupport/QtPrintSupport>
 #endif
 
+#ifdef _MSC_VER
 #pragma warning(pop)
 #endif
 

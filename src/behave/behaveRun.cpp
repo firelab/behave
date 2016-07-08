@@ -299,6 +299,11 @@ bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
 }
 
+int BehaveRun::getFuelModelNumber() const
+{
+	return surface_.getFuelModelNumber();
+}
+
 double BehaveRun::getCanopyCover() const
 {
     return surface_.getCanopyCover();
