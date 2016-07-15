@@ -49,6 +49,11 @@ public:
 
     // FuelModelSet Methods
     bool isFuelModelDefined(int fuelModelNumber) const;
+	double getFuelLoadOneHour(int fuelModelNumber) const;
+	double getFuelLoadTenHour(int fuelModelNumber) const;
+	double getFuelLoadHundredHour(int fuelModelNumber) const;
+	double getFuelLoadLiveHerbaceous(int fuelModelNumber) const;
+	double getFuelLoadLiveWoody(int fuelModelNumber) const;
 
     // SURFACE 
     void doSurfaceRunInDirectionOfMaxSpread();

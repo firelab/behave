@@ -299,6 +299,31 @@ bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
 }
 
+double BehaveRun::getFuelLoadOneHour(int fuelModelNumber) const
+{
+	return fuelModelSet_->getFuelLoadOneHour(fuelModelNumber);
+}
+
+double BehaveRun::getFuelLoadTenHour(int fuelModelNumber) const
+{
+	return fuelModelSet_->getFuelLoadTenHour(fuelModelNumber);
+}
+
+double BehaveRun::getFuelLoadHundredHour(int fuelModelNumber) const
+{
+	return fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber);
+}
+
+double BehaveRun::getFuelLoadLiveHerbaceous(int fuelModelNumber) const
+{
+	return fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber);
+}
+
+double BehaveRun::getFuelLoadLiveWoody(int fuelModelNumber) const
+{
+	return fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber);
+}
+
 int BehaveRun::getFuelModelNumber() const
 {
 	return surface_.getFuelModelNumber();
