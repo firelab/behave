@@ -1,7 +1,7 @@
 /******************************************************************************
 *
 * Project:  CodeBlocks
-* Purpose:  Class for storing various constant values used by the Surface class
+* Purpose:  Various constant values used by the Surface class
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************

@@ -1,7 +1,7 @@
 /******************************************************************************
 *
 * Project:  CodeBlocks
-* Purpose:  Various constant values used by the Crown class
+* Purpose:  Various constant values used by the Ignite class
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************
@@ -25,19 +25,32 @@
 *
 ******************************************************************************/
 
+#ifndef IGNITEENUMS_H
+#define IGNITEENUMS_H
 
-#ifndef CROWNENUMS_H
-#define CROWNENUMS_H
-
-struct FireType
+struct IgnitionFuelBedType
 {
-    enum FireTypeEnum
+    enum IgnitionFuelBedTypeEnum
     {
-        SURFACE = 0,    // surface fire with no torching or crown fire spread.
-        TORCHING = 1,   // surface fire with torching.
-        CONDITIONAL_CROWN_FIRE = 2, // active crown fire possible if the fire transitions to the overstory        
-        CROWNING = 3    // active crown fire, fire is spreading through the canopy.
+        PONDEROSA_PINE_LITTER       = 0, //Ponderosa Pine Litter
+        PUNKY_WOOD_ROTTEN_CHUNKY    = 1, // Punky wood, rotten, chunky
+        PUNKY_WOOD_POWDER_DEEP      = 2, // Punky wood powder, deep (4.8 cm)
+        PUNK_WOOD_POWDER_SHALLOW    = 3, // Punk wood powder, shallow (2.4 cm)
+        LODGEPOLE_PINE_DUFF         = 4, // Lodgepole pine duff
+        DOUGLAS_FIR_DUFF            = 5, //  Douglas - fir duff
+        HIGH_ALTITUDE_MIXED         = 6, // High altitude mixed (mainly Engelmann spruce)
+        PEAT_MOSS                   = 7  // Peat moss (commercial)
     };
 };
 
-#endif // CROWNENUMS_H
+struct LightningCharge
+{
+    enum LightningChargeEnum
+    {
+        NEGATIVE    = 0,
+        POSITIVE    = 1,
+        UNKNOWN     = 2
+    };
+};
+
+#endif // IGNITEENUMS_H

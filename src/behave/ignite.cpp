@@ -30,7 +30,9 @@
 ******************************************************************************/
 
 #include "ignite.h"
+
 #include <cmath>
+#include "igniteEnums.h"
 
 Ignite::Ignite()
 {
@@ -54,7 +56,7 @@ Ignite::~Ignite()
 double Ignite::calculateFirebrandIgnitionProbability(double fuelTemperature,
     double fuelMoisture)
 {
-    // Covert fahrenheit to celcius
+    // Covert Fahrenheit to Celcius
     double localFuelTemperature = (fuelTemperature - 32.0) * 5.0 / 9.0;
     double heatOfIgnition = 144.51
         - 0.26600 * localFuelTemperature
@@ -170,86 +172,89 @@ double Ignite::calculateLightningIgnitionProbability(int fuelType, double depth,
 
     // Convert duff depth to cm and restrict to maximum of 10 cm.
     depth *= 2.54;
-    if (depth > 10.)
+    if (depth > 10.0)
     {
-        depth = 10.;
+        depth = 10.0;
     }
+
     // Convert duff moisture to percent and restrict to maximum of 40%.
-    moisture *= 100.;
-    if (moisture > 40.)
+    moisture *= 100.0;
+    if (moisture > 40.0)
     {
-        moisture = 40.;
+        moisture = 40.0;
     }
+
     // Ponderosa Pine Litter
-    double pPos = 0.;
-    double pNeg = 0.;
-    double prob = 0.;
-    if (fuelType == 0)
+    double pPos = 0.0;
+    double pNeg = 0.0;
+    double prob = 0.0;
+    if (fuelType == IgnitionFuelBedType::PONDEROSA_PINE_LITTER)
     {
         pPos = 0.92 * exp(-0.087 * moisture);
         pNeg = 1.04 * exp(-0.054 * moisture);
     }
     // Punky wood, rotten, chunky
-    else if (fuelType == 1)
+    else if (fuelType == IgnitionFuelBedType::PUNKY_WOOD_ROTTEN_CHUNKY)
     {
         pPos = 0.44 * exp(-0.110 * moisture);
         pNeg = 0.59 * exp(-0.094 * moisture);
     }
     // Punky wood powder, deep (4.8 cm)
-    else if (fuelType == 2)
+    else if (fuelType == IgnitionFuelBedType::PUNKY_WOOD_POWDER_DEEP)
     {
         pPos = 0.86 * exp(-0.060 * moisture);
         pNeg = 0.90 * exp(-0.056 * moisture);
     }
     // Punk wood powder, shallow (2.4 cm)
-    else if (fuelType == 3)
+    else if (fuelType == IgnitionFuelBedType::PUNK_WOOD_POWDER_SHALLOW)
     {
         pPos = 0.60 - (0.011 * moisture);
         pNeg = 0.73 - (0.011 * moisture);
     }
     // Lodgepole pine duff
-    else if (fuelType == 4)
+    else if (fuelType == IgnitionFuelBedType::LODGEPOLE_PINE_DUFF)
     {
-        pPos = 1. / (1. + exp(5.13 - 0.68 * depth));
-        pNeg = 1. / (1. + exp(3.84 - 0.60 * depth));
+        pPos = 1.0 / (1.0 + exp(5.13 - 0.68 * depth));
+        pNeg = 1.0 / (1.0 + exp(3.84 - 0.60 * depth));
     }
     // Douglas-fir duff
-    else if (fuelType == 5)
+    else if (fuelType == IgnitionFuelBedType::DOUGLAS_FIR_DUFF)
     {
-        pPos = 1. / (1. + exp(6.69 - 1.39 * depth));
-        pNeg = 1. / (1. + exp(5.48 - 1.28 * depth));
+        pPos = 1.0 / (1.0 + exp(6.69 - 1.39 * depth));
+        pNeg = 1.0 / (1.0 + exp(5.48 - 1.28 * depth));
     }
     // High altitude mixed (mainly Engelmann spruce)
-    else if (fuelType == 6)
+    else if (fuelType == IgnitionFuelBedType::HIGH_ALTITUDE_MIXED)
     {
         pPos = 0.62 * exp(-0.050 * moisture);
         pNeg = 0.80 - (0.014 * moisture);
     }
     // Peat moss (commercial)
-    else if (fuelType == 7)
+    else if (fuelType == IgnitionFuelBedType::PEAT_MOSS)
     {
         pPos = 0.71 * exp(-0.070 * moisture);
         pNeg = 0.84 * exp(-0.060 * moisture);
     }
+
     // Return requested result
-    static const int negative = 0, positive = 1, unknown = 2;
-    if (charge == negative)
+    if (charge == LightningCharge::NEGATIVE)
     {
         prob = ccNeg * pNeg;
     }
-    else if (charge == positive)
+    else if (charge == LightningCharge::POSITIVE)
     {
         prob = ccPos * pPos;
     }
-    else if (charge == unknown)
+    else if (charge == LightningCharge::UNKNOWN)
     {
         prob = freqPos * ccPos * pPos
             + freqNeg * ccNeg * pNeg;
     }
+
     // Constrain result
-    if (prob < 0.)
+    if (prob < 0.0)
     {
-        prob = 0.;
+        prob = 0.0;
     }
     if (prob > 1.0)
     {
