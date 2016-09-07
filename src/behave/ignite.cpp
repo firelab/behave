@@ -143,7 +143,7 @@ double Ignite::calculateFuelTemperature(double airTemperature, double sunShade)
 *                      6 == High altitude mixed (mainly Engelmann spruce)
 *                      7 == Peat moss (commercial)
 *  \param depth    Ignition fuel bed depth (inches).
-*  \param moisture Ignition fuel moisture content (lb/lb).
+*  \param moisture Ignition fuel moisture content, uses 100-hr fuel moisture (lb/lb). 
 *  \param charge   Lightning charge:
 *                      0 == negative,
 *                      1 == positive,
