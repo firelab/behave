@@ -69,6 +69,7 @@ SET(HEADERS
     src/behave/crownInputs.h
     src/behave/fuelModelSet.h
 	src/behave/ignite.h
+	src/behave/igniteEnums.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
