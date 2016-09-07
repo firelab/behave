@@ -4,10 +4,9 @@
 * Purpose:  Part of Mark Finney's EXRATE package for determining expected
 *           and harmonic mean spread rate in randomly arranged fuels
 * Author:   William Chatham <wchatham@fs.fed.us>
-* Credits:  Some of the code in this file is, in part or in whole, from
-*           BehavePlus5 and EXRATE source originally authored by Collin D.
-*           Bevins and Mark Finney respectively, and is used with or without
-*           modification.
+* Credits:  Some of the code in the corresponding cpp file is, in part or in
+*           whole, from BehavePlus5 source originally authored by Collin D.
+*           Bevins and is used with or without modification.
 *
 *******************************************************************************
 *
