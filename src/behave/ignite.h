@@ -39,10 +39,10 @@ public:
     ~Ignite();
 
     double calculateFirebrandIgnitionProbability(double fuelTemperature,
-        double fuelMoisture);
+        double oneHourMoisture);
     double calculateFuelTemperature(double airTemperature, double sunShade);
     double calculateLightningIgnitionProbability(int fuelType, double depth,
-        double moisture, int charge);
+        double hundredHourMoisture, int charge);
 
 private:
 
