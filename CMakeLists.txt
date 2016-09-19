@@ -5,9 +5,21 @@
 # include directories, compile definitions, the position-independent-code flag, 
 # and links to the qtmain.lib library on Windows.
 # *****************************************************************************
+
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
-SET (CMAKE_CXX_STANDARD 11)
+# Macro to make use of c++11 on Versions CMake versions less than 3.1
+MACRO(USE_CXX11)
+  IF(CMAKE_VERSION VERSION_LESS "3.1")
+    IF(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      SET(CMAKE_CXX_FLAGS "--std=gnu++11 ${CMAKE_CXX_FLAGS}")
+    ENDIF()
+  ELSE()
+    SET(CMAKE_CXX_STANDARD 11)
+  ENDIF()
+ENDMACRO(USE_CXX11)
+
+USE_CXX11()
 
 PROJECT(behave)
 
