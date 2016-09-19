@@ -150,7 +150,7 @@ double parseMoisture(int i, const int MAX_ARG_INDEX, char *argv[], std::string a
         // Report error
         std::string errorString = "ERROR: No valid value entered for ";
         errorString += argName;
-        printf(errorString.c_str());
+        printf("%s\n", errorString.c_str());
         Usage(); // Exits program
     }
     checkMoistureBound(parsedMoistureValue);
@@ -176,7 +176,7 @@ double parseDouble(int i, const int MAX_ARG_INDEX, char *argv[], std::string arg
         // Report error
         std::string errorString = "ERROR: No valid value entered for ";
         errorString += argumentName;
-        printf(errorString.c_str());
+        printf("%s\n", errorString.c_str());
         Usage(); // Exits program
     }
 
@@ -423,8 +423,7 @@ int main(int argc, char *argv[])
             // Report error
             std::string errorString = "ERROR: Missing required argument ";
             errorString += getArgumentName(i);
-            printf(errorString.c_str());
-            printf("\n");
+            printf("%s\n", errorString.c_str());
             isMissingRequirement = true;
         }
     }
