@@ -7,6 +7,8 @@
 # *****************************************************************************
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
+SET (CMAKE_CXX_STANDARD 11)
+
 PROJECT(behave)
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
