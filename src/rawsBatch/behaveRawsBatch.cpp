@@ -13,8 +13,6 @@
 
 #define EQUAL(a,b) (strcmp(a,b)==0)
 
-const int REQUIRED_ARG_COUNT = 10;
-
 enum
 {
     RAWS_ID,
