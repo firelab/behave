@@ -19,7 +19,7 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
                     ${CMAKE_SOURCE_DIR}/src/cli
                     ${CMAKE_SOURCE_DIR}/src/qcustomplot)      
 
-OPTION(CLI "Enable CLI boost parser" OFF)
+OPTION(CLI "Enable Behave CLI" OFF)
 IF(CLI)
     ADD_DEFINITIONS(-DCLI)
 ENDIF(CLI)

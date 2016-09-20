@@ -472,7 +472,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        //behave.doSurfaceRun();
+        behave.doSurfaceRunInDirectionOfMaxSpread();
     }
 
     // Get the surface fire spread rate
