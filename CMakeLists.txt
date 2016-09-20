@@ -24,6 +24,11 @@ IF(CLI)
     ADD_DEFINITIONS(-DCLI)
 ENDIF(CLI)
 
+OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
+IF(RAWS_BATCH)
+    ADD_DEFINITIONS(-DRAWS_BATCH)
+ENDIF(RAWS_BATCH)
+
 OPTION(GUI "Enable Qt Gui" OFF)
 IF(GUI)
     ADD_DEFINITIONS(-DGUI)
@@ -119,6 +124,13 @@ IF(TEST_BEHAVE)
         TARGET_LINK_LIBRARIES(testBehave ${Boost_LIBRARIES})
     ENDIF()
 ENDIF(TEST_BEHAVE)
+
+IF(RAWS_BATCH)
+    ADD_EXECUTABLE(behave-raws-batch
+        ${SOURCE}
+        src/rawsBatch/behaveRawsBatch.cpp
+        ${HEADERS})
+ENDIF(RAWS_BATCH)
 
 IF(CLI)
     ADD_EXECUTABLE(behave-cli 
