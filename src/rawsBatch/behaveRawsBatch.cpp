@@ -37,7 +37,7 @@ void Usage()
     printf("\nUsage:\n");
     printf("behave-raws-batch [--input-file-name name]   Optional\n");
     printf("                  [--output-file-name name]  Optional\n");
-    printf("--output-file-name <name>               Optional: Specify input file name\n");
+    printf("--input-file-name <name>                Optional: Specify input file name\n");
     printf("                                            default file name: input.txt\n");
     printf("--output-file-name <name>               Optional: Specify output file name\n");
     printf("                                            default file name: output.txt\n");
