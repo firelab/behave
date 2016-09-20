@@ -3,9 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <iomanip>
-#include <time.h>
-#include <cmath>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -39,7 +36,7 @@ void Usage()
 {
     printf("\nUsage:\n");
     printf("behave-raws-batch [--input-file-name name]   Optional\n");
-    printf("             [--output-file-name name]  Optional\n");
+    printf("                  [--output-file-name name]  Optional\n");
     printf("--output-file-name <name>               Optional: Specify input file name\n");
     printf("                                            default file name: input.txt\n");
     printf("--output-file-name <name>               Optional: Specify output file name\n");
@@ -84,8 +81,6 @@ int main(int argc, char *argv[])
     double directionOfMaxSpread = 0.0;
     double flameLength = 0.0;
     double directionOfInterest = 0.0;
-
-    // Wind adjustment factor parameters
     double canopyCover = 0.0;
     double canopyHeight = 0.0;
     double crownRatio = 0.0;
@@ -96,9 +91,7 @@ int main(int argc, char *argv[])
     behave.setSlopeInputMode(SlopeInputMode::SLOPE_IN_DEGREES);
     behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
 
-    
     std::string line = "";
-  
     std::string token = "";
     std::string outputLine = "";
     std::string spreadRateString = "";
@@ -261,8 +254,7 @@ int main(int argc, char *argv[])
 
         // Get other required outputs
         flameLength = behave.getFlameLength();
-        directionOfMaxSpread = behave.getDirectionOfMaxSpread();
-
+     
         // Convert output to metric
         spreadRate *= CHAINS_PER_HOUSR_TO_METERS_PER_SECOND;
         flameLength *= FEET_TO_METERS;
