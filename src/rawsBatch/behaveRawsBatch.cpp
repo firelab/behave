@@ -45,11 +45,14 @@ void Usage()
     printf("--output-file-name <name>               Optional: Specify output file name\n");
     printf("                                            default file name: output.txt\n");
     printf("A properly formatted input file consisting of RAWS data must exist\n");
-    printf("RAWS data must be comma delimited and each behave run separated by a new line");
-    printf("Inputs must be in the following order : ");
+    printf("RAWS data must be comma delimited and inputs for each behave run separated by a new line");
+    printf("Inputs must be in the following order within a line: ");
     printf("RAWS_ID,DATE_TIME,OBSERVED_OR_PREDICTED,FUEL_MODEL_NUMBER,ONE_HOUR_MOISTURE\n");
     printf("TEN_HOUR_MOISTURE, HUNDRED_HOUR_MOISTURE, LIVE_HERB_MOISTURE,\n");
-    printf("LIVE_WOODY_MOISTURE,WIND_SPEED,WIND_DIRECTION,SLOPE,ASPECT   \n");
+    printf("LIVE_WOODY_MOISTURE,WIND_SPEED,WIND_DIRECTION,SLOPE,ASPECT\n");
+    printf("FUEL_MODEL_NUMBER must be an integer, all subsequent values must be floating point\n");
+    printf("Moisture is given in percent, midflame wind speed must be m/s, and wind direction,\n");
+    printf("slope, and aspect must be in degrees. All directions must be relative to compass north\n");
     printf("Example of a properfly formated line of data shown below:\n");
     printf("04V,2015-01-01 03:00:00,obs,101,13.7477,4.8854,4.8718,120,60,0.733349036493112,340,0,-1\n\n");
     exit(1); // Exit with error code 1
@@ -148,14 +151,14 @@ int main(int argc, char *argv[])
     std::ofstream outFile(outFileName, std::ios::out);
     std::ifstream inputFileStream(inFileName, std::ifstream::in);
 
-    int tokenCounter = 0;
-
+    // Check for input file's existence
     if (!inputFileStream)
     {
         printf("ERROR: input file does not exist\n");
         Usage(); // Exits program
     }
 
+    int tokenCounter = 0;
     while(getline(inputFileStream, line))
     {
         std::stringstream lineStream(line);
