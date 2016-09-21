@@ -39,17 +39,17 @@ void Usage()
     printf("                                            default file name: input.txt\n");
     printf("--output-file-name <name>               Optional: Specify output file name\n");
     printf("                                            default file name: output.txt\n");
-    printf("A properly formatted input file consisting of RAWS data must exist\n");
-    printf("RAWS data must be comma delimited and inputs for each behave run separated by a new line");
-    printf("Inputs must be in the following order within a line: ");
+    printf("\nA properly formatted input file consisting of RAWS data must exist\n");
+    printf("RAWS data must be comma delimited and inputs for each behave run separated\nby a new line");
+    printf("Inputs must be in the following order within a line:\n");
     printf("RAWS_ID,DATE_TIME,OBSERVED_OR_PREDICTED,FUEL_MODEL_NUMBER,ONE_HOUR_MOISTURE\n");
     printf("TEN_HOUR_MOISTURE, HUNDRED_HOUR_MOISTURE, LIVE_HERB_MOISTURE,\n");
-    printf("LIVE_WOODY_MOISTURE,WIND_SPEED,WIND_DIRECTION,SLOPE,ASPECT\n");
-    printf("FUEL_MODEL_NUMBER must be an integer, all subsequent values must be floating point\n");
-    printf("Moisture is given in percent, midflame wind speed must be m/s, and wind direction,\n");
-    printf("slope, and aspect must be in degrees. All directions must be relative to compass north\n");
-    printf("Example of a properfly formated line of data shown below:\n");
-    printf("04V,2015-01-01 03:00:00,obs,101,13.7477,4.8854,4.8718,120,60,0.733349036493112,340,0,-1\n\n");
+    printf("LIVE_WOODY_MOISTURE,WIND_SPEED,WIND_DIRECTION,SLOPE,ASPECT\n\n");
+    printf("FUEL_MODEL_NUMBER must be an integer, all subsequent values must be\nfloating point. ");
+    printf("Moisture is given in percent, midflame wind speed must be\nm/s, and wind direction,");
+    printf("slope, and aspect must be in degrees. All directions\nmust be relative to compass north.");
+    printf("Example of a properfly formated line of \ndata shown below:\n");
+    printf("04V,2015-01-01 03:00:00,obs,101,13.7477,4.8854,4.8718,120,60,0.7333,340,0,-1\n\n");
     exit(1); // Exit with error code 1
 }
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     std::string inputFileName = "input.txt"; // default input file name
     std::string outFileName = "output.txt"; // default output file name
     std::string runIdentifier = "";
-  
+
     // Surface Fire Inputs;
     int fuelModelNumber = 0;
     double moistureOneHr = 0.0;
@@ -97,39 +97,47 @@ int main(int argc, char *argv[])
 
     int argIndex = 1;
     // Parse commandline arguments
-    while (argIndex < argc)
+    if (argc > 1)
     {
-        if (EQUAL(argv[argIndex], "--output-file-name"))
+        while (argIndex < argc)
         {
-            if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
+            if (EQUAL(argv[argIndex], "--output-file-name"))
             {
-                // Report error
-                printf("ERROR: No output file name entered\n");
+                if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
+                {
+                    // Report error
+                    printf("ERROR: No output file name entered\n");
+                    Usage(); // Exits program
+                }
+                outFileName = argv[++argIndex];
+                if (!(outFileName.substr(outFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
+                {
+                    // Give the output file a .txt extension
+                    outFileName += ".txt";
+                }
+            }
+            if (EQUAL(argv[argIndex], "--input-file-name"))
+            {
+                if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
+                {
+                    // Report error
+                    printf("ERROR: No input file name entered\n");
+                    Usage(); // Exits program
+                }
+                inputFileName = argv[++argIndex];
+                if (!(inputFileName.substr(inputFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
+                {
+                    // Give the input file a .txt extension
+                    inputFileName += ".txt";
+                }
+            }
+            else
+            {
+                printf("ERROR: Invalid argument entered\n");
                 Usage(); // Exits program
             }
-            outFileName = argv[++argIndex];
-            if (!(outFileName.substr(outFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
-            {
-                // Give the output file a .txt extension
-                outFileName += ".txt";
-            }
+            argIndex++;
         }
-        if (EQUAL(argv[argIndex], "--input-file-name"))
-        {
-            if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
-            {
-                // Report error
-                printf("ERROR: No input file name entered\n");
-                Usage(); // Exits program
-            }
-            inputFileName = argv[++argIndex];
-            if (!(inputFileName.substr(inputFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
-            {
-                // Give the input file a .txt extension
-                inputFileName += ".txt";
-            }
-        }
-        argIndex++;
     }
 
     if (inputFileName.compare(outFileName) == 0)
