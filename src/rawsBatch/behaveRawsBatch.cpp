@@ -131,12 +131,6 @@ int main(int argc, char *argv[])
                     inputFileName += ".txt";
                 }
             }
-            else
-            {
-                // Report error
-                printf("ERROR: Invalid argument entered\n");
-                Usage(); // Exits program
-            }
             argIndex++;
         }
     }
