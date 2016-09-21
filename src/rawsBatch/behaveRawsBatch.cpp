@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     const double CHAINS_PER_HOUSR_TO_METERS_PER_SECOND = 0.005588;
     const double FEET_TO_METERS = 0.3048;
 
-    std::string inFileName = "input.txt"; // default input file name
+    std::string inputFileName = "input.txt"; // default input file name
     std::string outFileName = "output.txt"; // default output file name
     std::string runIdentifier = "";
   
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
             outFileName = argv[++argIndex];
             if (!(outFileName.substr(outFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
             {
-                // Give the file a .txt extension
+                // Give the output file a .txt extension
                 outFileName += ".txt";
             }
         }
@@ -122,45 +122,54 @@ int main(int argc, char *argv[])
                 printf("ERROR: No input file name entered\n");
                 Usage(); // Exits program
             }
-            inFileName = argv[++argIndex];
-            if (!(inFileName.substr(inFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
+            inputFileName = argv[++argIndex];
+            if (!(inputFileName.substr(inputFileName.find_last_of(".") + 1) == "txt")) // Output is not yet a .txt file
             {
-                // Give the file a .txt extension
-                inFileName += ".txt";
+                // Give the input file a .txt extension
+                inputFileName += ".txt";
             }
         }
         argIndex++;
     }
 
-    if (inFileName.compare(outFileName) == 0)
+    if (inputFileName.compare(outFileName) == 0)
     {
         // Report error
         printf("ERROR: input file name cannot be same as output file name\n");
         Usage(); // Exits program
     }
 
-    std::ofstream outFile(outFileName, std::ios::out);
-    std::ifstream inputFileStream(inFileName, std::ifstream::in);
+    std::ofstream outputFile(outFileName, std::ios::out);
+    std::ifstream inputFile(inputFileName, std::ifstream::in);
 
     // Check for input file's existence
-    if (!inputFileStream)
+    if (!inputFile)
     {
         printf("ERROR: input file does not exist\n");
         Usage(); // Exits program
     }
 
+    std::stringstream lineStream;
+    bool badData = false;
+
     int tokenCounter = 0;
-    while(getline(inputFileStream, line))
+
+    // Start reading input file
+    while(getline(inputFile, line))
     {
-        std::stringstream lineStream(line);
+        // Reset variables for new loop iteration
+        lineStream.str("");
+        lineStream.clear();
         token = "";
         outputLine = "";
         spreadRateString = "";
         flameLengthString = "";
         tokenCounter = 0;
         runIdentifier = "";
+        badData = false;
 
         // Parse arguments from a single line
+        lineStream << line;
         while(std::getline(lineStream, token, ','))
         {
             switch (tokenCounter)
@@ -182,52 +191,132 @@ int main(int argc, char *argv[])
                 }
                 case FUEL_MODEL_NUMBER:
                 {
-                    fuelModelNumber = std::stoi(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        fuelModelNumber = std::stoi(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case ONE_HOUR:
                 {
-                    moistureOneHr = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        moistureOneHr = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case TEN_HOUR:
                 {
-                    moistureTenHr = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        moistureTenHr = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case HUNDRED_HOUR:
                 {
-                    moistureHundredHr = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        moistureHundredHr = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case LIVE_HERB:
                 {
-                    moistureLiveHerb = std::stod(token);              
+                    if (!token.compare("NA") == 0)
+                    {
+                        moistureLiveHerb = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case LIVE_WOODY:
                 {
-                    moistureLiveWoody = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        moistureLiveWoody = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case WIND_SPEED:
                 {
-                    windSpeed = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        windSpeed = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case WIND_DIRECTION:
                 {
-                    windDirection = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        windDirection = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case SLOPE:
                 {
-                    slope = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        slope = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case ASPECT:
                 {
-                    aspect = std::stod(token);
+                    if (!token.compare("NA") == 0)
+                    {
+                        aspect = std::stod(token);
+                    }
+                    else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 default:
@@ -238,33 +327,47 @@ int main(int argc, char *argv[])
             tokenCounter++;
         }
 
-        // Convert windspeed from m/s to mi/hr for Behave's internal calculations
-        windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
+        // If data is not bad, do calculations
+        if (!badData)
+        {
+            // Convert windspeed from m/s to mi/hr for Behave's internal calculations
+            windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
 
-        // Feed input values to behave
-        behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+            // Feed input values to behave
+            behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
-        // Calculate spread rate and flame length
-        behave.doSurfaceRunInDirectionOfMaxSpread();
+            // Calculate spread rate and flame length
+            behave.doSurfaceRunInDirectionOfMaxSpread();
 
-        // Get the surface fire spread rate
-        spreadRate = behave.getSurfaceFireSpreadRate();
+            // Get the surface fire spread rate
+            spreadRate = behave.getSurfaceFireSpreadRate();
 
-        // Get other required outputs
-        flameLength = behave.getFlameLength();
-     
-        // Convert output to metric
-        spreadRate *= CHAINS_PER_HOUSR_TO_METERS_PER_SECOND;
-        flameLength *= FEET_TO_METERS;
+            // Get other required outputs
+            flameLength = behave.getFlameLength();
 
-        spreadRateString = std::to_string(spreadRate);
-        flameLengthString = std::to_string(flameLength);
+            // Convert output to metric
+            spreadRate *= CHAINS_PER_HOUSR_TO_METERS_PER_SECOND;
+            flameLength *= FEET_TO_METERS;
 
+
+            spreadRateString = std::to_string(spreadRate);
+            flameLengthString = std::to_string(flameLength);
+        }
+        else
+        {
+            // Data is bad
+            spreadRateString = "NA";
+            flameLengthString = "NA";
+        }
+
+        // Print line to output file
         outputLine = runIdentifier + "," + spreadRateString + "," + flameLengthString;
-        outFile << outputLine << std::endl;
+        outputFile << outputLine << std::endl;
     }
 
-    outFile.close();
+    // Close input and output files
+    inputFile.close();
+    outputFile.close();
 
     return 0; // Success
 }
