@@ -367,7 +367,7 @@ int main(int argc, char *argv[])
 
         // Print line to output file
         outputLine = runIdentifier + "," + spreadRateString + "," + flameLengthString;
-        outputFile << outputLine << std::endl;
+        outputFile << outputLine << '\n';
     }
 
     // Close input and output files
