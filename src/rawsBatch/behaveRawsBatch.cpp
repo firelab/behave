@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     const int MAX_ARGUMENT_INDEX = argc - 1;
 
     const double METERS_PER_SECOND_TO_MILES_PER_HOUR = 2.236936;
-    const double CHAINS_PER_HOUSR_TO_METERS_PER_SECOND = 0.005588;
+    const double CHAINS_PER_HOUR_TO_METERS_PER_SECOND = 0.005588;
     const double FEET_TO_METERS = 0.3048;
 
     std::string inputFileName = "input.txt"; // default input file name
@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
             }
             else
             {
+                // Report error
                 printf("ERROR: Invalid argument entered\n");
                 Usage(); // Exits program
             }
@@ -153,6 +154,7 @@ int main(int argc, char *argv[])
     // Check for input file's existence
     if (!inputFile)
     {
+        // Report error
         printf("ERROR: input file does not exist\n");
         Usage(); // Exits program
     }
@@ -160,9 +162,8 @@ int main(int argc, char *argv[])
     std::stringstream lineStream;
     bool badData = false;
 
-    int tokenCounter = 0;
-
     // Start reading input file
+    int tokenCounter = 0;
     while(getline(inputFile, line))
     {
         // Reset variables for new loop iteration
@@ -340,24 +341,20 @@ int main(int argc, char *argv[])
         {
             // Convert windspeed from m/s to mi/hr for Behave's internal calculations
             windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
-
             // Feed input values to behave
-            behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-
+            behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, 
+                moistureLiveHerb, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, 
+                windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
             // Calculate spread rate and flame length
             behave.doSurfaceRunInDirectionOfMaxSpread();
-
             // Get the surface fire spread rate
             spreadRate = behave.getSurfaceFireSpreadRate();
-
             // Get other required outputs
             flameLength = behave.getFlameLength();
-
             // Convert output to metric
-            spreadRate *= CHAINS_PER_HOUSR_TO_METERS_PER_SECOND;
+            spreadRate *= CHAINS_PER_HOUR_TO_METERS_PER_SECOND;
             flameLength *= FEET_TO_METERS;
-
-
+            // Convert data to string for output to file
             spreadRateString = std::to_string(spreadRate);
             flameLengthString = std::to_string(flameLength);
         }
