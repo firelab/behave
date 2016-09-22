@@ -162,6 +162,8 @@ int main(int argc, char *argv[])
     std::stringstream lineStream;
     bool badData = false;
 
+
+    printf("Processing files please wait...\n");
     // Start reading input file
     int tokenCounter = 0;
     while(getline(inputFile, line))
@@ -373,6 +375,8 @@ int main(int argc, char *argv[])
     // Close input and output files
     inputFile.close();
     outputFile.close();
+
+    printf("Done!\n\n");
 
     return 0; // Success
 }
