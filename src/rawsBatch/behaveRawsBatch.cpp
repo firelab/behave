@@ -51,7 +51,6 @@ void Usage()
     printf("Example of a properfly formated line of \ndata shown below:\n");
     printf("04V,2015-01-01 03:00:00,obs,101,13.7477,4.8854,4.8718,120,60,0.7333,340,0,-1\n\n");
 
-    std::cin.get();
     exit(1); // Exit with error code 1
 }
 
