@@ -50,6 +50,8 @@ void Usage()
     printf("slope, and aspect must be in degrees. All directions\nmust be relative to compass north.");
     printf("Example of a properfly formated line of \ndata shown below:\n");
     printf("04V,2015-01-01 03:00:00,obs,101,13.7477,4.8854,4.8718,120,60,0.7333,340,0,-1\n\n");
+
+    std::cin.get();
     exit(1); // Exit with error code 1
 }
 
@@ -116,7 +118,7 @@ int main(int argc, char *argv[])
                     outFileName += ".txt";
                 }
             }
-            if (EQUAL(argv[argIndex], "--input-file-name"))
+            else if (EQUAL(argv[argIndex], "--input-file-name"))
             {
                 if ((argIndex + 1) > MAX_ARGUMENT_INDEX) // An error has occurred
                 {
@@ -130,6 +132,11 @@ int main(int argc, char *argv[])
                     // Give the input file a .txt extension
                     inputFileName += ".txt";
                 }
+            }
+            else
+            {
+                printf("ERROR: %s is an invalid argument\n", argv[argIndex]);
+                Usage(); // Exits program
             }
             argIndex++;
         }
