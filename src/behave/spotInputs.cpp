@@ -50,16 +50,16 @@ SpotInputs & SpotInputs::operator=(const SpotInputs & rhs)
 {
 	if (this != &rhs)
 	{
-		downwindCoverHeight_ = 0.0;
-		location_ = SpotFireLocation::MIDSLOPE_WINDWARD;
-		ridgeToValleyDistance_ = 0.0;
-		ridgeToValleyElevation_ = 0.0;
-		windSpeedAtTwentyFeet_ = 0.0;
-		buringPileFlameHeight_ = 0.0;
-		flameLength_ = 0.0;
-		torchingTrees_ = 0.0;
-		DBH_ = 0.0;
-		treeHeight_ = 0.0;
+        DBH_ = rhs.DBH_;
+        downwindCoverHeight_ = rhs.downwindCoverHeight_;
+        location_ = rhs.location_;
+        ridgeToValleyDistance_ = rhs.ridgeToValleyDistance_;
+        ridgeToValleyElevation_ = rhs.ridgeToValleyElevation_;
+        windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
+        buringPileFlameHeight_ = rhs.buringPileFlameHeight_;
+        flameLength_ = rhs.flameLength_;
+        torchingTrees_ = rhs.torchingTrees_;
+        treeHeight_ = rhs.treeHeight_;
 	}
 	return *this;
 }
