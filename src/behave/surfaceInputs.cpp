@@ -259,6 +259,26 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     DBH_ = DBH;
 }
 
+void SurfaceInputs::setAspenFuelModelNumber(int aspenFuelModelNumber)
+{
+    aspenFuelModelNumber_ = aspenFuelModelNumber;
+}
+
+void SurfaceInputs::setAspenCuringLevel(double aspenCuringLevel)
+{
+    aspenCuringLevel_ = aspenCuringLevel;
+}
+
+void SurfaceInputs::setAspenDBH(double DBH)
+{
+    DBH_ = DBH;
+}
+
+void SurfaceInputs::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity)
+{
+    aspenFireSeverity_ = aspenFireSeverity;
+}
+
 void SurfaceInputs::setCanopyCover(double canopyCover)
 {
     canopyCover_ = canopyCover;
@@ -562,6 +582,16 @@ int SurfaceInputs::getAspenFuelModelNumber() const
 double SurfaceInputs::getAspenCuringLevel() const
 {
     return aspenCuringLevel_;
+}
+
+double SurfaceInputs::getAspenDBH() const
+{
+    return DBH_;
+}
+
+AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() const
+{
+    return aspenFireSeverity_;
 }
 
 void SurfaceInputs::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)

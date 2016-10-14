@@ -195,6 +195,31 @@ int Surface::getFuelModelNumber() const
 	return surfaceInputs_.getFuelModelNumber();
 }
 
+double Surface::getMoistureOneHour() const
+{
+    return surfaceInputs_.getMoistureOneHour();
+}
+
+double Surface::getMoistureTenHour() const
+{
+    return surfaceInputs_.getMoistureTenHour();
+}
+
+double Surface::getMoistureHundredHour() const
+{
+    return surfaceInputs_.getMoistureHundredHour();
+}
+
+double Surface::getMoistureLiveHerbaceous() const
+{
+    return surfaceInputs_.getMoistureLiveHerbaceous();
+}
+
+double Surface::getMoistureLiveWoody() const
+{
+    return surfaceInputs_.getMoistureLiveWoody();
+}
+
 double Surface::getCanopyCover() const
 {
     return surfaceInputs_.getCanopyCover();
@@ -228,6 +253,21 @@ SlopeInputMode::SlopeInputModeEnum Surface::getSlopeInputMode() const
 double Surface::getWindSpeed() const
 {
     return surfaceInputs_.getWindSpeed();
+}
+
+double Surface::getWindDirection() const
+{
+    return surfaceInputs_.getWindDirection();
+}
+
+double Surface::getSlope() const
+{
+    return surfaceInputs_.getSlope();
+}
+
+double Surface::getAspect() const
+{
+    return surfaceInputs_.getAspect();
 }
 
 void Surface::setFuelModelNumber(int fuelModelNumber)

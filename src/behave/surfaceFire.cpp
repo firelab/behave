@@ -29,7 +29,7 @@
 *
 ******************************************************************************/
 
-#include "surfaceFireSpread.h"
+#include "surfaceFire.h"
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -40,13 +40,13 @@
 #include "surfaceInputs.h"
 #include "windAdjustmentFactor.h"
 
-SurfaceFireSpread::SurfaceFireSpread()
+SurfaceFire::SurfaceFire()
     : surfaceFireReactionIntensity_()
 {
 
 }
 
-SurfaceFireSpread::SurfaceFireSpread(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs)
+SurfaceFire::SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs)
     : surfaceFuelbedIntermediates_(fuelModelSet, surfaceInputs),
       surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
 {
@@ -56,7 +56,7 @@ SurfaceFireSpread::SurfaceFireSpread(const FuelModelSet& fuelModelSet, const Sur
 }
 
 // Copy Ctor
-SurfaceFireSpread::SurfaceFireSpread(const SurfaceFireSpread &rhs)
+SurfaceFire::SurfaceFire(const SurfaceFire &rhs)
     : surfaceFireReactionIntensity_()
 {
     surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
@@ -91,7 +91,7 @@ SurfaceFireSpread::SurfaceFireSpread(const SurfaceFireSpread &rhs)
     aspenMortality_ = rhs.aspenMortality_;
 }
 
-SurfaceFireSpread& SurfaceFireSpread::operator= (const SurfaceFireSpread& rhs)
+SurfaceFire& SurfaceFire::operator= (const SurfaceFire& rhs)
 {
     if (this != &rhs)
     {
@@ -129,7 +129,7 @@ SurfaceFireSpread& SurfaceFireSpread::operator= (const SurfaceFireSpread& rhs)
     return *this;
 }
 
-double SurfaceFireSpread::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink)
+double SurfaceFire::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink)
 {
     noWindNoSlopeSpreadRate_ = (heatSink < 1.0e-07)
         ? (0.0)
@@ -137,7 +137,7 @@ double SurfaceFireSpread::calculateNoWindNoSlopeSpreadRate(double reactionIntens
     return(noWindNoSlopeSpreadRate_);
 }
 
-void SurfaceFireSpread::calculateResidenceTime()
+void SurfaceFire::calculateResidenceTime()
 {
     double sigma = surfaceFuelbedIntermediates_.getSigma();
     residenceTime_ = ((sigma < 1.0e-07)
@@ -145,12 +145,12 @@ void SurfaceFireSpread::calculateResidenceTime()
         : (384. / sigma));
 }
 
-void SurfaceFireSpread::calculateFireFirelineIntensity()
+void SurfaceFire::calculateFireFirelineIntensity()
 {
     firelineIntensity_ = forwardSpreadRate_ * reactionIntensity_ * residenceTime_ / 60.0;
 }
 
-double  SurfaceFireSpread::calculateFlameLength(double firelineIntensity)
+double  SurfaceFire::calculateFlameLength(double firelineIntensity)
 {
     double flameLength = ((firelineIntensity < 1.0e-07)
         ? (0.0)
@@ -158,14 +158,14 @@ double  SurfaceFireSpread::calculateFlameLength(double firelineIntensity)
     return flameLength;
 }
 
-void SurfaceFireSpread::calculateFlameLength()
+void SurfaceFire::calculateFlameLength()
 {
     flameLength_ = ((firelineIntensity_ < 1.0e-07)
         ? (0.0)
         : (0.45 * pow(firelineIntensity_, 0.46)));
 }
 
-double SurfaceFireSpread::calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest, double directionOfInterest)
+double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest, double directionOfInterest)
 {
     // Reset member variables to prepare for next calculation
     initializeMembers();
@@ -237,7 +237,7 @@ double SurfaceFireSpread::calculateForwardSpreadRate(int fuelModelNumber, bool h
 //
 //  \return Fire spread rate along the specified vector (ft/min).
 
-double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest)
+double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
 {
     //if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
     //{
@@ -268,7 +268,7 @@ double SurfaceFireSpread::calculateSpreadRateAtVector(double directionOfInterest
     return rosVector;
 }
 
-void SurfaceFireSpread::applyWindSpeedLimit()
+void SurfaceFire::applyWindSpeedLimit()
 {
     isWindLimitExceeded_ = true;
     effectiveWindSpeed_ = windSpeedLimit_;
@@ -278,14 +278,14 @@ void SurfaceFireSpread::applyWindSpeedLimit()
     forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1 + phiEffectiveWind);
 }
 
-void SurfaceFireSpread::calculateEffectiveWindSpeed()
+void SurfaceFire::calculateEffectiveWindSpeed()
 {
     double phiEffectiveWind = forwardSpreadRate_ / noWindNoSlopeSpreadRate_ - 1.0;
     double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
     effectiveWindSpeed_ = pow(((phiEffectiveWind * pow(relativePackingRatio, windE_)) / windC_), 1.0 / windB_);
 }
 
-void SurfaceFireSpread::calculateDirectionOfMaxSpread()
+void SurfaceFire::calculateDirectionOfMaxSpread()
 {
     //Calculate directional components (direction is clockwise from upslope)
     double windDir = surfaceInputs_->getWindDirection();
@@ -337,12 +337,12 @@ void SurfaceFireSpread::calculateDirectionOfMaxSpread()
     directionOfMaxSpread_ = azimuth;
 }
 
-void SurfaceFireSpread::calculateHeatPerUnitArea()
+void SurfaceFire::calculateHeatPerUnitArea()
 {
     heatPerUnitArea_ = reactionIntensity_ * residenceTime_;
 }
 
-void  SurfaceFireSpread::calculateWindSpeedLimit()
+void  SurfaceFire::calculateWindSpeedLimit()
 {
     windSpeedLimit_ = 0.9 * reactionIntensity_; // windSpeedLimit is in ft/min
     if (phiS_ > 0.0)
@@ -355,7 +355,7 @@ void  SurfaceFireSpread::calculateWindSpeedLimit()
     }
 }
 
-void SurfaceFireSpread::calculateWindFactor()
+void SurfaceFire::calculateWindFactor()
 {
     double sigma = surfaceFuelbedIntermediates_.getSigma();
     double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
@@ -375,7 +375,7 @@ void SurfaceFireSpread::calculateWindFactor()
     }
 }
 
-void SurfaceFireSpread::calculateWindAdjustmentFactor()
+void SurfaceFire::calculateWindAdjustmentFactor()
 {
     WindAjustmentFactor windAdjustmentFactor;
 
@@ -387,7 +387,7 @@ void SurfaceFireSpread::calculateWindAdjustmentFactor()
     windAdjustmentFactor_ = windAdjustmentFactor.calculateWindAdjustmentFactor(canopyCover, canopyHeight, crownRatio, fuelbedDepth);
 }
 
-void SurfaceFireSpread::calculateMidflameWindSpeed()
+void SurfaceFire::calculateMidflameWindSpeed()
 {
     double windSpeed = surfaceInputs_->getWindSpeed();
 
@@ -415,7 +415,7 @@ void SurfaceFireSpread::calculateMidflameWindSpeed()
     }
 }
 
-void SurfaceFireSpread::calculateSlopeFactor()
+void SurfaceFire::calculateSlopeFactor()
 {
     double packingRatio = surfaceFuelbedIntermediates_.getPackingRatio();
     // Slope factor
@@ -424,7 +424,7 @@ void SurfaceFireSpread::calculateSlopeFactor()
     phiS_ = 5.275 * pow(packingRatio, -0.3) * (slopex * slopex);
 }
 
-void SurfaceFireSpread::calculateFireLengthToWidthRatio()
+void SurfaceFire::calculateFireLengthToWidthRatio()
 {
     if (effectiveWindSpeed_ > 1.0e-07)
     {
@@ -436,7 +436,7 @@ void SurfaceFireSpread::calculateFireLengthToWidthRatio()
     }
 }
 
-void SurfaceFireSpread::calculateSurfaceFireEccentricity()
+void SurfaceFire::calculateSurfaceFireEccentricity()
 {
     eccentricity_ = 0.0;
     double x = (fireLengthToWidthRatio_ * fireLengthToWidthRatio_) - 1.0;
@@ -446,7 +446,7 @@ void SurfaceFireSpread::calculateSurfaceFireEccentricity()
     }
 }
 
-void SurfaceFireSpread::calculateEllipticalDimensions()
+void SurfaceFire::calculateEllipticalDimensions()
 {
     ellipticalA_ = 0.0;
     ellipticalB_ = 0.0;
@@ -467,34 +467,34 @@ void SurfaceFireSpread::calculateEllipticalDimensions()
     ellipticalC_ *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
 }
 
-void SurfaceFireSpread::calculateBackingSpreadRate()
+void SurfaceFire::calculateBackingSpreadRate()
 {
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
 }
 
-double SurfaceFireSpread::getFuelbedDepth() const
+double SurfaceFire::getFuelbedDepth() const
 {
     int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
     double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber);
     return fuelbedDepth;
 }
 
-double SurfaceFireSpread::getSpreadRate() const
+double SurfaceFire::getSpreadRate() const
 {
     return forwardSpreadRate_;
 }
 
-double SurfaceFireSpread::getDirectionOfMaxSpread() const
+double SurfaceFire::getDirectionOfMaxSpread() const
 {
     return directionOfMaxSpread_;
 }
 
-double SurfaceFireSpread::getEffectiveWindSpeed() const
+double SurfaceFire::getEffectiveWindSpeed() const
 {
     return effectiveWindSpeed_;
 }
 
-double SurfaceFireSpread::convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const
+double SurfaceFire::convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const
 {
     double dirMaxSpreadRelativeToNorth = directionOfMaxSpreadFromUpslope;
     double aspect = surfaceInputs_->getAspect();
@@ -502,142 +502,142 @@ double SurfaceFireSpread::convertDirectionOfSpreadToRelativeToNorth(double direc
     return dirMaxSpreadRelativeToNorth;
 }
 
-double SurfaceFireSpread::getFirelineIntensity() const
+double SurfaceFire::getFirelineIntensity() const
 {
     return firelineIntensity_;
 }
 
-double SurfaceFireSpread::getFlameLength() const
+double SurfaceFire::getFlameLength() const
 {
     return flameLength_;
 }
 
-double SurfaceFireSpread::getMaxFlameLength() const
+double SurfaceFire::getMaxFlameLength() const
 {
     return maxFlameLength_;
 }
 
-double SurfaceFireSpread::getFireLengthToWidthRatio() const
+double SurfaceFire::getFireLengthToWidthRatio() const
 {
     return fireLengthToWidthRatio_;
 }
 
-double SurfaceFireSpread::getFireEccentricity() const
+double SurfaceFire::getFireEccentricity() const
 {
     return eccentricity_;
 }
 
-double SurfaceFireSpread::getHeatPerUnitArea() const
+double SurfaceFire::getHeatPerUnitArea() const
 {
     return heatPerUnitArea_;
 }
 
-double  SurfaceFireSpread::getResidenceTime() const
+double  SurfaceFire::getResidenceTime() const
 {
     return residenceTime_;
 }
 
-double SurfaceFireSpread::getWindSpeedLimit() const
+double SurfaceFire::getWindSpeedLimit() const
 {
     return windSpeedLimit_;
 }
 
-double SurfaceFireSpread::getReactionIntensity() const
+double SurfaceFire::getReactionIntensity() const
 {
     return reactionIntensity_;
 }
 
-double SurfaceFireSpread::getMidflameWindSpeed() const
+double SurfaceFire::getMidflameWindSpeed() const
 {
     return midflameWindSpeed_;
 }
 
-double SurfaceFireSpread::getEllipticalA() const
+double SurfaceFire::getEllipticalA() const
 {
     return ellipticalA_;
 }
 
-double SurfaceFireSpread::getEllipticalB() const
+double SurfaceFire::getEllipticalB() const
 {
     return ellipticalB_;
 }
 
-double SurfaceFireSpread::getEllipticalC() const
+double SurfaceFire::getEllipticalC() const
 {
     return ellipticalC_;
 }
 
-double SurfaceFireSpread::getWindAdjustmentFactor() const
+double SurfaceFire::getWindAdjustmentFactor() const
 {
     return windAdjustmentFactor_;
 }
 
-bool SurfaceFireSpread::getIsWindLimitExceeded() const
+bool SurfaceFire::getIsWindLimitExceeded() const
 {
     return isWindLimitExceeded_;
 }
 
-void SurfaceFireSpread::setDirectionOfMaxSpread(double directionOFMaxSpread)
+void SurfaceFire::setDirectionOfMaxSpread(double directionOFMaxSpread)
 {
     directionOfMaxSpread_ = directionOFMaxSpread;
 }
 
-void SurfaceFireSpread::setEffectiveWindSpeed(double effectiveWindSpeed)
+void SurfaceFire::setEffectiveWindSpeed(double effectiveWindSpeed)
 {
     effectiveWindSpeed_ = effectiveWindSpeed;
 }
 
-void SurfaceFireSpread::setFirelineIntensity(double firelineIntensity)
+void SurfaceFire::setFirelineIntensity(double firelineIntensity)
 {
     firelineIntensity_ = firelineIntensity;
 }
 
-void SurfaceFireSpread::setFlameLength(double flameLength)
+void SurfaceFire::setFlameLength(double flameLength)
 {
     flameLength_ = flameLength;
 }
 
-void SurfaceFireSpread::setFireLengthToWidthRatio(double lengthToWidthRatio)
+void SurfaceFire::setFireLengthToWidthRatio(double lengthToWidthRatio)
 {
     fireLengthToWidthRatio_ = lengthToWidthRatio;
 }
 
-void SurfaceFireSpread::setResidenceTime(double residenceTime)
+void SurfaceFire::setResidenceTime(double residenceTime)
 {
     residenceTime_ = residenceTime;
 }
 
-void SurfaceFireSpread::setWindSpeedLimit(double windSpeedLimit)
+void SurfaceFire::setWindSpeedLimit(double windSpeedLimit)
 {
     windSpeedLimit_ = windSpeedLimit;
 }
 
-void SurfaceFireSpread::setReactionIntensity(double reactionIntensity)
+void SurfaceFire::setReactionIntensity(double reactionIntensity)
 {
     reactionIntensity_ = reactionIntensity;
 }
 
-void SurfaceFireSpread::setHeatPerUnitArea(double heatPerUnitArea)
+void SurfaceFire::setHeatPerUnitArea(double heatPerUnitArea)
 {
     heatPerUnitArea_ = heatPerUnitArea;
 }
 
-void SurfaceFireSpread::setIsWindLimitExceeded(bool isWindLimitExceeded)
+void SurfaceFire::setIsWindLimitExceeded(bool isWindLimitExceeded)
 {
     isWindLimitExceeded_ = isWindLimitExceeded;
 }
 
-void SurfaceFireSpread::setWindAdjustmentFactor(double windAdjustmentFactor)
+void SurfaceFire::setWindAdjustmentFactor(double windAdjustmentFactor)
 {
     windAdjustmentFactor_ = windAdjustmentFactor;
 }
 
-void SurfaceFireSpread::setMidflameWindSpeed(double midflameWindSpeed)
+void SurfaceFire::setMidflameWindSpeed(double midflameWindSpeed)
 {
     midflameWindSpeed_ = midflameWindSpeed;
 }
 
-void SurfaceFireSpread::initializeMembers()
+void SurfaceFire::initializeMembers()
 {
     isWindLimitExceeded_ = false;
     effectiveWindSpeed_ = 0.0;

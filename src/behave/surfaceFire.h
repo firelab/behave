@@ -35,14 +35,14 @@
 #include "surfaceFireReactionIntensity.h"
 #include "surfaceFuelbedIntermediates.h"
 
-class SurfaceFireSpread
+class SurfaceFire
 {
     friend class SurfaceTwoFuelModels; // to keep setters for outputs out of public interface
 public:
-    SurfaceFireSpread();
-    SurfaceFireSpread(const SurfaceFireSpread& rhs);
-    SurfaceFireSpread& operator= (const SurfaceFireSpread& rhs);
-    SurfaceFireSpread(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
+    SurfaceFire();
+    SurfaceFire(const SurfaceFire& rhs);
+    SurfaceFire& operator= (const SurfaceFire& rhs);
+    SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false, 
         double directionOfInterest = -1.0);

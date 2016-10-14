@@ -64,7 +64,7 @@ SET(SOURCE
     src/behave/surfaceFireReactionIntensity.cpp
     src/behave/surfaceFuelbedIntermediates.cpp
     src/behave/surfaceInputs.cpp
-    src/behave/surfaceFireSpread.cpp
+    src/behave/surfaceFire.cpp
     src/behave/surfaceTwoFuelModels.cpp
     src/behave/westernAspen.cpp
     src/behave/windAdjustmentFactor.cpp
@@ -91,7 +91,7 @@ SET(HEADERS
     src/behave/surfaceFireReactionIntensity.h
     src/behave/surfaceFuelbedIntermediates.h
     src/behave/surfaceInputs.h
-    src/behave/surfaceFireSpread.h
+    src/behave/surfaceFire.h
     src/behave/surfaceTwoFuelModels.h
     src/behave/westernAspen.h
     src/behave/windAdjustmentFactor.h

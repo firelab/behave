@@ -436,3 +436,18 @@ void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity,
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface_ is pointing to
     crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }
+
+void Crown::setCanopyBaseHeight(double canopyBaseHeight)
+{
+    crownInputs_.setCanopyBaseHeight(canopyBaseHeight);
+}
+
+void Crown::setCanopyBulkDensity(double canopyBulkDensity)
+{
+    crownInputs_.setCanopyBulkDensity(canopyBulkDensity);
+}
+
+void Crown::setFoliarMoisture(double foliarMoisture)
+{
+    crownInputs_.setFoliarMoisture(foliarMoisture);
+}

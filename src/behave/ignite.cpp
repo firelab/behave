@@ -57,8 +57,11 @@ double Ignite::calculateFirebrandIgnitionProbability(double fuelTemperature,
     double oneHourMoisture)
 {
     // Covert Fahrenheit to Celcius
-    double fuelMoisture = oneHourMoisture; // use one hour moisture in the following calculation
     double localFuelTemperature = (fuelTemperature - 32.0) * 5.0 / 9.0;
+
+    double fuelMoisture = oneHourMoisture; // use one hour moisture in the following calculation
+
+    // Calculate heat of ignition
     double heatOfIgnition = 144.51
         - 0.26600 * localFuelTemperature
         - 0.00058 * localFuelTemperature * localFuelTemperature
@@ -187,10 +190,11 @@ double Ignite::calculateLightningIgnitionProbability(int fuelType, double depth,
         fuelMoisture = 40.0;
     }
 
-    // Ponderosa Pine Litter
     double pPos = 0.0;
     double pNeg = 0.0;
     double prob = 0.0;
+
+    // Ponderosa Pine Litter
     if (fuelType == IgnitionFuelBedType::PONDEROSA_PINE_LITTER)
     {
         pPos = 0.92 * exp(-0.087 * fuelMoisture);

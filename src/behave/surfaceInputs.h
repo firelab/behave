@@ -39,26 +39,11 @@ public:
     SurfaceInputs& operator= (const SurfaceInputs& rhs);
 
     void initializeMembers();
+
+    // Main Surface module inputs setters 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
-        double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, 
-        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
-        double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-        double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
-        double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
-        AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
-        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
-        double aspect, double canopyCover, double canopyHeight, double crownRatio);
-    void setCanopyCover(double canopyCover);
-    void setCanopyHeight(double canopyHeight);
-    void setCrownRatio(double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
@@ -72,56 +57,88 @@ public:
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
+    void setCanopyCover(double canopyCover);
+    void setCanopyHeight(double canopyHeight);
+    void setCrownRatio(double crownRatio);
+    void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
+
+    // Two fuel models inputs setters
+    void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
+        double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
+        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
+        double canopyCover, double canopyHeight, double crownRatio);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
     void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
 
-    bool isUsingPalmettoGallberry() const;
+    // Palmetto-Gallberry inputs setters
+    void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+        double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
+        double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setAgeOfRough(double ageOfRough);
-    double getAgeOfRough() const;
     void setHeightOfUnderstory(double heightOfUnderstory);
-    double getHeightOfUnderstory() const;
     void setPalmettoCoverage(double palmettoCoverage);
-    double getPalmettoCoverage() const;
     void setOverstoryBasalArea(double overstoryBasalArea);
-    double getOverstoryBasalArea() const;
+   
+    // Westerm Aspen inputs setters
+    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
+        AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
+        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
+        double aspect, double canopyCover, double canopyHeight, double crownRatio);
+    void setAspenFuelModelNumber(int aspenFuelModelNumber);
+    void setAspenCuringLevel(double aspenCuringLevel);
+    void setAspenDBH(double DBH);
+    void setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity);
 
-    bool isUsingWesternAspen() const;
-    int getAspenFuelModelNumber() const;
-    double getAspenCuringLevel() const;
-
+    // Main Surface module inputs getters 
     int getFuelModelNumber() const;
-    int getFirstFuelModelNumber() const;
-    int getSecondFuelModelNumber() const;
-    TwoFuelModels::TwoFuelModelsEnum getTwoFuelModelsMethod() const;
-
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
-    WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
-    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
-
-    bool isUsingTwoFuelModels() const;
-    bool hasUserEnteredWindAdjustmentFactor() const;
-    double getSlope() const;
-    double getAspect() const;
-    double getWindDirection() const;
-    double getWindSpeed() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;
     double getMoistureLiveHerbaceous() const;
     double getMoistureLiveWoody() const;
-    double getFirstFuelModelCoverage() const;
-
+    double getWindSpeed() const;
+    double getWindDirection() const;
+    double getSlope() const;
+    double getAspect() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;
-    void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
+    bool hasUserEnteredWindAdjustmentFactor() const;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
+    WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
+    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
     double getUserProvidedWindAdjustmentFactor() const;
+
+    // Two fuel models inputs getters
+    bool isUsingTwoFuelModels() const;
+    TwoFuelModels::TwoFuelModelsEnum getTwoFuelModelsMethod() const;
+    int getFirstFuelModelNumber() const;
+    int getSecondFuelModelNumber() const;
+    double getFirstFuelModelCoverage() const;
+
+    // Palmetto-Gallberry getters
+    double getAgeOfRough() const;
+    double getHeightOfUnderstory() const;
+    double getPalmettoCoverage() const;
+    double getOverstoryBasalArea() const;
+    bool isUsingPalmettoGallberry() const;
+
+    // Western Aspen getters
+    bool isUsingWesternAspen() const;
+    int getAspenFuelModelNumber() const;
+    double getAspenCuringLevel() const;
+    double getAspenDBH() const;
+    AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
 
 private:
     double convertWindToUpslope(double windDirectionFromNorth);
    
+    // Main Suface module inputs
     int fuelModelNumber_;               // 1 to 256
     double moistureOneHour_;            // 1% to 60%
     double moistureTenHour_;            // 1% to 60%		
@@ -133,24 +150,24 @@ private:
     double slope_;                      // gradient 0-600 or degrees 0-80  
     double aspect_;                     // aspect of slope in degrees, 0-360
 
-    // Two Fuel Models
-    bool isUsingTwoFuelModels_;         // Whether fuel spread calculation is using Two Fuel Models
+    // Two Fuel Models inputs
+    bool isUsingTwoFuelModels_;         // Whether fire spread calculation is using Two Fuel Models
     int secondFuelModelNumber_;         // 1 to 256, second fuel used in Two Fuel Models
     double firstFuelModelCoverage_;     // percent of landscape occupied by first fuel in Two Fuel Models
 
-    // Palmetto-Gallberry
-    bool isUsingPalmettoGallberry_;     // Whether fuel spread calculation is using Palmetto-Gallbery
+    // Palmetto-Gallberry inputs
+    bool isUsingPalmettoGallberry_;     // Whether fire spread calculation is using Palmetto-Gallbery
     double ageOfRough_;
     double heightOfUnderstory_;
     double palmettoCoverage_;
     double overstoryBasalArea_;
 
-    // Western Aspen
-    bool isUsingWesternAspen_;          // Whether fuel spread calculation is using Western Aspen
+    // Western Aspen inputs
+    bool isUsingWesternAspen_;          // Whether fire spread calculation is using Western Aspen
     int aspenFuelModelNumber_;
     double aspenCuringLevel_;
-    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity_;
     double DBH_;
+    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity_;
 
     // Wind Adjustment Factor Parameters
     double canopyCover_;

@@ -49,17 +49,20 @@ public:
 
     void doCrownRun();
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+    void setCanopyBaseHeight(double canopyBaseHeight);
+    void setCanopyBulkDensity(double canopyBulkDensity);
+    void setFoliarMoisture(double foliarMoisture);
 
     double getCrownFireSpreadRate() const;
     FireType::FireTypeEnum getFireType() const;
 
 private:
-    const FuelModelSet* fuelModelSet_;  // pointer to BehaveRun's FuelModelSet object
-    CrownInputs crownInputs_;    // pointer to BehaveRun's CrownInputs object
+    const FuelModelSet* fuelModelSet_;              // pointer to BehaveRun's FuelModelSet object
+    CrownInputs crownInputs_;                       // pointer to BehaveRun's CrownInputs object
     
     // SURFACE module components
-    const Surface* surface_;                            // pointer to the BehaveRun's Surface object
-    Surface crownDeepCopyOfSurface_;                    // deep copy of Surface's surface inputs to allow parallel runs in Surface
+    const Surface* surface_;                        // pointer to the BehaveRun's Surface object
+    Surface crownDeepCopyOfSurface_;                // deep copy of Surface's surface inputs to allow parallel runs in Surface
 
     // Private methods
     void initializeMemmbers();

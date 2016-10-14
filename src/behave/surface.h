@@ -33,7 +33,7 @@
 #define SURFACE_H
 
 // The SURFACE module of BehavePlus
-#include "surfaceFireSpread.h"
+#include "surfaceFire.h"
 #include "surfaceInputs.h"
 
 class Surface
@@ -106,10 +106,19 @@ public:
     // SurfaceInputs getters
     //const SurfaceInputs& getSurfaceInputs() const;
 	int getFuelModelNumber() const;
+    double getMoistureOneHour() const;
+    double getMoistureTenHour() const;
+    double getMoistureHundredHour() const;
+    double getMoistureLiveHerbaceous() const;
+    double getMoistureLiveWoody() const;
+    double getWindSpeed() const;
+    double getWindDirection() const;
+    double getSlope() const;
+    double getAspect() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;
-    double getWindSpeed() const;
+  
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
@@ -118,7 +127,7 @@ private:
     const FuelModelSet*	fuelModelSet_;
 
     // Surface Module components
-    SurfaceFireSpread surfaceFireSpread_;
+    SurfaceFire surfaceFireSpread_;
     SurfaceInputs surfaceInputs_;
 };
 

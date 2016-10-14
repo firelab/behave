@@ -98,8 +98,18 @@ public:
         double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
+
     // SURFACE Module Getters
 	int getFuelModelNumber() const;
+    double getMoistureOneHour() const;
+    double getMoistureTenHour() const;
+    double getMoistureHundredHour() const;
+    double getMoistureLiveHerbaceous() const;
+    double getMoistureLiveWoody() const;
+    double getWindSpeed() const;
+    double getWindDirection() const;
+    double getSlope() const;
+    double getAspect() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;
@@ -113,14 +123,16 @@ public:
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;
-    double getWindSpeed() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
     // CROWN Module
-    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
     void doCrownRun();
+
+    // CROWN Module Setters
+    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+
     // CROWN Module Getters
     double getCrownFireSpreadRate() const;
     FireType::FireTypeEnum getFireType() const;

@@ -294,6 +294,21 @@ double BehaveRun::getWindSpeed() const
     return surface_.getWindSpeed();
 }
 
+double BehaveRun::getWindDirection() const
+{
+    return surface_.getWindDirection();
+}
+
+double BehaveRun::getSlope() const
+{
+    return surface_.getSlope();
+}
+
+double BehaveRun::getAspect() const
+{
+    return surface_.getAspect();
+}
+
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
@@ -328,6 +343,33 @@ int BehaveRun::getFuelModelNumber() const
 {
 	return surface_.getFuelModelNumber();
 }
+
+double BehaveRun::getMoistureOneHour() const
+{
+    return surface_.getMoistureOneHour();
+}
+
+double BehaveRun::getMoistureTenHour() const
+{
+    return surface_.getMoistureTenHour();
+}
+
+double BehaveRun::getMoistureHundredHour() const
+{
+    return surface_.getMoistureHundredHour();
+}
+
+double BehaveRun::getMoistureLiveHerbaceous() const
+{
+    return surface_.getMoistureLiveHerbaceous();
+}
+
+double BehaveRun::getMoistureLiveWoody() const
+{
+    return surface_.getMoistureLiveWoody();
+}
+
+
 
 double BehaveRun::getCanopyCover() const
 {

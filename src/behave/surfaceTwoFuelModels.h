@@ -35,12 +35,12 @@
 #include "surfaceEnums.h"
 
 class SurfaceFuelbedIntermediates;
-class SurfaceFireSpread;
+class SurfaceFire;
 
 class SurfaceTwoFuelModels
 {
 public:
-    SurfaceTwoFuelModels(SurfaceFireSpread& surfaceFireSpread);
+    SurfaceTwoFuelModels(SurfaceFire& surfaceFireSpread);
     void calculateWeightedSpreadRate(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, 
         int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
         bool hasDirectionOfInterest = false, double directionOfInterest = -1);
@@ -61,7 +61,7 @@ public:
     double getFireLengthToWidthRatio() const;
 
 private:
-    SurfaceFireSpread* surfaceFireSpread_;
+    SurfaceFire* surfaceFireSpread_;
 
     double surfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals);

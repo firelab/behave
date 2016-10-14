@@ -35,10 +35,10 @@
 #include "newext.h"
 #include "randfuel.h"
 #include "randthread.h"
-#include "surfaceFireSpread.h"
+#include "surfaceFire.h"
 #include "surfaceFuelbedIntermediates.h"
 
-SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceFireSpread& surfaceFireSpread)
+SurfaceTwoFuelModels::SurfaceTwoFuelModels(SurfaceFire& surfaceFireSpread)
 {
     surfaceFireSpread_ = &surfaceFireSpread;
 }
