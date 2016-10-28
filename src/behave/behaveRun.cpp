@@ -274,6 +274,21 @@ double BehaveRun::getMidflameWindspeed() const
     return surface_.getMidflameWindspeed();
 }
 
+double BehaveRun::getSurfaceFireHeatPerUnitArea() const
+{
+    return surface_.getHeatPerUnitArea();
+}
+
+double BehaveRun::getSurfaceFireResidenceTime() const
+{
+    return surface_.getResidenceTime();
+}
+
+double BehaveRun::getSurfaceFireReactionIntensity() const
+{
+    return surface_.getReactionIntensity();
+}
+
 double BehaveRun::getEllipticalA() const
 {
     return surface_.getEllipticalA();
@@ -368,8 +383,6 @@ double BehaveRun::getMoistureLiveWoody() const
 {
     return surface_.getMoistureLiveWoody();
 }
-
-
 
 double BehaveRun::getCanopyCover() const
 {

@@ -58,6 +58,8 @@ public:
     double getFirelineIntensity() const;
     double getHeatPerUnitArea() const;
     double getMidflameWindspeed() const;
+    double getResidenceTime() const;
+    double getReactionIntensity() const;
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;
@@ -118,7 +120,7 @@ public:
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;
-  
+   
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
@@ -127,7 +129,7 @@ private:
     const FuelModelSet*	fuelModelSet_;
 
     // Surface Module components
-    SurfaceFire surfaceFireSpread_;
+    SurfaceFire surfaceFire_;
     SurfaceInputs surfaceInputs_;
 };
 

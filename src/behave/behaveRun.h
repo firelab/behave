@@ -120,6 +120,9 @@ public:
     double getFireEccentricity() const;
     double getSurfaceFirelineIntensity() const;
     double getMidflameWindspeed() const;
+    double getSurfaceFireHeatPerUnitArea() const;
+    double getSurfaceFireResidenceTime() const;
+    double getSurfaceFireReactionIntensity() const;
     double getEllipticalA() const;
     double getEllipticalB() const;
     double getEllipticalC() const;

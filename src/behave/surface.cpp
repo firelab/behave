@@ -36,17 +36,17 @@
 
 Surface::Surface(const FuelModelSet& fuelModels)
     : surfaceInputs_(),
-    surfaceFireSpread_(fuelModels, surfaceInputs_)
+    surfaceFire_(fuelModels, surfaceInputs_)
 {
     fuelModelSet_ = &fuelModels;
 }
 
 // Copy Ctor
 Surface::Surface(const Surface &rhs)
-    : surfaceFireSpread_()
+    : surfaceFire_()
 {
     surfaceInputs_ = rhs.surfaceInputs_;
-    surfaceFireSpread_ = rhs.surfaceFireSpread_;
+    surfaceFire_ = rhs.surfaceFire_;
 }
 
 Surface& Surface::operator= (const Surface& rhs)
@@ -54,7 +54,7 @@ Surface& Surface::operator= (const Surface& rhs)
     if (this != &rhs)
     {
         surfaceInputs_ = rhs.surfaceInputs_;
-        surfaceFireSpread_ = rhs.surfaceFireSpread_;
+        surfaceFire_ = rhs.surfaceFire_;
     }
     return *this;
 }
@@ -66,7 +66,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
-        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFireSpread_);
+        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFire_);
         TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
         int firstFuelModelNumber = surfaceInputs_.getFirstFuelModelNumber();
         double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
@@ -78,7 +78,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        surfaceFireSpread_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+        surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
 }
 
@@ -88,7 +88,7 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
-        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFireSpread_);
+        SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFire_);
         TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
         int firstFuelModelNumber = surfaceInputs_.getFirstFuelModelNumber();
         double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
@@ -100,74 +100,84 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        surfaceFireSpread_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+        surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
 }
 
 double Surface::calculateFlameLength(double firelineIntensity)
 {
-    return surfaceFireSpread_.calculateFlameLength(firelineIntensity);
+    return surfaceFire_.calculateFlameLength(firelineIntensity);
 }
 
 double Surface::calculateSpreadRateAtVector(double directionOfinterest)
 {
-    return surfaceFireSpread_.calculateSpreadRateAtVector(directionOfinterest);
+    return surfaceFire_.calculateSpreadRateAtVector(directionOfinterest);
 }
 
 double Surface::getSpreadRate() const
 {
-    return surfaceFireSpread_.getSpreadRate();
+    return surfaceFire_.getSpreadRate();
 }
 
 double Surface::getDirectionOfMaxSpread() const
 {
-    double directionOfMaxSpread = surfaceFireSpread_.getDirectionOfMaxSpread();
+    double directionOfMaxSpread = surfaceFire_.getDirectionOfMaxSpread();
     return directionOfMaxSpread;
 }
 
 double Surface::getFlameLength() const
 {
-    return surfaceFireSpread_.getFlameLength();
+    return surfaceFire_.getFlameLength();
 }
 
 double Surface::getFireLengthToWidthRatio() const
 {
-    return surfaceFireSpread_.getFireLengthToWidthRatio();
+    return surfaceFire_.getFireLengthToWidthRatio();
 }
 
 double Surface::getFireEccentricity() const
 {
-    return surfaceFireSpread_.getFireEccentricity();
+    return surfaceFire_.getFireEccentricity();
 }
 
 double Surface::getFirelineIntensity() const
 {
-    return surfaceFireSpread_.getFirelineIntensity();
+    return surfaceFire_.getFirelineIntensity();
 }
 
 double Surface::getHeatPerUnitArea() const
 {
-    return surfaceFireSpread_.getHeatPerUnitArea();
+    return surfaceFire_.getHeatPerUnitArea();
+}
+
+double Surface::getResidenceTime() const
+{
+    return surfaceFire_.getResidenceTime();
+}
+
+double Surface::getReactionIntensity() const
+{
+    return surfaceFire_.getReactionIntensity();
 }
 
 double Surface::getMidflameWindspeed() const
 {
-    return surfaceFireSpread_.getMidflameWindSpeed();
+    return surfaceFire_.getMidflameWindSpeed();
 }
 
 double Surface::getEllipticalA() const
 {
-    return surfaceFireSpread_.getEllipticalA();
+    return surfaceFire_.getEllipticalA();
 }
 
 double Surface::getEllipticalB() const
 {
-    return surfaceFireSpread_.getEllipticalB();
+    return surfaceFire_.getEllipticalB();
 }
 
 double Surface::getEllipticalC() const
 {
-    return surfaceFireSpread_.getEllipticalC();
+    return surfaceFire_.getEllipticalC();
 }
 
 void Surface::setCanopyCover(double canopyCover)
