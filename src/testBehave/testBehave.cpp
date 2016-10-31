@@ -206,6 +206,22 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
+BOOST_AUTO_TEST_CASE(firelineIntensityTest)
+{
+    double observedFirelineIntensity = 0.0;
+    double expectedFirelineIntensity = 598.339039;
+
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+
+    // Test upslope oriented mode, 20 foot uplsope wind 
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+  
+    observedFirelineIntensity = behaveRun.getSurfaceFirelineIntensity();
+    BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
+}
+
 BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
 {
     double observedSurfaceFireSpreadRate = 0.0;
