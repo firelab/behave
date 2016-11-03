@@ -239,12 +239,6 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
 double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
 {
-    //if (surfaceInputs_->isWindAndSpreadAngleRelativeToNorth())
-    //{
-    //    double aspect = surfaceInputs_->getAspect();
-    //    directionOfInterest -= aspect + 180.0; // Direction of interest is now relative to north
-    //}
-
     double rosVector = forwardSpreadRate_;
     if (forwardSpreadRate_) // if forward spread rate is not zero
     {
@@ -253,6 +247,7 @@ double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
 
         // Calcualte beta: the angle between the direction of max spread and the direction of interest
         double beta = fabs(directionOfMaxSpread_ - directionOfInterest);
+
         // Calculate the fire spread rate in this azimuth
         // if it deviates more than a tenth degree from the maximum azimuth
         if (beta > 180.0)
@@ -262,6 +257,7 @@ double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
         if (fabs(beta) > 0.1)
         {
             double radians = beta * M_PI / 180.0;
+
             rosVector = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 - eccentricity_ * cos(radians));
         }
     }
@@ -288,8 +284,16 @@ void SurfaceFire::calculateEffectiveWindSpeed()
 void SurfaceFire::calculateDirectionOfMaxSpread()
 {
     //Calculate directional components (direction is clockwise from upslope)
-    double windDir = surfaceInputs_->getWindDirection();
-    double windDirRadians = windDir * M_PI / 180.0;
+    double correctedWindDirection = surfaceInputs_->getWindDirection();
+
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientation = surfaceInputs_->getWindAndSpreadOrientationMode();
+    if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
+    {
+        double aspect = surfaceInputs_->getAspect();
+        correctedWindDirection -= aspect; // wind direction is now in degrees 
+    }
+
+    double windDirRadians = correctedWindDirection * M_PI / 180.0;
 
     // Calculate wind and slope rate
     double slopeRate = noWindNoSlopeSpreadRate_ * phiS_;
@@ -323,7 +327,6 @@ void SurfaceFire::calculateDirectionOfMaxSpread()
     }
 
     // Convert azimuth to be relative to North if necessary
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientation = surfaceInputs_->getWindAndSpreadOrientationMode();
     if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
     {
         azimuth = convertDirectionOfSpreadToRelativeToNorth(azimuth);
