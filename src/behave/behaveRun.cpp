@@ -452,13 +452,50 @@ double BehaveRun::getCrownRatio() const
     return surface_.getCrownRatio();
 }
 
+void BehaveRun::updateDeepCopyOfSurface(const Surface & surface)
+{
+    crown_.updateDeepCopyOfSurface(surface);
+}
+
+void BehaveRun::setCanopyBaseHeight(double canopyBaseHeight)
+{
+    crown_.setCanopyBaseHeight(canopyBaseHeight);
+}
+
+void BehaveRun::setCanopyBulkDensity(double bulkDensity)
+{
+    crown_.setCanopyBulkDensity(bulkDensity);
+}
+
+void BehaveRun::setFoliarMoisture(double foliarMoisture)
+{
+    crown_.setFoliarMoisture(foliarMoisture);
+}
+
 void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
     crown_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }
 
+double BehaveRun::getCanopyBaseHeight() const
+{
+    return crown_.getCanopyBaseHeight();
+}
+
+double BehaveRun::getCanopyBulkDensity() const
+{
+    return crown_.getCanopyBulkDensity();
+}
+
+double BehaveRun::getFoliarMoisture() const
+{
+    return crown_.getFoliarMoisture();
+}
+
 void BehaveRun::doCrownRun()
 {
+    // Update Crown's copy of surface
+    crown_.updateDeepCopyOfSurface(surface_);
     // Calculate Crown module outputs
     crown_.doCrownRun();
 }
@@ -469,7 +506,7 @@ double BehaveRun::getCrownFireSpreadRate() const
     return crown_.getCrownFireSpreadRate() * FEET_PER_MIN_TO_CHAINS_PER_HOUR;
 }
 
-FireType::FireTypeEnum BehaveRun::getFireType() const
+FireType::FireTypeEnum BehaveRun::getCrownFireType() const
 {
     return crown_.getFireType();
 }

@@ -134,11 +134,18 @@ public:
     void doCrownRun();
 
     // CROWN Module Setters
+    void updateDeepCopyOfSurface(const Surface& surface);
+    void setCanopyBaseHeight(double canopyBaseHeight);
+    void setCanopyBulkDensity(double bulkDensity);
+    void setFoliarMoisture(double foliarMoisture);
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
 
     // CROWN Module Getters
+    double getCanopyBaseHeight() const;
+    double getCanopyBulkDensity() const;
+    double getFoliarMoisture() const;
     double getCrownFireSpreadRate() const;
-    FireType::FireTypeEnum getFireType() const;
+    FireType::FireTypeEnum getCrownFireType() const;
 
     // SPOT Module
     void calculateSpottingDistanceFromBurningPile();

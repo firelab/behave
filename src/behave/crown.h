@@ -48,11 +48,15 @@ public:
     Crown& operator= (const Crown& rhs);
 
     void doCrownRun();
+    void updateDeepCopyOfSurface(const Surface& surface);
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setFoliarMoisture(double foliarMoisture);
 
+    double getCanopyBaseHeight() const;
+    double getCanopyBulkDensity() const;
+    double getFoliarMoisture() const;
     double getCrownFireSpreadRate() const;
     FireType::FireTypeEnum getFireType() const;
 

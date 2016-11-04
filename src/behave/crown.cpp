@@ -156,6 +156,12 @@ void Crown::doCrownRun()
     calculateFireType();
 }
 
+void Crown::updateDeepCopyOfSurface(const Surface & surface)
+{
+    surface_ = &surface; // point to the same location as BehaveRun's surface
+    crownDeepCopyOfSurface_ = *surface_; // copy the actual data surfaceInputs is pointing to
+}
+
 double Crown::getCrownFireSpreadRate() const
 {
     return crownFireSpreadRate_;
@@ -450,4 +456,19 @@ void Crown::setCanopyBulkDensity(double canopyBulkDensity)
 void Crown::setFoliarMoisture(double foliarMoisture)
 {
     crownInputs_.setFoliarMoisture(foliarMoisture);
+}
+
+double Crown::getCanopyBaseHeight() const
+{
+    return crownInputs_.getCanopyBaseHeight();
+}
+
+double Crown::getCanopyBulkDensity() const
+{
+    return crownInputs_.getCanopyBulkDensity();
+}
+
+double Crown::getFoliarMoisture() const
+{
+    return crownInputs_.getFoliarMoisture();
 }

@@ -365,7 +365,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::SURFACE;
-    observedFireType = (int)behaveRun.getFireType();
+    observedFireType = (int)behaveRun.getCrownFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
     // Test fire type, Torching fire expected
@@ -374,7 +374,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::TORCHING;
-    observedFireType = (int)behaveRun.getFireType();
+    observedFireType = (int)behaveRun.getCrownFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
     // Test fire type, Crowning fire expected
@@ -384,7 +384,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::CROWNING;
-    observedFireType = (int)behaveRun.getFireType();
+    observedFireType = (int)behaveRun.getCrownFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
     // Test fire type, Conditional crown fire expected
@@ -398,7 +398,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::CONDITIONAL_CROWN_FIRE;
-    observedFireType = (int)behaveRun.getFireType();
+    observedFireType = (int)behaveRun.getCrownFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 }
 
