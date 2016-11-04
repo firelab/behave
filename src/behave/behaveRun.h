@@ -144,6 +144,8 @@ public:
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
     double getFoliarMoisture() const;
+    double getCrownFirelineIntensity() const;
+    double getCrownFlameLength() const;
     double getCrownFireSpreadRate() const;
     FireType::FireTypeEnum getCrownFireType() const;
 

@@ -167,6 +167,16 @@ double Crown::getCrownFireSpreadRate() const
     return crownFireSpreadRate_;
 }
 
+double Crown::getCrownFirelineIntensity() const
+{
+    return crownFirelineIntensity_;
+}
+
+double Crown::getCrownFlameLength() const
+{
+    return crownFlameLength_;
+}
+
 FireType::FireTypeEnum Crown::getFireType() const
 {
     return fireType_;

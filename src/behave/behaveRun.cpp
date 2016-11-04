@@ -492,6 +492,16 @@ double BehaveRun::getFoliarMoisture() const
     return crown_.getFoliarMoisture();
 }
 
+double BehaveRun::getCrownFirelineIntensity() const
+{
+    return crown_.getCrownFirelineIntensity();
+}
+
+double BehaveRun::getCrownFlameLength() const
+{
+    return crown_.getCrownFlameLength();
+}
+
 void BehaveRun::doCrownRun()
 {
     // Update Crown's copy of surface
