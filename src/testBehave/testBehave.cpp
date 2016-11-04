@@ -69,7 +69,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double windDirection = 0;
     double slope = 30.0;
     double aspect = 0;
-    double canopyCover = 0.50;
+    double canopyCover = 50;
     double canopyHeight = 30.0;
     double crownRatio = 0.50;
 
@@ -95,7 +95,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double firstFuelModelCoverage = 0;
     double slope = 30.0;
     double aspect = 0;
-    double canopyCover = 0.50;
+    double canopyCover = 50;
     double canopyHeight = 30.0;
     double crownRatio = 0.50;
 

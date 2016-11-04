@@ -183,29 +183,27 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
         windDirection -= 360.0;
     }
 
-    setWindDirection(windDirection);
-
-    fuelModelNumber_ = fuelModelNumber;
-
+    setFuelModelNumber(fuelModelNumber);
+   
     setMoistureOneHour(moistureOneHour);
     setMoistureTenHour(moistureTenHour);
     setMoistureHundredHour(moistureHundredHour);
     setMoistureLiveHerbaceous(moistureLiveHerbaceous);
     setMoistureLiveWoody(moistureLiveWoody);
 
-    windHeightInputMode_ = windHeightInputMode;
-    windSpeed_ = windSpeed;
-    windDirection_ = windDirection;
+    setWindHeightInputMode(windHeightInputMode);
+    setWindSpeed(windSpeed);
+    setWindDirection(windDirection);
 
     isUsingTwoFuelModels_ = false;
-    twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
+    setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum::NO_METHOD);
    
     isUsingPalmettoGallberry_ = false;
     isUsingWesternAspen_ = false;
 
-    canopyCover_ = canopyCover;
-    canopyHeight_ = canopyHeight;
-    crownRatio_ = crownRatio;
+    setCanopyCover(canopyCover);
+    setCanopyHeight(canopyHeight);
+    setCrownRatio(crownRatio);
 }
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
@@ -218,12 +216,11 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    secondFuelModelNumber_ = secondFuelModelNumber;
-    firstFuelModelCoverage_ = firstFuelModelCoverage / 100.0;
 
+    setSecondFuelModelNumber(secondFuelModelNumber);
+    setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
     isUsingTwoFuelModels_ = true;
-
-    twoFuelModelsMethod_ = twoFuelModelsMethod;
+    setTwoFuelModelsMethod(twoFuelModelsMethod);
 }
 
 void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
@@ -235,11 +232,10 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
-    ageOfRough_ = ageOfRough;
-    heightOfUnderstory_ = heightOfUnderstory;
-    palmettoCoverage_ = palmettoCoverage;
-    overstoryBasalArea_ = overstoryBasalArea;
-
+    setAgeOfRough(ageOfRough);
+    setHeightOfUnderstory(heightOfUnderstory);
+    setPalmettoCoverage(palmettoCoverage);
+    setOverstoryBasalArea(overstoryBasalArea);
     isUsingPalmettoGallberry_ = true;
 }
 
@@ -252,11 +248,11 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
 
-    aspenFuelModelNumber_ = aspenFuelModelNumber;
-    aspenCuringLevel_ = aspenCuringLevel;
-    aspenFireSeverity_ = aspenFireSeverity;
+    setAspenFuelModelNumber(aspenFuelModelNumber);
+    setAspenCuringLevel(aspenCuringLevel);
+    setAspenFireSeverity(aspenFireSeverity);
+    setAspenDBH(DBH);
     isUsingWesternAspen_ = true;
-    DBH_ = DBH;
 }
 
 void SurfaceInputs::setAspenFuelModelNumber(int aspenFuelModelNumber)
@@ -321,36 +317,26 @@ void SurfaceInputs::setFuelModelNumber(int fuelModelNumber)
 
 void SurfaceInputs::setMoistureOneHour(double moistureOneHour)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureOneHour /= 100.0;
     moistureOneHour_ = moistureOneHour;
 }
 
 void SurfaceInputs::setMoistureTenHour(double moistureTenHour)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureTenHour /= 100.0;
     moistureTenHour_ = moistureTenHour;
 }
 
 void SurfaceInputs::setMoistureHundredHour(double moistureHundredHour)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureHundredHour /= 100.0;
     moistureHundredHour_ = moistureHundredHour;
 }
 
 void SurfaceInputs::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureLiveHerbaceous /= 100.0;
     moistureLiveHerbaceous_ = moistureLiveHerbaceous;
 }
 
 void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureLiveWoody /= 100.0;
     moistureLiveWoody_ = moistureLiveWoody;
 }
 
@@ -381,7 +367,7 @@ void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoF
 
 void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
 {
-    firstFuelModelCoverage_ = firstFuelModelCoverage / 100.0;
+    firstFuelModelCoverage_ = firstFuelModelCoverage;
 }
 
 void  SurfaceInputs::setWindSpeed(double windSpeed)
