@@ -452,11 +452,6 @@ double BehaveRun::getCrownRatio() const
     return surface_.getCrownRatio();
 }
 
-void BehaveRun::updateDeepCopyOfSurface(const Surface & surface)
-{
-    crown_.updateDeepCopyOfSurface(surface);
-}
-
 void BehaveRun::setCanopyBaseHeight(double canopyBaseHeight)
 {
     crown_.setCanopyBaseHeight(canopyBaseHeight);

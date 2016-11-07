@@ -178,7 +178,6 @@ private:
 
     // CROWN Module
     Crown crown_;
-    void updateDeepCopyOfSurface(const Surface& surface); // this is an implementation detail that clients shouldn't access
 
     // SPOT Module
     Spot spot_;
