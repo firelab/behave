@@ -248,7 +248,7 @@ void SurfaceTwoFuelModels::calculateWeightedSpreadRate(TwoFuelModels::TwoFuelMod
     surfaceFireSpread_->forwardSpreadRate_ = spreadRate_;
 }
 
-double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double *ros, double *cov, int fuels,
+double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double* ros, double* cov, int fuels,
     double lbRatio, int samples, int depth, int laterals)
 {
     // Initialize results

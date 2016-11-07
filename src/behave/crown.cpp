@@ -35,7 +35,7 @@
 #include "surfaceEnums.h"
 #include "windSpeedUtility.h"
 
-Crown::Crown(const FuelModelSet &fuelModelSet, const Surface &surface)
+Crown::Crown(const FuelModelSet& fuelModelSet, const Surface& surface)
     : crownDeepCopyOfSurface_(fuelModelSet)
 {
     fuelModelSet_ = &fuelModelSet; // point to the same location as BehaveRun'sfuelModels
@@ -50,7 +50,7 @@ Crown::~Crown()
 
 }
 
-Crown::Crown(const Crown &rhs)
+Crown::Crown(const Crown& rhs)
     : crownDeepCopyOfSurface_(*rhs.fuelModelSet_)
 {
     fuelModelSet_ = rhs.fuelModelSet_;
@@ -78,7 +78,7 @@ Crown::Crown(const Crown &rhs)
     windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
 }
 
-Crown& Crown::operator= (const Crown &rhs)
+Crown& Crown::operator= (const Crown& rhs)
 {
     if (this != &rhs)
     {
@@ -156,7 +156,7 @@ void Crown::doCrownRun()
     calculateFireType();
 }
 
-void Crown::updateDeepCopyOfSurface(const Surface &surface)
+void Crown::updateDeepCopyOfSurface(const Surface& surface)
 {
     surface_ = &surface; // point to the same location as BehaveRun's surface
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface is pointing to

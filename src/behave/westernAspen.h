@@ -35,7 +35,7 @@ class WesternAspen
 {
 public:
     WesternAspen();
-    WesternAspen(const WesternAspen &rhs);
+    WesternAspen(const WesternAspen& rhs);
     WesternAspen& operator= (const WesternAspen& rhs);
     ~WesternAspen();
 
@@ -60,7 +60,7 @@ public:
     double calculateAspenMortality(int severity, double flameLength, double DBH);
 
 private:
-    double aspenInterpolate(double curing, double *valueArray);
+    double aspenInterpolate(double curing, double* valueArray);
 
     // Member variables
     double DBH_;

@@ -40,7 +40,7 @@ FuelModelSet::FuelModelSet()
     populateFuelModels();
 }
 
-FuelModelSet::FuelModelSet(const FuelModelSet &rhs)
+FuelModelSet::FuelModelSet(const FuelModelSet& rhs)
 {
     FuelModelArray.resize(rhs.FuelModelArray.size());
     for (int i = 0; i < rhs.FuelModelArray.size(); i++)

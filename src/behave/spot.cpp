@@ -44,7 +44,7 @@ Spot::~Spot()
 
 }
 
-Spot::Spot(const Spot & rhs)
+Spot::Spot(const Spot& rhs)
 {
 	memcpy(speciesFlameHeightParameters_, rhs.speciesFlameHeightParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
 	memcpy(speciesFlameDurationParameters_, rhs.speciesFlameDurationParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
@@ -68,7 +68,7 @@ Spot::Spot(const Spot & rhs)
     mountainDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
 }
 
-Spot & Spot::operator=(const Spot & rhs)
+Spot & Spot::operator=(const Spot& rhs)
 {
     if (this != &rhs)
     {

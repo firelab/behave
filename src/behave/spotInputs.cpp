@@ -32,7 +32,7 @@ SpotInputs::SpotInputs()
 	initializeMembers();
 }
 
-SpotInputs::SpotInputs(const SpotInputs & rhs)
+SpotInputs::SpotInputs(const SpotInputs& rhs)
 {
 	DBH_ = rhs.DBH_;
 	downwindCoverHeight_ = rhs.downwindCoverHeight_;
@@ -46,7 +46,7 @@ SpotInputs::SpotInputs(const SpotInputs & rhs)
 	treeHeight_ = rhs.treeHeight_;
 }
 
-SpotInputs & SpotInputs::operator=(const SpotInputs & rhs)
+SpotInputs& SpotInputs::operator=(const SpotInputs& rhs)
 {
 	if (this != &rhs)
 	{

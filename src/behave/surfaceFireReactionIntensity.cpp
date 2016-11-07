@@ -38,7 +38,7 @@ SurfaceFireReactionIntensity::SurfaceFireReactionIntensity()
 
 }
 
-SurfaceFireReactionIntensity::SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity &rhs)
+SurfaceFireReactionIntensity::SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity& rhs)
 {
     
     for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)

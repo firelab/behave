@@ -41,7 +41,7 @@ class Surface
 public:
     Surface() = delete; // no default constructor
     Surface(const FuelModelSet& fuelModelSet);
-    Surface(const Surface &rhs);
+    Surface(const Surface& rhs);
     Surface& operator= (const Surface& rhs);
 
     void doSurfaceRunInDirectionOfMaxSpread();
@@ -126,11 +126,11 @@ public:
     SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
 
 private:
-    const FuelModelSet*	fuelModelSet_;
+    const FuelModelSet* fuelModelSet_;
 
     // Surface Module components
-    SurfaceFire surfaceFire_;
     SurfaceInputs surfaceInputs_;
+    SurfaceFire surfaceFire_;
 };
 
 #endif // SURFACE_H

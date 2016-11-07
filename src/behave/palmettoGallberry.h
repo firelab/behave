@@ -35,7 +35,7 @@ class PalmettoGallberry
 {
 public:
     PalmettoGallberry();
-    PalmettoGallberry(const PalmettoGallberry &rhs);
+    PalmettoGallberry(const PalmettoGallberry& rhs);
     PalmettoGallberry& operator= (const PalmettoGallberry& rhs);
 
     void initializeMembers();

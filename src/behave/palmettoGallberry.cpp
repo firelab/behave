@@ -37,7 +37,7 @@ PalmettoGallberry::PalmettoGallberry()
     initializeMembers();
 }
 
-PalmettoGallberry::PalmettoGallberry(const PalmettoGallberry &rhs)
+PalmettoGallberry::PalmettoGallberry(const PalmettoGallberry& rhs)
 {
     moistureOfExtinctionDead_ = rhs.moistureOfExtinctionDead_;
     heatOfCombustionDead_ = rhs.heatOfCombustionDead_;

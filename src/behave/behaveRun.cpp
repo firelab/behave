@@ -30,14 +30,14 @@
 
 #include "fuelModelSet.h"
 
-BehaveRun::BehaveRun(FuelModelSet &fuelModelSet)
+BehaveRun::BehaveRun(FuelModelSet& fuelModelSet)
     : surface_(fuelModelSet),
     crown_(fuelModelSet, surface_)
 {
     fuelModelSet_ = &fuelModelSet;
 }
 
-BehaveRun::BehaveRun(const BehaveRun &rhs)
+BehaveRun::BehaveRun(const BehaveRun& rhs)
     : surface_(*rhs.fuelModelSet_),
     crown_(*rhs.fuelModelSet_, surface_) 
 {

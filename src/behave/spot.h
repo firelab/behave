@@ -41,8 +41,8 @@ public:
     Spot();
     ~Spot();
     
-    Spot(const Spot &rhs);
-    Spot& operator= (const Spot& rhs);
+    Spot(const Spot& rhs);
+    Spot &operator= (const Spot& rhs);
 
     void calculateSpottingDistanceFromBurningPile();
     void calculateSpottingDistanceFromSurfaceFire();

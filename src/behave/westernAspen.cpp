@@ -37,7 +37,7 @@ WesternAspen::WesternAspen()
 
 }
 
-WesternAspen::WesternAspen(const WesternAspen &rhs)
+WesternAspen::WesternAspen(const WesternAspen& rhs)
 {
     mortality_ = rhs.mortality_;
 }
@@ -74,7 +74,7 @@ double WesternAspen::getAspenMortality () const
 *
 *  \return value        Interpolated value
 */
-double WesternAspen::aspenInterpolate(double curing, double *valueArray)
+double WesternAspen::aspenInterpolate(double curing, double* valueArray)
 {
     static double curingArray[] = { 0.0, 0.3, 0.5, 0.7, 0.9, 1.000000001 };
     curing = (curing < 0.0) ? 0.0 : curing;

@@ -41,9 +41,9 @@ class BehaveRun
 {
 public:
     BehaveRun() = delete; // There is no default constructor
-    explicit BehaveRun(FuelModelSet &fuelModelSet);
+    explicit BehaveRun(FuelModelSet& fuelModelSet);
     
-    BehaveRun(const BehaveRun &rhs);
+    BehaveRun(const BehaveRun& rhs);
     BehaveRun& operator= (const BehaveRun& rhs);
     ~BehaveRun();
 
@@ -134,7 +134,6 @@ public:
     void doCrownRun();
 
     // CROWN Module Setters
-    void updateDeepCopyOfSurface(const Surface& surface);
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double bulkDensity);
     void setFoliarMoisture(double foliarMoisture);
@@ -179,6 +178,7 @@ private:
 
     // CROWN Module
     Crown crown_;
+    void updateDeepCopyOfSurface(const Surface& surface); // this is an implementation detail that clients shouldn't access
 
     // SPOT Module
     Spot spot_;

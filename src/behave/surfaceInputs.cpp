@@ -37,7 +37,7 @@ SurfaceInputs::SurfaceInputs()
 }
 
 // Copy Ctor
-SurfaceInputs::SurfaceInputs(const SurfaceInputs &rhs)
+SurfaceInputs::SurfaceInputs(const SurfaceInputs& rhs)
 {
     fuelModelNumber_ = rhs.fuelModelNumber_;
     secondFuelModelNumber_ = rhs.secondFuelModelNumber_;

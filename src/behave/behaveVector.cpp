@@ -39,7 +39,7 @@ BehaveVector::~BehaveVector()
 
 }
 
-BehaveVector::BehaveVector(const BehaveVector &rhs)
+BehaveVector::BehaveVector(const BehaveVector& rhs)
     :behaveRun(rhs.size(), BehaveRun(fuelModelSet_))
 {
     fuelModelSet_ = rhs.fuelModelSet_;
@@ -78,16 +78,17 @@ BehaveVector& BehaveVector::operator= (const BehaveVector& rhs)
 
 BehaveRun& BehaveVector::operator[] (const std::vector<BehaveRun>::size_type index)
 { 
-    assert(index >= 0 && index < behaveRun.size()); // for bounds checking in debug
+    std::vector<BehaveRun>::size_type behaveRunSize = (std::vector<BehaveRun>::size_type)behaveRun.size();
+    assert((index >= 0) && (index < behaveRunSize)); // for bounds checking in debug
     return behaveRun[index]; 
 }
 
-BehaveRun&  BehaveVector::at(const std::vector<BehaveRun>::size_type index)
+BehaveRun& BehaveVector::at(const std::vector<BehaveRun>::size_type index)
 {
     return behaveRun.at(index);
 }
 
-const BehaveRun&  BehaveVector::at(const std::vector<BehaveRun>::size_type index) const
+const BehaveRun& BehaveVector::at(const std::vector<BehaveRun>::size_type index) const
 {
     return behaveRun.at(index);
 }

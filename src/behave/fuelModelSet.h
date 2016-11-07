@@ -44,7 +44,7 @@ public:
 
     FuelModelSet();
     FuelModelSet& operator= (const FuelModelSet& rhs);
-    FuelModelSet(const FuelModelSet &rhs);
+    FuelModelSet(const FuelModelSet& rhs);
     ~FuelModelSet();
    
     bool setCustomFuelModel(int fuelModelNumberIn, std::string code, std::string name,

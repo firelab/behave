@@ -40,7 +40,7 @@ SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates()
 }
 
 // Copy Ctor
-SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates &rhs)
+SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs)
 {
     const int NUMBER_OF_LIVE_SIZE_CLASSES = 2;
 

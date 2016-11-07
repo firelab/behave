@@ -42,7 +42,7 @@ Surface::Surface(const FuelModelSet& fuelModels)
 }
 
 // Copy Ctor
-Surface::Surface(const Surface &rhs)
+Surface::Surface(const Surface& rhs)
     : surfaceFire_()
 {
     surfaceInputs_ = rhs.surfaceInputs_;

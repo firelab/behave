@@ -37,7 +37,7 @@ class BehaveVector
 public:
     BehaveVector();
     ~BehaveVector();
-    BehaveVector(const BehaveVector &rhs);
+    BehaveVector(const BehaveVector& rhs);
     BehaveVector& operator= (const BehaveVector& rhs);
 
     // Overloaded element access methods for member vector<BehaveRun> behaveRun

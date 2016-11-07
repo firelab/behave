@@ -39,7 +39,7 @@ class SurfaceFireReactionIntensity
 {
 public:
     SurfaceFireReactionIntensity();
-    SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity &rhs);
+    SurfaceFireReactionIntensity(const SurfaceFireReactionIntensity& rhs);
     SurfaceFireReactionIntensity& operator= (const SurfaceFireReactionIntensity& rhs);
     SurfaceFireReactionIntensity(const SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates);
 

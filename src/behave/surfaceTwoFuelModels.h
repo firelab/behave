@@ -63,7 +63,7 @@ public:
 private:
     SurfaceFire* surfaceFireSpread_;
 
-    double surfaceFireExpectedSpreadRate(double *ros, double *coverage, int fuels,
+    double surfaceFireExpectedSpreadRate(double* ros, double* coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals);
     void calculateFireOutputsForEachModel(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
     void calculateSpreadRateBasedOnMethod();

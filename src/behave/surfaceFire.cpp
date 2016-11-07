@@ -56,7 +56,7 @@ SurfaceFire::SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& 
 }
 
 // Copy Ctor
-SurfaceFire::SurfaceFire(const SurfaceFire &rhs)
+SurfaceFire::SurfaceFire(const SurfaceFire& rhs)
     : surfaceFireReactionIntensity_()
 {
     surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
