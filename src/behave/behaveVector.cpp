@@ -47,7 +47,7 @@ BehaveVector::BehaveVector(const BehaveVector& rhs)
     {
         resize(rhs.size());
     }
-    for (int i = 0; i < rhs.size(); i++)
+    for (unsigned int i = 0; i < rhs.size(); i++)
     {
         behaveRun[i] = rhs.behaveRun[i];
         // since behaveRun's assignment operator copys the rhs behaveRun's fuelModelSet_ pointer
@@ -65,7 +65,7 @@ BehaveVector& BehaveVector::operator= (const BehaveVector& rhs)
         {
             resize(rhs.size());
         }
-        for (int i = 0; i < rhs.size(); i++)
+        for (unsigned int i = 0; i < rhs.size(); i++)
         {
             behaveRun[i] = rhs.behaveRun[i];
             // since behaveRun's assignment operator copys the rhs behaveRun's fuelModelSet_ pointer
