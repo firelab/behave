@@ -125,7 +125,7 @@ int main()
     behave.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     spreadRate = behave.getSurfaceFireSpreadRate();
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
-    flameLength = behave.getFlameLength();
+    flameLength = behave.getSurfaceFlameLength();
     std::cout << "Spread rate for fuel model " << fuelModelNumber << " is " << std::setprecision(8) << spreadRate << " ch/hr" << std::endl;
     std::cout << "Flame length for fuel model " << fuelModelNumber << " is " << std::setprecision(8) << flameLength << " ft" << std::endl << std::endl;
     // Direction of Max Spread test

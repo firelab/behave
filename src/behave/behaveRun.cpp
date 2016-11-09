@@ -296,17 +296,17 @@ double BehaveRun::getDirectionOfMaxSpread() const
     return surface_.getDirectionOfMaxSpread();
 }
 
-double BehaveRun::getFlameLength() const
+double BehaveRun::getSurfaceFlameLength() const
 {
     return surface_.getFlameLength();
 }
 
-double BehaveRun::getFireLengthToWidthRatio() const
+double BehaveRun::getSurfaceFireLengthToWidthRatio() const
 {
     return surface_.getFireLengthToWidthRatio();
 }
 
-double BehaveRun::getFireEccentricity() const
+double BehaveRun::getSurfaceFireEccentricity() const
 {
     return surface_.getFireEccentricity();
 }

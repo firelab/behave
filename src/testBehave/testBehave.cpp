@@ -421,7 +421,7 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    flameLength = behaveRun.getFlameLength();
+    flameLength = behaveRun.getSurfaceFlameLength();
 
     SpotFireLocation::SpotFireLocationEnum location = SpotFireLocation::RIDGE_TOP;
     double ridgeToValleyDistance = 1.0;

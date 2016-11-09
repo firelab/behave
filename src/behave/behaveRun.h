@@ -115,9 +115,9 @@ public:
     double getCrownRatio() const;
     double getSurfaceFireSpreadRate() const;
     double getDirectionOfMaxSpread() const;
-    double getFlameLength() const;
-    double getFireLengthToWidthRatio() const;
-    double getFireEccentricity() const;
+    double getSurfaceFlameLength() const;
+    double getSurfaceFireLengthToWidthRatio() const;
+    double getSurfaceFireEccentricity() const;
     double getSurfaceFirelineIntensity() const;
     double getMidflameWindspeed() const;
     double getSurfaceFireHeatPerUnitArea() const;

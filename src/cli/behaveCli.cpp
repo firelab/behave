@@ -479,7 +479,7 @@ int main(int argc, char *argv[])
     spreadRate = behave.getSurfaceFireSpreadRate();
 
     // Get other required outputs
-    flameLength = behave.getFlameLength();
+    flameLength = behave.getSurfaceFlameLength();
     directionOfMaxSpread = behave.getDirectionOfMaxSpread();
 
     // Convert output units if necessary
