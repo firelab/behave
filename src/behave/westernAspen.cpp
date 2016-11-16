@@ -259,11 +259,11 @@ double WesternAspen::getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspe
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[5][6] = 
     {
-        { 0.403, 0.403, 0.333, 0.283, 0.277, 0.274 },
-        { 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 },
-        { 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 },
+        { 0.403, 0.403, 0.333, 0.283, 0.277, 0.2740 },
+        { 0.000, 0.000, 0.000, 0.000, 0.000, 0.0000 },
+        { 0.000, 0.000, 0.000, 0.000, 0.000, 0.0000 },
         { 0.455, 0.455, 0.364, 0.290, 0.261, 0.2465 },
-        { 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 }
+        { 0.000, 0.000, 0.000, 0.000, 0.000, 0.0000 }
     };
     double load = 0.0;
     if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)

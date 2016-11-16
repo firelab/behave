@@ -499,8 +499,6 @@ double BehaveRun::getCrownFlameLength() const
 
 void BehaveRun::doCrownRun()
 {
-    // Update Crown's copy of surface
-    crown_.updateDeepCopyOfSurface(surface_);
     // Calculate Crown module outputs
     crown_.doCrownRun();
 }

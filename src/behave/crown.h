@@ -48,7 +48,7 @@ public:
     Crown& operator= (const Crown &rhs);
 
     void doCrownRun();
-    void updateDeepCopyOfSurface(const Surface& surface);
+  
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
@@ -86,6 +86,7 @@ private:
     void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
     void calculateFireType();
+    void updateDeepCopyOfSurface();
     double calculateWindSpeedAtTwentyFeet();
 
     // Member variables

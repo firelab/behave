@@ -119,6 +119,9 @@ Crown& Crown::operator= (const Crown& rhs)
 */
 void Crown::doCrownRun()
 {
+    // Step 0: Update Crown's copy of Surface
+    updateDeepCopyOfSurface();
+
     // Step 1: Create the crown fuel model (fire behavior fuel model 10)
     crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
     crownDeepCopyOfSurface_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
@@ -156,9 +159,8 @@ void Crown::doCrownRun()
     calculateFireType();
 }
 
-void Crown::updateDeepCopyOfSurface(const Surface& surface)
+void Crown::updateDeepCopyOfSurface()
 {
-    surface_ = &surface; // point to the same location as BehaveRun's surface
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface is pointing to
 }
 
@@ -449,7 +451,6 @@ void Crown::calculateFireType()
 
 void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
-    // crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface_ is pointing to
     crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }
 
