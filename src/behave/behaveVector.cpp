@@ -42,6 +42,20 @@ BehaveVector::~BehaveVector()
 BehaveVector::BehaveVector(const BehaveVector& rhs)
     :behaveRun(rhs.size(), BehaveRun(fuelModelSet_))
 {
+    memberwiseCopyAssignment(rhs);
+}
+
+BehaveVector& BehaveVector::operator=(const BehaveVector& rhs)
+{
+    if (this != &rhs)
+    {
+        memberwiseCopyAssignment(rhs);
+    }
+    return *this;
+}
+
+void BehaveVector::memberwiseCopyAssignment(const BehaveVector& rhs)
+{
     fuelModelSet_ = rhs.fuelModelSet_;
     if (size() != rhs.size())
     {
@@ -50,30 +64,7 @@ BehaveVector::BehaveVector(const BehaveVector& rhs)
     for (unsigned int i = 0; i < rhs.size(); i++)
     {
         behaveRun[i] = rhs.behaveRun[i];
-        // since behaveRun's assignment operator copys the rhs behaveRun's fuelModelSet_ pointer
-        // we need to point the lhs behaveRun back to this object's fuelModelSet_'s memory location
-        behaveRun[i].setFuelModelSet(fuelModelSet_);
     }
-}
-
-BehaveVector& BehaveVector::operator= (const BehaveVector& rhs)
-{
-    if (this != &rhs)
-    {
-        fuelModelSet_ = rhs.fuelModelSet_;
-        if (size() != rhs.size())
-        {
-            resize(rhs.size());
-        }
-        for (unsigned int i = 0; i < rhs.size(); i++)
-        {
-            behaveRun[i] = rhs.behaveRun[i];
-            // since behaveRun's assignment operator copys the rhs behaveRun's fuelModelSet_ pointer
-            // we need to point the lhs behaveRun back to this object's fuelModelSet_'s memory location
-            behaveRun[i].setFuelModelSet(fuelModelSet_);
-        }
-    }
-    return *this;
 }
 
 BehaveRun& BehaveVector::operator[] (const std::vector<BehaveRun>::size_type index)

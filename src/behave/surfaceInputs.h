@@ -29,17 +29,14 @@
 #ifndef SURFACEINPUTS_H
 #define SURFACEINPUTS_H
 
+#include "behaveUnits.h"
 #include "surfaceEnums.h"
 
 class SurfaceInputs
 {
 public:
     SurfaceInputs();
-    SurfaceInputs(const SurfaceInputs& rhs);
-    SurfaceInputs& operator= (const SurfaceInputs& rhs);
-
-    void initializeMembers();
-
+  
     // Main Surface module inputs setters 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
@@ -52,7 +49,7 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody);
     void setSlope(double slope);
     void setAspect(double slopeAspect);
-    void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
+    void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setWindSpeed(double windSpeed);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
@@ -111,7 +108,7 @@ public:
     bool hasUserEnteredWindAdjustmentFactor() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
-    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
+    SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     double getUserProvidedWindAdjustmentFactor() const;
 
     // Two fuel models inputs getters
@@ -137,6 +134,7 @@ public:
 
 private:
     double convertWindToUpslope(double windDirectionFromNorth);
+    void initializeMembers();
    
     // Main Suface module inputs
     int fuelModelNumber_;               // 1 to 256
@@ -176,7 +174,7 @@ private:
     double userProvidedWindAdjustmentFactor_;
 
     // Input Modes
-    SlopeInputMode::SlopeInputModeEnum slopeInputMode_;                 // Whether slope is input as percent or degrees
+    SlopeUnits::SlopeUnitsEnum slopeUnits_;                             // Whether slope is input as percent or degrees
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              // Method used in Two Fuel Models calculations
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;  // Height above canopy from which wind speed is measured
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode_; // How wind and spread directions are referenced

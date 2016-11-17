@@ -35,11 +35,10 @@ class WesternAspen
 {
 public:
     WesternAspen();
-    WesternAspen(const WesternAspen& rhs);
-    WesternAspen& operator= (const WesternAspen& rhs);
     ~WesternAspen();
 
     void initializeMembers();
+    double getAspenDBH() const;
     double getAspenMortality() const;
 
     // The following getter methods are used to populate FuelModel data fields 

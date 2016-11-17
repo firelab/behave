@@ -101,13 +101,14 @@ public:
     double getMaxSpottingDistanceFromTorchingTrees();
 
 private:
-	SpotInputs spotInputs_;
-
+    void memberwiseCopyAssignment(const Spot& rhs);
     void initializeMembers();
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
     double spotDistanceMountainTerrain(double flatDistance, SpotFireLocation::SpotFireLocationEnum location, 
 		double ridgeToValleyDistance, double ridgeToValleyElevation);
+
+    SpotInputs spotInputs_;
 
     double speciesFlameHeightParameters_[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS];
     double speciesFlameDurationParameters_[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS];

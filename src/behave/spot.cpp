@@ -46,9 +46,23 @@ Spot::~Spot()
 
 Spot::Spot(const Spot& rhs)
 {
-	memcpy(speciesFlameHeightParameters_, rhs.speciesFlameHeightParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
-	memcpy(speciesFlameDurationParameters_, rhs.speciesFlameDurationParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
-	memcpy(firebrandHeightFactors_, rhs.firebrandHeightFactors_, SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
+    memberwiseCopyAssignment(rhs);
+}
+
+Spot& Spot::operator=(const Spot& rhs)
+{
+    if (this != &rhs)
+    {
+        memberwiseCopyAssignment(rhs);
+    }
+    return *this;
+}
+
+void Spot::memberwiseCopyAssignment(const Spot& rhs)
+{
+    memcpy(speciesFlameHeightParameters_, rhs.speciesFlameHeightParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
+    memcpy(speciesFlameDurationParameters_, rhs.speciesFlameDurationParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
+    memcpy(firebrandHeightFactors_, rhs.firebrandHeightFactors_, SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
 
     coverHeightUsedForSurfaceFire_ = rhs.coverHeightUsedForSurfaceFire_;
     coverHeightUsedForBurningPile_ = rhs.coverHeightUsedForBurningPile_;
@@ -67,42 +81,6 @@ Spot::Spot(const Spot& rhs)
     mountainDistanceFromSurfaceFire_ = rhs.mountainDistanceFromBurningPile_;
     mountainDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
 }
-
-Spot & Spot::operator=(const Spot& rhs)
-{
-    if (this != &rhs)
-    {
-		memcpy(speciesFlameHeightParameters_, rhs.speciesFlameHeightParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
-		memcpy(speciesFlameDurationParameters_, rhs.speciesFlameDurationParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
-		memcpy(firebrandHeightFactors_, rhs.firebrandHeightFactors_, SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
-
-        coverHeightUsedForSurfaceFire_ = rhs.coverHeightUsedForSurfaceFire_;
-        coverHeightUsedForBurningPile_ = rhs.coverHeightUsedForBurningPile_;
-        coverHeightUsedForTorchingTrees_ = rhs.coverHeightUsedForTorchingTrees_;
-        flameHeightForTorchingTrees_ = rhs.flameHeightForTorchingTrees_;
-        flameRatio_ = rhs.flameRatio_;
-        firebrandDrift_ = rhs.firebrandDrift_;
-        flameDuration_ = rhs.flameDuration_;
-        firebrandHeightFromBurningPile_ = rhs.firebrandHeightFromBurningPile_;
-        firebrandHeightFromSurfaceFire_ = rhs.firebrandHeightFromSurfaceFire_;
-        firebrandHeightFromTorchingTrees_ = rhs.firebrandHeightFromTorchingTrees_;
-        flatDistanceFromBurningPile_ = rhs.flatDistanceFromBurningPile_;
-        flatDistanceFromSurfaceFire_ = rhs.flatDistanceFromSurfaceFire_;
-        flatDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
-        mountainDistanceFromBurningPile_ = rhs.mountainDistanceFromBurningPile_;
-        mountainDistanceFromSurfaceFire_ = rhs.mountainDistanceFromBurningPile_;
-        mountainDistanceFromTorchingTrees_ = rhs.mountainDistanceFromBurningPile_;
-    }
-    return *this;
-}
-
-//-------------------------------------------------------------------------------------
-/*! \brief Calculates cover height used in spotting distance calculations.
- *
- *  \param firebrandHeight      Maximum firebrand height.
- *  \param coverHeight          Tree/vegetation cover height(ft).
- *
- */
 
 void Spot::initializeMembers()
 {
@@ -177,6 +155,14 @@ void Spot::initializeMembers()
     mountainDistanceFromSurfaceFire_ = 0.0;
     mountainDistanceFromTorchingTrees_ = 0.0;
 }
+
+// ------------------------------------------------------------------------------------ -
+/*! \brief Calculates cover height used in spotting distance calculations.
+*
+*  \param firebrandHeight      Maximum firebrand height.
+*  \param coverHeight          Tree/vegetation cover height(ft).
+*
+*/
 
 double Spot::calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight)
 {

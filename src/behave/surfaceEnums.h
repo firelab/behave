@@ -52,15 +52,6 @@ struct AspenFireSeverity
     };
 };
 
-struct SlopeInputMode
-{
-    enum SlopeInputModeEnum
-    {
-        SLOPE_IN_PERCENT = 0,   // Slope is input as a percent
-        SLOPE_IN_DEGREES = 1    // Slope is input as degrees
-    };
-};
-
 struct TwoFuelModels
 {
     enum TwoFuelModelsEnum

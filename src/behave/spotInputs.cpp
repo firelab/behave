@@ -32,38 +32,6 @@ SpotInputs::SpotInputs()
 	initializeMembers();
 }
 
-SpotInputs::SpotInputs(const SpotInputs& rhs)
-{
-	DBH_ = rhs.DBH_;
-	downwindCoverHeight_ = rhs.downwindCoverHeight_;
-	location_ = rhs.location_;
-	ridgeToValleyDistance_ = rhs.ridgeToValleyDistance_;
-	ridgeToValleyElevation_ = rhs.ridgeToValleyElevation_;
-	windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
-	buringPileFlameHeight_ = rhs.buringPileFlameHeight_;
-	flameLength_ = rhs.flameLength_;
-	torchingTrees_ = rhs.torchingTrees_;
-	treeHeight_ = rhs.treeHeight_;
-}
-
-SpotInputs& SpotInputs::operator=(const SpotInputs& rhs)
-{
-	if (this != &rhs)
-	{
-        DBH_ = rhs.DBH_;
-        downwindCoverHeight_ = rhs.downwindCoverHeight_;
-        location_ = rhs.location_;
-        ridgeToValleyDistance_ = rhs.ridgeToValleyDistance_;
-        ridgeToValleyElevation_ = rhs.ridgeToValleyElevation_;
-        windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
-        buringPileFlameHeight_ = rhs.buringPileFlameHeight_;
-        flameLength_ = rhs.flameLength_;
-        torchingTrees_ = rhs.torchingTrees_;
-        treeHeight_ = rhs.treeHeight_;
-	}
-	return *this;
-}
-
 void SpotInputs::setBurningPileFlameHeight(double buringPileFlameHeight)
 {
 	buringPileFlameHeight_ = buringPileFlameHeight;

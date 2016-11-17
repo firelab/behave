@@ -34,8 +34,6 @@ class SpotInputs
 {
 public:
 	SpotInputs();
-	SpotInputs(const  SpotInputs& rhs);
-	SpotInputs& operator= (const  SpotInputs& rhs);
 
 	void setBurningPileFlameHeight(double buringPileflameHeight);
 	void setDBH(double DBH);

@@ -61,12 +61,12 @@ public:
     double getFireLengthToWidthRatio() const;
 
 private:
-    SurfaceFire* surfaceFireSpread_;
-
     double surfaceFireExpectedSpreadRate(double* ros, double* coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals);
     void calculateFireOutputsForEachModel(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
     void calculateSpreadRateBasedOnMethod();
+
+    SurfaceFire* surfaceFireSpread_;
 
     // Member arrays, stores data for each of the two fuel models
     int fuelModelNumber_[TwoFuelModels::NUMBER_OF_MODELS];                      // fuel model number

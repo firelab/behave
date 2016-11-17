@@ -45,18 +45,22 @@ Surface::Surface(const FuelModelSet& fuelModels)
 Surface::Surface(const Surface& rhs)
     : surfaceFire_()
 {
-    surfaceInputs_ = rhs.surfaceInputs_;
-    surfaceFire_ = rhs.surfaceFire_;
+    memberwiseCopyAssignment(rhs);
 }
 
-Surface& Surface::operator= (const Surface& rhs)
+Surface& Surface::operator=(const Surface& rhs)
 {
     if (this != &rhs)
     {
-        surfaceInputs_ = rhs.surfaceInputs_;
-        surfaceFire_ = rhs.surfaceFire_;
+        memberwiseCopyAssignment(rhs);
     }
     return *this;
+}
+
+void Surface::memberwiseCopyAssignment(const Surface& rhs)
+{
+    surfaceInputs_ = rhs.surfaceInputs_;
+    surfaceFire_ = rhs.surfaceFire_;
 }
 
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
@@ -255,9 +259,9 @@ WindHeightInputMode::WindHeightInputModeEnum Surface::getWindHeightInputMode() c
     return surfaceInputs_.getWindHeightInputMode();
 }
 
-SlopeInputMode::SlopeInputModeEnum Surface::getSlopeInputMode() const
+SlopeUnits::SlopeUnitsEnum Surface::getSlopeUnits() const
 {
-    return surfaceInputs_.getSlopeInputMode();
+    return surfaceInputs_.getSlopeUnits();
 }
 
 double Surface::getWindSpeed() const
@@ -320,9 +324,9 @@ void Surface::setAspect(double aspect)
     surfaceInputs_.setAspect(aspect);
 }
 
-void Surface::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
+void Surface::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
 {
-    surfaceInputs_.setSlopeInputMode(slopeInputMode);
+    surfaceInputs_.setSlopeUnits(slopeInputMode);
 }
 
 void Surface::setWindSpeed(double windSpeed)

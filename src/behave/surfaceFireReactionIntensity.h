@@ -49,6 +49,8 @@ public:
     double getReactionIntensity() const;
 
 private:
+    void memberwiseCopyAssignment(const SurfaceFireReactionIntensity& rhs);
+
     double etaM_[FuelConstants::MAX_LIFE_STATES];                           //< Moisture damping coefficient for  i-th categort (dead/live)
     double etaS_[FuelConstants::MAX_LIFE_STATES];                           //< Mineral(silica) damping coefficient for i - th categort(dead / live)
     double reactionIntensityForLifeState_[FuelConstants::MAX_LIFE_STATES];  //< Reaction intensity for i-th category (dead/live)

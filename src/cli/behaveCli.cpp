@@ -279,7 +279,7 @@ int main(int argc, char *argv[])
 
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
-    behave.setSlopeInputMode(SlopeInputMode::SLOPE_IN_DEGREES);
+    behave.setSlopeUnits(SlopeUnits::DEGREES);
     behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
 
     // Check for presense command line arguments

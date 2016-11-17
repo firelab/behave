@@ -31,9 +31,10 @@
 #ifndef BEHAVERUN_H
 #define BEHAVERUN_H
 
-#include "surface.h"
+#include "behaveUnits.h"
 #include "crown.h"
 #include "spot.h"
+#include "surface.h"
 
 class FuelModels;
 
@@ -77,7 +78,7 @@ public:
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
-    void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
+    void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
@@ -128,7 +129,7 @@ public:
     double getEllipticalC() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
-    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
+    SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
 
     // CROWN Module
     void doCrownRun();
@@ -170,6 +171,8 @@ public:
     double getMaxSpottingDistanceFromTorchingTrees();
 
 private:
+    void memberwiseCopyAssignment(const BehaveRun& rhs);
+
     // Fuel model set (orginal 13, 40 and custom)
     FuelModelSet* fuelModelSet_;    // This must point to a valid reference passed to the constructor
 

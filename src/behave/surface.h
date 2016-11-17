@@ -33,6 +33,7 @@
 #define SURFACE_H
 
 // The SURFACE module of BehavePlus
+#include "behaveUnits.h"
 #include "surfaceFire.h"
 #include "surfaceInputs.h"
 
@@ -77,7 +78,7 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody);
     void setSlope(double slope);
     void setAspect(double aspect);
-    void setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode);
+    void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
@@ -123,9 +124,11 @@ public:
    
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
-    SlopeInputMode::SlopeInputModeEnum getSlopeInputMode() const;
+    SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
 
 private:
+    void memberwiseCopyAssignment(const Surface& rhs);
+
     const FuelModelSet* fuelModelSet_;
 
     // Surface Module components

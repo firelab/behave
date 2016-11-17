@@ -53,6 +53,20 @@ Crown::~Crown()
 Crown::Crown(const Crown& rhs)
     : crownDeepCopyOfSurface_(*rhs.fuelModelSet_)
 {
+    memberwiseCopyAssignment(rhs);
+}
+
+Crown& Crown::operator=(const Crown& rhs)
+{
+    if (this != &rhs)
+    {
+        memberwiseCopyAssignment(rhs);
+    }
+    return *this;
+}
+
+void Crown::memberwiseCopyAssignment(const Crown& rhs)
+{
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
     crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
@@ -76,37 +90,6 @@ Crown::Crown(const Crown& rhs)
     crownFireActiveRatio_ = rhs.crownFireActiveRatio_;
     crownFireTransitionRatio_ = rhs.crownFireTransitionRatio_;
     windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
-}
-
-Crown& Crown::operator= (const Crown& rhs)
-{
-    if (this != &rhs)
-    {
-        fuelModelSet_ = rhs.fuelModelSet_;
-        surface_ = rhs.surface_;
-        crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
-        crownInputs_ = rhs.crownInputs_;
-
-        fireType_ = rhs.fireType_;
-        crownCopyOfSurfaceHeatPerUnitArea_ = rhs.crownCopyOfSurfaceHeatPerUnitArea_;
-        crownCopyOfSurfaceFirelineIntensity_ = rhs.crownCopyOfSurfaceFirelineIntensity_;
-        crownFuelLoad_ = rhs.crownFuelLoad_;
-        canopyHeatPerUnitArea_ = rhs.canopyHeatPerUnitArea_;
-        crownFireHeatPerUnitArea_ = rhs.crownFireHeatPerUnitArea_;
-        crownFirelineIntensity_ = rhs.crownFirelineIntensity_;
-        crownFlameLength_ = rhs.crownFlameLength_;
-        crownFireSpreadRate_ = rhs.crownFireSpreadRate_;
-        crownCriticalSurfaceFireIntensity_ = rhs.crownCriticalSurfaceFireIntensity_;
-        crownCriticalFireSpreadRate_ = rhs.crownCriticalFireSpreadRate_;
-        crownCriticalSurfaceFlameLength_ = rhs.crownCriticalSurfaceFlameLength_;
-        crownPowerOfFire_ = rhs.crownPowerOfFire_;
-        crownPowerOfWind_ = rhs.crownPowerOfWind_;
-        crownFirePowerRatio_ = rhs.crownFirePowerRatio_;
-        crownFireActiveRatio_ = rhs.crownFireActiveRatio_;
-        crownFireTransitionRatio_ = rhs.crownFireTransitionRatio_;
-        windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
-    }
-    return *this;
 }
 
 //------------------------------------------------------------------------------

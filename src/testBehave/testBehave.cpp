@@ -114,21 +114,24 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
-    // Test North oriented mode, 42 degree wind, 20 foot wind 
+    // Test North oriented mode, 42 degree wind, 20 foot wind , 30 degree slope
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.setSlopeUnits(SlopeUnits::DEGREES);
+    behaveRun.setSlope(30);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
     behaveRun.setWindSpeed(5);
     behaveRun.setWindDirection(45);
     behaveRun.setAspect(95);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
-    //expectedSurfaceFireSpreadRate = 19.690219;
-    expectedSurfaceFireSpreadRate = 8.298746;
+    expectedSurfaceFireSpreadRate = 19.677584;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
+    // Test upslope oriented mode, 20 foot uplsope wind
     behaveRun.setFuelModelNumber(124);
     behaveRun.setWindSpeed(5);
-    // Test upslope oriented mode, 20 foot uplsope wind 
+    behaveRun.setSlopeUnits(SlopeUnits::PERCENT);
+    behaveRun.setSlope(30);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveRun.setWindDirection(0);

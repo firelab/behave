@@ -66,6 +66,8 @@ public:
     std::vector<BehaveRun>::const_reverse_iterator crend() const;
 
 private:
+    void memberwiseCopyAssignment(const BehaveVector& rhs);
+
     FuelModelSet fuelModelSet_;
     std::vector<BehaveRun> behaveRun;
 };

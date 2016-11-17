@@ -72,6 +72,7 @@ private:
 
     // Private methods
     void initializeMemmbers();
+    void memberwiseCopyAssignment(const Crown& rhs);
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();
     void calculateCrownFuelLoad();

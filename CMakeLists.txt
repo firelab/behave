@@ -50,6 +50,7 @@ ENDIF(TEST_BEHAVE)
 SET(SOURCE
     src/behave/behaveRun.cpp
     src/behave/behaveVector.cpp
+	src/behave/behaveUnits.cpp
     src/behave/crown.cpp
     src/behave/crownInputs.cpp
     src/behave/fuelModelSet.cpp
@@ -73,6 +74,7 @@ SET(SOURCE
 SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveVector.h
+	src/behave/behaveUnits.h
     src/behave/crown.h
     src/behave/crownEnums.h
     src/behave/crownInputs.h

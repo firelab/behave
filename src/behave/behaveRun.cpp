@@ -41,22 +41,24 @@ BehaveRun::BehaveRun(const BehaveRun& rhs)
     : surface_(*rhs.fuelModelSet_),
     crown_(*rhs.fuelModelSet_, surface_) 
 {
+    memberwiseCopyAssignment(rhs);
+}
+
+BehaveRun& BehaveRun::operator=(const BehaveRun& rhs)
+{
+    if (this != &rhs)
+    {
+        memberwiseCopyAssignment(rhs);
+    }
+    return *this;
+}
+
+void BehaveRun::memberwiseCopyAssignment(const BehaveRun& rhs)
+{
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
     crown_ = rhs.crown_;
     spot_ = rhs.spot_;
-}
-
-BehaveRun& BehaveRun::operator= (const BehaveRun& rhs)
-{
-    if (this != &rhs)
-    {
-        fuelModelSet_ = rhs.fuelModelSet_;
-        surface_ = rhs.surface_;
-        crown_ = rhs.crown_;
-        spot_ = rhs.spot_;
-    }
-    return *this;
 }
 
 BehaveRun::~BehaveRun()
@@ -264,9 +266,9 @@ void BehaveRun::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     surface_.doSurfaceRunInDirectionOfInterest(directionOfInterest);
 }
 
-void BehaveRun::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
+void BehaveRun::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
 {
-    surface_.setSlopeInputMode(slopeInputMode);
+    surface_.setSlopeUnits(slopeInputMode);
 }
 
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum BehaveRun::getWindAndSpreadOrientationMode() const
@@ -279,9 +281,9 @@ WindHeightInputMode::WindHeightInputModeEnum BehaveRun::getWindHeightInputMode()
     return surface_.getWindHeightInputMode();
 }
 
-SlopeInputMode::SlopeInputModeEnum BehaveRun::getSlopeInputMode() const
+SlopeUnits::SlopeUnitsEnum BehaveRun::getSlopeUnits() const
 {
-    return surface_.getSlopeInputMode();
+    return surface_.getSlopeUnits();
 }
 
 double BehaveRun::getSurfaceFireSpreadRate() const

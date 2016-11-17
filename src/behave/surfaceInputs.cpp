@@ -36,93 +36,6 @@ SurfaceInputs::SurfaceInputs()
     initializeMembers();
 }
 
-// Copy Ctor
-SurfaceInputs::SurfaceInputs(const SurfaceInputs& rhs)
-{
-    fuelModelNumber_ = rhs.fuelModelNumber_;
-    secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
-    moistureOneHour_ = rhs.moistureOneHour_;
-    moistureTenHour_ = rhs.moistureTenHour_;
-    moistureHundredHour_ = rhs.moistureHundredHour_;
-    moistureLiveHerbaceous_ = rhs.moistureLiveHerbaceous_;
-    moistureLiveWoody_ = rhs.moistureLiveWoody_;
-    slope_ = rhs.slope_;
-    aspect_ = rhs.aspect_;
-    windSpeed_ = rhs.windSpeed_;
-    windDirection_ = rhs.windDirection_;
-
-    isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
-    isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
-    isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
-
-    slopeInputMode_ = rhs.slopeInputMode_;
-    windAndSpreadOrientationMode_ = rhs.windAndSpreadOrientationMode_;
-    windHeightInputMode_ = rhs.windHeightInputMode_;
-    twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
-
-    firstFuelModelCoverage_ = 0.0;
-
-    ageOfRough_ = rhs.ageOfRough_;
-    heightOfUnderstory_ = rhs.heightOfUnderstory_;
-    palmettoCoverage_ = rhs.palmettoCoverage_;
-    overstoryBasalArea_ = rhs.overstoryBasalArea_;
-
-    canopyCover_ = rhs.canopyCover_;
-    canopyHeight_ = rhs.canopyHeight_;
-    crownRatio_ = rhs.crownRatio_;
-
-    aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
-    aspenCuringLevel_ = rhs.aspenCuringLevel_;
-    aspenFireSeverity_ = rhs.aspenFireSeverity_;
-
-    userProvidedWindAdjustmentFactor_ = rhs.userProvidedWindAdjustmentFactor_;
-}
-
-SurfaceInputs& SurfaceInputs::operator= (const SurfaceInputs& rhs)
-{
-    if (this != &rhs)
-    {
-        fuelModelNumber_ = rhs.fuelModelNumber_;
-        secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
-        moistureOneHour_ = rhs.moistureOneHour_;
-        moistureTenHour_ = rhs.moistureTenHour_;
-        moistureHundredHour_ = rhs.moistureHundredHour_;
-        moistureLiveHerbaceous_ = rhs.moistureLiveHerbaceous_;
-        moistureLiveWoody_ = rhs.moistureLiveWoody_;
-        slope_ = rhs.slope_;
-        aspect_ = rhs.aspect_;
-        windSpeed_ = rhs.windSpeed_;
-        windDirection_ = rhs.windDirection_;
-
-        isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
-        isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
-        isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
-
-        slopeInputMode_ = rhs.slopeInputMode_;
-        windAndSpreadOrientationMode_ = rhs.windAndSpreadOrientationMode_;
-        windHeightInputMode_ = rhs.windHeightInputMode_;
-        twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
-
-        firstFuelModelCoverage_ = 0.0;
-
-        ageOfRough_ = rhs.ageOfRough_;
-        heightOfUnderstory_ = rhs.heightOfUnderstory_;
-        palmettoCoverage_ = rhs.palmettoCoverage_;
-        overstoryBasalArea_ = rhs.overstoryBasalArea_;
-
-        canopyCover_ = rhs.canopyCover_;
-        canopyHeight_ = rhs.canopyHeight_;
-        crownRatio_ = rhs.crownRatio_;
-
-        aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
-        aspenCuringLevel_ = rhs.aspenCuringLevel_;
-        aspenFireSeverity_ = rhs.aspenFireSeverity_;
-
-        userProvidedWindAdjustmentFactor_ = rhs.userProvidedWindAdjustmentFactor_;
-    }
-    return *this;
-}
-
 void SurfaceInputs::initializeMembers()
 {
     fuelModelNumber_ = 0;
@@ -141,7 +54,7 @@ void SurfaceInputs::initializeMembers()
     isUsingPalmettoGallberry_ = false;
     isUsingWesternAspen_ = false;
 
-    slopeInputMode_ = SlopeInputMode::SLOPE_IN_PERCENT;
+    slopeUnits_ = SlopeUnits::PERCENT;
     windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE;
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
@@ -342,7 +255,7 @@ void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 
 void SurfaceInputs::setSlope(double slope)
 {
-    if (slopeInputMode_ == SlopeInputMode::SLOPE_IN_PERCENT)
+    if (slopeUnits_ == SlopeUnits::PERCENT)
     {
         const double PI = 3.141592653589793238463;
         slope = (180 / PI) * atan(slope / 100.0); // slope is now in degees
@@ -355,9 +268,9 @@ void SurfaceInputs::setAspect(double aspect)
     aspect_ = aspect;
 }
 
-void SurfaceInputs::setSlopeInputMode(SlopeInputMode::SlopeInputModeEnum slopeInputMode)
+void SurfaceInputs::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits)
 {
-    slopeInputMode_ = slopeInputMode;
+    slopeUnits_ = slopeUnits;
 }
 
 void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
@@ -456,9 +369,9 @@ WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum SurfaceInputs::ge
     return windAndSpreadOrientationMode_;
 }
 
-SlopeInputMode::SlopeInputModeEnum SurfaceInputs::getSlopeInputMode() const
+SlopeUnits::SlopeUnitsEnum SurfaceInputs::getSlopeUnits() const
 {
-    return slopeInputMode_;
+    return slopeUnits_;
 }
 
 double SurfaceInputs::getWindDirection() const

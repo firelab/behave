@@ -78,6 +78,7 @@ public:
 
 private:
     void initializeMembers();
+    void memberwiseCopyAssignment(const SurfaceFuelbedIntermediates& rhs);
     void setFuelLoad();
     void setMoistureContent();
     void setDeadFuelMoistureOfExtinction();

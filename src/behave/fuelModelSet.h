@@ -71,6 +71,7 @@ public:
     bool isFuelModelDefined(int fuelModelNumber) const;
 
 private:
+    void memberwiseCopyAssignment(const FuelModelSet& rhs);
     void initializeFuelModelRecords();
     void populateFuelModels();
     void markAsCustomModel(int fuelModelNumber);

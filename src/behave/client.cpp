@@ -56,13 +56,13 @@ int main()
     //behave.setSlopeInputToDegrees();
 
     // Checking the slope input mode
-    SlopeInputMode::SlopeInputModeEnum slopeInputMode = behave.getSlopeInputMode();
+    SlopeUnits::SlopeUnitsEnum slopeUnits = behave.getSlopeUnits();
     std::wcout << "Slope input mode is ";
-    if (slopeInputMode == SlopeInputMode::SLOPE_IN_PERCENT)
+    if (slopeUnits == SlopeUnits::PERCENT)
     {
         std::cout << "percent" << std::endl << std::endl;
     }
-    if (slopeInputMode == SlopeInputMode::SLOPE_IN_DEGREES)
+    if (slopeUnits == SlopeUnits::DEGREES)
     {
         std::cout << "degrees" << std::endl << std::endl;
     }

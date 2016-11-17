@@ -37,20 +37,6 @@ WesternAspen::WesternAspen()
 
 }
 
-WesternAspen::WesternAspen(const WesternAspen& rhs)
-{
-    mortality_ = rhs.mortality_;
-}
-
-WesternAspen& WesternAspen::operator = (const WesternAspen& rhs)
-{
-    if (this != &rhs)
-    {
-        mortality_ = rhs.mortality_;
-    }
-    return *this;
-}
-
 WesternAspen::~WesternAspen()
 {
 
@@ -58,7 +44,13 @@ WesternAspen::~WesternAspen()
 
 void WesternAspen::initializeMembers()
 {
+    DBH_ = 0.0;
     mortality_ = 0.0;
+}
+
+double WesternAspen::getAspenDBH() const
+{
+    return DBH_;
 }
 
 double WesternAspen::getAspenMortality () const

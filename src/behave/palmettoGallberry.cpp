@@ -37,40 +37,6 @@ PalmettoGallberry::PalmettoGallberry()
     initializeMembers();
 }
 
-PalmettoGallberry::PalmettoGallberry(const PalmettoGallberry& rhs)
-{
-    moistureOfExtinctionDead_ = rhs.moistureOfExtinctionDead_;
-    heatOfCombustionDead_ = rhs.heatOfCombustionDead_;
-    heatOfCombustionLive_ = rhs.heatOfCombustionLive_;
-    palmettoGallberyDeadOneHourLoad_ = rhs.palmettoGallberyDeadOneHourLoad_;
-    palmettoGallberyDeadTenHourLoad_ = rhs.palmettoGallberyDeadTenHourLoad_;
-    palmettoGallberyDeadFoliageLoad_ = rhs.palmettoGallberyDeadFoliageLoad_;
-    palmettoGallberyFuelBedDepth_ = rhs.palmettoGallberyFuelBedDepth_;
-    palmettoGallberyLitterLoad_ = rhs.palmettoGallberyLitterLoad_;
-    palmettoGallberyLiveOneHourLoad_ = rhs.palmettoGallberyLiveOneHourLoad_;
-    palmettoGallberyLiveTenHourLoad_ = rhs.palmettoGallberyLiveTenHourLoad_;
-    palmettoGallberyLiveFoliageLoad_ = rhs.palmettoGallberyLiveFoliageLoad_;
-}
-
-PalmettoGallberry& PalmettoGallberry::operator= (const PalmettoGallberry& rhs)
-{
-    if (this != &rhs)
-    {
-        moistureOfExtinctionDead_ = rhs.moistureOfExtinctionDead_;
-        heatOfCombustionDead_ = rhs.heatOfCombustionDead_;
-        heatOfCombustionLive_ = rhs.heatOfCombustionLive_;
-        palmettoGallberyDeadOneHourLoad_ = rhs.palmettoGallberyDeadOneHourLoad_;
-        palmettoGallberyDeadTenHourLoad_ = rhs.palmettoGallberyDeadTenHourLoad_;
-        palmettoGallberyDeadFoliageLoad_ = rhs.palmettoGallberyDeadFoliageLoad_;
-        palmettoGallberyFuelBedDepth_ = rhs.palmettoGallberyFuelBedDepth_;
-        palmettoGallberyLitterLoad_ = rhs.palmettoGallberyLitterLoad_;
-        palmettoGallberyLiveOneHourLoad_ = rhs.palmettoGallberyLiveOneHourLoad_;
-        palmettoGallberyLiveTenHourLoad_ = rhs.palmettoGallberyLiveTenHourLoad_;
-        palmettoGallberyLiveFoliageLoad_ = rhs.palmettoGallberyLiveFoliageLoad_;
-    }
-    return *this;
-}
-
 void PalmettoGallberry::initializeMembers()
 {
     moistureOfExtinctionDead_ = 0.40;
