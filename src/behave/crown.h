@@ -45,7 +45,7 @@ public:
     ~Crown();
 
     Crown(const Crown &rhs);
-    Crown& operator= (const Crown &rhs);
+    Crown& operator=(const Crown &rhs);
 
     void doCrownRun();
   

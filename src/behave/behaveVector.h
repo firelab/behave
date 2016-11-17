@@ -38,10 +38,10 @@ public:
     BehaveVector();
     ~BehaveVector();
     BehaveVector(const BehaveVector& rhs);
-    BehaveVector& operator= (const BehaveVector& rhs);
+    BehaveVector& operator=(const BehaveVector& rhs);
 
     // Overloaded element access methods for member vector<BehaveRun> behaveRun
-    BehaveRun& operator[] (const std::vector<BehaveRun>::size_type index);
+    BehaveRun& operator[](const std::vector<BehaveRun>::size_type index);
     BehaveRun& at(const std::vector<BehaveRun>::size_type index);
     const BehaveRun& at(const std::vector<BehaveRun>::size_type index) const;
 

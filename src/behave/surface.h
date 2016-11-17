@@ -43,7 +43,7 @@ public:
     Surface() = delete; // no default constructor
     Surface(const FuelModelSet& fuelModelSet);
     Surface(const Surface& rhs);
-    Surface& operator= (const Surface& rhs);
+    Surface& operator=(const Surface& rhs);
 
     void doSurfaceRunInDirectionOfMaxSpread();
     void doSurfaceRunInDirectionOfInterest(double directionOfinterest);

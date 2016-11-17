@@ -41,7 +41,7 @@ class SurfaceFire
 public:
     SurfaceFire();
     SurfaceFire(const SurfaceFire& rhs);
-    SurfaceFire& operator= (const SurfaceFire& rhs);
+    SurfaceFire& operator=(const SurfaceFire& rhs);
     SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false, 

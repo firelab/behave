@@ -2,7 +2,7 @@
 *
 * Project:  CodeBlocks
 * Purpose:  A collection of units conversion functions and enums
-* Author:   Jason Forthofer <jforthofer@gmail.com>
+* Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************
 *

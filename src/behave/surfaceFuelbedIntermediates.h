@@ -43,7 +43,7 @@ class SurfaceFuelbedIntermediates
 public:
     SurfaceFuelbedIntermediates();
     SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs);
-    SurfaceFuelbedIntermediates& operator= (const SurfaceFuelbedIntermediates& rhs);
+    SurfaceFuelbedIntermediates& operator=(const SurfaceFuelbedIntermediates& rhs);
     SurfaceFuelbedIntermediates(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
 
     ~SurfaceFuelbedIntermediates();

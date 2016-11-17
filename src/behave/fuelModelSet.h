@@ -43,7 +43,7 @@ public:
     // applications -WMC 10/2015
 
     FuelModelSet();
-    FuelModelSet& operator= (const FuelModelSet& rhs);
+    FuelModelSet& operator=(const FuelModelSet& rhs);
     FuelModelSet(const FuelModelSet& rhs);
     ~FuelModelSet();
    

@@ -45,7 +45,7 @@ public:
     explicit BehaveRun(FuelModelSet& fuelModelSet);
     
     BehaveRun(const BehaveRun& rhs);
-    BehaveRun& operator= (const BehaveRun& rhs);
+    BehaveRun& operator=(const BehaveRun& rhs);
     ~BehaveRun();
 
     // FuelModelSet Methods
