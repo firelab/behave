@@ -31,6 +31,7 @@
 #ifndef CROWN_H
 #define CROWN_H
 
+#include "behaveUnits.h"
 #include "crownInputs.h"
 #include "crownEnums.h"
 #include "surface.h"
@@ -53,14 +54,17 @@ public:
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setFoliarMoisture(double foliarMoisture);
+    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
 
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
+    double getCanopyBulkDensityInDesiredUnits(DensityUnits::DensityUnitsEnum desiredUnits) const;
     double getFoliarMoisture() const;
     double getCrownFireSpreadRate() const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
     FireType::FireTypeEnum getFireType() const;
+    DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
 
 private:
     const FuelModelSet* fuelModelSet_;              // pointer to BehaveRun's FuelModelSet object

@@ -66,6 +66,11 @@ double CrownInputs::getCanopyFirelineIntensity() const
     return canopyUserProvidedFirelineIntensity_;
 }
 
+DensityUnits::DensityUnitsEnum CrownInputs::getCanopyBulkDensityUnits() const
+{
+    return canopyBulkDensityUnits_;
+}
+
 double CrownInputs::getFoliarMoisture() const
 {
     return foliarMoisture_;
@@ -89,6 +94,11 @@ void CrownInputs::setCanopyFlameLength(double canopyUserProvidedFlameLength)
 void CrownInputs::setCanopyFirelineIntensity(double canopyUserProvidedFirelineIntensity)
 {
     canopyUserProvidedFirelineIntensity_ = canopyUserProvidedFirelineIntensity;
+}
+
+void CrownInputs::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits)
+{
+    canopyBulkDensityUnits_ = densityUnits;
 }
 
 void CrownInputs::setFoliarMoisture(double foliarMoisture)

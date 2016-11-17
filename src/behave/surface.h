@@ -54,6 +54,7 @@ public:
     double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
+    double getFlameLengthInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getFirelineIntensity() const;
@@ -80,6 +81,7 @@ public:
     void setAspect(double aspect);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
+    void setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
@@ -88,6 +90,7 @@ public:
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
     void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
+    void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
@@ -107,7 +110,6 @@ public:
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
 
     // SurfaceInputs getters
-    //const SurfaceInputs& getSurfaceInputs() const;
 	int getFuelModelNumber() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
@@ -115,16 +117,19 @@ public:
     double getMoistureLiveHerbaceous() const;
     double getMoistureLiveWoody() const;
     double getWindSpeed() const;
+    double getWindSpeedInDesiredUnits(VelocityUnits::VelocityUnitsEnum desiredUnits) const;
     double getWindDirection() const;
     double getSlope() const;
+    double getSlopeInDesiredUnits(SlopeUnits::SlopeUnitsEnum desiredUnits) const;
     double getAspect() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;
-   
+    LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
+    VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
 
 private:
     void memberwiseCopyAssignment(const Surface& rhs);

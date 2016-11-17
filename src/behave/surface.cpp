@@ -134,6 +134,11 @@ double Surface::getFlameLength() const
     return surfaceFire_.getFlameLength();
 }
 
+double Surface::getFlameLengthInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const
+{
+    return LengthUnits::fromBaseUnits(getFlameLength(), desiredUnits);
+}
+
 double Surface::getFireLengthToWidthRatio() const
 {
     return surfaceFire_.getFireLengthToWidthRatio();
@@ -249,6 +254,11 @@ double Surface::getCrownRatio() const
     return surfaceInputs_.getCrownRatio();
 }
 
+LengthUnits::LengthUnitsEnum Surface::getFlameLengthUnits() const
+{
+    return surfaceInputs_.getFlameLengthUnits();
+}
+
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum Surface::getWindAndSpreadOrientationMode() const
 {
     return surfaceInputs_.getWindAndSpreadOrientationMode();
@@ -264,9 +274,19 @@ SlopeUnits::SlopeUnitsEnum Surface::getSlopeUnits() const
     return surfaceInputs_.getSlopeUnits();
 }
 
+VelocityUnits::VelocityUnitsEnum Surface::getWindSpeedUnits() const
+{
+    return surfaceInputs_.getWindSpeedUnits();
+}
+
 double Surface::getWindSpeed() const
 {
     return surfaceInputs_.getWindSpeed();
+}
+
+double Surface::getWindSpeedInDesiredUnits(VelocityUnits::VelocityUnitsEnum desiredUnits) const
+{
+    return VelocityUnits::fromBaseUnits(surfaceInputs_.getWindSpeed(), desiredUnits);
 }
 
 double Surface::getWindDirection() const
@@ -277,6 +297,11 @@ double Surface::getWindDirection() const
 double Surface::getSlope() const
 {
     return surfaceInputs_.getSlope();
+}
+
+double Surface::getSlopeInDesiredUnits(SlopeUnits::SlopeUnitsEnum desiredUnits) const
+{
+    return SlopeUnits::fromBaseUnits(surfaceInputs_.getSlope(), desiredUnits);
 }
 
 double Surface::getAspect() const
@@ -334,6 +359,11 @@ void Surface::setWindSpeed(double windSpeed)
     surfaceInputs_.setWindSpeed(windSpeed);
 }
 
+void Surface::setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits)
+{
+    surfaceInputs_.setWindSpeedUnits(windSpeedUnits);
+}
+
 void Surface::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
 {
     surfaceInputs_.setUserProvidedWindAdjustmentFactor(userProvidedWindAdjustmentFactor);
@@ -372,6 +402,11 @@ void Surface::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelMod
 void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
 {
     surfaceInputs_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
+}
+
+void Surface::setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    surfaceInputs_.setFlameLengthUnits(flameLengthUnits);
 }
 
 void Surface::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,

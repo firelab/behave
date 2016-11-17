@@ -129,8 +129,10 @@ public:
     double getEllipticalC() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
+    VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
-
+    LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
+   
     // CROWN Module
     void doCrownRun();
 
@@ -148,6 +150,7 @@ public:
     double getCrownFlameLength() const;
     double getCrownFireSpreadRate() const;
     FireType::FireTypeEnum getCrownFireType() const;
+    DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
 
     // SPOT Module
     void calculateSpottingDistanceFromBurningPile();

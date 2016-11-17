@@ -167,6 +167,11 @@ FireType::FireTypeEnum Crown::getFireType() const
     return fireType_;
 }
 
+DensityUnits::DensityUnitsEnum Crown::getCanopyBulkDensityUnits() const
+{
+    return crownInputs_.getCanopyBulkDensityUnits();
+}
+
 void Crown::initializeMemmbers()
 {
     fireType_ = FireType::SURFACE;
@@ -452,6 +457,11 @@ void Crown::setFoliarMoisture(double foliarMoisture)
     crownInputs_.setFoliarMoisture(foliarMoisture);
 }
 
+void Crown::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits)
+{
+    crownInputs_.setCanopyBulkDensityUnits(densityUnits);
+}
+
 double Crown::getCanopyBaseHeight() const
 {
     return crownInputs_.getCanopyBaseHeight();
@@ -460,6 +470,11 @@ double Crown::getCanopyBaseHeight() const
 double Crown::getCanopyBulkDensity() const
 {
     return crownInputs_.getCanopyBulkDensity();
+}
+
+double Crown::getCanopyBulkDensityInDesiredUnits(DensityUnits::DensityUnitsEnum desiredUnits) const
+{
+    return DensityUnits::fromBaseUnits(crownInputs_.getCanopyBulkDensity(), desiredUnits);
 }
 
 double Crown::getFoliarMoisture() const

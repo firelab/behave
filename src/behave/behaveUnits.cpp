@@ -118,7 +118,7 @@ double VelocityUnits::fromBaseUnits(double value, VelocityUnits::VelocityUnitsEn
     // Velocity from base units constants
     static const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;
     static const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 0.909091;
-    static const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.0113636;
+    static const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.01136363636;
     static const double FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR = 0.018288;
 
     switch (units)
@@ -184,7 +184,7 @@ double SlopeUnits::fromBaseUnits(double value, SlopeUnitsEnum units)
     return value;
 }
 
-double Density::toBaseUnits(double value, DensityUnitsEnum units)
+double DensityUnits::toBaseUnits(double value, DensityUnitsEnum units)
 {
     // Denisty to base units constants
     static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.062427961;
@@ -196,7 +196,7 @@ double Density::toBaseUnits(double value, DensityUnitsEnum units)
     return value;
 }
 
-double Density::fromBaseUnits(double value, DensityUnitsEnum units)
+double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
 {
     // Denisty from base units constants
     static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.01853255;

@@ -82,7 +82,7 @@ struct SlopeUnits
 };
 
 
-struct Density
+struct DensityUnits
 {
     enum DensityUnitsEnum
     {

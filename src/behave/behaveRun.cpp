@@ -281,9 +281,19 @@ WindHeightInputMode::WindHeightInputModeEnum BehaveRun::getWindHeightInputMode()
     return surface_.getWindHeightInputMode();
 }
 
+VelocityUnits::VelocityUnitsEnum BehaveRun::getWindSpeedUnits() const
+{
+    return surface_.getWindSpeedUnits();
+}
+
 SlopeUnits::SlopeUnitsEnum BehaveRun::getSlopeUnits() const
 {
     return surface_.getSlopeUnits();
+}
+
+LengthUnits::LengthUnitsEnum BehaveRun::getFlameLengthUnits() const
+{
+    return surface_.getFlameLengthUnits();
 }
 
 double BehaveRun::getSurfaceFireSpreadRate() const
@@ -300,7 +310,8 @@ double BehaveRun::getDirectionOfMaxSpread() const
 
 double BehaveRun::getSurfaceFlameLength() const
 {
-    return surface_.getFlameLength();
+    LengthUnits::LengthUnitsEnum desiredUnits = surface_.getFlameLengthUnits();
+    return surface_.getFlameLengthInDesiredUnits(desiredUnits);
 }
 
 double BehaveRun::getSurfaceFireLengthToWidthRatio() const
@@ -355,7 +366,8 @@ double BehaveRun::getEllipticalC() const
 
 double BehaveRun::getWindSpeed() const
 {
-    return surface_.getWindSpeed();
+    VelocityUnits::VelocityUnitsEnum desiredUnits = surface_.getWindSpeedUnits();
+    return surface_.getWindSpeedInDesiredUnits(desiredUnits);
 }
 
 double BehaveRun::getWindDirection() const
@@ -365,7 +377,8 @@ double BehaveRun::getWindDirection() const
 
 double BehaveRun::getSlope() const
 {
-    return surface_.getSlope();
+    SlopeUnits::SlopeUnitsEnum desiredUnits = surface_.getSlopeUnits();
+    return surface_.getSlopeInDesiredUnits(desiredUnits);
 }
 
 double BehaveRun::getAspect() const
@@ -481,7 +494,8 @@ double BehaveRun::getCanopyBaseHeight() const
 
 double BehaveRun::getCanopyBulkDensity() const
 {
-    return crown_.getCanopyBulkDensity();
+    DensityUnits::DensityUnitsEnum desiredUnits = crown_.getCanopyBulkDensityUnits();
+    return crown_.getCanopyBulkDensityInDesiredUnits(desiredUnits);
 }
 
 double BehaveRun::getFoliarMoisture() const

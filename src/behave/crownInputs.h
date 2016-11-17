@@ -28,7 +28,7 @@
 #ifndef CROWNINPUTS_H
 #define CROWNINPUTS_H
 
-
+#include "behaveUnits.h"
 
 class CrownInputs
 {
@@ -40,12 +40,14 @@ public:
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setCanopyFlameLength(double canopyUserProvidedFlameLength);
     void setCanopyFirelineIntensity(double canopyUserProvidedFirelineIntensity);
+    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
     void setFoliarMoisture(double foliarMoisture);
 
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
     double getCanopyFlameLength() const;
     double getCanopyFirelineIntensity() const;
+    DensityUnits::DensityUnitsEnum  getCanopyBulkDensityUnits() const;
     double getFoliarMoisture() const;
 
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
@@ -57,6 +59,7 @@ private:
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
     double canopyUserProvidedFlameLength_; // flame length(ft)
     double canopyUserProvidedFirelineIntensity_; // fireline intensity(ft)
+    DensityUnits::DensityUnitsEnum canopyBulkDensityUnits_;   // Units is which density is measured
     double foliarMoisture_; // Tree foliar moisture content (lb water/lb foliage)
 
 };

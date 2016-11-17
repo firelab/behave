@@ -55,6 +55,8 @@ void SurfaceInputs::initializeMembers()
     isUsingWesternAspen_ = false;
 
     slopeUnits_ = SlopeUnits::PERCENT;
+    flameLengthUnits_ = LengthUnits::FEET;
+    windSpeedUnits_ = VelocityUnits::MILES_PER_HOUR;
     windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE;
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
@@ -255,17 +257,17 @@ void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody)
 
 void SurfaceInputs::setSlope(double slope)
 {
-    if (slopeUnits_ == SlopeUnits::PERCENT)
-    {
-        const double PI = 3.141592653589793238463;
-        slope = (180 / PI) * atan(slope / 100.0); // slope is now in degees
-    }
-    slope_ = slope;
+    slope_ = SlopeUnits::toBaseUnits(slope, slopeUnits_);   
 }
 
 void SurfaceInputs::setAspect(double aspect)
 {
     aspect_ = aspect;
+}
+
+void SurfaceInputs::setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    flameLengthUnits_ = flameLengthUnits;
 }
 
 void SurfaceInputs::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits)
@@ -285,7 +287,12 @@ void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModel
 
 void  SurfaceInputs::setWindSpeed(double windSpeed)
 {
-    windSpeed_ = windSpeed;
+    windSpeed_ = VelocityUnits::toBaseUnits(windSpeed, windSpeedUnits_);
+}
+
+void SurfaceInputs::setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits)
+{
+    windSpeedUnits_ = windSpeedUnits;
 }
 
 void  SurfaceInputs::setWindDirection(double windDirection)
@@ -372,6 +379,16 @@ WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum SurfaceInputs::ge
 SlopeUnits::SlopeUnitsEnum SurfaceInputs::getSlopeUnits() const
 {
     return slopeUnits_;
+}
+
+VelocityUnits::VelocityUnitsEnum SurfaceInputs::getWindSpeedUnits() const
+{
+    return windSpeedUnits_;
+}
+
+LengthUnits::LengthUnitsEnum SurfaceInputs::getFlameLengthUnits() const
+{
+    return flameLengthUnits_;
 }
 
 double SurfaceInputs::getWindDirection() const

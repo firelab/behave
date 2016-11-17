@@ -49,8 +49,10 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody);
     void setSlope(double slope);
     void setAspect(double slopeAspect);
+    void setFlameLengthUnits(LengthUnits::LengthUnitsEnum lengthUnits);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setWindSpeed(double windSpeed);
+    void setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
@@ -109,6 +111,8 @@ public:
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
+    VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
+    LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
     double getUserProvidedWindAdjustmentFactor() const;
 
     // Two fuel models inputs getters
@@ -143,7 +147,7 @@ private:
     double moistureHundredHour_;        // 1% to 60%
     double moistureLiveHerbaceous_;     // 30% to 300%
     double moistureLiveWoody_;          // 30% to 300%
-    double windSpeed_;                  // measured wind speed in miles per hour
+    double windSpeed_;                  // measured wind speed in feet per minute
     double windDirection_;              // degrees, 0-360
     double slope_;                      // gradient 0-600 or degrees 0-80  
     double aspect_;                     // aspect of slope in degrees, 0-360
@@ -174,6 +178,8 @@ private:
     double userProvidedWindAdjustmentFactor_;
 
     // Input Modes
+    VelocityUnits::VelocityUnitsEnum windSpeedUnits_;
+    LengthUnits::LengthUnitsEnum flameLengthUnits_;
     SlopeUnits::SlopeUnitsEnum slopeUnits_;                             // Whether slope is input as percent or degrees
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              // Method used in Two Fuel Models calculations
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;  // Height above canopy from which wind speed is measured
