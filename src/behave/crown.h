@@ -53,15 +53,14 @@ public:
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
-    void setFoliarMoisture(double foliarMoisture);
+    void setMoistureFoliar(double foliarMoisture);
+    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
 
     double getCanopyBaseHeight() const;
-    double getCanopyBaseHeightInDesiredUnits(LengthUnits::LengthUnitsEnum  desiredUnits) const;
     double getCanopyBulkDensity() const;
-    double getCanopyBulkDensityInDesiredUnits(DensityUnits::DensityUnitsEnum desiredUnits) const;
-    double getFoliarMoisture() const;
+    double getMoistureFoliar() const;
     double getCrownFireSpreadRate() const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;

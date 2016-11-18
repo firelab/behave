@@ -49,6 +49,7 @@ struct VelocityUnits
         FEET_PER_MINUTE, //base velocity unit
         CHAINS_PER_HOUR,
         METERS_PER_SECOND,	
+        METERS_PER_MINUTE,
         MILES_PER_HOUR,
         KILOMETERS_PER_HOUR
     };

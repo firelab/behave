@@ -134,11 +134,6 @@ double Surface::getFlameLength() const
     return surfaceFire_.getFlameLength();
 }
 
-double Surface::getFlameLengthInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const
-{
-    return LengthUnits::fromBaseUnits(getFlameLength(), desiredUnits);
-}
-
 double Surface::getFireLengthToWidthRatio() const
 {
     return surfaceFire_.getFireLengthToWidthRatio();
@@ -299,11 +294,6 @@ double Surface::getWindSpeed() const
     return surfaceInputs_.getWindSpeed();
 }
 
-double Surface::getWindSpeedInDesiredUnits(VelocityUnits::VelocityUnitsEnum desiredUnits) const
-{
-    return VelocityUnits::fromBaseUnits(surfaceInputs_.getWindSpeed(), desiredUnits);
-}
-
 double Surface::getWindDirection() const
 {
     return surfaceInputs_.getWindDirection();
@@ -312,11 +302,6 @@ double Surface::getWindDirection() const
 double Surface::getSlope() const
 {
     return surfaceInputs_.getSlope();
-}
-
-double Surface::getSlopeInDesiredUnits(SlopeUnits::SlopeUnitsEnum desiredUnits) const
-{
-    return SlopeUnits::fromBaseUnits(surfaceInputs_.getSlope(), desiredUnits);
 }
 
 double Surface::getAspect() const

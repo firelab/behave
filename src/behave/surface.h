@@ -54,7 +54,6 @@ public:
     double getSpreadRate() const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength() const;
-    double getFlameLengthInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getFirelineIntensity() const;
@@ -118,10 +117,8 @@ public:
     double getMoistureLiveHerbaceous() const;
     double getMoistureLiveWoody() const;
     double getWindSpeed() const;
-    double getWindSpeedInDesiredUnits(VelocityUnits::VelocityUnitsEnum desiredUnits) const;
     double getWindDirection() const;
     double getSlope() const;
-    double getSlopeInDesiredUnits(SlopeUnits::SlopeUnitsEnum desiredUnits) const;
     double getAspect() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;

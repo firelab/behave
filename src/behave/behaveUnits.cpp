@@ -58,7 +58,7 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
 double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum units)
 {
     // Length from base units constants
-    const double FEET_TO_METERS = 0.3047999995;
+    const double FEET_TO_METERS = 0.3048;
     const double FEET_TO_MILES = 0.000189394;
     const double FEET_TO_KILOMETERS = 0.0003048;
 
@@ -86,6 +86,7 @@ double VelocityUnits::toBaseUnits(double value, VelocityUnits::VelocityUnitsEnum
 {
     // Velocity to base units constants
     const double METERS_PER_SECOND_TO_FEET_PER_MINUTE = 196.8503937;
+    const double METERS_PER_MINUTE_TO_FEET_PER_MINUTE = 3.28084;
     const double CHAINS_PER_HOUR_TO_FEET_PER_MINUTE = 1.1;
     const double MILES_PER_HOUR_TO_FEET_PER_MINUTE = 88;
     const double KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE = 54.680665;
@@ -97,6 +98,9 @@ double VelocityUnits::toBaseUnits(double value, VelocityUnits::VelocityUnitsEnum
         break;
     case METERS_PER_SECOND:
         value *= METERS_PER_SECOND_TO_FEET_PER_MINUTE;
+        break;
+    case   METERS_PER_MINUTE:
+        value *= METERS_PER_MINUTE_TO_FEET_PER_MINUTE;
         break;
     case CHAINS_PER_HOUR:
         value *= CHAINS_PER_HOUR_TO_FEET_PER_MINUTE;
@@ -117,6 +121,7 @@ double VelocityUnits::fromBaseUnits(double value, VelocityUnits::VelocityUnitsEn
 {
     // Velocity from base units constants
     const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;
+    const double FEET_PER_MINUTE_TO_METERS_PER_MINUTE = 0.3048;
     const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 0.909091;
     const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.01136363636;
     const double FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR = 0.018288;
@@ -128,6 +133,9 @@ double VelocityUnits::fromBaseUnits(double value, VelocityUnits::VelocityUnitsEn
         break;
     case METERS_PER_SECOND:
         value *= FEET_PER_MINUTE_TO_METERS_PER_SECOND;
+        break;
+    case   METERS_PER_MINUTE:
+        value *= FEET_PER_MINUTE_TO_METERS_PER_MINUTE;
         break;
     case CHAINS_PER_HOUR:
         value *= FEET_PER_MINUTE_TO_CHAINS_PER_HOUR;
@@ -205,7 +213,7 @@ double SlopeUnits::fromBaseUnits(double value, SlopeUnitsEnum units)
 double DensityUnits::toBaseUnits(double value, DensityUnitsEnum units)
 {
     // Denisty to base units constants
-    static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.062427961;
+    static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.06242796051;
 
     if (units == KILOGRAMS_PER_CUBIC_METER)
     {
@@ -217,7 +225,7 @@ double DensityUnits::toBaseUnits(double value, DensityUnitsEnum units)
 double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
 {
     // Denisty from base units constants
-    static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.01853255;
+    static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.018463390932;
 
     if (units == KILOGRAMS_PER_CUBIC_METER)
     {
@@ -225,4 +233,3 @@ double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
     }
     return value;
 }
-

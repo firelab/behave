@@ -346,7 +346,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double canopyHeight = 30;
     double canopyBaseHeight = 6; 
     double canopyBulkDensity = 0.03;
-    double foliarMoisture = 120;
+    double moistureFoliar = 120;
 
     double observedCrownFireSpreadRate = 0;
     double expectedCrownFireSpreadRate = 0;
@@ -360,7 +360,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     // Test crown fire spread rate, flame length, intensity
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar);
     behaveRun.doCrownRun();
     expectedCrownFireSpreadRate = 10.259921;
     observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getCrownFireSpreadRate());
@@ -376,7 +376,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.setMoistureOneHour(20);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::SURFACE;
     observedFireType = (int)behaveRun.getCrownFireType();
@@ -385,7 +385,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     // Test fire type, Torching fire expected
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::TORCHING;
     observedFireType = (int)behaveRun.getCrownFireType();
@@ -395,7 +395,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.setWindSpeed(10);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar);
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::CROWNING;
     observedFireType = (int)behaveRun.getCrownFireType();
@@ -408,7 +408,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     canopyBaseHeight = 30;
     canopyBulkDensity = 0.06;
     behaveRun.setWindSpeed(5);
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     behaveRun.doCrownRun();
     expectedFireType = (int)FireType::CONDITIONAL_CROWN_FIRE;
@@ -468,12 +468,9 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 
-    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.setTreeAndCanopyHeightUnits(LengthUnits::METERS);
-
     double canopyHeight = 30;
     double canopyBaseHeight = 6;
-    double canopyBulkDensity = 0.03;
+    double canopyBulkDensity = 0.5;
     double foliarMoisture = 120;
 
     double observedCrownFireSpreadRate = 0;
@@ -484,8 +481,12 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     double expectedCrownFirelineIntensity = 0;
     int expectedFireType = (int)FireType::SURFACE;
     int observedFireType = (int)FireType::SURFACE;
+    
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setTreeAndCanopyHeightUnits(LengthUnits::METERS);
+    behaveRun.setCanopyBulkDensityUnits(DensityUnits::KILOGRAMS_PER_CUBIC_METER);
 
-
+    // Test surface spread rate
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     expectedSurfaceFireSpreadRate = 8.171074;
@@ -501,7 +502,7 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     expectedCrownFlameLength = 29.320577;
     observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.getCrownFlameLength());
     BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
-    expectedCrownFirelineIntensity = 4246.231918;
+    expectedCrownFirelineIntensity = 4390.073140;
     observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.getCrownFirelineIntensity());
     BOOST_CHECK_CLOSE(observedCrownFirelineIntensity, expectedCrownFirelineIntensity, ERROR_TOLERANCE);
 }

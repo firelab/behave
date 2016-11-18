@@ -42,6 +42,7 @@ public:
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
+    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
     void setMoistureHundredHour(double moistureHundredHour);
@@ -57,6 +58,7 @@ public:
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
+    void setCanopyCoverUnits(CoverUnits::CoverUnitsEnum canopyCoverUnits);
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight);
     void setCrownRatio(double crownRatio);
@@ -96,6 +98,7 @@ public:
 
     // Main Surface module inputs getters 
     int getFuelModelNumber() const;
+    MoistureUnits::MoistureUnitsEnum getMoistureUnits() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;
@@ -114,6 +117,7 @@ public:
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
+    CoverUnits::CoverUnitsEnum getCanopyCoverUnits() const;
     LengthUnits::LengthUnitsEnum getCanopyHeightUnits() const;
     double getUserProvidedWindAdjustmentFactor() const;
 
@@ -182,7 +186,9 @@ private:
     // Input Modes
     VelocityUnits::VelocityUnitsEnum windSpeedUnits_;
     LengthUnits::LengthUnitsEnum canopyHeightUnits_;
+    CoverUnits::CoverUnitsEnum canopyCoverUnits_;
     LengthUnits::LengthUnitsEnum flameLengthUnits_;
+    MoistureUnits::MoistureUnitsEnum moistureUnits_;
     SlopeUnits::SlopeUnitsEnum slopeUnits_;                             // Whether slope is input as percent or degrees
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              // Method used in Two Fuel Models calculations
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;  // Height above canopy from which wind speed is measured

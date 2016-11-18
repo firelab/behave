@@ -68,8 +68,6 @@ BehaveRun::~BehaveRun()
 
 void BehaveRun::setCanopyCover(double canopyCover)
 {
-    // Convert canopy cover input from percent to decimal fraction
-    canopyCover /= 100.0;
     surface_.setCanopyCover(canopyCover);
 }
 
@@ -96,36 +94,26 @@ void BehaveRun::setFuelModelNumber(int fuelModelNumber)
 
 void BehaveRun::setMoistureOneHour(double moistureOneHour)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureOneHour /= 100.0;
     surface_.setMoistureOneHour(moistureOneHour);
 }
 
 void BehaveRun::setMoistureTenHour(double moistureTenHour)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureTenHour /= 100.0;
     surface_.setMoistureTenHour(moistureTenHour);
 }
 
 void BehaveRun::setMoistureHundredHour(double moistureHundredHour)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureHundredHour /= 100.0;
     surface_.setMoistureHundredHour(moistureHundredHour);
 }
 
 void BehaveRun::setMoistureLiveHerbaceous(double moistureLiveHerbaceous)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureLiveHerbaceous /= 100.0;
     surface_.setMoistureLiveHerbaceous(moistureLiveHerbaceous);
 }
 
 void BehaveRun::setMoistureLiveWoody(double moistureLiveWoody)
 {
-    // Convert moisture input from percent to decimal fraction
-    moistureLiveWoody /= 100.0;
     surface_.setMoistureLiveWoody(moistureLiveWoody);
 }
 
@@ -184,15 +172,7 @@ void BehaveRun::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelM
 void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
-{
-    //Convert relevant inputs from percent to decimal fraction
-    moistureOneHour /= 100;
-    moistureTenHour /= 100;
-    moistureHundredHour /= 100;
-    moistureLiveHerbaceous /= 100;
-    moistureLiveWoody /= 100;
-    canopyCover /= 100;
-
+{  
     surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
     surface_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
@@ -203,16 +183,7 @@ void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, i
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
     double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
     double canopyCover, double canopyHeight, double crownRatio)
-{
-    //Convert relevant inputs from percent to decimal fraction
-    moistureOneHour /= 100;
-    moistureTenHour /= 100;
-    moistureHundredHour /= 100;
-    moistureLiveHerbaceous /= 100;
-    moistureLiveWoody /= 100;
-    firstFuelModelCoverage /= 100;
-    canopyCover /= 100;
-
+{   
     surface_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windHeightInputMode, windSpeed, windDirection,
         firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
@@ -222,15 +193,7 @@ void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, d
     double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
     double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
-{
-    //Convert relevant inputs from percent to decimal fraction
-    moistureOneHour /= 100;
-    moistureTenHour /= 100;
-    moistureHundredHour /= 100;
-    moistureLiveHerbaceous /= 100;
-    moistureLiveWoody /= 100;
-    canopyCover /= 100;
-
+{ 
     surface_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, 
         moistureLiveWoody, windHeightInputMode, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, 
         overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
@@ -242,14 +205,6 @@ void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, dou
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
     double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
-    //Convert relevant inputs from percent to decimal fraction
-    moistureOneHour /= 100;
-    moistureTenHour /= 100;
-    moistureHundredHour /= 100;
-    moistureLiveHerbaceous /= 100;
-    moistureLiveWoody /= 100;
-    canopyCover /= 100;
-
     surface_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, aspenFireSeverity, DBH, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windHeightInputMode, windSpeed, windDirection,
         slope, aspect, canopyCover, canopyHeight, crownRatio);
@@ -317,7 +272,7 @@ double BehaveRun::getDirectionOfMaxSpread() const
 double BehaveRun::getSurfaceFlameLength() const
 {
     LengthUnits::LengthUnitsEnum desiredUnits = surface_.getFlameLengthUnits();
-    return surface_.getFlameLengthInDesiredUnits(desiredUnits);
+    return LengthUnits::fromBaseUnits(surface_.getFlameLength(), desiredUnits);
 }
 
 double BehaveRun::getSurfaceFireLengthToWidthRatio() const
@@ -373,7 +328,7 @@ double BehaveRun::getEllipticalC() const
 double BehaveRun::getWindSpeed() const
 {
     VelocityUnits::VelocityUnitsEnum desiredUnits = surface_.getWindSpeedUnits();
-    return surface_.getWindSpeedInDesiredUnits(desiredUnits);
+    return VelocityUnits::fromBaseUnits(surface_.getWindSpeed(), desiredUnits);
 }
 
 double BehaveRun::getWindDirection() const
@@ -384,7 +339,7 @@ double BehaveRun::getWindDirection() const
 double BehaveRun::getSlope() const
 {
     SlopeUnits::SlopeUnitsEnum desiredUnits = surface_.getSlopeUnits();
-    return surface_.getSlopeInDesiredUnits(desiredUnits);
+    return SlopeUnits::fromBaseUnits(surface_.getSlope(), desiredUnits);
 }
 
 double BehaveRun::getAspect() const
@@ -484,9 +439,9 @@ void BehaveRun::setCanopyBulkDensity(double bulkDensity)
     crown_.setCanopyBulkDensity(bulkDensity);
 }
 
-void BehaveRun::setFoliarMoisture(double foliarMoisture)
+void BehaveRun::setFoliarMoisture(double moistureFoliar)
 {
-    crown_.setFoliarMoisture(foliarMoisture);
+    crown_.setMoistureFoliar(moistureFoliar);
 }
 
 void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
@@ -494,21 +449,26 @@ void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDens
     crown_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
 }
 
+void BehaveRun::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits)
+{
+    crown_.setCanopyBulkDensityUnits(densityUnits);
+}
+
 double BehaveRun::getCanopyBaseHeight() const
 {
     LengthUnits::LengthUnitsEnum desiredUnits = crown_.getCanopyBaseHeightUnits();
-    return crown_.getCanopyBaseHeightInDesiredUnits(desiredUnits);
+    return LengthUnits::fromBaseUnits(crown_.getCanopyBaseHeight(),desiredUnits);
 }
 
 double BehaveRun::getCanopyBulkDensity() const
 {
     DensityUnits::DensityUnitsEnum desiredUnits = crown_.getCanopyBulkDensityUnits();
-    return crown_.getCanopyBulkDensityInDesiredUnits(desiredUnits);
+    return DensityUnits::fromBaseUnits(crown_.getCanopyBulkDensity(), desiredUnits);
 }
 
-double BehaveRun::getFoliarMoisture() const
+double BehaveRun::getMoistureFoliar() const
 {
-    return crown_.getFoliarMoisture();
+    return crown_.getMoistureFoliar();
 }
 
 double BehaveRun::getCrownFirelineIntensity() const

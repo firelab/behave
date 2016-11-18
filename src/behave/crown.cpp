@@ -267,21 +267,21 @@ void Crown::calculateCrownFirelineIntensity()
 void Crown::calculateCrownCriticalSurfaceFireIntensity()
 {
     const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.288672;
-    const double FEET_TO_METERS = 0.3048;
 
-    double foliarMoisture = crownInputs_.getFoliarMoisture();
+    double moistureFoliar = crownInputs_.getMoistureFoliar();
 
     // Convert foliar moisture content to percent and constrain lower limit
-    // double foliarMoisture *= 100.0;
-    foliarMoisture = (foliarMoisture < 30.0) ? 30.0 : foliarMoisture;
+    moistureFoliar = MoistureUnits::fromBaseUnits(moistureFoliar, MoistureUnits::PERCENT);
+    moistureFoliar = (moistureFoliar < 30.0) ? 30.0 : moistureFoliar;
 
     double crownBaseHeight = crownInputs_.getCanopyBaseHeight();
-    // Convert crown base heigt to meters and constrain lower limit
-    crownBaseHeight *= FEET_TO_METERS;
+    // Convert crown base height to meters and constrain lower limit
+    crownBaseHeight = LengthUnits::fromBaseUnits(crownBaseHeight, LengthUnits::METERS);
     crownBaseHeight = (crownBaseHeight < 0.1) ? 0.1 : crownBaseHeight;
+
     // Critical surface fireline intensity (kW/m)
     // Need to changed value in calculation below from 450 to 460 at some point
-    crownCriticalSurfaceFireIntensity_ = pow((0.010 * crownBaseHeight * (450.0 + 25.9 * foliarMoisture)), 1.5);
+    crownCriticalSurfaceFireIntensity_ = pow((0.010 * crownBaseHeight * (450.0 + 25.9 * moistureFoliar)), 1.5);
 
     // Return as Btu/ft/s
     crownCriticalSurfaceFireIntensity_ *= KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND;
@@ -324,16 +324,16 @@ void Crown::calculateCrownPowerOfFire()
 */
 void Crown::calcuateCrownPowerOfWind()
 {
-    const double MILES_PER_HOUR_TO_FEET_PER_MINUTE = 5280.0 / 60.0;
     const double SECONDS_PER_MINUTE = 60.0;
     
     windSpeedAtTwentyFeet_ = calculateWindSpeedAtTwentyFeet();
 
-    double windSpeedInFeetPerMinute = windSpeedAtTwentyFeet_ * MILES_PER_HOUR_TO_FEET_PER_MINUTE;
+    //double windSpeedInFeetPerMinute = windSpeedAtTwentyFeet_ * MILES_PER_HOUR_TO_FEET_PER_MINUTE;
 
-    double WindspeedMinusCrownROS = 0.0; // Eq. 7, Rothermel 1991
+    double WindspeedMinusCrownROS = 0.0; 
 
-    WindspeedMinusCrownROS = (windSpeedInFeetPerMinute - crownFireSpreadRate_) / SECONDS_PER_MINUTE;
+    // Eq. 7, Rothermel 1991
+    WindspeedMinusCrownROS = (windSpeedAtTwentyFeet_ - crownFireSpreadRate_) / SECONDS_PER_MINUTE;
     WindspeedMinusCrownROS = (WindspeedMinusCrownROS < 1e-07) ? 0.0 : WindspeedMinusCrownROS;
     crownPowerOfWind_ = 0.00106 * (WindspeedMinusCrownROS * WindspeedMinusCrownROS * WindspeedMinusCrownROS);
 }
@@ -356,13 +356,13 @@ void Crown::calcualteCrownFirePowerRatio()
 void Crown::calculateCrownCriticalFireSpreadRate()
 {
     double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
-    const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.0185;
-    // Convert to Kg/m3
-    double convertedBulkDensity = LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER * canopyBulkDensity;
-    crownCriticalFireSpreadRate_ = (convertedBulkDensity < 1e-07) ? 0.00 : (3.0 / convertedBulkDensity);
-    const double METERS_PER_MIN_TO_FEET_PER_MIN = 3.28084;
-    // Convert to ft/min
-    crownCriticalFireSpreadRate_ *= METERS_PER_MIN_TO_FEET_PER_MIN;
+   
+    // Convert canopy bulk density to Kg/m3
+    double convertedCanopyBulkDensity = DensityUnits::fromBaseUnits(canopyBulkDensity, DensityUnits::KILOGRAMS_PER_CUBIC_METER);
+    crownCriticalFireSpreadRate_ = (convertedCanopyBulkDensity < 1e-07) ? 0.00 : (3.0 / convertedCanopyBulkDensity);
+
+    // Convert spread rate from m/min to ft/min
+    crownCriticalFireSpreadRate_ = VelocityUnits::toBaseUnits(crownCriticalFireSpreadRate_, VelocityUnits::METERS_PER_MINUTE);
 }
 
 //------------------------------------------------------------------------------
@@ -457,9 +457,14 @@ void Crown::setCanopyBulkDensity(double canopyBulkDensity)
     crownInputs_.setCanopyBulkDensity(canopyBulkDensity);
 }
 
-void Crown::setFoliarMoisture(double foliarMoisture)
+void Crown::setMoistureFoliar(double moistureFoliar)
 {
-    crownInputs_.setFoliarMoisture(foliarMoisture);
+    crownInputs_.setMoistureFoliar(moistureFoliar);
+}
+
+void Crown::setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    crownInputs_.setMoistureUnits(moistureUnits);
 }
 
 void Crown::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits)
@@ -477,22 +482,12 @@ double Crown::getCanopyBaseHeight() const
     return crownInputs_.getCanopyBaseHeight();
 }
 
-double Crown::getCanopyBaseHeightInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const
-{
-    return LengthUnits::fromBaseUnits(crownInputs_.getCanopyBaseHeight(), desiredUnits);
-}
-
 double Crown::getCanopyBulkDensity() const
 {
     return crownInputs_.getCanopyBulkDensity();
 }
 
-double Crown::getCanopyBulkDensityInDesiredUnits(DensityUnits::DensityUnitsEnum desiredUnits) const
+double Crown::getMoistureFoliar() const
 {
-    return DensityUnits::fromBaseUnits(crownInputs_.getCanopyBulkDensity(), desiredUnits);
-}
-
-double Crown::getFoliarMoisture() const
-{
-    return crownInputs_.getFoliarMoisture();
+    return crownInputs_.getMoistureFoliar();
 }

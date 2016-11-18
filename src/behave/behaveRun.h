@@ -142,11 +142,12 @@ public:
     void setCanopyBulkDensity(double bulkDensity);
     void setFoliarMoisture(double foliarMoisture);
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
 
     // CROWN Module Getters
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
-    double getFoliarMoisture() const;
+    double getMoistureFoliar() const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
     double getCrownFireSpreadRate() const;
