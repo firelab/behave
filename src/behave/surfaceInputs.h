@@ -49,13 +49,14 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody);
     void setSlope(double slope);
     void setAspect(double slopeAspect);
-    void setFlameLengthUnits(LengthUnits::LengthUnitsEnum lengthUnits);
+    void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setWindSpeed(double windSpeed);
     void setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
+    void setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight);
     void setCrownRatio(double crownRatio);
@@ -113,6 +114,7 @@ public:
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
+    LengthUnits::LengthUnitsEnum getCanopyHeightUnits() const;
     double getUserProvidedWindAdjustmentFactor() const;
 
     // Two fuel models inputs getters
@@ -179,6 +181,7 @@ private:
 
     // Input Modes
     VelocityUnits::VelocityUnitsEnum windSpeedUnits_;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits_;
     LengthUnits::LengthUnitsEnum flameLengthUnits_;
     SlopeUnits::SlopeUnitsEnum slopeUnits_;                             // Whether slope is input as percent or degrees
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              // Method used in Two Fuel Models calculations

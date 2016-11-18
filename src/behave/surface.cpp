@@ -189,6 +189,11 @@ double Surface::getEllipticalC() const
     return surfaceFire_.getEllipticalC();
 }
 
+void Surface::setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits)
+{
+    surfaceInputs_.setCanopyHeightUnits(canopyHeightUnits);
+}
+
 void Surface::setCanopyCover(double canopyCover)
 {
     surfaceInputs_.setCanopyCover(canopyCover);
@@ -249,6 +254,11 @@ double Surface::getCanopyHeight() const
     return surfaceInputs_.getCanopyHeight();
 }
 
+double Surface::getCanopyHeightInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const
+{
+    return LengthUnits::fromBaseUnits(surfaceInputs_.getCanopyHeight(), desiredUnits);
+}
+
 double Surface::getCrownRatio() const
 {
     return surfaceInputs_.getCrownRatio();
@@ -257,6 +267,11 @@ double Surface::getCrownRatio() const
 LengthUnits::LengthUnitsEnum Surface::getFlameLengthUnits() const
 {
     return surfaceInputs_.getFlameLengthUnits();
+}
+
+LengthUnits::LengthUnitsEnum Surface::getCanopyHeightUnits() const
+{
+    return  surfaceInputs_.getCanopyHeightUnits();
 }
 
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum Surface::getWindAndSpreadOrientationMode() const

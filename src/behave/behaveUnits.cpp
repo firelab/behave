@@ -31,9 +31,9 @@
 double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units)
 {
     // Length to base units constants
-    static const double METERS_TO_FEET = 3.28084;
-    static const double MILES_TO_FEET = 5280.0;
-    static const double KILOMETERS_TO_FEET = 3280.84;
+    const double METERS_TO_FEET = 3.2808398950131;
+    const double MILES_TO_FEET = 5280.0;
+    const double KILOMETERS_TO_FEET = 3280.8398950131;
 
     switch (units)
     {
@@ -58,9 +58,9 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
 double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum units)
 {
     // Length from base units constants
-    static const double FEET_TO_METERS = 0.3048;
-    static const double FEET_TO_MILES = 0.000189394;
-    static const double FEET_TO_KILOMETERS = 0.0003048;
+    const double FEET_TO_METERS = 0.3047999995;
+    const double FEET_TO_MILES = 0.000189394;
+    const double FEET_TO_KILOMETERS = 0.0003048;
 
     switch (units)
     {
@@ -85,10 +85,10 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
 double VelocityUnits::toBaseUnits(double value, VelocityUnits::VelocityUnitsEnum units)
 {
     // Velocity to base units constants
-    static const double METERS_PER_SECOND_TO_FEET_PER_MINUTE = 196.8503937;
-    static const double CHAINS_PER_HOUR_TO_FEET_PER_MINUTE = 1.1;
-    static const double MILES_PER_HOUR_TO_FEET_PER_MINUTE = 88;
-    static const double KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE = 54.680665;
+    const double METERS_PER_SECOND_TO_FEET_PER_MINUTE = 196.8503937;
+    const double CHAINS_PER_HOUR_TO_FEET_PER_MINUTE = 1.1;
+    const double MILES_PER_HOUR_TO_FEET_PER_MINUTE = 88;
+    const double KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE = 54.680665;
 
     switch (units)
     {
@@ -116,10 +116,10 @@ double VelocityUnits::toBaseUnits(double value, VelocityUnits::VelocityUnitsEnum
 double VelocityUnits::fromBaseUnits(double value, VelocityUnits::VelocityUnitsEnum units)
 {
     // Velocity from base units constants
-    static const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;
-    static const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 0.909091;
-    static const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.01136363636;
-    static const double FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR = 0.018288;
+    const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;
+    const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 0.909091;
+    const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.01136363636;
+    const double FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR = 0.018288;
 
     switch (units)
     {
@@ -154,6 +154,24 @@ double CoverUnits::toBaseUnits(double value, CoverUnitsEnum units)
 }
 
 double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
+{
+    if (units == PERCENT)
+    {
+        value *= 100.0;
+    }
+    return value;
+}
+
+double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
+{
+    if (units == PERCENT)
+    {
+        value /= 100.0;
+    }
+    return value;
+}
+
+double MoistureUnits::fromBaseUnits(double value, MoistureUnitsEnum units)
 {
     if (units == PERCENT)
     {
@@ -207,3 +225,4 @@ double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
     }
     return value;
 }
+

@@ -172,6 +172,11 @@ DensityUnits::DensityUnitsEnum Crown::getCanopyBulkDensityUnits() const
     return crownInputs_.getCanopyBulkDensityUnits();
 }
 
+LengthUnits::LengthUnitsEnum Crown::getCanopyBaseHeightUnits() const
+{
+    return crownInputs_.getCanopyBaseHeightUnits();
+}
+
 void Crown::initializeMemmbers()
 {
     fireType_ = FireType::SURFACE;
@@ -462,9 +467,19 @@ void Crown::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnit
     crownInputs_.setCanopyBulkDensityUnits(densityUnits);
 }
 
+void Crown::setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits)
+{
+    crownInputs_.setCanopyBaseHeightUnits(canopyBaseHeightUnits);
+}
+
 double Crown::getCanopyBaseHeight() const
 {
     return crownInputs_.getCanopyBaseHeight();
+}
+
+double Crown::getCanopyBaseHeightInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const
+{
+    return LengthUnits::fromBaseUnits(crownInputs_.getCanopyBaseHeight(), desiredUnits);
 }
 
 double Crown::getCanopyBulkDensity() const

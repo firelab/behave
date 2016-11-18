@@ -271,6 +271,12 @@ void BehaveRun::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
     surface_.setSlopeUnits(slopeInputMode);
 }
 
+void BehaveRun::setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum treeAndCanopyHeightUnits)
+{
+    surface_.setCanopyHeightUnits(treeAndCanopyHeightUnits);
+    crown_.setCanopyBaseHeightUnits(treeAndCanopyHeightUnits);
+}
+
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum BehaveRun::getWindAndSpreadOrientationMode() const
 {
     return surface_.getWindAndSpreadOrientationMode();
@@ -459,7 +465,8 @@ double BehaveRun::getCanopyCover() const
 
 double BehaveRun::getCanopyHeight() const
 {
-    return surface_.getCanopyHeight();
+    LengthUnits::LengthUnitsEnum desiredUnits = surface_.getCanopyHeightUnits();
+    return surface_.getCanopyHeightInDesiredUnits(desiredUnits);
 }
 
 double BehaveRun::getCrownRatio() const
@@ -489,7 +496,8 @@ void BehaveRun::updateCrownInputs(double canopyBaseHeight, double canopyBulkDens
 
 double BehaveRun::getCanopyBaseHeight() const
 {
-    return crown_.getCanopyBaseHeight();
+    LengthUnits::LengthUnitsEnum desiredUnits = crown_.getCanopyBaseHeightUnits();
+    return crown_.getCanopyBaseHeightInDesiredUnits(desiredUnits);
 }
 
 double BehaveRun::getCanopyBulkDensity() const

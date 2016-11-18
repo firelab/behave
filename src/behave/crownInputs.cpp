@@ -44,6 +44,8 @@ void CrownInputs::initializeMembers()
     canopyUserProvidedFlameLength_ = 0;
     canopyUserProvidedFirelineIntensity_ = 0;
     foliarMoisture_ = 0;
+    canopyBaseHeightUnits_ = LengthUnits::FEET;
+    canopyBulkDensityUnits_ = DensityUnits::POUNDS_PER_CUBIC_FOOT;
 }
 
 double CrownInputs::getCanopyBaseHeight() const
@@ -71,6 +73,11 @@ DensityUnits::DensityUnitsEnum CrownInputs::getCanopyBulkDensityUnits() const
     return canopyBulkDensityUnits_;
 }
 
+LengthUnits::LengthUnitsEnum CrownInputs::getCanopyBaseHeightUnits() const
+{
+    return canopyBaseHeightUnits_;
+}
+
 double CrownInputs::getFoliarMoisture() const
 {
     return foliarMoisture_;
@@ -78,12 +85,12 @@ double CrownInputs::getFoliarMoisture() const
 
 void CrownInputs::setCanopyBaseHeight(double canopyBaseHeight)
 {
-    canopyBaseHeight_ = canopyBaseHeight;
+    canopyBaseHeight_ = LengthUnits::toBaseUnits(canopyBaseHeight, canopyBaseHeightUnits_);
 }
 
 void CrownInputs::setCanopyBulkDensity(double canopyBulkDensity)
 {
-    canopyBulkDensity_ = canopyBulkDensity;
+    canopyBulkDensity_ = DensityUnits::toBaseUnits(canopyBulkDensity, canopyBulkDensityUnits_);
 }
 
 void CrownInputs::setCanopyFlameLength(double canopyUserProvidedFlameLength)
@@ -101,6 +108,11 @@ void CrownInputs::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densi
     canopyBulkDensityUnits_ = densityUnits;
 }
 
+void CrownInputs::setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits)
+{
+    canopyBaseHeightUnits_ = canopyBaseHeightUnits;
+}
+
 void CrownInputs::setFoliarMoisture(double foliarMoisture)
 {
     foliarMoisture_ = foliarMoisture;
@@ -108,7 +120,7 @@ void CrownInputs::setFoliarMoisture(double foliarMoisture)
 
 void CrownInputs::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
 {
-    canopyBaseHeight_ = canopyBaseHeight;
-    canopyBulkDensity_ = canopyBulkDensity;
-    foliarMoisture_ = foliarMoisture;
+    setCanopyBaseHeight(canopyBaseHeight);
+    setCanopyBulkDensity(canopyBulkDensity);
+    setFoliarMoisture(foliarMoisture);
 }

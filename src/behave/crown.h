@@ -55,8 +55,10 @@ public:
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setFoliarMoisture(double foliarMoisture);
     void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
+    void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
 
     double getCanopyBaseHeight() const;
+    double getCanopyBaseHeightInDesiredUnits(LengthUnits::LengthUnitsEnum  desiredUnits) const;
     double getCanopyBulkDensity() const;
     double getCanopyBulkDensityInDesiredUnits(DensityUnits::DensityUnitsEnum desiredUnits) const;
     double getFoliarMoisture() const;
@@ -65,6 +67,7 @@ public:
     double getCrownFlameLength() const;
     FireType::FireTypeEnum getFireType() const;
     DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
+    LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
 
 private:
     const FuelModelSet* fuelModelSet_;              // pointer to BehaveRun's FuelModelSet object

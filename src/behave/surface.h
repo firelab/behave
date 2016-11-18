@@ -67,6 +67,7 @@ public:
     double getEllipticalC() const;
    
     // SurfaceInputs setters
+    void setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight);
     void setCrownRatio(double crownRatio);
@@ -124,8 +125,10 @@ public:
     double getAspect() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
+    double getCanopyHeightInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const;
     double getCrownRatio() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
+    LengthUnits::LengthUnitsEnum getCanopyHeightUnits() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;

@@ -40,7 +40,8 @@ public:
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setCanopyFlameLength(double canopyUserProvidedFlameLength);
     void setCanopyFirelineIntensity(double canopyUserProvidedFirelineIntensity);
-    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
+    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits);
+    void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
     void setFoliarMoisture(double foliarMoisture);
 
     double getCanopyBaseHeight() const;
@@ -48,6 +49,7 @@ public:
     double getCanopyFlameLength() const;
     double getCanopyFirelineIntensity() const;
     DensityUnits::DensityUnitsEnum  getCanopyBulkDensityUnits() const;
+    LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
     double getFoliarMoisture() const;
 
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
@@ -57,9 +59,10 @@ private:
 
     double canopyBaseHeight_; //Canopy base height(ft)
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
-    double canopyUserProvidedFlameLength_; // flame length(ft)
-    double canopyUserProvidedFirelineIntensity_; // fireline intensity(ft)
-    DensityUnits::DensityUnitsEnum canopyBulkDensityUnits_;   // Units is which density is measured
+    double canopyUserProvidedFlameLength_; // Flame length(ft)
+    double canopyUserProvidedFirelineIntensity_; // Fireline intensity(ft)
+    LengthUnits::LengthUnitsEnum canopyBaseHeightUnits_; // Units in which canopy base height is measured
+    DensityUnits::DensityUnitsEnum canopyBulkDensityUnits_;   // Units in which density is measured
     double foliarMoisture_; // Tree foliar moisture content (lb water/lb foliage)
 
 };

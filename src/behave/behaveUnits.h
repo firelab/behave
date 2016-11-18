@@ -69,6 +69,19 @@ struct CoverUnits
     static double fromBaseUnits(double value, CoverUnitsEnum units);
 };
 
+struct MoistureUnits
+{
+    enum MoistureUnitsEnum
+    {
+        FRACTION, //base cover unit
+        PERCENT
+    };
+
+    static double toBaseUnits(double value, MoistureUnitsEnum units);
+    static double fromBaseUnits(double value, MoistureUnitsEnum units);
+};
+
+
 struct SlopeUnits
 {
     enum SlopeUnitsEnum

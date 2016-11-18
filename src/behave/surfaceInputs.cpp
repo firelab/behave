@@ -60,6 +60,7 @@ void SurfaceInputs::initializeMembers()
     windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE;
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
+    canopyHeightUnits_ = LengthUnits::FEET;
 
     firstFuelModelCoverage_ = 0.0;
 
@@ -197,7 +198,7 @@ void SurfaceInputs::setCanopyCover(double canopyCover)
 
 void SurfaceInputs::setCanopyHeight(double canopyHeight)
 {
-    canopyHeight_ = canopyHeight;
+    canopyHeight_ = LengthUnits::toBaseUnits(canopyHeight, canopyHeightUnits_);
 }
 
 void SurfaceInputs::setCrownRatio(double crownRatio)
@@ -213,6 +214,11 @@ void SurfaceInputs::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode
 void SurfaceInputs::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
     windHeightInputMode_ = windHeightInputMode;
+}
+
+void SurfaceInputs::setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits)
+{
+    canopyHeightUnits_ = canopyHeightUnits;
 }
 
 double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
@@ -389,6 +395,11 @@ VelocityUnits::VelocityUnitsEnum SurfaceInputs::getWindSpeedUnits() const
 LengthUnits::LengthUnitsEnum SurfaceInputs::getFlameLengthUnits() const
 {
     return flameLengthUnits_;
+}
+
+LengthUnits::LengthUnitsEnum SurfaceInputs::getCanopyHeightUnits() const
+{
+    return canopyHeightUnits_;
 }
 
 double SurfaceInputs::getWindDirection() const
