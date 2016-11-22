@@ -284,7 +284,7 @@ SlopeUnits::SlopeUnitsEnum Surface::getSlopeUnits() const
     return surfaceInputs_.getSlopeUnits();
 }
 
-VelocityUnits::VelocityUnitsEnum Surface::getWindSpeedUnits() const
+SpeedUnits::SpeedUnitsEnum Surface::getWindSpeedUnits() const
 {
     return surfaceInputs_.getWindSpeedUnits();
 }
@@ -359,7 +359,7 @@ void Surface::setWindSpeed(double windSpeed)
     surfaceInputs_.setWindSpeed(windSpeed);
 }
 
-void Surface::setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits)
+void Surface::setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
     surfaceInputs_.setWindSpeedUnits(windSpeedUnits);
 }

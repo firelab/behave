@@ -42,9 +42,9 @@ struct LengthUnits
     static double fromBaseUnits(double value, LengthUnitsEnum units);
 };
 
-struct VelocityUnits 
+struct SpeedUnits 
 {
-    enum VelocityUnitsEnum
+    enum SpeedUnitsEnum
     {
         FEET_PER_MINUTE, //base velocity unit
         CHAINS_PER_HOUR,
@@ -54,8 +54,8 @@ struct VelocityUnits
         KILOMETERS_PER_HOUR
     };
 
-    static double toBaseUnits(double value, VelocityUnitsEnum units);
-    static double fromBaseUnits(double value, VelocityUnitsEnum units);
+    static double toBaseUnits(double value, SpeedUnitsEnum units);
+    static double fromBaseUnits(double value, SpeedUnitsEnum units);
 };
 
 struct CoverUnits

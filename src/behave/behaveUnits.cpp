@@ -82,7 +82,7 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
     return value;
 }
 
-double VelocityUnits::toBaseUnits(double value, VelocityUnits::VelocityUnitsEnum units)
+double SpeedUnits::toBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 {
     // Velocity to base units constants
     const double METERS_PER_SECOND_TO_FEET_PER_MINUTE = 196.8503937;
@@ -117,7 +117,7 @@ double VelocityUnits::toBaseUnits(double value, VelocityUnits::VelocityUnitsEnum
     return value;
 }
 
-double VelocityUnits::fromBaseUnits(double value, VelocityUnits::VelocityUnitsEnum units)
+double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 {
     // Velocity from base units constants
     const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;

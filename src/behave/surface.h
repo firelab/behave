@@ -81,7 +81,7 @@ public:
     void setAspect(double aspect);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
-    void setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits);
+    void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
@@ -129,7 +129,7 @@ public:
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
-    VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
+    SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
 
 private:
     void memberwiseCopyAssignment(const Surface& rhs);

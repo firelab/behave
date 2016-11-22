@@ -56,7 +56,7 @@ void SurfaceInputs::initializeMembers()
 
     slopeUnits_ = SlopeUnits::PERCENT;
     flameLengthUnits_ = LengthUnits::FEET;
-    windSpeedUnits_ = VelocityUnits::MILES_PER_HOUR;
+    windSpeedUnits_ = SpeedUnits::MILES_PER_HOUR;
     windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE;
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
@@ -305,10 +305,10 @@ void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModel
 
 void  SurfaceInputs::setWindSpeed(double windSpeed)
 {
-    windSpeed_ = VelocityUnits::toBaseUnits(windSpeed, windSpeedUnits_);
+    windSpeed_ = SpeedUnits::toBaseUnits(windSpeed, windSpeedUnits_);
 }
 
-void SurfaceInputs::setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits)
+void SurfaceInputs::setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
     windSpeedUnits_ = windSpeedUnits;
 }
@@ -404,7 +404,7 @@ SlopeUnits::SlopeUnitsEnum SurfaceInputs::getSlopeUnits() const
     return slopeUnits_;
 }
 
-VelocityUnits::VelocityUnitsEnum SurfaceInputs::getWindSpeedUnits() const
+SpeedUnits::SpeedUnitsEnum SurfaceInputs::getWindSpeedUnits() const
 {
     return windSpeedUnits_;
 }

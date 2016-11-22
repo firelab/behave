@@ -130,7 +130,7 @@ public:
     double getEllipticalC() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
-    VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
+    SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
    

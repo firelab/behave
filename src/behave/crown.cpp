@@ -362,7 +362,7 @@ void Crown::calculateCrownCriticalFireSpreadRate()
     crownCriticalFireSpreadRate_ = (convertedCanopyBulkDensity < 1e-07) ? 0.00 : (3.0 / convertedCanopyBulkDensity);
 
     // Convert spread rate from m/min to ft/min
-    crownCriticalFireSpreadRate_ = VelocityUnits::toBaseUnits(crownCriticalFireSpreadRate_, VelocityUnits::METERS_PER_MINUTE);
+    crownCriticalFireSpreadRate_ = SpeedUnits::toBaseUnits(crownCriticalFireSpreadRate_, SpeedUnits::METERS_PER_MINUTE);
 }
 
 //------------------------------------------------------------------------------

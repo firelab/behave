@@ -53,7 +53,7 @@ public:
     void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setWindSpeed(double windSpeed);
-    void setWindSpeedUnits(VelocityUnits::VelocityUnitsEnum windSpeedUnits);
+    void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
@@ -115,7 +115,7 @@ public:
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
-    VelocityUnits::VelocityUnitsEnum getWindSpeedUnits() const;
+    SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
     CoverUnits::CoverUnitsEnum getCanopyCoverUnits() const;
     LengthUnits::LengthUnitsEnum getCanopyHeightUnits() const;
@@ -184,7 +184,7 @@ private:
     double userProvidedWindAdjustmentFactor_;
 
     // Input Modes
-    VelocityUnits::VelocityUnitsEnum windSpeedUnits_;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits_;
     LengthUnits::LengthUnitsEnum canopyHeightUnits_;
     CoverUnits::CoverUnitsEnum canopyCoverUnits_;
     LengthUnits::LengthUnitsEnum flameLengthUnits_;

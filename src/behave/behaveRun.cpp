@@ -242,7 +242,7 @@ WindHeightInputMode::WindHeightInputModeEnum BehaveRun::getWindHeightInputMode()
     return surface_.getWindHeightInputMode();
 }
 
-VelocityUnits::VelocityUnitsEnum BehaveRun::getWindSpeedUnits() const
+SpeedUnits::SpeedUnitsEnum BehaveRun::getWindSpeedUnits() const
 {
     return surface_.getWindSpeedUnits();
 }
@@ -327,8 +327,8 @@ double BehaveRun::getEllipticalC() const
 
 double BehaveRun::getWindSpeed() const
 {
-    VelocityUnits::VelocityUnitsEnum desiredUnits = surface_.getWindSpeedUnits();
-    return VelocityUnits::fromBaseUnits(surface_.getWindSpeed(), desiredUnits);
+    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getWindSpeedUnits();
+    return SpeedUnits::fromBaseUnits(surface_.getWindSpeed(), desiredUnits);
 }
 
 double BehaveRun::getWindDirection() const
