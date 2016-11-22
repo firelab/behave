@@ -28,6 +28,8 @@
 *
 ******************************************************************************/
 
+// TODO: Add unit conversions for energy and incorporate into calculateCrownCriticalSurfaceFireIntensity() - WMC 11/16
+
 #ifndef CROWN_H
 #define CROWN_H
 

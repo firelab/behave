@@ -498,6 +498,11 @@ FireType::FireTypeEnum BehaveRun::getCrownFireType() const
     return crown_.getFireType();
 }
 
+DensityUnits::DensityUnitsEnum BehaveRun::getCanopyBulkDensityUnits() const
+{
+    return  crown_.getCanopyBulkDensityUnits();
+}
+
 void BehaveRun::calculateSpottingDistanceFromBurningPile()
 {
     spot_.calculateSpottingDistanceFromBurningPile();
