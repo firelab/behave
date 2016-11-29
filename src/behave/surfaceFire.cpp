@@ -99,7 +99,7 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
 
     midflameWindSpeed_ = rhs.midflameWindSpeed_;
     windAdjustmentFactor_ = rhs.windAdjustmentFactor_;
-    windAdjustmentFactorMethod_ = rhs.windAdjustmentFactorMethod_;
+    windAdjustmentFactorShelterMethod_ = rhs.windAdjustmentFactorShelterMethod_;
     canopyCrownFraction_ = rhs.canopyCrownFraction_;
 
     aspenMortality_ = rhs.aspenMortality_;
@@ -632,7 +632,7 @@ void SurfaceFire::initializeMembers()
 
     midflameWindSpeed_ = 0.0;
     windAdjustmentFactor_ = 0.0;
-    windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
+    windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::UNSHELTERED;
     canopyCrownFraction_ = 0.0;
 
     eccentricity_ = 0.0; 

@@ -66,13 +66,22 @@ struct TwoFuelModels
     };
 };
 
-struct WindAdjustmentFactorMethod
+struct WindAdjustmentFactorShelterMethod
 {
-    enum WindAdjustmentFactorMethodEnum
+    enum WindAdjustmentFactorShelterMethodEnum
     {
-        UNSHELTERED = 0,    // Wind adjustment factor was calculated using unsheltered method
-        SHELTERED = 1,      // Wind adjustment factor was calculated using sheltered method
-        USER_INPUT = 2      // User enters wind adjustment factor directly
+        UNSHELTERED = 0,            // Wind adjustment factor was calculated using unsheltered method
+        SHELTERED = 1,              // Wind adjustment factor was calculated using sheltered method
+    };  
+};
+
+struct WindAdjustmentFactorCalculationMethod
+{
+    enum WindAdjustmentFactorCalculationMethodEnum
+    {
+        USER_INPUT = 0,             // User enters wind adjustment factor directly
+        USE_CROWN_RATIO = 1,        // Use crown ratio when calculating wind adjustment factor
+        DONT_USE_CROWN_RATIO = 2    // Don't use crown ratio when calculating wind adjustment factor
     };
 };
 

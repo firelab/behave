@@ -42,13 +42,13 @@ public:
     double calculateWindAdjustmentFactorWithoutCrownRatio(double canopyCover, double canopyHeight,
         double fuelBedDepth);
     double getCanopyCrownFraction() const;
-    WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum getWindAdjustmentFactorMethod() const;
+    WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum getWindAdjustmentFactorShelterMethod() const;
 
 private:
-    void calculateWindAdjustmentFactorMethod(const double canopyCover, const double canopyHeight, const double fuelbedDepth);
+    void calculateWindAdjustmentFactorShelterMethod(const double canopyCover, const double canopyHeight, const double fuelbedDepth);
     double	windAdjustmentFactor_;
     double	canopyCrownFraction_;
-    WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;
+    WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;
 };
 
 #endif // WINDADJUSTMENTFACTOR_H

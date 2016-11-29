@@ -142,7 +142,8 @@ private:
 
     double midflameWindSpeed_; 
     double windAdjustmentFactor_;
-    WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum windAdjustmentFactorMethod_;
+    WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;
+    WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod_;
     double canopyCrownFraction_;
 
     double aspenMortality_;
