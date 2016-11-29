@@ -354,7 +354,7 @@ void SurfaceFire::calculateWindAdjustmentFactor()
     double crownRatio = surfaceInputs_->getCrownRatio();
     double fuelbedDepth = surfaceFuelbedIntermediates_.getFuelbedDepth();
 
-    windAdjustmentFactor_ = windAdjustmentFactor.calculateWindAdjustmentFactor(canopyCover, canopyHeight, crownRatio, fuelbedDepth);
+    windAdjustmentFactor_ = windAdjustmentFactor.calculateWindAdjustmentFactorWithCrownRatio(canopyCover, canopyHeight, crownRatio, fuelbedDepth);
 }
 
 void SurfaceFire::calculateMidflameWindSpeed()

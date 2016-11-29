@@ -28,6 +28,7 @@
 *
 ******************************************************************************/
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include "windAdjustmentFactor.h"
 
@@ -38,10 +39,10 @@ WindAjustmentFactor::WindAjustmentFactor()
     windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
 }
 
-double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, double canopyHeight,
+double WindAjustmentFactor::calculateWindAdjustmentFactorWithCrownRatio(double canopyCover, double canopyHeight,
     double crownRatio, double fuelbedDepth)
 {
-    double windAdjustmentFactor = 1.0;
+    windAdjustmentFactor_ = 1.0;
 
     crownRatio = (crownRatio < 0.0) ? 0.0 : crownRatio;
     crownRatio = (crownRatio > 1.0) ? 1.0 : crownRatio;
@@ -52,25 +53,30 @@ double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, do
     // tree crowns (division by 3 assumes conical crown shapes).
     canopyCrownFraction_ = crownRatio * canopyCover / 3.0;
 
-    // Unsheltered
-    if (canopyCover < 1.0e-07 || canopyCrownFraction_ < 0.05 || canopyHeight < 6.0)
-    {
-        if (fuelbedDepth > 1.0e-07)
-        {
-            windAdjustmentFactor = 1.83 / log((20.0 + 0.36 * fuelbedDepth) / (0.13 * fuelbedDepth));
-        }
-        windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
-    }
-    // Sheltered
-    else
-    {
-        windAdjustmentFactor = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight)
-            / (0.13 * canopyHeight)));
-        windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::SHELTERED;
-    }
+    calculateWindAdjustmentFactorMethod(canopyCover, canopyHeight, fuelbedDepth);
+
     // Results
-    windAdjustmentFactor_ = (windAdjustmentFactor > 1.0) ? 1.0 : windAdjustmentFactor;
-    windAdjustmentFactor_ = (windAdjustmentFactor < 0.0) ? 0.0 : windAdjustmentFactor;
+    windAdjustmentFactor_ = (windAdjustmentFactor_ > 1.0) ? 1.0 : windAdjustmentFactor_;
+    windAdjustmentFactor_ = (windAdjustmentFactor_ < 0.0) ? 0.0 : windAdjustmentFactor_;
+
+    return windAdjustmentFactor_;
+}
+
+double WindAjustmentFactor::calculateWindAdjustmentFactorWithoutCrownRatio(double canopyCover, double canopyHeight, double fuelbedDepth)
+{
+    windAdjustmentFactor_ = 1.0;
+    canopyCover = (canopyCover < 0.0) ? 0.0 : canopyCover;
+    canopyCover = (canopyCover > 1.0) ? 1.0 : canopyCover;
+
+    // canopyCrownFraction == fraction of the volume under the canopy top that is filled with
+    // tree crowns (division by 3 assumes conical crown shapes).
+    canopyCrownFraction_ = (canopyCover * M_PI) / 1200.0;
+   
+    calculateWindAdjustmentFactorMethod(canopyCover, canopyHeight, fuelbedDepth);
+
+    // Results
+    windAdjustmentFactor_ = (windAdjustmentFactor_ > 1.0) ? 1.0 : windAdjustmentFactor_;
+    windAdjustmentFactor_ = (windAdjustmentFactor_ < 0.0) ? 0.0 : windAdjustmentFactor_;
 
     return windAdjustmentFactor_;
 }
@@ -83,4 +89,24 @@ double WindAjustmentFactor::getCanopyCrownFraction() const
 WindAdjustmentFactorMethod::WindAdjustmentFactorMethodEnum WindAjustmentFactor::getWindAdjustmentFactorMethod() const
 {
     return windAdjustmentFactorMethod_;
+}
+
+void WindAjustmentFactor::calculateWindAdjustmentFactorMethod(const double canopyCover, const double canopyHeight, const double fuelbedDepth)
+{
+    // Unsheltered
+    if (canopyCover < 1.0e-07 || canopyCrownFraction_ < 0.05 || canopyHeight < 6.0)
+    {
+        if (fuelbedDepth > 1.0e-07)
+        {
+            windAdjustmentFactor_ = 1.83 / log((20.0 + 0.36 * fuelbedDepth) / (0.13 * fuelbedDepth));
+        }
+        windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
+    }
+    // Sheltered
+    else
+    {
+        windAdjustmentFactor_ = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight)
+            / (0.13 * canopyHeight)));
+        windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::SHELTERED;
+    }
 }

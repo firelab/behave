@@ -38,7 +38,6 @@
 class FuelModelSet
 {
 public:
-    // TODO: Formate comments in Doxygen style
     // TODO: Consider making a Freeze() method that marks all records as reserved to make the array read-only for threaded 
     // applications -WMC 10/2015
 
@@ -82,8 +81,6 @@ private:
         double fuelLoadLiveWoody, double savrOneHourFuel, double savrLiveHerbaceous, double savrLiveWoody,
         bool isDynamic, bool isReserved);
 
-    // Each individual fuel model has its own record (struct)
-    // TODO: Need to figure out best way of handling fuel codes (e.g., "GR1"), as well as name (e.g., "Humid Climate Grass") - WMC 10/201
     struct FuelModelRecord
     {
         int fuelModelNumber_;               // Standard ID number for fuel model 
