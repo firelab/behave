@@ -40,9 +40,8 @@ Crown::Crown(const FuelModelSet& fuelModelSet, const Surface& surface)
 {
     fuelModelSet_ = &fuelModelSet; // point to the same location as BehaveRun'sfuelModels
     surface_ = &surface; // point to the same location as BehaveRun's surface
-    crownDeepCopyOfSurface_ = *surface_; // copy the actual data surfaceInputs is pointing to
-
-    initializeMemmbers();
+    updateDeepCopyOfSurface();
+    initializeMembers();
 }
 
 Crown::~Crown()
@@ -137,6 +136,7 @@ void Crown::doCrownRun()
 void Crown::updateDeepCopyOfSurface()
 {
     crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface is pointing to
+    crownDeepCopyOfSurface_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::USER_INPUT);
 }
 
 double Crown::getCrownFireSpreadRate() const
@@ -169,7 +169,7 @@ LengthUnits::LengthUnitsEnum Crown::getCanopyBaseHeightUnits() const
     return crownInputs_.getCanopyBaseHeightUnits();
 }
 
-void Crown::initializeMemmbers()
+void Crown::initializeMembers()
 {
     fireType_ = FireType::SURFACE;
     crownCopyOfSurfaceHeatPerUnitArea_ = 0.0;

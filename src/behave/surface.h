@@ -91,6 +91,7 @@ public:
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
     void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
     void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
@@ -130,6 +131,7 @@ public:
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
+    WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
 
 private:
     void memberwiseCopyAssignment(const Surface& rhs);

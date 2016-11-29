@@ -164,6 +164,11 @@ void BehaveRun::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCove
     surface_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
 }
 
+void BehaveRun::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod)
+{
+    surface_.setWindAdjustmentFactorCalculationMethod(windAdjustmentFactorCalculationMethod);
+}
+
 void BehaveRun::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
 {
     surface_.setTwoFuelModelsMethod(twoFuelModelsMethod);
@@ -255,6 +260,11 @@ SlopeUnits::SlopeUnitsEnum BehaveRun::getSlopeUnits() const
 LengthUnits::LengthUnitsEnum BehaveRun::getFlameLengthUnits() const
 {
     return surface_.getFlameLengthUnits();
+}
+
+WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum BehaveRun::getWindAdjustmentFactorCalculationMethod() const
+{
+    return surface_.getWindAdjustmentFactorCalculationMethod();
 }
 
 double BehaveRun::getSurfaceFireSpreadRate() const

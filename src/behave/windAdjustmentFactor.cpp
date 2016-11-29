@@ -55,6 +55,19 @@ double WindAjustmentFactor::calculateWindAdjustmentFactorWithCrownRatio(double c
 
     calculateWindAdjustmentFactorShelterMethod(canopyCover, canopyHeight, fuelbedDepth);
 
+    if (windAdjustmentFactorShelterMethod_ == WindAdjustmentFactorShelterMethod::UNSHELTERED)
+    {
+        if (fuelbedDepth > 1.0e-07)
+        {
+            windAdjustmentFactor_ = 1.83 / log((20.0 + 0.36 * fuelbedDepth) / (0.13 * fuelbedDepth));
+        }
+    }
+    else // SHELTERED
+    {
+        windAdjustmentFactor_ = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight)
+            / (0.13 * canopyHeight)));
+    }
+
     // Results
     windAdjustmentFactor_ = (windAdjustmentFactor_ > 1.0) ? 1.0 : windAdjustmentFactor_;
     windAdjustmentFactor_ = (windAdjustmentFactor_ < 0.0) ? 0.0 : windAdjustmentFactor_;
@@ -73,6 +86,19 @@ double WindAjustmentFactor::calculateWindAdjustmentFactorWithoutCrownRatio(doubl
     canopyCrownFraction_ = (canopyCover * M_PI) / 1200.0; // RMRS-RP-4, eq. 45
    
     calculateWindAdjustmentFactorShelterMethod(canopyCover, canopyHeight, fuelbedDepth);
+
+    if (windAdjustmentFactorShelterMethod_ == WindAdjustmentFactorShelterMethod::UNSHELTERED)
+    {
+        if (fuelbedDepth > 1.0e-07)
+        {
+            windAdjustmentFactor_ = 1.83 / log((20.0 + 0.36 * fuelbedDepth) / (0.13 * fuelbedDepth));
+        }
+    }
+    else // SHELTERED
+    {
+        windAdjustmentFactor_ = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight)
+            / (0.13 * canopyHeight)));
+    }
 
     // Results
     windAdjustmentFactor_ = (windAdjustmentFactor_ > 1.0) ? 1.0 : windAdjustmentFactor_;
@@ -96,17 +122,11 @@ void WindAjustmentFactor::calculateWindAdjustmentFactorShelterMethod(const doubl
     // Unsheltered
     if (canopyCover < 1.0e-07 || canopyCrownFraction_ < 0.05 || canopyHeight < 6.0)
     {
-        if (fuelbedDepth > 1.0e-07)
-        {
-            windAdjustmentFactor_ = 1.83 / log((20.0 + 0.36 * fuelbedDepth) / (0.13 * fuelbedDepth));
-        }
         windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::UNSHELTERED;
     }
     // Sheltered
     else
     {
-        windAdjustmentFactor_ = 0.555 / (sqrt(canopyCrownFraction_ * canopyHeight) * log((20.0 + 0.36 * canopyHeight)
-            / (0.13 * canopyHeight)));
         windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::SHELTERED;
     }
 }

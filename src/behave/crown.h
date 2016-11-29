@@ -81,7 +81,7 @@ private:
     Surface crownDeepCopyOfSurface_;                // deep copy of Surface's surface inputs to allow parallel runs in Surface
 
     // Private methods
-    void initializeMemmbers();
+    void initializeMembers();
     void memberwiseCopyAssignment(const Crown& rhs);
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();

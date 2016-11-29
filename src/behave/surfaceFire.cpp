@@ -373,7 +373,9 @@ void SurfaceFire::calculateMidflameWindSpeed()
         {
             windSpeed /= 1.15;
         }
-        if (surfaceInputs_->hasUserEnteredWindAdjustmentFactor())
+        WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod;
+        windAdjustmentFactorCalculationMethod = surfaceInputs_->getWindAdjustmentFactorCalculationMethod();
+        if (windAdjustmentFactorCalculationMethod == WindAdjustmentFactorCalculationMethod::USER_INPUT)
         {
             windAdjustmentFactor_ = surfaceInputs_->getUserProvidedWindAdjustmentFactor();
         }

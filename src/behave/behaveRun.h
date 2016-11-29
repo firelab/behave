@@ -83,6 +83,7 @@ public:
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
+    void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
@@ -133,6 +134,7 @@ public:
     SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
+    WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
    
     // CROWN Module
     void doCrownRun();

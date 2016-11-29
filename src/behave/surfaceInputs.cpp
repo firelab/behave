@@ -63,6 +63,7 @@ void SurfaceInputs::initializeMembers()
     canopyHeightUnits_ = LengthUnits::FEET;
     canopyCoverUnits_ = CoverUnits::PERCENT;
     moistureUnits_ = MoistureUnits::PERCENT;
+    windAdjustmentFactorCalculationMethod_ = WindAdjustmentFactorCalculationMethod::USE_CROWN_RATIO;
 
     firstFuelModelCoverage_ = 0.0;
 
@@ -378,17 +379,6 @@ bool SurfaceInputs::isUsingPalmettoGallberry() const
     return isUsingPalmettoGallberry_;
 }
 
-bool SurfaceInputs::hasUserEnteredWindAdjustmentFactor() const
-{
-    bool userHasEnteredWindAdjustmentFactor = false;
-
-    if (userProvidedWindAdjustmentFactor_ >= 0.0) // Negative 1 indicates nothing has been entered
-    {
-        userHasEnteredWindAdjustmentFactor = true;
-    }
-    return userHasEnteredWindAdjustmentFactor;
-}
-
 WindHeightInputMode::WindHeightInputModeEnum SurfaceInputs::getWindHeightInputMode() const
 {
     return windHeightInputMode_;
@@ -544,7 +534,17 @@ void SurfaceInputs::setUserProvidedWindAdjustmentFactor(double userProvidedWindA
     userProvidedWindAdjustmentFactor_ = userProvidedWindAdjustmentFactor;
 }
 
+void SurfaceInputs::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod)
+{
+    windAdjustmentFactorCalculationMethod_ = windAdjustmentFactorCalculationMethod;
+}
+
 double SurfaceInputs::getUserProvidedWindAdjustmentFactor() const
 {
     return userProvidedWindAdjustmentFactor_;
+}
+
+WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum SurfaceInputs::getWindAdjustmentFactorCalculationMethod() const
+{
+    return windAdjustmentFactorCalculationMethod_;
 }

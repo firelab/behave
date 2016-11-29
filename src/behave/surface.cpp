@@ -289,6 +289,11 @@ SpeedUnits::SpeedUnitsEnum Surface::getWindSpeedUnits() const
     return surfaceInputs_.getWindSpeedUnits();
 }
 
+WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum Surface::getWindAdjustmentFactorCalculationMethod() const
+{
+    return surfaceInputs_.getWindAdjustmentFactorCalculationMethod();
+}
+
 double Surface::getWindSpeed() const
 {
     return surfaceInputs_.getWindSpeed();
@@ -407,6 +412,11 @@ void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCovera
 void Surface::setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
     surfaceInputs_.setFlameLengthUnits(flameLengthUnits);
+}
+
+void Surface::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod)
+{
+    surfaceInputs_.setWindAdjustmentFactorCalculationMethod(windAdjustmentFactorCalculationMethod);
 }
 
 void Surface::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
