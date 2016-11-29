@@ -46,7 +46,6 @@ SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const FuelModelSet& fue
     initializeMembers();
 }
 
-// Copy Ctor
 SurfaceFuelbedIntermediates::SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs)
 {
     memberwiseCopyAssignment(rhs);

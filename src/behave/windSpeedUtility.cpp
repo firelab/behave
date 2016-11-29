@@ -37,33 +37,12 @@ WindSpeedUtility::WindSpeedUtility()
     windSpeedAtMidflame_ = 0;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief WindSpeedAtMidflame
-*
-*  Dependent Variables (Outputs)
-*      windSpeedAtMidflame_ (mi/h)
-*
-*  Independent Variables (Inputs)
-*      windSpeedAtTwentyFeet (mi/h)
-*      windAdjustmentFactor (fraction)
-*/
-
 double WindSpeedUtility::windSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor)
 {
     // Calculate results
     windSpeedAtMidflame_ = windSpeedAtTwentyFeet * windAdjustmentFactor;
     return windSpeedAtMidflame_;
 }
-
-//------------------------------------------------------------------------------
-/*! \brief WindSpeedAt20Ft
-*
-*  Dependent Variables (Outputs)
-*      windSpeedAt20Ft_ (mi/h)
-*
-*  Independent Variables (Inputs)
-*      windSpeedAtTenMeters (mi/h)
-*/
 
 double WindSpeedUtility::windSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters)
 {

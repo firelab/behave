@@ -52,16 +52,6 @@ void PalmettoGallberry::initializeMembers()
     palmettoGallberyLiveFoliageLoad_ = 0.0;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry dead 0.0 - 0.25" load.
-*
-*  \param age      Age of rough (years).
-*  \param height   Height of the understory (ft).
-*
-*  \return Palmetto-gallbery dead 0.0 - 0.25" load (lb/ft2).
-*/
-
-
 double PalmettoGallberry::calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory)
 {
     palmettoGallberyDeadOneHourLoad_ = -0.00121
@@ -73,15 +63,6 @@ double PalmettoGallberry::calculatePalmettoGallberyDeadOneHourLoad(double ageOfR
     }
     return palmettoGallberyDeadOneHourLoad_;
 }
-
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry dead 0.25 - 1.0 " load.
-*
-*  \param age      Age of rough (years).
-*  \param cover    Coverage of area by palmetto (percent).
-*
-*  \return Palmetto-gallbery dead 0.25 - 1.0" load (lb/ft2).
-*/
 
 double PalmettoGallberry::calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage)
 {
@@ -95,28 +76,11 @@ double PalmettoGallberry::calculatePalmettoGallberyDeadTenHourLoad(double ageOfR
     return palmettoGallberyDeadTenHourLoad_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry dead foliage load.
-*
-*  \param age      Age of rough (years).
-*  \param cover    Coverage of area by palmetto (percent).
-*
-*  \return Palmetto-gallbery dead foliage load (lb/ft2).
-*/
-
 double PalmettoGallberry::calculatePalmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage)
 {
     palmettoGallberyDeadFoliageLoad_ = 0.00221 * pow(ageOfRough, 0.51263) * exp(0.02482 * palmettoCoverage);
     return palmettoGallberyDeadFoliageLoad_;
 }
-
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry fuel bed depth.
-*
-*  \param height   Height of the understory (ft).
-*
-*  \return Palmetto-gallbery fuel bed depth (ft).
-*/
 
 double PalmettoGallberry::calculatePalmettoGallberyFuelBedDepth(double heightOfUnderstory)
 {
@@ -124,44 +88,17 @@ double PalmettoGallberry::calculatePalmettoGallberyFuelBedDepth(double heightOfU
     return palmettoGallberyFuelBedDepth_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry L layer load.
-*
-*  \param age      Age of rough (years).
-*  \param ba       Overstory basal aea (ft2/ac)
-*
-*  \return Palmetto-gallbery L layer load (lb/ft2).
-*/
-
 double PalmettoGallberry::calculatePalmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea)
 {
     palmettoGallberyLitterLoad_ = (0.03632 + 0.0005336 * overstoryBasalArea) * (1.0 - pow(0.25, ageOfRough));
     return palmettoGallberyLitterLoad_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry live 0.0 - 0.25" load.
-*
-*  \param age      Age of rough (years).
-*  \param height   Height of the understory (ft).
-*
-*  \return Palmetto-gallbery live 0.0 - 0.25" load (lb/ft2).
-*/
-
 double PalmettoGallberry::calculatePalmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory)
 {
     palmettoGallberyLiveOneHourLoad_ = 0.00546 + 0.00092 * ageOfRough + 0.00212 * heightOfUnderstory * heightOfUnderstory;
     return palmettoGallberyLiveOneHourLoad_;
 }
-
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry live 0.25 - 1.0" load.
-*
-*  \param age      Age of rough (years).
-*  \param height   Height of the understory (ft).
-*
-*  \return Palmetto-gallbery live 0.25 - 1.0" load (lb/ft2).
-*/
 
 double PalmettoGallberry::calculatePalmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory)
 {
@@ -174,16 +111,6 @@ double PalmettoGallberry::calculatePalmettoGallberyLiveTenHourLoad(double ageOfR
     }
     return palmettoGallberyLiveTenHourLoad_;
 }
-
-//------------------------------------------------------------------------------
-/*! \brief Calculates the palmetto-gallberry live foliage load.
-*
-*  \param age      Age of rough (years).
-*  \param cover    Coverage of area by palmetto (percent).
-*  \param height   Height of the understory (ft).
-*
-*  \return Palmetto-gallbery live foliage load (lb/ft2).
-*/
 
 double PalmettoGallberry::calculatePalmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage,
     double heightOfUnderstory)

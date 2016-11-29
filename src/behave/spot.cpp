@@ -156,14 +156,6 @@ void Spot::initializeMembers()
     mountainDistanceFromTorchingTrees_ = 0.0;
 }
 
-// ------------------------------------------------------------------------------------ -
-/*! \brief Calculates cover height used in spotting distance calculations.
-*
-*  \param firebrandHeight      Maximum firebrand height.
-*  \param coverHeight          Tree/vegetation cover height(ft).
-*
-*/
-
 double Spot::calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight)
 {
     // Minimum value of coverHeight used to calculate flatDistance
@@ -179,23 +171,6 @@ double Spot::calculateSpotCriticalCoverHeight(double firebrandHeight, double cov
 
     return coverHeightUsed;
 }
-
-//---------------------------------------------------------------------------------------
-/*! \brief Calculates maximum spotting distance adjusted for mountain terrain.
- *
- *  \param flatDistance             Maximum spotting distance over flat terrain (mi).
- *  \param location                 Location of the burning pile:
- *                                      0 == midslope, windward
- *                                      1 == valley bottom
- *                                      2 == midslope, leeward
- *                                      3 == ridge top
- *  \param ridgeToValleyDistance    Horizontal distance from ridge top to valley bottom
- *                                  (mi).
- *  \param ridgeToValleyElevation   Vertical distance from ridge top to valley bottom
- *                                  (ft).
- *  \return mountainDistance       Maximum spotting distance from the torching trees
- *                                  (mi).
- */
 
 double Spot::spotDistanceMountainTerrain(
     double flatDistance,
@@ -219,16 +194,6 @@ double Spot::spotDistanceMountainTerrain(
     return mountainDistance;
 }
 
-//---------------------------------------------------------------------------------------
-/*! \brief Calculates maximum spotting distance over flat terrain.
- *
- *  \param firebrandHeight_         Maximum firebrand height (ft).
- *  \param coverHeight_             Tree/vegetation cover height (ft).
- *  \param windSpeedAtTwentyFeet_   Wind speed at 20 ft (mi/h).
- *
- *  \return flatDistance      Maximum spotting distance over flat terrain.
- */
-
 double Spot::spotDistanceFlatTerrain(
     double firebrandHeight,
     double coverHeight,
@@ -244,28 +209,6 @@ double Spot::spotDistanceFlatTerrain(
     }
     return flatDistance;
 }
-
-//---------------------------------------------------------------------------------------
-/*! \brief Calculates maximum spotting distance from a burning pile.
-*
-*  \param location                 Location of the burning pile:
-*                                      0 == midslope, windward
-*                                      1 == valley bottom
-*                                      2 == midslope, leeward
-*                                      3 == ridge top
-*  \param ridgeToValleyDistance    Horizontal distance from ridge top to valley bottom
-*                                  (mi).
-*  \param ridgeToValleyElevation   Vertical distance from ridge top to valley bottom
-*                                  (ft).
-*  \param downwindCoverHeight      Downwind tree/vegetation cover height (ft).
-*  \param windSpeedAtTwentyFeet    Wind speed at 20 ft (mi/h).
-*  \param burningPileflameHeight   Burning pile's flame height (ft).
-*  \param[out] heightUsed_         Actual tree/vegetation ht used (ft).
-*  \param[out] firebrandHeight_    Initial maximum firebrand height (ft).
-*  \param[out] flatDistance_       Maximum spotting distance over flat terrain (mi).
-*
-*  \return Maximum spotting distance from the burning pile (mi).
-*/
 
 void Spot::calculateSpottingDistanceFromBurningPile()
 {
@@ -302,29 +245,6 @@ void Spot::calculateSpottingDistanceFromBurningPile()
 		}
 	}
 }
-
-//---------------------------------------------------------------------------------------
-/*! \brief Calculates maximum spotting distance from a surface fire.
- *
- *  \param location                 Location of the surface fire:
- *                                      0 == midslope, windward
- *                                      1 == valley bottom
- *                                      2 == midslope, leeward
- *                                      3 == ridge top
- *  \param ridgeToValleyDistance    Horizontal distance from ridge top to valley bottom
- *                                  (mi).
- *  \param ridgeToValleyElevation   Vertical distance from ridge top to valley bottom
- *                                  (ft).
- *  \param downwindCoverHeight      Downwind tree/vegetation cover height (ft).
- *  \param windSpeedAtTwentyFeet    Wind speed at 20 ft (mi/h).
- *  \param flameLength              Surface fire flame length (ft).
- *  \param[out] heightUsed_         Actual tree/vegetation ht used (ft).
- *  \param[out] firebrandHeight_    Initial maximum firebrand height (ft).
- *  \param[out] firebrandDrift_     Maximum firebrand drift (mi).
- *  \param[out] flatDistance_       Maximum spotting distance over flat terrain (mi).
- *
- *  \return Maximum sptting distance from the surface fire (mi).
- */
 
 void Spot::calculateSpottingDistanceFromSurfaceFire()
 {
@@ -367,34 +287,6 @@ void Spot::calculateSpottingDistanceFromSurfaceFire()
         }
     }
 }
-
-//---------------------------------------------------------------------------------------
-/*! \brief Calculates maximum spotting distance from a group of torching trees.
- *
- *  \param location				Location of the torching trees:
- *									0 == midslope, windward
- *									1 == valley bottom
- *									2 == midslope, leeward
- *									3 == ridge top
- *  \param ridgeToValleyDist	    Horizontal distance from ridge top to valley bottom
- *								    (mi).
- *  \param ridgeToValleyElev	    Vertical distance from ridge top to valley bottom
- *								    (ft).
- *  \param downwindCoverHeight      Downwind tree/vegetation cover height (ft).
- *  \param windSpeedAtTwentyFeet    Wind speed at 20 ft (mi/h).
- *  \param torchingTrees		    Number of torching trees.
- *  \param treeDbh				    Tree dbh (in).
- *  \param treeHeight				Tree height (ft).
- *  \param treeSpecies			    Tree species code.
- *  \param[out] heightUsed_		    Actual tree/vegetation ht used (ft).
- *  \param[out] flameHeight			Steady state flame ht (ft).
- *  \param[out] flameRatio		    Ratio of tree height to steady flame height (ft/ft).
- *  \param[out] flameDuration_		Flame duration (min).
- *  \param[out] firebrandHeight_    Initial maximum firebrand height (ft).
- *  \param[out] flatDistance_	    Maximum spotting distance over flat terrain (mi).
- *
- *  \return Maximum spotting distance from the torching trees (mi).
- */
 
 void Spot::calculateSpottingDistanceFromTorchingTrees()
 {

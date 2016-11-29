@@ -63,7 +63,7 @@ void BehaveRun::memberwiseCopyAssignment(const BehaveRun& rhs)
 
 BehaveRun::~BehaveRun()
 {
-    // Default Destructor
+
 }
 
 void BehaveRun::setCanopyCover(double canopyCover)

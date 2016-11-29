@@ -108,24 +108,6 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
     return fireLengthToWidthRatio_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief FuelBedWeighted
-*
-*  Dependent Variables (Outputs)
-*       reactionIntensity_ (Btu/ft2/min)
-*       spreadRate_ (ft/min)
-*       directionOfMaxSpread_ (clockwise from upslope)
-*       effectiveWind_ (mi/h)
-*       windSpeedLimit_ (mi/h)
-*       windLimitExceeded_ (flag)
-*       heatPerUnitArea_ (Btu/ft2)
-*       fireLineIntensity_ (Btu/ft/s)
-*       fireFlameLength_ (ft)
-*
-*  Independent Variables (Inputs)
-*       SurfaceInputs (object)
-*/
-
 void SurfaceTwoFuelModels::calculateWeightedSpreadRate(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod,
     int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
     bool hasDirectionOfInterest, double directionOfInterest)

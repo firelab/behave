@@ -204,15 +204,6 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     return forwardSpreadRate_;
 }
 
-//------------------------------------------------------------------------------
-// \brief Calculates the fire spread rate at 'beta' degrees from the
-//		direction of maximum spread.
-//
-//  \param directionOfInterest The direction for which the spread rate of the fire
-//		is desired               
-//
-//  \return Fire spread rate along the specified vector (ft/min).
-
 double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
 {
     double rosVector = forwardSpreadRate_;

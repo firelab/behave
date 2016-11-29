@@ -38,25 +38,6 @@ WindAjustmentFactor::WindAjustmentFactor()
     windAdjustmentFactorMethod_ = WindAdjustmentFactorMethod::UNSHELTERED;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the wind adjustment factor for scaling wind speed from
-*   20-ft to midflame height.
-*
-*   For sheltered conditions under a canopy, Albini and Baughman (1979)
-*   equation 21 (page 9) is used for the wind adjustment factor.
-*
-*   For unsheltered conditions, wind adjustment factor is calculated as an
-*	average from the top of the fuel bed to twice the fuel bed depth,
-*	using Albini and Baughman (1979) equation 9 (page 5).
-*
-*   \param canopyCover  Canopy cover projected onto ground [0..1].
-*   \param canopyHeight Tree canopy height from the ground (ft).
-*   \param crownRatio   Tree crown length-to-tree height ratio [0..1].
-*   \param fuelbedDepth Fuel bed depth (ft).
-*
-*   \return Wind adjustment factor [0..1].
-*/
-
 double WindAjustmentFactor::calculateWindAdjustmentFactor(double canopyCover, double canopyHeight,
     double crownRatio, double fuelbedDepth)
 {

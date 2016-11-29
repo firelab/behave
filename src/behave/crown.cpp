@@ -92,16 +92,10 @@ void Crown::memberwiseCopyAssignment(const Crown& rhs)
     windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire spread rate.
-*
-*  This uses Rothermel's 1991 crown fire correlation.
-*
-*  \return Crown fire average spread rate (ft/min).
-*
-*/
 void Crown::doCrownRun()
 {
+    // This method uses Rothermel's 1991 crown fire correlation to calculate Crown fire average spread rate (ft/min)
+
     // Step 1: Update Crown's copy of Surface and the values needed for further calculations 
     updateDeepCopyOfSurface();
     crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
@@ -197,32 +191,17 @@ void Crown::initializeMemmbers()
     windSpeedAtTwentyFeet_ = 0.0;;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the canopy portion of the crown fire heat per unit area
-*  given the crown fire fuel load and low heat of combustion.
-*
-*/
 void Crown::calculateCanopyHeatPerUnitArea()
 {
     const double LOW_HEAT_OF_COMBUSTION = 8000.0; // Low heat of combustion (hard coded to 8000 Btu/lbs)
     canopyHeatPerUnitArea_ = crownFuelLoad_ * LOW_HEAT_OF_COMBUSTION;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the total crown fire heat per unit area
-*  by summing surface HPUA and canopy HPUA.
-*
-*/
 void Crown::calculateCrownFireHeatPerUnitArea()
 {
     crownFireHeatPerUnitArea_ = crownCopyOfSurfaceHeatPerUnitArea_ + canopyHeatPerUnitArea_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire fuel load
-*  given the canopy bulk density and canopy height.
-*
-*/
 void Crown::calculateCrownFuelLoad()
 {
     double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
@@ -231,13 +210,6 @@ void Crown::calculateCrownFuelLoad()
     crownFuelLoad_ = canopyBulkDensity * (canopyHeight - canopyBaseHeight);
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire transition ratio.
-*
-*  given the surface fireline intensity (Btu/ft/s) and the
-*  critical crown fire fireline intensity (Btu/ft/s).
-*
-*/
 void Crown::calculateCrownFireTransitionRatio()
 {
    crownFireTransitionRatio_ = ((crownCriticalSurfaceFireIntensity_ < 1.0e-7)
@@ -245,23 +217,11 @@ void Crown::calculateCrownFireTransitionRatio()
         : (crownCopyOfSurfaceFirelineIntensity_ / crownCriticalSurfaceFireIntensity_));
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire fireline intensity
-*  given the surface fire and crown fire heats per unit area
-*  and the crown fire spread rate.
-*
-*
-*/
 void Crown::calculateCrownFirelineIntensity()
 {
     crownFirelineIntensity_ = (crownFireSpreadRate_ / 60.0) * crownFireHeatPerUnitArea_;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the critical surface fire intensity for a surface fire
-*  to transition to a crown fire given the foliar moisture and crown base height
-*
-*/
 void Crown::calculateCrownCriticalSurfaceFireIntensity()
 {
     const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.288672;
@@ -285,41 +245,21 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
     crownCriticalSurfaceFireIntensity_ *= KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the critical surface fire flame length for a surface fire
-*  to transition to a crown fire given the critical fireline intensity.
-*
-*/
 void Crown::calculateCrownCriticalSurfaceFlameLength()
 {
     crownCriticalSurfaceFlameLength_ = crownDeepCopyOfSurface_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire flame length
-*  given the crown fireline intensity.
-*
-*/
 void Crown::calculateCrownFlameLength()
 {
     crownFlameLength_ = 0.2 * pow(crownFirelineIntensity_, (2.0 / 3.0));
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire 'power of the fire'
-*  given the crown fireline intensity.
-*
-*/
 void Crown::calculateCrownPowerOfFire()
 {
     crownPowerOfFire_ = crownFirelineIntensity_ / 129.0;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire 'power of the wind'
-*  given the 20-ft wind speed and crown fire spread rate.
-*
-*/
 void Crown::calcuateCrownPowerOfWind()
 {
     const double SECONDS_PER_MINUTE = 60.0;
@@ -336,21 +276,11 @@ void Crown::calcuateCrownPowerOfWind()
     crownPowerOfWind_ = 0.00106 * (WindspeedMinusCrownROS * WindspeedMinusCrownROS * WindspeedMinusCrownROS);
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire 'power-of-fire to power-of-wind' ratio
-*
-*  \return Ratio of the crown fire 'power-of-the-fire' to 'power-of-the-wind).
-*/
 void Crown::calcualteCrownFirePowerRatio()
 {
     crownFirePowerRatio_ = (crownPowerOfWind_ > 1e-07) ? (crownPowerOfFire_ / crownPowerOfWind_) : 0.0;
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the critical crown fire spread rate to achieve active
-*  crowning given the canopy crown bulk density
-*
-*/
 void Crown::calculateCrownCriticalFireSpreadRate()
 {
     double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
@@ -363,11 +293,6 @@ void Crown::calculateCrownCriticalFireSpreadRate()
     crownCriticalFireSpreadRate_ = SpeedUnits::toBaseUnits(crownCriticalFireSpreadRate_, SpeedUnits::METERS_PER_MINUTE);
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the crown fire active ratio given the crown fire spread 
-*  rate and the critical crown fire spread rate.
-*
-*/
 void Crown::calculateCrownFireActiveRatio()
 {
     crownFireActiveRatio_ = (crownCriticalFireSpreadRate_ < 1e-07)
@@ -393,23 +318,6 @@ double Crown::calculateWindSpeedAtTwentyFeet()
     }
     return windSpeedAtTwentyFeet_;
 }
-
-//----------------------------------------------------------------------------------
-/*! \brief Calculates the fire type; surface, passive, or active.
-*
-*  \param transitionRatio  Crown fire transition ratio.
-*  \param activeRatio      Crown fire active ratio.
-*
-*  \retval SURFACE                  == Surface: surface fire with no torching or
-*                                       crown fire spread.
-*  \retval TORCHING                 == Torching: surface fire with torching.
-*  \retval CONDITIONAL_CROWN_FIRE   == Conditional crown fire: conditions indicate 
-*                                       the fire will not transition from the 
-*                                       surface to the crown. But if it does, an 
-*                                       active crown fire may result.
-*  \retval CROWNING                 == Crowing: active crown fire, fire is spreading
-*                                       through the canopy.
-*/
 
 void Crown::calculateFireType()
 {
