@@ -468,8 +468,8 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 
-    double canopyHeight = 30;
-    double canopyBaseHeight = 6;
+    double canopyHeight = 9;
+    double canopyBaseHeight = 2;
     double canopyBulkDensity = 0.5;
     double foliarMoisture = 120;
 
@@ -479,17 +479,19 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     double expectedCrownFlameLength = 0;
     double observedCrownFirelineIntensity = 0;
     double expectedCrownFirelineIntensity = 0;
-    int expectedFireType = (int)FireType::SURFACE;
+    int expectedFireType = (int)FireType::TORCHING;
     int observedFireType = (int)FireType::SURFACE;
     
-    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setSlopeUnits(SlopeUnits::DEGREES);
     behaveRun.setTreeAndCanopyHeightUnits(LengthUnits::METERS);
     behaveRun.setCanopyBulkDensityUnits(DensityUnits::KILOGRAMS_PER_CUBIC_METER);
-
-    // Test surface spread rate
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setCanopyHeight(9);
+    behaveRun.setSlope(30);
+  
+    // Test surface spread rate
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    expectedSurfaceFireSpreadRate = 8.171074;
+    expectedSurfaceFireSpreadRate = 20.454224;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
@@ -502,7 +504,7 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     expectedCrownFlameLength = 29.320577;
     observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.getCrownFlameLength());
     BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
-    expectedCrownFirelineIntensity = 4390.073140;
+    expectedCrownFirelineIntensity = 1770.330923;
     observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.getCrownFirelineIntensity());
     BOOST_CHECK_CLOSE(observedCrownFirelineIntensity, expectedCrownFirelineIntensity, ERROR_TOLERANCE);
 }

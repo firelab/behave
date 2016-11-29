@@ -102,24 +102,22 @@ void Crown::memberwiseCopyAssignment(const Crown& rhs)
 */
 void Crown::doCrownRun()
 {
-    // Step 0: Update Crown's copy of Surface
+    // Step 1: Update Crown's copy of Surface and the values needed for further calculations 
     updateDeepCopyOfSurface();
+    crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
+    crownCopyOfSurfaceHeatPerUnitArea_ = crownDeepCopyOfSurface_.getHeatPerUnitArea();
+    crownCopyOfSurfaceFirelineIntensity_ = crownDeepCopyOfSurface_.getFirelineIntensity();
+    double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
+    crownDeepCopyOfSurface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
 
-    // Step 1: Create the crown fuel model (fire behavior fuel model 10)
+    // Step 2: Create the crown fuel model (fire behavior fuel model 10)
     crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
     crownDeepCopyOfSurface_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
     crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
 
-    double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
-    crownDeepCopyOfSurface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
-
-    // Step 2: Determine fire behavior
+    // Step 3: Determine fire behavior
     crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
     crownFireSpreadRate_ = 3.34 * crownDeepCopyOfSurface_.getSpreadRate(); // Rothermel 1991
-
-    //  Step 3:  Get values from Surface needed for further calculations 
-    crownCopyOfSurfaceHeatPerUnitArea_ = surface_->getHeatPerUnitArea();
-    crownCopyOfSurfaceFirelineIntensity_ = surface_->getFirelineIntensity();
 
     //  Step 4: Calculate remaining crown fire characteristics
     calculateCrownFuelLoad();
