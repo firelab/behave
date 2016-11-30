@@ -122,7 +122,7 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     // Velocity from base units constants
     const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;
     const double FEET_PER_MINUTE_TO_METERS_PER_MINUTE = 0.3048;
-    const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 10.0 / 11;
+    const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 10.0 / 11.0;
     const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.01136363636;
     const double FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR = 0.018288;
 
