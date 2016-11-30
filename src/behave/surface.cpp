@@ -289,6 +289,11 @@ SpeedUnits::SpeedUnitsEnum Surface::getWindSpeedUnits() const
     return surfaceInputs_.getWindSpeedUnits();
 }
 
+SpeedUnits::SpeedUnitsEnum Surface::getSpreadRateUnits() const
+{
+    return surfaceInputs_.getSpreadRateUnits();
+}
+
 WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum Surface::getWindAdjustmentFactorCalculationMethod() const
 {
     return surfaceInputs_.getWindAdjustmentFactorCalculationMethod();
@@ -367,6 +372,11 @@ void Surface::setWindSpeed(double windSpeed)
 void Surface::setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
     surfaceInputs_.setWindSpeedUnits(windSpeedUnits);
+}
+
+void Surface::setSpreadUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
+{
+    surfaceInputs_.setSpreadRateUnits(spreadRateUnits);
 }
 
 void Surface::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)

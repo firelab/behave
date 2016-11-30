@@ -82,6 +82,7 @@ public:
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
     void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setSpreadUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
@@ -131,6 +132,7 @@ public:
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
+    SpeedUnits::SpeedUnitsEnum getSpreadRateUnits() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
 
 private:

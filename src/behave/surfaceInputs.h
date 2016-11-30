@@ -54,11 +54,12 @@ public:
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setWindSpeed(double windSpeed);
     void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
-    void setCanopyCoverUnits(CoverUnits::CoverUnitsEnum canopyCoverUnits);
+    void setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits);
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight);
     void setCrownRatio(double crownRatio);
@@ -84,8 +85,9 @@ public:
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
     SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
+    SpeedUnits::SpeedUnitsEnum getSpreadRateUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
-    CoverUnits::CoverUnitsEnum getCanopyCoverUnits() const;
+    CoverUnits::CoverUnitsEnum getCoverUnits() const;
     LengthUnits::LengthUnitsEnum getCanopyHeightUnits() const;
     double getUserProvidedWindAdjustmentFactor() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
@@ -187,10 +189,11 @@ private:
     // Input Modes
     SpeedUnits::SpeedUnitsEnum windSpeedUnits_;
     LengthUnits::LengthUnitsEnum canopyHeightUnits_;
-    CoverUnits::CoverUnitsEnum canopyCoverUnits_;
+    CoverUnits::CoverUnitsEnum coverUnits_;
     LengthUnits::LengthUnitsEnum flameLengthUnits_;
     MoistureUnits::MoistureUnitsEnum moistureUnits_;
     SlopeUnits::SlopeUnitsEnum slopeUnits_;
+    SpeedUnits::SpeedUnitsEnum spreadRateUnits_;
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode_;  
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode_;

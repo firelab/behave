@@ -61,8 +61,9 @@ void SurfaceInputs::initializeMembers()
     windHeightInputMode_ = WindHeightInputMode::DIRECT_MIDFLAME;
     twoFuelModelsMethod_ = TwoFuelModels::NO_METHOD;
     canopyHeightUnits_ = LengthUnits::FEET;
-    canopyCoverUnits_ = CoverUnits::PERCENT;
+    coverUnits_ = CoverUnits::PERCENT;
     moistureUnits_ = MoistureUnits::PERCENT;
+    spreadRateUnits_ = SpeedUnits::CHAINS_PER_HOUR;
     windAdjustmentFactorCalculationMethod_ = WindAdjustmentFactorCalculationMethod::USE_CROWN_RATIO;
 
     firstFuelModelCoverage_ = 0.0;
@@ -196,7 +197,7 @@ void SurfaceInputs::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnu
 
 void SurfaceInputs::setCanopyCover(double canopyCover)
 {
-    canopyCover_ = CoverUnits::toBaseUnits(canopyCover, canopyCoverUnits_);
+    canopyCover_ = CoverUnits::toBaseUnits(canopyCover, coverUnits_);
 }
 
 void SurfaceInputs::setCanopyHeight(double canopyHeight)
@@ -224,9 +225,9 @@ void SurfaceInputs::setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeig
     canopyHeightUnits_ = canopyHeightUnits;
 }
 
-void SurfaceInputs::setCanopyCoverUnits(CoverUnits::CoverUnitsEnum canopyCoverUnits)
+void SurfaceInputs::setCoverUnits(CoverUnits::CoverUnitsEnum canopyCoverUnits)
 {
-    canopyCoverUnits_ = canopyCoverUnits;
+    coverUnits_ = canopyCoverUnits;
 }
 
 double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
@@ -301,7 +302,7 @@ void SurfaceInputs::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoF
 
 void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
 {
-    firstFuelModelCoverage_ = firstFuelModelCoverage;
+    firstFuelModelCoverage_ = CoverUnits::toBaseUnits(firstFuelModelCoverage, coverUnits_);
 }
 
 void  SurfaceInputs::setWindSpeed(double windSpeed)
@@ -312,6 +313,11 @@ void  SurfaceInputs::setWindSpeed(double windSpeed)
 void SurfaceInputs::setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
     windSpeedUnits_ = windSpeedUnits;
+}
+
+void SurfaceInputs::setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
+{
+    spreadRateUnits_ = spreadRateUnits;
 }
 
 void  SurfaceInputs::setWindDirection(double windDirection)
@@ -399,14 +405,19 @@ SpeedUnits::SpeedUnitsEnum SurfaceInputs::getWindSpeedUnits() const
     return windSpeedUnits_;
 }
 
+SpeedUnits::SpeedUnitsEnum SurfaceInputs::getSpreadRateUnits() const
+{
+    return spreadRateUnits_;
+}
+
 LengthUnits::LengthUnitsEnum SurfaceInputs::getFlameLengthUnits() const
 {
     return flameLengthUnits_;
 }
 
-CoverUnits::CoverUnitsEnum SurfaceInputs::getCanopyCoverUnits() const
+CoverUnits::CoverUnitsEnum SurfaceInputs::getCoverUnits() const
 {
-    return canopyCoverUnits_;
+    return coverUnits_;
 }
 
 LengthUnits::LengthUnitsEnum SurfaceInputs::getCanopyHeightUnits() const

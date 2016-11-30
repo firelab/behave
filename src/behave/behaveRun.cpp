@@ -159,8 +159,6 @@ void BehaveRun::setSecondFuelModelNumber(int secondFuelModelNumber)
 
 void BehaveRun::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
 {
-    //Convert fuel model coverage input from percent to decimal fraction
-    firstFuelModelCoverage /= 100;
     surface_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
 }
 
@@ -269,9 +267,8 @@ WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum
 
 double BehaveRun::getSurfaceFireSpreadRate() const
 {
-    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-    double surfaceFireForwardSpreadRate = surface_.getSpreadRate();
-    return surfaceFireForwardSpreadRate *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
+    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getSpreadRateUnits();
+    return  SpeedUnits::fromBaseUnits(surface_.getSpreadRate(), desiredUnits);
 }
 
 double BehaveRun::getDirectionOfMaxSpread() const
