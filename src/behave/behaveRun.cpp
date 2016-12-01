@@ -203,12 +203,11 @@ void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, d
 
 void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
-    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
-    double aspect, double canopyCover, double canopyHeight, double crownRatio)
+    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection, 
+    double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     surface_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, aspenFireSeverity, DBH, moistureOneHour,
-        moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windHeightInputMode, windSpeed, windDirection,
+        moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection,
         slope, aspect, canopyCover, canopyHeight, crownRatio);
 }
 

@@ -129,9 +129,8 @@ public:
     // Westerm Aspen inputs setters
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
-        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection, double slope,
-        double aspect, double canopyCover, double canopyHeight, double crownRatio);
+        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection,
+        double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setAspenFuelModelNumber(int aspenFuelModelNumber);
     void setAspenCuringLevel(double aspenCuringLevel);
     void setAspenDBH(double DBH);
