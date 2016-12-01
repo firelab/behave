@@ -111,9 +111,9 @@ public:
 
     // Palmetto-Gallberry inputs setters
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-        double windSpeed, double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
-        double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
+        double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection, double ageOfRough, 
+        double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, double aspect, 
+        double canopyCover, double canopyHeight, double crownRatio);
     void setAgeOfRough(double ageOfRough);
     void setHeightOfUnderstory(double heightOfUnderstory);
     void setPalmettoCoverage(double palmettoCoverage);

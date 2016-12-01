@@ -142,10 +142,10 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
 }
 
 void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour,
-    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed, double windDirection,
-    double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope,
-    double aspect, double canopyCover, double canopyHeight, double crownRatio)
+    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, 
+    double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage, 
+    double overstoryBasalArea, double slope, double aspect, double canopyCover, double canopyHeight, 
+    double crownRatio)
 {
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
