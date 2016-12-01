@@ -39,8 +39,8 @@ public:
   
     // Main Surface module inputs setters 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-        double windSpeed, double windDirection, double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
+        double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection, double slope, 
+        double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour);

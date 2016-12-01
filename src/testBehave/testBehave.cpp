@@ -64,7 +64,6 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     double windSpeed = 5.0;
     double windDirection = 0;
     double slope = 30.0;
@@ -75,7 +74,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
 
     behaveRun.updateSurfaceInputs(fuelModelNumber, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-        windHeightInputMode, windSpeed, windDirection, slope, aspect, canopyCover,
+        windSpeed, windDirection, slope, aspect, canopyCover,
         canopyHeight, crownRatio);
 }
 
@@ -271,6 +270,7 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
     double expectedSurfaceFireSpreadRate = 0.0;
 
     // Test upslope oriented mode, 20 foot wind, low moisture conditions
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     setSurfaceInputsForTwoFuelModelsLowMoistureScenario(behaveRun);
 
     // Do runs for first fuel model coverage 0-100 with step size 10
@@ -357,6 +357,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     int expectedFireType = (int)FireType::SURFACE;
     int observedFireType = (int)FireType::SURFACE;
 
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+
     // Test crown fire spread rate, flame length, intensity
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
@@ -423,6 +425,7 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     double observedSpottingDistance = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     flameLength = behaveRun.getSurfaceFlameLength();
 
@@ -479,13 +482,12 @@ BOOST_AUTO_TEST_CASE(unitConversionTest)
     double expectedCrownFlameLength = 0;
     double observedCrownFirelineIntensity = 0;
     double expectedCrownFirelineIntensity = 0;
-    int expectedFireType = (int)FireType::TORCHING;
-    int observedFireType = (int)FireType::SURFACE;
     
     behaveRun.setSlopeUnits(SlopeUnits::DEGREES);
     behaveRun.setTreeAndCanopyHeightUnits(LengthUnits::METERS);
     behaveRun.setCanopyBulkDensityUnits(DensityUnits::KILOGRAMS_PER_CUBIC_METER);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setCanopyHeight(9);
     behaveRun.setSlope(30);
   
@@ -522,7 +524,9 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
 
     // Make sure that changes in one behaveVector's elements surfaceInputs do not affect another's surfaceInputs
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
+    behaveVector[0].setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[1]);
+    behaveVector[1].setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
 
     // Change behaveVector[1]'s surfaceInputs
     behaveVector[1].setWindSpeed(10);

@@ -44,15 +44,6 @@ Ignite::~Ignite()
 
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the probability of a firebrand starting a fire.
-*
-*  \param fuelTemperature  Dead surface fuel temperature (oF).
-*  \param oneHourMoisture  Dead surface 1 hour fuel moisture content (lb/lb).
-*
-*  \return Probability of a firebrand starting a fire [0..1].
-*/
-
 double Ignite::calculateFirebrandIgnitionProbability(double fuelTemperature,
     double oneHourMoisture)
 {
@@ -85,16 +76,6 @@ double Ignite::calculateFirebrandIgnitionProbability(double fuelTemperature,
     }
     return(probabilityOfIgnition);
 }
-
-//------------------------------------------------------------------------------
-/*! \brief Calculates the fuel temperature using the BEHAVE FIRE2 subroutine
-*  CAIGN() algorithm.
-*
-*  \param airTemperature Air temperature (oF).
-*  \param sunShade       Fraction of sun shaded from the fuel.
-*
-*  \return Fuel temperature (oF).
-*/
 
 double Ignite::calculateFuelTemperature(double airTemperature, double sunShade)
 {
@@ -129,43 +110,23 @@ double Ignite::calculateFuelTemperature(double airTemperature, double sunShade)
     // But we are going to use the continuum
     localAirTemperature = airTemperature;
 
-    // This could be approximated by amountIncrease = 25.0 - (20.0 * sunShade);
+    // This could be approximated by temperatureDifferential = 25.0 - (20.0 * sunShade);
     temperatureDifferential = 25.0 - (20.0 * sunShade);
     return(localAirTemperature + temperatureDifferential);
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates the probability of a lightning strike starting a fire.
-*
-*  \param fuelType Ignition fuel bed type:
-*                      0 == Ponderosa Pine Litter
-*                      1 == Punky wood, rotten, chunky
-*                      2 == Punky wood powder, deep (4.8 cm)
-*                      3 == Punk wood powder, shallow (2.4 cm)
-*                      4 == Lodgepole pine duff
-*                      5 == Douglas-fir duff
-*                      6 == High altitude mixed (mainly Engelmann spruce)
-*                      7 == Peat moss (commercial)
-*  \param depth    Ignition fuel bed depth (inches).
-*  \param moisture Ignition fuel moisture content, uses 100-hr fuel moisture (lb/lb). 
-*  \param charge   Lightning charge:
-*                      0 == negative,
-*                      1 == positive,
-*                      2 == unknown
-*
-*  \note  The following assumptions are made by Latham:
-*      - 20% of negative flashes have continuing current
-*      - 90% of positive flashes have continuing current
-*      - Latham and Schlieter found a relative frequency of
-*          0.723 negative and 0.277 positive strikes
-*      - Unknown strikes are therefore p = 0.1446 neg + 0.2493 pos
-*
-*  \return Probability of the lightning strike starting a fire [0..1].
-*/
-
 double Ignite::calculateLightningIgnitionProbability(int fuelType, double depth,
     double hundredHourMoisture, int charge)
 {
+    /*
+    *      The following assumptions are made by Latham:
+    *      - 20% of negative flashes have continuing current
+    *      - 90% of positive flashes have continuing current
+    *      - Latham and Schlieter found a relative frequency of
+    *          0.723 negative and 0.277 positive strikes
+    *      - Unknown strikes are therefore p = 0.1446 neg + 0.2493 pos
+    */
+
     double fuelMoisture = hundredHourMoisture;  // use hundred hour moisture in the following calculation
 
     // Probability of continuing current by charge type (Latham)
