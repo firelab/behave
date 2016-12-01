@@ -127,15 +127,14 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
     double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous,
-    double moistureLiveWoody, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windSpeed,
-    double windDirection, double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod,
-    double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+    double moistureLiveWoody, double windSpeed, double windDirection, double firstFuelModelCoverage, 
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect, double canopyCover, 
+    double canopyHeight, double crownRatio)
 {
     int fuelModelNumber = firstfuelModelNumber;
     updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-
     setSecondFuelModelNumber(secondFuelModelNumber);
     setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
     isUsingTwoFuelModels_ = true;
