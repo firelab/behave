@@ -186,6 +186,7 @@ void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour,
 {  
     surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+    setFuelModelNumber(fuelModelNumber);
     surface_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
 }
 
@@ -197,6 +198,8 @@ void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, i
     surface_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection,
         firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
+    setFuelModelNumber(firstfuelModelNumber);
+    setFuelModelNumber(secondFuelModelNumber);
 }
 
 void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
