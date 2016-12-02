@@ -134,6 +134,11 @@ double  SurfaceFire::calculateFlameLength(double firelineIntensity)
     return flameLength;
 }
 
+void SurfaceFire::skipCalculationForZeroLoad()
+{
+    initializeMembers();
+}
+
 void SurfaceFire::calculateFlameLength()
 {
     flameLength_ = ((firelineIntensity_ < 1.0e-07)
@@ -635,6 +640,7 @@ void SurfaceFire::initializeMembers()
     midflameWindSpeed_ = 0.0;
     windAdjustmentFactor_ = 0.0;
     windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::UNSHELTERED;
+    windAdjustmentFactorCalculationMethod_ = WindAdjustmentFactorCalculationMethod::USE_CROWN_RATIO;
     canopyCrownFraction_ = 0.0;
 
     eccentricity_ = 0.0; 

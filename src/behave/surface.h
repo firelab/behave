@@ -34,6 +34,7 @@
 
 // The SURFACE module of BehavePlus
 #include "behaveUnits.h"
+#include "fuelModelSet.h"
 #include "surfaceFire.h"
 #include "surfaceInputs.h"
 
@@ -45,6 +46,7 @@ public:
     Surface(const Surface& rhs);
     Surface& operator=(const Surface& rhs);
 
+    bool isAllFuelLoadZero(int fuelModelNumber);
     void doSurfaceRunInDirectionOfMaxSpread();
     void doSurfaceRunInDirectionOfInterest(double directionOfinterest);
     double calculateSpreadRateAtVector(double directionOfinterest);

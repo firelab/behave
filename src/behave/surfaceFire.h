@@ -48,6 +48,7 @@ public:
         double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
     double calculateFlameLength(double firelineIntensity);
+    void skipCalculationForZeroLoad();
 
     // Public getters
     double getFuelbedDepth() const;

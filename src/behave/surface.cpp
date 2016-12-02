@@ -63,6 +63,20 @@ void Surface::memberwiseCopyAssignment(const Surface& rhs)
     surfaceFire_ = rhs.surfaceFire_;
 }
 
+bool Surface::isAllFuelLoadZero(int fuelModelNumber)
+{
+    // if any of these loads are non-zero, load
+    bool isNonZeroLoad = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber);
+    isNonZeroLoad = isNonZeroLoad || fuelModelSet_->getFuelLoadTenHour(fuelModelNumber);
+    isNonZeroLoad = isNonZeroLoad || fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber);
+    isNonZeroLoad = isNonZeroLoad || fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber);
+    isNonZeroLoad = isNonZeroLoad || fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber);
+
+    bool isZeroLoad = !isNonZeroLoad;
+
+    return isZeroLoad;
+}
+
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
 {
     double directionOfInterest = -1; // dummy value
@@ -82,7 +96,16 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+        if (isAllFuelLoadZero(fuelModelNumber))
+        {
+            // No fuel to burn, spread rate is zero
+            surfaceFire_.skipCalculationForZeroLoad();
+        }
+        else
+        {
+            // Calculate spread rate
+            surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+        }
     }
 }
 
@@ -101,10 +124,18 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
             secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest);
     }
     else // Use only one fuel model
-    {
-        // Calculate spread rate
+    {   
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+        if (isAllFuelLoadZero(fuelModelNumber))
+        {
+            // No fuel to burn, spread rate is zero
+            surfaceFire_.skipCalculationForZeroLoad();
+        }
+        else
+        {
+            // Calculate spread rate
+            surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+        }
     }
 }
 
