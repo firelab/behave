@@ -157,12 +157,28 @@ void BehaveRun::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::Wi
 
 void BehaveRun::setFirstFuelModelNumber(int firstFuelModelNumber)
 {
-    surface_.setFirstFuelModelNumber(firstFuelModelNumber);
+    if (fuelModelSet_->isFuelModelDefined(firstFuelModelNumber))
+    {
+        surface_.setFirstFuelModelNumber(firstFuelModelNumber);
+    }
+    else
+    {
+        surface_.setFuelModelNumber(0);
+        // TODO: Handle error
+    }
 }
 
 void BehaveRun::setSecondFuelModelNumber(int secondFuelModelNumber)
 {
-    surface_.setSecondFuelModelNumber(secondFuelModelNumber);
+    if (fuelModelSet_->isFuelModelDefined(secondFuelModelNumber))
+    {
+        surface_.setSecondFuelModelNumber(secondFuelModelNumber);
+    }
+    else
+    {
+        surface_.setFuelModelNumber(0);
+        // TODO: Handle error
+    }
 }
 
 void BehaveRun::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
@@ -198,8 +214,8 @@ void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, i
     surface_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, windSpeed, windDirection,
         firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    setFuelModelNumber(firstfuelModelNumber);
-    setFuelModelNumber(secondFuelModelNumber);
+    setFirstFuelModelNumber(firstfuelModelNumber);
+    setSecondFuelModelNumber(secondFuelModelNumber);
 }
 
 void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
