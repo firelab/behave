@@ -89,7 +89,15 @@ void BehaveRun::setFuelModelSet(FuelModelSet& fuelModelSet)
 
 void BehaveRun::setFuelModelNumber(int fuelModelNumber)
 {
-    surface_.setFuelModelNumber(fuelModelNumber);
+    if (fuelModelSet_->isFuelModelDefined(fuelModelNumber))
+    {
+        surface_.setFuelModelNumber(fuelModelNumber);
+    }
+    else
+    {
+        surface_.setFuelModelNumber(0);
+        // TODO: Handle error
+    }
 }
 
 void BehaveRun::setMoistureOneHour(double moistureOneHour)
