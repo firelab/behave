@@ -80,6 +80,7 @@ void SurfaceInputs::initializeMembers()
     aspenFuelModelNumber_ = -1;
     aspenCuringLevel_ = 0.0;
     aspenFireSeverity_ = AspenFireSeverity::LOW;
+    DBH_ = 0.0;
 
     userProvidedWindAdjustmentFactor_ = -1.0;
 }
