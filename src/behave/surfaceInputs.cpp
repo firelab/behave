@@ -217,7 +217,7 @@ void SurfaceInputs::setWindHeightInputMode(WindHeightInputMode::WindHeightInputM
     windHeightInputMode_ = windHeightInputMode;
 }
 
-void SurfaceInputs::setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits)
+void SurfaceInputs::setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits)
 {
     canopyHeightUnits_ = canopyHeightUnits;
 }

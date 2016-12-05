@@ -68,12 +68,14 @@ public:
     double getEllipticalC() const;
    
     // SurfaceInputs setters
-    void setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
-    void setCanopyCover(double canopyCover);
+    void setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyHeight(double canopyHeight);
+    void setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits);
+    void setCanopyCover(double canopyCover);
     void setCrownRatio(double crownRatio);
     bool isUsingTwoFuelModels() const;
     void setFuelModelNumber(int fuelModelNumber);
+    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
     void setMoistureHundredHour(double moistureHundredHour);
@@ -113,6 +115,7 @@ public:
 
     // SurfaceInputs getters
 	int getFuelModelNumber() const;
+    MoistureUnits::MoistureUnitsEnum getMoistureUnits() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;
@@ -122,9 +125,9 @@ public:
     double getWindDirection() const;
     double getSlope() const;
     double getAspect() const;
+    CoverUnits::CoverUnitsEnum getCoverUnits() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
-    double getCanopyHeightInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const;
     double getCrownRatio() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
     LengthUnits::LengthUnitsEnum getCanopyHeightUnits() const;

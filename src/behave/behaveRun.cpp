@@ -100,6 +100,11 @@ void BehaveRun::setFuelModelNumber(int fuelModelNumber)
     }
 }
 
+void BehaveRun::setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surface_.setMoistureUnits(moistureUnits);
+}
+
 void BehaveRun::setMoistureOneHour(double moistureOneHour)
 {
     surface_.setMoistureOneHour(moistureOneHour);
@@ -256,8 +261,13 @@ void BehaveRun::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
 
 void BehaveRun::setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum treeAndCanopyHeightUnits)
 {
-    surface_.setCanopyHeightUnits(treeAndCanopyHeightUnits);
+    surface_.setTreeAndCanopyHeightUnits(treeAndCanopyHeightUnits);
     crown_.setCanopyBaseHeightUnits(treeAndCanopyHeightUnits);
+}
+
+void BehaveRun::setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits)
+{
+    surface_.setCoverUnits(coverUnits);
 }
 
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum BehaveRun::getWindAndSpreadOrientationMode() const
@@ -414,46 +424,56 @@ int BehaveRun::getFuelModelNumber() const
 	return surface_.getFuelModelNumber();
 }
 
+MoistureUnits::MoistureUnitsEnum BehaveRun::getMoistureUnits() const
+{
+    return surface_.getMoistureUnits();
+}
+
 double BehaveRun::getMoistureOneHour() const
 {
-    // Convert moisture from decimal fraction to percent
-    return surface_.getMoistureOneHour() * 100;
+    MoistureUnits::MoistureUnitsEnum desiredUnits = surface_.getMoistureUnits();
+    return MoistureUnits::fromBaseUnits(surface_.getMoistureOneHour(), desiredUnits);
 }
 
 double BehaveRun::getMoistureTenHour() const
 {
-    // Convert moisture from decimal fraction to percent
-    return surface_.getMoistureTenHour() * 100;
+    MoistureUnits::MoistureUnitsEnum desiredUnits = surface_.getMoistureUnits();
+    return MoistureUnits::fromBaseUnits(surface_.getMoistureTenHour(), desiredUnits);
 }
 
 double BehaveRun::getMoistureHundredHour() const
 {
-    // Convert moisture from decimal fraction to percent
-    return surface_.getMoistureHundredHour() * 100;
+    MoistureUnits::MoistureUnitsEnum desiredUnits = surface_.getMoistureUnits();
+    return MoistureUnits::fromBaseUnits(surface_.getMoistureHundredHour(), desiredUnits);
 }
 
 double BehaveRun::getMoistureLiveHerbaceous() const
 {
-    // Convert moisture from decimal fraction to percent
-    return surface_.getMoistureLiveHerbaceous() * 100;
+    MoistureUnits::MoistureUnitsEnum desiredUnits = surface_.getMoistureUnits();
+    return MoistureUnits::fromBaseUnits(surface_.getMoistureLiveHerbaceous(), desiredUnits);
 }
 
 double BehaveRun::getMoistureLiveWoody() const
 {
-    // Convert moisture from decimal fraction to percent
-    return surface_.getMoistureLiveWoody() * 100;
+    MoistureUnits::MoistureUnitsEnum desiredUnits = surface_.getMoistureUnits();
+    return MoistureUnits::fromBaseUnits(surface_.getMoistureLiveWoody(), desiredUnits);
+}
+
+CoverUnits::CoverUnitsEnum BehaveRun::getCoverUnits() const
+{
+    return surface_.getCoverUnits();
 }
 
 double BehaveRun::getCanopyCover() const
 {
-    // Convert canopy cover from decimal fraction to percent
-    return surface_.getCanopyCover() * 100;
+    CoverUnits::CoverUnitsEnum desiredUnits = surface_.getCoverUnits();
+    return CoverUnits::fromBaseUnits(surface_.getCoverUnits(), desiredUnits);
 }
 
 double BehaveRun::getCanopyHeight() const
 {
     LengthUnits::LengthUnitsEnum desiredUnits = surface_.getCanopyHeightUnits();
-    return surface_.getCanopyHeightInDesiredUnits(desiredUnits);
+    return LengthUnits::fromBaseUnits(surface_.getCanopyHeight(), desiredUnits);
 }
 
 double BehaveRun::getCrownRatio() const

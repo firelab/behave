@@ -66,6 +66,7 @@ public:
     void setCrownRatio(double crownRatio);
     void setFuelModelSet(FuelModelSet& fuelModelSet);
     void setFuelModelNumber(int fuelModelNumber);
+    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour);
     void setMoistureTenHour(double moistureTenHour);
     void setMoistureHundredHour(double moistureHundredHour);
@@ -80,6 +81,7 @@ public:
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum treeAndCanopyHeightUnits);
+    void setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage);
@@ -102,6 +104,7 @@ public:
 
     // SURFACE Module Getters
 	int getFuelModelNumber() const;
+    MoistureUnits::MoistureUnitsEnum getMoistureUnits() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;
@@ -111,6 +114,7 @@ public:
     double getWindDirection() const;
     double getSlope() const;
     double getAspect() const;
+    CoverUnits::CoverUnitsEnum getCoverUnits() const;
     double getCanopyCover() const;
     double getCanopyHeight() const;
     double getCrownRatio() const;

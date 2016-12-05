@@ -215,9 +215,9 @@ double Surface::getEllipticalC() const
     return surfaceFire_.getEllipticalC();
 }
 
-void Surface::setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits)
+void Surface::setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits)
 {
-    surfaceInputs_.setCanopyHeightUnits(canopyHeightUnits);
+    surfaceInputs_.setTreeAndCanopyHeightUnits(canopyHeightUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover)
@@ -228,6 +228,11 @@ void Surface::setCanopyCover(double canopyCover)
 void Surface::setCanopyHeight(double canopyHeight)
 {
     surfaceInputs_.setCanopyHeight(canopyHeight);
+}
+
+void Surface::setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits)
+{
+    surfaceInputs_.setCoverUnits(coverUnits);
 }
 
 void Surface::setCrownRatio(double crownRatio)
@@ -243,6 +248,11 @@ bool Surface::isUsingTwoFuelModels() const
 int Surface::getFuelModelNumber() const
 {
 	return surfaceInputs_.getFuelModelNumber();
+}
+
+MoistureUnits::MoistureUnitsEnum Surface::getMoistureUnits() const
+{
+    return surfaceInputs_.getMoistureUnits();
 }
 
 double Surface::getMoistureOneHour() const
@@ -278,11 +288,6 @@ double Surface::getCanopyCover() const
 double Surface::getCanopyHeight() const
 {
     return surfaceInputs_.getCanopyHeight();
-}
-
-double Surface::getCanopyHeightInDesiredUnits(LengthUnits::LengthUnitsEnum desiredUnits) const
-{
-    return LengthUnits::fromBaseUnits(surfaceInputs_.getCanopyHeight(), desiredUnits);
 }
 
 double Surface::getCrownRatio() const
@@ -350,9 +355,19 @@ double Surface::getAspect() const
     return surfaceInputs_.getAspect();
 }
 
+CoverUnits::CoverUnitsEnum Surface::getCoverUnits() const
+{
+    return surfaceInputs_.getCoverUnits();
+}
+
 void Surface::setFuelModelNumber(int fuelModelNumber)
 {
     surfaceInputs_.setFuelModelNumber(fuelModelNumber);
+}
+
+void Surface::setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surfaceInputs_.setMoistureUnits(moistureUnits);
 }
 
 void Surface::setMoistureOneHour(double moistureOneHour)

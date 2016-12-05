@@ -58,7 +58,7 @@ public:
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
-    void setCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
+    void setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits);
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight);
