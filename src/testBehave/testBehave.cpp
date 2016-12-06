@@ -178,6 +178,13 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
     expectedSurfaceFireSpreadRate = 8.503960;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test Non-Burnable Fuel
+    behaveRun.setFuelModelNumber(91);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate());
+    expectedSurfaceFireSpreadRate = 0.0;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
