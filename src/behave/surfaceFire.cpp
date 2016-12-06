@@ -339,14 +339,13 @@ void SurfaceFire::calculateWindFactor()
     windB_ = 0.02526 * pow(sigma, 0.54);
     windE_ = 0.715 * exp(-0.000359*sigma);
 
-    double windSpeedInFtPerMin = midflameWindSpeed_;		// ft/minute
-    if (windSpeedInFtPerMin < 1.0e-07)
+    if (midflameWindSpeed_ < 1.0e-07) // midflameWindSpeed is in ft/min
     {
         phiW_ = 0.0;
     }
     else
     {
-        phiW_ = pow(windSpeedInFtPerMin, windB_) * windC_ * pow(relativePackingRatio, -windE_);
+        phiW_ = pow(midflameWindSpeed_, windB_) * windC_ * pow(relativePackingRatio, -windE_);
     }
 }
 
