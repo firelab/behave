@@ -123,7 +123,8 @@ void SurfaceFire::calculateResidenceTime()
 
 void SurfaceFire::calculateFireFirelineIntensity()
 {
-    firelineIntensity_ = forwardSpreadRate_ * reactionIntensity_ * residenceTime_ / 60.0;
+    double secondsPerMinute = 60.0;
+    firelineIntensity_ = forwardSpreadRate_ * reactionIntensity_ * residenceTime_ / secondsPerMinute;
 }
 
 double  SurfaceFire::calculateFlameLength(double firelineIntensity)
@@ -428,19 +429,13 @@ void SurfaceFire::calculateEllipticalDimensions()
     ellipticalB_ = 0.0;
     ellipticalC_ = 0.0;
 
-    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0;
-
+    // Internally A, B, and C are in terms of ft/min
     ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2;
     if (fireLengthToWidthRatio_ > 1e-07)
     {
         ellipticalA_ = ellipticalB_ / fireLengthToWidthRatio_;
     }
     ellipticalC_ = ellipticalB_ - backingSpreadRate_;
-
-    // Convert elliptical dimensions from being in terms of ft/min to ch/hr
-    ellipticalA_ *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
-    ellipticalB_ *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
-    ellipticalC_ *= FEET_PER_MIN_TO_CHAINS_PER_HOUR;
 }
 
 void SurfaceFire::calculateBackingSpreadRate()

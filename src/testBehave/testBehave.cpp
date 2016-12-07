@@ -87,7 +87,6 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = TwoFuelModels::TWO_DIMENSIONAL;
     double windSpeed = 5.0;
     double windDirection = 0;
@@ -199,9 +198,9 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
-    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
    
     observedA = roundToSixDecimalPlaces(behaveRun.getEllipticalA());

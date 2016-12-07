@@ -145,6 +145,16 @@ void BehaveRun::setWindSpeed(double windSpeed)
     surface_.setWindSpeed(windSpeed);
 }
 
+void BehaveRun::setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
+{
+    surface_.setWindSpeedUnits(windSpeedUnits);
+}
+
+void BehaveRun::setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
+{
+    surface_.setSpreadRateUnits(spreadRateUnits);
+}
+
 void BehaveRun::setWindDirection(double windDirection)
 {
     surface_.setWindDirection(windDirection);
@@ -285,6 +295,11 @@ SpeedUnits::SpeedUnitsEnum BehaveRun::getWindSpeedUnits() const
     return surface_.getWindSpeedUnits();
 }
 
+SpeedUnits::SpeedUnitsEnum BehaveRun::getSpreadRateUnits() const
+{
+    return surface_.getSpreadRateUnits();
+}
+
 SlopeUnits::SlopeUnitsEnum BehaveRun::getSlopeUnits() const
 {
     return surface_.getSlopeUnits();
@@ -354,17 +369,20 @@ double BehaveRun::getSurfaceFireReactionIntensity() const
 
 double BehaveRun::getEllipticalA() const
 {
-    return surface_.getEllipticalA();
+    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getSpreadRateUnits();
+    return SpeedUnits::fromBaseUnits(surface_.getEllipticalA(), desiredUnits);
 }
 
 double BehaveRun::getEllipticalB() const
 {
-    return surface_.getEllipticalB();
+    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getSpreadRateUnits();
+    return SpeedUnits::fromBaseUnits(surface_.getEllipticalB(), desiredUnits);
 }
 
 double BehaveRun::getEllipticalC() const
 {
-    return surface_.getEllipticalC();
+    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getSpreadRateUnits();
+    return SpeedUnits::fromBaseUnits(surface_.getEllipticalC(), desiredUnits);
 }
 
 double BehaveRun::getWindSpeed() const
@@ -541,8 +559,8 @@ void BehaveRun::doCrownRun()
 
 double BehaveRun::getCrownFireSpreadRate() const
 {
-    const double FEET_PER_MIN_TO_CHAINS_PER_HOUR = 10.0 / 11.0; // conversion factor from ft/min to chains/hr
-    return crown_.getCrownFireSpreadRate() * FEET_PER_MIN_TO_CHAINS_PER_HOUR;
+    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getSpreadRateUnits();
+    return SpeedUnits::fromBaseUnits(crown_.getCrownFireSpreadRate(), desiredUnits);
 }
 
 FireType::FireTypeEnum BehaveRun::getCrownFireType() const

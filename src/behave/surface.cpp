@@ -420,7 +420,7 @@ void Surface::setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
     surfaceInputs_.setWindSpeedUnits(windSpeedUnits);
 }
 
-void Surface::setSpreadUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
+void Surface::setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
 {
     surfaceInputs_.setSpreadRateUnits(spreadRateUnits);
 }

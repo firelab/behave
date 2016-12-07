@@ -75,6 +75,8 @@ public:
     void setSlope(double slope);
     void setAspect(double aspect);
     void setWindSpeed(double windSpeed);
+    void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setWindDirection(double windDirection);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode);
@@ -133,8 +135,9 @@ public:
     double getEllipticalC() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
-    SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
+    SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
+    SpeedUnits::SpeedUnitsEnum getSpreadRateUnits() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
    

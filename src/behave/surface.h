@@ -86,7 +86,7 @@ public:
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode);
     void setWindSpeed(double windSpeed);
     void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
-    void setSpreadUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
+    void setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
