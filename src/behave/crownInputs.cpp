@@ -46,7 +46,6 @@ void CrownInputs::initializeMembers()
     moistureFoliar_ = 0;
     canopyBaseHeightUnits_ = LengthUnits::FEET;
     canopyBulkDensityUnits_ = DensityUnits::POUNDS_PER_CUBIC_FOOT;
-    moistureUnits_ = MoistureUnits::PERCENT;
 }
 
 double CrownInputs::getCanopyBaseHeight() const
@@ -77,11 +76,6 @@ DensityUnits::DensityUnitsEnum CrownInputs::getCanopyBulkDensityUnits() const
 LengthUnits::LengthUnitsEnum CrownInputs::getCanopyBaseHeightUnits() const
 {
     return canopyBaseHeightUnits_;
-}
-
-MoistureUnits::MoistureUnitsEnum CrownInputs::getMoistureUnits() const
-{
-    return moistureUnits_;
 }
 
 double CrownInputs::getMoistureFoliar() const
@@ -119,19 +113,14 @@ void CrownInputs::setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBa
     canopyBaseHeightUnits_ = canopyBaseHeightUnits;
 }
 
-void CrownInputs::setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits)
+void CrownInputs::setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    moistureUnits_ = moistureUnits;
+    moistureFoliar_ = MoistureUnits::toBaseUnits(moistureFoliar, moistureUnits);
 }
 
-void CrownInputs::setMoistureFoliar(double moistureFoliar)
-{
-    moistureFoliar_ = MoistureUnits::toBaseUnits(moistureFoliar, moistureUnits_);
-}
-
-void CrownInputs::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double moisturefoliar)
+void CrownInputs::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double moisturefoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     setCanopyBaseHeight(canopyBaseHeight);
     setCanopyBulkDensity(canopyBulkDensity);
-    setMoistureFoliar(moisturefoliar);
+    setMoistureFoliar(moisturefoliar, moistureUnits);
 }

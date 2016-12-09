@@ -54,11 +54,10 @@ public:
 
     void doCrownRun();
   
-    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture);
+    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
-    void setMoistureFoliar(double foliarMoisture);
-    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureFoliar(double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
 

@@ -348,9 +348,9 @@ void Crown::calculateFireType()
     }
 }
 
-void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture)
+void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture);
+    crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture, moistureUnits);
 }
 
 void Crown::setCanopyBaseHeight(double canopyBaseHeight)
@@ -363,14 +363,9 @@ void Crown::setCanopyBulkDensity(double canopyBulkDensity)
     crownInputs_.setCanopyBulkDensity(canopyBulkDensity);
 }
 
-void Crown::setMoistureFoliar(double moistureFoliar)
+void Crown::setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    crownInputs_.setMoistureFoliar(moistureFoliar);
-}
-
-void Crown::setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits)
-{
-    crownInputs_.setMoistureUnits(moistureUnits);
+    crownInputs_.setMoistureFoliar(moistureFoliar, moistureUnits);
 }
 
 void Crown::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits)

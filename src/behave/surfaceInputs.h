@@ -39,15 +39,14 @@ public:
   
     // Main Surface module inputs setters 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection, double slope, 
+        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, double slope,
         double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
-    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureOneHour(double moistureOneHour);
-    void setMoistureTenHour(double moistureTenHour);
-    void setMoistureHundredHour(double moistureHundredHour);
-    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous);
-    void setMoistureLiveWoody(double moistureLiveWoody);
+    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setSlope(double slope);
     void setAspect(double slopeAspect);
     void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
@@ -68,7 +67,6 @@ public:
 
     // Main Surface module inputs getters 
     int getFuelModelNumber() const;
-    MoistureUnits::MoistureUnitsEnum getMoistureUnits() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;
@@ -94,9 +92,10 @@ public:
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
-        double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, 
-        double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
+        double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
+        MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, double firstFuelModelCoverage, 
+        TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect, double canopyCover, double canopyHeight, 
+        double crownRatio);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod);
@@ -111,9 +110,9 @@ public:
 
     // Palmetto-Gallberry inputs setters
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection, double ageOfRough, 
-        double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, double aspect, 
-        double canopyCover, double canopyHeight, double crownRatio);
+        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
+        double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, 
+        double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setAgeOfRough(double ageOfRough);
     void setHeightOfUnderstory(double heightOfUnderstory);
     void setPalmettoCoverage(double palmettoCoverage);
@@ -129,7 +128,8 @@ public:
     // Westerm Aspen inputs setters
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
-        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, double windSpeed, double windDirection,
+        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
+        MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection,
         double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio);
     void setAspenFuelModelNumber(int aspenFuelModelNumber);
     void setAspenCuringLevel(double aspenCuringLevel);
@@ -189,7 +189,6 @@ private:
     LengthUnits::LengthUnitsEnum canopyHeightUnits_;
     CoverUnits::CoverUnitsEnum coverUnits_;
     LengthUnits::LengthUnitsEnum flameLengthUnits_;
-    MoistureUnits::MoistureUnitsEnum moistureUnits_;
     SlopeUnits::SlopeUnitsEnum slopeUnits_;
     SpeedUnits::SpeedUnitsEnum spreadRateUnits_;
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;              

@@ -345,7 +345,7 @@ int main(int argc, char *argv[])
             windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
             // Feed input values to behave
             behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, 
-                moistureLiveHerb, moistureLiveWoody, windSpeed, 
+                moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed,
                 windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
             // Calculate spread rate and flame length
             behave.doSurfaceRunInDirectionOfMaxSpread();

@@ -82,7 +82,6 @@ struct MoistureUnits
     static double fromBaseUnits(double value, MoistureUnitsEnum units);
 };
 
-
 struct SlopeUnits
 {
     enum SlopeUnitsEnum
@@ -94,7 +93,6 @@ struct SlopeUnits
     static double toBaseUnits(double value, SlopeUnitsEnum units);
     static double fromBaseUnits(double value, SlopeUnitsEnum units);
 };
-
 
 struct DensityUnits
 {

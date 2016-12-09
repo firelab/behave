@@ -110,7 +110,7 @@ double SurfaceFire::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, d
     noWindNoSlopeSpreadRate_ = (heatSink < 1.0e-07)
         ? (0.0)
         : (reactionIntensity * propagatingFlux / heatSink);
-    return(noWindNoSlopeSpreadRate_);
+    return noWindNoSlopeSpreadRate_;
 }
 
 void SurfaceFire::calculateResidenceTime()
@@ -183,9 +183,11 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
         applyWindSpeedLimit();
     }
 
-    // Convert wind speeds to mi/hr
-    effectiveWindSpeed_ /= 88.0; // effective wind speed is not in mi/hr
-    windSpeedLimit_ /= 88.0; // wind speed limit is not in mi/hr
+    // Convert wind speeds to desired units
+    SpeedUnits::SpeedUnitsEnum desiredWindSpeedUnits = surfaceInputs_->getWindSpeedUnits();
+    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, desiredWindSpeedUnits);
+    //effectiveWindSpeed_ /= 88.0; // effective wind speed is now in mi/hr
+    //windSpeedLimit_ /= 88.0; // wind speed limit is now in mi/hr
 
     calculateResidenceTime();
 
@@ -204,8 +206,6 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     calculateBackingSpreadRate();
     calculateEllipticalDimensions();
     calculateHeatPerUnitArea();
-
-    //hasDirectionOfInterest_ = false;
 
     return forwardSpreadRate_;
 }
@@ -230,7 +230,6 @@ double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
         if (fabs(beta) > 0.1)
         {
             double radians = beta * M_PI / 180.0;
-
             rosVector = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 - eccentricity_ * cos(radians));
         }
     }
@@ -320,12 +319,12 @@ void SurfaceFire::calculateHeatPerUnitArea()
 
 void  SurfaceFire::calculateWindSpeedLimit()
 {
-    windSpeedLimit_ = 0.9 * reactionIntensity_; // windSpeedLimit is in ft/min
+    windSpeedLimit_ = 0.9 * reactionIntensity_; 
     if (phiS_ > 0.0)
     {
         if (phiS_ > windSpeedLimit_)
         {
-            // can't have inifinite windspeed
+            // Enforce wind speed limit
             phiS_ = windSpeedLimit_;
         }
     }
@@ -340,7 +339,8 @@ void SurfaceFire::calculateWindFactor()
     windB_ = 0.02526 * pow(sigma, 0.54);
     windE_ = 0.715 * exp(-0.000359*sigma);
 
-    if (midflameWindSpeed_ < 1.0e-07) // midflameWindSpeed is in ft/min
+    // midflameWindSpeed is in ft/min
+    if (midflameWindSpeed_ < 1.0e-07) 
     {
         phiW_ = 0.0;
     }
@@ -429,7 +429,7 @@ void SurfaceFire::calculateEllipticalDimensions()
     ellipticalB_ = 0.0;
     ellipticalC_ = 0.0;
 
-    // Internally A, B, and C are in terms of ft/min
+    // Internally A, B, and C are in terms of ft
     ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2;
     if (fireLengthToWidthRatio_ > 1e-07)
     {
