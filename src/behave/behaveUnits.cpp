@@ -37,20 +37,20 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
 
     switch (units)
     {
-    case FEET:
-        // Already in base, nothing to do
-        break;
-    case METERS:
-        value *= METERS_TO_FEET;
-        break;
-    case MILES:
-        value *= MILES_TO_FEET;
-        break;
-    case KILOMETERS:
-        value *= KILOMETERS_TO_FEET;
-        break;
-    default:
-        ; // TODO: Handle error
+        case FEET:
+            // Already in base, nothing to do
+            break;
+        case METERS:
+            value *= METERS_TO_FEET;
+            break;
+        case MILES:
+            value *= MILES_TO_FEET;
+            break;
+        case KILOMETERS:
+            value *= KILOMETERS_TO_FEET;
+            break;
+        default:
+            ; // TODO: Handle error
     }
     return value;
 }
@@ -64,20 +64,20 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
 
     switch (units)
     {
-    case FEET:
-        // Already in base, nothing to do
-        break;
-    case METERS:
-        value *= FEET_TO_METERS;
-        break;
-    case MILES:
-        value *= FEET_TO_MILES;
-        break;
-    case KILOMETERS:
-        value *= FEET_TO_KILOMETERS;
-        break;
-    default:
-        ; // TODO: Handle error
+        case FEET:
+            // Already in base, nothing to do
+            break;
+        case METERS:
+            value *= FEET_TO_METERS;
+            break;
+        case MILES:
+            value *= FEET_TO_MILES;
+            break;
+        case KILOMETERS:
+            value *= FEET_TO_KILOMETERS;
+            break;
+        default:
+            ; // TODO: Handle error
     }
     return value;
 }
@@ -93,26 +93,26 @@ double SpeedUnits::toBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 
     switch (units)
     {
-    case FEET_PER_MINUTE:
-        // Already in base, nothing to do
-        break;
-    case METERS_PER_SECOND:
-        value *= METERS_PER_SECOND_TO_FEET_PER_MINUTE;
-        break;
-    case   METERS_PER_MINUTE:
-        value *= METERS_PER_MINUTE_TO_FEET_PER_MINUTE;
-        break;
-    case CHAINS_PER_HOUR:
-        value *= CHAINS_PER_HOUR_TO_FEET_PER_MINUTE;
-        break;
-    case MILES_PER_HOUR:
-        value *= MILES_PER_HOUR_TO_FEET_PER_MINUTE;
-        break;
-    case KILOMETERS_PER_HOUR:
-        value *= KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE;
-        break;
-    default:
-        ; // TODO: Handle error
+        case FEET_PER_MINUTE:
+            // Already in base, nothing to do
+            break;
+        case METERS_PER_SECOND:
+            value *= METERS_PER_SECOND_TO_FEET_PER_MINUTE;
+            break;
+        case   METERS_PER_MINUTE:
+            value *= METERS_PER_MINUTE_TO_FEET_PER_MINUTE;
+            break;
+        case CHAINS_PER_HOUR:
+            value *= CHAINS_PER_HOUR_TO_FEET_PER_MINUTE;
+            break;
+        case MILES_PER_HOUR:
+            value *= MILES_PER_HOUR_TO_FEET_PER_MINUTE;
+            break;
+        case KILOMETERS_PER_HOUR:
+            value *= KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE;
+            break;
+        default:
+            ; // TODO: Handle error
     }
     return value;
 }
@@ -128,26 +128,26 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 
     switch (units)
     {
-    case FEET_PER_MINUTE:
-        // Already in base, nothing to do
-        break;
-    case METERS_PER_SECOND:
-        value *= FEET_PER_MINUTE_TO_METERS_PER_SECOND;
-        break;
-    case   METERS_PER_MINUTE:
-        value *= FEET_PER_MINUTE_TO_METERS_PER_MINUTE;
-        break;
-    case CHAINS_PER_HOUR:
-        value *= FEET_PER_MINUTE_TO_CHAINS_PER_HOUR;
-        break;
-    case MILES_PER_HOUR:
-        value *= FEET_PER_MINUTE_TO_MILES_PER_HOUR;
-        break;
-    case KILOMETERS_PER_HOUR:
-        value *= FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR;
-        break;
-    default:
-        ; // TODO: Handle error
+        case FEET_PER_MINUTE:
+            // Already in base, nothing to do
+            break;
+        case METERS_PER_SECOND:
+            value *= FEET_PER_MINUTE_TO_METERS_PER_SECOND;
+            break;
+        case   METERS_PER_MINUTE:
+            value *= FEET_PER_MINUTE_TO_METERS_PER_MINUTE;
+            break;
+        case CHAINS_PER_HOUR:
+            value *= FEET_PER_MINUTE_TO_CHAINS_PER_HOUR;
+            break;
+        case MILES_PER_HOUR:
+            value *= FEET_PER_MINUTE_TO_MILES_PER_HOUR;
+            break;
+        case KILOMETERS_PER_HOUR:
+            value *= FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR;
+            break;
+        default:
+            ; // TODO: Handle error
     }
     return value;
 }
@@ -193,7 +193,7 @@ double SlopeUnits::toBaseUnits(double value, SlopeUnitsEnum units)
     static const double PI = 3.141592653589793238463;
 
     if (units == PERCENT)
-    {    
+    {
         value = (180 / PI) * atan(value / 100.0); // slope is now in degees
     }
     return value;
