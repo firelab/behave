@@ -227,16 +227,6 @@ void SurfaceInputs::setCoverUnits(CoverUnits::CoverUnitsEnum canopyCoverUnits)
     coverUnits_ = canopyCoverUnits;
 }
 
-double SurfaceInputs::convertWindToUpslope(double windDirectionFromNorth)
-{
-    // Important information: 
-    // when wind is given relative to upslope, it is given as the direction the wind pushes the fire, 
-    // not the direction from which is blowing - WMC 01/2016
-    double windDirectionFromUpslope = windDirectionFromNorth - aspect_; // wind direction is now in degrees 
-    //clockwise relative to blowing in the upslope direction
-    return windDirectionFromUpslope;
-}
-
 void SurfaceInputs::setFuelModelNumber(int fuelModelNumber)
 {
     fuelModelNumber_ = fuelModelNumber;

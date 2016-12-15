@@ -144,7 +144,6 @@ public:
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
 
 private:
-    double convertWindToUpslope(double windDirectionFromNorth);
     void initializeMembers();
    
     // Main Suface module inputs
