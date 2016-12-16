@@ -87,7 +87,6 @@ int main(int argc, char *argv[])
 
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
-    behave.setSlopeUnits(SlopeUnits::DEGREES);
     behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
 
     std::string line = "";
@@ -346,7 +345,7 @@ int main(int argc, char *argv[])
             // Feed input values to behave
             behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, 
                 moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed,
-                windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+                windDirection, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, crownRatio);
             // Calculate spread rate and flame length
             behave.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate
