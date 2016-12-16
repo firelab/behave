@@ -414,29 +414,29 @@ double SurfaceInputs::getWindSpeed() const
     return windSpeed_;
 }
 
-double SurfaceInputs::getMoistureOneHour() const
+double SurfaceInputs::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return moistureOneHour_;
+    return MoistureUnits::fromBaseUnits(moistureOneHour_, moistureUnits);
 }
 
-double SurfaceInputs::getMoistureTenHour() const
+double SurfaceInputs::getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return moistureTenHour_;
+     return MoistureUnits::fromBaseUnits(moistureTenHour_, moistureUnits);
 }
 
-double SurfaceInputs::getMoistureHundredHour() const
+double SurfaceInputs::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return moistureHundredHour_;
+    return MoistureUnits::fromBaseUnits(moistureHundredHour_, moistureUnits);
 }
 
-double SurfaceInputs::getMoistureLiveHerbaceous() const
+double SurfaceInputs::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return moistureLiveHerbaceous_;
+    return MoistureUnits::fromBaseUnits(moistureLiveHerbaceous_, moistureUnits);
 }
 
-double SurfaceInputs::getMoistureLiveWoody() const
+double SurfaceInputs::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return moistureLiveWoody_;
+    return MoistureUnits::fromBaseUnits(moistureLiveWoody_, moistureUnits);
 }
 
 void SurfaceInputs::setAgeOfRough(double ageOfRough)

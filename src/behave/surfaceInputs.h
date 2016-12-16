@@ -67,11 +67,11 @@ public:
 
     // Main Surface module inputs getters 
     int getFuelModelNumber() const;
-    double getMoistureOneHour() const;
-    double getMoistureTenHour() const;
-    double getMoistureHundredHour() const;
-    double getMoistureLiveHerbaceous() const;
-    double getMoistureLiveWoody() const;
+    double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getWindSpeed() const;
     double getWindDirection() const;
     double getSlope() const;

@@ -50,7 +50,7 @@ public:
     double getCanopyFirelineIntensity() const;
     DensityUnits::DensityUnitsEnum  getCanopyBulkDensityUnits() const;
     LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
-    double getMoistureFoliar() const;
+    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
 
     void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
 

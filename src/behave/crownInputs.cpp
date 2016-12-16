@@ -78,9 +78,9 @@ LengthUnits::LengthUnitsEnum CrownInputs::getCanopyBaseHeightUnits() const
     return canopyBaseHeightUnits_;
 }
 
-double CrownInputs::getMoistureFoliar() const
+double CrownInputs::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return moistureFoliar_;
+    return MoistureUnits::fromBaseUnits(moistureFoliar_, moistureUnits);
 }
 
 void CrownInputs::setCanopyBaseHeight(double canopyBaseHeight)

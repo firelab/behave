@@ -250,29 +250,29 @@ int Surface::getFuelModelNumber() const
 	return surfaceInputs_.getFuelModelNumber();
 }
 
-double Surface::getMoistureOneHour() const
+double Surface::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surfaceInputs_.getMoistureOneHour();
+    return surfaceInputs_.getMoistureOneHour(moistureUnits);
 }
 
-double Surface::getMoistureTenHour() const
+double Surface::getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surfaceInputs_.getMoistureTenHour();
+    return surfaceInputs_.getMoistureTenHour(moistureUnits);
 }
 
-double Surface::getMoistureHundredHour() const
+double Surface::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surfaceInputs_.getMoistureHundredHour();
+    return surfaceInputs_.getMoistureHundredHour(moistureUnits);
 }
 
-double Surface::getMoistureLiveHerbaceous() const
+double Surface::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surfaceInputs_.getMoistureLiveHerbaceous();
+    return surfaceInputs_.getMoistureLiveHerbaceous(moistureUnits);
 }
 
-double Surface::getMoistureLiveWoody() const
+double Surface::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surfaceInputs_.getMoistureLiveWoody();
+    return surfaceInputs_.getMoistureLiveWoody(moistureUnits);
 }
 
 double Surface::getCanopyCover() const

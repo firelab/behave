@@ -63,7 +63,7 @@ public:
 
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
-    double getMoistureFoliar() const;
+    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getCrownFireSpreadRate() const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
