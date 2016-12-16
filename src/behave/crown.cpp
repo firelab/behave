@@ -105,7 +105,7 @@ void Crown::doCrownRun()
 
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
     crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
-    crownDeepCopyOfSurface_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
+    crownDeepCopyOfSurface_.setSlope(0.0, SlopeUnits::DEGREES);             // slope is always assumed to be zero in crown ROS
     crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
 
     // Step 3: Determine fire behavior

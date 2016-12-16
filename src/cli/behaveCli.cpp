@@ -260,6 +260,7 @@ int main(int argc, char *argv[])
     double windSpeed = 0.0;
     double windDirection = 0.0;
     double slope = 0.0;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::DEGREES;
     double aspect = 0.0;
     double directionOfMaxSpread = 0.0;
     double flameLength = 0.0;
@@ -279,7 +280,6 @@ int main(int argc, char *argv[])
 
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
-    behave.setSlopeUnits(SlopeUnits::DEGREES);
     behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
     behave.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
 
@@ -464,7 +464,7 @@ int main(int argc, char *argv[])
 
     // Feed input values to behave
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT,
-        windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        windSpeed, windDirection, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
 
     // Do the spread rate calculation
     if (hasDirectionOfInterest)

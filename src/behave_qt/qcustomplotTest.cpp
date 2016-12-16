@@ -55,7 +55,7 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
     for (int i = 0; i < NO_OF_ROWS; i++)
     {
         //oneHourMoisture += incrementAmount; // Update the value of the secondary independently ranged variable
-        behaveVector[i].updateSurfaceInputs(fuelModelNumber, 6, 7, 8, 60, 90, MoistureUnits::PERCENT, windSpeed, 0, 0, 0, 0, 0, 0);
+        behaveVector[i].updateSurfaceInputs(fuelModelNumber, 6, 7, 8, 60, 90, MoistureUnits::PERCENT, windSpeed, 0, 0, SlopeUnits::DEGREES, 0, 0, 0, 0);
         customPlot->addGraph(); // add a graph to the plot
         fuelModelNumber += (int)incrementAmount; // Update the value of the secondary independently ranged variable
     }
