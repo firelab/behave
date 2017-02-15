@@ -105,7 +105,7 @@ void Crown::doCrownRun()
 
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
     crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
-    crownDeepCopyOfSurface_.setSlope(0.0);             // slope is always assumed to be zero in crown ROS
+    crownDeepCopyOfSurface_.setSlope(0.0, SlopeUnits::DEGREES);             // slope is always assumed to be zero in crown ROS
     crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
 
     // Step 3: Determine fire behavior
@@ -226,10 +226,8 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
 {
     const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.288672;
 
-    double moistureFoliar = crownInputs_.getMoistureFoliar();
-
-    // Convert foliar moisture content to percent and constrain lower limit
-    moistureFoliar = MoistureUnits::fromBaseUnits(moistureFoliar, MoistureUnits::PERCENT);
+    // Get moisture content in percent and constrain lower limit
+    double moistureFoliar = crownInputs_.getMoistureFoliar(MoistureUnits::PERCENT);
     moistureFoliar = (moistureFoliar < 30.0) ? 30.0 : moistureFoliar;
 
     double crownBaseHeight = crownInputs_.getCanopyBaseHeight();
@@ -388,7 +386,7 @@ double Crown::getCanopyBulkDensity() const
     return crownInputs_.getCanopyBulkDensity();
 }
 
-double Crown::getMoistureFoliar() const
+double Crown::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return crownInputs_.getMoistureFoliar();
+    return crownInputs_.getMoistureFoliar(moistureUnits);
 }

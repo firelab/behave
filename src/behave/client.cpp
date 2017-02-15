@@ -121,7 +121,7 @@ int main()
     crownRatio = 0.50;
 
     // Single fuel model test
-    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed, windDirection, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, crownRatio);
     behave.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     spreadRate = behave.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR);
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;

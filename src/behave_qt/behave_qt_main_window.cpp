@@ -102,7 +102,7 @@ void BehaveQtMainWindow::windSpeedInputChanged(const QString& text)
 void BehaveQtMainWindow::slopeInputChanged(const QString& text)
 {
     double slope = text.toDouble();
-    behaveRun.setSlope(slope);
+    behaveRun.setSlope(slope, SlopeUnits::DEGREES);
 }
 
 // Slot

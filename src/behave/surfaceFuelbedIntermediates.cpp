@@ -252,14 +252,14 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
 {
     if (isUsingPalmettoGallberry_)
     {
-        moistureDead_[0] = surfaceInputs_->getMoistureOneHour();
-        moistureDead_[1] = surfaceInputs_->getMoistureTenHour();
-        moistureDead_[2] = surfaceInputs_->getMoistureOneHour();
-        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour();
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(MoistureUnits::FRACTION);
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(MoistureUnits::FRACTION);
+        moistureDead_[2] = surfaceInputs_->getMoistureOneHour(MoistureUnits::FRACTION);
+        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour(MoistureUnits::FRACTION);
 
-        moistureLive_[0] = surfaceInputs_->getMoistureLiveWoody();
-        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody();
-        moistureLive_[2] = surfaceInputs_->getMoistureLiveHerbaceous();
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::FRACTION);
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::FRACTION);
+        moistureLive_[2] = surfaceInputs_->getMoistureLiveHerbaceous(MoistureUnits::FRACTION);
         moistureLive_[3] = 0.0;
     }
     else
@@ -270,13 +270,13 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
             moistureLive_[i] = 0;
         }
 
-        moistureDead_[0] = surfaceInputs_->getMoistureOneHour();
-        moistureDead_[1] = surfaceInputs_->getMoistureTenHour();
-        moistureDead_[2] = surfaceInputs_->getMoistureHundredHour();
-        moistureDead_[3] = surfaceInputs_->getMoistureOneHour();
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(MoistureUnits::FRACTION);
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(MoistureUnits::FRACTION);
+        moistureDead_[2] = surfaceInputs_->getMoistureHundredHour(MoistureUnits::FRACTION);
+        moistureDead_[3] = surfaceInputs_->getMoistureOneHour(MoistureUnits::FRACTION);
 
-        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous();
-        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody();
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous(MoistureUnits::FRACTION);
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::FRACTION);
     }
 }
 

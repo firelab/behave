@@ -39,7 +39,7 @@ BehaveRun::BehaveRun(FuelModelSet& fuelModelSet)
 
 BehaveRun::BehaveRun(const BehaveRun& rhs)
     : surface_(*rhs.fuelModelSet_),
-    crown_(*rhs.fuelModelSet_, surface_) 
+    crown_(*rhs.fuelModelSet_, surface_)
 {
     memberwiseCopyAssignment(rhs);
 }
@@ -125,9 +125,9 @@ void BehaveRun::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::Mo
     surface_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
 }
 
-void BehaveRun::setSlope(double slope)
+void BehaveRun::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)
 {
-    surface_.setSlope(slope);
+    surface_.setSlope(slope, slopeUnits);
 }
 
 void BehaveRun::setAspect(double aspect)
@@ -207,45 +207,46 @@ void BehaveRun::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelM
 }
 
 void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, double slope, double aspect,
-    double canopyCover, double canopyHeight, double crownRatio)
-{  
+    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+{
     surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-        moistureLiveWoody, moistureUnits, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        moistureLiveWoody, moistureUnits, windSpeed, windDirection, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
     setFuelModelNumber(fuelModelNumber);
     surface_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
 }
 
 void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
-    double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits,
-    double windSpeed, double windDirection, double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, double aspect,
+    double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+    MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, double firstFuelModelCoverage,
+    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
     double canopyCover, double canopyHeight, double crownRatio)
-{   
+{
     surface_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection,
-        firstFuelModelCoverage, twoFuelModelsMethod, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
     setFirstFuelModelNumber(firstfuelModelNumber);
     setSecondFuelModelNumber(secondFuelModelNumber);
 }
 
 void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
-    double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, 
-    double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
-{ 
-    surface_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, 
+    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
+    double windDirection, double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+{
+    surface_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage,
-        overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
+        overstoryBasalArea, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
 void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection,
-    double slope, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, double crownRatio)
 {
     surface_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, aspenFireSeverity, DBH, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection,
-        slope, aspect, canopyCover, canopyHeight, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
 void BehaveRun::doSurfaceRunInDirectionOfMaxSpread()
@@ -257,11 +258,6 @@ void BehaveRun::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
 {
     // Calculate SURFACE Module outputs
     surface_.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-}
-
-void BehaveRun::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
-{
-    surface_.setSlopeUnits(slopeInputMode);
 }
 
 void BehaveRun::setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum treeAndCanopyHeightUnits)
@@ -405,57 +401,57 @@ bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 
 double BehaveRun::getFuelLoadOneHour(int fuelModelNumber) const
 {
-	return fuelModelSet_->getFuelLoadOneHour(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadOneHour(fuelModelNumber);
 }
 
 double BehaveRun::getFuelLoadTenHour(int fuelModelNumber) const
 {
-	return fuelModelSet_->getFuelLoadTenHour(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadTenHour(fuelModelNumber);
 }
 
 double BehaveRun::getFuelLoadHundredHour(int fuelModelNumber) const
 {
-	return fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber);
 }
 
 double BehaveRun::getFuelLoadLiveHerbaceous(int fuelModelNumber) const
 {
-	return fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber);
 }
 
 double BehaveRun::getFuelLoadLiveWoody(int fuelModelNumber) const
 {
-	return fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber);
 }
 
 int BehaveRun::getFuelModelNumber() const
 {
-	return surface_.getFuelModelNumber();
+    return surface_.getFuelModelNumber();
 }
 
 double BehaveRun::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surface_.getMoistureOneHour(), moistureUnits);
+    return surface_.getMoistureOneHour(moistureUnits);
 }
 
 double BehaveRun::getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surface_.getMoistureTenHour(), moistureUnits);
+    return surface_.getMoistureTenHour(moistureUnits);
 }
 
 double BehaveRun::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surface_.getMoistureHundredHour(), moistureUnits);
+    return surface_.getMoistureHundredHour(moistureUnits);
 }
 
 double BehaveRun::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surface_.getMoistureLiveHerbaceous(), moistureUnits);
+    return surface_.getMoistureLiveHerbaceous(moistureUnits);
 }
 
 double BehaveRun::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surface_.getMoistureLiveWoody(), moistureUnits);
+    return surface_.getMoistureLiveWoody(moistureUnits);
 }
 
 CoverUnits::CoverUnitsEnum BehaveRun::getCoverUnits() const
@@ -506,7 +502,7 @@ void BehaveRun::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum density
 double BehaveRun::getCanopyBaseHeight() const
 {
     LengthUnits::LengthUnitsEnum desiredUnits = crown_.getCanopyBaseHeightUnits();
-    return LengthUnits::fromBaseUnits(crown_.getCanopyBaseHeight(),desiredUnits);
+    return LengthUnits::fromBaseUnits(crown_.getCanopyBaseHeight(), desiredUnits);
 }
 
 double BehaveRun::getCanopyBulkDensity() const
@@ -515,9 +511,9 @@ double BehaveRun::getCanopyBulkDensity() const
     return DensityUnits::fromBaseUnits(crown_.getCanopyBulkDensity(), desiredUnits);
 }
 
-double BehaveRun::getMoistureFoliar() const
+double BehaveRun::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return crown_.getMoistureFoliar();
+    return crown_.getMoistureFoliar(moistureUnits);
 }
 
 double BehaveRun::getCrownFirelineIntensity() const
@@ -568,25 +564,25 @@ void BehaveRun::calculateSpottingDistanceFromTorchingTrees()
 }
 
 void BehaveRun::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-	double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight, double windSpeedAtTwentyFeet)
+    double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight, double windSpeedAtTwentyFeet)
 {
-	spot_.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
-		buringPileFlameHeight, windSpeedAtTwentyFeet);
+    spot_.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
+        buringPileFlameHeight, windSpeedAtTwentyFeet);
 }
 
 void BehaveRun::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-	double ridgeToValleyElevation, double downwindCoverHeight, double flameLength, double windSpeedAtTwentyFeet)
+    double ridgeToValleyElevation, double downwindCoverHeight, double flameLength, double windSpeedAtTwentyFeet)
 {
-	spot_.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
-		flameLength, windSpeedAtTwentyFeet);
+    spot_.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
+        flameLength, windSpeedAtTwentyFeet);
 }
 
 void BehaveRun::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-	double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
-	SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet)
+    double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
+    SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet)
 {
-	spot_.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
-		torchingTrees, DBH, treeHeight, treeSpecies, windSpeedAtTwentyFeet);
+    spot_.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyElevation, downwindCoverHeight,
+        torchingTrees, DBH, treeHeight, treeSpecies, windSpeedAtTwentyFeet);
 }
 
 double BehaveRun::getMaxSpottingDistanceFromBurningPile()
