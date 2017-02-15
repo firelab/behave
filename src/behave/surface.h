@@ -75,7 +75,6 @@ public:
     void setCrownRatio(double crownRatio);
     bool isUsingTwoFuelModels() const;
     void setFuelModelNumber(int fuelModelNumber);
-    void setMoistureUnits(MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
@@ -115,7 +114,6 @@ public:
 
     // SurfaceInputs getters
 	int getFuelModelNumber() const;
-    MoistureUnits::MoistureUnitsEnum getMoistureUnits() const;
     double getMoistureOneHour() const;
     double getMoistureTenHour() const;
     double getMoistureHundredHour() const;

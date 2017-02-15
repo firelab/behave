@@ -350,9 +350,9 @@ int main(int argc, char *argv[])
             // Calculate spread rate and flame length
             behave.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate
-            spreadRate = behave.getSurfaceFireSpreadRate();
+            spreadRate = behave.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR);
             // Get other required outputs
-            flameLength = behave.getSurfaceFlameLength();
+            flameLength = behave.getSurfaceFlameLength(LengthUnits::FEET);
             // Convert output to metric
             spreadRate *= CHAINS_PER_HOUR_TO_METERS_PER_SECOND;
             flameLength *= FEET_TO_METERS;

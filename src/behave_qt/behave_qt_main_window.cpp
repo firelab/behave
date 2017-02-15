@@ -110,7 +110,7 @@ void BehaveQtMainWindow::calculateClicked()
 {
     double directionOfInterest = 0;
     behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    double spreadRate = behaveRun.getSurfaceFireSpreadRate();
+    double spreadRate = behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR);
 
     ui.spreadRateLineEdit->setText(QString::number(spreadRate, 10, 2));
 

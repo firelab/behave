@@ -73,7 +73,7 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
             behaveVector[i].setWindSpeed(windSpeed); // This is where you make use of the x value in the function being graphed
             double directionOfInterest = 0;
             behaveVector[i].doSurfaceRunInDirectionOfInterest(directionOfInterest);
-            y[i][j] = behaveVector[i].getSurfaceFireSpreadRate(); // This updates the y value
+            y[i][j] = behaveVector[i].getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR); // This updates the y value
         }
     }
 

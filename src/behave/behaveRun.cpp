@@ -310,10 +310,9 @@ WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum
     return surface_.getWindAdjustmentFactorCalculationMethod();
 }
 
-double BehaveRun::getSurfaceFireSpreadRate() const
+double BehaveRun::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
-    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getSpreadRateUnits();
-    return  SpeedUnits::fromBaseUnits(surface_.getSpreadRate(), desiredUnits);
+    return  SpeedUnits::fromBaseUnits(surface_.getSpreadRate(), spreadRateUnits);
 }
 
 double BehaveRun::getDirectionOfMaxSpread() const
@@ -321,10 +320,9 @@ double BehaveRun::getDirectionOfMaxSpread() const
     return surface_.getDirectionOfMaxSpread();
 }
 
-double BehaveRun::getSurfaceFlameLength() const
+double BehaveRun::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
 {
-    LengthUnits::LengthUnitsEnum desiredUnits = surface_.getFlameLengthUnits();
-    return LengthUnits::fromBaseUnits(surface_.getFlameLength(), desiredUnits);
+    return LengthUnits::fromBaseUnits(surface_.getFlameLength(), flameLengthUnits);
 }
 
 double BehaveRun::getSurfaceFireLengthToWidthRatio() const
@@ -342,7 +340,7 @@ double BehaveRun::getSurfaceFirelineIntensity() const
     return surface_.getFirelineIntensity();
 }
 
-double BehaveRun::getMidflameWindspeed() const
+double BehaveRun::getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum midflameWindSpeedUnits) const
 {
     return surface_.getMidflameWindspeed();
 }
@@ -380,10 +378,9 @@ double BehaveRun::getEllipticalC() const
     return SpeedUnits::fromBaseUnits(surface_.getEllipticalC(), desiredUnits);
 }
 
-double BehaveRun::getWindSpeed() const
+double BehaveRun::getWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const
 {
-    SpeedUnits::SpeedUnitsEnum desiredUnits = surface_.getWindSpeedUnits();
-    return SpeedUnits::fromBaseUnits(surface_.getWindSpeed(), desiredUnits);
+    return SpeedUnits::fromBaseUnits(surface_.getWindSpeed(), speedUnits);
 }
 
 double BehaveRun::getWindDirection() const
@@ -391,10 +388,9 @@ double BehaveRun::getWindDirection() const
     return surface_.getWindDirection();
 }
 
-double BehaveRun::getSlope() const
+double BehaveRun::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    SlopeUnits::SlopeUnitsEnum desiredUnits = surface_.getSlopeUnits();
-    return SlopeUnits::fromBaseUnits(surface_.getSlope(), desiredUnits);
+    return SlopeUnits::fromBaseUnits(surface_.getSlope(), slopeUnits);
 }
 
 double BehaveRun::getAspect() const
@@ -467,16 +463,14 @@ CoverUnits::CoverUnitsEnum BehaveRun::getCoverUnits() const
     return surface_.getCoverUnits();
 }
 
-double BehaveRun::getCanopyCover() const
+double BehaveRun::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
 {
-    CoverUnits::CoverUnitsEnum desiredUnits = surface_.getCoverUnits();
-    return CoverUnits::fromBaseUnits(surface_.getCoverUnits(), desiredUnits);
+    return CoverUnits::fromBaseUnits(surface_.getCoverUnits(), coverUnits);
 }
 
-double BehaveRun::getCanopyHeight() const
+double BehaveRun::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const
 {
-    LengthUnits::LengthUnitsEnum desiredUnits = surface_.getCanopyHeightUnits();
-    return LengthUnits::fromBaseUnits(surface_.getCanopyHeight(), desiredUnits);
+    return LengthUnits::fromBaseUnits(surface_.getCanopyHeight(), canopyHeightUnits);
 }
 
 double BehaveRun::getCrownRatio() const
