@@ -36,7 +36,7 @@
 FuelModelSet::FuelModelSet()
 {
     FuelModelArray.resize(FuelConstants::NUM_FUEL_MODELS);
-    initializeFuelModelRecords();
+    initializeAllFuelModelRecords();
     populateFuelModels();
 }
 
@@ -84,27 +84,32 @@ FuelModelSet::~FuelModelSet()
 
 }
 
-void FuelModelSet::initializeFuelModelRecords()
+void FuelModelSet::initializeSingleFuelModelRecord(int fuelModelNumber)
+{
+    FuelModelArray[fuelModelNumber].fuelModelNumber_ = 0;
+    FuelModelArray[fuelModelNumber].code_ = "NO_CODE";
+    FuelModelArray[fuelModelNumber].name_ = "NO_NAME";
+    FuelModelArray[fuelModelNumber].fuelbedDepth_ = 0;
+    FuelModelArray[fuelModelNumber].moistureOfExtinctionDead_ = 0;
+    FuelModelArray[fuelModelNumber].heatOfCombustionDead_ = 0;
+    FuelModelArray[fuelModelNumber].heatOfCombustionLive_ = 0;
+    FuelModelArray[fuelModelNumber].fuelLoadOneHour_ = 0;
+    FuelModelArray[fuelModelNumber].fuelLoadTenHour_ = 0;
+    FuelModelArray[fuelModelNumber].fuelLoadHundredHour_ = 0;
+    FuelModelArray[fuelModelNumber].fuelLoadLiveHerbaceous_ = 0;
+    FuelModelArray[fuelModelNumber].fuelLoadLiveWoody_ = 0;
+    FuelModelArray[fuelModelNumber].savrOneHour_ = 0;
+    FuelModelArray[fuelModelNumber].savrLiveHerbaceous_ = 0;
+    FuelModelArray[fuelModelNumber].savrLiveWoody_ = 0;
+    FuelModelArray[fuelModelNumber].isReserved_ = false;
+    FuelModelArray[fuelModelNumber].isDefined_ = false;
+}
+
+void FuelModelSet::initializeAllFuelModelRecords()
 {
     for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
     {
-        FuelModelArray[i].fuelModelNumber_ = 0;
-        FuelModelArray[i].code_ = "NO_CODE";
-        FuelModelArray[i].name_ = "NO_NAME";
-        FuelModelArray[i].fuelbedDepth_ = 0;
-        FuelModelArray[i].moistureOfExtinctionDead_ = 0;
-        FuelModelArray[i].heatOfCombustionDead_ = 0;
-        FuelModelArray[i].heatOfCombustionLive_ = 0;
-        FuelModelArray[i].fuelLoadOneHour_ = 0;
-        FuelModelArray[i].fuelLoadTenHour_ = 0;
-        FuelModelArray[i].fuelLoadHundredHour_ = 0;
-        FuelModelArray[i].fuelLoadLiveHerbaceous_ = 0;
-        FuelModelArray[i].fuelLoadLiveWoody_ = 0;
-        FuelModelArray[i].savrOneHour_ = 0;
-        FuelModelArray[i].savrLiveHerbaceous_ = 0;
-        FuelModelArray[i].savrLiveWoody_ = 0;
-        FuelModelArray[i].isReserved_ = false;
-        FuelModelArray[i].isDefined_ = false;
+        initializeSingleFuelModelRecord(i);
     }
 }
 
@@ -138,6 +143,10 @@ void FuelModelSet::setFuelModelRecord(int fuelModelNumber, std::string code, std
 // as well as earmarking which models are available for use as custom models
 void FuelModelSet::populateFuelModels()
 {
+    // See Standard Fire Behavior Fuel Models: A Comprehensive Set for Use with Rothermel’s
+    // Surface Fire Spread Model by Joe H.Scott and Robert E.Burgan, 2005
+    // https://www.fs.fed.us/rm/pubs/rmrs_gtr153.pdf
+
     // Index 0 is not used
     setFuelModelRecord(0, "NO_CODE", "NO_NAME", 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, false, false);
@@ -218,10 +227,10 @@ void FuelModelSet::populateFuelModels()
         1500, 1500, 1500,
         false, true);
 
-    // Indices 14 - 89 Available for custom models
+    // 14-89 Available for custom models
 
     // Code NBx: Non-burnable
-    // Index 90 Available for custom NB model  
+    // 90 Available for custom NB model  
     setFuelModelRecord(91, "NB1", "Urban, developed [91]",
         1.0, 0.10, 8000, 8000,
         0, 0, 0, 0, 0,
@@ -238,7 +247,12 @@ void FuelModelSet::populateFuelModels()
         1500, 1500, 1500,
         false, true);
 
-    // Indices 94-95 Reserved for future standard models
+    // Indices 94-95 Reserved for future standard non-burnable models
+    for (int i = 94; i <= 95; i++)
+    {
+        markAsReservedModel(i);
+    }
+
     setFuelModelRecord(94, "NB4", "Future standard non-burnable [94]",
         1.0, 0.10, 8000, 8000,
         0, 0, 0, 0, 0,
@@ -316,8 +330,15 @@ void FuelModelSet::populateFuelModels()
         1.0*f, 1.0*f, 0, 9.0*f, 0,
         1800, 1600, 1500,
         true, true);
+    // 110-112 are reserved for future standard grass models
+    for (int i = 110; i <= 112; i++)
+    {
+        markAsReservedModel(i);
+    }
+    // 113-119 are available for custom grass models
 
     // Code GSx: Grass and shrub
+    // 120 available for custom grass and shrub model
     setFuelModelRecord(121, "GS1",
         "Low load, dry climate grass-shrub (D)",
         0.9, 0.15, 8000, 8000,
@@ -342,8 +363,15 @@ void FuelModelSet::populateFuelModels()
         1.9*f, 0.3*f, 0.1*f, 3.4*f, 7.1*f,
         1800, 1600, 1600,
         true, true);
+    // 125-130 reserved for future standard grass and shrub models
+    for (int i = 125; i <= 130; i++)
+    {
+        markAsReservedModel(i);
+    }
+    // 131-139 available for custom grass and shrub models
 
     // Shrub
+    // 140 available for custom shrub model
     setFuelModelRecord(141, "SH1",
         "Low load, dry climate shrub (D)",
         1.0, 0.15, 8000, 8000,
@@ -398,8 +426,15 @@ void FuelModelSet::populateFuelModels()
         4.5*f, 2.45*f, 0, 1.55*f, 7.0*f,
         750, 1800, 1500,
         true, true);
+    // 150-152 reserved for future standard shrub models
+    for (int i = 150; i <= 152; i++)
+    {
+        markAsReservedModel(i);
+    }
+    // 153-159 available for custom shrub models
 
     // Timber and understory
+    // 160 available for custom timber and understory model
     setFuelModelRecord(161, "TU1",
         "Light load, dry climate timber-grass-shrub (D)",
         0.6, 0.20, 8000, 8000,
@@ -418,7 +453,6 @@ void FuelModelSet::populateFuelModels()
         1.1*f, 0.15*f, 0.25*f, 0.65*f, 1.1*f,
         1800, 1600, 1400,
         true, true);
-
     setFuelModelRecord(164, "TU4",
         "Dwarf conifer understory (S)",
         0.5, 0.12, 8000, 8000,
@@ -431,8 +465,15 @@ void FuelModelSet::populateFuelModels()
         4.0*f, 4.0*f, 3.0*f, 0, 3.0*f,
         1500, 1800, 750,
         true, true);
+    // 166-170 reserved for future standard timber and understory models
+    for (int i = 166; i <= 170; i++)
+    {
+        markAsReservedModel(i);
+    }
+    // 171-179 available for custom timber and understory models
 
     // Timber and litter
+    // 180 available for custom timber and litter models
     setFuelModelRecord(181, "TL1",
         "Low load, compact conifer litter (S)",
         0.2, 0.30, 8000, 8000,
@@ -487,8 +528,16 @@ void FuelModelSet::populateFuelModels()
         6.65*f, 3.30*f, 4.15*f, 0, 0,
         1800, 1800, 1600,
         true, true);
+    // 190-192 reserved for future standard timber and litter models
+    for (int i = 190; i <= 192; i++)
+    {
+        markAsReservedModel(i);
+    }
+
+    // 193-199 available for custom timber and litter models
 
     // Slash and blowdown
+    // 200 available for custom slash and blowdown model
     setFuelModelRecord(201, "SB1",
         "Low load activity fuel (S)",
         1.0, 0.25, 8000, 8000,
@@ -513,6 +562,14 @@ void FuelModelSet::populateFuelModels()
         5.25*f, 3.5*f, 5.25*f, 0, 0,
         2000, 1800, 1600,
         true, true);
+    // 205-210 reserved for future slash and blowdown models
+    for (int i = 205; i <= 210; i++)
+    {
+        markAsReservedModel(i);
+    }
+    // 211-219 available for custom  slash and blowdown models
+
+    // 220 - 256 Available for custom models
 }
 
 // SetCustomFuelModel() is used by client code to define custom fuel types
@@ -531,15 +588,26 @@ bool FuelModelSet::setCustomFuelModel(int fuelModelNumber, std::string code, std
             fuelbedDepth, moistureOfExtinctionDead, heatOfCombustionDead, heatOfCombustionLive,
             fuelLoadOneHour, fuelLoadTenHour, fuelLoadHundredHour, fuelLoadliveHerb,
             fuelLoadliveWoody, savrOneHour, savrLiveHerb, savrLiveWoody, isDynamic,
-            FuelModelArray[fuelModelNumber].isReserved_);
+            false);
         successStatus = true;
     }
     return successStatus;
 }
 
-void FuelModelSet::markAsCustomModel(int fuelModelNumber)
+bool FuelModelSet::clearCustomFuelModel(int fuelModelNumber)
 {
-    FuelModelArray[fuelModelNumber].isReserved_ = false;
+    bool successStatus = false;
+
+    if (FuelModelArray[fuelModelNumber].isReserved_)
+    {
+        successStatus = false;
+    }
+    else
+    {
+        initializeSingleFuelModelRecord(fuelModelNumber);
+        successStatus = true;
+    }
+    return successStatus;
 }
 
 void FuelModelSet::markAsReservedModel(int fuelModelNumber)

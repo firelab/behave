@@ -32,15 +32,15 @@
 #ifndef FUELMODELSET_H
 #define FUELMODELSET_H
 
+#include "behaveUnits.h"
 #include <string>
 #include <vector>
+
+// TODO: Add in a std::map to map fuel codes to the respective fuel model number in FuelModelArray -WMC 02/2017
 
 class FuelModelSet
 {
 public:
-    // TODO: Consider making a Freeze() method that marks all records as reserved to make the array read-only for threaded 
-    // applications -WMC 10/2015
-
     FuelModelSet();
     FuelModelSet& operator=(const FuelModelSet& rhs);
     FuelModelSet(const FuelModelSet& rhs);
@@ -51,7 +51,8 @@ public:
         double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
         double fuelLoadLiveWoody, double savrOneHour, double savrLiveHerbaceous, double savrLiveWoody,
         bool isDynamic);
-  
+    bool clearCustomFuelModel(int fuelModelNumber);
+
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
     double getFuelbedDepth(int fuelModelNumber) const;
@@ -71,9 +72,9 @@ public:
 
 private:
     void memberwiseCopyAssignment(const FuelModelSet& rhs);
-    void initializeFuelModelRecords();
+    void initializeSingleFuelModelRecord(int fuelModelNumber);
+    void initializeAllFuelModelRecords();
     void populateFuelModels();
-    void markAsCustomModel(int fuelModelNumber);
     void markAsReservedModel(int fuelModelNumber);
     void setFuelModelRecord(int fuelModelCodeIn, std::string code, std::string name,
         double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,

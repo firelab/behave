@@ -40,6 +40,8 @@ public:
     BehaveVector(const BehaveVector& rhs);
     BehaveVector& operator=(const BehaveVector& rhs);
 
+    FuelModelSet fuelModelSet_;
+
     // Overloaded element access methods for member vector<BehaveRun> behaveRun
     BehaveRun& operator[](const std::vector<BehaveRun>::size_type index);
     BehaveRun& at(const std::vector<BehaveRun>::size_type index);
@@ -68,7 +70,6 @@ public:
 private:
     void memberwiseCopyAssignment(const BehaveVector& rhs);
 
-    FuelModelSet fuelModelSet_;
     std::vector<BehaveRun> behaveRun;
 };
 
