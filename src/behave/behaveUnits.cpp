@@ -38,19 +38,29 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
     switch (units)
     {
         case FEET:
+        {
             // Already in base, nothing to do
             break;
+        }
         case METERS:
+        {
             value *= METERS_TO_FEET;
             break;
+        }
         case MILES:
+        {
             value *= MILES_TO_FEET;
             break;
+        }
         case KILOMETERS:
+        {
             value *= KILOMETERS_TO_FEET;
             break;
+        }
         default:
+        {
             ; // TODO: Handle error
+        }
     }
     return value;
 }
@@ -65,19 +75,29 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
     switch (units)
     {
         case FEET:
+        {
             // Already in base, nothing to do
             break;
+        }
         case METERS:
+        {
             value *= FEET_TO_METERS;
             break;
+        }
         case MILES:
+        {
             value *= FEET_TO_MILES;
             break;
+        }
         case KILOMETERS:
+        {
             value *= FEET_TO_KILOMETERS;
             break;
+        }
         default:
+        {
             ; // TODO: Handle error
+        }
     }
     return value;
 }
@@ -94,25 +114,39 @@ double SpeedUnits::toBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     switch (units)
     {
         case FEET_PER_MINUTE:
+        {
             // Already in base, nothing to do
             break;
+        }
         case METERS_PER_SECOND:
+        {
             value *= METERS_PER_SECOND_TO_FEET_PER_MINUTE;
             break;
+        }
         case   METERS_PER_MINUTE:
+        {
             value *= METERS_PER_MINUTE_TO_FEET_PER_MINUTE;
             break;
+        }
         case CHAINS_PER_HOUR:
+        {
             value *= CHAINS_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
+        }
         case MILES_PER_HOUR:
+        {
             value *= MILES_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
+        }
         case KILOMETERS_PER_HOUR:
+        {
             value *= KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
+        }
         default:
+        {
             ; // TODO: Handle error
+        }
     }
     return value;
 }
@@ -129,25 +163,39 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     switch (units)
     {
         case FEET_PER_MINUTE:
+        {
             // Already in base, nothing to do
             break;
+        }
         case METERS_PER_SECOND:
+        {
             value *= FEET_PER_MINUTE_TO_METERS_PER_SECOND;
             break;
+        }
         case   METERS_PER_MINUTE:
+        {
             value *= FEET_PER_MINUTE_TO_METERS_PER_MINUTE;
             break;
+        }
         case CHAINS_PER_HOUR:
+        {
             value *= FEET_PER_MINUTE_TO_CHAINS_PER_HOUR;
             break;
+        }
         case MILES_PER_HOUR:
+        {
             value *= FEET_PER_MINUTE_TO_MILES_PER_HOUR;
             break;
+        }
         case KILOMETERS_PER_HOUR:
+        {
             value *= FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR;
             break;
+        }
         default:
+        {
             ; // TODO: Handle error
+        }
     }
     return value;
 }
@@ -244,19 +292,29 @@ double LoadingUnits::toBaseUnits(double value, LoadingUnitsEnum units)
     switch (units)
     {
         case POUNDS_PER_SQUARE_FOOT:
+        {
             // Already in base, nothing to do
             break;
+        }
         case TONS_PER_ACRE:
+        {
             value *= TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT;
             break;
+        }
         case TONNES_PER_HECTARE:
+        {
             value *= TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT;
             break;
+        }
         case KILOGRAMS_PER_SQUARE_METER:
+        {
             value *= KILOGRAMS_PER_SQUARE_METER_TO_POUNDS_PER_SQUARE_FOOT;
             break;
+        }
         default:
+        {
             ; // TODO: Handle error
+        }
     }
     return value;
 }
@@ -271,19 +329,102 @@ double LoadingUnits::fromBaseUnits(double value, LoadingUnitsEnum units)
     switch (units)
     {
         case POUNDS_PER_SQUARE_FOOT:
+        {
             // Already in base, nothing to do
             break;
+        }
         case TONS_PER_ACRE:
+        {
             value *= POUNDS_PER_SQUARE_FOOT_TO_TONS_PER_ACRE;
             break;
+        }
         case TONNES_PER_HECTARE:
+        {
             value *= POUNDS_PER_SQUARE_FOOT_TO_TONNES_PER_HECTARE;
             break;
+        }
         case KILOGRAMS_PER_SQUARE_METER:
+        {
             value *= POUNDS_PER_SQUARE_FOOT_TO_KILOGRAMS_PER_SQUARE_METER;
             break;
+        }
         default:
+        {
             ; // TODO: Handle error
+        }
+    }
+    return value;
+}
+
+double SurfaceAreaToVolumeUnits::toBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units)
+{
+    const double SQUARE_METERS_OVER_CUBIC_METERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 3.280839895013123;
+    
+    const double SQUARE_INCHES_OVER_CUBIC_INCHES_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.083333333333333;
+    const double SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.03280839895013123;
+
+    switch (units)
+    {
+        case SQUARE_FEET_OVER_CUBIC_FEET:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case SQUARE_METERS_OVER_CUBIC_METERS:
+        {
+            value *= SQUARE_METERS_OVER_CUBIC_METERS_TO_SQUARE_FEET_OVER_CUBIC_FEET;
+            break;
+        }
+        case SQUARE_INCHES_OVER_CUBIC_INCHES:
+        {
+            value *= SQUARE_INCHES_OVER_CUBIC_INCHES_TO_SQUARE_FEET_OVER_CUBIC_FEET;
+            break;
+        }
+        case SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS:
+        {
+            value *= SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS_TO_SQUARE_FEET_OVER_CUBIC_FEET;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+    return value;
+}
+
+double SurfaceAreaToVolumeUnits::fromBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units)
+{
+    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_METERS_OVER_CUBIC_METERS = 0.3048;
+    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_INCHES_OVER_CUBIC_INCHES = 12;
+    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS = 30.48;
+
+    switch (units)
+    {
+        case SQUARE_FEET_OVER_CUBIC_FEET:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case SQUARE_METERS_OVER_CUBIC_METERS:
+        {
+            value *= SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_METERS_OVER_CUBIC_METERS;
+            break;
+        }
+        case SQUARE_INCHES_OVER_CUBIC_INCHES:
+        {
+            value *= SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_INCHES_OVER_CUBIC_INCHES;
+            break;
+        }
+        case SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS:
+        {
+            value *= SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
     }
     return value;
 }

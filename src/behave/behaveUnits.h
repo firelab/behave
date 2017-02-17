@@ -56,6 +56,21 @@ struct LoadingUnits
     static double fromBaseUnits(double value, LoadingUnitsEnum units);
 };
 
+struct SurfaceAreaToVolumeUnits
+{
+    enum SurfaceAreaToVolumeUnitsEnum
+    {
+        SQUARE_FEET_OVER_CUBIC_FEET, // base loading unit
+        SQUARE_METERS_OVER_CUBIC_METERS,
+        SQUARE_INCHES_OVER_CUBIC_INCHES,
+        SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS
+    };
+
+    static double toBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units);
+    static double fromBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units);
+};
+
+
 struct SpeedUnits 
 {
     enum SpeedUnitsEnum

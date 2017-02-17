@@ -576,12 +576,36 @@ void FuelModelSet::populateFuelModels()
 // The function can fail in the case of trying to set a record whose isReserve field is set to 1.
 // The return value is TRUE if successful, and FALSE in case of failure
 bool FuelModelSet::setCustomFuelModel(int fuelModelNumber, std::string code, std::string name,
-    double fuelbedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
+    double fuelbedDepth, LengthUnits::LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead, 
+    MoistureUnits::MoistureUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
     double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadliveHerb,
-    double fuelLoadliveWoody, double savrOneHour, double savrLiveHerb, double savrLiveWoody, bool isDynamic)
+    double fuelLoadliveWoody, LoadingUnits::LoadingUnitsEnum loadingUnits, double savrOneHour, double savrLiveHerb,
+    double savrLiveWoody, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits, bool isDynamic)
 {
     bool successStatus = false;
     
+    fuelbedDepth = LengthUnits::toBaseUnits(fuelbedDepth, lengthUnits);
+
+    moistureOfExtinctionDead = MoistureUnits::toBaseUnits(moistureOfExtinctionDead, moistureUnits);
+
+    if (loadingUnits != LoadingUnits::POUNDS_PER_SQUARE_FOOT)
+    {
+        fuelLoadOneHour = LoadingUnits::toBaseUnits(fuelLoadOneHour, loadingUnits);
+        fuelLoadTenHour = LoadingUnits::toBaseUnits(fuelLoadTenHour, loadingUnits);
+        fuelLoadHundredHour = LoadingUnits::toBaseUnits(fuelLoadHundredHour, loadingUnits);
+        fuelLoadliveHerb = LoadingUnits::toBaseUnits(fuelLoadliveHerb, loadingUnits);
+        fuelLoadliveWoody = LoadingUnits::toBaseUnits(fuelLoadliveWoody, loadingUnits);
+    }
+
+    code = code.substr(0, 3);
+
+    if (savrUnits != SurfaceAreaToVolumeUnits::SQUARE_FEET_OVER_CUBIC_FEET)
+    {
+        savrOneHour = SurfaceAreaToVolumeUnits::toBaseUnits(savrOneHour, savrUnits);
+        savrOneHour = SurfaceAreaToVolumeUnits::toBaseUnits(savrLiveHerb, savrUnits);
+        savrOneHour = SurfaceAreaToVolumeUnits::toBaseUnits(savrLiveWoody, savrUnits);
+    }
+
     if (FuelModelArray[fuelModelNumber].isReserved_ == false)
     {
         setFuelModelRecord(fuelModelNumber, code, name,
