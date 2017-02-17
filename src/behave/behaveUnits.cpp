@@ -233,3 +233,57 @@ double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
     }
     return value;
 }
+
+double LoadingUnits::toBaseUnits(double value, LoadingUnitsEnum units)
+{
+    // Velocity to base units constants
+    const double KILOGRAMS_PER_SQUARE_METER_TO_POUNDS_PER_SQUARE_FOOT = 0.2048161436225217;
+    const double TONS_PER_ACRE_TO_POUNDS_PER_SQUARE_FOOT = 0.045913682277318638;
+    const double TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT = 0.02048161436225217;
+ 
+    switch (units)
+    {
+        case POUNDS_PER_SQUARE_FOOT:
+            // Already in base, nothing to do
+            break;
+        case TONS_PER_ACRE:
+            value *= TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT;
+            break;
+        case TONNES_PER_HECTARE:
+            value *= TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT;
+            break;
+        case KILOGRAMS_PER_SQUARE_METER:
+            value *= KILOGRAMS_PER_SQUARE_METER_TO_POUNDS_PER_SQUARE_FOOT;
+            break;
+        default:
+            ; // TODO: Handle error
+    }
+    return value;
+}
+
+double LoadingUnits::fromBaseUnits(double value, LoadingUnitsEnum units)
+{
+    // Velocity to base units constants
+    const double POUNDS_PER_SQUARE_FOOT_TO_KILOGRAMS_PER_SQUARE_METER = 4.88242763638305;
+    const double POUNDS_PER_SQUARE_FOOT_TO_TONS_PER_ACRE = 21.78;
+    const double POUNDS_PER_SQUARE_FOOT_TO_TONNES_PER_HECTARE = 48.8242763638305;
+
+    switch (units)
+    {
+        case POUNDS_PER_SQUARE_FOOT:
+            // Already in base, nothing to do
+            break;
+        case TONS_PER_ACRE:
+            value *= POUNDS_PER_SQUARE_FOOT_TO_TONS_PER_ACRE;
+            break;
+        case TONNES_PER_HECTARE:
+            value *= POUNDS_PER_SQUARE_FOOT_TO_TONNES_PER_HECTARE;
+            break;
+        case KILOGRAMS_PER_SQUARE_METER:
+            value *= POUNDS_PER_SQUARE_FOOT_TO_KILOGRAMS_PER_SQUARE_METER;
+            break;
+        default:
+            ; // TODO: Handle error
+    }
+    return value;
+}

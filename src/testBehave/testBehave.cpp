@@ -474,49 +474,53 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
 }
 
-BOOST_AUTO_TEST_CASE(unitConversionTest)
+BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
 {
     // Observed and expected output
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 
-    double canopyHeight = 9;
-    double canopyBaseHeight = 2;
-    double canopyBulkDensity = 0.5;
-    double foliarMoisture = 120;
-
-    double observedCrownFireSpreadRate = 0;
-    double expectedCrownFireSpreadRate = 0;
-    double observedCrownFlameLength = 0;
-    double expectedCrownFlameLength = 0;
-    double observedCrownFirelineIntensity = 0;
-    double expectedCrownFirelineIntensity = 0;
-    
-    behaveRun.setTreeAndCanopyHeightUnits(LengthUnits::METERS);
-    behaveRun.setCanopyBulkDensityUnits(DensityUnits::KILOGRAMS_PER_CUBIC_METER);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+
+    // Test upslope oriented mode, 20 foot uplsope wind
+    behaveRun.setFuelModelNumber(124);
+    behaveRun.setWindSpeed(5);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.setCanopyHeight(9);
-    behaveRun.setSlope(30, SlopeUnits::DEGREES);
-  
-    // Test surface spread rate
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.setWindDirection(0);
+    behaveRun.setSlope(30, SlopeUnits::PERCENT);
+    behaveRun.setAspect(0);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
-    expectedSurfaceFireSpreadRate = 20.454224;
+
+    // Test surface spread rate in chains per hour
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    // Test crown fire spread rate, flame length, intensity
-    behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture, MoistureUnits::PERCENT);
-    behaveRun.doCrownRun();
-    expectedCrownFireSpreadRate = 10.259921;
-    observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getCrownFireSpreadRate());
-    BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
-    expectedCrownFlameLength = 29.320577;
-    observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.getCrownFlameLength());
-    BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
-    expectedCrownFirelineIntensity = 1770.330923;
-    observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.getCrownFirelineIntensity());
-    BOOST_CHECK_CLOSE(observedCrownFirelineIntensity, expectedCrownFirelineIntensity, ERROR_TOLERANCE);
+    // Test surface spread rate in feet per minute
+    expectedSurfaceFireSpreadRate = 9.763838;
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::FEET_PER_MINUTE));
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test surface spread rate in kilometers per hour
+    expectedSurfaceFireSpreadRate = 0.178561;
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::KILOMETERS_PER_HOUR));
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test surface spread rate in meters per minute
+    expectedSurfaceFireSpreadRate = 2.976018;
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::METERS_PER_MINUTE));
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test surface spread rate in meters per second
+    expectedSurfaceFireSpreadRate = 0.049600;
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::METERS_PER_SECOND));
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test surface spread rate in miles per hour
+    expectedSurfaceFireSpreadRate = 0.110953;
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::MILES_PER_HOUR));
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite

@@ -42,6 +42,20 @@ struct LengthUnits
     static double fromBaseUnits(double value, LengthUnitsEnum units);
 };
 
+struct LoadingUnits
+{
+    enum LoadingUnitsEnum
+    {
+        POUNDS_PER_SQUARE_FOOT, // base loading unit
+        TONS_PER_ACRE,
+        TONNES_PER_HECTARE,
+        KILOGRAMS_PER_SQUARE_METER
+    };
+
+    static double toBaseUnits(double value, LoadingUnitsEnum units);
+    static double fromBaseUnits(double value, LoadingUnitsEnum units);
+};
+
 struct SpeedUnits 
 {
     enum SpeedUnitsEnum
