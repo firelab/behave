@@ -165,6 +165,8 @@ int main(int argc, char *argv[])
     printf("Processing files please wait...\n");
     // Start reading input file
     int tokenCounter = 0;
+    int lineCounter = 0;
+
     while(getline(inputFile, line))
     {
         // Reset variables for new loop iteration
@@ -210,6 +212,11 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
+                    if (!behave.isFuelModelDefined(fuelModelNumber))
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case ONE_HOUR:
@@ -219,6 +226,11 @@ int main(int argc, char *argv[])
                         moistureOneHr = std::stod(token);
                     }
                     else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
+                    if (moistureOneHr < 0 || moistureOneHr > 1000)
                     {
                         // Data is bad
                         badData = true;
@@ -236,6 +248,11 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
+                    if (moistureTenHr < 0 || moistureTenHr > 1000)
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case HUNDRED_HOUR:
@@ -245,6 +262,11 @@ int main(int argc, char *argv[])
                         moistureHundredHr = std::stod(token);
                     }
                     else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
+                    if (moistureHundredHr < 0 || moistureHundredHr > 1000)
                     {
                         // Data is bad
                         badData = true;
@@ -262,6 +284,11 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
+                    if (moistureLiveHerb < 0 || moistureLiveHerb > 1000)
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case LIVE_WOODY:
@@ -271,6 +298,11 @@ int main(int argc, char *argv[])
                         moistureLiveWoody = std::stod(token);
                     }
                     else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
+                    if (moistureLiveWoody < 0 || moistureLiveWoody > 1000)
                     {
                         // Data is bad
                         badData = true;
@@ -288,6 +320,11 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
+                    if (windSpeed < 0 || windSpeed > 1000)
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case WIND_DIRECTION:
@@ -297,6 +334,11 @@ int main(int argc, char *argv[])
                         windDirection = std::stod(token);
                     }
                     else
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
+                    if (windDirection < -1000 || windDirection > 1000)
                     {
                         // Data is bad
                         badData = true;
@@ -314,6 +356,11 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
+                    if (slope < -1000 || slope > 1000)
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 case ASPECT:
@@ -327,6 +374,11 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
+                    if (aspect < -1000 || aspect > 1000)
+                    {
+                        // Data is bad
+                        badData = true;
+                    }
                     break;
                 }
                 default:
@@ -335,6 +387,12 @@ int main(int argc, char *argv[])
                 }
             }
             tokenCounter++;
+        }
+
+        lineCounter++;
+        if (lineCounter % 10000 == 0)
+        {
+            printf("prcessed %d behave runs\n", lineCounter);
         }
 
         // If data is not bad, do calculations
