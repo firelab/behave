@@ -1,7 +1,6 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <time.h>
 
 #include "behaveRun.h"
 #include "fuelModelSet.h"
@@ -10,8 +9,6 @@
 
 int main()
 {
-    //clock_t tStart = clock();
-
     // Surface Fire Inputs;
     int fuelModelNumber = 0;
     double moistureOneHour = 0.0;
@@ -21,6 +18,7 @@ int main()
     double moistureLiveWoody = 0.0;
     double windSpeed = 0.0;
     double windDirection = 0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::DIRECT_MIDFLAME;
     double slope = 0.0;
     double aspect = 0.0;
     double directionOfMaxSpread = 0;
@@ -49,22 +47,6 @@ int main()
     if (windAndSpreadOrientationMode == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
     {
         std::cout << "compass north" << std::endl << std::endl;
-    }
-
-    // Setting the slope input mode (default is percent)
-    //behave.setSlopeInputToPercent();
-    //behave.setSlopeInputToDegrees();
-
-    // Checking the slope input mode
-    SlopeUnits::SlopeUnitsEnum slopeUnits = behave.getSlopeUnits();
-    std::wcout << "Slope input mode is ";
-    if (slopeUnits == SlopeUnits::PERCENT)
-    {
-        std::cout << "percent" << std::endl << std::endl;
-    }
-    if (slopeUnits == SlopeUnits::DEGREES)
-    {
-        std::cout << "degrees" << std::endl << std::endl;
     }
 
     //for (int i = 0; i <= 10; i++)
@@ -112,6 +94,7 @@ int main()
     moistureLiveWoody = 90;
     windSpeed = 5;
     windDirection = 42;
+    windHeightInputMode = WindHeightInputMode::DIRECT_MIDFLAME;
     slope = 30;
     aspect = 291;
     directionOfInterest = 63;
@@ -121,7 +104,7 @@ int main()
     crownRatio = 0.50;
 
     // Single fuel model test
-    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed, windDirection, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, crownRatio);
+    behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed, windDirection, windHeightInputMode, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, crownRatio);
     behave.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     spreadRate = behave.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR);
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
@@ -131,41 +114,6 @@ int main()
     // Direction of Max Spread test
     directionOfMaxSpread = behave.getDirectionOfMaxSpread();
     std::cout << "Direction of maximum spread is " << round(directionOfMaxSpread) << " degrees" << std::endl << std::endl;
-
-    // Palmetto-Gallbury test
-    //double	ageOfRough = 0.0;
-    //double	heightOfUnderstory = 0.0;
-    //double	palmettoCoverage = 0.0;
-    //double	overstoryBasalArea = 0.0;
-    //ageOfRough = 20;
-    //heightOfUnderstory = 3;
-    //palmettoCoverage = 25;
-    //overstoryBasalArea = 100;
-    //behave.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-
-    //std::cout << "Spread rate for Palmetto-Gallberry is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
-    //flameLength = behave.getFlameLength();
-    //flameLength = floor(flameLength * 10 + 0.5) / 10;
-    //std::cout << "Flame length for Palmetto-Gallberry is " << flameLength << " ft" << std::endl << std::endl;
-
-    // Western Aspen test
-    //int aspenFuelModelNumber = 0;
-    //double aspenCuringLevel = 0.0;
-    //double DBH = 0.0;
-    //aspenFuelModelNumber = 5;
-    //aspenCuringLevel = 0.0;
-    //DBH = 2;
-    //behave.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, AspenFireSeverity::LOW, DBH, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, WindHeightInputMode::DIRECT_MIDFLAME, windSpeed, windDirection, slope, aspect, canopyCover, canopyHeight, crownRatio);
-    //spreadRate = behave.calculateSurfaceFireForwardSpreadRate(directionOfInterest);
-    //std::cout << "Spread rate for Western is " << std::setprecision(1) << std::fixed << spreadRate << " ch/hr" << std::endl;
-    //flameLength = behave.getFlameLength();
-    //flameLength = floor(flameLength * 10 + 0.5) / 10;
-    //std::cout << "Flame length for fuel model " << fuelModelNumber << " is " << flameLength << " ft" << std::endl << std::endl;
-
-    // Used for testing performance
-    //double executionTimeInSeconds = (double)((clock() - tStart) / CLOCKS_PER_SEC);
-    //std::cout << "Total execution time for " << 1000000 << " fire spread calculations is " << executionTimeInSeconds << " seconds." << std::endl;
 
 #ifndef NDEBUG
     std::cout << "Press Enter to continue";

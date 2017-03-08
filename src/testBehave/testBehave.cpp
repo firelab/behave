@@ -76,7 +76,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
 
     behaveRun.updateSurfaceInputs(fuelModelNumber, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-        moistureUnits, windSpeed, windDirection, slope, slopeUnits, aspect, canopyCover,
+        moistureUnits, windSpeed, windDirection, WindHeightInputMode::TWENTY_FOOT, slope, slopeUnits, aspect, canopyCover,
         canopyHeight, crownRatio);
 }
 
@@ -102,7 +102,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double crownRatio = 0.50;
 
     behaveRun.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
-        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection,
+        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection, WindHeightInputMode::TWENTY_FOOT,
         firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
 }
 
@@ -201,8 +201,8 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
 
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
-    behaveRun.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
    
     observedA = roundToSixDecimalPlaces(behaveRun.getEllipticalA());
