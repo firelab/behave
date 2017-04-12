@@ -269,6 +269,7 @@ int main(int argc, char *argv[])
     // Wind adjustment factor parameters
     double canopyCover = 0.0;
     double canopyHeight = 0.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
     double crownRatio = 0.0;
 
     double spreadRate = 0;
@@ -460,11 +461,12 @@ int main(int argc, char *argv[])
     if (isUsingMetric)
     {
         windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
+        canopyHeightUnits = LengthUnits::METERS;
     }
 
     // Feed input values to behave
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT,
-        windSpeed, windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
+        windSpeed, windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 
     // Do the spread rate calculation
     if (hasDirectionOfInterest)

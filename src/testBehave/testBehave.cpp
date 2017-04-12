@@ -72,12 +72,13 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double aspect = 0;
     double canopyCover = 50;
     double canopyHeight = 30.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
     double crownRatio = 0.50;
 
     behaveRun.updateSurfaceInputs(fuelModelNumber, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         moistureUnits, windSpeed, windDirection, WindHeightInputMode::TWENTY_FOOT, slope, slopeUnits, aspect, canopyCover,
-        canopyHeight, crownRatio);
+        canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
@@ -99,11 +100,12 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double aspect = 0;
     double canopyCover = 50;
     double canopyHeight = 30.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
     double crownRatio = 0.50;
 
     behaveRun.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection, WindHeightInputMode::TWENTY_FOOT,
-        firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
+        firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 BOOST_FIXTURE_TEST_SUITE(BehaveRunTestSuite, BehaveRunTest)
@@ -415,7 +417,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     // Test fire type, Conditional crown fire expected
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     canopyHeight = 60;
-    behaveRun.setCanopyHeight(canopyHeight);
+    behaveRun.setCanopyHeight(canopyHeight, LengthUnits::FEET);
     canopyBaseHeight = 30;
     canopyBulkDensity = 0.06;
     behaveRun.setWindSpeed(5);

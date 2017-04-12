@@ -71,9 +71,9 @@ void BehaveRun::setCanopyCover(double canopyCover)
     surface_.setCanopyCover(canopyCover);
 }
 
-void BehaveRun::setCanopyHeight(double canopyHeight)
+void BehaveRun::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits)
 {
-    surface_.setCanopyHeight(canopyHeight);
+    surface_.setCanopyHeight(canopyHeight, canopyHeightUnits);
 }
 
 void BehaveRun::setCrownRatio(double crownRatio)
@@ -207,12 +207,14 @@ void BehaveRun::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelM
 }
 
 void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection,
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
+    double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double slope, 
+    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, 
+    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windDirection, windHeightInputMode, slope, slopeUnits, aspect, canopyCover, 
-        canopyHeight, crownRatio);
+        canopyHeight, canopyHeightUnits, crownRatio);
     setFuelModelNumber(fuelModelNumber);
     surface_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
 }
@@ -222,11 +224,11 @@ void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, i
     MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, 
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double firstFuelModelCoverage,
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
-    double canopyCover, double canopyHeight, double crownRatio)
+    double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surface_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection, windHeightInputMode,
-        firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
+        firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
     setFirstFuelModelNumber(firstfuelModelNumber);
     setSecondFuelModelNumber(secondFuelModelNumber);
 }
@@ -235,22 +237,23 @@ void BehaveRun::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, d
     double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
     double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double ageOfRough, double heightOfUnderstory,
     double palmettoCoverage, double overstoryBasalArea, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, 
-    double canopyCover, double canopyHeight, double crownRatio)
+    double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surface_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windDirection, windHeightInputMode, ageOfRough, heightOfUnderstory, palmettoCoverage,
-        overstoryBasalArea, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
+        overstoryBasalArea, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void BehaveRun::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, 
     double windSpeed, double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
-    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, double crownRatio)
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, 
+    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surface_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, aspenFireSeverity, DBH, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection,
-        windHeightInputMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, crownRatio);
+        windHeightInputMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void BehaveRun::doSurfaceRunInDirectionOfMaxSpread()
@@ -262,12 +265,6 @@ void BehaveRun::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
 {
     // Calculate SURFACE Module outputs
     surface_.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-}
-
-void BehaveRun::setTreeAndCanopyHeightUnits(LengthUnits::LengthUnitsEnum treeAndCanopyHeightUnits)
-{
-    surface_.setTreeAndCanopyHeightUnits(treeAndCanopyHeightUnits);
-    crown_.setCanopyBaseHeightUnits(treeAndCanopyHeightUnits);
 }
 
 void BehaveRun::setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits)

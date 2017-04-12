@@ -403,7 +403,7 @@ int main(int argc, char *argv[])
             // Feed input values to behave
             behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, 
                 moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed,
-                windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, crownRatio);
+                windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, LengthUnits::FEET, crownRatio);
             // Calculate spread rate and flame length
             behave.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate
