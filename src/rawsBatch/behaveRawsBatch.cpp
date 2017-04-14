@@ -398,12 +398,11 @@ int main(int argc, char *argv[])
         // If data is not bad, do calculations
         if (!badData)
         {
-            // Convert windspeed from m/s to mi/hr for Behave's internal calculations
-            windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
             // Feed input values to behave
-            behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, 
-                moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed,
-                windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, LengthUnits::FEET, crownRatio);
+            behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr,
+                moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed, SpeedUnits::METERS_PER_SECOND,
+                windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, SlopeUnits::DEGREES, aspect, canopyCover, 
+                canopyHeight, LengthUnits::FEET, crownRatio);
             // Calculate spread rate and flame length
             behave.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate

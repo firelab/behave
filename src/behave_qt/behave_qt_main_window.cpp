@@ -95,7 +95,7 @@ void BehaveQtMainWindow::liveWoodyMoistureInputChanged(const QString& text)
 void BehaveQtMainWindow::windSpeedInputChanged(const QString& text)
 {
     double windSpeed = text.toDouble();
-    behaveRun.setWindSpeed(windSpeed);
+    behaveRun.setWindSpeed(windSpeed, SpeedUnits::MILES_PER_HOUR);
 }
 
 // Slot

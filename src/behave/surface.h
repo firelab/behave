@@ -82,8 +82,7 @@ public:
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode);
-    void setWindSpeed(double windSpeed);
-    void setWindSpeedUnits(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
     void setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
@@ -96,24 +95,24 @@ public:
     void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
     void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, 
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, 
-        double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
+        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
+        double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
+        double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits,
-        double windSpeed, double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double firstFuelModelCoverage, 
-        TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
-        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
-    void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection,
-        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,double overstoryBasalArea,
-        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
+        double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
+        double firstFuelModelCoverage, TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, 
         double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
+    void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
+        double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
+        double overstoryBasalArea, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, 
+        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH,
         double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
-        MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, double windDirection, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
-        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits,
-        double crownRatio);
+        MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double windDirection, 
+        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, 
+        double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
 
     // SurfaceInputs getters
     int getFuelModelNumber() const;
@@ -134,7 +133,6 @@ public:
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     SlopeUnits::SlopeUnitsEnum getSlopeUnits() const;
-    SpeedUnits::SpeedUnitsEnum getWindSpeedUnits() const;
     SpeedUnits::SpeedUnitsEnum getSpreadRateUnits() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
 

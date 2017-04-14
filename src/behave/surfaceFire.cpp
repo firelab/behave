@@ -184,8 +184,8 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     }
 
     // Convert wind speeds to desired units
-    SpeedUnits::SpeedUnitsEnum desiredWindSpeedUnits = surfaceInputs_->getWindSpeedUnits();
-    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, desiredWindSpeedUnits);
+    //SpeedUnits::SpeedUnitsEnum desiredWindSpeedUnits = surfaceInputs_->getWindSpeedUnits();
+    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::MILES_PER_HOUR);
     //effectiveWindSpeed_ /= 88.0; // effective wind speed is now in mi/hr
     //windSpeedLimit_ /= 88.0; // wind speed limit is now in mi/hr
 

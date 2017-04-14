@@ -66,6 +66,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveWoody = 90.0;
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
     double windSpeed = 5.0;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     double windDirection = 0;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::PERCENT;
@@ -77,7 +78,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
 
     behaveRun.updateSurfaceInputs(fuelModelNumber, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-        moistureUnits, windSpeed, windDirection, WindHeightInputMode::TWENTY_FOOT, slope, slopeUnits, aspect, canopyCover,
+        moistureUnits, windSpeed, windSpeedUnits, windDirection, WindHeightInputMode::TWENTY_FOOT, slope, slopeUnits, aspect, canopyCover,
         canopyHeight, canopyHeightUnits, crownRatio);
 }
 
@@ -93,6 +94,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = TwoFuelModels::TWO_DIMENSIONAL;
     double windSpeed = 5.0;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     double windDirection = 0;
     double firstFuelModelCoverage = 0;
     double slope = 30.0;
@@ -104,7 +106,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double crownRatio = 0.50;
 
     behaveRun.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
-        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windDirection, WindHeightInputMode::TWENTY_FOOT,
+        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windDirection, WindHeightInputMode::TWENTY_FOOT,
         firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
@@ -118,11 +120,13 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+
     // Test North oriented mode, 42 degree wind, 20 foot wind , 30 degree slope
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setSlope(30, SlopeUnits::DEGREES);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
-    behaveRun.setWindSpeed(5);
+    behaveRun.setWindSpeed(5, windSpeedUnits);
     behaveRun.setWindDirection(45);
     behaveRun.setAspect(95);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
@@ -132,7 +136,7 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 
     // Test upslope oriented mode, 20 foot uplsope wind
     behaveRun.setFuelModelNumber(124);
-    behaveRun.setWindSpeed(5);
+    behaveRun.setWindSpeed(5, windSpeedUnits);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveRun.setWindDirection(0);
@@ -200,20 +204,20 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     double expectedC = 16.187176;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-
+    SpeedUnits::SpeedUnitsEnum spreadRateUnits = SpeedUnits::CHAINS_PER_HOUR;
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
    
-    observedA = roundToSixDecimalPlaces(behaveRun.getEllipticalA());
+    observedA = roundToSixDecimalPlaces(behaveRun.getEllipticalA(spreadRateUnits));
     BOOST_CHECK_CLOSE(observedA, expectedA, ERROR_TOLERANCE);
 
-    observedB = roundToSixDecimalPlaces(behaveRun.getEllipticalB());
+    observedB = roundToSixDecimalPlaces(behaveRun.getEllipticalB(spreadRateUnits));
     BOOST_CHECK_CLOSE(observedB, expectedB, ERROR_TOLERANCE);
 
-    observedC = roundToSixDecimalPlaces(observedC = behaveRun.getEllipticalC());
+    observedC = roundToSixDecimalPlaces(observedC = behaveRun.getEllipticalC(spreadRateUnits));
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
 }
 
@@ -359,6 +363,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double canopyBulkDensity = 0.03;
     double moistureFoliar = 120;
 
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+
     double observedCrownFireSpreadRate = 0;
     double expectedCrownFireSpreadRate = 0;
     double observedCrownFlameLength = 0;
@@ -406,7 +412,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 
     // Test fire type, Crowning fire expected
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.setWindSpeed(10);
+    behaveRun.setWindSpeed(10, windSpeedUnits);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar, MoistureUnits::PERCENT);
     behaveRun.doCrownRun();
@@ -420,7 +426,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     behaveRun.setCanopyHeight(canopyHeight, LengthUnits::FEET);
     canopyBaseHeight = 30;
     canopyBulkDensity = 0.06;
-    behaveRun.setWindSpeed(5);
+    behaveRun.setWindSpeed(5, windSpeedUnits);
     behaveRun.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar, MoistureUnits::PERCENT);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     behaveRun.doCrownRun();
@@ -482,11 +488,13 @@ BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     // Test upslope oriented mode, 20 foot uplsope wind
     behaveRun.setFuelModelNumber(124);
-    behaveRun.setWindSpeed(5);
+    behaveRun.setWindSpeed(5, windSpeedUnits);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
     behaveRun.setWindDirection(0);
@@ -536,6 +544,8 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     double expectedSurfaceFireSpreadRate = 0;
     double observedSurfaceFireSpreadRate = 0;
 
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+
     // Make sure that changes in one behaveVector's elements surfaceInputs do not affect another's surfaceInputs
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
     behaveVector[0].setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
@@ -543,7 +553,7 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     behaveVector[1].setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
 
     // Change behaveVector[1]'s surfaceInputs
-    behaveVector[1].setWindSpeed(10);
+    behaveVector[1].setWindSpeed(10, windSpeedUnits);
   
     // Check that behaveVector[0]'s surfaceInputs is unchanged
     expectedWindSpeed = 5;

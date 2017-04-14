@@ -55,7 +55,7 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
     for (int i = 0; i < NO_OF_ROWS; i++)
     {
         //oneHourMoisture += incrementAmount; // Update the value of the secondary independently ranged variable
-        behaveVector[i].updateSurfaceInputs(fuelModelNumber, 6, 7, 8, 60, 90, MoistureUnits::PERCENT, windSpeed, 0, WindHeightInputMode::DIRECT_MIDFLAME, 0, SlopeUnits::DEGREES, 0, 0, 0, LengthUnits::FEET, 0);
+        behaveVector[i].updateSurfaceInputs(fuelModelNumber, 6, 7, 8, 60, 90, MoistureUnits::PERCENT, windSpeed, SpeedUnits::MILES_PER_HOUR, 0, WindHeightInputMode::DIRECT_MIDFLAME, 0, SlopeUnits::DEGREES, 0, 0, 0, LengthUnits::FEET, 0);
         customPlot->addGraph(); // add a graph to the plot
         fuelModelNumber += (int)incrementAmount; // Update the value of the secondary independently ranged variable
     }
@@ -70,7 +70,7 @@ QcustomplotTest::QcustomplotTest(QWidget* parent)
         {
             windSpeed += incrementAmount; // update the x variable's value
             x[j] = windSpeed; // x goes from xMin to xMax
-            behaveVector[i].setWindSpeed(windSpeed); // This is where you make use of the x value in the function being graphed
+            behaveVector[i].setWindSpeed(windSpeed, SpeedUnits::MILES_PER_HOUR); // This is where you make use of the x value in the function being graphed
             double directionOfInterest = 0;
             behaveVector[i].doSurfaceRunInDirectionOfInterest(directionOfInterest);
             y[i][j] = behaveVector[i].getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR); // This updates the y value

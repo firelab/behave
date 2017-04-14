@@ -258,6 +258,7 @@ int main(int argc, char *argv[])
     double moistureLiveHerb = 0.0;
     double moistureLiveWoody = 0.0;
     double windSpeed = 0.0;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     double windDirection = 0.0;
     double slope = 0.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::DEGREES;
@@ -282,7 +283,7 @@ int main(int argc, char *argv[])
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
     behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
-    behave.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
+    //behave.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
 
     // Check for presense command line arguments
     if (argc == 1)
@@ -460,13 +461,13 @@ int main(int argc, char *argv[])
     // Convert input units if necessary
     if (isUsingMetric)
     {
-        windSpeed *= METERS_PER_SECOND_TO_MILES_PER_HOUR;
+        windSpeedUnits = SpeedUnits::METERS_PER_SECOND;
         canopyHeightUnits = LengthUnits::METERS;
     }
 
     // Feed input values to behave
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT,
-        windSpeed, windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
+        windSpeed, windSpeedUnits, windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 
     // Do the spread rate calculation
     if (hasDirectionOfInterest)

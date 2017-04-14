@@ -17,6 +17,7 @@ int main()
     double moistureLiveHerbaceous = 0.0;
     double moistureLiveWoody = 0.0;
     double windSpeed = 0.0;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     double windDirection = 0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::DIRECT_MIDFLAME;
     double slope = 0.0;
@@ -106,7 +107,7 @@ int main()
 
     // Single fuel model test
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 
-        MoistureUnits::PERCENT, windSpeed, windDirection, windHeightInputMode, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight, 
+        MoistureUnits::PERCENT, windSpeed, windSpeedUnits, windDirection, windHeightInputMode, slope, SlopeUnits::DEGREES, aspect, canopyCover, canopyHeight,
         canopyHeightUnits, crownRatio);
     behave.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     spreadRate = behave.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR);
