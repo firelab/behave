@@ -14,10 +14,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 PROJECT(behave)
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
-                    ${CMAKE_SOURCE_DIR}/src/behave_qt
-                    ${CMAKE_SOURCE_DIR}/src/canopy_flow
-                    ${CMAKE_SOURCE_DIR}/src/cli
-                    ${CMAKE_SOURCE_DIR}/src/qcustomplot)      
+                    ${CMAKE_SOURCE_DIR}/src/cli)      
 
 OPTION(CLI "Enable Behave CLI" OFF)
 IF(CLI)
@@ -28,11 +25,6 @@ OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
 IF(RAWS_BATCH)
     ADD_DEFINITIONS(-DRAWS_BATCH)
 ENDIF(RAWS_BATCH)
-
-OPTION(GUI "Enable Qt Gui" OFF)
-IF(GUI)
-    ADD_DEFINITIONS(-DGUI)
-ENDIF(GUI)
 
 OPTION(TEST_BEHAVE "Enable Testing" OFF)
 IF(TEST_BEHAVE)
@@ -140,62 +132,3 @@ IF(CLI)
         src/cli/behaveCli.cpp
         ${HEADERS})
 ENDIF(CLI)
-
-IF(GUI)
-    # Set up Qt
-    SET(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-    SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
-
-    SET(CMAKE_AUTOMOC ON)
-    
-    FIND_PACKAGE(Qt5Core REQUIRED)
-
-    GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
-
-    # Find the QtWidgets library
-    FIND_PACKAGE(Qt5Widgets REQUIRED)
-
-    FIND_PACKAGE(Qt5PrintSupport REQUIRED)
-    
-    SET(BEHAVE_QT_SOURCE
-        src/behave_qt/behave_qt_main_window.cpp
-        src/behave_qt/behave_qtree_widget.cpp
-        src/behave_qt/main.cpp
-        src/behave_qt/qcustomplotTest.cpp)
-
-    SET(BEHAVE_QT_HEADERS
-        src/behave_qt/behave_qt_main_window.h
-        src/behave_qt/behave_qt_main_window_enums.h
-        src/behave_qt/behave_qtree_widget.h
-        src/behave_qt/qcustomplotTest.h
-        src/behave_qt/qtIncludesSilencedW4.h)
-
-    SET(QCUSTOMPLOT
-        src/qcustomplot/qcustomplot.h
-        src/qcustomplot/qcustomplot.cpp)
-
-    QT5_WRAP_UI(UIS_HDRS 
-        src/behave_qt/behave_qt_main_window.ui
-        src/behave_qt/qcustomplot_test.ui)
-
-    SOURCE_GROUP("UI Files"  FILES
-        src/behave_qt/behave_qt_main_window.ui
-        src/behave_qt/qcustomplot_test.ui)
-
-    SOURCE_GROUP("Behave Qt GUI Source Files" FILES ${BEHAVE_QT_SOURCE})
-
-    SOURCE_GROUP("Behave Qt GUI Header Files" FILES ${BEHAVE_QT_HEADERS})
-
-    SOURCE_GROUP("qcustomplot Files" FILES ${QCUSTOMPLOT})
-
-    ADD_EXECUTABLE(behave_qt
-        ${SOURCE}
-        ${HEADERS}
-        ${BEHAVE_QT_SOURCE}
-        ${BEHAVE_QT_HEADERS}
-        ${QCUSTOMPLOT}
-        ${UIS_HDRS})
-
-    TARGET_LINK_LIBRARIES(behave_qt Qt5::Widgets Qt5::PrintSupport)
-ENDIF(GUI)
