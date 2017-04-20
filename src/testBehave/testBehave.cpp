@@ -233,7 +233,7 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
   
-    // Test upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 wind
+    // Test upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind
     directionOfInterest = 90;
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
@@ -242,6 +242,39 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
     expectedSurfaceFireSpreadRate = 3.016440;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test upslope oriented mode, 20 foot wind, direction of interest 160 degrees from upslope, 290 degree wind
+    directionOfInterest = 160;
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.setWindDirection(290);
+
+    behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    expectedSurfaceFireSpreadRate = 1.399262;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test upslope oriented mode, 20 foot wind, direction of interest 215 degrees from upslope, 215 degree wind
+    directionOfInterest = 215;
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.setWindDirection(215);
+
+    behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    expectedSurfaceFireSpreadRate = 1.648579;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    
+    // Test North oriented mode, 20 foot 135 degree wind, direction of interest 30 degrees from north, 263 degree aspect
+    directionOfInterest = 30;
+    behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.setWindDirection(280);
+    behaveRun.setAspect(135);
+    behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    expectedSurfaceFireSpreadRate = 3.504961;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test North oriented mode, 20 foot north wind, direction of interest 90 degrees from north, 45 degree aspect
@@ -255,15 +288,15 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     expectedSurfaceFireSpreadRate = 1.803660;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    // Test North oriented mode, 20 foot 135 degree wind, direction of interest 90 degrees from north, 45 degree aspect
-    directionOfInterest = 90;
+    // Test North oriented mode, 20 foot 135 degree wind, direction of interest 285 degrees from north, 263 degree aspect
+    directionOfInterest = 285;
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
-    behaveRun.setWindDirection(135);
-    behaveRun.setAspect(45);
+    behaveRun.setWindDirection(280);
+    behaveRun.setAspect(263);
     behaveRun.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
-    expectedSurfaceFireSpreadRate = 1.395287;
+    expectedSurfaceFireSpreadRate = 1.452856;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
