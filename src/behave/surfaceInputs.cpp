@@ -114,8 +114,9 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
 
     setWindSpeed(windSpeed, windSpeedUnits);
-    setWindDirection(windDirection);
     setWindHeightInputMode(windHeightInputMode);
+    setWindDirection(windDirection);
+    setWindAndSpreadOrientationMode(windAndSpreadOrientationMode);
     isUsingTwoFuelModels_ = false;
     setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum::NO_METHOD);
    
