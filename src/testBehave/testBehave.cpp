@@ -66,8 +66,10 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveWoody = 90.0;
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
     double windSpeed = 5.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::PERCENT;
     double aspect = 0;
@@ -76,10 +78,9 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
     double crownRatio = 0.50;
 
-    behaveRun.updateSurfaceInputs(fuelModelNumber, moistureOneHour,
-        moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-        moistureUnits, windSpeed, windSpeedUnits, windDirection, WindHeightInputMode::TWENTY_FOOT, slope, slopeUnits, aspect, canopyCover,
-        canopyHeight, canopyHeightUnits, crownRatio);
+    behaveRun.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
+        slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
@@ -94,8 +95,10 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
     TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = TwoFuelModels::TWO_DIMENSIONAL;
     double windSpeed = 5.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
     double firstFuelModelCoverage = 0;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::PERCENT;
@@ -106,8 +109,9 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double crownRatio = 0.50;
 
     behaveRun.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
-        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windDirection, WindHeightInputMode::TWENTY_FOOT,
-        firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
+        moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
+        windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, 
+        canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 BOOST_FIXTURE_TEST_SUITE(BehaveRunTestSuite, BehaveRunTest)

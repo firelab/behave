@@ -282,8 +282,8 @@ int main(int argc, char *argv[])
 
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
-    behave.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
-    //behave.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
+
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
 
     // Check for presense command line arguments
     if (argc == 1)
@@ -467,7 +467,7 @@ int main(int argc, char *argv[])
 
     // Feed input values to behave
     behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr, moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT,
-        windSpeed, windSpeedUnits, windDirection, WindHeightInputMode::DIRECT_MIDFLAME, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
+        windSpeed, windSpeedUnits, WindHeightInputMode::DIRECT_MIDFLAME, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 
     // Do the spread rate calculation
     if (hasDirectionOfInterest)
