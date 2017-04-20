@@ -118,9 +118,9 @@ void CrownInputs::setMoistureFoliar(double moistureFoliar, MoistureUnits::Moistu
     moistureFoliar_ = MoistureUnits::toBaseUnits(moistureFoliar, moistureUnits);
 }
 
-void CrownInputs::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double moisturefoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void CrownInputs::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     setCanopyBaseHeight(canopyBaseHeight);
     setCanopyBulkDensity(canopyBulkDensity);
-    setMoistureFoliar(moisturefoliar, moistureUnits);
+    setMoistureFoliar(moistureFoliar, moistureUnits);
 }

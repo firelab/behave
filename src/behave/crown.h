@@ -46,7 +46,7 @@ class Crown
 {
 public:
     Crown() = delete; // No default constructor
-    Crown(const FuelModelSet& fuelModelSet, const Surface& surface);
+    Crown(const FuelModelSet& fuelModelSet);
     ~Crown();
 
     Crown(const Crown &rhs);
@@ -54,16 +54,41 @@ public:
 
     void doCrownRun();
   
-    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar,
+        MoistureUnits::MoistureUnitsEnum  moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
+        WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
+        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
+        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBaseHeight, double canopyBulkDensity);
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double canopyBulkDensity);
     void setMoistureFoliar(double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
 
+    // SURFACE Module Inputs Setters
+    void setCanopyCover(double canopyCover);
+    void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
+    void setCrownRatio(double crownRatio);
+    void setFuelModelSet(FuelModelSet& fuelModelSet);
+    void setFuelModelNumber(int fuelModelNumber);
+    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
+    void setAspect(double aspect);
+    void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
+    void setWindDirection(double windDirection);
+    void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
+    void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode);
+
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getSpreadRateBaseOnFireType() const;
     double getCrownFireSpreadRate() const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
@@ -73,11 +98,10 @@ public:
 
 private:
     const FuelModelSet* fuelModelSet_;              // pointer to BehaveRun's FuelModelSet object
-    CrownInputs crownInputs_;                       // pointer to BehaveRun's CrownInputs object
+    CrownInputs crownInputs_;
     
     // SURFACE module components
-    const Surface* surface_;                        // pointer to the BehaveRun's Surface object
-    Surface crownDeepCopyOfSurface_;                // deep copy of Surface's surface inputs to allow parallel runs in Surface
+    Surface surface_;
 
     // Private methods
     void initializeMembers();
@@ -96,7 +120,6 @@ private:
     void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
     void calculateFireType();
-    void updateDeepCopyOfSurface();
     double calculateWindSpeedAtTwentyFeet();
 
     // Member variables

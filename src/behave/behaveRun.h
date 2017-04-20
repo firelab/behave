@@ -73,7 +73,7 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
-    void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setWindDirection(double windDirection);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
@@ -156,7 +156,12 @@ public:
     void setCanopyBaseHeight(double canopyBaseHeight);
     void setCanopyBulkDensity(double bulkDensity);
     void setFoliarMoisture(double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar, MoistureUnits::MoistureUnitsEnum  moistureUnits,
+        double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+        double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
+        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
+        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBaseHeight, double canopyBulkDensity);
     void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
 
     // CROWN Module Getters
@@ -165,7 +170,7 @@ public:
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
-    double getCrownFireSpreadRate() const;
+    double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     FireType::FireTypeEnum getCrownFireType() const;
     DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
 

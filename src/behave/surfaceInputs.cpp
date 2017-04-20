@@ -113,7 +113,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
     setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
 
-    setWindSpeed(windSpeed, windSpeedUnits);
+    setWindSpeed(windSpeed, windSpeedUnits, windHeightInputMode);
     setWindHeightInputMode(windHeightInputMode);
     setWindDirection(windDirection);
     setWindAndSpreadOrientationMode(windAndSpreadOrientationMode);
@@ -297,8 +297,9 @@ void SurfaceInputs::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModel
     firstFuelModelCoverage_ = CoverUnits::toBaseUnits(firstFuelModelCoverage, coverUnits_);
 }
 
-void  SurfaceInputs::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
+void  SurfaceInputs::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
+    windHeightInputMode_ = windHeightInputMode;
     windSpeed_ = SpeedUnits::toBaseUnits(windSpeed, windSpeedUnits);
 }
 

@@ -54,7 +54,7 @@ public:
     void setAspect(double aspect);
     void setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits);
     void setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeUnits);
-    void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);

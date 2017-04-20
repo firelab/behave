@@ -35,12 +35,10 @@
 #include "surfaceEnums.h"
 #include "windSpeedUtility.h"
 
-Crown::Crown(const FuelModelSet& fuelModelSet, const Surface& surface)
-    : crownDeepCopyOfSurface_(fuelModelSet)
+Crown::Crown(const FuelModelSet& fuelModelSet)
+    : surface_(fuelModelSet)
 {
-    fuelModelSet_ = &fuelModelSet; // point to the same location as BehaveRun'sfuelModels
-    surface_ = &surface; // point to the same location as BehaveRun's surface
-    updateDeepCopyOfSurface();
+    fuelModelSet_ = &fuelModelSet;
     initializeMembers();
 }
 
@@ -50,7 +48,7 @@ Crown::~Crown()
 }
 
 Crown::Crown(const Crown& rhs)
-    : crownDeepCopyOfSurface_(*rhs.fuelModelSet_)
+    : surface_(*rhs.fuelModelSet_)
 {
     memberwiseCopyAssignment(rhs);
 }
@@ -68,7 +66,6 @@ void Crown::memberwiseCopyAssignment(const Crown& rhs)
 {
     fuelModelSet_ = rhs.fuelModelSet_;
     surface_ = rhs.surface_;
-    crownDeepCopyOfSurface_ = rhs.crownDeepCopyOfSurface_;
     crownInputs_ = rhs.crownInputs_;
 
     fireType_ = rhs.fireType_;
@@ -95,22 +92,23 @@ void Crown::doCrownRun()
 {
     // This method uses Rothermel's 1991 crown fire correlation to calculate Crown fire average spread rate (ft/min)
 
-    // Step 1: Update Crown's copy of Surface and the values needed for further calculations 
-    updateDeepCopyOfSurface();
-    crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
-    crownCopyOfSurfaceHeatPerUnitArea_ = crownDeepCopyOfSurface_.getHeatPerUnitArea();
-    crownCopyOfSurfaceFirelineIntensity_ = crownDeepCopyOfSurface_.getFirelineIntensity();
+    // Step 1: Do surface run and store values needed for further calculations 
+    surface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
+    crownCopyOfSurfaceHeatPerUnitArea_ = surface_.getHeatPerUnitArea();
+    crownCopyOfSurfaceFirelineIntensity_ = surface_.getFirelineIntensity();
+    surface_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::USER_INPUT);
     double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
-    crownDeepCopyOfSurface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
+    surface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
 
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
-    crownDeepCopyOfSurface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
-    crownDeepCopyOfSurface_.setSlope(0.0, SlopeUnits::DEGREES);             // slope is always assumed to be zero in crown ROS
-    crownDeepCopyOfSurface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
+    surface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
+    surface_.setSlope(0.0, SlopeUnits::DEGREES); // slope is always assumed to be zero in crown ROS
+    surface_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    surface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
 
-    // Step 3: Determine fire behavior
-    crownDeepCopyOfSurface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
-    crownFireSpreadRate_ = 3.34 * crownDeepCopyOfSurface_.getSpreadRate(); // Rothermel 1991
+    // Step 3: Determine crown fire behavior
+    surface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
+    crownFireSpreadRate_ = 3.34 * surface_.getSpreadRate(); // Rothermel 1991
 
     //  Step 4: Calculate remaining crown fire characteristics
     calculateCrownFuelLoad();
@@ -130,13 +128,8 @@ void Crown::doCrownRun()
     calcuateCrownPowerOfWind();
     calcualteCrownFirePowerRatio();
 
+    // Determine if/what type of crown fire has occured
     calculateFireType();
-}
-
-void Crown::updateDeepCopyOfSurface()
-{
-    crownDeepCopyOfSurface_ = *surface_; // copy the actual data surface is pointing to
-    crownDeepCopyOfSurface_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::USER_INPUT);
 }
 
 double Crown::getCrownFireSpreadRate() const
@@ -206,7 +199,7 @@ void Crown::calculateCrownFuelLoad()
 {
     double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight();
-    double canopyHeight = surface_->getCanopyHeight();
+    double canopyHeight = surface_.getCanopyHeight();
     crownFuelLoad_ = canopyBulkDensity * (canopyHeight - canopyBaseHeight);
 }
 
@@ -245,7 +238,7 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
 
 void Crown::calculateCrownCriticalSurfaceFlameLength()
 {
-    crownCriticalSurfaceFlameLength_ = crownDeepCopyOfSurface_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
+    crownCriticalSurfaceFlameLength_ = surface_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
 }
 
 void Crown::calculateCrownFlameLength()
@@ -302,16 +295,16 @@ double Crown::calculateWindSpeedAtTwentyFeet()
 {
     windSpeedAtTwentyFeet_ = -1; // If negative 1 is returned, there is an error
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode;
-    windHeightInputMode = surface_->getWindHeightInputMode();
+    windHeightInputMode = surface_.getWindHeightInputMode();
 
     if (windHeightInputMode == WindHeightInputMode::TWENTY_FOOT)
     {
-        windSpeedAtTwentyFeet_ = surface_->getWindSpeed();
+        windSpeedAtTwentyFeet_ = surface_.getWindSpeed();
     }
     else if (windHeightInputMode == WindHeightInputMode::TEN_METER)
     {
         WindSpeedUtility windSpeedUtility;
-        double windSpeedAtTenMeters = surface_->getWindSpeed();
+        double windSpeedAtTenMeters = surface_.getWindSpeed();
         windSpeedAtTwentyFeet_ = windSpeedUtility.windSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
     }
     return windSpeedAtTwentyFeet_;
@@ -346,9 +339,18 @@ void Crown::calculateFireType()
     }
 }
 
-void Crown::updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Crown::updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+    double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits,
+    double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+    double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
+    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBaseHeight, double canopyBulkDensity)
 {
-    crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, foliarMoisture, moistureUnits);
+    surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect,
+        canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
+    crownInputs_.updateCrownInputs(canopyBaseHeight, canopyBulkDensity, moistureFoliar, moistureUnits);
 }
 
 void Crown::setCanopyBaseHeight(double canopyBaseHeight)
@@ -374,6 +376,82 @@ void Crown::setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnit
 void Crown::setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits)
 {
     crownInputs_.setCanopyBaseHeightUnits(canopyBaseHeightUnits);
+}
+
+void  Crown::setCanopyCover(double canopyCover)
+{
+    surface_.setCanopyCover(canopyCover);
+}
+
+void  Crown::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits)
+{
+    surface_.setCanopyHeight(canopyHeight, canopyHeightUnits);
+}
+
+void  Crown::setCrownRatio(double crownRatio)
+{
+    surface_.setCrownRatio(crownRatio);
+}
+
+
+void  Crown::setFuelModelNumber(int fuelModelNumber)
+{
+    surface_.setFuelModelNumber(fuelModelNumber);
+}
+
+void  Crown::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surface_.setMoistureOneHour(moistureOneHour, moistureUnits);
+}
+
+void  Crown::setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surface_.setMoistureTenHour(moistureTenHour, moistureUnits);
+}
+
+void  Crown::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surface_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
+}
+
+void  Crown::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surface_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
+}
+
+void  Crown::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surface_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
+}
+
+void  Crown::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)
+{
+    surface_.setSlope(slope, slopeUnits);
+}
+
+void  Crown::setAspect(double aspect)
+{
+    surface_.setAspect(aspect);
+}
+
+void  Crown::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
+{
+    surface_.setWindSpeed(windSpeed, windSpeedUnits, windHeightInputMode);
+}
+
+void  Crown::setWindDirection(double windDirection)
+{
+    surface_.setWindDirection(windDirection);
+}
+
+void Crown::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
+{
+    surface_.setWindHeightInputMode(windHeightInputMode);
+}
+
+void  Crown::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode)
+{
+    surface_.setWindAndSpreadOrientationMode(windAndSpreadAngleMode);
 }
 
 double Crown::getCanopyBaseHeight() const

@@ -385,9 +385,9 @@ void Surface::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
     surfaceInputs_.setSlopeUnits(slopeInputMode);
 }
 
-void Surface::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
+void Surface::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
-    surfaceInputs_.setWindSpeed(windSpeed, windSpeedUnits);
+    surfaceInputs_.setWindSpeed(windSpeed, windSpeedUnits, windHeightInputMode);
 }
 
 void Surface::setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)

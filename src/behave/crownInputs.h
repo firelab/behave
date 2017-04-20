@@ -52,7 +52,7 @@ public:
     LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
 
-    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits);
 
 private:
     void initializeMembers();
