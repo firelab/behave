@@ -324,7 +324,7 @@ WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum
 
 double BehaveRun::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
-    return  SpeedUnits::fromBaseUnits(surface_.getSpreadRate(), spreadRateUnits);
+    return  surface_.getSpreadRate(spreadRateUnits);
 }
 
 double BehaveRun::getDirectionOfMaxSpread() const
@@ -334,7 +334,7 @@ double BehaveRun::getDirectionOfMaxSpread() const
 
 double BehaveRun::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
 {
-    return LengthUnits::fromBaseUnits(surface_.getFlameLength(), flameLengthUnits);
+    return surface_.getFlameLength(flameLengthUnits);
 }
 
 double BehaveRun::getSurfaceFireLengthToWidthRatio() const
@@ -390,9 +390,10 @@ double BehaveRun::getEllipticalC(SpeedUnits::SpeedUnitsEnum spreadRateUnits) con
     return SpeedUnits::fromBaseUnits(surface_.getEllipticalC(), spreadRateUnits);
 }
 
-double BehaveRun::getWindSpeed(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+double BehaveRun::getWindSpeed(SpeedUnits::SpeedUnitsEnum spreadRateUnits, 
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputmode) const
 {
-    return SpeedUnits::fromBaseUnits(surface_.getWindSpeed(), spreadRateUnits);
+    return surface_.getWindSpeed(spreadRateUnits, windHeightInputmode);
 }
 
 double BehaveRun::getWindDirection() const
@@ -402,7 +403,7 @@ double BehaveRun::getWindDirection() const
 
 double BehaveRun::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    return SlopeUnits::fromBaseUnits(surface_.getSlope(), slopeUnits);
+    return surface_.getSlope(slopeUnits);
 }
 
 double BehaveRun::getAspect() const
@@ -482,7 +483,7 @@ double BehaveRun::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
 
 double BehaveRun::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const
 {
-    return LengthUnits::fromBaseUnits(surface_.getCanopyHeight(), canopyHeightUnits);
+    return surface_.getCanopyHeight(canopyHeightUnits);
 }
 
 double BehaveRun::getCrownRatio() const

@@ -616,19 +616,19 @@ BOOST_AUTO_TEST_CASE(behaveVectorElementIndependenceTest)
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[0]);
     behaveVector[0].setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     setSurfaceInputsForGS4LowMoistureScenario(behaveVector[1]);
-    behaveVector[1].setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveVector[1].setWindHeightInputMode(WindHeightInputMode::TEN_METER);
 
     // Change behaveVector[1]'s surfaceInputs
     behaveVector[1].setWindSpeed(10, windSpeedUnits, windHeightInputMode);
   
     // Check that behaveVector[0]'s surfaceInputs is unchanged
     expectedWindSpeed = 5;
-    observedWindSpeed = behaveVector[0].getWindSpeed(SpeedUnits::MILES_PER_HOUR);
+    observedWindSpeed = behaveVector[0].getWindSpeed(SpeedUnits::MILES_PER_HOUR, windHeightInputMode);
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
 
     // Check that behaveVector[1]'s surfaceInputs has been changed correctly
     expectedWindSpeed = 10;
-    observedWindSpeed = behaveVector[1].getWindSpeed(SpeedUnits::MILES_PER_HOUR);
+    observedWindSpeed = behaveVector[1].getWindSpeed(SpeedUnits::MILES_PER_HOUR, windHeightInputMode);
     BOOST_CHECK_CLOSE(observedWindSpeed, expectedWindSpeed, ERROR_TOLERANCE);
 
     // Do a surface run in behaveVector[0] and check that surface outputs are correct

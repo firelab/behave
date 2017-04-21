@@ -52,10 +52,12 @@ public:
     double calculateSpreadRateAtVector(double directionOfinterest);
     double calculateFlameLength(double firelineIntensity);
 
+    void setFuelModelSet(FuelModelSet& fuelModelSet);
+
     // SurfaceFire getters
-    double getSpreadRate() const;
+    double getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getDirectionOfMaxSpread() const;
-    double getFlameLength() const;
+    double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getFirelineIntensity() const;
@@ -125,13 +127,13 @@ public:
     double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getWindSpeed() const;
+    double getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const;
     double getWindDirection() const;
-    double getSlope() const;
+    double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getAspect() const;
     CoverUnits::CoverUnitsEnum getCoverUnits() const;
-    double getCanopyCover() const;
-    double getCanopyHeight() const;
+    double getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const;
     double getCrownRatio() const;
     LengthUnits::LengthUnitsEnum getFlameLengthUnits() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;

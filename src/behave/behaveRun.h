@@ -121,7 +121,8 @@ public:
     double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
+    double getWindSpeed(SpeedUnits::SpeedUnitsEnum spreadRateUnits,
+        WindHeightInputMode::WindHeightInputModeEnum windHeightInputmode) const;
     double getWindDirection() const;
     double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getAspect() const;

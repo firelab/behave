@@ -71,6 +71,8 @@ public:
     double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
  
+    void calculateMidflameWindSpeed();
+
 protected:
     // Protected setters accessible to friend classes
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
@@ -101,7 +103,7 @@ private:
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
     void calculateBackingSpreadRate();
-    void calculateMidflameWindSpeed();
+  
     void calculateEffectiveWindSpeed();
     void applyWindSpeedLimit();
     void calculateEllipticalDimensions();
