@@ -229,6 +229,9 @@ void BehaveRun::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect,
         canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
     surface_.setTwoFuelModelsMethod(TwoFuelModels::NO_METHOD);
+    crown_.updateCrownsSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
+        slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void  BehaveRun::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,

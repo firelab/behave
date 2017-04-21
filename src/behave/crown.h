@@ -68,6 +68,11 @@ public:
     void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
 
     // SURFACE Module Inputs Setters
+    void updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+        WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
+        WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
+        double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setCanopyCover(double canopyCover);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCrownRatio(double crownRatio);
@@ -90,6 +95,7 @@ public:
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getSpreadRateBaseOnFireType() const;
     double getCrownFireSpreadRate() const;
+    double getSurfaceFireSpreadRate() const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
     FireType::FireTypeEnum getFireType() const;
@@ -97,7 +103,7 @@ public:
     LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
 
 private:
-    const FuelModelSet* fuelModelSet_;              // pointer to BehaveRun's FuelModelSet object
+    const FuelModelSet* fuelModelSet_;
     CrownInputs crownInputs_;
     
     // SURFACE module components

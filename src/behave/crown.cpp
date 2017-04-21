@@ -137,6 +137,11 @@ double Crown::getCrownFireSpreadRate() const
     return crownFireSpreadRate_;
 }
 
+double Crown::getSurfaceFireSpreadRate() const
+{
+    return surface_.getSpreadRate();
+}
+
 double Crown::getCrownFirelineIntensity() const
 {
     return crownFirelineIntensity_;
@@ -378,6 +383,20 @@ void Crown::setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeig
     crownInputs_.setCanopyBaseHeightUnits(canopyBaseHeightUnits);
 }
 
+void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, 
+    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
+    MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
+    double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, 
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, 
+    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+{
+    surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, 
+        moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
+        windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight,
+        canopyHeightUnits, crownRatio);
+}
+
 void  Crown::setCanopyCover(double canopyCover)
 {
     surface_.setCanopyCover(canopyCover);
@@ -391,6 +410,11 @@ void  Crown::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum c
 void  Crown::setCrownRatio(double crownRatio)
 {
     surface_.setCrownRatio(crownRatio);
+}
+
+void Crown::setFuelModelSet(FuelModelSet & fuelModelSet)
+{
+    fuelModelSet_ = &fuelModelSet;
 }
 
 
@@ -467,4 +491,16 @@ double Crown::getCanopyBulkDensity() const
 double Crown::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return crownInputs_.getMoistureFoliar(moistureUnits);
+}
+
+double Crown::getSpreadRateBaseOnFireType() const
+{
+    if (fireType_ == FireType::CONDITIONAL_CROWN_FIRE || fireType_ == FireType::CROWNING)
+    {
+        return surface_.getSpreadRate();
+    }
+    else
+    {
+        return crownFireSpreadRate_;
+    }
 }
