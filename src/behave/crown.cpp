@@ -498,7 +498,7 @@ double Crown::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUn
 
 double Crown::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return getMoistureLiveHerbaceous(moistureUnits);
+    return surface_.getMoistureLiveHerbaceous(moistureUnits);
 }
 
 double Crown::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const

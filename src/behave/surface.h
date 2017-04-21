@@ -49,7 +49,7 @@ public:
     bool isAllFuelLoadZero(int fuelModelNumber);
     void doSurfaceRunInDirectionOfMaxSpread();
     void doSurfaceRunInDirectionOfInterest(double directionOfinterest);
-    double calculateSpreadRateAtVector(double directionOfinterest);
+
     double calculateFlameLength(double firelineIntensity);
 
     void setFuelModelSet(FuelModelSet& fuelModelSet);
@@ -144,6 +144,7 @@ public:
 
 private:
     void memberwiseCopyAssignment(const Surface& rhs);
+    double calculateSpreadRateAtVector(double directionOfinterest);
 
     const FuelModelSet* fuelModelSet_;
 
