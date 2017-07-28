@@ -174,6 +174,7 @@ public:
     double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     FireType::FireTypeEnum getCrownFireType() const;
     DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
+    double getCrownFireLengthToWidthRatio() const;
 
     // SPOT Module
     void calculateSpottingDistanceFromBurningPile();

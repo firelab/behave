@@ -240,6 +240,9 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     double observedLengthToWidthRatio = 0.0;
     double expectedLengthToWidthRatio = 0.0;
 
+    double observedCrownLengthToWidthRatio = 0;
+    double expectedCrownLengthToWidthRatio = 0;
+
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
@@ -268,6 +271,13 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getSurfaceFireLengthToWidthRatio());
     expectedLengthToWidthRatio = 1.897769;
     BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
+
+    // Test Crown fire length-to-width-ratio
+    setCrownInputsLowMoistureScenario(behaveRun);
+    behaveRun.doCrownRun();
+    expectedCrownLengthToWidthRatio = 1.625;
+    observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getCrownFireLengthToWidthRatio());
+    BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
@@ -466,7 +476,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double canopyHeight = 30;
     double canopyBaseHeight = 6; 
     double canopyBulkDensity = 0.03;
-   
+    
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
 

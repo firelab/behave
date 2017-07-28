@@ -81,6 +81,8 @@ public:
     DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
     LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
 
+    double getCrownFireLengthToWidthRatio() const;
+
     // SURFACE Module Inputs Setters
     void updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
@@ -144,6 +146,7 @@ private:
     void calculateCrownFireActiveRatio();
     void calculateFireType();
     double calculateWindSpeedAtTwentyFeet();
+    double calculateCrownLengthToWidthRatio();
 
     // Member variables
     FireType::FireTypeEnum fireType_;               // Classification based on corwn fire active and transition ratios
@@ -163,6 +166,7 @@ private:
     double crownFirePowerRatio_;                    // Crown fire power ratio
     double crownFireActiveRatio_;                   // Crown fire active ratio
     double crownFireTransitionRatio_;               // Crown fire transition ratio
+    double crownFireLengthToWidthRatio_;               // Crown fire transition ratio
     double windSpeedAtTwentyFeet_;
 };
 

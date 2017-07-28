@@ -572,6 +572,11 @@ DensityUnits::DensityUnitsEnum BehaveRun::getCanopyBulkDensityUnits() const
     return  crown_.getCanopyBulkDensityUnits();
 }
 
+double BehaveRun::getCrownFireLengthToWidthRatio() const
+{
+    return crown_.getCrownFireLengthToWidthRatio();
+}
+
 void BehaveRun::calculateSpottingDistanceFromBurningPile()
 {
     spot_.calculateSpottingDistanceFromBurningPile();
