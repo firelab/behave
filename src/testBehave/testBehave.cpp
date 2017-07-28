@@ -272,10 +272,36 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     expectedLengthToWidthRatio = 1.897769;
     BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
 
+    // Test North oriented mode, 45 degree wind, 15 mph 20 foot wind, 95 degree aspect, 30 degree slope
+    behaveRun.setWindHeightInputMode(windHeightInputMode);
+    behaveRun.setSlope(30, SlopeUnits::DEGREES);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.setWindSpeed(15, windSpeedUnits, windHeightInputMode);
+    behaveRun.setWindDirection(45);
+    behaveRun.setAspect(95);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getSurfaceFireLengthToWidthRatio());
+    expectedLengthToWidthRatio = 2.142422;
+    BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
+
     // Test Crown fire length-to-width-ratio
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.doCrownRun();
     expectedCrownLengthToWidthRatio = 1.625;
+    observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getCrownFireLengthToWidthRatio());
+    BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
+
+    setCrownInputsLowMoistureScenario(behaveRun);
+    behaveRun.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
+    behaveRun.doCrownRun();
+    expectedCrownLengthToWidthRatio = 2.25;
+    observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getCrownFireLengthToWidthRatio());
+    BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
+
+    setCrownInputsLowMoistureScenario(behaveRun);
+    behaveRun.setWindSpeed(15, windSpeedUnits, windHeightInputMode);
+    behaveRun.doCrownRun();
+    expectedCrownLengthToWidthRatio = 2.875;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getCrownFireLengthToWidthRatio());
     BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
 }
