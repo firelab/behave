@@ -145,8 +145,8 @@ private:
     void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
     void calculateFireType();
-    double calculateWindSpeedAtTwentyFeet();
-    double calculateCrownLengthToWidthRatio();
+    void calculateWindSpeedAtTwentyFeet();
+    void calculateCrownLengthToWidthRatio();
 
     // Member variables
     FireType::FireTypeEnum fireType_;               // Classification based on corwn fire active and transition ratios

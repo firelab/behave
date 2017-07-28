@@ -125,6 +125,7 @@ void Crown::doCrownRun()
     calculateCrownFireTransitionRatio();
 
     calculateCrownPowerOfFire();
+    calculateWindSpeedAtTwentyFeet();
     calcuateCrownPowerOfWind();
     calculateCrownLengthToWidthRatio();
     calcualteCrownFirePowerRatio();
@@ -267,8 +268,6 @@ void Crown::calcuateCrownPowerOfWind()
 {
     const double SECONDS_PER_MINUTE = 60.0;
 
-    windSpeedAtTwentyFeet_ = calculateWindSpeedAtTwentyFeet();
-
     double WindspeedMinusCrownROS = 0.0;
 
     // Eq. 7, Rothermel 1991
@@ -301,7 +300,7 @@ void Crown::calculateCrownFireActiveRatio()
         : (crownFireSpreadRate_ / crownCriticalFireSpreadRate_);
 }
 
-double Crown::calculateWindSpeedAtTwentyFeet()
+void Crown::calculateWindSpeedAtTwentyFeet()
 {
     windSpeedAtTwentyFeet_ = -1; // If negative 1 is returned, there is an error
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode;
@@ -317,10 +316,9 @@ double Crown::calculateWindSpeedAtTwentyFeet()
         double windSpeedAtTenMeters = surface_.getWindSpeed(SpeedUnits::FEET_PER_MINUTE, windHeightInputMode);
         windSpeedAtTwentyFeet_ = windSpeedUtility.windSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
     }
-    return windSpeedAtTwentyFeet_;
 }
 
-double Crown::calculateCrownLengthToWidthRatio()
+void Crown::calculateCrownLengthToWidthRatio()
 {
     //Calculates the crown fire length-to-width ratio given the 20-ft wind speed (in mph)
     // (Rothermel 1991, Equation 10, p16)
@@ -334,8 +332,6 @@ double Crown::calculateCrownLengthToWidthRatio()
     {
         crownFireLengthToWidthRatio_ = 1.0;
     }
-
-    return crownFireLengthToWidthRatio_;
 }
 
 void Crown::calculateFireType()
