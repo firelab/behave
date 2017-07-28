@@ -359,9 +359,9 @@ void Spot::calculateSpottingDistanceFromTorchingTrees()
     }
 }
 
-void Spot::setBurningPileFlameHeight(double buringPileflameHeight)
+void Spot::setBurningPileFlameHeight(double buringPileFlameHeight)
 {
-	spotInputs_.setBurningPileFlameHeight(buringPileflameHeight);
+	spotInputs_.setBurningPileFlameHeight(buringPileFlameHeight);
 }
 
 void Spot::setDBH(double DBH)

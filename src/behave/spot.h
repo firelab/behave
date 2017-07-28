@@ -49,7 +49,7 @@ public:
     void calculateSpottingDistanceFromTorchingTrees();
 
 	// Spot Inputs Setters
-	void setBurningPileFlameHeight(double buringPileflameHeight);
+	void setBurningPileFlameHeight(double buringPileFlameHeight);
 	void setDBH(double DBH);
     void setDownwindCoverHeight(double downwindCoverHeight);
     void setLocation(SpotFireLocation::SpotFireLocationEnum location);

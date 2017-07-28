@@ -302,7 +302,6 @@ void Crown::calculateCrownFireActiveRatio()
 
 void Crown::calculateWindSpeedAtTwentyFeet()
 {
-    windSpeedAtTwentyFeet_ = -1; // If negative 1 is returned, there is an error
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode;
     windHeightInputMode = surface_.getWindHeightInputMode();
 
