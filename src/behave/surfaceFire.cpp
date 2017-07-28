@@ -623,7 +623,7 @@ void SurfaceFire::initializeMembers()
     noWindNoSlopeSpreadRate_ = 0.0;
     forwardSpreadRate_ = 0.0;
     heatPerUnitArea_ = 0.0;
-    fireLengthToWidthRatio_ = 0.0;
+    fireLengthToWidthRatio_ = 1.0;
     residenceTime_ = 0.0;
     reactionIntensity_ = 0.0;
     firelineIntensity_ = 0.0;

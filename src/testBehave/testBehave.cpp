@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
 
-    // Test North oriented mode, 42 degree wind, 20 foot wind , 30 degree slope
+    // Test North oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     behaveRun.setWindHeightInputMode(windHeightInputMode);
     behaveRun.setSlope(30, SlopeUnits::DEGREES);
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     expectedSurfaceFireSpreadRate = 19.677584;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    // Test upslope oriented mode, 20 foot uplsope wind
+    // Test upslope oriented mode, 5 mph 20 foot uplsope wind
     behaveRun.setFuelModelNumber(124);
     behaveRun.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
@@ -186,9 +186,10 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    // Test upslope oriented mode,  20 foot wind cross-slope left to right (90 degrees)
+    // Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)
     behaveRun.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
     behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.setWindDirection(90);
     behaveRun.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
@@ -231,6 +232,42 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
     expectedSurfaceFireSpreadRate = 0.0;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+}
+
+BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
+{
+    // Observed and expected output
+    double observedLengthToWidthRatio = 0.0;
+    double expectedLengthToWidthRatio = 0.0;
+
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+
+    // Test North oriented mode, north wind, 0 mph 20 foot wind, 0 degree aspect, 0 degree slope
+    behaveRun.setWindHeightInputMode(windHeightInputMode);
+    behaveRun.setSlope(0, SlopeUnits::DEGREES);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.setWindSpeed(0, windSpeedUnits, windHeightInputMode);
+    behaveRun.setWindDirection(0);
+    behaveRun.setAspect(0);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getSurfaceFireLengthToWidthRatio());
+    expectedLengthToWidthRatio = 1.0;
+    BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
+
+    // Test North oriented mode, 45 degree wind, 5 mph 20 foot wind, 95 degree aspect, 30 degree slope
+    behaveRun.setWindHeightInputMode(windHeightInputMode);
+    behaveRun.setSlope(30, SlopeUnits::DEGREES);
+    behaveRun.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
+    behaveRun.setWindDirection(45);
+    behaveRun.setAspect(95);
+    behaveRun.doSurfaceRunInDirectionOfMaxSpread();
+    observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.getSurfaceFireLengthToWidthRatio());
+    expectedLengthToWidthRatio = 1.897769;
+    BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
