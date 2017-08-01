@@ -31,7 +31,7 @@
 #ifndef WINDADJUSTMENTFACTOR_H
 #define WINDADJUSTMENTFACTOR_H
 
-#include "surfaceEnums.h"
+#include "surfaceInputs.h"
 
 class WindAjustmentFactor
 {

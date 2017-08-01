@@ -32,7 +32,6 @@
 #ifndef SPOT_H
 #define SPOT_H
 
-#include "spotEnums.h"
 #include "spotInputs.h"
 
 class Spot

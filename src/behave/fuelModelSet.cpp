@@ -31,7 +31,7 @@
 
 #include "fuelModelSet.h"
 
-#include "surfaceEnums.h"
+#include "surfaceInputs.h"
 
 FuelModelSet::FuelModelSet()
 {

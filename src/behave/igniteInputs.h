@@ -1,7 +1,7 @@
 /******************************************************************************
 *
 * Project:  CodeBlocks
-* Purpose:  Various constant values used by the Ignite class
+* Purpose:  Class for handling the inputs required for Behave's Ignite module
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************
@@ -25,21 +25,23 @@
 *
 ******************************************************************************/
 
-#ifndef IGNITEENUMS_H
-#define IGNITEENUMS_H
+#ifndef IGNITEINPUTS_H
+#define IGNITEINPUTS_H
+
+#include "behaveUnits.h"
 
 struct IgnitionFuelBedType
 {
     enum IgnitionFuelBedTypeEnum
     {
-        PONDEROSA_PINE_LITTER       = 0, //Ponderosa Pine Litter
-        PUNKY_WOOD_ROTTEN_CHUNKY    = 1, // Punky wood, rotten, chunky
-        PUNKY_WOOD_POWDER_DEEP      = 2, // Punky wood powder, deep (4.8 cm)
-        PUNK_WOOD_POWDER_SHALLOW    = 3, // Punk wood powder, shallow (2.4 cm)
-        LODGEPOLE_PINE_DUFF         = 4, // Lodgepole pine duff
-        DOUGLAS_FIR_DUFF            = 5, //  Douglas - fir duff
-        HIGH_ALTITUDE_MIXED         = 6, // High altitude mixed (mainly Engelmann spruce)
-        PEAT_MOSS                   = 7  // Peat moss (commercial)
+        PONDEROSA_PINE_LITTER = 0, //Ponderosa Pine Litter
+        PUNKY_WOOD_ROTTEN_CHUNKY = 1, // Punky wood, rotten, chunky
+        PUNKY_WOOD_POWDER_DEEP = 2, // Punky wood powder, deep (4.8 cm)
+        PUNK_WOOD_POWDER_SHALLOW = 3, // Punk wood powder, shallow (2.4 cm)
+        LODGEPOLE_PINE_DUFF = 4, // Lodgepole pine duff
+        DOUGLAS_FIR_DUFF = 5, //  Douglas - fir duff
+        HIGH_ALTITUDE_MIXED = 6, // High altitude mixed (mainly Engelmann spruce)
+        PEAT_MOSS = 7  // Peat moss (commercial)
     };
 };
 
@@ -47,10 +49,20 @@ struct LightningCharge
 {
     enum LightningChargeEnum
     {
-        NEGATIVE    = 0,
-        POSITIVE    = 1,
-        UNKNOWN     = 2
+        NEGATIVE = 0,
+        POSITIVE = 1,
+        UNKNOWN = 2
     };
 };
 
-#endif // IGNITEENUMS_H
+class IgniteInputs
+{
+public:
+    IgniteInputs();
+    ~IgniteInputs();
+
+private:
+ 
+};
+
+#endif // IGNITEINPUTS_H

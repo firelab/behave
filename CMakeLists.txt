@@ -47,6 +47,7 @@ SET(SOURCE
     src/behave/crownInputs.cpp
     src/behave/fuelModelSet.cpp
 	src/behave/ignite.cpp
+	src/behave/igniteInputs.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
@@ -68,20 +69,17 @@ SET(HEADERS
     src/behave/behaveVector.h
 	src/behave/behaveUnits.h
     src/behave/crown.h
-    src/behave/crownEnums.h
     src/behave/crownInputs.h
     src/behave/fuelModelSet.h
 	src/behave/ignite.h
-	src/behave/igniteEnums.h
+	src/behave/igniteInputs.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
     src/behave/randthread.h
     src/behave/spot.h
-    src/behave/spotEnums.h
     src/behave/spotInputs.h
     src/behave/surface.h
-    src/behave/surfaceEnums.h
     src/behave/surfaceFireReactionIntensity.h
     src/behave/surfaceFuelbedIntermediates.h
     src/behave/surfaceInputs.h

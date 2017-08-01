@@ -31,7 +31,7 @@
 #ifndef SURFACEFIREREACTIONINTENSITY_H
 #define SURFACEFIREREACTIONINTENSITY_H
 
-#include "surfaceEnums.h"
+#include "surfaceInputs.h"
 
 class SurfaceFuelbedIntermediates;
 

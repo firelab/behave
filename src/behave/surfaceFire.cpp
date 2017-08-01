@@ -35,7 +35,6 @@
 #include <cmath>
 
 #include "fuelModelSet.h"
-#include "surfaceEnums.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
 #include "windAdjustmentFactor.h"

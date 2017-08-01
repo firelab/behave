@@ -32,7 +32,7 @@
 #ifndef SURFACETWOFUELMODELS_H
 #define SURFACETWOFUELMODELS_H
 
-#include "surfaceEnums.h"
+#include "surfaceInputs.h"
 
 class SurfaceFuelbedIntermediates;
 class SurfaceFire;

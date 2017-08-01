@@ -32,6 +32,8 @@
 #ifndef IGNITE_H
 #define IGNITE_H
 
+#include "igniteInputs.h"
+
 class Ignite
 {
 public:

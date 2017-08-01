@@ -33,7 +33,7 @@
 
 #include "palmettoGallberry.h" 
 #include "westernAspen.h"
-#include "surfaceEnums.h"
+#include "surfaceInputs.h"
 
 class FuelModelSet;
 class SurfaceInputs;

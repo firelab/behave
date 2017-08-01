@@ -37,7 +37,6 @@
 
 #include "behaveUnits.h"
 #include "crownInputs.h"
-#include "crownEnums.h"
 #include "surface.h"
 
 class FuelModelSet;

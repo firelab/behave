@@ -32,7 +32,6 @@
 
 #include <cmath>
 #include "fuelModelSet.h"
-#include "surfaceEnums.h"
 #include "windSpeedUtility.h"
 
 Crown::Crown(const FuelModelSet& fuelModelSet)

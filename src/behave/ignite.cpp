@@ -32,7 +32,7 @@
 #include "ignite.h"
 
 #include <cmath>
-#include "igniteEnums.h"
+#include "igniteInputs.h"
 
 Ignite::Ignite()
 {

@@ -126,7 +126,6 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveWoody = 90.0;
     double moistureFoliar = 120;
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
-    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = TwoFuelModels::TWO_DIMENSIONAL;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
@@ -141,7 +140,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     double crownRatio = 0.50;
     double canopyBaseHeight = 6;
     double canopyBulkDensity = 0.03;
-
+    
     behaveRun.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
         windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits,
