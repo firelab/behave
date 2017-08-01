@@ -86,8 +86,8 @@ double Ignite::calculateFuelTemperature(double airTemperature, double sunShade)
     return(airTemperature + temperatureDifferential);
 }
 
-double Ignite::calculateLightningIgnitionProbability(int fuelType, double depth,
-    double hundredHourMoisture, int charge)
+double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType, double duffDepth,
+    double hundredHourMoisture, LightningCharge::LightningChargeEnum charge)
 {
     /*
     *      The following assumptions are made by Latham:
@@ -109,10 +109,10 @@ double Ignite::calculateLightningIgnitionProbability(int fuelType, double depth,
     static const double freqPos = 0.277;
 
     // Convert duff depth to cm and restrict to maximum of 10 cm.
-    depth *= 2.54;
-    if (depth > 10.0)
+    duffDepth *= 2.54;
+    if (duffDepth > 10.0)
     {
-        depth = 10.0;
+        duffDepth = 10.0;
     }
 
     // Convert duff moisture to percent and restrict to maximum of 40%.
@@ -154,14 +154,14 @@ double Ignite::calculateLightningIgnitionProbability(int fuelType, double depth,
         }
         case IgnitionFuelBedType::LODGEPOLE_PINE_DUFF:
         {
-            pPos = 1.0 / (1.0 + exp(5.13 - 0.68 * depth));
-            pNeg = 1.0 / (1.0 + exp(3.84 - 0.60 * depth));
+            pPos = 1.0 / (1.0 + exp(5.13 - 0.68 * duffDepth));
+            pNeg = 1.0 / (1.0 + exp(3.84 - 0.60 * duffDepth));
             break;
         }
         case IgnitionFuelBedType::DOUGLAS_FIR_DUFF:
         {
-            pPos = 1.0 / (1.0 + exp(6.69 - 1.39 * depth));
-            pNeg = 1.0 / (1.0 + exp(5.48 - 1.28 * depth));
+            pPos = 1.0 / (1.0 + exp(6.69 - 1.39 * duffDepth));
+            pNeg = 1.0 / (1.0 + exp(5.48 - 1.28 * duffDepth));
             break;
         }
         case IgnitionFuelBedType::HIGH_ALTITUDE_MIXED:

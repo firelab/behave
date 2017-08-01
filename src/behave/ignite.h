@@ -43,11 +43,13 @@ public:
     double calculateFirebrandIgnitionProbability(double fuelTemperature,
         double oneHourMoisture);
     double calculateFuelTemperature(double airTemperature, double sunShade);
-    double calculateLightningIgnitionProbability(int fuelType, double depth,
-        double hundredHourMoisture, int charge);
+    double calculateLightningIgnitionProbability(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType, double duffDepth,
+        double hundredHourMoisture, LightningCharge::LightningChargeEnum charge);
+
+
 
 private:
-
+    IgniteInputs igniteInputs_;
 };
 
 #endif  // IGNITE_H
