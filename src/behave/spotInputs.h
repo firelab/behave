@@ -38,14 +38,6 @@ struct SpotArrayConstants
     };
 };
 
-struct SpotSurfaceInputs
-{
-    enum SpotSurfaceInputsEnum
-    {
-        NOT_SET = -1 // This indicates that the value used should be from Surface module
-    };
-};
-
 struct SpotTreeSpecies
 {
     enum SpotTreeSpeciesEnum
@@ -98,13 +90,13 @@ public:
 
 	void updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
 		double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight, 
-		double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		double windSpeedAtTwentyFeet);
 	void updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-		double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET,
-		double flameLength = SpotSurfaceInputs::NOT_SET);
+		double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet,
+		double flameLength);
 	void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
 		double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
-		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet);
 
 	double getBurningPileFlameHeight();
 	double getDBH();

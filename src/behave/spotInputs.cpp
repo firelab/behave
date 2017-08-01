@@ -181,9 +181,9 @@ void SpotInputs::initializeMembers()
 	location_ = SpotFireLocation::MIDSLOPE_WINDWARD;
 	ridgeToValleyDistance_ = 0.0;
 	ridgeToValleyElevation_ = 0.0;
-	windSpeedAtTwentyFeet_ = SpotSurfaceInputs::NOT_SET;
+	windSpeedAtTwentyFeet_ = 0.0;
 	buringPileFlameHeight_ = 0.0;
-	flameLength_ = SpotSurfaceInputs::NOT_SET;
+	flameLength_ = 0.0;
 	torchingTrees_ = 0.0;
 	DBH_ = 0.0;
 	treeHeight_ = 0.0;

@@ -184,13 +184,13 @@ public:
 	// SPOT Module Setters
 	void updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
 		double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight,
-		double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		double windSpeedAtTwentyFeet);
 	void updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-		double ridgeToValleyElevation, double downwindCoverHeight, double flameLength = SpotSurfaceInputs::NOT_SET,
-		double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		double ridgeToValleyElevation, double downwindCoverHeight, double flameLength,
+		double windSpeedAtTwentyFeet);
 	void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
 		double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
-		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet);
 
     // SPOT Module Getters
     double getMaxSpottingDistanceFromBurningPile();

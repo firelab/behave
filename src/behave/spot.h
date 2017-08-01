@@ -61,13 +61,13 @@ public:
 	void setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet);
 	void updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
 		double ridgeToValleyElevation, double downwindCoverHeight, double buringPileFlameHeight,
-		double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		double windSpeedAtTwentyFeet);
 	void updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
-		double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET,
-		double flameLength = SpotSurfaceInputs::NOT_SET);
+		double ridgeToValleyElevation, double downwindCoverHeight, double windSpeedAtTwentyFeet,
+		double flameLength);
 	void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
 		double ridgeToValleyElevation, double downwindCoverHeight, double torchingTrees, double DBH, double treeHeight,
-		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet = SpotSurfaceInputs::NOT_SET);
+		SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet);
 
 	// Spot Inputs Getters
 	double getBurningPileFlameHeight();
