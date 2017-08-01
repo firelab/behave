@@ -60,36 +60,38 @@ class IgniteInputs
 public:
     IgniteInputs();
     ~IgniteInputs();
-    void updateIgniteInputs(double fuelTemperature, double oneHourMoisture, double airTemperature,
-        double sunShade, IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType, double duffDepth,
-        double hundredHourMoisture, LightningCharge::LightningChargeEnum chargeType);
+    void updateIgniteInputs(double fuelTemperature, double moistureOneHour, double moistureHundredHour,
+        double airTemperature, double sunShade, IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth,
+        LightningCharge::LightningChargeEnum lightningChargeType);
 
     void setFuelTemperature(double fuelTemperature);
-    void setOneHourMoisture(double oneHourMoisture);
+    void setMoistureHundredHour(double hundredHourMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setAirTemperature(double airTemperature);
     void setSunShade(double sunShade);
     void setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_);
-    void setDuffDepth(double duffDepth);
-    void setHundredHourMoisture(double hundredHourMoisture);
+    void setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits);
+  
     void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
 
     double getFuelTemperature();
-    double getOneHourMoisture();
+    double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum desiredUnits);
+    double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum desiredUnits);
     double getAirTemperature();
     double getSunShade();
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum getIgnitionFuelBedType();
-    double getDuffDepth();
-    double getHundredHourMoisture();
+    double getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits);
     LightningCharge::LightningChargeEnum getLightningChargeType();
      
 private:
     double fuelTemperature_;
-    double oneHourMoisture_;
+    double moistureOneHour_;
+    double moistureHundredHour_;
     double airTemperature_;
     double sunShade_;
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_;
     double duffDepth_;
-    double hundredHourMoisture_;
+ 
     LightningCharge::LightningChargeEnum lightningChargeType_;
 };
 

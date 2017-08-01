@@ -44,13 +44,14 @@ Ignite::~Ignite()
 
 }
 
-double Ignite::calculateFirebrandIgnitionProbability(double fuelTemperature,
-    double oneHourMoisture)
+double Ignite::calculateFirebrandIgnitionProbability()
 {
     // Covert Fahrenheit to Celcius
-    double localFuelTemperature = (fuelTemperature - 32.0) * 5.0 / 9.0;
+    double fuelTemperature = igniteInputs_.getFuelTemperature();
+    double localFuelTemperature = ( fuelTemperature - 32.0) * 5.0 / 9.0;
 
-    double fuelMoisture = oneHourMoisture; // use one hour moisture in the following calculation
+    // use one hour moisture in the following calculation
+    double fuelMoisture = igniteInputs_.getMoistureOneHour(MoistureUnits::FRACTION);; 
 
     // Calculate heat of ignition
     double heatOfIgnition = 144.51
@@ -78,16 +79,18 @@ double Ignite::calculateFirebrandIgnitionProbability(double fuelTemperature,
     return probabilityOfIgnition;
 }
 
-double Ignite::calculateFuelTemperature(double airTemperature, double sunShade)
+double Ignite::calculateFuelTemperature()
 {
     double temperatureDifferential;
+
+    double sunShade = igniteInputs_.getSunShade();
+    double airTemperature = igniteInputs_.getAirTemperature();
 
     temperatureDifferential = 25.0 - (20.0 * sunShade);
     return(airTemperature + temperatureDifferential);
 }
 
-double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType, double duffDepth,
-    double hundredHourMoisture, LightningCharge::LightningChargeEnum charge)
+double Ignite::calculateLightningIgnitionProbability()
 {
     /*
     *      The following assumptions are made by Latham:
@@ -98,8 +101,6 @@ double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::Igniti
     *      - Unknown strikes are therefore p = 0.1446 neg + 0.2493 pos
     */
 
-    double fuelMoisture = hundredHourMoisture;  // use hundred hour moisture in the following calculation
-
     // Probability of continuing current by charge type (Latham)
     static const double ccNeg = 0.2;
     static const double ccPos = 0.9;
@@ -109,14 +110,16 @@ double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::Igniti
     static const double freqPos = 0.277;
 
     // Convert duff depth to cm and restrict to maximum of 10 cm.
+    double duffDepth = igniteInputs_.getDuffDepth(LengthUnits::CENTIMETERS);
+
     duffDepth *= 2.54;
     if (duffDepth > 10.0)
     {
         duffDepth = 10.0;
     }
 
-    // Convert duff moisture to percent and restrict to maximum of 40%.
-    fuelMoisture *= 100.0;
+    //  use hundred hour moisture as duff moisture and conver to percent and restrict to maximum of 40%.
+    double fuelMoisture = igniteInputs_.getMoistureHundredHour(MoistureUnits::PERCENT);
     if (fuelMoisture > 40.0)
     {
         fuelMoisture = 40.0;
@@ -126,6 +129,7 @@ double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::Igniti
     double pNeg = 0.0;
     double prob = 0.0;
 
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType = igniteInputs_.getIgnitionFuelBedType();
     switch (fuelType)
     {
         case IgnitionFuelBedType::PONDEROSA_PINE_LITTER:
@@ -178,6 +182,7 @@ double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::Igniti
         }
     }
 
+    LightningCharge::LightningChargeEnum charge = igniteInputs_.getLightningChargeType();
     switch (charge)
     {
         case LightningCharge::NEGATIVE:
@@ -208,4 +213,39 @@ double Ignite::calculateLightningIgnitionProbability(IgnitionFuelBedType::Igniti
     }
 
     return prob;
+}
+
+void Ignite::setFuelTemperature(double fuelTemperature)
+{
+    igniteInputs_.setFuelTemperature(fuelTemperature);
+}
+
+void Ignite::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum desiredUnits)
+{
+    igniteInputs_.setMoistureOneHour(moistureOneHour, desiredUnits);
+}
+
+void Ignite::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum desiredUnits)
+{
+    igniteInputs_.setMoistureOneHour(moistureHundredHour, desiredUnits);
+}
+
+void Ignite::setAirTemperature(double airTemperature)
+{
+    igniteInputs_.setAirTemperature(airTemperature);
+}
+
+void Ignite::setSunShade(double sunShade)
+{
+    igniteInputs_.setSunShade(sunShade);
+}
+
+void Ignite::setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_)
+{
+    igniteInputs_.setIgnitionFuelBedType(fuelBedType_);
+}
+
+void Ignite::setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits)
+{
+    igniteInputs_.setDuffDepth(duffDepth, lengthUnits);
 }

@@ -31,7 +31,9 @@
 double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units)
 {
     // Length to base units constants
+    const double INCHES_TO_FEET = 0.08333333333333;
     const double METERS_TO_FEET = 3.2808398950131;
+    const double CENTIMETERS_TO_FEET = 0.03280839895;
     const double MILES_TO_FEET = 5280.0;
     const double KILOMETERS_TO_FEET = 3280.8398950131;
 
@@ -40,6 +42,16 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
         case FEET:
         {
             // Already in base, nothing to do
+            break;
+        }
+        case INCHES:
+        {
+            value *= INCHES_TO_FEET;
+            break;
+        }
+        case CENTIMETERS:
+        {
+            value *= CENTIMETERS_TO_FEET;
             break;
         }
         case METERS:
@@ -68,6 +80,8 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
 double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum units)
 {
     // Length from base units constants
+    const double FEET_TO_INCHES = 12;
+    const double FEET_TO_CENTIMETERS = 30.48;
     const double FEET_TO_METERS = 0.3048;
     const double FEET_TO_MILES = 0.000189394;
     const double FEET_TO_KILOMETERS = 0.0003048;
@@ -77,6 +91,16 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
         case FEET:
         {
             // Already in base, nothing to do
+            break;
+        }
+        case INCHES:
+        {
+            value *= FEET_TO_INCHES;
+            break;
+        }
+        case CENTIMETERS:
+        {
+            value *= FEET_TO_CENTIMETERS;
             break;
         }
         case METERS:

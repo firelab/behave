@@ -40,13 +40,28 @@ public:
     Ignite();
     ~Ignite();
 
-    double calculateFirebrandIgnitionProbability(double fuelTemperature,
-        double oneHourMoisture);
-    double calculateFuelTemperature(double airTemperature, double sunShade);
-    double calculateLightningIgnitionProbability(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType, double duffDepth,
-        double hundredHourMoisture, LightningCharge::LightningChargeEnum charge);
+    double calculateFirebrandIgnitionProbability();
+    double calculateFuelTemperature();
+    double calculateLightningIgnitionProbability();
 
+    void setFuelTemperature(double fuelTemperature);
+    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum desiredUnits);
+    void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum desiredUnits);
+    void setAirTemperature(double airTemperature);
+    void setSunShade(double sunShade);
+    void setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_);
+    void setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits);
+   
+    void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
 
+    double getFuelTemperature();
+    double getOneHourMoisture();
+    double getAirTemperature();
+    double getSunShade();
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum getIgnitionFuelBedType();
+    double getDuffDepth();
+    double getHundredHourMoisture();
+    LightningCharge::LightningChargeEnum getLightningChargeType();
 
 private:
     IgniteInputs igniteInputs_;

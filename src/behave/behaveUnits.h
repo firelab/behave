@@ -33,6 +33,8 @@ struct LengthUnits
     enum LengthUnitsEnum
     {
         FEET, // base length unit
+        INCHES,
+        CENTIMETERS,
         METERS,				
         MILES,
         KILOMETERS
