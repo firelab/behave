@@ -70,10 +70,10 @@ public:
     // Crown Module Getters
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
-    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
-    double getCrownFireSpreadRate() const;
-    double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum desiredUnits) const;
+    double getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
+    double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
+    double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength() const;
     FireType::FireTypeEnum getFireType() const;

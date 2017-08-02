@@ -133,14 +133,14 @@ void Crown::doCrownRun()
     calculateFireType();
 }
 
-double Crown::getCrownFireSpreadRate() const
+double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return crownFireSpreadRate_;
+    return SpeedUnits::fromBaseUnits(crownFireSpreadRate_, desiredUnits);
 }
 
-double Crown::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+double Crown::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return surface_.getSpreadRate(spreadRateUnits);
+    return surface_.getSpreadRate(desiredUnits);
 }
 
 double Crown::getCrownFirelineIntensity() const

@@ -65,9 +65,9 @@ public:
     double getMidflameWindspeed() const;
     double getResidenceTime() const;
     double getReactionIntensity() const;
-    double getEllipticalA() const;
-    double getEllipticalB() const;
-    double getEllipticalC() const;
+    double getEllipticalA(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
+    double getEllipticalB(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
+    double getEllipticalC(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
    
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);

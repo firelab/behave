@@ -96,7 +96,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        if (isAllFuelLoadZero(fuelModelNumber))
+        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModelSet_->isFuelModelDefined(fuelModelNumber))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -126,7 +126,7 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     else // Use only one fuel model
     {   
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        if (isAllFuelLoadZero(fuelModelNumber))
+        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModelSet_->isFuelModelDefined(fuelModelNumber))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -205,19 +205,19 @@ double Surface::getMidflameWindspeed() const
     return surfaceFire_.getMidflameWindSpeed();
 }
 
-double Surface::getEllipticalA() const
+double Surface::getEllipticalA(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return surfaceFire_.getEllipticalA();
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getEllipticalA(), desiredUnits);
 }
 
-double Surface::getEllipticalB() const
+double Surface::getEllipticalB(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return surfaceFire_.getEllipticalB();
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getEllipticalB(), desiredUnits);
 }
 
-double Surface::getEllipticalC() const
+double Surface::getEllipticalC(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return surfaceFire_.getEllipticalC();
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getEllipticalC(), desiredUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover)

@@ -41,7 +41,6 @@ public:
     ~Ignite();
 
     double calculateFirebrandIgnitionProbability();
-    double calculateFuelTemperature();
     double calculateLightningIgnitionProbability();
 
     void setFuelTemperature(double fuelTemperature);
@@ -51,7 +50,6 @@ public:
     void setSunShade(double sunShade);
     void setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_);
     void setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits);
-   
     void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
 
     double getFuelTemperature();
@@ -64,6 +62,8 @@ public:
     LightningCharge::LightningChargeEnum getLightningChargeType();
 
 private:
+    double calculateFuelTemperature();
+
     IgniteInputs igniteInputs_;
 };
 
