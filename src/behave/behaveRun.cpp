@@ -48,10 +48,7 @@ BehaveRun& BehaveRun::operator=(const BehaveRun& rhs)
 {
     if (this != &rhs)
     {
-        setFuelModelSet(*rhs.fuelModelSet_);
-        surface = rhs.surface;
-        crown = rhs.crown;
-        spot = rhs.spot;
+        memberwiseCopyAssignment(rhs);
     }
     return *this;
 }
