@@ -77,7 +77,7 @@ struct SpeedUnits
 {
     enum SpeedUnitsEnum
     {
-        FEET_PER_MINUTE, //base velocity unit
+        FEET_PER_MINUTE, // base velocity unit
         CHAINS_PER_HOUR,
         METERS_PER_SECOND,	
         METERS_PER_MINUTE,
@@ -93,7 +93,7 @@ struct CoverUnits
 {
     enum CoverUnitsEnum
     {
-        FRACTION, //base cover unit
+        FRACTION, // base cover unit
         PERCENT
     };
 
@@ -101,11 +101,24 @@ struct CoverUnits
     static double fromBaseUnits(double value, CoverUnitsEnum units);
 };
 
+struct ProbabilityUnits
+{
+    enum ProbabilityUnitsEnum
+    {
+        FRACTION, // base cover unit
+        PERCENT
+    };
+
+    static double toBaseUnits(double value, ProbabilityUnitsEnum units);
+    static double fromBaseUnits(double value, ProbabilityUnitsEnum units);
+};
+
+
 struct MoistureUnits
 {
     enum MoistureUnitsEnum
     {
-        FRACTION, //base cover unit
+        FRACTION, // base cover unit
         PERCENT
     };
 
@@ -117,7 +130,7 @@ struct SlopeUnits
 {
     enum SlopeUnitsEnum
     {			   
-        DEGREES, //base slope unit
+        DEGREES, // base slope unit
         PERCENT
     };
 
@@ -129,12 +142,25 @@ struct DensityUnits
 {
     enum DensityUnitsEnum
     {
-        POUNDS_PER_CUBIC_FOOT, //base density unit
+        POUNDS_PER_CUBIC_FOOT, // base density unit
         KILOGRAMS_PER_CUBIC_METER
     };
 
     static double toBaseUnits(double value, DensityUnitsEnum units);
     static double fromBaseUnits(double value, DensityUnitsEnum units);
+};
+
+struct TemperatureUnits
+{
+    enum TemperatureUnitsEnum
+    {
+        FAHRENHEIT, // base temperature unit
+        CELSIUS,
+        KELVIN
+    };
+
+    static double toBaseUnits(double value, TemperatureUnitsEnum units);
+    static double fromBaseUnits(double value, TemperatureUnitsEnum units);
 };
 
 #endif // BEHAVEUNITS_H

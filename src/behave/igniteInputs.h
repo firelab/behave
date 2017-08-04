@@ -60,31 +60,29 @@ class IgniteInputs
 public:
     IgniteInputs();
     ~IgniteInputs();
-    void updateIgniteInputs(double fuelTemperature, double moistureOneHour, double moistureHundredHour,
-        double airTemperature, double sunShade, IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth,
+    void updateIgniteInputs(double moistureOneHour, double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits,
+        double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits,
+        IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
         LightningCharge::LightningChargeEnum lightningChargeType);
 
-    void setFuelTemperature(double fuelTemperature);
     void setMoistureHundredHour(double hundredHourMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setAirTemperature(double airTemperature);
-    void setSunShade(double sunShade);
+    void setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits);
+    void setSunShade(double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits);
     void setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_);
     void setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits);
   
     void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
 
-    double getFuelTemperature();
+    double getAirTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits);
     double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum desiredUnits);
     double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum desiredUnits);
-    double getAirTemperature();
-    double getSunShade();
+    double getSunShade(CoverUnits::CoverUnitsEnum desiredUnits);
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum getIgnitionFuelBedType();
     double getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits);
     LightningCharge::LightningChargeEnum getLightningChargeType();
      
 private:
-    double fuelTemperature_;
     double moistureOneHour_;
     double moistureHundredHour_;
     double airTemperature_;

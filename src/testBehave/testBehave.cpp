@@ -9,7 +9,7 @@
 #include "behaveVector.h"
 
 // Define the error tolerance for double values
-static const double ERROR_TOLERANCE = 1e-07;
+static const double ERROR_TOLERANCE = 1e-06;
 
 double roundToSixDecimalPlaces(const double numberToBeRounded) 
 {
@@ -668,6 +668,57 @@ BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
     expectedSurfaceFireSpreadRate = 0.110953;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MILES_PER_HOUR));
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+}
+
+BOOST_AUTO_TEST_CASE(igniteModuleTest)
+{
+    double moistureOneHour = 6.0;
+    double moistureHundredHour = 8.0;
+    double airTemperature = 80; // Fahrenheit
+    double sunShade = 50.0; // Percent 
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType = IgnitionFuelBedType::DOUGLAS_FIR_DUFF;
+    double duffDepth = 6.0; // inches
+    LightningCharge::LightningChargeEnum lightningChargeType = LightningCharge::UNKNOWN;
+
+    double observedFirebrandIgnitionProbability = 0;
+    double observedLightningIgnitionProbability = 0;
+    double expectedFirebrandIgnitionProbability = 0;
+    double expectedLightningIgnitionProbability = 0;
+
+    MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::PERCENT;
+    TemperatureUnits::TemperatureUnitsEnum temperatureUnits = TemperatureUnits::FAHRENHEIT;
+    CoverUnits::CoverUnitsEnum sunShadeUnits = CoverUnits::PERCENT;
+    LengthUnits::LengthUnitsEnum duffDepthUnits = LengthUnits::INCHES;
+
+    expectedFirebrandIgnitionProbability = 0.54831705;
+    expectedLightningIgnitionProbability = 0.39362018;
+
+    behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
+        temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::FRACTION);
+    BOOST_CHECK_CLOSE(observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, ERROR_TOLERANCE);
+
+    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::FRACTION);
+    BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
+
+    moistureOneHour = 7.0;
+    moistureHundredHour = 9.0;
+    airTemperature = 90; // Fahrenheit
+    sunShade = 25.0; // Percent 
+    fuelBedType = IgnitionFuelBedType::LODGEPOLE_PINE_DUFF;
+    duffDepth = 8.0; // inches
+    lightningChargeType = LightningCharge::NEGATIVE;
+
+    expectedFirebrandIgnitionProbability = 50.717573;
+    expectedLightningIgnitionProbability = 17.931991;
+
+    behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
+        temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::PERCENT);
+    BOOST_CHECK_CLOSE(observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, ERROR_TOLERANCE);
+
+    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::PERCENT);
+    BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite

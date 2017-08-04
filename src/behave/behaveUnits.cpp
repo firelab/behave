@@ -81,7 +81,7 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
 {
     // Length from base units constants
     const double FEET_TO_INCHES = 12;
-    const double FEET_TO_CENTIMETERS = 30.48;
+    const double FEET_TO_CENTIMETERS = 30.480;
     const double FEET_TO_METERS = 0.3048;
     const double FEET_TO_MILES = 0.000189394;
     const double FEET_TO_KILOMETERS = 0.0003048;
@@ -449,6 +449,78 @@ double SurfaceAreaToVolumeUnits::fromBaseUnits(double value, SurfaceAreaToVolume
         {
             ; // TODO: Handle error
         }
+    }
+    return value;
+}
+
+double TemperatureUnits::toBaseUnits(double value, TemperatureUnitsEnum units)
+{
+    switch (units)
+    {
+        case FAHRENHEIT:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case CELSIUS:
+        {
+            value = ((value * 9.0) / 5.0) + 32;
+            break;
+        }
+        case KELVIN:
+        {
+            value = (((value - 273.15) * 9.0) / 5.0) + 32;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+    return value;
+}
+
+double TemperatureUnits::fromBaseUnits(double value, TemperatureUnitsEnum units)
+{
+    switch (units)
+    {
+        case FAHRENHEIT:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case CELSIUS:
+        {
+            value = ((value - 32) * 5) / 9.0;
+            break;
+        }
+        case KELVIN:
+        {
+            value = (((value - 32) * 5) / 9.0) + 273.15;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+    return value;
+}
+
+double ProbabilityUnits::toBaseUnits(double value, ProbabilityUnitsEnum units)
+{
+    if (units == PERCENT)
+    {
+        value /= 100.0;
+    }
+    return value;
+}
+
+double ProbabilityUnits::fromBaseUnits(double value, ProbabilityUnitsEnum units)
+{
+    if (units == PERCENT)
+    {
+        value *= 100.0;
     }
     return value;
 }

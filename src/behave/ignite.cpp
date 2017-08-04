@@ -44,20 +44,20 @@ Ignite::~Ignite()
 
 }
 
-double Ignite::calculateFirebrandIgnitionProbability()
+double Ignite::calculateFirebrandIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits)
 {
-    // Covert Fahrenheit to Celcius
-    double fuelTemperature = igniteInputs_.getFuelTemperature();
-    double localFuelTemperature = ( fuelTemperature - 32.0) * 5.0 / 9.0;
+    // Covert temperature to Celcius
+    calculateFuelTemperature();
+    double fuelTemperature = getFuelTemperature(TemperatureUnits::CELSIUS);
 
     // use one hour moisture in the following calculation
     double fuelMoisture = igniteInputs_.getMoistureOneHour(MoistureUnits::FRACTION);; 
 
     // Calculate heat of ignition
     double heatOfIgnition = 144.51
-        - 0.26600 * localFuelTemperature
-        - 0.00058 * localFuelTemperature * localFuelTemperature
-        - localFuelTemperature * fuelMoisture
+        - 0.26600 * fuelTemperature
+        - 0.00058 * fuelTemperature * fuelTemperature
+        - fuelTemperature * fuelMoisture
         + 18.5400 * (1.0 - exp(-15.1 * fuelMoisture))
         + 640.000 * fuelMoisture;
     if (heatOfIgnition > 400.0)
@@ -76,21 +76,23 @@ double Ignite::calculateFirebrandIgnitionProbability()
         probabilityOfIgnition = 0.0;
     }
 
-    return probabilityOfIgnition;
+    return ProbabilityUnits::fromBaseUnits(probabilityOfIgnition, desiredUnits);
 }
 
 double Ignite::calculateFuelTemperature()
 {
     double temperatureDifferential;
 
-    double sunShade = igniteInputs_.getSunShade();
-    double airTemperature = igniteInputs_.getAirTemperature();
+    double sunShade = igniteInputs_.getSunShade(CoverUnits::FRACTION);
+    double airTemperature = igniteInputs_.getAirTemperature(TemperatureUnits::FAHRENHEIT);
 
     temperatureDifferential = 25.0 - (20.0 * sunShade);
-    return(airTemperature + temperatureDifferential);
+
+    fuelTemperature_ = airTemperature + temperatureDifferential;
+    return fuelTemperature_;
 }
 
-double Ignite::calculateLightningIgnitionProbability()
+double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits)
 {
     /*
     *      The following assumptions are made by Latham:
@@ -127,7 +129,7 @@ double Ignite::calculateLightningIgnitionProbability()
 
     double pPos = 0.0;
     double pNeg = 0.0;
-    double prob = 0.0;
+    double probabilityOfLightningIgnition = 0.0;
 
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType = igniteInputs_.getIgnitionFuelBedType();
     switch (fuelType)
@@ -187,37 +189,37 @@ double Ignite::calculateLightningIgnitionProbability()
     {
         case LightningCharge::NEGATIVE:
         {
-            prob = ccNeg * pNeg;
+            probabilityOfLightningIgnition = ccNeg * pNeg;
             break;
         }
         case  LightningCharge::POSITIVE:
         {
-            prob = ccPos * pPos;
+            probabilityOfLightningIgnition = ccPos * pPos;
             break;
         }
         case LightningCharge::UNKNOWN:
         {
-            prob = freqPos * ccPos * pPos + freqNeg * ccNeg * pNeg;
+            probabilityOfLightningIgnition = freqPos * ccPos * pPos + freqNeg * ccNeg * pNeg;
             break;
         }
     }
 
     // Constrain result
-    if (prob < 0.0)
+    if (probabilityOfLightningIgnition < 0.0)
     {
-        prob = 0.0;
+        probabilityOfLightningIgnition = 0.0;
     }
-    if (prob > 1.0)
+    if (probabilityOfLightningIgnition > 1.0)
     {
-        prob = 1.0;
+        probabilityOfLightningIgnition = 1.0;
     }
 
-    return prob;
+    return ProbabilityUnits::fromBaseUnits(probabilityOfLightningIgnition, desiredUnits);
 }
 
-void Ignite::setFuelTemperature(double fuelTemperature)
+void Ignite::setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnites)
 {
-    igniteInputs_.setFuelTemperature(fuelTemperature);
+    igniteInputs_.setAirTemperature(airTemperature, temperatureUnites);
 }
 
 void Ignite::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum desiredUnits)
@@ -230,14 +232,9 @@ void Ignite::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::M
     igniteInputs_.setMoistureOneHour(moistureHundredHour, desiredUnits);
 }
 
-void Ignite::setAirTemperature(double airTemperature)
+void Ignite::setSunShade(double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits)
 {
-    igniteInputs_.setAirTemperature(airTemperature);
-}
-
-void Ignite::setSunShade(double sunShade)
-{
-    igniteInputs_.setSunShade(sunShade);
+    igniteInputs_.setSunShade(sunShade, sunShadeUnits);
 }
 
 void Ignite::setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_)
@@ -248,4 +245,70 @@ void Ignite::setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum
 void Ignite::setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits)
 {
     igniteInputs_.setDuffDepth(duffDepth, lengthUnits);
+}
+
+void Ignite::setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType)
+{
+    igniteInputs_.setLightningChargeType(lightningChargeType);
+}
+
+void Ignite::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits,
+    double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits,
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
+    LightningCharge::LightningChargeEnum lightningChargeType)
+{
+    igniteInputs_.updateIgniteInputs(moistureOneHour, moistureHundredHour, moistureUnits, airTemperature,
+        temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
+}
+
+double Ignite::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits)
+{
+    return igniteInputs_.getAirTemperature(desiredUnits);
+}
+
+double Ignite::getFuelTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits)
+{
+    return TemperatureUnits::fromBaseUnits(fuelTemperature_, desiredUnits);
+}
+
+double Ignite::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum desiredUnits)
+{
+    return igniteInputs_.getMoistureOneHour(desiredUnits);
+}
+
+double Ignite::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum desiredUnits)
+{
+    return igniteInputs_.getMoistureHundredHour(desiredUnits);
+}
+
+double Ignite::getSunShade(CoverUnits::CoverUnitsEnum desiredUnits)
+{
+    return igniteInputs_.getSunShade(desiredUnits);
+}
+
+IgnitionFuelBedType::IgnitionFuelBedTypeEnum Ignite::getFuelBedType()
+{
+    return igniteInputs_.getIgnitionFuelBedType();
+}
+
+double Ignite::getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits)
+{
+    return igniteInputs_.getDuffDepth(desiredUnits);
+}
+
+LightningCharge::LightningChargeEnum Ignite::getLightningChargeType()
+{
+    return igniteInputs_.getLightningChargeType();
+}
+
+bool Ignite::isFuelDepthNeeded()
+{
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType = igniteInputs_.getIgnitionFuelBedType();
+    bool isNeeded = false;
+
+    if (fuelBedType == IgnitionFuelBedType::LODGEPOLE_PINE_DUFF || fuelBedType == IgnitionFuelBedType::DOUGLAS_FIR_DUFF)
+    {
+        bool isNeeded = true;
+    }
+    return isNeeded;
 }
