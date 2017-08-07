@@ -67,7 +67,7 @@ Sem::ContainResource::ContainResource(
         double production,
         double duration,
         ContainFlank flank,
-        char * const desc,
+        std::string desc,
         double baseCost,
         double hourCost ) :
     m_arrival(arrival),
@@ -118,7 +118,7 @@ double Sem::ContainResource::baseCost( void ) const
     \return Resource description.
  */
 
-char * Sem::ContainResource::description( void ) const
+std::string Sem::ContainResource::description( void ) const
 {
     return( m_desc );
 }

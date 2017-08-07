@@ -31,13 +31,14 @@
  */
 
 Sem::ContainForce::ContainForce( int maxResources ) :
-    m_cr(0),
+    //m_cr(0),
     m_size(maxResources),
     m_count(0)
 {
     // Allocate ContainResource pointer array.
-    m_cr = new ContainResource *[m_size];
-    ContainSim::checkmem( __FILE__, __LINE__, m_cr, "ContainResource", m_size );
+    //m_cr = new ContainResource *[m_size];
+
+    //ContainSim::checkmem( __FILE__, __LINE__, m_cr, "ContainResource", m_size );
     return;
 }
 
@@ -47,11 +48,11 @@ Sem::ContainForce::ContainForce( int maxResources ) :
 
 Sem::ContainForce::~ContainForce( void )
 {
-    for ( int i=0; i<m_count; i++ )
-    {
-        delete m_cr[i];  m_cr[i] = 0;
-    }
-    delete[] m_cr;      m_cr = 0;
+    //for ( int i=0; i<m_count; i++ )
+    //{
+    //    delete m_cr[i];  m_cr[i] = 0;
+    //}
+    //delete[] m_cr;      m_cr = 0;
     return;
 }
 
@@ -66,13 +67,16 @@ Sem::ContainForce::~ContainForce( void )
 
 double Sem::ContainForce::exhausted( ContainFlank flank ) const
 {
-    double at = 0.;
+    double at = 0.0;
     double done;
-    for ( int i=0; i<m_count; i++ )
+    //for ( int i=0; i<m_count; i++ )
+    for (int i = 0; i < resourceVector.size(); i++)
     {
-        if ( m_cr[i]->m_flank == flank || m_cr[i]->m_flank == BothFlanks )
+        //if ( m_cr[i]->m_flank == flank || m_cr[i]->m_flank == BothFlanks )
+        if (resourceVector[i].m_flank == flank || resourceVector[i].m_flank == BothFlanks)
         {
-            if ( ( done = m_cr[i]->m_arrival + m_cr[i]->m_duration ) > at )
+            //if ( ( done = m_cr[i]->m_arrival + m_cr[i]->m_duration ) > at )
+            if ((done = resourceVector[i].m_arrival + resourceVector[i].m_duration) > at)
             {
                 at = done;
             }
@@ -92,13 +96,16 @@ double Sem::ContainForce::exhausted( ContainFlank flank ) const
 
 double Sem::ContainForce::firstArrival( ContainFlank flank ) const
 {
-    double at = 99999999.;
-    for ( int i=0; i<m_count; i++ )
+    double at = 99999999.0;
+    //for ( int i=0; i<m_count; i++ )
+    for (int i = 0; i < resourceVector.size(); i++)
     {
-        if ( ( m_cr[i]->m_flank == flank || m_cr[i]->m_flank == BothFlanks )
-          && m_cr[i]->m_arrival < at )
+        //if ( ( m_cr[i]->m_flank == flank || m_cr[i]->m_flank == BothFlanks )
+        //  && m_cr[i]->m_arrival < at )
+        if ( (resourceVector[i].m_flank == flank || resourceVector[i].m_flank == BothFlanks )
+          && resourceVector[i].m_arrival < at )
         {
-            at = m_cr[i]->m_arrival;
+            at = resourceVector[i].m_arrival;
         }
     }
     return( at );
@@ -152,25 +159,26 @@ double Sem::ContainForce::nextArrival( double after, double until,
 Sem::ContainResource *Sem::ContainForce::addResource(
         Sem::ContainResource* resource )
 {
-	#define EXTRA_ALLOCATION 100
-    // Check for vector space 
-    if ( m_count >= m_size )
-    {
-        //need to reallocate memory - give some amount to grow
-        int newsize=m_size+EXTRA_ALLOCATION;
-        ContainResource ** cr_tmp = new ContainResource *[newsize];  
-        if (cr_tmp) {
-        	//copy to new place, and reassign 
-        	memcpy(cr_tmp,m_cr,sizeof(ContainResource*)*m_size);
-        	m_cr=cr_tmp;
-        	m_size = newsize;
-        } else {
-           ContainSim::checkmem( __FILE__, __LINE__, cr_tmp, "ContainResource", newsize );          
-           return NULL; //throw Exception("Out of Memory Exception");          
-        }        	         
-    }
-    // Add the new record to the vector and return.
-    m_cr[m_count++] = resource;
+	//#define EXTRA_ALLOCATION 100
+ //   // Check for vector space 
+ //   if ( m_count >= m_size )
+ //   {
+ //       //need to reallocate memory - give some amount to grow
+ //       int newsize=m_size+EXTRA_ALLOCATION;
+ //       ContainResource ** cr_tmp = new ContainResource *[newsize];  
+ //       if (cr_tmp) {
+ //       	//copy to new place, and reassign 
+ //       	memcpy(cr_tmp,m_cr,sizeof(ContainResource*)*m_size);
+ //       	m_cr=cr_tmp;
+ //       	m_size = newsize;
+ //       } else {
+ //          ContainSim::checkmem( __FILE__, __LINE__, cr_tmp, "ContainResource", newsize );          
+ //          return NULL; //throw Exception("Out of Memory Exception");          
+ //       }        	         
+ //   }
+ //   // Add the new record to the vector and return.
+ //   m_cr[m_count++] = resource;
+    resourceVector.push_back(*resource);
     return( resource );
 }
 
@@ -196,15 +204,45 @@ Sem::ContainResource *Sem::ContainForce::addResource(
         double production,
         double duration,
         ContainFlank flank,
-        char * const desc,
+        std::string desc,
         double baseCost,
         double hourCost )
 {
     // Create a new ContainResource record.
-    ContainResource *resource = new ContainResource( arrival, production,
-        duration, flank, desc, baseCost, hourCost );
-    ContainSim::checkmem( __FILE__, __LINE__, resource, "ContainResource rec", 1 );
-    return( addResource( resource ) );
+    //ContainResource *resource = new ContainResource( arrival, production,
+    //    duration, flank, desc, baseCost, hourCost );
+    //ContainSim::checkmem( __FILE__, __LINE__, resource, "ContainResource rec", 1 );
+    ContainResource resource = ContainResource(arrival, production,
+        duration, flank, desc, baseCost, hourCost);
+    //return( addResource( resource ) );
+    return(addResource(&resource));
+}
+
+int Sem::ContainForce::removeResourceAt(int index)
+{
+    if (index >= 0 && index < resourceVector.size())
+    {
+        resourceVector.erase(resourceVector.begin() + index);
+        return 0; // success
+    }
+    else
+    {
+        return 1; // Error occcured
+    }
+}
+
+int Sem::ContainForce::removeResourceByDesc(std::string desc)
+{
+    for (int i = 0; i < resourceVector.size(); i++)
+    {
+        if (resourceVector[i].m_desc == desc)
+        {
+            removeResourceAt(i);
+            return 0; // success
+        }
+    }
+    // didn't find it
+    return 1; // error
 }
 
 //------------------------------------------------------------------------------
@@ -226,13 +264,18 @@ double Sem::ContainForce::productionRate( double minSinceReport,
     Sem::ContainFlank flank ) const
 {
     double fpm = 0.0;
-    for ( int i=0; i<m_count; i++ )
+    //for ( int i=0; i<m_count; i++ )
+    for (int i = 0; i < resourceVector.size(); i++)
     {
-        if ( ( m_cr[i]->m_flank == flank || m_cr[i]->m_flank == BothFlanks )
-          && ( m_cr[i]->m_arrival <= ( minSinceReport + 0.001 ) )
-          && ( m_cr[i]->m_arrival + m_cr[i]->m_duration ) >= minSinceReport )
+        //if ( ( m_cr[i]->m_flank == flank || m_cr[i]->m_flank == BothFlanks )
+        //  && ( m_cr[i]->m_arrival <= ( minSinceReport + 0.001 ) )
+        //  && ( m_cr[i]->m_arrival + m_cr[i]->m_duration ) >= minSinceReport )
+        if ((resourceVector[i].m_flank == flank || resourceVector[i].m_flank == BothFlanks)
+            && (resourceVector[i].m_arrival <= (minSinceReport + 0.001))
+            && (resourceVector[i].m_arrival + resourceVector[i].m_duration) >= minSinceReport)
         {
-            fpm += ( 0.50 * m_cr[i]->m_production );
+            //fpm += ( 0.50 * m_cr[i]->m_production );
+            fpm += (0.50 * resourceVector[i].m_production);
         }
     }
     return( fpm );
@@ -247,7 +290,8 @@ double Sem::ContainForce::productionRate( double minSinceReport,
 
 int Sem::ContainForce::resources( void ) const
 {
-    return( m_count );
+    //return( m_count );
+    return resourceVector.size();
 }
 
 //------------------------------------------------------------------------------
@@ -263,9 +307,11 @@ int Sem::ContainForce::resources( void ) const
 
 double Sem::ContainForce::resourceArrival( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_arrival );
+        //return( m_cr[index]->m_arrival );
+        return(resourceVector[index].m_arrival);
     }
     return( 0.0 );
 }
@@ -282,9 +328,11 @@ double Sem::ContainForce::resourceArrival( int index ) const
 
 double Sem::ContainForce::resourceBaseCost( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_baseCost );
+        //return( m_cr[index]->m_baseCost );
+        return(resourceVector[index].m_baseCost);
     }
     return( 0.0 );
 }
@@ -304,23 +352,30 @@ double Sem::ContainForce::resourceBaseCost( int index ) const
 
 double Sem::ContainForce::resourceCost( int index, double finalTime ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
         // Was this resource deployed?
-        if ( finalTime <= m_cr[index]->m_arrival )
+        //if ( finalTime <= m_cr[index]->m_arrival )
+        if (finalTime <= resourceVector[index].m_arrival)
         {
             return( 0.0 );
         }
         // Number of hours at the fire
-        double minutes = finalTime - m_cr[index]->m_arrival;
-        if ( minutes > m_cr[index]->m_duration )
+        //double minutes = finalTime - m_cr[index]->m_arrival;
+        double minutes = finalTime - resourceVector[index].m_arrival;
+        //if ( minutes > m_cr[index]->m_duration )
+        if (minutes > resourceVector[index].m_duration)
         {
-            minutes = m_cr[index]->m_duration;
+            //minutes = m_cr[index]->m_duration;
+            minutes = resourceVector[index].m_duration;
         }
-        return( m_cr[index]->m_baseCost
-            + ( m_cr[index]->m_hourCost * minutes / 60. ) );
+        //return( m_cr[index]->m_baseCost
+        //    + ( m_cr[index]->m_hourCost * minutes / 60. ) );
+        return(resourceVector[index].m_baseCost
+            + (resourceVector[index].m_hourCost * minutes / 60.0 ) );
     }
-    return( 0. );
+    return( 0.0 );
 }
 
 //------------------------------------------------------------------------------
@@ -333,11 +388,13 @@ double Sem::ContainForce::resourceCost( int index, double finalTime ) const
     \return ContainResource's description.
  */
 
-char * Sem::ContainForce::resourceDescription( int index ) const
+std::string Sem::ContainForce::resourceDescription( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_desc );
+        //return( m_cr[index]->m_desc );
+        return(resourceVector[index].m_desc);
     }
     return( "" );
 }
@@ -354,9 +411,11 @@ char * Sem::ContainForce::resourceDescription( int index ) const
 
 double Sem::ContainForce::resourceDuration( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_duration );
+        //return( m_cr[index]->m_duration );
+        return(resourceVector[index].m_duration);
     }
     return( 0.0 );
 }
@@ -374,9 +433,11 @@ double Sem::ContainForce::resourceDuration( int index ) const
 
 Sem::ContainFlank Sem::ContainForce::resourceFlank( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_flank );
+        //return( m_cr[index]->m_flank );
+        return(resourceVector[index].m_flank);
     }
     return( NeitherFlank );
 }
@@ -393,9 +454,11 @@ Sem::ContainFlank Sem::ContainForce::resourceFlank( int index ) const
 
 double Sem::ContainForce::resourceHourCost( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    //if ( index >= 0 && index < m_count )
+    if (index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_hourCost );
+        //return( m_cr[index]->m_hourCost );
+        return(resourceVector[index].m_hourCost);
     }
     return( 0.0 );
 }
@@ -415,9 +478,10 @@ double Sem::ContainForce::resourceHourCost( int index ) const
 
 double Sem::ContainForce::resourceProduction( int index ) const
 {
-    if ( index >= 0 && index < m_count )
+    if ( index >= 0 && index < resourceVector.size())
     {
-        return( m_cr[index]->m_production );
+        //return( m_cr[index]->m_production );
+        return(resourceVector[index].m_production);
     }
     return( 0.0 );
 }
@@ -431,7 +495,8 @@ void Sem::ContainForce::logResources(bool debug, const Contain* contain) const {
 	if (!debug) return;
 	for ( int i=0; i<m_count; i++ )
     {
-       m_cr[i]->print(buf, 65);
+       //m_cr[i]->print(buf, 65);
+       resourceVector[i].print(buf, 65);
        contain->containLog(true, "resource %d: %s\n",i+1,buf);
     }
 }

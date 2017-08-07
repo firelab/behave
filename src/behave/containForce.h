@@ -11,7 +11,8 @@
 // Custom include files
 #include "Contain.h"
 #include "ContainResource.h"
-#include <cstring>
+#include <string>
+#include <vector>
 
 namespace Sem
 {
@@ -43,9 +44,11 @@ public:
         double production,
         double duration=480.,
         Sem::ContainFlank flank=Sem::LeftFlank,
-        char * const desc="",
+        std::string desc="",
         double baseCost=0.0,
         double hourCost=0.0 );
+    int removeResourceAt(int index);
+    int removeResourceByDesc(std::string desc);
 
     // Force-level access methods
     double exhausted( Sem::ContainFlank flank ) const ;
@@ -61,7 +64,7 @@ public:
     double  resourceArrival( int index ) const ;
     double  resourceBaseCost( int index ) const ;
     double  resourceCost( int index, double finalTime ) const ;
-    char * resourceDescription( int index ) const ;
+    std::string resourceDescription( int index ) const ;
     double  resourceDuration( int index ) const ;
     Sem::ContainFlank resourceFlank( int index ) const ;
     double  resourceHourCost( int index ) const ;
@@ -69,9 +72,14 @@ public:
 
 // Protected data
 protected:
-    ContainResource **m_cr;     //!< Array of pointers to ContainResources
+    //ContainResource **m_cr;     //!< Array of pointers to ContainResources
+
+    std::vector<ContainResource> resourceVector;
+
     int     m_size;             //!< Size of m_cr
     int     m_count;            //!< Items in m_cr
+
+
 
 friend class Contain;
 };

@@ -10,6 +10,8 @@
 #ifndef _CONTAINRESOURCE_H_INCLUDED_
 #define _CONTAINRESOURCE_H_INCLUDED_
 
+#include <string>
+
 // Custom files
 #include "ContainForce.h"
 
@@ -61,7 +63,7 @@ public:
         double production,
         double duration=480.,
         Sem::ContainFlank flank=Sem::LeftFlank,
-        char * const desc="",
+        std::string desc="",
         double baseCost=0.00,
         double hourCost=0.00 );
     // Virtual destructor
@@ -70,7 +72,7 @@ public:
     // Access methods
     double arrival( void ) const ;
     double baseCost( void ) const ;
-    char * description( void ) const ;
+    std::string description( void ) const ;
     double duration( void ) const ;
     Sem::ContainFlank flank( void ) const ;
     double hourCost( void ) const ;
@@ -85,7 +87,7 @@ protected:
     double  m_baseCost;         //!< Base resource cost
     double  m_hourCost;         //!< Hourly resource cost
     Sem::ContainFlank m_flank;  //!< Both, Left, or Right flank attack
-    char * m_desc;             //!< Resource description
+    std::string m_desc;             //!< Resource description
 
     friend class ContainForce;
 };

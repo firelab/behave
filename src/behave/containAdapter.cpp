@@ -1,5 +1,6 @@
 #include "containAdapter.h"
 
+
 ContainAdapter::ContainAdapter()
 {
     lwRatio_ = 1.0,
@@ -10,11 +11,46 @@ ContainAdapter::ContainAdapter()
     maxSteps_ = 1000,
     maxFireSize_ = 1000,
     maxFireTime_ = 1080;
+
+    doContainRun();
 }
 
 ContainAdapter::~ContainAdapter()
 {
 
+}
+
+void ContainAdapter::addResource(ContainResource& resource)
+{
+    ContainResource* resourcePointer = &resource;
+    force_.addResource(resourcePointer);
+}
+
+void ContainAdapter::addResource(double arrival, double production, double duration, 
+    ContainFlank flank, std::string desc, double baseCost, double hourCost)
+{
+    force_.addResource(arrival, production, duration, flank, desc, baseCost, hourCost);
+}
+
+int ContainAdapter::removeResourceAt(int index)
+{
+    return force_.removeResourceAt(index);
+}
+
+int ContainAdapter::removeResourceByDesc(std::string desc)
+{
+    return force_.removeResourceByDesc(desc);
+}
+
+int ContainAdapter::removeAllResourcesWithDesc(std::string desc)
+{
+    int rc;
+    int success = 1; // 1 means didn't find it
+    while ((rc = force_.removeResourceByDesc(desc)) == 0)
+    {
+        success = 0; // found at least one
+    }
+    return success;
 }
 
 void ContainAdapter::setReportSize(double reportSize)
@@ -74,22 +110,17 @@ void ContainAdapter::setMaxFireTime(int maxFireTime)
 
 void ContainAdapter::doContainRun()
 {
-    reportRate_ = 20;
-    reportSize_ = 20;
-    lwRatio_ = 1.0;
-    fireStartTime_ = 0;
-
-    force_.addResource(0, 60);
-    Sem::ContainForce* forcePointer = &force_;
-   
-    for (int i = 0; i < 24; i++)
+    if (force_.resources() > 0)
     {
-        diurnalROS_[i] = reportRate_;
+        for (int i = 0; i < 24; i++)
+        {
+            diurnalROS_[i] = reportRate_;
+        }
+        ContainForce* forcePointer = &force_;
+        ContainSim containSim(reportSize_, reportRate_, diurnalROS_, fireStartTime_, lwRatio_,
+            forcePointer, tactic_, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
+            maxFireTime_);
+
+        containSim.run();
     }
-
-    Sem::ContainSim containSim(reportSize_, reportRate_, diurnalROS_, fireStartTime_, lwRatio_,
-        forcePointer, tactic_, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
-        maxFireTime_);
-
-    containSim.run();
 }

@@ -31,6 +31,9 @@
 
 #include "Contain.h"
 #include "ContainSim.h"
+#include <string>
+
+using namespace Sem;
 
 class ContainAdapter
 {
@@ -38,11 +41,25 @@ public:
     ContainAdapter();
     ~ContainAdapter();
 
+    void addResource(ContainResource& resource);
+    // Construct ContainResource into ContainForce
+    void addResource(
+        double arrival,
+        double production,
+        double duration = 480.,
+        ContainFlank flank = Sem::LeftFlank,
+        std::string desc = "",
+        double baseCost = 0.0,
+        double hourCost = 0.0);
+    int removeResourceAt(int index);
+    int removeResourceByDesc(std::string desc);
+    int removeAllResourcesWithDesc(std::string desc);
+
     void setReportSize(double reportSize);
     void setReportRate(double reportRate);
     void setFireStartTime(int fireStartTime);
     void setLwRatio(double lwRatio);
-    void setTactic(Sem::Contain::ContainTactic tactic);
+    void setTactic(Contain::ContainTactic tactic);
     void setAttackDistance(double attackDistance);
     void setRetry(bool retry);
     void setMinSteps(int minSteps);
@@ -58,8 +75,8 @@ private:
     double diurnalROS_[24];
     int fireStartTime_;
     double lwRatio_;
-    Sem::ContainForce force_;
-    Sem::Contain::ContainTactic tactic_;
+    ContainForce force_;
+    Contain::ContainTactic tactic_;
     double attackDistance_;
     bool retry_;
     int minSteps_;

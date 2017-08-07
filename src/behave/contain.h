@@ -153,7 +153,7 @@ public:
     double  exhaustedTime( void ) const ;
     int     resources( void ) const ;
     double  resourceArrival( int index ) const ;
-    char * resourceDescription( int index ) const ;
+    std::string resourceDescription( int index ) const ;
     double  resourceDuration( int index ) const ;
     double  resourceProduction( int index ) const ;
     double  resourceBaseCost( int index ) const ;
