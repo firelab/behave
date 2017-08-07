@@ -838,6 +838,7 @@ double Sem::Contain::getDiurnalSpreadRate(double minutesSinceReport) const
 	 // Modified the following statement DT 4/17/12
 	 // m_reportTime - the time the fire took to grow to the discovery size, is no longer used
 	 //CurrentTime=minutesSinceReport+m_reportTime+m_startTime;
+
      CurrentTime=minutesSinceReport+m_startTime;
 	 
      while(CurrentTime>=1440.0)

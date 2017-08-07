@@ -43,6 +43,11 @@ SET(SOURCE
     src/behave/behaveRun.cpp
     src/behave/behaveVector.cpp
 	src/behave/behaveUnits.cpp
+	src/behave/contain.cpp
+	src/behave/containAdapter.cpp
+	src/behave/containForce.cpp
+	src/behave/ContainResource.cpp
+	src/behave/ContainSim.cpp
     src/behave/crown.cpp
     src/behave/crownInputs.cpp
     src/behave/fuelModelSet.cpp
@@ -68,6 +73,11 @@ SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveVector.h
 	src/behave/behaveUnits.h
+	src/behave/contain.h
+	src/behave/containAdapter.h
+	src/behave/containForce.h
+	src/behave/ContainResource.h
+	src/behave/ContainSim.h
     src/behave/crown.h
     src/behave/crownInputs.h
     src/behave/fuelModelSet.h

@@ -1,8 +1,8 @@
 /******************************************************************************
 *
 * Project:  CodeBlocks
-* Purpose:  Interface for Behave application based on the Facade OOP Design 
-*           Pattern used to tie together the modules and objects used by Behave
+* Purpose:  Interface for Contain to be used in Behave-like applications
+*           used to tie together the classes used in a Contain simulation
 * Author:   William Chatham <wchatham@fs.fed.us>
 *
 *******************************************************************************
@@ -26,58 +26,46 @@
 *
 ******************************************************************************/
 
-#ifndef BEHAVERUN_H
-#define BEHAVERUN_H
+#ifndef CONTAINADAPTER_H
+#define CONTAINADAPTER_H
 
-#include "behaveUnits.h"
-#include "ContainAdapter.h"
-#include "crown.h"
-#include "ignite.h"
-#include "spot.h"
-#include "surface.h"
+#include "Contain.h"
+#include "ContainSim.h"
 
-class FuelModels;
-
-class BehaveRun
+class ContainAdapter
 {
 public:
-    BehaveRun() = delete; // There is no default constructor
-    explicit BehaveRun(FuelModelSet& fuelModelSet);
-    
-    BehaveRun(const BehaveRun& rhs);
-    BehaveRun& operator=(const BehaveRun& rhs);
-    ~BehaveRun();
+    ContainAdapter();
+    ~ContainAdapter();
 
-    // FuelModelSet Methods
-    bool isFuelModelDefined(int fuelModelNumber) const;
-	double getFuelLoadOneHour(int fuelModelNumber) const;
-	double getFuelLoadTenHour(int fuelModelNumber) const;
-	double getFuelLoadHundredHour(int fuelModelNumber) const;
-	double getFuelLoadLiveHerbaceous(int fuelModelNumber) const;
-	double getFuelLoadLiveWoody(int fuelModelNumber) const;
+    void setReportSize(double reportSize);
+    void setReportRate(double reportRate);
+    void setFireStartTime(int fireStartTime);
+    void setLwRatio(double lwRatio);
+    void setTactic(Sem::Contain::ContainTactic tactic);
+    void setAttackDistance(double attackDistance);
+    void setRetry(bool retry);
+    void setMinSteps(int minSteps);
+    void setMaxSteps(int maxSteps);
+    void setMaxFireSize(int maxFireSize);
+    void setMaxFireTime(int maxFireTime);
 
-    void setFuelModelSet(FuelModelSet& fuelModelSet);
-
- // SURFACE Module
-Surface surface;
-
-// CROWN Module
-Crown crown;
-
-// SPOT Module
-Spot spot;
-
-//  Ignite Module
-Ignite ignite;
-
-//  Contain Module
-ContainAdapter contain;
+    void doContainRun();
 
 private:
-    void memberwiseCopyAssignment(const BehaveRun& rhs);
-
-    // Fuel model set (orginal 13, 40 and custom)
-    FuelModelSet* fuelModelSet_;
+    double reportSize_;
+    double reportRate_;
+    double diurnalROS_[24];
+    int fireStartTime_;
+    double lwRatio_;
+    Sem::ContainForce force_;
+    Sem::Contain::ContainTactic tactic_;
+    double attackDistance_;
+    bool retry_;
+    int minSteps_;
+    int maxSteps_;
+    int maxFireSize_;
+    int maxFireTime_;
 };
 
-#endif //BEHAVERUN_H
+#endif //CONTAINADAPTER_H
