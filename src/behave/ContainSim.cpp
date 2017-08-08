@@ -24,6 +24,7 @@
 // Local include files
 #include <iostream>
 #include "ContainSim.h"
+#include "ContainResource.h"
 //include "Logger.h"
 
 // Standard include files
@@ -73,7 +74,7 @@ Sem::ContainSim::ContainSim(
         int fireStartMinutesStartTime,
         double lwRatio,
         ContainForce *force,
-        Sem::Contain::ContainTactic tactic,
+        ContainTactic::ContainTacticEnum tactic,
         double attackDist,
         bool retry,
         int minSteps,
@@ -123,13 +124,13 @@ Sem::ContainSim::ContainSim(
     // Try attacking at first resource arrival.
     // If the initial attack forces are overrun, subsequent simulations
     // delay the initial attack until the next arrival of forces.
-    double attackTime = m_force->firstArrival( LeftFlank );
+    double attackTime = m_force->firstArrival( ContainFlank::LeftFlank );
 
     // Create the left flank
 	  m_left = new Contain( reportSize, reportRate, 
         diurnalROS,fireStartMinutesStartTime,
         lwRatio, distStep,
-        LeftFlank, force, attackTime, tactic, attackDist );
+          ContainFlank::LeftFlank, force, attackTime, tactic, attackDist );
 
 
     if (logLevel > 0) {
@@ -369,7 +370,7 @@ void Sem::ContainSim::finalStats( void )
     // So far we know the containment area and line constructed
     m_finalPerim = m_finalLine;
     m_finalSize = 0.;
-    if ( m_left->m_status == Sem::Contain::Contained )
+    if ( m_left->m_status == ContainStatus::Contained )
     {
         m_finalSize = m_finalSweep;
     } else {
@@ -645,8 +646,8 @@ void Sem::ContainSim::run( void )
         m_finalSweep = m_finalLine = m_finalPerim = 0.0;
         totalArea=0.0;
         suma = sumb = sumDT = 0.0;
-        while ( m_left->m_status != Sem::Contain::Overrun
-             && m_left->m_status != Sem::Contain::Contained
+        while ( m_left->m_status != ContainStatus::Overrun
+             && m_left->m_status != ContainStatus::Contained
              && m_left->m_step    < m_maxSteps
              && totalArea <  m_maxFireSize
              && m_left->m_currentTime < m_maxFireTime		 		// MAF
@@ -706,8 +707,8 @@ void Sem::ContainSim::run( void )
                 iLeft, m_u[iLeft], m_h[iLeft], m_x[iLeft], m_y[iLeft], elapsed, UCarea*0.2, (area-UCarea)*0.2, totalArea, m_finalLine );
         }
         // BEHAVEPLUS FIX: Adjust the last x-coordinate for contained head attacks
-        if ( m_left->m_status == Sem::Contain::Contained
-          && m_left->m_tactic == Sem::Contain::HeadAttack )
+        if ( m_left->m_status == ContainStatus::Contained
+          && m_left->m_tactic == ContainTactic::HeadAttack )
         {
             m_x[m_left->m_step] -= 2. * m_left->m_attackDist;
 		}
@@ -737,7 +738,7 @@ void Sem::ContainSim::run( void )
         m_finalSweep = 0.2 * area;
 
         // Cases 1-3: forces are overrun by fire...
-        if ( m_left->m_status == Sem::Contain::Overrun )
+        if ( m_left->m_status == ContainStatus::Overrun )
         {
             // Case 1: No retry allowed, simulation is complete
             if ( ! m_retry )
@@ -752,7 +753,7 @@ void Sem::ContainSim::run( void )
             }
             // Case 2: Try initial attack after more forces have arrived
             else if ( ( at = m_force->nextArrival( m_left->m_attackTime,
-                m_left->m_exhausted, LeftFlank ) ) > 0.01 )
+                m_left->m_exhausted, ContainFlank::LeftFlank ) ) > 0.01 )
             {
                 m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 2: Retry\n"
@@ -761,7 +762,7 @@ void Sem::ContainSim::run( void )
                     "    - when line building rate will be %3.2f ch/h\n"
                     "    - RE-RUN\n",
                     m_pass, elapsed, m_left->m_step, m_pass+1,
-                    at, m_force->productionRate( at, LeftFlank ) );
+                    at, m_force->productionRate( at, ContainFlank::LeftFlank ) );
                 m_pass++;
                 m_left->m_attackTime = at;
                 m_left->reset();
@@ -777,7 +778,7 @@ void Sem::ContainSim::run( void )
                     "    - resources exhausted at %3.1f minutes (%d steps)\n"
                     "    - FIRE ESCAPES at %3.1f minutes\n",
                     m_pass, elapsed, m_left->m_step, elapsed );
-                m_left->m_status = Sem::Contain::Exhausted;
+                m_left->m_status = ContainStatus::Exhausted;
             }
         }
         
@@ -792,7 +793,7 @@ void Sem::ContainSim::run( void )
                     "    - resources exhausted at %3.1f minutes (%d steps)\n"
                     "    - FIRE ESCAPES at %3.1f minutes\n",
                     m_pass, elapsed, m_left->m_step, elapsed );
-                m_left->m_status = Sem::Contain::Exhausted;
+                m_left->m_status = ContainStatus::Exhausted;
         }
         
         // Case 4: maximum number of steps was exceeded
@@ -824,7 +825,7 @@ void Sem::ContainSim::run( void )
 		  MAXSTEPS_EXCEEDED=true;
         }
         // Cases 5-6: fire is contained...
-        else if ( m_left->m_status == Sem::Contain::Contained )
+        else if ( m_left->m_status == ContainStatus::Contained )
         {
             // Case 5: there were insufficient simulation steps...
             if (  iLeft < m_minSteps && MAXSTEPS_EXCEEDED==false) // MAF 9/29/2010 added MAXSTEPS_EXCEEDED check
@@ -867,7 +868,7 @@ void Sem::ContainSim::run( void )
         //Add check for maximum Area
         else if(totalArea >= m_maxFireSize){    	        
                 at = m_force->nextArrival( m_left->m_attackTime,
-                m_left->m_exhausted, LeftFlank );
+                m_left->m_exhausted, ContainFlank::LeftFlank );
         /*//////////////////////////////////////////////////////////////////////////
         	Removed DT 6/2010 Stop when fire exceeds maximum size
                 if (at > .01){
@@ -891,7 +892,7 @@ void Sem::ContainSim::run( void )
                     m_pass, totalArea, m_maxFireSize, elapsed);               	
                 	rerun = false;
                 	//Production rate is not longer increasing
-                	m_left->m_status = Sem::Contain::SizeLimitExceeded;
+                	m_left->m_status = ContainStatus::SizeLimitExceeded;
  //               } 
        
         }
@@ -901,7 +902,7 @@ void Sem::ContainSim::run( void )
 		//------------------------------------------------------------------
 		else if(((m_left->m_currentTime) > (m_maxFireTime-1)))
 			 {     m_left->m_currentTime=m_maxFireTime;
-    	           m_left->m_status = Sem::Contain::TimeLimitExceeded;
+    	           m_left->m_status = ContainStatus::TimeLimitExceeded;
 
 				   rerun=false;
 			 }
@@ -917,8 +918,8 @@ void Sem::ContainSim::run( void )
         }
     }
     // Special case for contained head tactic with non-zero offset
-    if ( m_left->m_status == Sem::Contain::Contained
-      && m_left->m_tactic == Sem::Contain::HeadAttack
+    if ( m_left->m_status == ContainStatus::Contained
+      && m_left->m_tactic == ContainTactic::HeadAttack
       && m_left->m_attackDist > 0.01 )
     {
     }
@@ -939,7 +940,7 @@ void Sem::ContainSim::run( void )
     //------------------------------------------------------------------
     if ((m_left->m_currentTime) > (m_maxFireTime-1)) {
      	m_left->m_currentTime=m_maxFireTime;
-     	m_left->m_status = Sem::Contain::TimeLimitExceeded;
+     	m_left->m_status = ContainStatus::TimeLimitExceeded;
      }
      
     // Simulation complete: display results
@@ -978,7 +979,7 @@ void Sem::ContainSim::run( void )
         - Overflow   = Simulation max step overflow
  */
 
-Sem::Contain::ContainStatus Sem::ContainSim::status( void ) const
+Sem::ContainStatus::ContainStatusEnum Sem::ContainSim::status( void ) const
 {
     return( m_left->status() );
 }
@@ -991,13 +992,13 @@ Sem::Contain::ContainStatus Sem::ContainSim::status( void ) const
         - RearAttack = 1
  */
 
-Sem::Contain::ContainTactic Sem::ContainSim::tactic( void ) const
+Sem::ContainTactic::ContainTacticEnum Sem::ContainSim::tactic( void ) const
 {
     return( m_left->tactic() );
 }
 
 // Calculate the size of the uncontained portion of the fire ellipse  by DT 1/2013
-double Sem::ContainSim::UncontainedArea( double head, double lwRatio, double x, double y, Sem::Contain::ContainTactic tactic )
+double Sem::ContainSim::UncontainedArea( double head, double lwRatio, double x, double y, Sem::ContainTactic::ContainTacticEnum tactic )
 {
         if( lwRatio < 1.0 )
             lwRatio = 1.00000001;
@@ -1047,7 +1048,7 @@ double Sem::ContainSim::UncontainedArea( double head, double lwRatio, double x, 
 	area = ellsector - ( xcenter * y / 2 );
 
 	// If the tactic is head then need to use the complement area
-	if ( tactic == Sem::Contain::HeadAttack )
+	if ( tactic == ContainTactic::HeadAttack )
 		area = 3.141592654 * a * b / 2 - area;
 	
 	// If the area calculated is less than 0 set it to 0

@@ -26,14 +26,16 @@ class ContainForce;
     \brief Identifies the fire flank to which ContainResource objects
     are assigned.
  */
-enum ContainFlank
+struct ContainFlank
 {
-    LeftFlank    = 0,   //!< Attack left (upper) flank only (full production)
-    RightFlank   = 1,   //!< Attack right (lower) flank only (full production)
-    BothFlanks   = 2,   //!< Attack both flanks (half of production per flank)
-    NeitherFlank = 3    //!< Attack neither flank (inactive)
+    enum ContainFlankEnum
+    {
+        LeftFlank = 0,   //!< Attack left (upper) flank only (full production)
+        RightFlank = 1,   //!< Attack right (lower) flank only (full production)
+        BothFlanks = 2,   //!< Attack both flanks (half of production per flank)
+        NeitherFlank = 3    //!< Attack neither flank (inactive)
+    };
 };
-
 //------------------------------------------------------------------------------
 /*! \class ContainResource ContainResource.h
     \brief A single fire containment resource unit that can be dispatched
@@ -62,7 +64,7 @@ public:
         double arrival,
         double production,
         double duration=480.,
-        Sem::ContainFlank flank=Sem::LeftFlank,
+        Sem::ContainFlank::ContainFlankEnum flank=Sem::ContainFlank::LeftFlank,
         std::string desc="",
         double baseCost=0.00,
         double hourCost=0.00 );
@@ -74,7 +76,7 @@ public:
     double baseCost( void ) const ;
     std::string description( void ) const ;
     double duration( void ) const ;
-    Sem::ContainFlank flank( void ) const ;
+    Sem::ContainFlank::ContainFlankEnum flank( void ) const ;
     double hourCost( void ) const ;
     double production( void ) const ;
     void   print(char buf[], int buflen) const;
@@ -86,7 +88,7 @@ protected:
     double  m_production;       //!< Total fireline production rate on both flanks (ch/h)
     double  m_baseCost;         //!< Base resource cost
     double  m_hourCost;         //!< Hourly resource cost
-    Sem::ContainFlank m_flank;  //!< Both, Left, or Right flank attack
+    Sem::ContainFlank::ContainFlankEnum m_flank;  //!< Both, Left, or Right flank attack
     std::string m_desc;             //!< Resource description
 
     friend class ContainForce;

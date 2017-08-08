@@ -43,7 +43,7 @@ public:
         double arrival,
         double production,
         double duration=480.,
-        Sem::ContainFlank flank=Sem::LeftFlank,
+        ContainFlank::ContainFlankEnum flank=ContainFlank::LeftFlank,
         std::string desc="",
         double baseCost=0.0,
         double hourCost=0.0 );
@@ -52,10 +52,10 @@ public:
     void clearResourceVector();
 
     // Force-level access methods
-    double exhausted( Sem::ContainFlank flank ) const ;
-    double firstArrival( Sem::ContainFlank flank ) const ;
-    double nextArrival( double after, double until, Sem::ContainFlank flank ) const ;
-    double productionRate( double minutesSinceReport, Sem::ContainFlank flank ) const ;
+    double exhausted(ContainFlank::ContainFlankEnum  flank ) const ;
+    double firstArrival(ContainFlank::ContainFlankEnum  flank ) const ;
+    double nextArrival( double after, double until, ContainFlank::ContainFlankEnum  flank ) const ;
+    double productionRate( double minutesSinceReport, ContainFlank::ContainFlankEnum  flank ) const ;
     
     //for debug
     void   logResources(bool debug,const Contain*) const ;
@@ -67,7 +67,7 @@ public:
     double  resourceCost( int index, double finalTime ) const ;
     std::string resourceDescription( int index ) const ;
     double  resourceDuration( int index ) const ;
-    Sem::ContainFlank resourceFlank( int index ) const ;
+    ContainFlank::ContainFlankEnum  resourceFlank( int index ) const ;
     double  resourceHourCost( int index ) const ;
     double  resourceProduction( int index ) const ;
 

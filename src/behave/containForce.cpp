@@ -53,14 +53,14 @@ Sem::ContainForce::~ContainForce( void )
             (minutes since fire report).
  */
 
-double Sem::ContainForce::exhausted( ContainFlank flank ) const
+double Sem::ContainForce::exhausted( ContainFlank::ContainFlankEnum flank ) const
 {
     double at = 0.0;
     double done;
 
     for (int i = 0; i < m_resourceVector.size(); i++)
     {
-        if (m_resourceVector[i].m_flank == flank || m_resourceVector[i].m_flank == BothFlanks)
+        if (m_resourceVector[i].m_flank == flank || m_resourceVector[i].m_flank == ContainFlank::BothFlanks)
         {
             if ((done = m_resourceVector[i].m_arrival + m_resourceVector[i].m_duration) > at)
             {
@@ -80,12 +80,12 @@ double Sem::ContainForce::exhausted( ContainFlank flank ) const
             (minutes since fire report).
  */
 
-double Sem::ContainForce::firstArrival( ContainFlank flank ) const
+double Sem::ContainForce::firstArrival( ContainFlank::ContainFlankEnum flank ) const
 {
     double at = 99999999.0;
     for (int i = 0; i < m_resourceVector.size(); i++)
     {
-        if ( (m_resourceVector[i].m_flank == flank || m_resourceVector[i].m_flank == BothFlanks )
+        if ( (m_resourceVector[i].m_flank == flank || m_resourceVector[i].m_flank == ContainFlank::BothFlanks )
           && m_resourceVector[i].m_arrival < at )
         {
             at = m_resourceVector[i].m_arrival;
@@ -110,7 +110,7 @@ double Sem::ContainForce::firstArrival( ContainFlank flank ) const
  */
 
 double Sem::ContainForce::nextArrival( double after, double until,
-        ContainFlank flank ) const
+        ContainFlank::ContainFlankEnum flank ) const
 {
     // Get the production rate at the requested time
     double prodRate = productionRate( after, flank );
@@ -173,7 +173,7 @@ int Sem::ContainForce::addResource(
         double arrival,
         double production,
         double duration,
-        ContainFlank flank,
+        ContainFlank::ContainFlankEnum flank,
         std::string desc,
         double baseCost,
         double hourCost )
@@ -238,12 +238,12 @@ void Sem::ContainForce::clearResourceVector()
  */
 
 double Sem::ContainForce::productionRate( double minSinceReport,
-    Sem::ContainFlank flank ) const
+    ContainFlank::ContainFlankEnum flank ) const
 {
     double fpm = 0.0;
     for (int i = 0; i < m_resourceVector.size(); i++)
     {
-        if ((m_resourceVector[i].m_flank == flank || m_resourceVector[i].m_flank == BothFlanks)
+        if ((m_resourceVector[i].m_flank == flank || m_resourceVector[i].m_flank == ContainFlank::BothFlanks)
             && (m_resourceVector[i].m_arrival <= (minSinceReport + 0.001))
             && (m_resourceVector[i].m_arrival + m_resourceVector[i].m_duration) >= minSinceReport)
         {
@@ -387,13 +387,13 @@ double Sem::ContainForce::resourceDuration( int index ) const
     \return ContainResource's flank: Active or Inactive.
  */
 
-Sem::ContainFlank Sem::ContainForce::resourceFlank( int index ) const
+Sem::ContainFlank::ContainFlankEnum Sem::ContainForce::resourceFlank( int index ) const
 {
     if (index >= 0 && index < m_resourceVector.size())
     {
         return(m_resourceVector[index].m_flank);
     }
-    return( NeitherFlank );
+    return( ContainFlank::NeitherFlank );
 }
 
 //------------------------------------------------------------------------------

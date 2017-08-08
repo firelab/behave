@@ -47,7 +47,7 @@ public:
         double arrival,
         double production,
         double duration = 480.,
-        ContainFlank flank = Sem::LeftFlank,
+        ContainFlank::ContainFlankEnum flank = Sem::ContainFlank::LeftFlank,
         std::string desc = "",
         double baseCost = 0.0,
         double hourCost = 0.0);
@@ -60,7 +60,7 @@ public:
     void setReportRate(double reportRate);
     void setFireStartTime(int fireStartTime);
     void setLwRatio(double lwRatio);
-    void setTactic(Contain::ContainTactic tactic);
+    void setTactic(ContainTactic::ContainTacticEnum tactic);
     void setAttackDistance(double attackDistance);
     void setRetry(bool retry);
     void setMinSteps(int minSteps);
@@ -70,20 +70,38 @@ public:
 
     void doContainRun();
 
+    double getFinalCost() const;   // Final total cost of all resources used
+    double getFinalFireLineLength() const;   // Final fire line at containment or escape (ch)
+    double getPerimeterAtContainment() const;  // Final line plus fire perimeter at containment or escape (ch)
+    double getFinalFireSize() const;   // Final fire size at containment or escape (ac)
+    double getFinalContainmentArea() const;  // Final containment area at containment or escape (ac)
+    double getFinalTimeSinceReport() const;   // Containment or escape time since report (min)   
+    ContainStatus::ContainStatusEnum getContainmentStatus() const; // Status of fire at end of contain simultation
+
 private:
+    // Contain Inputs
     double reportSize_;
     double reportRate_;
     double diurnalROS_[24];
     int fireStartTime_;
     double lwRatio_;
     ContainForce force_;
-    Contain::ContainTactic tactic_;
+    ContainTactic::ContainTacticEnum tactic_;
     double attackDistance_;
     bool retry_;
     int minSteps_;
     int maxSteps_;
     int maxFireSize_;
     int maxFireTime_;
+
+    // Contain Outputs
+    double finalCost_;
+    double finalFireLineLength_;
+    double perimeterAtContainment_;
+    double finalFireSize_;
+    double finalContainmentArea_;
+    double finalTime_;
+    ContainStatus::ContainStatusEnum containmentStatus_;
 };
 
 #endif //CONTAINADAPTER_H

@@ -706,6 +706,56 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
     BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
 }
 
+BOOST_AUTO_TEST_CASE(ContainModuleTest)
+{
+    
+    double observedFinalFireLineLength = 0;
+    double observedtPerimeterAtContainment = 0;
+    double observedFinalFireSize = 0;
+    double observedFinalContainmentArea = 0;
+    double observedFinalTimeSinceReport = 0;
+    ContainStatus::ContainStatusEnum observedContainmentStatus = ContainStatus::Unreported;
+
+    double expectedFinalFireLineLength = 0;
+    double expectedPerimeterAtContainment = 0;
+    double expectedFinalFireSize = 0;
+    double expectedFinalContainmentArea = 0;
+    double expectedFinalTimeSinceReport = 0;
+    ContainStatus::ContainStatusEnum expectedContainmentStatus = ContainStatus::Unreported;
+
+    // Test case when expected result is containment
+    behaveRun.contain.setAttackDistance(0);
+    behaveRun.contain.setFireStartTime(0);
+    behaveRun.contain.setLwRatio(3);
+    behaveRun.contain.setReportRate(5);
+    behaveRun.contain.setReportSize(1);
+    behaveRun.contain.setTactic(ContainTactic::HeadAttack);
+    behaveRun.contain.addResource(0, 20);
+    behaveRun.contain.doContainRun();
+
+    expectedFinalFireLineLength = 14.8329956;
+    expectedPerimeterAtContainment = 14.8329956;
+    expectedFinalFireSize = 1.32673918;
+    expectedFinalContainmentArea = 1.32673918;
+    expectedFinalTimeSinceReport = 44.5000000;
+    expectedContainmentStatus = ContainStatus::Contained;
+
+    observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength();
+    observedtPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment();
+    observedFinalFireSize = behaveRun.contain.getFinalFireSize();
+    observedFinalContainmentArea = behaveRun.contain.getFinalContainmentArea();
+    observedFinalTimeSinceReport = behaveRun.contain.getFinalTimeSinceReport();
+    observedContainmentStatus = behaveRun.contain.getContainmentStatus();
+
+    BOOST_CHECK_CLOSE(observedFinalFireLineLength, expectedFinalFireLineLength, ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedtPerimeterAtContainment, expectedPerimeterAtContainment, ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedFinalContainmentArea, expectedFinalContainmentArea,ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedFinalFireSize, expectedFinalFireSize, ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedFinalTimeSinceReport, expectedFinalTimeSinceReport, ERROR_TOLERANCE);
+    BOOST_CHECK_EQUAL(observedContainmentStatus, expectedContainmentStatus);
+
+}
+
 BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite
 
 #ifndef NDEBUG

@@ -34,7 +34,7 @@ Sem::ContainResource::ContainResource( void ) :
     m_production(0.0),
     m_baseCost(0.0),
     m_hourCost(0.0),
-    m_flank(Sem::LeftFlank),
+    m_flank(Sem::ContainFlank::LeftFlank),
     m_desc("")
 {
     return;
@@ -66,7 +66,7 @@ Sem::ContainResource::ContainResource(
         double arrival,
         double production,
         double duration,
-        ContainFlank flank,
+        ContainFlank::ContainFlankEnum flank,
         std::string desc,
         double baseCost,
         double hourCost ) :
@@ -144,7 +144,7 @@ double Sem::ContainResource::duration( void ) const
         - NeitherFlank
  */
 
-Sem::ContainFlank Sem::ContainResource::flank( void ) const
+Sem::ContainFlank::ContainFlankEnum Sem::ContainResource::flank( void ) const
 {
     return( m_flank );
 }

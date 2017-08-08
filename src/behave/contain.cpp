@@ -145,10 +145,10 @@ Sem::Contain::Contain(
         int fireStartMinutesStartTime,              
         double lwRatio,
         double distStep,
-        ContainFlank flank,
+        ContainFlank::ContainFlankEnum flank,
         ContainForce *force,
         double attackTime,
-        ContainTactic tactic,
+        ContainTactic::ContainTacticEnum tactic,
         double attackDist ) :
     m_reportSize(reportSize),
     m_reportRate(reportRate),
@@ -177,7 +177,7 @@ Sem::Contain::Contain(
     m_h0(0.),
     m_x(0.),
     m_y(0.),
-    m_status(Unreported),
+    m_status(ContainStatus::Unreported),
     m_startTime(fireStartMinutesStartTime)
 {
     // Set all the input parameters.
@@ -216,7 +216,7 @@ void Sem::Contain::calcU( void )
     // Store the current u and h as the old u and h.
     m_u0 = m_u;
     m_h0 = m_h;
-    m_status = Attacked;
+    m_status = ContainStatus::Attacked;
     // Calculate constants used in the 4th order Runga-Kutta approximation.
     double rk[4], deriv;
     double OldDistStep=m_distStep;
@@ -368,7 +368,7 @@ bool Sem::Contain::calcUh( double p, double h, double u, double *d )
     }
     // du is the change in angle of attack point from fire origin
     double du;
-    if ( m_tactic == RearAttack )
+    if ( m_tactic == ContainTactic::RearAttack )
     {
         du = m_eps * sinU - ( 1. + m_eps ) * sqrt( uh_radical );
     }
@@ -958,7 +958,7 @@ void Sem::Contain::reset( void )
     //------------------------------------------------------------------------
 
     // Initial angle to attack point depends on whether HeadAttack or RearAttack
-    if ( m_tactic == RearAttack )
+    if ( m_tactic == ContainTactic::RearAttack )
     {
         m_u = m_u0 = M_PI;
         m_x = -m_attackBack - m_attackDist;
@@ -975,7 +975,7 @@ void Sem::Contain::reset( void )
     m_step = 0;
     m_time = 0.0;
     m_rkpr[0] = m_rkpr[1] = m_rkpr[2] = 0.;
-    m_status = Reported;        // Also means that we're initialized
+    m_status = ContainStatus::Reported;        // Also means that we're initialized
 
     // Log it
     containLog( (m_logLevel>1), "\n\nCONTAIN RESET-----------------------------\n\n" );
@@ -1109,8 +1109,8 @@ double Sem::Contain::resourceProduction( int index ) const
     Called only by the constructor.
  */
 
-void Sem::Contain::setAttack( ContainFlank flank, ContainForce *force,
-        double attackTime, ContainTactic tactic, double attackDist )
+void Sem::Contain::setAttack( ContainFlank::ContainFlankEnum flank, ContainForce *force,
+        double attackTime, ContainTactic::ContainTacticEnum tactic, double attackDist )
 {
     m_flank      = flank;
     m_force      = force;
@@ -1190,7 +1190,7 @@ double Sem::Contain::simulationTime( void ) const
         - Overflow   = Simulation max step overflow
  */
 
-Sem::Contain::ContainStatus Sem::Contain::status( void ) const
+Sem::ContainStatus::ContainStatusEnum Sem::Contain::status( void ) const
 {
     return( m_status );
 }
@@ -1218,7 +1218,7 @@ double Sem::Contain::spreadRate( double /* minutesSinceReport */ ) const
     \retval Current fire status.
  */
 
-Sem::Contain::ContainStatus Sem::Contain::step( void )
+Sem::ContainStatus::ContainStatusEnum Sem::Contain::step( void )
 {
     // Determine next angle and fire head position.
     calcU();
@@ -1230,20 +1230,20 @@ Sem::Contain::ContainStatus Sem::Contain::step( void )
     m_time = timeSinceReport( m_h );
 
     // If forces were overrun, simply return false
-    if ( m_status == Overrun )
+    if ( m_status == Sem::ContainStatus::Overrun )
     {
         return( m_status );
     }
     // If the forces contain the fire, interpolate the final u and h.
-    if ( m_tactic == HeadAttack && m_u >= M_PI )
+    if ( m_tactic == ContainTactic::HeadAttack && m_u >= M_PI )
     {
-        m_status = Contained;
+        m_status = Sem::ContainStatus::Contained;
         m_h = m_h0 - m_distStep * m_u0 / ( m_u0 + fabs( m_u ) );
         m_u = M_PI;
     }
-    else if ( m_tactic == RearAttack && m_u <= 0.0 )
+    else if ( m_tactic == Sem::ContainTactic::RearAttack && m_u <= 0.0 )
     {
-        m_status = Contained;
+        m_status = Sem::ContainStatus::Contained;
         m_h = m_h0 + m_distStep * m_u0 / ( m_u0 + fabs( m_u ) );
         m_u = 0.;
     }
@@ -1267,7 +1267,7 @@ Sem::Contain::ContainStatus Sem::Contain::step( void )
         - RearAttack = 1
  */
 
-Sem::Contain::ContainTactic Sem::Contain::tactic( void ) const
+Sem::ContainTactic::ContainTacticEnum Sem::Contain::tactic( void ) const
 {
     return( m_tactic );
 }
@@ -1292,34 +1292,34 @@ double Sem::Contain::timeSinceReport( double headPos ) const
     return( 0. );
 }
 
-char * Sem::Contain::printStatus(Sem::Contain::ContainStatus cs) {
+char * Sem::Contain::printStatus(Sem::ContainStatus::ContainStatusEnum cs) {
 	char *status;
 	switch (cs) {
-    case Sem::Contain::Unreported:
+        case Sem::ContainStatus::Unreported:
 	    status =  "Unreported"; //!< Fire started but not yet reported (init() not called)
 	    break;
-    case Sem::Contain::Reported:
+    case Sem::ContainStatus::Reported:
       status =  "reported"; //!< Fire reported but not yet attacked (init() called)
       break;
-    case Sem::Contain::Attacked:
+    case Sem::ContainStatus::Attacked:
       status =  "Attacked"; //!< Fire attacked but not yet resolved
       break;
-    case Sem::Contain::Contained:
+    case Sem::ContainStatus::Contained:
       status = "Contained"; //!< Fire contained by attacking forces
       break;
-    case Sem::Contain::Overrun:
+    case Sem::ContainStatus::Overrun:
       status = "Overrun"; //!< Attacking forces are overrun
       break;
-    case Sem::Contain::Exhausted:
+    case Sem::ContainStatus::Exhausted:
       status = "Exhausted";//!< Fire escaped when all resources are exhausted
       break;
-    case Sem::Contain::Overflow:
+    case Sem::ContainStatus::Overflow:
       status= "Overflow"; //!< Simulation max step overflow
       break;
-    case Sem::Contain::SizeLimitExceeded:
+    case Sem::ContainStatus::SizeLimitExceeded:
  	    status = "SizeLimitExceeded";  //!< Simulation max fire size exceeded   
  	    break; 	       	      
- 	case Sem::Contain::TimeLimitExceeded:
+ 	case Sem::ContainStatus::TimeLimitExceeded:
  	    status = "TimeLimitExceeded";  //!< Simulation max fire time exceeded   
  	    break; 	    
     default:

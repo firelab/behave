@@ -4,13 +4,23 @@
 ContainAdapter::ContainAdapter()
 {
     lwRatio_ = 1.0,
-    tactic_ = Sem::Contain::HeadAttack,
+    tactic_ = ContainTactic::HeadAttack,
     attackDistance_ = 0.0,
     retry_ = true,
     minSteps_ = 250,
     maxSteps_ = 1000,
     maxFireSize_ = 1000,
     maxFireTime_ = 1080;
+    reportSize_ = 0;
+    reportRate_ = 0;
+    fireStartTime_ = 0;
+
+    finalCost_ = 0.0;
+    finalFireLineLength_ = 0.0;
+    perimeterAtContainment_ = 0.0;
+    finalFireSize_ = 0.0;
+    finalContainmentArea_ = 0.0;
+    finalTime_ = 0.0;
 
     doContainRun();
 }
@@ -26,7 +36,7 @@ void ContainAdapter::addResource(ContainResource& resource)
 }
 
 void ContainAdapter::addResource(double arrival, double production, double duration, 
-    ContainFlank flank, std::string desc, double baseCost, double hourCost)
+    ContainFlank::ContainFlankEnum flank, std::string desc, double baseCost, double hourCost)
 {
     force_.addResource(arrival, production, duration, flank, desc, baseCost, hourCost);
 }
@@ -77,7 +87,7 @@ void ContainAdapter::setLwRatio(double lwRatio)
     lwRatio_ = lwRatio;
 }
 
-void ContainAdapter::setTactic(Sem::Contain::ContainTactic tactic)
+void ContainAdapter::setTactic(ContainTactic::ContainTacticEnum tactic)
 {
     tactic_ = tactic;
 }
@@ -114,7 +124,7 @@ void ContainAdapter::setMaxFireTime(int maxFireTime)
 
 void ContainAdapter::doContainRun()
 {
-    if (force_.resources() > 0)
+    if (force_.resources() > 0 && reportSize_ != 0)
     {
         for (int i = 0; i < 24; i++)
         {
@@ -126,5 +136,48 @@ void ContainAdapter::doContainRun()
             maxFireTime_);
 
         containSim.run();
+
+         finalCost_ = containSim.finalFireCost();
+         finalFireLineLength_ = containSim.finalFireLine();
+         perimeterAtContainment_ = containSim.finalFirePerimeter();
+         finalFireSize_ = containSim.finalFireSize();
+         finalContainmentArea_ = containSim.finalFireSweep();
+         finalTime_ = containSim.finalFireTime();
+         containmentStatus_ = containSim.status();
     }
+}
+
+double ContainAdapter::getFinalCost() const
+{
+    return finalCost_;
+}
+
+double ContainAdapter::getFinalFireLineLength() const
+{
+    return finalFireLineLength_;
+}
+
+double ContainAdapter::getPerimeterAtContainment() const
+{
+    return perimeterAtContainment_;
+}
+
+double ContainAdapter::getFinalFireSize() const
+{
+    return finalFireSize_;
+}
+
+double ContainAdapter::getFinalContainmentArea() const
+{
+    return finalContainmentArea_;
+}
+
+double ContainAdapter::getFinalTimeSinceReport() const
+{
+    return finalTime_;
+}
+
+ContainStatus::ContainStatusEnum ContainAdapter::getContainmentStatus() const
+{
+    return containmentStatus_;
 }
