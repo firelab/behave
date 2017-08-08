@@ -41,7 +41,6 @@ ENDIF(TEST_BEHAVE)
 
 SET(SOURCE
     src/behave/behaveRun.cpp
-    src/behave/behaveVector.cpp
 	src/behave/behaveUnits.cpp
 	src/behave/contain.cpp
 	src/behave/containAdapter.cpp
@@ -71,7 +70,6 @@ SET(SOURCE
 
 SET(HEADERS
     src/behave/behaveRun.h
-    src/behave/behaveVector.h
 	src/behave/behaveUnits.h
 	src/behave/contain.h
 	src/behave/containAdapter.h
