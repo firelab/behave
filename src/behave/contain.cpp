@@ -996,7 +996,7 @@ void Sem::Contain::reset( void )
 
 int Sem::Contain::resources( void ) const
 {
-    return( m_force->m_count );
+    return( m_force->resources() );
 }
 
 //------------------------------------------------------------------------------

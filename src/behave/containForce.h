@@ -37,9 +37,9 @@ public:
     // Virtual destructor
     virtual ~ContainForce( void ) ;
     // Add ContainResource into ContainForce
-    ContainResource* addResource( ContainResource* resource ) ;
+    int addResource( ContainResource& resource ) ;
     // Construct ContainResource into ContainForce
-    ContainResource *addResource(
+    int addResource(
         double arrival,
         double production,
         double duration=480.,
@@ -48,7 +48,8 @@ public:
         double baseCost=0.0,
         double hourCost=0.0 );
     int removeResourceAt(int index);
-    int removeResourceByDesc(std::string desc);
+    int removeResourceWithThisDesc(std::string desc);
+    void clearResourceVector();
 
     // Force-level access methods
     double exhausted( Sem::ContainFlank flank ) const ;
@@ -73,13 +74,9 @@ public:
 // Protected data
 protected:
     //ContainResource **m_cr;     //!< Array of pointers to ContainResources
+    std::vector<ContainResource> m_resourceVector;
 
-    std::vector<ContainResource> resourceVector;
-
-    int     m_size;             //!< Size of m_cr
-    int     m_count;            //!< Items in m_cr
-
-
+    int     m_maxSize;         
 
 friend class Contain;
 };

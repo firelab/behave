@@ -22,8 +22,7 @@ ContainAdapter::~ContainAdapter()
 
 void ContainAdapter::addResource(ContainResource& resource)
 {
-    ContainResource* resourcePointer = &resource;
-    force_.addResource(resourcePointer);
+    force_.addResource(resource);
 }
 
 void ContainAdapter::addResource(double arrival, double production, double duration, 
@@ -37,20 +36,25 @@ int ContainAdapter::removeResourceAt(int index)
     return force_.removeResourceAt(index);
 }
 
-int ContainAdapter::removeResourceByDesc(std::string desc)
+int ContainAdapter::removeResourceWithThisDesc(std::string desc)
 {
-    return force_.removeResourceByDesc(desc);
+    return force_.removeResourceWithThisDesc(desc);
 }
 
-int ContainAdapter::removeAllResourcesWithDesc(std::string desc)
+int ContainAdapter::removeAllResourcesWithThisDesc(std::string desc)
 {
     int rc;
     int success = 1; // 1 means didn't find it
-    while ((rc = force_.removeResourceByDesc(desc)) == 0)
+    while ((rc = force_.removeResourceWithThisDesc(desc)) == 0)
     {
         success = 0; // found at least one
     }
     return success;
+}
+
+void ContainAdapter::removeAllResources()
+{
+    force_.clearResourceVector();
 }
 
 void ContainAdapter::setReportSize(double reportSize)

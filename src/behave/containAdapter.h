@@ -52,8 +52,9 @@ public:
         double baseCost = 0.0,
         double hourCost = 0.0);
     int removeResourceAt(int index);
-    int removeResourceByDesc(std::string desc);
-    int removeAllResourcesWithDesc(std::string desc);
+    int removeResourceWithThisDesc(std::string desc);
+    int removeAllResourcesWithThisDesc(std::string desc);
+    void removeAllResources();
 
     void setReportSize(double reportSize);
     void setReportRate(double reportRate);
