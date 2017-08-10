@@ -184,7 +184,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
     // Convert wind speeds to desired units
     //SpeedUnits::SpeedUnitsEnum desiredWindSpeedUnits = surfaceInputs_->getWindSpeedUnits();
-    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::MILES_PER_HOUR);
+    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::MilesPerHour);
     //effectiveWindSpeed_ /= 88.0; // effective wind speed is now in mi/hr
     //windSpeedLimit_ /= 88.0; // wind speed limit is now in mi/hr
 
@@ -258,7 +258,7 @@ void SurfaceFire::calculateDirectionOfMaxSpread()
     double correctedWindDirection = surfaceInputs_->getWindDirection();
 
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientation = surfaceInputs_->getWindAndSpreadOrientationMode();
-    if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
+    if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RelativeToNorth)
     {
         double aspect = surfaceInputs_->getAspect();
         correctedWindDirection -= aspect; // wind direction is now in degrees 
@@ -298,7 +298,7 @@ void SurfaceFire::calculateDirectionOfMaxSpread()
     }
 
     // Convert azimuth to be relative to North if necessary
-    if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RELATIVE_TO_NORTH)
+    if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RelativeToNorth)
     {
         azimuth = convertDirectionOfSpreadToRelativeToNorth(azimuth);
         while (azimuth >= 360.0)
@@ -367,19 +367,19 @@ void SurfaceFire::calculateMidflameWindSpeed()
 
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = surfaceInputs_->getWindHeightInputMode();
 
-    if (windHeightInputMode == WindHeightInputMode::DIRECT_MIDFLAME)
+    if (windHeightInputMode == WindHeightInputMode::DirectMidflame)
     {
         midflameWindSpeed_ = windSpeed;
     }
-    else if (windHeightInputMode == WindHeightInputMode::TWENTY_FOOT || windHeightInputMode == WindHeightInputMode::TEN_METER)
+    else if (windHeightInputMode == WindHeightInputMode::TwentyFoot || windHeightInputMode == WindHeightInputMode::TenMeter)
     {
-        if (windHeightInputMode == WindHeightInputMode::TEN_METER)
+        if (windHeightInputMode == WindHeightInputMode::TenMeter)
         {
             windSpeed /= 1.15;
         }
         WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod;
         windAdjustmentFactorCalculationMethod = surfaceInputs_->getWindAdjustmentFactorCalculationMethod();
-        if (windAdjustmentFactorCalculationMethod == WindAdjustmentFactorCalculationMethod::USER_INPUT)
+        if (windAdjustmentFactorCalculationMethod == WindAdjustmentFactorCalculationMethod::UserInput)
         {
             windAdjustmentFactor_ = surfaceInputs_->getUserProvidedWindAdjustmentFactor();
         }
@@ -632,8 +632,8 @@ void SurfaceFire::initializeMembers()
 
     midflameWindSpeed_ = 0.0;
     windAdjustmentFactor_ = 0.0;
-    windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::UNSHELTERED;
-    windAdjustmentFactorCalculationMethod_ = WindAdjustmentFactorCalculationMethod::USE_CROWN_RATIO;
+    windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::Unsheltered;
+    windAdjustmentFactorCalculationMethod_ = WindAdjustmentFactorCalculationMethod::UseCrownRatio;
     canopyCrownFraction_ = 0.0;
 
     eccentricity_ = 0.0; 

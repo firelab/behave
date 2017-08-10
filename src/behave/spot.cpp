@@ -60,9 +60,9 @@ Spot& Spot::operator=(const Spot& rhs)
 
 void Spot::memberwiseCopyAssignment(const Spot& rhs)
 {
-    memcpy(speciesFlameHeightParameters_, rhs.speciesFlameHeightParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
-    memcpy(speciesFlameDurationParameters_, rhs.speciesFlameDurationParameters_, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
-    memcpy(firebrandHeightFactors_, rhs.firebrandHeightFactors_, SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
+    memcpy(speciesFlameHeightParameters_, rhs.speciesFlameHeightParameters_, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
+    memcpy(speciesFlameDurationParameters_, rhs.speciesFlameDurationParameters_, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
+    memcpy(firebrandHeightFactors_, rhs.firebrandHeightFactors_, SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
 
     coverHeightUsedForSurfaceFire_ = rhs.coverHeightUsedForSurfaceFire_;
     coverHeightUsedForBurningPile_ = rhs.coverHeightUsedForBurningPile_;
@@ -85,7 +85,7 @@ void Spot::memberwiseCopyAssignment(const Spot& rhs)
 void Spot::initializeMembers()
 {
 	// Set up speciesFlameHeightParameters_
-	const double tempSpeciesFlameHeightParameters[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS] =
+	const double tempSpeciesFlameHeightParameters[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS] =
 	{
 		{ 15.7, 0.451 },  //  0 Engelmann spruce
 		{ 15.7, 0.451 },  //  1 Douglas-fir
@@ -104,10 +104,10 @@ void Spot::initializeMembers()
 						  //{12.9, .453 },  // 14 western larch (guessed)
 						  //{15.7, .515 }   // 15 western red cedar (guessed)
 	};
-	memcpy(speciesFlameHeightParameters_, tempSpeciesFlameHeightParameters, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
+	memcpy(speciesFlameHeightParameters_, tempSpeciesFlameHeightParameters, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
 
 	// Set up speciesFlameDurationParameters_
-	const double tempSpeciesFlameDurationParameters[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS] =
+	const double tempSpeciesFlameDurationParameters[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS] =
 	{
 		{ 12.6, -0.256 },  //  0 Engelmann spruce
 		{ 10.7, -0.278 },  //  1 Douglas-fir
@@ -126,17 +126,17 @@ void Spot::initializeMembers()
 						   //{ 6.3, -.249},   // 14 western larch (guessed)
 						   //{ 12.6, -.256}   // 15 western red cedar (guessed)
 	};
-	memcpy(speciesFlameDurationParameters_, tempSpeciesFlameDurationParameters, SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
+	memcpy(speciesFlameDurationParameters_, tempSpeciesFlameDurationParameters, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
 
 	// Set up firebrandHeightFactors_
-	const double tempFirebrandHeightFactors[SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotArrayConstants::NUM_COLS] =
+	const double tempFirebrandHeightFactors[SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotInputs::SpotArrayConstants::NUM_COLS] =
 	{
 		{ 4.24, 0.332 },
 		{ 3.64, 0.391 },
 		{ 2.78, 0.418 },
 		{ 4.70, 0.000 }
 	};
-	memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
+	memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
 
     coverHeightUsedForSurfaceFire_ = 0.0;
     coverHeightUsedForBurningPile_ = 0.0;

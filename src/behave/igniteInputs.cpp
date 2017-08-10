@@ -6,10 +6,10 @@ IgniteInputs::IgniteInputs()
     moistureHundredHour_ = 0.0;
     airTemperature_ = 0.0;
     sunShade_ = 0.0;
-    fuelBedType_ = IgnitionFuelBedType::PONDEROSA_PINE_LITTER;
+    fuelBedType_ = IgnitionFuelBedType::PonderosaPineLitter;
     duffDepth_ = 0.0;
   
-    lightningChargeType_ = LightningCharge::UNKNOWN;
+    lightningChargeType_ = LightningCharge::Unknown;
 }
 
 IgniteInputs::~IgniteInputs()

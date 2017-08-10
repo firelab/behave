@@ -48,10 +48,10 @@ double Ignite::calculateFirebrandIgnitionProbability(ProbabilityUnits::Probabili
 {
     // Covert temperature to Celcius
     calculateFuelTemperature();
-    double fuelTemperature = getFuelTemperature(TemperatureUnits::CELSIUS);
+    double fuelTemperature = getFuelTemperature(TemperatureUnits::Celsius);
 
     // use one hour moisture in the following calculation
-    double fuelMoisture = igniteInputs_.getMoistureOneHour(MoistureUnits::FRACTION);; 
+    double fuelMoisture = igniteInputs_.getMoistureOneHour(MoistureUnits::Fraction);; 
 
     // Calculate heat of ignition
     double heatOfIgnition = 144.51
@@ -83,8 +83,8 @@ double Ignite::calculateFuelTemperature()
 {
     double temperatureDifferential;
 
-    double sunShade = igniteInputs_.getSunShade(CoverUnits::FRACTION);
-    double airTemperature = igniteInputs_.getAirTemperature(TemperatureUnits::FAHRENHEIT);
+    double sunShade = igniteInputs_.getSunShade(CoverUnits::Fraction);
+    double airTemperature = igniteInputs_.getAirTemperature(TemperatureUnits::Fahrenheit);
 
     temperatureDifferential = 25.0 - (20.0 * sunShade);
 
@@ -112,7 +112,7 @@ double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::Probabili
     static const double freqPos = 0.277;
 
     // Convert duff depth to cm and restrict to maximum of 10 cm.
-    double duffDepth = igniteInputs_.getDuffDepth(LengthUnits::CENTIMETERS);
+    double duffDepth = igniteInputs_.getDuffDepth(LengthUnits::Centimeters);
 
     duffDepth *= 2.54;
     if (duffDepth > 10.0)
@@ -121,7 +121,7 @@ double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::Probabili
     }
 
     //  use hundred hour moisture as duff moisture and conver to percent and restrict to maximum of 40%.
-    double fuelMoisture = igniteInputs_.getMoistureHundredHour(MoistureUnits::PERCENT);
+    double fuelMoisture = igniteInputs_.getMoistureHundredHour(MoistureUnits::Percent);
     if (fuelMoisture > 40.0)
     {
         fuelMoisture = 40.0;
@@ -134,49 +134,49 @@ double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::Probabili
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelType = igniteInputs_.getIgnitionFuelBedType();
     switch (fuelType)
     {
-        case IgnitionFuelBedType::PONDEROSA_PINE_LITTER:
+        case IgnitionFuelBedType::PonderosaPineLitter:
         {
             pPos = 0.92 * exp(-0.087 * fuelMoisture);
             pNeg = 1.04 * exp(-0.054 * fuelMoisture);
             break;
         }
-        case IgnitionFuelBedType::PUNKY_WOOD_ROTTEN_CHUNKY:
+        case IgnitionFuelBedType::PunkyWoodRottenChunky:
         {
             pPos = 0.44 * exp(-0.110 * fuelMoisture);
             pNeg = 0.59 * exp(-0.094 * fuelMoisture);
             break;
         }
-        case IgnitionFuelBedType::PUNKY_WOOD_POWDER_DEEP:
+        case IgnitionFuelBedType::PunkyWoodPowderDeep:
         {
             pPos = 0.86 * exp(-0.060 * fuelMoisture);
             pNeg = 0.90 * exp(-0.056 * fuelMoisture);
             break;
         }
-        case IgnitionFuelBedType::PUNK_WOOD_POWDER_SHALLOW:
+        case IgnitionFuelBedType::PunkWoodPowderShallow:
         {
             pPos = 0.60 - (0.011 * fuelMoisture);
             pNeg = 0.73 - (0.011 * fuelMoisture);
             break;
         }
-        case IgnitionFuelBedType::LODGEPOLE_PINE_DUFF:
+        case IgnitionFuelBedType::LodgepolePineDuff:
         {
             pPos = 1.0 / (1.0 + exp(5.13 - 0.68 * duffDepth));
             pNeg = 1.0 / (1.0 + exp(3.84 - 0.60 * duffDepth));
             break;
         }
-        case IgnitionFuelBedType::DOUGLAS_FIR_DUFF:
+        case IgnitionFuelBedType::DouglasFirDuff:
         {
             pPos = 1.0 / (1.0 + exp(6.69 - 1.39 * duffDepth));
             pNeg = 1.0 / (1.0 + exp(5.48 - 1.28 * duffDepth));
             break;
         }
-        case IgnitionFuelBedType::HIGH_ALTITUDE_MIXED:
+        case IgnitionFuelBedType::HighAltitudeMixed:
         {
             pPos = 0.62 * exp(-0.050 * fuelMoisture);
             pNeg = 0.80 - (0.014 * fuelMoisture);
             break;
         }
-        case IgnitionFuelBedType::PEAT_MOSS:
+        case IgnitionFuelBedType::PeatMoss:
         {
             pPos = 0.71 * exp(-0.070 * fuelMoisture);
             pNeg = 0.84 * exp(-0.060 * fuelMoisture);
@@ -187,17 +187,17 @@ double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::Probabili
     LightningCharge::LightningChargeEnum charge = igniteInputs_.getLightningChargeType();
     switch (charge)
     {
-        case LightningCharge::NEGATIVE:
+        case LightningCharge::Negative:
         {
             probabilityOfLightningIgnition = ccNeg * pNeg;
             break;
         }
-        case  LightningCharge::POSITIVE:
+        case  LightningCharge::Positive:
         {
             probabilityOfLightningIgnition = ccPos * pPos;
             break;
         }
-        case LightningCharge::UNKNOWN:
+        case LightningCharge::Unknown:
         {
             probabilityOfLightningIgnition = freqPos * ccPos * pPos + freqNeg * ccNeg * pNeg;
             break;
@@ -306,7 +306,7 @@ bool Ignite::isFuelDepthNeeded()
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType = igniteInputs_.getIgnitionFuelBedType();
     bool isNeeded = false;
 
-    if (fuelBedType == IgnitionFuelBedType::LODGEPOLE_PINE_DUFF || fuelBedType == IgnitionFuelBedType::DOUGLAS_FIR_DUFF)
+    if (fuelBedType == IgnitionFuelBedType::LodgepolePineDuff || fuelBedType == IgnitionFuelBedType::DouglasFirDuff)
     {
         bool isNeeded = true;
     }

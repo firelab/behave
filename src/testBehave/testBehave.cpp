@@ -49,18 +49,18 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
     double windSpeed = 5.0;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     double windDirection = 0;
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
     double slope = 30.0;
-    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::PERCENT;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
     double canopyHeight = 30.0;
-    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
 
     behaveRun.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
@@ -77,20 +77,20 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
-    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = TwoFuelModels::TWO_DIMENSIONAL;
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = TwoFuelModelsMethod::TwoFimensional;
     double windSpeed = 5.0;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     double windDirection = 0;
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
     double firstFuelModelCoverage = 0;
     double slope = 30.0;
-    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::PERCENT;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
     double canopyHeight = 30.0;
-    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
 
     behaveRun.surface.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
@@ -110,18 +110,18 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
     double moistureFoliar = 120;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::PERCENT;
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
     double windSpeed = 5.0;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     double windDirection = 0;
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
     double slope = 30.0;
-    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::PERCENT;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
     double canopyHeight = 30.0;
-    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::FEET;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
     double canopyBaseHeight = 6;
     double canopyBulkDensity = 0.03;
@@ -142,78 +142,78 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
 
     // Test North oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
-    behaveRun.surface.setSlope(30, SlopeUnits::DEGREES);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.setAspect(95);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 19.677584;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test upslope oriented mode, 5 mph 20 foot uplsope wind
     behaveRun.surface.setFuelModelNumber(124);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(0);
-    behaveRun.surface.setSlope(30, SlopeUnits::PERCENT);
+    behaveRun.surface.setSlope(30, SlopeUnits::Percent);
     behaveRun.surface.setAspect(0);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindDirection(90);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 7.091665;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test North oriented mode, 20 foot North wind, zero aspect
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(0);
     behaveRun.surface.setAspect(0);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test North oriented mode, 20 foot North-East wind (45 degree), 215 degree aspect
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setAspect(215);
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 4.113265;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test North oriented mode, 20 foot 45 degree wind, 95 degree aspect
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setAspect(5);
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.503960;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test Non-Burnable Fuel
     behaveRun.surface.setFuelModelNumber(91);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 0.0;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
@@ -229,13 +229,13 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
     // Test North oriented mode, north wind, 0 mph 20 foot wind, 0 degree aspect, 0 degree slope
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
-    behaveRun.surface.setSlope(0, SlopeUnits::DEGREES);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setSlope(0, SlopeUnits::Degrees);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindSpeed(0, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindDirection(0);
     behaveRun.surface.setAspect(0);
@@ -246,8 +246,8 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
 
     // Test North oriented mode, 45 degree wind, 5 mph 20 foot wind, 95 degree aspect, 30 degree slope
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
-    behaveRun.surface.setSlope(30, SlopeUnits::DEGREES);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.setAspect(95);
@@ -258,8 +258,8 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
 
     // Test North oriented mode, 45 degree wind, 15 mph 20 foot wind, 95 degree aspect, 30 degree slope
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
-    behaveRun.surface.setSlope(30, SlopeUnits::DEGREES);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindSpeed(15, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.setAspect(95);
@@ -300,11 +300,11 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     double expectedC = 16.187176;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    SpeedUnits::SpeedUnitsEnum spreadRateUnits = SpeedUnits::CHAINS_PER_HOUR;
+    SpeedUnits::SpeedUnitsEnum spreadRateUnits = SpeedUnits::ChainsPerHour;
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DIRECT_MIDFLAME);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
     observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(spreadRateUnits));
@@ -327,64 +327,64 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
   
     // Test upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind
     directionOfInterest = 90;
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 3.016440;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test upslope oriented mode, 20 foot wind, direction of interest 160 degrees from upslope, 290 degree wind
     directionOfInterest = 160;
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(290);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 1.399262;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test upslope oriented mode, 20 foot wind, direction of interest 215 degrees from upslope, 215 degree wind
     directionOfInterest = 215;
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(215);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 1.648579;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
     
     // Test North oriented mode, 20 foot 135 degree wind, direction of interest 30 degrees from north, 263 degree aspect
     directionOfInterest = 30;
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(280);
     behaveRun.surface.setAspect(135);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 3.504961;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test North oriented mode, 20 foot north wind, direction of interest 90 degrees from north, 45 degree aspect
     directionOfInterest = 90;
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(0);
     behaveRun.surface.setAspect(45);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 1.803660;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test North oriented mode, 20 foot 135 degree wind, direction of interest 285 degrees from north, 263 degree aspect
     directionOfInterest = 285;
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_NORTH);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(280);
     behaveRun.surface.setAspect(263);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 1.452856;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
@@ -397,8 +397,8 @@ BOOST_AUTO_TEST_CASE(firelineIntensityTest)
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     // Test upslope oriented mode, 20 foot uplsope wind 
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedFirelineIntensity = behaveRun.surface.getFirelineIntensity();
     BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
@@ -410,73 +410,73 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
     double expectedSurfaceFireSpreadRate = 0.0;
 
     // Test upslope oriented mode, 20 foot wind, low moisture conditions
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     setSurfaceInputsForTwoFuelModelsLowMoistureScenario(behaveRun);
 
     // Do runs for first fuel model coverage 0-100 with step size 10
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(0);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(10);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 10.446373;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(20);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 12.112509;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(30);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 13.825904;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(40);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 15.532700;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(50);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 17.173897;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(60);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 18.685358;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(70);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 19.997806;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(80);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.036826;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(90);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.722861;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(100);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.971217;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
@@ -487,8 +487,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double canopyBaseHeight = 6; 
     double canopyBulkDensity = 0.03;
     
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
     double observedCrownFireSpreadRate = 0;
     double expectedCrownFireSpreadRate = 0;
@@ -496,10 +496,10 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     double expectedCrownFlameLength = 0;
     double observedCrownFirelineIntensity = 0;
     double expectedCrownFirelineIntensity = 0;
-    int expectedFireType = (int)FireType::SURFACE;
-    int observedFireType = (int)FireType::SURFACE;
+    int expectedFireType = (int)FireType::Surface;
+    int observedFireType = (int)FireType::Surface;
 
-    behaveRun.crown.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.crown.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
 
     // Test crown fire spread rate, flame length, intensity
     //setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
@@ -507,7 +507,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRun();
     expectedCrownFireSpreadRate = 10.259921;
-    observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireSpreadRate(SpeedUnits::ChainsPerHour));
     BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
 
     expectedCrownFlameLength = 29.320557;
@@ -520,16 +520,16 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 
     // Test fire type, Surface fire expected
     setCrownInputsLowMoistureScenario(behaveRun);
-    behaveRun.crown.setMoistureOneHour(20, MoistureUnits::PERCENT);
+    behaveRun.crown.setMoistureOneHour(20, MoistureUnits::Percent);
     behaveRun.crown.doCrownRun();
-    expectedFireType = (int)FireType::SURFACE;
+    expectedFireType = (int)FireType::Surface;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
     // Test fire type, Torching fire expected
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRun();
-    expectedFireType = (int)FireType::TORCHING;
+    expectedFireType = (int)FireType::Torching;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
@@ -537,21 +537,21 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRun();
-    expectedFireType = (int)FireType::CROWNING;
+    expectedFireType = (int)FireType::Crowning;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
     // Test fire type, Conditional crown fire expected
     setCrownInputsLowMoistureScenario(behaveRun);
     canopyHeight = 60;
-    behaveRun.crown.setCanopyHeight(canopyHeight, LengthUnits::FEET);
+    behaveRun.crown.setCanopyHeight(canopyHeight, LengthUnits::Feet);
     canopyBaseHeight = 30;
     behaveRun.crown.setCanopyBaseHeight(canopyBaseHeight);
     canopyBulkDensity = 0.06;
     behaveRun.crown.setCanopyBulkDensity(0.06);
     behaveRun.crown.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRun();
-    expectedFireType = (int)FireType::CONDITIONAL_CROWN_FIRE;
+    expectedFireType = (int)FireType::ConditionalCrownFire;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 }
@@ -563,9 +563,9 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     double observedSpottingDistance = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    flameLength = behaveRun.surface.getFlameLength(LengthUnits::FEET);
+    flameLength = behaveRun.surface.getFlameLength(LengthUnits::Feet);
 
     SpotFireLocation::SpotFireLocationEnum location = SpotFireLocation::RIDGE_TOP;
     double ridgeToValleyDistance = 1.0;
@@ -609,49 +609,49 @@ BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 
-    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MILES_PER_HOUR;
-    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TWENTY_FOOT;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     // Test upslope oriented mode, 20 foot uplsope wind
     behaveRun.surface.setFuelModelNumber(124);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TWENTY_FOOT);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RELATIVE_TO_UPSLOPE);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(0);
-    behaveRun.surface.setSlope(30, SlopeUnits::PERCENT);
+    behaveRun.surface.setSlope(30, SlopeUnits::Percent);
     behaveRun.surface.setAspect(0);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
     // Test surface spread rate in chains per hour
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::CHAINS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test surface spread rate in feet per minute
     expectedSurfaceFireSpreadRate = 9.763838;
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::FEET_PER_MINUTE));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::FeetPerMinute));
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test surface spread rate in kilometers per hour
     expectedSurfaceFireSpreadRate = 0.178561;
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::KILOMETERS_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::KilometersPerHour));
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test surface spread rate in meters per minute
     expectedSurfaceFireSpreadRate = 2.976018;
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::METERS_PER_MINUTE));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MetersPerMinute));
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test surface spread rate in meters per second
     expectedSurfaceFireSpreadRate = 0.049600;
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::METERS_PER_SECOND));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MetersPerSecond));
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
     // Test surface spread rate in miles per hour
     expectedSurfaceFireSpreadRate = 0.110953;
-    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MILES_PER_HOUR));
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MilesPerHour));
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
@@ -661,67 +661,66 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
     double moistureHundredHour = 8.0;
     double airTemperature = 80; // Fahrenheit
     double sunShade = 50.0; // Percent 
-    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType = IgnitionFuelBedType::DOUGLAS_FIR_DUFF;
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType = IgnitionFuelBedType::DouglasFirDuff;
     double duffDepth = 6.0; // inches
-    LightningCharge::LightningChargeEnum lightningChargeType = LightningCharge::UNKNOWN;
+    LightningCharge::LightningChargeEnum lightningChargeType = LightningCharge::Unknown;
 
     double observedFirebrandIgnitionProbability = 0;
     double observedLightningIgnitionProbability = 0;
     double expectedFirebrandIgnitionProbability = 0;
     double expectedLightningIgnitionProbability = 0;
 
-    MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::PERCENT;
-    TemperatureUnits::TemperatureUnitsEnum temperatureUnits = TemperatureUnits::FAHRENHEIT;
-    CoverUnits::CoverUnitsEnum sunShadeUnits = CoverUnits::PERCENT;
-    LengthUnits::LengthUnitsEnum duffDepthUnits = LengthUnits::INCHES;
+    MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::Percent;
+    TemperatureUnits::TemperatureUnitsEnum temperatureUnits = TemperatureUnits::Fahrenheit;
+    CoverUnits::CoverUnitsEnum sunShadeUnits = CoverUnits::Percent;
+    LengthUnits::LengthUnitsEnum duffDepthUnits = LengthUnits::Inches;
 
     expectedFirebrandIgnitionProbability = 0.54831705;
     expectedLightningIgnitionProbability = 0.39362018;
 
     behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
         temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
-    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::FRACTION);
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Fraction);
     BOOST_CHECK_CLOSE(observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, ERROR_TOLERANCE);
 
-    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::FRACTION);
+    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::Fraction);
     BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
 
     moistureOneHour = 7.0;
     moistureHundredHour = 9.0;
     airTemperature = 90; // Fahrenheit
     sunShade = 25.0; // Percent 
-    fuelBedType = IgnitionFuelBedType::LODGEPOLE_PINE_DUFF;
+    fuelBedType = IgnitionFuelBedType::LodgepolePineDuff;
     duffDepth = 8.0; // inches
-    lightningChargeType = LightningCharge::NEGATIVE;
+    lightningChargeType = LightningCharge::Negative;
 
     expectedFirebrandIgnitionProbability = 50.717573;
     expectedLightningIgnitionProbability = 17.931991;
 
     behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
         temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
-    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::PERCENT);
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Percent);
     BOOST_CHECK_CLOSE(observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, ERROR_TOLERANCE);
 
-    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::PERCENT);
+    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::Percent);
     BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_CASE(ContainModuleTest)
 {
-    
     double observedFinalFireLineLength = 0;
     double observedtPerimeterAtContainment = 0;
     double observedFinalFireSize = 0;
     double observedFinalContainmentArea = 0;
     double observedFinalTimeSinceReport = 0;
-    Contain::ContainStatus observedContainmentStatus = Contain::ContainStatus::Unreported;
+    ContainStatus::ContainStatusEnum observedContainmentStatus = ContainStatus::Unreported;
  
     double expectedFinalFireLineLength = 0;
     double expectedPerimeterAtContainment = 0;
     double expectedFinalFireSize = 0;
     double expectedFinalContainmentArea = 0;
     double expectedFinalTimeSinceReport = 0;
-    Contain::ContainStatus expectedContainmentStatus = Contain::ContainStatus::Unreported;
+    ContainStatus::ContainStatusEnum expectedContainmentStatus = ContainStatus::Unreported;
 
     // Test case when expected result is containment
     behaveRun.contain.setAttackDistance(0);
@@ -729,8 +728,8 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     behaveRun.contain.setLwRatio(3);
     behaveRun.contain.setReportRate(5);
     behaveRun.contain.setReportSize(1);
-    behaveRun.contain.setTactic(Contain::ContainTactic::HeadAttack);
-    behaveRun.contain.addResource(0, 20, 480, ContainFlank::LeftFlank, "testo");
+    behaveRun.contain.setTactic(ContainTactic::HeadAttack);
+    behaveRun.contain.addResource(0, 20, 480, ContainFlank::LeftFlank, "test");
     behaveRun.contain.doContainRun();
 
     expectedFinalFireLineLength = 14.8329956;
@@ -738,7 +737,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     expectedFinalFireSize = 1.32673918;
     expectedFinalContainmentArea = 1.32673918;
     expectedFinalTimeSinceReport = 44.5000000;
-    expectedContainmentStatus = Contain::ContainStatus::Contained;
+    expectedContainmentStatus = ContainStatus::Contained;
 
     observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength();
     observedtPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment();

@@ -39,32 +39,32 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
 
     switch (units)
     {
-        case FEET:
+        case Feet:
         {
             // Already in base, nothing to do
             break;
         }
-        case INCHES:
+        case Inches:
         {
             value *= INCHES_TO_FEET;
             break;
         }
-        case CENTIMETERS:
+        case Centimeters:
         {
             value *= CENTIMETERS_TO_FEET;
             break;
         }
-        case METERS:
+        case Meters:
         {
             value *= METERS_TO_FEET;
             break;
         }
-        case MILES:
+        case Miles:
         {
             value *= MILES_TO_FEET;
             break;
         }
-        case KILOMETERS:
+        case Kilometers:
         {
             value *= KILOMETERS_TO_FEET;
             break;
@@ -88,32 +88,32 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
 
     switch (units)
     {
-        case FEET:
+        case Feet:
         {
             // Already in base, nothing to do
             break;
         }
-        case INCHES:
+        case Inches:
         {
             value *= FEET_TO_INCHES;
             break;
         }
-        case CENTIMETERS:
+        case Centimeters:
         {
             value *= FEET_TO_CENTIMETERS;
             break;
         }
-        case METERS:
+        case Meters:
         {
             value *= FEET_TO_METERS;
             break;
         }
-        case MILES:
+        case Miles:
         {
             value *= FEET_TO_MILES;
             break;
         }
-        case KILOMETERS:
+        case Kilometers:
         {
             value *= FEET_TO_KILOMETERS;
             break;
@@ -137,32 +137,32 @@ double SpeedUnits::toBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 
     switch (units)
     {
-        case FEET_PER_MINUTE:
+        case FeetPerMinute:
         {
             // Already in base, nothing to do
             break;
         }
-        case METERS_PER_SECOND:
+        case MetersPerSecond:
         {
             value *= METERS_PER_SECOND_TO_FEET_PER_MINUTE;
             break;
         }
-        case   METERS_PER_MINUTE:
+        case   MetersPerMinute:
         {
             value *= METERS_PER_MINUTE_TO_FEET_PER_MINUTE;
             break;
         }
-        case CHAINS_PER_HOUR:
+        case ChainsPerHour:
         {
             value *= CHAINS_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
         }
-        case MILES_PER_HOUR:
+        case MilesPerHour:
         {
             value *= MILES_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
         }
-        case KILOMETERS_PER_HOUR:
+        case KilometersPerHour:
         {
             value *= KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
@@ -186,32 +186,32 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 
     switch (units)
     {
-        case FEET_PER_MINUTE:
+        case FeetPerMinute:
         {
             // Already in base, nothing to do
             break;
         }
-        case METERS_PER_SECOND:
+        case MetersPerSecond:
         {
             value *= FEET_PER_MINUTE_TO_METERS_PER_SECOND;
             break;
         }
-        case   METERS_PER_MINUTE:
+        case   MetersPerMinute:
         {
             value *= FEET_PER_MINUTE_TO_METERS_PER_MINUTE;
             break;
         }
-        case CHAINS_PER_HOUR:
+        case ChainsPerHour:
         {
             value *= FEET_PER_MINUTE_TO_CHAINS_PER_HOUR;
             break;
         }
-        case MILES_PER_HOUR:
+        case MilesPerHour:
         {
             value *= FEET_PER_MINUTE_TO_MILES_PER_HOUR;
             break;
         }
-        case KILOMETERS_PER_HOUR:
+        case KilometersPerHour:
         {
             value *= FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR;
             break;
@@ -226,7 +226,7 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
 
 double CoverUnits::toBaseUnits(double value, CoverUnitsEnum units)
 {
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value /= 100.0;
     }
@@ -235,7 +235,7 @@ double CoverUnits::toBaseUnits(double value, CoverUnitsEnum units)
 
 double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
 {
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value *= 100.0;
     }
@@ -244,7 +244,7 @@ double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
 
 double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
 {
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value /= 100.0;
     }
@@ -253,7 +253,7 @@ double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
 
 double MoistureUnits::fromBaseUnits(double value, MoistureUnitsEnum units)
 {
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value *= 100.0;
     }
@@ -264,7 +264,7 @@ double SlopeUnits::toBaseUnits(double value, SlopeUnitsEnum units)
 {
     static const double PI = 3.141592653589793238463;
 
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value = (180 / PI) * atan(value / 100.0); // slope is now in degees
     }
@@ -275,7 +275,7 @@ double SlopeUnits::fromBaseUnits(double value, SlopeUnitsEnum units)
 {
     static const double PI = 3.141592653589793238463;
 
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value = tan(value * (PI / 180)) * 100; // slope is now in percent
     }
@@ -287,7 +287,7 @@ double DensityUnits::toBaseUnits(double value, DensityUnitsEnum units)
     // Denisty to base units constants
     static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.06242796051;
 
-    if (units == KILOGRAMS_PER_CUBIC_METER)
+    if (units == KilogramsPerCubicMeter)
     {
         value *= KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT;
     }
@@ -299,7 +299,7 @@ double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
     // Denisty from base units constants
     static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.018463390932;
 
-    if (units == KILOGRAMS_PER_CUBIC_METER)
+    if (units == KilogramsPerCubicMeter)
     {
         value *= LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER;
     }
@@ -315,22 +315,22 @@ double LoadingUnits::toBaseUnits(double value, LoadingUnitsEnum units)
  
     switch (units)
     {
-        case POUNDS_PER_SQUARE_FOOT:
+        case PoundsPerSquareFoot:
         {
             // Already in base, nothing to do
             break;
         }
-        case TONS_PER_ACRE:
+        case TonsPerAcre:
+        {
+            value *= TONS_PER_ACRE_TO_POUNDS_PER_SQUARE_FOOT;
+            break;
+        }
+        case TonnesPerHectare:
         {
             value *= TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT;
             break;
         }
-        case TONNES_PER_HECTARE:
-        {
-            value *= TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT;
-            break;
-        }
-        case KILOGRAMS_PER_SQUARE_METER:
+        case KilogramsPerSquareMeter:
         {
             value *= KILOGRAMS_PER_SQUARE_METER_TO_POUNDS_PER_SQUARE_FOOT;
             break;
@@ -352,22 +352,22 @@ double LoadingUnits::fromBaseUnits(double value, LoadingUnitsEnum units)
 
     switch (units)
     {
-        case POUNDS_PER_SQUARE_FOOT:
+        case PoundsPerSquareFoot:
         {
             // Already in base, nothing to do
             break;
         }
-        case TONS_PER_ACRE:
+        case TonsPerAcre:
         {
             value *= POUNDS_PER_SQUARE_FOOT_TO_TONS_PER_ACRE;
             break;
         }
-        case TONNES_PER_HECTARE:
+        case TonnesPerHectare:
         {
             value *= POUNDS_PER_SQUARE_FOOT_TO_TONNES_PER_HECTARE;
             break;
         }
-        case KILOGRAMS_PER_SQUARE_METER:
+        case KilogramsPerSquareMeter:
         {
             value *= POUNDS_PER_SQUARE_FOOT_TO_KILOGRAMS_PER_SQUARE_METER;
             break;
@@ -389,22 +389,22 @@ double SurfaceAreaToVolumeUnits::toBaseUnits(double value, SurfaceAreaToVolumeUn
 
     switch (units)
     {
-        case SQUARE_FEET_OVER_CUBIC_FEET:
+        case SquareFeetOverCubicFeet:
         {
             // Already in base, nothing to do
             break;
         }
-        case SQUARE_METERS_OVER_CUBIC_METERS:
+        case SquareMetersOverCubicMeters:
         {
             value *= SQUARE_METERS_OVER_CUBIC_METERS_TO_SQUARE_FEET_OVER_CUBIC_FEET;
             break;
         }
-        case SQUARE_INCHES_OVER_CUBIC_INCHES:
+        case SquareInchesOverCubicInches:
         {
             value *= SQUARE_INCHES_OVER_CUBIC_INCHES_TO_SQUARE_FEET_OVER_CUBIC_FEET;
             break;
         }
-        case SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS:
+        case SquareCentimetersOverCubicCentimers:
         {
             value *= SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS_TO_SQUARE_FEET_OVER_CUBIC_FEET;
             break;
@@ -425,22 +425,22 @@ double SurfaceAreaToVolumeUnits::fromBaseUnits(double value, SurfaceAreaToVolume
 
     switch (units)
     {
-        case SQUARE_FEET_OVER_CUBIC_FEET:
+        case SquareFeetOverCubicFeet:
         {
             // Already in base, nothing to do
             break;
         }
-        case SQUARE_METERS_OVER_CUBIC_METERS:
+        case SquareMetersOverCubicMeters:
         {
             value *= SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_METERS_OVER_CUBIC_METERS;
             break;
         }
-        case SQUARE_INCHES_OVER_CUBIC_INCHES:
+        case SquareInchesOverCubicInches:
         {
             value *= SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_INCHES_OVER_CUBIC_INCHES;
             break;
         }
-        case SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS:
+        case SquareCentimetersOverCubicCentimers:
         {
             value *= SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS;
             break;
@@ -457,17 +457,17 @@ double TemperatureUnits::toBaseUnits(double value, TemperatureUnitsEnum units)
 {
     switch (units)
     {
-        case FAHRENHEIT:
+        case Fahrenheit:
         {
             // Already in base, nothing to do
             break;
         }
-        case CELSIUS:
+        case Celsius:
         {
             value = ((value * 9.0) / 5.0) + 32;
             break;
         }
-        case KELVIN:
+        case Kelvin:
         {
             value = (((value - 273.15) * 9.0) / 5.0) + 32;
             break;
@@ -484,17 +484,17 @@ double TemperatureUnits::fromBaseUnits(double value, TemperatureUnitsEnum units)
 {
     switch (units)
     {
-        case FAHRENHEIT:
+        case Fahrenheit:
         {
             // Already in base, nothing to do
             break;
         }
-        case CELSIUS:
+        case Celsius:
         {
             value = ((value - 32) * 5) / 9.0;
             break;
         }
-        case KELVIN:
+        case Kelvin:
         {
             value = (((value - 32) * 5) / 9.0) + 273.15;
             break;
@@ -509,7 +509,7 @@ double TemperatureUnits::fromBaseUnits(double value, TemperatureUnitsEnum units)
 
 double ProbabilityUnits::toBaseUnits(double value, ProbabilityUnitsEnum units)
 {
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value /= 100.0;
     }
@@ -518,7 +518,7 @@ double ProbabilityUnits::toBaseUnits(double value, ProbabilityUnitsEnum units)
 
 double ProbabilityUnits::fromBaseUnits(double value, ProbabilityUnitsEnum units)
 {
-    if (units == PERCENT)
+    if (units == Percent)
     {
         value *= 100.0;
     }

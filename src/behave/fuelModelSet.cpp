@@ -35,7 +35,7 @@
 
 FuelModelSet::FuelModelSet()
 {
-    FuelModelArray.resize(FuelConstants::NUM_FUEL_MODELS);
+    FuelModelArray.resize(SurfaceInputs::FuelConstants::NUM_FUEL_MODELS);
     initializeAllFuelModelRecords();
     populateFuelModels();
 }
@@ -107,7 +107,7 @@ void FuelModelSet::initializeSingleFuelModelRecord(int fuelModelNumber)
 
 void FuelModelSet::initializeAllFuelModelRecords()
 {
-    for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
+    for (int i = 0; i < SurfaceInputs::FuelConstants::NUM_FUEL_MODELS; i++)
     {
         initializeSingleFuelModelRecord(i);
     }
@@ -588,7 +588,7 @@ bool FuelModelSet::setCustomFuelModel(int fuelModelNumber, std::string code, std
 
     moistureOfExtinctionDead = MoistureUnits::toBaseUnits(moistureOfExtinctionDead, moistureUnits);
 
-    if (loadingUnits != LoadingUnits::POUNDS_PER_SQUARE_FOOT)
+    if (loadingUnits != LoadingUnits::PoundsPerSquareFoot)
     {
         fuelLoadOneHour = LoadingUnits::toBaseUnits(fuelLoadOneHour, loadingUnits);
         fuelLoadTenHour = LoadingUnits::toBaseUnits(fuelLoadTenHour, loadingUnits);
@@ -599,7 +599,7 @@ bool FuelModelSet::setCustomFuelModel(int fuelModelNumber, std::string code, std
 
     code = code.substr(0, 3);
 
-    if (savrUnits != SurfaceAreaToVolumeUnits::SQUARE_FEET_OVER_CUBIC_FEET)
+    if (savrUnits != SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet)
     {
         savrOneHour = SurfaceAreaToVolumeUnits::toBaseUnits(savrOneHour, savrUnits);
         savrOneHour = SurfaceAreaToVolumeUnits::toBaseUnits(savrLiveHerb, savrUnits);

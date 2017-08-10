@@ -85,7 +85,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFire_);
-        TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
+        TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
         int firstFuelModelNumber = surfaceInputs_.getFirstFuelModelNumber();
         double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
         int secondFuelModelNumber = surfaceInputs_.getSecondFuelModelNumber();
@@ -116,7 +116,7 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     {
         // Calculate spread rate for Two Fuel Models
         SurfaceTwoFuelModels surfaceTwoFuelModels(surfaceFire_);
-        TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
+        TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = surfaceInputs_.getTwoFuelModelsMethod();
         int firstFuelModelNumber = surfaceInputs_.getFirstFuelModelNumber();
         double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
         int secondFuelModelNumber = surfaceInputs_.getSecondFuelModelNumber();
@@ -325,7 +325,7 @@ double Surface::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits,
 {
     double midFlameWindSpeed = surfaceFire_.getMidflameWindSpeed();
     double windSpeed = midFlameWindSpeed;
-    if (windHeightInputMode == WindHeightInputMode::DIRECT_MIDFLAME)
+    if (windHeightInputMode == WindHeightInputMode::DirectMidflame)
     {
         windSpeed = midFlameWindSpeed;
     }
@@ -333,7 +333,7 @@ double Surface::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits,
     {
         double windAdjustmentFactor = surfaceFire_.getWindAdjustmentFactor();
     
-        if ((windHeightInputMode == WindHeightInputMode::TWENTY_FOOT) && (windAdjustmentFactor > 0.0))
+        if ((windHeightInputMode == WindHeightInputMode::TwentyFoot) && (windAdjustmentFactor > 0.0))
         {
             windSpeed = midFlameWindSpeed / windAdjustmentFactor;
         }
@@ -454,7 +454,7 @@ void Surface::setSecondFuelModelNumber(int secondFuelModelNumber)
     surfaceInputs_.setSecondFuelModelNumber(secondFuelModelNumber);
 }
 
-void Surface::setTwoFuelModelsMethod(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod)
+void Surface::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod)
 {
     surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
 }
@@ -492,7 +492,7 @@ void Surface::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int 
     MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage,
-    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, 
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
     double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,

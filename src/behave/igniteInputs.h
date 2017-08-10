@@ -34,14 +34,14 @@ struct IgnitionFuelBedType
 {
     enum IgnitionFuelBedTypeEnum
     {
-        PONDEROSA_PINE_LITTER = 0, //Ponderosa Pine Litter
-        PUNKY_WOOD_ROTTEN_CHUNKY = 1, // Punky wood, rotten, chunky
-        PUNKY_WOOD_POWDER_DEEP = 2, // Punky wood powder, deep (4.8 cm)
-        PUNK_WOOD_POWDER_SHALLOW = 3, // Punk wood powder, shallow (2.4 cm)
-        LODGEPOLE_PINE_DUFF = 4, // Lodgepole pine duff
-        DOUGLAS_FIR_DUFF = 5, //  Douglas - fir duff
-        HIGH_ALTITUDE_MIXED = 6, // High altitude mixed (mainly Engelmann spruce)
-        PEAT_MOSS = 7  // Peat moss (commercial)
+        PonderosaPineLitter = 0, //Ponderosa Pine Litter
+        PunkyWoodRottenChunky = 1, // Punky wood, rotten, chunky
+        PunkyWoodPowderDeep = 2, // Punky wood powder, deep (4.8 cm)
+        PunkWoodPowderShallow = 3, // Punk wood powder, shallow (2.4 cm)
+        LodgepolePineDuff = 4, // Lodgepole pine duff
+        DouglasFirDuff = 5, //  Douglas - fir duff
+        HighAltitudeMixed = 6, // High altitude mixed (mainly Engelmann spruce)
+        PeatMoss = 7  // Peat moss (commercial)
     };
 };
 
@@ -49,9 +49,9 @@ struct LightningCharge
 {
     enum LightningChargeEnum
     {
-        NEGATIVE = 0,
-        POSITIVE = 1,
-        UNKNOWN = 2
+        Negative = 0,
+        Positive = 1,
+        Unknown = 2
     };
 };
 

@@ -109,9 +109,9 @@ private:
 
     SpotInputs spotInputs_;
 
-    double speciesFlameHeightParameters_[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS];
-    double speciesFlameDurationParameters_[SpotArrayConstants::NUM_SPECIES][SpotArrayConstants::NUM_COLS];
-    double firebrandHeightFactors_[SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotArrayConstants::NUM_COLS];
+    double speciesFlameHeightParameters_[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS];
+    double speciesFlameDurationParameters_[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS];
+    double firebrandHeightFactors_[SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotInputs::SpotArrayConstants::NUM_COLS];
 
 	// Outputs
     double coverHeightUsedForSurfaceFire_;      // Actual tree / vegetation ht used for surface fire(ft)

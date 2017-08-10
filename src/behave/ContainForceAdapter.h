@@ -34,24 +34,34 @@
 #include <vector>
 #include "ContainResource.h"
 
-using namespace Sem;
-
 class ContainForceAdapter
 {
 public:
+
+
     ContainForceAdapter();
     ~ContainForceAdapter();
 
-    void addResource(ContainResource& resource);
+    int size() const;
+
+    void addResource(Sem::ContainResource& resource);
     void ContainForceAdapter::addResource(double arrival, double production, double duration,
-        ContainFlank flank, std::string desc, double baseCost, double hourCost);
+        Sem::ContainFlank flank, std::string desc, double baseCost, double hourCost);
+    void removeAllResources();
     int removeResourceAt(int index);
     int removeResourceWithThisDesc(std::string desc);
     int removeAllResourcesWithThisDesc(std::string desc);
 
-    std::vector<ContainResource> resourceVector;
-private:
+    double getResourceArrivalAtIndex(int index) const;
+    double getResourceBaseCostAtIndex(int index) const;
+    std::string getResourceDescriptionAtIndex(int index) const;
+    double getResourceDurationAtIndex(int index) const;
+    Sem::ContainFlank getResourceFlankAtIndex(int index) const;
+    double GetResourceHourCostAtIndex(int index) const;
+    double GetResourceProductionAtIndex(int index) const;
 
+private:
+    std::vector<Sem::ContainResource> resourceVector;
 };
 
 #endif // CONTAINADAPTER_H

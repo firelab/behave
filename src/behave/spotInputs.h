@@ -28,15 +28,6 @@
 #ifndef SPOTINPUTS_H
 #define SPOTINPUTS_H
 
-struct SpotArrayConstants
-{
-    enum SpotArrayConstantsEnum
-    {
-        NUM_COLS = 2,
-        NUM_FIREBRAND_ROWS = 4,
-        NUM_SPECIES = 14
-    };
-};
 
 struct SpotTreeSpecies
 {
@@ -110,6 +101,15 @@ public:
 	SpotTreeSpecies::SpotTreeSpeciesEnum getTreeSpecies();
 	double getWindSpeedAtTwentyFeet();
 
+    struct SpotArrayConstants
+    {
+        enum SpotArrayConstantsEnum
+        {
+            NUM_COLS = 2,
+            NUM_FIREBRAND_ROWS = 4,
+            NUM_SPECIES = 14
+        };
+    };
 private:
 	void initializeMembers();
 

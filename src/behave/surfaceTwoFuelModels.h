@@ -41,7 +41,7 @@ class SurfaceTwoFuelModels
 {
 public:
     SurfaceTwoFuelModels(SurfaceFire& surfaceFireSpread);
-    void calculateWeightedSpreadRate(TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod, 
+    void calculateWeightedSpreadRate(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
         int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
         bool hasDirectionOfInterest = false, double directionOfInterest = -1);
 
@@ -69,25 +69,25 @@ private:
     SurfaceFire* surfaceFireSpread_;
 
     // Member arrays, stores data for each of the two fuel models
-    int fuelModelNumber_[TwoFuelModels::NUMBER_OF_MODELS];                      // fuel model number
-    double coverageForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];              // percent coverage of fuel model
-    double rosForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];                   // rate of spread
-    double firelineIntensityForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];     // fireline intensity
-    double maxFlameLengthForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];        // flame length in direction of max spread
-    double flameLengthForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];           // flame length
-    double fuelbedDepthForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];          // fuel bed depth in feet
-    double effectiveWindSpeedForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];    // effective wind speed
-    double lengthToWidthRatioForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];    // fire length-to-width ratio
-    double reactionIntensityForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];     // reaction intensity, 
-    double heatPerUnitAreaForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];       // heat per unit area
-    double dirMaxSpreadForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];          // direction of max spread
-    double windAdjustmentFactorForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];  // wind adjustment factor
-    double midFlameWindSpeedForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];     // wind speed at midflame
-    double windSpeedLimitForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];        // wind speed limit
-    bool windLimitExceededForFuelModel_[TwoFuelModels::NUMBER_OF_MODELS];       // wind speed exceeded flag
+    int fuelModelNumber_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];                      // fuel model number
+    double coverageForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];              // percent coverage of fuel model
+    double rosForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];                   // rate of spread
+    double firelineIntensityForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];     // fireline intensity
+    double maxFlameLengthForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];        // flame length in direction of max spread
+    double flameLengthForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];           // flame length
+    double fuelbedDepthForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];          // fuel bed depth in feet
+    double effectiveWindSpeedForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];    // effective wind speed
+    double lengthToWidthRatioForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];    // fire length-to-width ratio
+    double reactionIntensityForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];     // reaction intensity, 
+    double heatPerUnitAreaForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];       // heat per unit area
+    double dirMaxSpreadForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];          // direction of max spread
+    double windAdjustmentFactorForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];  // wind adjustment factor
+    double midFlameWindSpeedForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];     // wind speed at midflame
+    double windSpeedLimitForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];        // wind speed limit
+    bool windLimitExceededForFuelModel_[SurfaceInputs::TwoFuelModelsContants::NUMBER_OF_MODELS];       // wind speed exceeded flag
 
     // Member variables
-    TwoFuelModels::TwoFuelModelsEnum twoFuelModelsMethod_;
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod_;
     bool windLimitExceeded_;        // (flag)
     double reactionIntensity_;      // (Btu / ft^2 / min)
     double spreadRate_;             // (ft / min)

@@ -34,10 +34,10 @@ struct FireType
 {
     enum FireTypeEnum
     {
-        SURFACE = 0,    // surface fire with no torching or crown fire spread.
-        TORCHING = 1,   // surface fire with torching.
-        CONDITIONAL_CROWN_FIRE = 2, // active crown fire possible if the fire transitions to the overstory        
-        CROWNING = 3    // active crown fire, fire is spreading through the canopy.
+        Surface = 0,    // surface fire with no torching or crown fire spread.
+        Torching = 1,   // surface fire with torching.
+        ConditionalCrownFire = 2, // active crown fire possible if the fire transitions to the overstory        
+        Crowning = 3    // active crown fire, fire is spreading through the canopy.
     };
 };
 

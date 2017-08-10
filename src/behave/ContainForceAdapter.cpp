@@ -9,17 +9,27 @@ ContainForceAdapter::~ContainForceAdapter()
 {
 }
 
-void ContainForceAdapter::addResource(ContainResource& resource)
+int ContainForceAdapter::size() const
+{
+    return resourceVector.size();
+}
+
+void ContainForceAdapter::addResource(Sem::ContainResource& resource)
 {
     resourceVector.push_back(resource);
 }
 
 void ContainForceAdapter::addResource(double arrival, double production, double duration,
-    ContainFlank flank, std::string desc, double baseCost, double hourCost)
+    Sem::ContainFlank flank, std::string desc, double baseCost, double hourCost)
 {
     char* const descCharStarConst = (char* const)desc.c_str();
-    ContainResource resource(arrival, production, duration, flank, descCharStarConst, baseCost, hourCost);
+    Sem::ContainResource resource(arrival, production, duration, flank, descCharStarConst, baseCost, hourCost);
     addResource(resource);
+}
+
+void ContainForceAdapter::removeAllResources()
+{
+    resourceVector.clear();
 }
 
 int ContainForceAdapter::removeResourceAt(int index)
@@ -58,6 +68,41 @@ int ContainForceAdapter::removeAllResourcesWithThisDesc(std::string desc)
         success = 0; // found at least one
     }
     return success;
+}
+
+double ContainForceAdapter::getResourceArrivalAtIndex(int index) const
+{
+    return resourceVector[index].arrival();
+}
+
+double ContainForceAdapter::getResourceBaseCostAtIndex(int index) const
+{
+    return resourceVector[index].baseCost();
+}
+
+std::string ContainForceAdapter::getResourceDescriptionAtIndex(int index) const
+{
+    return resourceVector[index].description();
+}
+
+double ContainForceAdapter::getResourceDurationAtIndex(int index) const
+{
+    return resourceVector[index].duration();
+}
+
+Sem::ContainFlank ContainForceAdapter::getResourceFlankAtIndex(int index) const
+{
+    return resourceVector[index].flank();
+}
+
+double ContainForceAdapter::GetResourceHourCostAtIndex(int index) const
+{
+    return resourceVector[index].hourCost();
+}
+
+double ContainForceAdapter::GetResourceProductionAtIndex(int index) const
+{
+    return resourceVector[index].production();
 }
 
 
