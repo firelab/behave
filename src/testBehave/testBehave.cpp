@@ -714,14 +714,14 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     double observedFinalFireSize = 0;
     double observedFinalContainmentArea = 0;
     double observedFinalTimeSinceReport = 0;
-    ContainStatus::ContainStatusEnum observedContainmentStatus = ContainStatus::Unreported;
-
+    Contain::ContainStatus observedContainmentStatus = Contain::ContainStatus::Unreported;
+ 
     double expectedFinalFireLineLength = 0;
     double expectedPerimeterAtContainment = 0;
     double expectedFinalFireSize = 0;
     double expectedFinalContainmentArea = 0;
     double expectedFinalTimeSinceReport = 0;
-    ContainStatus::ContainStatusEnum expectedContainmentStatus = ContainStatus::Unreported;
+    Contain::ContainStatus expectedContainmentStatus = Contain::ContainStatus::Unreported;
 
     // Test case when expected result is containment
     behaveRun.contain.setAttackDistance(0);
@@ -729,8 +729,8 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     behaveRun.contain.setLwRatio(3);
     behaveRun.contain.setReportRate(5);
     behaveRun.contain.setReportSize(1);
-    behaveRun.contain.setTactic(ContainTactic::HeadAttack);
-    behaveRun.contain.addResource(0, 20);
+    behaveRun.contain.setTactic(Contain::ContainTactic::HeadAttack);
+    behaveRun.contain.addResource(0, 20, 480, ContainFlank::LeftFlank, "testo");
     behaveRun.contain.doContainRun();
 
     expectedFinalFireLineLength = 14.8329956;
@@ -738,7 +738,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     expectedFinalFireSize = 1.32673918;
     expectedFinalContainmentArea = 1.32673918;
     expectedFinalTimeSinceReport = 44.5000000;
-    expectedContainmentStatus = ContainStatus::Contained;
+    expectedContainmentStatus = Contain::ContainStatus::Contained;
 
     observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength();
     observedtPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment();

@@ -34,7 +34,7 @@ Sem::ContainResource::ContainResource( void ) :
     m_production(0.0),
     m_baseCost(0.0),
     m_hourCost(0.0),
-    m_flank(Sem::ContainFlank::LeftFlank),
+    m_flank(Sem::LeftFlank),
     m_desc("")
 {
     return;
@@ -66,8 +66,8 @@ Sem::ContainResource::ContainResource(
         double arrival,
         double production,
         double duration,
-        ContainFlank::ContainFlankEnum flank,
-        std::string desc,
+        ContainFlank flank,
+        char * const desc,
         double baseCost,
         double hourCost ) :
     m_arrival(arrival),
@@ -118,7 +118,7 @@ double Sem::ContainResource::baseCost( void ) const
     \return Resource description.
  */
 
-std::string Sem::ContainResource::description( void ) const
+char * Sem::ContainResource::description( void ) const
 {
     return( m_desc );
 }
@@ -144,7 +144,7 @@ double Sem::ContainResource::duration( void ) const
         - NeitherFlank
  */
 
-Sem::ContainFlank::ContainFlankEnum Sem::ContainResource::flank( void ) const
+Sem::ContainFlank Sem::ContainResource::flank( void ) const
 {
     return( m_flank );
 }
@@ -176,7 +176,7 @@ void Sem::ContainResource::print(char buf[], int buflen) const {
 	int i=0;
 	if (!buf || buflen<1) return;
 	memset(buf,0,buflen);
-	i=sprintf_s(localbuf,"arrival=%5.2f production=%5.2f duration=%6.1f ", m_arrival, m_production, m_duration);
+	i=sprintf(localbuf,"arrival=%5.2f production=%5.2f duration=%6.1f ", m_arrival, m_production, m_duration);
 	i=(i<(buflen-1)? i : (buflen-1));
 	memcpy(buf,localbuf,i);
 	buf[i]='\0';  

@@ -42,9 +42,10 @@ ENDIF(TEST_BEHAVE)
 SET(SOURCE
     src/behave/behaveRun.cpp
 	src/behave/behaveUnits.cpp
-	src/behave/contain.cpp
-	src/behave/containAdapter.cpp
-	src/behave/containForce.cpp
+	src/behave/Contain.cpp
+	src/behave/ContainAdapter.cpp
+	src/behave/ContainForce.cpp
+	src/behave/containForceAdapter.cpp
 	src/behave/ContainResource.cpp
 	src/behave/ContainSim.cpp
     src/behave/crown.cpp
@@ -71,9 +72,10 @@ SET(SOURCE
 SET(HEADERS
     src/behave/behaveRun.h
 	src/behave/behaveUnits.h
-	src/behave/contain.h
-	src/behave/containAdapter.h
-	src/behave/containForce.h
+	src/behave/Contain.h
+	src/behave/ContainAdapter.h
+	src/behave/ContainForce.h
+	src/behave/ContainForceAdapter.h
 	src/behave/ContainResource.h
 	src/behave/ContainSim.h
     src/behave/crown.h

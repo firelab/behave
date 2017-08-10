@@ -11,8 +11,7 @@
 // Custom include files
 #include "Contain.h"
 #include "ContainResource.h"
-#include <string>
-#include <vector>
+#include <cstring>
 
 namespace Sem
 {
@@ -37,25 +36,22 @@ public:
     // Virtual destructor
     virtual ~ContainForce( void ) ;
     // Add ContainResource into ContainForce
-    int addResource( ContainResource& resource ) ;
+    ContainResource* addResource( ContainResource* resource ) ;
     // Construct ContainResource into ContainForce
-    int addResource(
+    ContainResource *addResource(
         double arrival,
         double production,
         double duration=480.,
-        ContainFlank::ContainFlankEnum flank=ContainFlank::LeftFlank,
-        std::string desc="",
+        Sem::ContainFlank flank=Sem::LeftFlank,
+        char * const desc="",
         double baseCost=0.0,
         double hourCost=0.0 );
-    int removeResourceAt(int index);
-    int removeResourceWithThisDesc(std::string desc);
-    void clearResourceVector();
 
     // Force-level access methods
-    double exhausted(ContainFlank::ContainFlankEnum  flank ) const ;
-    double firstArrival(ContainFlank::ContainFlankEnum  flank ) const ;
-    double nextArrival( double after, double until, ContainFlank::ContainFlankEnum  flank ) const ;
-    double productionRate( double minutesSinceReport, ContainFlank::ContainFlankEnum  flank ) const ;
+    double exhausted( Sem::ContainFlank flank ) const ;
+    double firstArrival( Sem::ContainFlank flank ) const ;
+    double nextArrival( double after, double until, Sem::ContainFlank flank ) const ;
+    double productionRate( double minutesSinceReport, Sem::ContainFlank flank ) const ;
     
     //for debug
     void   logResources(bool debug,const Contain*) const ;
@@ -65,18 +61,17 @@ public:
     double  resourceArrival( int index ) const ;
     double  resourceBaseCost( int index ) const ;
     double  resourceCost( int index, double finalTime ) const ;
-    std::string resourceDescription( int index ) const ;
+    char * resourceDescription( int index ) const ;
     double  resourceDuration( int index ) const ;
-    ContainFlank::ContainFlankEnum  resourceFlank( int index ) const ;
+    Sem::ContainFlank resourceFlank( int index ) const ;
     double  resourceHourCost( int index ) const ;
     double  resourceProduction( int index ) const ;
 
 // Protected data
 protected:
-    //ContainResource **m_cr;     //!< Array of pointers to ContainResources
-    std::vector<ContainResource> m_resourceVector;
-
-    int     m_maxSize;         
+    ContainResource **m_cr;     //!< Array of pointers to ContainResources
+    int     m_size;             //!< Size of m_cr
+    int     m_count;            //!< Items in m_cr
 
 friend class Contain;
 };

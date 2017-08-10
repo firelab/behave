@@ -89,7 +89,7 @@ public:
         int fireStartMinutesStartTime,      
         double lwRatio=1.,
         ContainForce *force=0,
-        ContainTactic::ContainTacticEnum tactic=ContainTactic::HeadAttack,
+        Contain::ContainTactic tactic=Contain::HeadAttack,
         double attackDist=0.,
         bool retry=true,
         int minSteps=250,
@@ -117,8 +117,8 @@ public:
     ContainForce* force( void ) const ;
     int maximumSimulationSteps( void ) const ;
     int minimumSimulationSteps( void ) const ;
-    ContainStatus::ContainStatusEnum status( void ) const ;
-    ContainTactic::ContainTacticEnum tactic( void ) const ;
+    Contain::ContainStatus status( void ) const ;
+    Contain::ContainTactic tactic( void ) const ;
 
     // Access to output properties
     double finalFireCost( void ) const ;
@@ -141,7 +141,7 @@ public:
         const char* type, int size ) ;
 
 	// Calculate the area of the uncontained portion of the ellipse
-	double UncontainedArea( double head, double lwRatio, double x, double y, ContainTactic::ContainTacticEnum tactic  );	 // By DT 1/2013
+	double UncontainedArea( double head, double lwRatio, double x, double y, Sem::Contain::ContainTactic tactic  );	 // By DT 1/2013
 
 private:
     void finalStats( void ) ;

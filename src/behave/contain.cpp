@@ -44,6 +44,7 @@
 //==============================================================================
 //==============================================================================
 
+
 //==============================================================================
 //==============================================================================
 //
@@ -55,6 +56,7 @@
 //
 //==============================================================================
 //==============================================================================
+
 
 //==============================================================================
 //==============================================================================
@@ -69,8 +71,10 @@
 //             ::productionRatio()
 //             ::reset()
 //
+//
 //==============================================================================
 //==============================================================================
+
 
 //==============================================================================
 //==============================================================================
@@ -80,6 +84,7 @@
 //                
 //        Changed the following functions:
 //             ::reset() -  modified previous mod that determines reportHead and reportBack
+//
 //
 //==============================================================================
 //==============================================================================
@@ -145,10 +150,10 @@ Sem::Contain::Contain(
         int fireStartMinutesStartTime,              
         double lwRatio,
         double distStep,
-        ContainFlank::ContainFlankEnum flank,
+        ContainFlank flank,
         ContainForce *force,
         double attackTime,
-        ContainTactic::ContainTacticEnum tactic,
+        ContainTactic tactic,
         double attackDist ) :
     m_reportSize(reportSize),
     m_reportRate(reportRate),
@@ -177,7 +182,7 @@ Sem::Contain::Contain(
     m_h0(0.),
     m_x(0.),
     m_y(0.),
-    m_status(ContainStatus::Unreported),
+    m_status(Unreported),
     m_startTime(fireStartMinutesStartTime)
 {
     // Set all the input parameters.
@@ -216,7 +221,7 @@ void Sem::Contain::calcU( void )
     // Store the current u and h as the old u and h.
     m_u0 = m_u;
     m_h0 = m_h;
-    m_status = ContainStatus::Attacked;
+    m_status = Attacked;
     // Calculate constants used in the 4th order Runga-Kutta approximation.
     double rk[4], deriv;
     double OldDistStep=m_distStep;
@@ -250,6 +255,8 @@ void Sem::Contain::calcU( void )
 
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
+
+
 
     // First constant
     if ( ! calcUh( m_rkpr[0], m_h0, m_u0, &deriv ) )
@@ -368,7 +375,7 @@ bool Sem::Contain::calcUh( double p, double h, double u, double *d )
     }
     // du is the change in angle of attack point from fire origin
     double du;
-    if ( m_tactic == ContainTactic::RearAttack )
+    if ( m_tactic == RearAttack )
     {
         du = m_eps * sinU - ( 1. + m_eps ) * sqrt( uh_radical );
     }
@@ -437,8 +444,7 @@ void Sem::Contain::containLog( bool dolog, char *fmt, ... ) const
         // Open log file on first call.
         if ( ! fptr )
         {
-            //fptr = fopen( "/Cprogramming/Helitack/contain.log", "w" );
-			fopen_s(&fptr, "/Cprogramming/Helitack/contain.log", "w");
+            fptr = fopen( "/Cprogramming/Helitack/contain.log", "w" );
         }
         
         // Write formatted output
@@ -449,11 +455,11 @@ void Sem::Contain::containLog( bool dolog, char *fmt, ... ) const
           va_end( ap );
           fflush(fptr);
         } else {
-           //printf(fmt,ap);
-		   vprintf(fmt, ap);
+           printf(fmt,ap);
            va_end( ap );
            fflush(stdout);	
         }
+      
     }
     return;
 }
@@ -838,7 +844,6 @@ double Sem::Contain::getDiurnalSpreadRate(double minutesSinceReport) const
 	 // Modified the following statement DT 4/17/12
 	 // m_reportTime - the time the fire took to grow to the discovery size, is no longer used
 	 //CurrentTime=minutesSinceReport+m_reportTime+m_startTime;
-
      CurrentTime=minutesSinceReport+m_startTime;
 	 
      while(CurrentTime>=1440.0)
@@ -958,7 +963,7 @@ void Sem::Contain::reset( void )
     //------------------------------------------------------------------------
 
     // Initial angle to attack point depends on whether HeadAttack or RearAttack
-    if ( m_tactic == ContainTactic::RearAttack )
+    if ( m_tactic == RearAttack )
     {
         m_u = m_u0 = M_PI;
         m_x = -m_attackBack - m_attackDist;
@@ -975,7 +980,7 @@ void Sem::Contain::reset( void )
     m_step = 0;
     m_time = 0.0;
     m_rkpr[0] = m_rkpr[1] = m_rkpr[2] = 0.;
-    m_status = ContainStatus::Reported;        // Also means that we're initialized
+    m_status = Reported;        // Also means that we're initialized
 
     // Log it
     containLog( (m_logLevel>1), "\n\nCONTAIN RESET-----------------------------\n\n" );
@@ -996,7 +1001,7 @@ void Sem::Contain::reset( void )
 
 int Sem::Contain::resources( void ) const
 {
-    return( m_force->resources() );
+    return( m_force->m_count );
 }
 
 //------------------------------------------------------------------------------
@@ -1040,7 +1045,7 @@ double Sem::Contain::resourceBaseCost( int index ) const
     \return ContainResource's description.
  */
 
-std::string Sem::Contain::resourceDescription( int index ) const
+char * Sem::Contain::resourceDescription( int index ) const
 {
     return( m_force->resourceDescription( index ) );
 }
@@ -1109,8 +1114,8 @@ double Sem::Contain::resourceProduction( int index ) const
     Called only by the constructor.
  */
 
-void Sem::Contain::setAttack( ContainFlank::ContainFlankEnum flank, ContainForce *force,
-        double attackTime, ContainTactic::ContainTacticEnum tactic, double attackDist )
+void Sem::Contain::setAttack( ContainFlank flank, ContainForce *force,
+        double attackTime, ContainTactic tactic, double attackDist )
 {
     m_flank      = flank;
     m_force      = force;
@@ -1190,7 +1195,7 @@ double Sem::Contain::simulationTime( void ) const
         - Overflow   = Simulation max step overflow
  */
 
-Sem::ContainStatus::ContainStatusEnum Sem::Contain::status( void ) const
+Sem::Contain::ContainStatus Sem::Contain::status( void ) const
 {
     return( m_status );
 }
@@ -1218,7 +1223,7 @@ double Sem::Contain::spreadRate( double /* minutesSinceReport */ ) const
     \retval Current fire status.
  */
 
-Sem::ContainStatus::ContainStatusEnum Sem::Contain::step( void )
+Sem::Contain::ContainStatus Sem::Contain::step( void )
 {
     // Determine next angle and fire head position.
     calcU();
@@ -1230,20 +1235,20 @@ Sem::ContainStatus::ContainStatusEnum Sem::Contain::step( void )
     m_time = timeSinceReport( m_h );
 
     // If forces were overrun, simply return false
-    if ( m_status == Sem::ContainStatus::Overrun )
+    if ( m_status == Overrun )
     {
         return( m_status );
     }
     // If the forces contain the fire, interpolate the final u and h.
-    if ( m_tactic == ContainTactic::HeadAttack && m_u >= M_PI )
+    if ( m_tactic == HeadAttack && m_u >= M_PI )
     {
-        m_status = Sem::ContainStatus::Contained;
+        m_status = Contained;
         m_h = m_h0 - m_distStep * m_u0 / ( m_u0 + fabs( m_u ) );
         m_u = M_PI;
     }
-    else if ( m_tactic == Sem::ContainTactic::RearAttack && m_u <= 0.0 )
+    else if ( m_tactic == RearAttack && m_u <= 0.0 )
     {
-        m_status = Sem::ContainStatus::Contained;
+        m_status = Contained;
         m_h = m_h0 + m_distStep * m_u0 / ( m_u0 + fabs( m_u ) );
         m_u = 0.;
     }
@@ -1267,7 +1272,7 @@ Sem::ContainStatus::ContainStatusEnum Sem::Contain::step( void )
         - RearAttack = 1
  */
 
-Sem::ContainTactic::ContainTacticEnum Sem::Contain::tactic( void ) const
+Sem::Contain::ContainTactic Sem::Contain::tactic( void ) const
 {
     return( m_tactic );
 }
@@ -1292,34 +1297,34 @@ double Sem::Contain::timeSinceReport( double headPos ) const
     return( 0. );
 }
 
-char * Sem::Contain::printStatus(Sem::ContainStatus::ContainStatusEnum cs) {
+char * Sem::Contain::printStatus(Sem::Contain::ContainStatus cs) {
 	char *status;
 	switch (cs) {
-        case Sem::ContainStatus::Unreported:
+    case Sem::Contain::Unreported:
 	    status =  "Unreported"; //!< Fire started but not yet reported (init() not called)
 	    break;
-    case Sem::ContainStatus::Reported:
+    case Sem::Contain::Reported:
       status =  "reported"; //!< Fire reported but not yet attacked (init() called)
       break;
-    case Sem::ContainStatus::Attacked:
+    case Sem::Contain::Attacked:
       status =  "Attacked"; //!< Fire attacked but not yet resolved
       break;
-    case Sem::ContainStatus::Contained:
+    case Sem::Contain::Contained:
       status = "Contained"; //!< Fire contained by attacking forces
       break;
-    case Sem::ContainStatus::Overrun:
+    case Sem::Contain::Overrun:
       status = "Overrun"; //!< Attacking forces are overrun
       break;
-    case Sem::ContainStatus::Exhausted:
+    case Sem::Contain::Exhausted:
       status = "Exhausted";//!< Fire escaped when all resources are exhausted
       break;
-    case Sem::ContainStatus::Overflow:
+    case Sem::Contain::Overflow:
       status= "Overflow"; //!< Simulation max step overflow
       break;
-    case Sem::ContainStatus::SizeLimitExceeded:
+    case Sem::Contain::SizeLimitExceeded:
  	    status = "SizeLimitExceeded";  //!< Simulation max fire size exceeded   
  	    break; 	       	      
- 	case Sem::ContainStatus::TimeLimitExceeded:
+ 	case Sem::Contain::TimeLimitExceeded:
  	    status = "TimeLimitExceeded";  //!< Simulation max fire time exceeded   
  	    break; 	    
     default:

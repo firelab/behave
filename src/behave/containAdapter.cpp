@@ -4,7 +4,7 @@
 ContainAdapter::ContainAdapter()
 {
     lwRatio_ = 1.0,
-    tactic_ = ContainTactic::HeadAttack,
+    tactic_ = Contain::HeadAttack,
     attackDistance_ = 0.0,
     retry_ = true,
     minSteps_ = 250,
@@ -36,7 +36,7 @@ void ContainAdapter::addResource(ContainResource& resource)
 }
 
 void ContainAdapter::addResource(double arrival, double production, double duration, 
-    ContainFlank::ContainFlankEnum flank, std::string desc, double baseCost, double hourCost)
+    ContainFlank flank, std::string desc, double baseCost, double hourCost)
 {
     force_.addResource(arrival, production, duration, flank, desc, baseCost, hourCost);
 }
@@ -53,18 +53,12 @@ int ContainAdapter::removeResourceWithThisDesc(std::string desc)
 
 int ContainAdapter::removeAllResourcesWithThisDesc(std::string desc)
 {
-    int rc;
-    int success = 1; // 1 means didn't find it
-    while ((rc = force_.removeResourceWithThisDesc(desc)) == 0)
-    {
-        success = 0; // found at least one
-    }
-    return success;
+    return force_.removeAllResourcesWithThisDesc(desc);
 }
 
 void ContainAdapter::removeAllResources()
 {
-    force_.clearResourceVector();
+    force_.resourceVector.clear();
 }
 
 void ContainAdapter::setReportSize(double reportSize)
@@ -87,7 +81,7 @@ void ContainAdapter::setLwRatio(double lwRatio)
     lwRatio_ = lwRatio;
 }
 
-void ContainAdapter::setTactic(ContainTactic::ContainTacticEnum tactic)
+void ContainAdapter::setTactic(Contain::ContainTactic tactic)
 {
     tactic_ = tactic;
 }
@@ -124,15 +118,41 @@ void ContainAdapter::setMaxFireTime(int maxFireTime)
 
 void ContainAdapter::doContainRun()
 {
-    if (force_.resources() > 0 && reportSize_ != 0)
+    if (force_.resourceVector.size() > 0 && reportSize_ != 0)
     {
         for (int i = 0; i < 24; i++)
         {
             diurnalROS_[i] = reportRate_;
         }
-        ContainForce* forcePointer = &force_;
+
+        double  resourceArrival;
+        double  resourceBaseCost;
+        double  resourceCost;
+        std::string resourceDescription;
+        double  resourceDuration;
+        Sem::ContainFlank resourceFlank;
+        double  resourceHourCost;
+        double  resourceProduction;
+
+        ContainForce oldForce;
+        ContainForce* oldForcePointer = &oldForce;
+        for (int i = 0; i < force_.resourceVector.size(); i++)
+        {
+            resourceArrival = force_.resourceVector[i].arrival();
+            resourceBaseCost = force_.resourceVector[i].baseCost();
+            resourceDescription = force_.resourceVector[i].description();
+            resourceDuration = force_.resourceVector[i].duration();
+            resourceFlank = force_.resourceVector[i].flank();
+            resourceHourCost = force_.resourceVector[i].hourCost();
+            resourceProduction = force_.resourceVector[i].production();
+
+            char* const desc = (char* const)resourceDescription.c_str();
+            oldForcePointer->addResource(resourceArrival, resourceProduction, resourceDuration, resourceFlank,
+                desc, resourceBaseCost, resourceHourCost);
+        }
+
         ContainSim containSim(reportSize_, reportRate_, diurnalROS_, fireStartTime_, lwRatio_,
-            forcePointer, tactic_, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
+            oldForcePointer, tactic_, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
             maxFireTime_);
 
         containSim.run();
@@ -177,7 +197,7 @@ double ContainAdapter::getFinalTimeSinceReport() const
     return finalTime_;
 }
 
-ContainStatus::ContainStatusEnum ContainAdapter::getContainmentStatus() const
+Contain::ContainStatus ContainAdapter::getContainmentStatus() const
 {
     return containmentStatus_;
 }

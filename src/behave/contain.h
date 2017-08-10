@@ -79,43 +79,38 @@ class ContainSim;
     is included.  The fire is assumed to grow in an elliptical shape.
  */
 
- //------------------------------------------------------------------------------
- /*! \enum ContainTactic
- \brief Identifies the possible fire containment tactic.
- are assigned.
- */
-struct ContainTactic
-{
-    enum ContainTacticEnum
-    {
-        HeadAttack = 0,     //!< Containment forces attack fire head
-        RearAttack = 1      //!< Containment forces attack fire rear
-    };
-};
-//------------------------------------------------------------------------------
-/*! \enum ContainStatus
-\brief Identifies the current fire containment status.
-*/
-struct ContainStatus
-{
-    enum ContainStatusEnum
-    {
-        Unreported = 0,     //!< Fire started but not yet reported (init() not called)
-        Reported = 1,     //!< Fire reported but not yet attacked (init() called)
-        Attacked = 2,     //!< Fire attacked but not yet resolved
-        Contained = 3,     //!< Fire contained by attacking forces
-        Overrun = 4,     //!< Attacking forces are overrun
-        Exhausted = 5,     //!< Fire escaped when all resources are exhausted
-        Overflow = 6,     //!< Simulation max step overflow
-        SizeLimitExceeded = 7,      //!< Simulation max fire size exceeded    
-        TimeLimitExceeded = 8	    //!< Simulation max fire time exceeded 
-    };
-};
-
 class Contain
 {
 // Public enums
 public:
+
+//------------------------------------------------------------------------------
+/*! \enum ContainTactic
+    \brief Identifies the possible fire containment tactic.
+    are assigned.
+ */
+enum ContainTactic
+{
+    HeadAttack = 0,     //!< Containment forces attack fire head
+    RearAttack = 1      //!< Containment forces attack fire rear
+};
+
+//------------------------------------------------------------------------------
+/*! \enum ContainStatus
+    \brief Identifies the current fire containment status.
+ */
+enum ContainStatus
+{
+    Unreported = 0,     //!< Fire started but not yet reported (init() not called)
+    Reported   = 1,     //!< Fire reported but not yet attacked (init() called)
+    Attacked   = 2,     //!< Fire attacked but not yet resolved
+    Contained  = 3,     //!< Fire contained by attacking forces
+    Overrun    = 4,     //!< Attacking forces are overrun
+    Exhausted  = 5,     //!< Fire escaped when all resources are exhausted
+    Overflow   = 6,     //!< Simulation max step overflow
+ 	SizeLimitExceeded = 7,      //!< Simulation max fire size exceeded    
+ 	TimeLimitExceeded = 8	    //!< Simulation max fire time exceeded 
+};
 
 static const int containVersion = 1;    //!< Class version
 
@@ -129,10 +124,10 @@ public:
         int fireStartMinutesStartTime,              
         double lwRatio,
         double distStep,
-        ContainFlank::ContainFlankEnum flank,
+        ContainFlank flank,
         ContainForce *force,
         double attackTime,
-        ContainTactic::ContainTacticEnum tactic=ContainTactic::HeadAttack,
+        ContainTactic tactic=HeadAttack,
         double attackDist=0. ) ;
     // Virtual destructor
     virtual ~Contain( void ) ;
@@ -152,13 +147,13 @@ public:
     double fireSpreadRateAtReport( void ) const ;
     double setFireStartTimeMinutes(int starttime);     // absolute time of day when fire starts, minutes
     ContainForce* force( void ) const ;
-    ContainTactic::ContainTacticEnum tactic( void ) const ;
+    ContainTactic tactic( void ) const ;
 
     // Containment resource access methods
     double  exhaustedTime( void ) const ;
     int     resources( void ) const ;
     double  resourceArrival( int index ) const ;
-    std::string resourceDescription( int index ) const ;
+    char * resourceDescription( int index ) const ;
     double  resourceDuration( int index ) const ;
     double  resourceProduction( int index ) const ;
     double  resourceBaseCost( int index ) const ;
@@ -169,8 +164,8 @@ public:
     double attackPointY( void ) const ;
     int    simulationStep( void ) const ;
     double simulationTime( void ) const ;
-    ContainStatus::ContainStatusEnum status( void ) const ;
-    static char * printStatus(ContainStatus::ContainStatusEnum);
+    ContainStatus status( void ) const ;
+    static char * printStatus(ContainStatus );
     bool   setDiurnalSpreadRates(double *rates);         // hourly, added MAF 10/6/2008
 
     // Computational methods
@@ -187,9 +182,9 @@ private:
     void    reset( void ) ;
     double  spreadRate( double minutesSinceReport ) const ;
     double  getDiurnalSpreadRate( double minutesSinceReport ) const;    // added MAF, 10/6/2008
-    ContainStatus::ContainStatusEnum step( void ) ;
-    void    setAttack( ContainFlank::ContainFlankEnum flank, ContainForce *force,
-                double attackTime, ContainTactic::ContainTacticEnum tactic, double attackDist ) ;
+    ContainStatus step( void ) ;
+    void    setAttack( ContainFlank flank, ContainForce *force,
+                double attackTime, ContainTactic tactic, double attackDist ) ;
     void    setReport( double reportSize, double reportRate, double lwRatio,
                 double distStep ) ;
     double  timeSinceReport( double headPos ) const ;
@@ -205,8 +200,8 @@ protected:
     double  m_attackDist;   //!< Parallel attack distance from fire (ch)
     double  m_attackTime;   //!< Initial attack time (min since fire report time)
     double  m_distStep;     //!< Simulation fire head distance step (ch)
-    ContainFlank::ContainFlankEnum m_flank;   //!< Apply ContainResources from this flank
-    ContainTactic::ContainTacticEnum m_tactic; //!< HeadAttack or RearAttack
+    ContainFlank m_flank;   //!< Apply ContainResources from this flank
+    ContainTactic m_tactic; //!< HeadAttack or RearAttack
     ContainForce *m_force;  //!< Ptr to collection of containment rersources
 
     // Calculated intermediates
@@ -239,7 +234,7 @@ protected:
     double  m_h0;           //!< Previous distance towards the head at each time step
     double  m_x;            //!< Current attack point x-coordinate (ch)
     double  m_y;            //!< Current attack point y-coordinate (ch)
-    ContainStatus::ContainStatusEnum m_status; //!< Status code.
+    ContainStatus m_status; //!< Status code.
 
     friend class ContainSim;
     friend class ContainForce;
