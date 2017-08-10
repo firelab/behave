@@ -29,11 +29,6 @@ ContainAdapter::~ContainAdapter()
 
 }
 
-void ContainAdapter::addResource(Sem::ContainResource& resource)
-{
-    force_.addResource(resource);
-}
-
 void ContainAdapter::addResource(double arrival, double production, double duration, 
     ContainFlank::ContainFlankEnum flank, std::string desc, double baseCost, double hourCost)
 {

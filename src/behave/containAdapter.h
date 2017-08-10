@@ -85,7 +85,6 @@ public:
     ContainAdapter();
     ~ContainAdapter();
 
-    void addResource(Sem::ContainResource& resource);
     void addResource(
         double arrival,
         double production,
