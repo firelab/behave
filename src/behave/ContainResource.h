@@ -11,7 +11,7 @@
 #define _CONTAINRESOURCE_H_INCLUDED_
 
 // Custom files
-//#include "ContainForce.h"
+//#include "ContainForce.h" // WMC commented out to remove circular dependency 08/17
 
 namespace Sem
 {
