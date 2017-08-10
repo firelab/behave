@@ -714,7 +714,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     double observedFinalContainmentArea = 0;
     double observedFinalTimeSinceReport = 0;
     ContainStatus::ContainStatusEnum observedContainmentStatus = ContainStatus::Unreported;
- 
+
     double expectedFinalFireLineLength = 0;
     double expectedPerimeterAtContainment = 0;
     double expectedFinalFireSize = 0;

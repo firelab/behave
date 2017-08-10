@@ -20,6 +20,8 @@ ContainAdapter::ContainAdapter()
     finalFireSize_ = 0.0;
     finalContainmentArea_ = 0.0;
     finalTime_ = 0.0;
+
+    doContainRun();
 }
 
 ContainAdapter::~ContainAdapter()
