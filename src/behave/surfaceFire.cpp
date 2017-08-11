@@ -45,11 +45,13 @@ SurfaceFire::SurfaceFire()
 
 }
 
-SurfaceFire::SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs)
+SurfaceFire::SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs, 
+    FireSize& size)
     : surfaceFuelbedIntermediates_(fuelModelSet, surfaceInputs),
       surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
 {
     fuelModelSet_ = &fuelModelSet;
+    size_ = &size;
     surfaceInputs_ = &surfaceInputs;
     initializeMembers();
 }
@@ -86,6 +88,7 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
     directionOfMaxSpread_ = rhs.directionOfMaxSpread_;
     noWindNoSlopeSpreadRate_ = rhs.noWindNoSlopeSpreadRate_;
     forwardSpreadRate_ = rhs.forwardSpreadRate_;
+    spreadRateInDirectionOfInterest_ = rhs.spreadRateInDirectionOfInterest_;
     heatPerUnitArea_ = rhs.heatPerUnitArea_;
     fireLengthToWidthRatio_ = rhs.fireLengthToWidthRatio_;
     eccentricity_ = rhs.eccentricity_;
@@ -120,10 +123,10 @@ void SurfaceFire::calculateResidenceTime()
         : (384. / sigma));
 }
 
-void SurfaceFire::calculateFireFirelineIntensity()
+void SurfaceFire::calculateFireFirelineIntensity(double forwardSpreadRate)
 {
     double secondsPerMinute = 60.0;
-    firelineIntensity_ = forwardSpreadRate_ * reactionIntensity_ * residenceTime_ / secondsPerMinute;
+    firelineIntensity_ = forwardSpreadRate * reactionIntensity_ * residenceTime_ / secondsPerMinute;
 }
 
 double  SurfaceFire::calculateFlameLength(double firelineIntensity)
@@ -182,28 +185,32 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
         applyWindSpeedLimit();
     }
 
-    // Convert wind speeds to desired units
-    //SpeedUnits::SpeedUnitsEnum desiredWindSpeedUnits = surfaceInputs_->getWindSpeedUnits();
-    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::MilesPerHour);
-    //effectiveWindSpeed_ /= 88.0; // effective wind speed is now in mi/hr
-    //windSpeedLimit_ /= 88.0; // wind speed limit is now in mi/hr
-
+    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::MilesPerHour);    
     calculateResidenceTime();
 
-    // Calculate fire ellipse
-    calculateFireLengthToWidthRatio();
-    calculateSurfaceFireEccentricity();
-    calculateFireFirelineIntensity();
+    double elapsedTime = surfaceInputs_->getElapsedTime();
+
+    // Calculate fire ellipse and related properties
+    size_->calculateFireDimensions(effectiveWindSpeed_, forwardSpreadRate_, elapsedTime);
+
+    fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
+    eccentricity_ = size_->getEccentricity();
+    backingSpreadRate_ = size_->getBackingSpreadRate();
+    ellipticalA_ = size_->getEllipticalA();
+    ellipticalB_ = size_->getEllipticalB();
+    ellipticalC_ = size_->getEllipticalC();
+    size_->getFirePerimeter();
+
+    calculateFireFirelineIntensity(forwardSpreadRate_);
     calculateFlameLength();
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
     if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
-        forwardSpreadRate_ = calculateSpreadRateAtVector(directionOfInterest);
-        calculateFlameLength(); // recalculate flame length in direction of interest
+        spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest);
+        calculateFireFirelineIntensity(spreadRateInDirectionOfInterest_);
+        calculateFlameLength();
     }
-    
-    calculateBackingSpreadRate();
-    calculateEllipticalDimensions();
+
     calculateHeatPerUnitArea();
 
     return forwardSpreadRate_;
@@ -454,6 +461,11 @@ double SurfaceFire::getSpreadRate() const
     return forwardSpreadRate_;
 }
 
+double SurfaceFire::getSpreadRateInDirectionOfInterest() const
+{
+    return spreadRateInDirectionOfInterest_;
+}
+
 double SurfaceFire::getDirectionOfMaxSpread() const
 {
     return directionOfMaxSpread_;
@@ -494,7 +506,7 @@ double SurfaceFire::getFireLengthToWidthRatio() const
 
 double SurfaceFire::getFireEccentricity() const
 {
-    return eccentricity_;
+    return  size_->getEccentricity();
 }
 
 double SurfaceFire::getHeatPerUnitArea() const
@@ -524,17 +536,17 @@ double SurfaceFire::getMidflameWindSpeed() const
 
 double SurfaceFire::getEllipticalA() const
 {
-    return ellipticalA_;
+    return size_->getEllipticalA();
 }
 
 double SurfaceFire::getEllipticalB() const
 {
-    return ellipticalB_;
+    return size_->getEllipticalB();
 }
 
 double SurfaceFire::getEllipticalC() const
 {
-    return ellipticalC_;
+    return size_->getEllipticalC();
 }
 
 double SurfaceFire::getWindAdjustmentFactor() const

@@ -34,6 +34,7 @@
 
 // The SURFACE module of BehavePlus
 #include "behaveUnits.h"
+#include "fireSize.h"
 #include "fuelModelSet.h"
 #include "surfaceFire.h"
 #include "surfaceInputs.h"
@@ -56,6 +57,7 @@ public:
 
     // SurfaceFire getters
     double getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getSpreadRateInDirectionOfInterest(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getDirectionOfMaxSpread() const;
     double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     double getFireLengthToWidthRatio() const;
@@ -151,6 +153,9 @@ private:
     // Surface Module components
     SurfaceInputs surfaceInputs_;
     SurfaceFire surfaceFire_;
+
+    // Size Module
+    FireSize size_;
 };
 
 #endif // SURFACE_H

@@ -123,6 +123,7 @@ public:
     void setCrownRatio(double crownRatio);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
+    void setElapsedTime(double elapsedTime);
 
     // Main Surface module inputs getters 
     int getFuelModelNumber() const;
@@ -146,6 +147,7 @@ public:
     CoverUnits::CoverUnitsEnum getCoverUnits() const;
     double getUserProvidedWindAdjustmentFactor() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
+    double getElapsedTime() const;
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
@@ -265,6 +267,9 @@ private:
     double aspenCuringLevel_;
     double DBH_;
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity_;
+
+    // For Size Module
+    double elapsedTime_;
 
     // Wind Adjustment Factor Parameters
     double canopyCover_;

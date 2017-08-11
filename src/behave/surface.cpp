@@ -34,11 +34,11 @@
 #include "surfaceTwoFuelModels.h"
 #include "surfaceInputs.h"
 
-Surface::Surface(const FuelModelSet& fuelModels)
+Surface::Surface(const FuelModelSet& fuelModelSet)
     : surfaceInputs_(),
-    surfaceFire_(fuelModels, surfaceInputs_)
+    surfaceFire_(fuelModelSet, surfaceInputs_, size_)
 {
-    fuelModelSet_ = &fuelModels;
+    fuelModelSet_ = &fuelModelSet;
 }
 
 // Copy Ctor
@@ -61,6 +61,7 @@ void Surface::memberwiseCopyAssignment(const Surface& rhs)
 {
     surfaceInputs_ = rhs.surfaceInputs_;
     surfaceFire_ = rhs.surfaceFire_;
+    size_ = rhs.size_;
 }
 
 bool Surface::isAllFuelLoadZero(int fuelModelNumber)
@@ -159,6 +160,11 @@ double Surface::getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
     return SpeedUnits::fromBaseUnits(surfaceFire_.getSpreadRate(), spreadRateUnits);
 }
 
+double Surface::getSpreadRateInDirectionOfInterest(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+{
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getSpreadRateInDirectionOfInterest(), spreadRateUnits);
+}
+
 double Surface::getDirectionOfMaxSpread() const
 {
     double directionOfMaxSpread = surfaceFire_.getDirectionOfMaxSpread();
@@ -172,12 +178,12 @@ double Surface::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) co
 
 double Surface::getFireLengthToWidthRatio() const
 {
-    return surfaceFire_.getFireLengthToWidthRatio();
+    return size_.getFireLengthToWidthRatio();
 }
 
 double Surface::getFireEccentricity() const
 {
-    return surfaceFire_.getFireEccentricity();
+    return size_.getEccentricity();
 }
 
 double Surface::getFirelineIntensity() const
@@ -207,17 +213,17 @@ double Surface::getMidflameWindspeed() const
 
 double Surface::getEllipticalA(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return SpeedUnits::fromBaseUnits(surfaceFire_.getEllipticalA(), desiredUnits);
+    return SpeedUnits::fromBaseUnits(size_.getEllipticalA(), desiredUnits);
 }
 
 double Surface::getEllipticalB(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return SpeedUnits::fromBaseUnits(surfaceFire_.getEllipticalB(), desiredUnits);
+    return SpeedUnits::fromBaseUnits(size_.getEllipticalB(), desiredUnits);
 }
 
 double Surface::getEllipticalC(SpeedUnits::SpeedUnitsEnum desiredUnits) const
 {
-    return SpeedUnits::fromBaseUnits(surfaceFire_.getEllipticalC(), desiredUnits);
+    return SpeedUnits::fromBaseUnits(size_.getEllipticalC(), desiredUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover)

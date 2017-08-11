@@ -32,6 +32,7 @@
 #ifndef SURFACEFIRE_H
 #define SURFACEFIRE_H
 
+#include "fireSize.h"
 #include "surfaceFireReactionIntensity.h"
 #include "surfaceFuelbedIntermediates.h"
 
@@ -42,7 +43,7 @@ public:
     SurfaceFire();
     SurfaceFire(const SurfaceFire& rhs);
     SurfaceFire& operator=(const SurfaceFire& rhs);
-    SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
+    SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs, FireSize& size);
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false, 
         double directionOfInterest = -1.0);
@@ -53,6 +54,7 @@ public:
     // Public getters
     double getFuelbedDepth() const;
     double getSpreadRate() const;
+    double getSpreadRateInDirectionOfInterest() const;
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
     double getFirelineIntensity() const;
@@ -98,7 +100,7 @@ private:
     void calculateFireLengthToWidthRatio();
     void calculateSurfaceFireEccentricity();
     void calculateResidenceTime();
-    void calculateFireFirelineIntensity();
+    void calculateFireFirelineIntensity(double forwardSpreadRate);
     void calculateFlameLength();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
@@ -112,6 +114,7 @@ private:
     // Pointers and references to other objects
     const FuelModelSet* fuelModelSet_;
     const SurfaceInputs* surfaceInputs_;
+    FireSize* size_;
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
   
@@ -128,6 +131,7 @@ private:
     double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
     double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
     double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
+    double spreadRateInDirectionOfInterest_;								// spreadRateInDirectionOfInterest
     double heatPerUnitArea_;                                // Heat per unit area (Btu/ft^2)
     double fireLengthToWidthRatio_;
     double residenceTime_;
