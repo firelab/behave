@@ -21,6 +21,8 @@ void FireSize::calculateFireDimensions(double effectiveWindSpeed, double forward
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
     calculateBackingSpreadRate();
+    forwardSpreadDistance_ = forwardSpreadRate_ * elapsedTime_;
+    backingSpreadDistance_ = backingSpreadRate_ * elapsedTime_;
     calculateEllipticalDimensions();
     calculateFirePerimeter();
 }
@@ -89,12 +91,12 @@ void FireSize::calculateEllipticalDimensions()
     ellipticalC_ = 0.0;
 
     // Internally A, B, and C are in terms of ft
-    ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2;
+    ellipticalB_ = (forwardSpreadDistance_ + backingSpreadDistance_) / 2;
     if (fireLengthToWidthRatio_ > 1e-07)
     {
         ellipticalA_ = ellipticalB_ / fireLengthToWidthRatio_;
     }
-    ellipticalC_ = ellipticalB_ - backingSpreadRate_;
+    ellipticalC_ = ellipticalB_ - backingSpreadDistance_;
 }
 
 void FireSize::calculateBackingSpreadRate()
