@@ -20,10 +20,9 @@ void ContainForceAdapter::addResource(Sem::ContainResource& resource)
 }
 
 void ContainForceAdapter::addResource(double arrival, double production, double duration,
-    Sem::ContainFlank flank, std::string desc, double baseCost, double hourCost)
+    Sem::ContainFlank flank, std::string description, double baseCost, double hourCost)
 {
-    char* const descCharStarConst = (char* const)desc.c_str();
-    Sem::ContainResource resource(arrival, production, duration, flank, descCharStarConst, baseCost, hourCost);
+    Sem::ContainResource resource(arrival, production, duration, flank, description, baseCost, hourCost);
     addResource(resource);
 }
 

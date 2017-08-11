@@ -10,6 +10,7 @@
 #ifndef _CONTAINRESOURCE_H_INCLUDED_
 #define _CONTAINRESOURCE_H_INCLUDED_
 
+#include <string>
 // Custom files
 //#include "ContainForce.h" // WMC commented out to remove circular dependency 08/17
 
@@ -61,7 +62,7 @@ public:
         double production,
         double duration=480.,
         Sem::ContainFlank flank=Sem::LeftFlank,
-        char * const desc="",
+        std::string desc="",
         double baseCost=0.00,
         double hourCost=0.00 );
     // Virtual destructor
@@ -85,7 +86,7 @@ protected:
     double  m_baseCost;         //!< Base resource cost
     double  m_hourCost;         //!< Hourly resource cost
     Sem::ContainFlank m_flank;  //!< Both, Left, or Right flank attack
-    char * m_desc;             //!< Resource description
+    std::string m_desc;             //!< Resource description
 
     friend class ContainForce;
 };

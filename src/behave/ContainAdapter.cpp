@@ -30,10 +30,12 @@ ContainAdapter::~ContainAdapter()
 }
 
 void ContainAdapter::addResource(double arrival, double production, double duration, 
-    ContainFlank::ContainFlankEnum flank, std::string desc, double baseCost, double hourCost)
+    ContainFlank::ContainFlankEnum flank, std::string description, double baseCost, double hourCost)
 {
     Sem::ContainFlank myflank = static_cast<Sem::ContainFlank>(flank);
-    force_.addResource(arrival, production, duration, myflank, desc, baseCost, hourCost);
+
+    Sem::ContainResource resource(arrival, production, duration, myflank, description, baseCost, hourCost);
+    force_.addResource(resource);
 }
 
 int ContainAdapter::removeResourceAt(int index)
@@ -115,6 +117,10 @@ void ContainAdapter::doContainRun()
 {
     if (force_.size() > 0 && reportSize_ != 0)
     {
+        if (reportRate_ < 0.00001)
+        {
+            reportRate_ = 0.00001; // Contain algorithm can not deal with ROS = 0
+        }
         for (int i = 0; i < 24; i++)
         {
             diurnalROS_[i] = reportRate_;
@@ -141,9 +147,8 @@ void ContainAdapter::doContainRun()
             resourceHourCost = force_.GetResourceHourCostAtIndex(i);
             resourceProduction = force_.GetResourceProductionAtIndex(i);
 
-            char* const desc = (char* const)resourceDescription.c_str();
             oldForcePointer->addResource(resourceArrival, resourceProduction, resourceDuration, resourceFlank,
-                desc, resourceBaseCost, resourceHourCost);
+                resourceDescription, resourceBaseCost, resourceHourCost);
         }
 
         Sem::Contain::ContainTactic tactic = static_cast<Sem::Contain::ContainTactic>(tactic_);
@@ -153,13 +158,13 @@ void ContainAdapter::doContainRun()
 
         containSim.run();
 
-         finalCost_ = containSim.finalFireCost();
-         finalFireLineLength_ = containSim.finalFireLine();
-         perimeterAtContainment_ = containSim.finalFirePerimeter();
-         finalFireSize_ = containSim.finalFireSize();
-         finalContainmentArea_ = containSim.finalFireSweep();
-         finalTime_ = containSim.finalFireTime();
-         containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
+        finalCost_ = containSim.finalFireCost();
+        finalFireLineLength_ = containSim.finalFireLine();
+        perimeterAtContainment_ = containSim.finalFirePerimeter();
+        finalFireSize_ = containSim.finalFireSize();
+        finalContainmentArea_ = containSim.finalFireSweep();
+        finalTime_ = containSim.finalFireTime();
+        containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
     }
 }
 

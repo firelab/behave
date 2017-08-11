@@ -198,7 +198,7 @@ Sem::ContainResource *Sem::ContainForce::addResource(
         double production,
         double duration,
         ContainFlank flank,
-        char * const desc,
+        std::string const desc,
         double baseCost,
         double hourCost )
 {
@@ -335,11 +335,11 @@ double Sem::ContainForce::resourceCost( int index, double finalTime ) const
     \return ContainResource's description.
  */
 
-char * Sem::ContainForce::resourceDescription( int index ) const
+std::string Sem::ContainForce::resourceDescription( int index ) const
 {
     if ( index >= 0 && index < m_count )
     {
-        return( m_cr[index]->m_desc );
+        m_cr[index]->m_desc;
     }
     return( "" );
 }

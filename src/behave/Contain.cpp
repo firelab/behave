@@ -1045,9 +1045,9 @@ double Sem::Contain::resourceBaseCost( int index ) const
     \return ContainResource's description.
  */
 
-char * Sem::Contain::resourceDescription( int index ) const
+std::string Sem::Contain::resourceDescription( int index ) const
 {
-    return( m_force->resourceDescription( index ) );
+    return m_force->resourceDescription( index );
 }
 
 //------------------------------------------------------------------------------

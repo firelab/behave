@@ -43,7 +43,7 @@ public:
         double production,
         double duration=480.,
         Sem::ContainFlank flank=Sem::LeftFlank,
-        char * const desc="",
+        std::string const desc="",
         double baseCost=0.0,
         double hourCost=0.0 );
 
@@ -61,7 +61,7 @@ public:
     double  resourceArrival( int index ) const ;
     double  resourceBaseCost( int index ) const ;
     double  resourceCost( int index, double finalTime ) const ;
-    char * resourceDescription( int index ) const ;
+    std::string resourceDescription( int index ) const ;
     double  resourceDuration( int index ) const ;
     Sem::ContainFlank resourceFlank( int index ) const ;
     double  resourceHourCost( int index ) const ;
