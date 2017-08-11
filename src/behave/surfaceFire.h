@@ -97,18 +97,15 @@ private:
     void calculateWindAdjustmentFactor();
     void calculateWindFactor();
     void calculateSlopeFactor();
-    void calculateFireLengthToWidthRatio();
-    void calculateSurfaceFireEccentricity();
+
     void calculateResidenceTime();
     void calculateFireFirelineIntensity(double forwardSpreadRate);
     void calculateFlameLength();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
-    void calculateBackingSpreadRate();
-  
+ 
     void calculateEffectiveWindSpeed();
     void applyWindSpeedLimit();
-    void calculateEllipticalDimensions();
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
 
     // Pointers and references to other objects

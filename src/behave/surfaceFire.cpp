@@ -407,48 +407,6 @@ void SurfaceFire::calculateSlopeFactor()
     phiS_ = 5.275 * pow(packingRatio, -0.3) * (slopex * slopex);
 }
 
-void SurfaceFire::calculateFireLengthToWidthRatio()
-{
-    if (effectiveWindSpeed_ > 1.0e-07)
-    {
-        fireLengthToWidthRatio_ = 1.0 + (0.25 * effectiveWindSpeed_);
-    }
-    else
-    {
-        fireLengthToWidthRatio_ = 1.0;
-    }
-}
-
-void SurfaceFire::calculateSurfaceFireEccentricity()
-{
-    eccentricity_ = 0.0;
-    double x = (fireLengthToWidthRatio_ * fireLengthToWidthRatio_) - 1.0;
-    if (x > 0.0)
-    {
-        eccentricity_ = sqrt(x) / fireLengthToWidthRatio_;
-    }
-}
-
-void SurfaceFire::calculateEllipticalDimensions()
-{
-    ellipticalA_ = 0.0;
-    ellipticalB_ = 0.0;
-    ellipticalC_ = 0.0;
-
-    // Internally A, B, and C are in terms of ft
-    ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2;
-    if (fireLengthToWidthRatio_ > 1e-07)
-    {
-        ellipticalA_ = ellipticalB_ / fireLengthToWidthRatio_;
-    }
-    ellipticalC_ = ellipticalB_ - backingSpreadRate_;
-}
-
-void SurfaceFire::calculateBackingSpreadRate()
-{
-    backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
-}
-
 double SurfaceFire::getFuelbedDepth() const
 {
     int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
@@ -501,7 +459,7 @@ double SurfaceFire::getMaxFlameLength() const
 
 double SurfaceFire::getFireLengthToWidthRatio() const
 {
-    return fireLengthToWidthRatio_;
+    return size_->getFireLengthToWidthRatio();
 }
 
 double SurfaceFire::getFireEccentricity() const
