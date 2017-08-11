@@ -118,9 +118,9 @@ double Sem::ContainResource::baseCost( void ) const
     \return Resource description.
  */
 
-char * Sem::ContainResource::description( void ) const
+std::string Sem::ContainResource::description( void ) const
 {
-    return (char *)m_desc.c_str();
+    return m_desc;
 }
 
 //------------------------------------------------------------------------------

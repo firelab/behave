@@ -90,7 +90,7 @@ public:
         double production,
         double duration = 480.,
         ContainFlank::ContainFlankEnum flank = ContainFlank::LeftFlank,
-        std::string desc = "",
+        std::string description = "",
         double baseCost = 0.0,
         double hourCost = 0.0);
     int removeResourceAt(int index);

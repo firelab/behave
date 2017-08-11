@@ -37,8 +37,6 @@
 class ContainForceAdapter
 {
 public:
-
-
     ContainForceAdapter();
     ~ContainForceAdapter();
 
@@ -46,7 +44,7 @@ public:
 
     void addResource(Sem::ContainResource& resource);
     void ContainForceAdapter::addResource(double arrival, double production, double duration,
-        Sem::ContainFlank flank, std::string desc, double baseCost, double hourCost);
+        Sem::ContainFlank flank, std::string description, double baseCost, double hourCost);
     void removeAllResources();
     int removeResourceAt(int index);
     int removeResourceWithThisDesc(std::string desc);

@@ -731,6 +731,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     behaveRun.contain.setTactic(ContainTactic::HeadAttack);
     behaveRun.contain.addResource(0, 20, 480, ContainFlank::LeftFlank, "test");
     behaveRun.contain.doContainRun();
+    behaveRun.contain.removeAllResources();
 
     expectedFinalFireLineLength = 14.8329956;
     expectedPerimeterAtContainment = 14.8329956;

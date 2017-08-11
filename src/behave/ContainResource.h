@@ -71,7 +71,7 @@ public:
     // Access methods
     double arrival( void ) const ;
     double baseCost( void ) const ;
-    char * description( void ) const ;
+    std::string description( void ) const ;
     double duration( void ) const ;
     Sem::ContainFlank flank( void ) const ;
     double hourCost( void ) const ;

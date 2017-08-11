@@ -38,7 +38,7 @@ public:
     // Add ContainResource into ContainForce
     ContainResource* addResource( ContainResource* resource ) ;
     // Construct ContainResource into ContainForce
-    ContainResource *addResource(
+    ContainResource* addResource(
         double arrival,
         double production,
         double duration=480.,
