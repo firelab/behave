@@ -49,6 +49,7 @@ private:
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
     void calculateFirePerimeter();
+    void calculateFireArea();
 
     // Inputs
     double effectiveWindSpeed_;

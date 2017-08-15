@@ -123,7 +123,7 @@ public:
     void setCrownRatio(double crownRatio);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
-    void setElapsedTime(double elapsedTime);
+    void setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits);
 
     // Main Surface module inputs getters 
     int getFuelModelNumber() const;

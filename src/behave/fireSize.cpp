@@ -2,6 +2,8 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
+#include "behaveUnits.h"
+
 FireSize::FireSize()
 {
 
@@ -15,8 +17,8 @@ FireSize::~FireSize()
 void FireSize::calculateFireDimensions(double effectiveWindSpeed, double forwardSpreadRate, double elapsedTime)
 {
     effectiveWindSpeed_ = effectiveWindSpeed;
-    forwardSpreadRate_ = forwardSpreadRate;
-    elapsedTime_ = elapsedTime;
+    forwardSpreadRate_ = forwardSpreadRate; // spread rate is feet per minute
+    elapsedTime_ = TimeUnits::fromBaseUnits(elapsedTime, TimeUnits::Minutes); // convert time units to minutes
 
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
@@ -25,6 +27,7 @@ void FireSize::calculateFireDimensions(double effectiveWindSpeed, double forward
     backingSpreadDistance_ = backingSpreadRate_ * elapsedTime_;
     calculateEllipticalDimensions();
     calculateFirePerimeter();
+    calculateFireArea();
 }
 
 double FireSize::getFireLengthToWidthRatio() const
@@ -117,4 +120,10 @@ void FireSize::calculateFirePerimeter()
         double pi = M_PI;
         perimeter_ = pi * aPlusB * (1 + (h/4.0) + ((h * h)/64.0));
     } 
+}
+
+void FireSize::calculateFireArea()
+{
+    double pi = M_PI;
+    area_ = pi * ellipticalA_ * ellipticalB_;
 }

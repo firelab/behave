@@ -79,7 +79,7 @@ void SurfaceInputs::initializeMembers()
     aspenFireSeverity_ = AspenFireSeverity::Low;
     DBH_ = 0.0;
 
-    elapsedTime_ = 1;
+    elapsedTime_ = TimeUnits::toBaseUnits(1, TimeUnits::Hours);
 
     userProvidedWindAdjustmentFactor_ = -1.0;
 }
@@ -525,9 +525,9 @@ void SurfaceInputs::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFacto
     windAdjustmentFactorCalculationMethod_ = windAdjustmentFactorCalculationMethod;
 }
 
-void SurfaceInputs::setElapsedTime(double elapsedTime)
+void SurfaceInputs::setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits)
 {
-    elapsedTime_ = elapsedTime;
+    elapsedTime_ = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
 }
 
 double SurfaceInputs::getUserProvidedWindAdjustmentFactor() const

@@ -35,7 +35,8 @@ struct LengthUnits
         Feet, // base length unit
         Inches,
         Centimeters,
-        Meters,				
+        Meters,
+        Chains,
         Miles,
         Kilometers
     };
@@ -161,6 +162,19 @@ struct TemperatureUnits
 
     static double toBaseUnits(double value, TemperatureUnitsEnum units);
     static double fromBaseUnits(double value, TemperatureUnitsEnum units);
+};
+
+struct TimeUnits
+{
+    enum TimeUnitsEnum
+    {
+        Seconds, // base time unit
+        Minutes,
+        Hours
+    };
+
+    static double toBaseUnits(double value, TimeUnitsEnum units);
+    static double fromBaseUnits(double value, TimeUnitsEnum units);
 };
 
 #endif // BEHAVEUNITS_H

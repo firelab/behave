@@ -34,6 +34,7 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
     const double INCHES_TO_FEET = 0.08333333333333;
     const double METERS_TO_FEET = 3.2808398950131;
     const double CENTIMETERS_TO_FEET = 0.03280839895;
+    const double CHAINS_TO_FEET = 66.0;
     const double MILES_TO_FEET = 5280.0;
     const double KILOMETERS_TO_FEET = 3280.8398950131;
 
@@ -57,6 +58,11 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
         case Meters:
         {
             value *= METERS_TO_FEET;
+            break;
+        }
+        case Chains:
+        {
+            value *= CHAINS_TO_FEET;
             break;
         }
         case Miles:
@@ -83,6 +89,7 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
     const double FEET_TO_INCHES = 12;
     const double FEET_TO_CENTIMETERS = 30.480;
     const double FEET_TO_METERS = 0.3048;
+    const double FEET_TO_CHAINS = 0.0151515151515;
     const double FEET_TO_MILES = 0.000189394;
     const double FEET_TO_KILOMETERS = 0.0003048;
 
@@ -106,6 +113,11 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
         case Meters:
         {
             value *= FEET_TO_METERS;
+            break;
+        }
+        case Chains:
+        {
+            value *= FEET_TO_CHAINS;
             break;
         }
         case Miles:
@@ -521,6 +533,60 @@ double ProbabilityUnits::fromBaseUnits(double value, ProbabilityUnitsEnum units)
     if (units == Percent)
     {
         value *= 100.0;
+    }
+    return value;
+}
+
+double TimeUnits::toBaseUnits(double value, TimeUnitsEnum units)
+{
+    switch (units)
+    {
+        case Seconds:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case Minutes:
+        {
+            value *= 60;
+            break;
+        }
+        case Hours:
+        {
+            value *= 3600;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+    return value;
+}
+
+double TimeUnits::fromBaseUnits(double value, TimeUnitsEnum units)
+{
+    switch (units)
+    {
+        case Seconds:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case Minutes:
+        {
+            value /= 60;
+            break;
+        }
+        case Hours:
+        {
+            value /= 3600;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
     }
     return value;
 }

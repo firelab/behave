@@ -211,19 +211,19 @@ double Surface::getMidflameWindspeed() const
     return surfaceFire_.getMidflameWindSpeed();
 }
 
-double Surface::getEllipticalA(SpeedUnits::SpeedUnitsEnum desiredUnits) const
+double Surface::getEllipticalA(LengthUnits::LengthUnitsEnum desiredUnits) const
 {
-    return SpeedUnits::fromBaseUnits(size_.getEllipticalA(), desiredUnits);
+    return LengthUnits::fromBaseUnits(size_.getEllipticalA(), desiredUnits);
 }
 
-double Surface::getEllipticalB(SpeedUnits::SpeedUnitsEnum desiredUnits) const
+double Surface::getEllipticalB(LengthUnits::LengthUnitsEnum desiredUnits) const
 {
-    return SpeedUnits::fromBaseUnits(size_.getEllipticalB(), desiredUnits);
+    return LengthUnits::fromBaseUnits(size_.getEllipticalB(), desiredUnits);
 }
 
-double Surface::getEllipticalC(SpeedUnits::SpeedUnitsEnum desiredUnits) const
+double Surface::getEllipticalC(LengthUnits::LengthUnitsEnum desiredUnits) const
 {
-    return SpeedUnits::fromBaseUnits(size_.getEllipticalC(), desiredUnits);
+    return LengthUnits::fromBaseUnits(size_.getEllipticalC(), desiredUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover)

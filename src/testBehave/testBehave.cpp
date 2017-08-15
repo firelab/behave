@@ -295,25 +295,25 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     double observedA = 0;
     double observedB = 0;
     double observedC = 0;
-    double expectedA = 7.461858;
-    double expectedB = 17.824253;
-    double expectedC = 16.187176;
+    double expectedA = 492.48260305133329;
+    double expectedB = 1176.4006989502413;
+    double expectedC = 1068.3536353578806;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    SpeedUnits::SpeedUnitsEnum spreadRateUnits = SpeedUnits::ChainsPerHour;
-    // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode)
+    LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+    // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode, 1 hour elapsed time)
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
-    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(spreadRateUnits));
+    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits));
     BOOST_CHECK_CLOSE(observedA, expectedA, ERROR_TOLERANCE);
 
-    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(spreadRateUnits));
+    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits));
     BOOST_CHECK_CLOSE(observedB, expectedB, ERROR_TOLERANCE);
 
-    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(spreadRateUnits));
+    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits));
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
 }
 
