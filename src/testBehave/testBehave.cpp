@@ -22,17 +22,6 @@ double roundToSixDecimalPlaces(const double numberToBeRounded)
     return roundedValue;
 }
 
-double roundToOneDecimalPlace(const double numberToBeRounded)
-{
-    std::stringstream ss;
-    ss << std::fixed;
-    ss.precision(1); // set to 6 places after decimal
-    ss << numberToBeRounded; // put number to be rounded into the stringstream
-    std::string s = ss.str(); // convert stringstream to string
-    double roundedValue = stod(s); // convert string to double
-    return roundedValue;
-}
-
 struct BehaveRunTest
 {
     FuelModelSet fuelModelSet;
@@ -327,12 +316,10 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, 1, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
 
-    double expectedArea = 41.8;
+    double expectedArea = 41.783821;
     double observedArea = 0.0;
 
-    AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::Acres;
-
-    observedArea = roundToOneDecimalPlace(observedArea = behaveRun.surface.getFireArea(areaUnits, 1, TimeUnits::Hours));
+    observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::Acres, 1, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedArea, expectedArea, ERROR_TOLERANCE);
 }
 
@@ -688,7 +675,7 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
     double observedLightningIgnitionProbability = 0;
     double expectedFirebrandIgnitionProbability = 0;
     double expectedLightningIgnitionProbability = 0;
-
+   
     MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::Percent;
     TemperatureUnits::TemperatureUnitsEnum temperatureUnits = TemperatureUnits::Fahrenheit;
     CoverUnits::CoverUnitsEnum sunShadeUnits = CoverUnits::Percent;
