@@ -22,6 +22,17 @@ double roundToSixDecimalPlaces(const double numberToBeRounded)
     return roundedValue;
 }
 
+double roundToOneDecimalPlace(const double numberToBeRounded)
+{
+    std::stringstream ss;
+    ss << std::fixed;
+    ss.precision(1); // set to 6 places after decimal
+    ss << numberToBeRounded; // put number to be rounded into the stringstream
+    std::string s = ss.str(); // convert stringstream to string
+    double roundedValue = stod(s); // convert string to double
+    return roundedValue;
+}
+
 struct BehaveRunTest
 {
     FuelModelSet fuelModelSet;
@@ -295,26 +306,34 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     double observedA = 0;
     double observedB = 0;
     double observedC = 0;
-    double expectedA = 492.48260305133329;
-    double expectedB = 1176.4006989502413;
-    double expectedC = 1068.3536353578806;
+    double expectedA = 7.4618580;
+    double expectedB = 17.824253;
+    double expectedC = 16.187176;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+    LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Chains;
     // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode, 1 hour elapsed time)
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
-    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits));
+    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits, 1, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedA, expectedA, ERROR_TOLERANCE);
 
-    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits));
+    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits, 1, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedB, expectedB, ERROR_TOLERANCE);
 
-    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits));
+    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, 1, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
+
+    double expectedArea = 41.8;
+    double observedArea = 0.0;
+
+    AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::Acres;
+
+    observedArea = roundToOneDecimalPlace(observedArea = behaveRun.surface.getFireArea(areaUnits, 1, TimeUnits::Hours));
+    BOOST_CHECK_CLOSE(observedArea, expectedArea, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_CASE(directionOfInterestTest)

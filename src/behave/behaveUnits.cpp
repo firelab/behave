@@ -541,19 +541,19 @@ double TimeUnits::toBaseUnits(double value, TimeUnitsEnum units)
 {
     switch (units)
     {
-        case Seconds:
+        case Minutes:
         {
             // Already in base, nothing to do
             break;
         }
-        case Minutes:
+        case Seconds:
         {
-            value *= 60;
+            value /= 60.0;
             break;
         }
         case Hours:
         {
-            value *= 3600;
+            value *= 60;
             break;
         }
         default:
@@ -568,19 +568,19 @@ double TimeUnits::fromBaseUnits(double value, TimeUnitsEnum units)
 {
     switch (units)
     {
-        case Seconds:
+        case Minutes:
         {
             // Already in base, nothing to do
             break;
         }
-        case Minutes:
+        case Seconds:
         {
-            value /= 60;
+            value *= 60;
             break;
         }
         case Hours:
         {
-            value /= 3600;
+            value /= 60.0;
             break;
         }
         default:
@@ -588,5 +588,103 @@ double TimeUnits::fromBaseUnits(double value, TimeUnitsEnum units)
             ; // TODO: Handle error
         }
     }
+    return value;
+}
+
+double AreaUnits::toBaseUnits(double value, AreaUnitsEnum units)
+{
+    const double ACRES_TO_SQUARE_FEET = 43560.1784398;
+    const double HECTARES_TO_SQUARE_FEET = 107639.10416709723;
+    const double SQUARE_METERS_TO_SQUARE_FEET = 10.76391041671;
+    const double SQUARE_MILES_TO_SQUARE_FEET = 27878400;
+    const double SQUARE_KILOMETERS_TO_SQUARE_FEET = 10763910.416709721;
+
+    switch (units)
+    {
+        case SquareFeet:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case Acres:
+        {
+            value *= ACRES_TO_SQUARE_FEET;
+            break;
+        }
+        case Hectares:
+        {
+            value *= HECTARES_TO_SQUARE_FEET;
+            break;
+        }
+        case SquareMeters:
+        {
+            value *= SQUARE_METERS_TO_SQUARE_FEET;
+            break;
+        }
+        case SquareMiles:
+        {
+            value *= SQUARE_MILES_TO_SQUARE_FEET;
+            break;
+        }
+        case SquareKilometers:
+        {
+            value *= SQUARE_KILOMETERS_TO_SQUARE_FEET;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}
+
+double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
+{
+    const double SQUARE_FEET_TO_ACRES = 0.0000229567470983;
+    const double SQUARE_FEET_TO_HECTARES = 0.000009290304;
+    const double SQUARE_FEET_TO_SQUARE_METERS = 0.09290304;
+    const double SQUARE_FEET_TO_SQUARE_MILES = 3.5870064279e-08;
+    const double SQUARE_FEET_TO_SQUARE_KILOMETERS = 9.290304e-08;
+
+    switch (units)
+    {
+        case SquareFeet:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case Acres:
+        {
+            value *= SQUARE_FEET_TO_ACRES;
+            break;
+        }
+        case Hectares:
+        {
+            value *= SQUARE_FEET_TO_HECTARES;
+            break;
+        }
+        case SquareMeters:
+        {
+            value *= SQUARE_FEET_TO_SQUARE_METERS;
+            break;
+        }
+        case SquareMiles:
+        {
+            value *= SQUARE_FEET_TO_SQUARE_MILES;
+            break;
+        }
+        case SquareKilometers:
+        {
+            value *= SQUARE_FEET_TO_SQUARE_KILOMETERS;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
     return value;
 }

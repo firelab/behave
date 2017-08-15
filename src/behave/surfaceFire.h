@@ -67,9 +67,7 @@ public:
     double getWindSpeedLimit() const;
     double getReactionIntensity() const;
     double getMidflameWindSpeed() const;
-    double getEllipticalA() const;
-    double getEllipticalB() const;
-    double getEllipticalC() const;
+
     double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
  

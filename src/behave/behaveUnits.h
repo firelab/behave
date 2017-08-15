@@ -28,6 +28,22 @@
 #ifndef	BEHAVEUNITS_H
 #define BEHAVEUNITS_H
 
+struct AreaUnits
+{
+    enum AreaUnitsEnum
+    {
+        SquareFeet, // base area unit
+        Acres,
+        Hectares,
+        SquareMeters,
+        SquareMiles,
+        SquareKilometers
+    };
+
+    static double toBaseUnits(double value, AreaUnitsEnum units);
+    static double fromBaseUnits(double value, AreaUnitsEnum units);
+};
+
 struct LengthUnits
 {
     enum LengthUnitsEnum
@@ -168,8 +184,8 @@ struct TimeUnits
 {
     enum TimeUnitsEnum
     {
-        Seconds, // base time unit
-        Minutes,
+        Minutes, // base time unit
+        Seconds,
         Hours
     };
 

@@ -28,28 +28,31 @@
 #ifndef FIRESIZE_H
 #define FIRESIZE_H
 
+#include "behaveUnits.h"
+
 class FireSize
 {
 public:
     FireSize();
     ~FireSize();
-    void calculateFireDimensions(double effectiveWindSpeed, double forwardSpreadRate, double elapsedTime);
+    void calculateFireBasicDimensions(double effectiveWindSpeed, double forwardSpreadRate);
 
     double getFireLengthToWidthRatio() const;
     double getEccentricity() const;
     double getBackingSpreadRate() const;
-    double getEllipticalA() const;
-    double getEllipticalB() const;
-    double getEllipticalC() const;
-    double getFirePerimeter() const;
+    double getEllipticalA(double elapsedTime) const;
+    double getEllipticalB(double elapsedTime) const;
+    double getEllipticalC(double elapsedTime) const;
+ 
+    double calculateFirePerimeter(double elapsedTime) const;
+    double calculateFireArea(double elapsedTime) const;
 
 private:
     void calculateFireLengthToWidthRatio();
     void calculateSurfaceFireEccentricity();
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
-    void calculateFirePerimeter();
-    void calculateFireArea();
+
 
     // Inputs
     double effectiveWindSpeed_;
@@ -65,8 +68,6 @@ private:
     double backingSpreadRate_;
     double backingSpreadDistance_;
     double fireLengthToWidthRatio_;
-    double area_;
-    double perimeter_;
     double fireLength_;
     double maximumFireWidth_;
 };

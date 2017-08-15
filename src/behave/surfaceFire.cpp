@@ -191,15 +191,15 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     double elapsedTime = surfaceInputs_->getElapsedTime();
 
     // Calculate fire ellipse and related properties
-    size_->calculateFireDimensions(effectiveWindSpeed_, forwardSpreadRate_, elapsedTime);
+    size_->calculateFireBasicDimensions(effectiveWindSpeed_, forwardSpreadRate_);
 
     fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
     eccentricity_ = size_->getEccentricity();
     backingSpreadRate_ = size_->getBackingSpreadRate();
-    ellipticalA_ = size_->getEllipticalA();
-    ellipticalB_ = size_->getEllipticalB();
-    ellipticalC_ = size_->getEllipticalC();
-    size_->getFirePerimeter();
+    //ellipticalA_ = size_->getEllipticalA();
+    //ellipticalB_ = size_->getEllipticalB();
+    //ellipticalC_ = size_->getEllipticalC();
+    //size_->getFirePerimeter();
 
     calculateFireFirelineIntensity(forwardSpreadRate_);
     calculateFlameLength();
@@ -490,21 +490,6 @@ double SurfaceFire::getReactionIntensity() const
 double SurfaceFire::getMidflameWindSpeed() const
 {
     return midflameWindSpeed_;
-}
-
-double SurfaceFire::getEllipticalA() const
-{
-    return size_->getEllipticalA();
-}
-
-double SurfaceFire::getEllipticalB() const
-{
-    return size_->getEllipticalB();
-}
-
-double SurfaceFire::getEllipticalC() const
-{
-    return size_->getEllipticalC();
 }
 
 double SurfaceFire::getWindAdjustmentFactor() const
