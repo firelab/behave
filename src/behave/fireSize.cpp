@@ -41,20 +41,27 @@ double FireSize::getBackingSpreadRate() const
 
 double FireSize::getEllipticalA(double elapsedTime) const
 {
-    double myEllipticalA = ellipticalA_ * elapsedTime;
-    return myEllipticalA;
+    return ellipticalA_ * elapsedTime;
 }
 
 double FireSize::getEllipticalB(double elapsedTime) const
 {
-    double myEllipticalB = ellipticalB_ * elapsedTime;
-    return myEllipticalB;
+    return ellipticalB_ * elapsedTime;
 }
 
 double FireSize::getEllipticalC(double elapsedTime) const
 {
-    double myEllipticalC = ellipticalC_ * elapsedTime;
-    return myEllipticalC;
+    return ellipticalC_ * elapsedTime;
+}
+
+double FireSize::getFireLength(double elapsedTime) const
+{
+    return ellipticalB_ * elapsedTime * 2.0;
+}
+
+double FireSize::getMaxFireWidth(double elapsedTime) const
+{
+    return ellipticalA_ * elapsedTime * 2.0;
 }
 
 void FireSize::calculateFireLengthToWidthRatio()

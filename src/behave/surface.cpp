@@ -232,7 +232,7 @@ double Surface::getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double 
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     double myElapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return LengthUnits::fromBaseUnits(size_.calculateFirePerimeter(elapsedTime), lengthUnits);
+    return LengthUnits::fromBaseUnits(size_.calculateFirePerimeter(myElapsedTime), lengthUnits);
 }
 
 double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const

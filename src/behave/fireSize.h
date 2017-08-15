@@ -43,7 +43,9 @@ public:
     double getEllipticalA(double elapsedTime) const;
     double getEllipticalB(double elapsedTime) const;
     double getEllipticalC(double elapsedTime) const;
- 
+    double getFireLength(double elapsedTime) const;
+    double getMaxFireWidth(double elapsedTime) const;
+
     double calculateFirePerimeter(double elapsedTime) const;
     double calculateFireArea(double elapsedTime) const;
 
@@ -60,16 +62,14 @@ private:
     double elapsedTime_;
 
     // Outputs
-    double ellipticalA_;
-    double ellipticalB_;
-    double ellipticalC_;
-    double eccentricity_;
+    double ellipticalA_; // semi-minor axis of fire ellipse
+    double ellipticalB_; // semi-major axis of fire ellipse
+    double ellipticalC_; // distance from center of ellipse to a focus
+    double eccentricity_; // measure of deviance from perfect circle, ranges from [0,1)
     double forwardSpreadDistance_;
     double backingSpreadRate_;
     double backingSpreadDistance_;
     double fireLengthToWidthRatio_;
-    double fireLength_;
-    double maximumFireWidth_;
 };
 
 #endif // FIRESIZE_H

@@ -316,11 +316,27 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, 1, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
 
-    double expectedArea = 41.783821;
+    double elapsedTime = 1;
+
+    // Area
+    double expectedArea = 0.0;
     double observedArea = 0.0;
 
-    observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::Acres, 1, TimeUnits::Hours));
+    expectedArea = 41.783821;
+    observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::Acres, elapsedTime, TimeUnits::Hours));
     BOOST_CHECK_CLOSE(observedArea, expectedArea, ERROR_TOLERANCE);
+
+    expectedArea = 0.169093;
+    observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::SquareKilometers, elapsedTime, TimeUnits::Hours));
+    BOOST_CHECK_CLOSE(observedArea, expectedArea, ERROR_TOLERANCE);
+
+    // Perimeter
+    double expectedPerimeter = 0.0;
+    double obeservedPerimeter = 0.0;
+
+    expectedPerimeter = 82.808915;
+    obeservedPerimeter = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFirePerimeter(LengthUnits::Chains, elapsedTime, TimeUnits::Hours));
+    BOOST_CHECK_CLOSE(obeservedPerimeter, expectedPerimeter, ERROR_TOLERANCE);
 }
 
 BOOST_AUTO_TEST_CASE(directionOfInterestTest)

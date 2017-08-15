@@ -643,11 +643,11 @@ double AreaUnits::toBaseUnits(double value, AreaUnitsEnum units)
 double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
 {
     const double SQUARE_FEET_TO_ACRES = 2.295684e-05;
-    const double SQUARE_FEET_TO_HECTARES = 0.000009290304;
-    const double SQUARE_FEET_TO_SQUARE_METERS = 0.09290304;
-    const double SQUARE_FEET_TO_SQUARE_MILES = 3.5870064279e-08;
+    const double SQUARE_FEET_TO_HECTARES = 0.0000092903036;
     const double SQUARE_FEET_TO_SQUARE_KILOMETERS = 9.290304e-08;
-
+    const double SQUARE_FEET_TO_SQUARE_METERS = 0.0929030353835;
+    const double SQUARE_FEET_TO_SQUARE_MILES = 3.5870064279e-08;
+ 
     switch (units)
     {
         case SquareFeet:
