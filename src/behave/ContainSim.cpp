@@ -76,7 +76,7 @@ Sem::ContainSim::ContainSim():
         m_a(0),
         m_p(0),
         m_left(),
-        m_right(),
+        //m_right(),
         m_size(0),
         m_pass(0),
         m_used(0)
@@ -117,7 +117,7 @@ Sem::ContainSim::ContainSim(
     m_a(0),
     m_p(0),
     m_left(),
-    m_right(),
+    //m_right(),
     m_force(&force),
     m_minSteps(minSteps),
     m_maxSteps(maxSteps),
@@ -153,7 +153,6 @@ Sem::ContainSim::ContainSim(
         lwRatio, distStep,
         LeftFlank, force, attackTime, tactic, attackDist );
 
-
     if (logLevel > 0) {
        m_left.containLog( true, " reportSize=%f,  reportRate=%f, lwRatio=%f, tactic=%d ,attackDist=%f   \n",reportSize, reportRate, lwRatio,tactic, attackDist);
        m_left.containLog( true, "retry=%d minSteps=%d maxSteps=%d maxFireSize=%d maxFireTime=%d \n",    retry,  minSteps, maxSteps,   maxFireSize,  maxFireTime);
@@ -169,14 +168,8 @@ Sem::ContainSim::ContainSim(
     }
     
     // Create the right flank
-    m_right.updateInputs(reportSize, reportRate,
-        diurnalROS, fireStartMinutesStartTime,
-        lwRatio, distStep,
-        LeftFlank, force, attackTime, tactic, attackDist);
-    //attackTime = m_force->firstArrival( RightFlank );
-    //m_right = new Contain( reportSize, reportRate, lwRatio,  distStep,
-    //    RightFlank, force, attackTime, tactic, attackDist );
-
+    // Right flank not actually created, assumed to be a mirror image of left flank
+       
     // How big do the arrays need to be?
     //Carmi commented out - m_right is not being initialized anymore 
     //m_size = ( m_right ) ? 2 * m_maxSteps : m_maxSteps;
@@ -264,9 +257,7 @@ void Sem::ContainSim::updateInputs(
     }
 
     // Create the right flank
-    //attackTime = m_force->firstArrival( RightFlank );
-    //m_right = new Contain( reportSize, reportRate, lwRatio,  distStep,
-    //    RightFlank, force, attackTime, tactic, attackDist );
+    // Right flank not actually created, assumed to be a mirror image of left flank
 
     // How big do the arrays need to be?
     //Carmi commented out - m_right is not being initialized anymore 
@@ -275,28 +266,16 @@ void Sem::ContainSim::updateInputs(
     m_size = m_maxSteps + 1;
 
     // Array of attack point angles (radians) at each simulation step.
-    //m_u = new double[m_size];
-    //checkmem( __FILE__, __LINE__, m_u, "double m_u", m_size );
     m_u.resize(m_size);
     // Array of free-burning fire head positions (ch) at each simulation step.
-    //m_h = new double[m_size];
-    //checkmem( __FILE__, __LINE__, m_h, "double m_h", m_size );
     m_h.resize(m_size);
     // Array of attack point x coordinates (ch) at each simulation step.
-    //m_x = new double[m_size];
-    //checkmem( __FILE__, __LINE__, m_x, "double m_x", m_size );
     m_x.resize(m_size);
     // Array of attack point y coordinates (ch) at each simulation step.
-    //m_y = new double[m_size];
-    //checkmem( __FILE__, __LINE__, m_y, "double m_y", m_size );
     m_y.resize(m_size);
     // Array of area under the perimeter curve (ch2) burned at each sim step.
-    //m_a = new double[m_size];
-    //checkmem( __FILE__, __LINE__, m_a, "double m_a", m_size );
     m_a.resize(m_size);
     // Array of fireline perimeter (ch) constructed at each simulation step.
-    //m_p = new double[m_size];
-    //checkmem( __FILE__, __LINE__, m_p, "double m_p", m_size );
     m_p.resize(m_size);
     return;
 }

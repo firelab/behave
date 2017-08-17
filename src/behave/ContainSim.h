@@ -160,7 +160,7 @@ public:
 private:
     void finalStats( void ) ;
     Contain m_left;
-    Contain m_right;
+    //Contain m_right;
 
 // Protected data
 protected:
