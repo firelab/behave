@@ -116,21 +116,38 @@ static const int containVersion = 1;    //!< Class version
 
 // Public methods
 public:
+    Contain();
     // Custom constructors
     Contain(
         double reportSize,
         double reportRate,
-        double *diurnalROS,
+        double diurnalROS[24],
         int fireStartMinutesStartTime,              
         double lwRatio,
         double distStep,
         ContainFlank flank,
-        ContainForce *force,
+        ContainForce& force,
         double attackTime,
         ContainTactic tactic=HeadAttack,
         double attackDist=0. ) ;
+
     // Virtual destructor
     virtual ~Contain( void ) ;
+
+    void updateInputs(
+        double reportSize,
+        double reportRate,
+        double *diurnalROS,
+        int fireStartMinutesStartTime,
+        double lwRatio,
+        double distStep,
+        ContainFlank flank,
+        ContainForce& force,
+        double attackTime,
+        ContainTactic tactic = HeadAttack,
+        double attackDist = 0.);
+
+    void setForce(ContainForce& force);
 
     // Access to input properties
     double attackDistance( void ) const ;
@@ -169,8 +186,7 @@ public:
     bool   setDiurnalSpreadRates(double *rates);         // hourly, added MAF 10/6/2008
 
     // Computational methods
-private:
-  
+private: 
     void    calcCoordinates( void ) ;
     void    calcU( void ) ;
     bool    calcUh( double r, double h, double u, double *d ) ;
@@ -183,7 +199,7 @@ private:
     double  spreadRate( double minutesSinceReport ) const ;
     double  getDiurnalSpreadRate( double minutesSinceReport ) const;    // added MAF, 10/6/2008
     ContainStatus step( void ) ;
-    void    setAttack( ContainFlank flank, ContainForce *force,
+    void    setAttack( ContainFlank flank, ContainForce& force,
                 double attackTime, ContainTactic tactic, double attackDist ) ;
     void    setReport( double reportSize, double reportRate, double lwRatio,
                 double distStep ) ;

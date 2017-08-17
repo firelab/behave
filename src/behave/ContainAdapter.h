@@ -30,7 +30,6 @@
 #define CONTAINADAPTER_H
 
 #include "ContainSim.h"
-#include "ContainForceAdapter.h"
 #include <string>
 
 //------------------------------------------------------------------------------
@@ -127,7 +126,8 @@ private:
     double diurnalROS_[24];
     int fireStartTime_;
     double lwRatio_;
-    ContainForceAdapter force_;
+    Sem::ContainSim containSim_;
+    Sem::ContainForce force_;
     ContainTactic::ContainTacticEnum tactic_;
     double attackDistance_;
     bool retry_;

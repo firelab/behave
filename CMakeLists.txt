@@ -45,7 +45,6 @@ SET(SOURCE
 	src/behave/Contain.cpp
 	src/behave/ContainAdapter.cpp
 	src/behave/ContainForce.cpp
-	src/behave/containForceAdapter.cpp
 	src/behave/ContainResource.cpp
 	src/behave/ContainSim.cpp
     src/behave/crown.cpp
@@ -76,7 +75,6 @@ SET(HEADERS
 	src/behave/Contain.h
 	src/behave/ContainAdapter.h
 	src/behave/ContainForce.h
-	src/behave/ContainForceAdapter.h
 	src/behave/ContainResource.h
 	src/behave/ContainSim.h
     src/behave/crown.h

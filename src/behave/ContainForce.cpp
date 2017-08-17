@@ -182,6 +182,45 @@ void Sem::ContainForce::clearResourceVector()
     m_resourceVector.clear();
 }
 
+int Sem::ContainForce::removeResourceAt(int index)
+{
+    int success = 1; // 1 means didn't find it
+    if (index < m_resourceVector.size())
+    {
+        m_resourceVector.erase(m_resourceVector.begin() + index);
+        return 0; // success
+    }
+    return success;
+}
+
+int Sem::ContainForce::removeResourceWithThisDesc(std::string desc)
+{
+    std::string descriptionString;
+    for (int i = 0; i < m_resourceVector.size(); i++)
+    {
+        descriptionString = m_resourceVector[i].description();
+        if (descriptionString == desc)
+        {
+            removeResourceAt(i);
+            return 0; // success
+        }
+    }
+    // didn't find it
+    return 1; // error
+}
+
+int Sem::ContainForce::removeAllResourcesWithThisDesc(std::string desc)
+{
+    int rc;
+    int success = 1; // 1 means didn't find it
+    while ((rc = removeResourceWithThisDesc(desc)) == 0)
+    {
+        success = 0; // found at least one
+    }
+    return success;
+}
+
+
 //------------------------------------------------------------------------------
 /*! \brief Determines the aggregate fireline production rate along one fire
 flank at the specified time by the entire available containment force.
@@ -399,13 +438,14 @@ double Sem::ContainForce::resourceProduction(int index) const
 * Print all available resources into the log file
 * For debugging purposes
 */
-void Sem::ContainForce::logResources(bool debug, const Contain* contain) const {
+void Sem::ContainForce::logResources(bool debug, const Contain& contain) const {
     char buf[70];
     if (!debug) return;
     for (int i = 0; i < m_resourceVector.size(); i++)
     {
         m_resourceVector[i].print(buf, 65);
-        contain->containLog(true, "resource %d: %s\n", i + 1, buf);
+        const Contain* containPtr = &contain;
+        containPtr->containLog(true, "resource %d: %s\n", i + 1, buf);
     }
 }
 

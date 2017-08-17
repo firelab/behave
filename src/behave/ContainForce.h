@@ -49,6 +49,9 @@ namespace Sem
             double baseCost = 0.0,
             double hourCost = 0.0);
         void clearResourceVector();
+        int removeResourceAt(int index);
+        int removeResourceWithThisDesc(std::string desc);
+        int removeAllResourcesWithThisDesc(std::string desc);
 
         // Force-level access methods
         double exhausted(Sem::ContainFlank flank) const;
@@ -57,7 +60,7 @@ namespace Sem
         double productionRate(double minutesSinceReport, Sem::ContainFlank flank) const;
 
         //for debug
-        void   logResources(bool debug, const Contain*) const;
+        void   logResources(bool debug, const Contain&) const;
 
         // Public access to individual ContainResources
         int     resources(void) const;
