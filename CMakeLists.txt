@@ -57,6 +57,7 @@ SET(SOURCE
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
+	src/behave/safety.cpp
     src/behave/spot.cpp
     src/behave/spotInputs.cpp
     src/behave/surface.cpp
@@ -87,6 +88,7 @@ SET(HEADERS
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
     src/behave/randthread.h
+	src/behave/safety.h
     src/behave/spot.h
     src/behave/spotInputs.h
     src/behave/surface.h
