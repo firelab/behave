@@ -728,6 +728,43 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
     BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
 }
 
+BOOST_AUTO_TEST_CASE(SafetyModuleTest)
+{
+    double flameHeight = 5; // ft
+    int numberOfPersonell = 6;
+    int numberOfEquipment = 1;
+    double areaPerPerson = 50; // ft^2
+    double areaPerEquipment = 300; // ft^2
+    LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+    AreaUnits::AreaUnitsEnum personellAndEquipmentAreaUnits = AreaUnits::SquareFeet;
+    AreaUnits::AreaUnitsEnum safetyZoneAreaUnits = AreaUnits::Acres;
+
+   
+    double expectedSeparationDistance = 0; 
+    double expectedSafetyZoneArea = 0;
+    double expectedSafetyZoneRadius = 0;
+
+    double observedSeparationDistance = 0;
+    double observedSafetyZoneArea = 0;
+    double observeSafetyZoneRadius = 0;
+
+
+    expectedSeparationDistance = 20; // ft
+    expectedSafetyZoneArea = 0.082490356; // acres
+    expectedSafetyZoneRadius = 33.819766; // ft
+    
+    behaveRun.safety.updateSafetyInputs(flameHeight, lengthUnits, numberOfPersonell, numberOfEquipment, areaPerPerson, areaPerEquipment, personellAndEquipmentAreaUnits);
+    behaveRun.safety.calculateSafetyZone();
+
+    observedSeparationDistance = behaveRun.safety.getSeparationDistance(lengthUnits);
+    observedSafetyZoneArea = behaveRun.safety.getSafetyZoneArea(safetyZoneAreaUnits);
+    observeSafetyZoneRadius = behaveRun.safety.getSafetyZoneRadius(lengthUnits);
+
+    BOOST_CHECK_CLOSE(observedSeparationDistance, expectedSeparationDistance, ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedSafetyZoneArea, expectedSafetyZoneArea, ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observeSafetyZoneRadius, expectedSafetyZoneRadius, ERROR_TOLERANCE);
+}
+
 BOOST_AUTO_TEST_CASE(ContainModuleTest)
 {
     double observedFinalFireLineLength = 0;

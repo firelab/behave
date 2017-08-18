@@ -33,6 +33,7 @@
 #include "ContainAdapter.h"
 #include "crown.h"
 #include "ignite.h"
+#include "safety.h"
 #include "spot.h"
 #include "surface.h"
 
@@ -72,6 +73,9 @@ Ignite ignite;
 
 //  Contain Module
 ContainAdapter contain;
+
+//  Safety Module
+Safety safety;
 
 private:
     void memberwiseCopyAssignment(const BehaveRun& rhs);

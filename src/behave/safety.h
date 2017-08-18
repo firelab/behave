@@ -33,20 +33,29 @@
 #ifndef SAFETY_H
 #define SAFETY_H
 
+#include "behaveUnits.h"
+
 class Safety
 {
 public:
-    void setFlameHeight(double flameHeight);
+    void setFlameHeight(double flameHeight, LengthUnits::LengthUnitsEnum lengthUnits);
     void setNumberOfPersonnel(double numberOfPersonnel);
-    void setAreaPerPerson(double areaPerPerson);
+    void setAreaPerPerson(double areaPerPerson, AreaUnits::AreaUnitsEnum areaUnits);
     void setNumberOfEquipment(double numberOfEquipment);
-    void setAreaPerEquipment(double areaPerEquipment);
+    void setAreaPerEquipment(double areaPerEquipment, AreaUnits::AreaUnitsEnum areaUnits);
+    void updateSafetyInputs(double flameHeight, LengthUnits::LengthUnitsEnum lengthUnits,
+        int numberOfPersonnel, int numberOfEquipment, double areaPerPerson,
+        double areaPerEquipment, AreaUnits::AreaUnitsEnum areaUnits);
 
-    void updateSafetyInputs(double flameHeight, double numberOfPersonnel, double areaPerPerson,
-        double numberOfEquipment, double areaPerEquipment);
-    void calculateSafetyZoneRadius();
-    void calculateSafetyZoneSeparationDistance();
+    void calculateSafetyZone();
+
+    double getSeparationDistance(LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getSafetyZoneRadius(LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getSafetyZoneArea(AreaUnits::AreaUnitsEnum areaUnits) const;
+
 private:
+    void calculateSafetyZoneSeparationDistance();
+
     //Inputs
     double flameHeight_;        // flame height (ft)
     double numberOfPersonnel_;
@@ -55,9 +64,9 @@ private:
     double areaPerEquipment_;   // Mean area required per piece of equipment within safety zone (ft^2)
 
     // Outputs
-    double separationDistance_;
-    double safetyZoneRadius_;
-    double safetyZoneArea_;
+    double separationDistance_; // minimum distance a firefighter in protective clothing must be to prevent radiant heat injury
+    double safetyZoneRadius_;   // minimum area of a circular safety zone that protects the specified number of personnel and heavy equipment from radiant burn injury
+    double safetyZoneArea_;     // radius of minimum circular safety zone that protect the specified number of personnel and heavy equipment from radiant burn injury
 };
 
 #endif  // SAFETY_H
