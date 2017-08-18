@@ -33,7 +33,7 @@ void Safety::updateSafetyInputs(double flameHeight, double numberOfPersonnel, do
 {
     setFlameHeight(flameHeight);
     setNumberOfPersonnel(numberOfPersonnel);
-    setAreaPerEquipment(areaPerEquipment);
+    setAreaPerPerson(areaPerPerson);
     setNumberOfEquipment(numberOfEquipment);
     setAreaPerEquipment(areaPerEquipment);
 }
