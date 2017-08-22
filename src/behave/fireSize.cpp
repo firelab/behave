@@ -125,8 +125,5 @@ double FireSize::calculateFirePerimeter(double elapsedTime) const
 
 double FireSize::calculateFireArea(double elapsedTime) const
 {
-    double myEllipticalA = ellipticalA_ * elapsedTime;
-    double myEllipticalB = ellipticalB_ * elapsedTime;
-    
-    return M_PI * myEllipticalA * myEllipticalB;
+    return M_PI * ellipticalA_ * ellipticalB_ * elapsedTime * elapsedTime;
 }

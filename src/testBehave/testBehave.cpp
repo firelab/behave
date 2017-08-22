@@ -731,15 +731,15 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
 BOOST_AUTO_TEST_CASE(SafetyModuleTest)
 {
     double flameHeight = 5; // ft
-    int numberOfPersonell = 6;
+    int numberOfPersonnel = 6;
     int numberOfEquipment = 1;
     double areaPerPerson = 50; // ft^2
     double areaPerEquipment = 300; // ft^2
+
     LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-    AreaUnits::AreaUnitsEnum personellAndEquipmentAreaUnits = AreaUnits::SquareFeet;
+    AreaUnits::AreaUnitsEnum personnelAndEquipmentAreaUnits = AreaUnits::SquareFeet;
     AreaUnits::AreaUnitsEnum safetyZoneAreaUnits = AreaUnits::Acres;
 
-   
     double expectedSeparationDistance = 0; 
     double expectedSafetyZoneArea = 0;
     double expectedSafetyZoneRadius = 0;
@@ -748,12 +748,11 @@ BOOST_AUTO_TEST_CASE(SafetyModuleTest)
     double observedSafetyZoneArea = 0;
     double observeSafetyZoneRadius = 0;
 
-
     expectedSeparationDistance = 20; // ft
     expectedSafetyZoneArea = 0.082490356; // acres
     expectedSafetyZoneRadius = 33.819766; // ft
     
-    behaveRun.safety.updateSafetyInputs(flameHeight, lengthUnits, numberOfPersonell, numberOfEquipment, areaPerPerson, areaPerEquipment, personellAndEquipmentAreaUnits);
+    behaveRun.safety.updateSafetyInputs(flameHeight, lengthUnits, numberOfPersonnel, numberOfEquipment, areaPerPerson, areaPerEquipment, personnelAndEquipmentAreaUnits);
     behaveRun.safety.calculateSafetyZone();
 
     observedSeparationDistance = behaveRun.safety.getSeparationDistance(lengthUnits);
@@ -768,51 +767,53 @@ BOOST_AUTO_TEST_CASE(SafetyModuleTest)
 BOOST_AUTO_TEST_CASE(ContainModuleTest)
 {
     double observedFinalFireLineLength = 0;
-    double observedtPerimeterAtContainment = 0;
+    double observedPerimeterAtInitialAttack = 0;
+    double observedPerimeterAtContainment = 0;
     double observedFinalFireSize = 0;
     double observedFinalContainmentArea = 0;
     double observedFinalTimeSinceReport = 0;
     ContainStatus::ContainStatusEnum observedContainmentStatus = ContainStatus::Unreported;
 
     double expectedFinalFireLineLength = 0;
+    double expectedPerimeterAtInitialAttack = 0;
     double expectedPerimeterAtContainment = 0;
     double expectedFinalFireSize = 0;
     double expectedFinalContainmentArea = 0;
     double expectedFinalTimeSinceReport = 0;
     ContainStatus::ContainStatusEnum expectedContainmentStatus = ContainStatus::Unreported;
 
-    // Test case when expected result is containment
-    behaveRun.contain.setAttackDistance(0);
-    behaveRun.contain.setFireStartTime(0);
+    // Test case where expected result is containment
+    behaveRun.contain.setAttackDistance(0, LengthUnits::Chains);
     behaveRun.contain.setLwRatio(3);
-    behaveRun.contain.setReportRate(5);
-    behaveRun.contain.setReportSize(1);
+    behaveRun.contain.setReportRate(5, SpeedUnits::ChainsPerHour);
+    behaveRun.contain.setReportSize(1, AreaUnits::Acres);
     behaveRun.contain.setTactic(ContainTactic::HeadAttack);
-    behaveRun.contain.addResource(0, 20, 480, ContainFlank::LeftFlank, "test");
+    behaveRun.contain.addResource(0, 8, TimeUnits::Hours, 20, SpeedUnits::ChainsPerHour, "test");
     behaveRun.contain.doContainRun();
     behaveRun.contain.removeAllResources();
 
     expectedFinalFireLineLength = 14.8329956;
+    expectedPerimeterAtInitialAttack = 13.765824;
     expectedPerimeterAtContainment = 14.8329956;
     expectedFinalFireSize = 1.32673918;
     expectedFinalContainmentArea = 1.32673918;
     expectedFinalTimeSinceReport = 44.5000000;
     expectedContainmentStatus = ContainStatus::Contained;
 
-    observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength();
-    observedtPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment();
-    observedFinalFireSize = behaveRun.contain.getFinalFireSize();
-    observedFinalContainmentArea = behaveRun.contain.getFinalContainmentArea();
-    observedFinalTimeSinceReport = behaveRun.contain.getFinalTimeSinceReport();
+    observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength(LengthUnits::Chains);
+    observedPerimeterAtInitialAttack = behaveRun.contain.getPerimiterAtInitialAttack(LengthUnits::Chains);
+    observedPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment(LengthUnits::Chains);
+    observedFinalFireSize = behaveRun.contain.getFinalFireSize(AreaUnits::Acres);
+    observedFinalContainmentArea = behaveRun.contain.getFinalContainmentArea(AreaUnits::Acres);
+    observedFinalTimeSinceReport = behaveRun.contain.getFinalTimeSinceReport(TimeUnits::Minutes);
     observedContainmentStatus = behaveRun.contain.getContainmentStatus();
 
     BOOST_CHECK_CLOSE(observedFinalFireLineLength, expectedFinalFireLineLength, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedtPerimeterAtContainment, expectedPerimeterAtContainment, ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedPerimeterAtContainment, expectedPerimeterAtContainment, ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedFinalContainmentArea, expectedFinalContainmentArea,ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedFinalFireSize, expectedFinalFireSize, ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedFinalTimeSinceReport, expectedFinalTimeSinceReport, ERROR_TOLERANCE);
     BOOST_CHECK_EQUAL(observedContainmentStatus, expectedContainmentStatus);
-
 }
 
 BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite

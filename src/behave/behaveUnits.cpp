@@ -593,7 +593,7 @@ double TimeUnits::fromBaseUnits(double value, TimeUnitsEnum units)
 
 double AreaUnits::toBaseUnits(double value, AreaUnitsEnum units)
 {
-    const double ACRES_TO_SQUARE_FEET = 43560.1784398;
+    const double ACRES_TO_SQUARE_FEET = 43560.002160576107;
     const double HECTARES_TO_SQUARE_FEET = 107639.10416709723;
     const double SQUARE_METERS_TO_SQUARE_FEET = 10.76391041671;
     const double SQUARE_MILES_TO_SQUARE_FEET = 27878400;

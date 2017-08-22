@@ -32,6 +32,9 @@
 #include "ContainSim.h"
 #include <string>
 
+#include "behaveUnits.h"
+#include "fireSize.h"
+
 //------------------------------------------------------------------------------
 /*! \enum ContainTactic
 \brief Identifies the possible fire containment tactic.
@@ -86,9 +89,10 @@ public:
 
     void addResource(
         double arrival,
-        double production,
-        double duration = 480.,
-        ContainFlank::ContainFlankEnum flank = ContainFlank::LeftFlank,
+        double duration,
+        TimeUnits::TimeUnitsEnum timeUnit,
+        double productionRate,
+        SpeedUnits::SpeedUnitsEnum productionRateUnits,
         std::string description = "",
         double baseCost = 0.0,
         double hourCost = 0.0);
@@ -97,39 +101,36 @@ public:
     int removeAllResourcesWithThisDesc(std::string desc);
     void removeAllResources();
 
-    void setReportSize(double reportSize);
-    void setReportRate(double reportRate);
-    void setFireStartTime(int fireStartTime);
+    void setReportSize(double reportSize, AreaUnits::AreaUnitsEnum areaUnits);
+    void setReportRate(double reportRate, SpeedUnits::SpeedUnitsEnum speedUnits);
     void setLwRatio(double lwRatio);
     void setTactic(ContainTactic::ContainTacticEnum tactic);
-    void setAttackDistance(double attackDistance);
-    void setRetry(bool retry);
-    void setMinSteps(int minSteps);
-    void setMaxSteps(int maxSteps);
-    void setMaxFireSize(int maxFireSize);
-    void setMaxFireTime(int maxFireTime);
+    void setAttackDistance(double attackDistance, LengthUnits::LengthUnitsEnum lengthUnits);
 
     void doContainRun();
 
-    double getFinalCost() const;   // Final total cost of all resources used
-    double getFinalFireLineLength() const;   // Final fire line at containment or escape (ch)
-    double getPerimeterAtContainment() const;  // Final line plus fire perimeter at containment or escape (ch)
-    double getFinalFireSize() const;   // Final fire size at containment or escape (ac)
-    double getFinalContainmentArea() const;  // Final containment area at containment or escape (ac)
-    double getFinalTimeSinceReport() const;   // Containment or escape time since report (min)   
-    ContainStatus::ContainStatusEnum getContainmentStatus() const; // Status of fire at end of contain simultation
+    double getFinalCost() const;
+    double getFinalFireLineLength(LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getPerimiterAtInitialAttack(LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getPerimeterAtContainment(LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getFinalFireSize(AreaUnits::AreaUnitsEnum areaUnits) const;
+    double getFinalContainmentArea(AreaUnits::AreaUnitsEnum areaUnits) const;
+    double getFinalTimeSinceReport(TimeUnits::TimeUnitsEnum timeUnits) const;
+    ContainStatus::ContainStatusEnum getContainmentStatus() const;
 
 private:
+    FireSize size_;
+
     // Contain Inputs
     double reportSize_;
     double reportRate_;
     double diurnalROS_[24];
-    int fireStartTime_;
     double lwRatio_;
     Sem::ContainSim containSim_;
     Sem::ContainForce force_;
     ContainTactic::ContainTacticEnum tactic_;
     double attackDistance_;
+    // Hard-coded input values
     bool retry_;
     int minSteps_;
     int maxSteps_;
@@ -137,13 +138,15 @@ private:
     int maxFireTime_;
 
     // Contain Outputs
-    double finalCost_;
-    double finalFireLineLength_;
-    double perimeterAtContainment_;
-    double finalFireSize_;
-    double finalContainmentArea_;
-    double finalTime_;
-    ContainStatus::ContainStatusEnum containmentStatus_;
+    double finalCost_; // Final total cost of all resources used
+    double finalFireLineLength_;  // Final fire line at containment or escape
+    double perimeterAtInitialAttack_; // firee perimeter at time of initial attack
+    double perimeterAtContainment_; // Final line plus fire perimeter at containment or escape
+    double finalFireSize_; // Final fire size at containment or escape
+    double finalContainmentArea_; // Final containment area at containment or escape
+    double finalTime_; // Containment or escape time since report
+
+    ContainStatus::ContainStatusEnum containmentStatus_; // Status of fire at end of contain simultation
 };
 
 #endif //CONTAINADAPTER_H

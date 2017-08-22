@@ -211,7 +211,7 @@ Sem::Contain::Contain(
     // Set all the input parameters.
     setReport( reportSize, reportRate, lwRatio, distStep );
     setAttack( flank, force, attackTime, tactic, attackDist );
-            
+    setFireStartTimeMinutes(fireStartMinutesStartTime);
     setDiurnalSpreadRates(diurnalROS);
     // Set all the intermediate parameters.
     reset();
@@ -233,7 +233,7 @@ void Sem::Contain::updateInputs(double reportSize, double reportRate, double * d
 {
     // Set all the input parameters.
     m_status = Unreported;
-    m_startTime = fireStartMinutesStartTime;
+    setFireStartTimeMinutes(fireStartMinutesStartTime);
     setForce(force);
     setReport(reportSize, reportRate, lwRatio, distStep);
     setAttack(flank, force, attackTime, tactic, attackDist);
