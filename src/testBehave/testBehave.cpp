@@ -769,6 +769,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     double observedFinalFireLineLength = 0;
     double observedPerimeterAtInitialAttack = 0;
     double observedPerimeterAtContainment = 0;
+    double observedFireSizeAtInitialAttack = 0;
     double observedFinalFireSize = 0;
     double observedFinalContainmentArea = 0;
     double observedFinalTimeSinceReport = 0;
@@ -777,6 +778,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     double expectedFinalFireLineLength = 0;
     double expectedPerimeterAtInitialAttack = 0;
     double expectedPerimeterAtContainment = 0;
+    double expectedFireSizeAtInitialAttack = 0;
     double expectedFinalFireSize = 0;
     double expectedFinalContainmentArea = 0;
     double expectedFinalTimeSinceReport = 0;
@@ -788,21 +790,23 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     behaveRun.contain.setReportRate(5, SpeedUnits::ChainsPerHour);
     behaveRun.contain.setReportSize(1, AreaUnits::Acres);
     behaveRun.contain.setTactic(ContainTactic::HeadAttack);
-    behaveRun.contain.addResource(0, 8, TimeUnits::Hours, 20, SpeedUnits::ChainsPerHour, "test");
+    behaveRun.contain.addResource(2, 8, TimeUnits::Hours, 20, SpeedUnits::ChainsPerHour, "test");
     behaveRun.contain.doContainRun();
     behaveRun.contain.removeAllResources();
 
-    expectedFinalFireLineLength = 14.8329956;
-    expectedPerimeterAtInitialAttack = 13.765824;
-    expectedPerimeterAtContainment = 14.8329956;
-    expectedFinalFireSize = 1.32673918;
-    expectedFinalContainmentArea = 1.32673918;
-    expectedFinalTimeSinceReport = 44.5000000;
+    expectedFinalFireLineLength = 39.539849615;
+    expectedPerimeterAtInitialAttack = 36.694893;
+    expectedPerimeterAtContainment = 39.539849615;
+    expectedFireSizeAtInitialAttack = 7.10569878;
+    expectedFinalFireSize = 9.42749714;
+    expectedFinalContainmentArea = 9.42749714;
+    expectedFinalTimeSinceReport = 238.75000000;
     expectedContainmentStatus = ContainStatus::Contained;
 
     observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength(LengthUnits::Chains);
     observedPerimeterAtInitialAttack = behaveRun.contain.getPerimiterAtInitialAttack(LengthUnits::Chains);
     observedPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment(LengthUnits::Chains);
+    observedFireSizeAtInitialAttack = behaveRun.contain.getFireSizeAtInitialAttack(AreaUnits::Acres);
     observedFinalFireSize = behaveRun.contain.getFinalFireSize(AreaUnits::Acres);
     observedFinalContainmentArea = behaveRun.contain.getFinalContainmentArea(AreaUnits::Acres);
     observedFinalTimeSinceReport = behaveRun.contain.getFinalTimeSinceReport(TimeUnits::Minutes);
@@ -811,6 +815,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     BOOST_CHECK_CLOSE(observedFinalFireLineLength, expectedFinalFireLineLength, ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedPerimeterAtContainment, expectedPerimeterAtContainment, ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedFinalContainmentArea, expectedFinalContainmentArea,ERROR_TOLERANCE);
+    BOOST_CHECK_CLOSE(observedFireSizeAtInitialAttack, expectedFireSizeAtInitialAttack, ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedFinalFireSize, expectedFinalFireSize, ERROR_TOLERANCE);
     BOOST_CHECK_CLOSE(observedFinalTimeSinceReport, expectedFinalTimeSinceReport, ERROR_TOLERANCE);
     BOOST_CHECK_EQUAL(observedContainmentStatus, expectedContainmentStatus);

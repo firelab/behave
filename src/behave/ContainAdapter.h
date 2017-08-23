@@ -113,6 +113,7 @@ public:
     double getFinalFireLineLength(LengthUnits::LengthUnitsEnum lengthUnits) const;
     double getPerimiterAtInitialAttack(LengthUnits::LengthUnitsEnum lengthUnits) const;
     double getPerimeterAtContainment(LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getFireSizeAtInitialAttack(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getFinalFireSize(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getFinalContainmentArea(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getFinalTimeSinceReport(TimeUnits::TimeUnitsEnum timeUnits) const;
@@ -142,7 +143,8 @@ private:
     double finalFireLineLength_;  // Final fire line at containment or escape
     double perimeterAtInitialAttack_; // firee perimeter at time of initial attack
     double perimeterAtContainment_; // Final line plus fire perimeter at containment or escape
-    double finalFireSize_; // Final fire size at containment or escape
+    double fireSizeAtIntitialAttack_; // Fire size (area) at time of initial attack
+    double finalFireSize_; // Final fire size (area) at containment or escape
     double finalContainmentArea_; // Final containment area at containment or escape
     double finalTime_; // Containment or escape time since report
 

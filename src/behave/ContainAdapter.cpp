@@ -13,12 +13,13 @@ ContainAdapter::ContainAdapter()
     maxSteps_ = 1000,
     maxFireSize_ = 1000,
     maxFireTime_ = 1080;
-    reportSize_ = 0;
-    reportRate_ = 0;
+    reportSize_ = 0.0;
+    reportRate_ = 0.0;
 
     finalCost_ = 0.0;
     finalFireLineLength_ = 0.0;
     perimeterAtContainment_ = 0.0;
+    fireSizeAtIntitialAttack_ = 0.0;
     finalFireSize_ = 0.0;
     finalContainmentArea_ = 0.0;
     perimeterAtInitialAttack_ = 0.0;
@@ -44,9 +45,9 @@ void ContainAdapter::addResource(double arrival, double duration, TimeUnits::Tim
    
     // Contain expects minutes
     double durationInMinutes = TimeUnits::toBaseUnits(duration, timeUnits); 
-    double arrivalInMinutes = TimeUnits::toBaseUnits(duration, timeUnits);
+    double arrivalInMinutes = TimeUnits::toBaseUnits(arrival, timeUnits);
     
-    Sem::ContainResource resource(arrival, productionRateInChainsPerHour, durationInMinutes, myflank, description, baseCost, hourCost);
+    Sem::ContainResource resource(arrivalInMinutes, productionRateInChainsPerHour, durationInMinutes, myflank, description, baseCost, hourCost);
     force_.addResource(resource);
 }
 
@@ -118,8 +119,10 @@ void ContainAdapter::doContainRun()
             tactic, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
             maxFireTime_);
 
+        // Do Contain simulation
         containSim_.run();
 
+        // Get results from Contain simulation
         finalCost_ = containSim_.finalFireCost();
         finalFireLineLength_ = LengthUnits::toBaseUnits(containSim_.finalFireLine(), LengthUnits::Chains);
         perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim_.finalFirePerimeter(), LengthUnits::Chains);
@@ -134,28 +137,32 @@ void ContainAdapter::doContainRun()
         double reportRateInFeetPerMinute = SpeedUnits::toBaseUnits(reportRate_, SpeedUnits::ChainsPerHour);
         size_.calculateFireBasicDimensions(effectiveWindspeed, reportRateInFeetPerMinute);
         // Find the time elapsed to created the fire at time of report 
-        double ellipticalA = size_.getEllipticalA(1);
-        double ellipticalB = size_.getEllipticalB(1);
+        double ellipticalA = size_.getEllipticalA(1); // get base elliptical dimensions
+        double ellipticalB = size_.getEllipticalB(1); // get base elliptical dimensions
 
-        double intialElapsedTime = 0;
-        double totalElapsedTime = 0;
-        double denominator = M_PI * ellipticalA * ellipticalB;
-
+        // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
+        // A = pi*a*b*s^2
         double reportSizeInSquareFeet = AreaUnits::toBaseUnits(reportSize_, AreaUnits::Acres);
+        double intialElapsedTime = 0; // time for the fire to get to the reported size
+        double totalElapsedTime = 0;
+        double denominator = M_PI * ellipticalA * ellipticalB; // pi*a*b
 
-        double minArriveTime = TimeUnits::toBaseUnits(force_.firstArrival(Sem::ContainFlank::LeftFlank), TimeUnits::Hours);
-        if (minArriveTime < 0)
+        // Get the time that the first resource begins to attack the fire
+        double firstArrivalTime = force_.firstArrival(Sem::ContainFlank::LeftFlank);
+        if (firstArrivalTime < 0)
         {
-            minArriveTime = 0;
+            firstArrivalTime = 0; // make sure the time isn't negative for some weird reason
         }
 
-        if (denominator > 1e-07)
+        // Solve for seconds elapsed for reported fire size to reach its size at time of report assuming constant rate of growth
+        if (denominator > 1.0e-07)
         {
-            intialElapsedTime =  sqrt(reportSizeInSquareFeet / denominator);
-            totalElapsedTime = intialElapsedTime + minArriveTime;
+            intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
+            totalElapsedTime = intialElapsedTime + firstArrivalTime;
+            // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
             perimeterAtInitialAttack_ = size_.calculateFirePerimeter(totalElapsedTime);
-        }
-        
+            fireSizeAtIntitialAttack_ = size_.calculateFireArea(totalElapsedTime);
+        }     
     }
 }
 
@@ -177,6 +184,11 @@ double ContainAdapter::getPerimiterAtInitialAttack(LengthUnits::LengthUnitsEnum 
 double ContainAdapter::getPerimeterAtContainment(LengthUnits::LengthUnitsEnum lengthUnits) const
 {
     return LengthUnits::fromBaseUnits(perimeterAtContainment_, lengthUnits);
+}
+
+double ContainAdapter::getFireSizeAtInitialAttack(AreaUnits::AreaUnitsEnum areaUnits) const
+{
+    return AreaUnits::fromBaseUnits(fireSizeAtIntitialAttack_, areaUnits);
 }
 
 double ContainAdapter::getFinalFireSize(AreaUnits::AreaUnitsEnum areaUnits) const

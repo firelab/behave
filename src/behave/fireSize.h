@@ -55,7 +55,6 @@ private:
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
 
-
     // Inputs
     double effectiveWindSpeed_;
     double forwardSpreadRate_;
