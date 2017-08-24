@@ -127,7 +127,6 @@ private:
     double reportRate_;
     double diurnalROS_[24];
     double lwRatio_;
-    Sem::ContainSim containSim_;
     Sem::ContainForce force_;
     ContainTactic::ContainTacticEnum tactic_;
     double attackDistance_;

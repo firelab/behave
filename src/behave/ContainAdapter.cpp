@@ -112,24 +112,24 @@ void ContainAdapter::doContainRun()
             diurnalROS_[i] = reportRate_;
         }
 
-        Sem::Contain::ContainTactic tactic = static_cast<Sem::Contain::ContainTactic>(tactic_);
-      
         int fireStartTime = 0;
-        containSim_.updateInputs(reportSize_, reportRate_, diurnalROS_, fireStartTime, force_, lwRatio_,
+        Sem::Contain::ContainTactic tactic = static_cast<Sem::Contain::ContainTactic>(tactic_);
+
+        Sem::ContainSim containSim(reportSize_, reportRate_, diurnalROS_, fireStartTime, force_, lwRatio_,
             tactic, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
             maxFireTime_);
 
         // Do Contain simulation
-        containSim_.run();
+        containSim.run();
 
         // Get results from Contain simulation
-        finalCost_ = containSim_.finalFireCost();
-        finalFireLineLength_ = LengthUnits::toBaseUnits(containSim_.finalFireLine(), LengthUnits::Chains);
-        perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim_.finalFirePerimeter(), LengthUnits::Chains);
-        finalFireSize_ = AreaUnits::toBaseUnits(containSim_.finalFireSize(), AreaUnits::Acres);
-        finalContainmentArea_ = AreaUnits::toBaseUnits(containSim_.finalFireSweep(), AreaUnits::Acres);
-        finalTime_ = TimeUnits::toBaseUnits(containSim_.finalFireTime(), TimeUnits::Minutes);
-        containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim_.status());
+        finalCost_ = containSim.finalFireCost();
+        finalFireLineLength_ = LengthUnits::toBaseUnits(containSim.finalFireLine(), LengthUnits::Chains);
+        perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim.finalFirePerimeter(), LengthUnits::Chains);
+        finalFireSize_ = AreaUnits::toBaseUnits(containSim.finalFireSize(), AreaUnits::Acres);
+        finalContainmentArea_ = AreaUnits::toBaseUnits(containSim.finalFireSweep(), AreaUnits::Acres);
+        finalTime_ = TimeUnits::toBaseUnits(containSim.finalFireTime(), TimeUnits::Minutes);
+        containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
 
         // Calculate effective windspeed needed for Size module
         // Find the effective windspeed
