@@ -213,32 +213,27 @@ double Surface::getMidflameWindspeed() const
 
 double Surface::getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    double myElapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return LengthUnits::fromBaseUnits(size_.getEllipticalA(myElapsedTime), lengthUnits);
+    return LengthUnits::fromBaseUnits(size_.getEllipticalA(elapsedTime, timeUnits), lengthUnits);
 }
 
 double Surface::getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    double myElapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return LengthUnits::fromBaseUnits(size_.getEllipticalB(myElapsedTime), lengthUnits);
+    return LengthUnits::fromBaseUnits(size_.getEllipticalB(elapsedTime, timeUnits), lengthUnits);
 }
 
 double Surface::getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    double myElapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return LengthUnits::fromBaseUnits(size_.getEllipticalC(myElapsedTime), lengthUnits);
+    return LengthUnits::fromBaseUnits(size_.getEllipticalC(elapsedTime, timeUnits), lengthUnits);
 }
 
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    double myElapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return LengthUnits::fromBaseUnits(size_.calculateFirePerimeter(myElapsedTime), lengthUnits);
+    return LengthUnits::fromBaseUnits(size_.calculateFirePerimeter(elapsedTime, timeUnits), lengthUnits);
 }
 
 double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    double myElapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return AreaUnits::fromBaseUnits(size_.calculateFireArea(myElapsedTime), areaUnits);
+    return AreaUnits::fromBaseUnits(size_.calculateFireArea(elapsedTime, timeUnits), areaUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover)

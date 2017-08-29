@@ -191,15 +191,11 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     double elapsedTime = surfaceInputs_->getElapsedTime();
 
     // Calculate fire ellipse and related properties
-    size_->calculateFireBasicDimensions(effectiveWindSpeed_, forwardSpreadRate_);
+    size_->calculateFireBasicDimensions(effectiveWindSpeed_, SpeedUnits::MilesPerHour, forwardSpreadRate_, SpeedUnits::FeetPerMinute);
 
     fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
     eccentricity_ = size_->getEccentricity();
     backingSpreadRate_ = size_->getBackingSpreadRate();
-    //ellipticalA_ = size_->getEllipticalA();
-    //ellipticalB_ = size_->getEllipticalB();
-    //ellipticalC_ = size_->getEllipticalC();
-    //size_->getFirePerimeter();
 
     calculateFireFirelineIntensity(forwardSpreadRate_);
     calculateFlameLength();

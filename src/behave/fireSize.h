@@ -35,19 +35,19 @@ class FireSize
 public:
     FireSize();
     ~FireSize();
-    void calculateFireBasicDimensions(double effectiveWindSpeed, double forwardSpreadRate);
+    void calculateFireBasicDimensions(double effectiveWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedRateUnits, double forwardSpreadRate, SpeedUnits::SpeedUnitsEnum spreadRateUnits);
 
     double getFireLengthToWidthRatio() const;
     double getEccentricity() const;
     double getBackingSpreadRate() const;
-    double getEllipticalA(double elapsedTime) const;
-    double getEllipticalB(double elapsedTime) const;
-    double getEllipticalC(double elapsedTime) const;
-    double getFireLength(double elapsedTime) const;
-    double getMaxFireWidth(double elapsedTime) const;
+    double getEllipticalA(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getEllipticalB(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getEllipticalC(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFireLength(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getMaxFireWidth(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 
-    double calculateFirePerimeter(double elapsedTime) const;
-    double calculateFireArea(double elapsedTime) const;
+    double calculateFirePerimeter(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double calculateFireArea(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 
 private:
     void calculateFireLengthToWidthRatio();
@@ -56,9 +56,9 @@ private:
     void calculateBackingSpreadRate();
 
     // Inputs
-    double effectiveWindSpeed_;
-    double forwardSpreadRate_;
-    double elapsedTime_;
+    double effectiveWindSpeed_; // internally stored in mph
+    double forwardSpreadRate_; // internally stored in ft/min
+    double elapsedTime_; // internally stored in minutes
 
     // Outputs
     double ellipticalA_; // semi-minor axis of fire ellipse

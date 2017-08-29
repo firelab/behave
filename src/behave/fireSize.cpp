@@ -12,10 +12,18 @@ FireSize::~FireSize()
 
 }
 
-void FireSize::calculateFireBasicDimensions(double effectiveWindSpeed, double forwardSpreadRate)
+void FireSize::calculateFireBasicDimensions(double effectiveWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedRateUnits, double forwardSpreadRate, SpeedUnits::SpeedUnitsEnum spreadRateUnits)
 {
-    effectiveWindSpeed_ = effectiveWindSpeed;
-    forwardSpreadRate_ = forwardSpreadRate; // spread rate is feet per minute
+    forwardSpreadRate_ = SpeedUnits::toBaseUnits(forwardSpreadRate, spreadRateUnits); // spread rate is now feet per minute
+    if (windSpeedRateUnits != SpeedUnits::MilesPerHour)
+    {
+        effectiveWindSpeed_ = SpeedUnits::toBaseUnits(effectiveWindSpeed, windSpeedRateUnits); // wind speed is now feet per minute
+        effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::MilesPerHour); // wind speed is now miles per hour
+    }
+    else
+    {
+        effectiveWindSpeed_ = effectiveWindSpeed;
+    }
 
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
@@ -39,28 +47,33 @@ double FireSize::getBackingSpreadRate() const
     return backingSpreadRate_;
 }
 
-double FireSize::getEllipticalA(double elapsedTime) const
+double FireSize::getEllipticalA(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     return ellipticalA_ * elapsedTime;
 }
 
-double FireSize::getEllipticalB(double elapsedTime) const
+double FireSize::getEllipticalB(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     return ellipticalB_ * elapsedTime;
 }
 
-double FireSize::getEllipticalC(double elapsedTime) const
+double FireSize::getEllipticalC(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     return ellipticalC_ * elapsedTime;
 }
 
-double FireSize::getFireLength(double elapsedTime) const
+double FireSize::getFireLength(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     return ellipticalB_ * elapsedTime * 2.0;
 }
 
-double FireSize::getMaxFireWidth(double elapsedTime) const
+double FireSize::getMaxFireWidth(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     return ellipticalA_ * elapsedTime * 2.0;
 }
 
@@ -106,9 +119,10 @@ void FireSize::calculateBackingSpreadRate()
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
 }
 
-double FireSize::calculateFirePerimeter(double elapsedTime) const
+double FireSize::calculateFirePerimeter(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     double perimeter = 0;
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     double myEllipticalA = ellipticalA_ * elapsedTime;
     double myEllipticalB = ellipticalB_ * elapsedTime;
     if((myEllipticalA + myEllipticalB) > 1.0e-07)
@@ -123,7 +137,8 @@ double FireSize::calculateFirePerimeter(double elapsedTime) const
     return perimeter;
 }
 
-double FireSize::calculateFireArea(double elapsedTime) const
+double FireSize::calculateFireArea(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
+    elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
     return M_PI * ellipticalA_ * ellipticalB_ * elapsedTime * elapsedTime;
 }

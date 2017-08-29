@@ -134,11 +134,10 @@ void ContainAdapter::doContainRun()
         // Calculate effective windspeed needed for Size module
         // Find the effective windspeed
         double effectiveWindspeed = 4.0 * (lwRatio_ - 1.0);
-        double reportRateInFeetPerMinute = SpeedUnits::toBaseUnits(reportRate_, SpeedUnits::ChainsPerHour);
-        size_.calculateFireBasicDimensions(effectiveWindspeed, reportRateInFeetPerMinute);
+        size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
         // Find the time elapsed to created the fire at time of report 
-        double ellipticalA = size_.getEllipticalA(1); // get base elliptical dimensions
-        double ellipticalB = size_.getEllipticalB(1); // get base elliptical dimensions
+        double ellipticalA = size_.getEllipticalA(1, TimeUnits::Minutes); // get base elliptical dimensions
+        double ellipticalB = size_.getEllipticalB(1, TimeUnits::Minutes); // get base elliptical dimensions
 
         // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
         // A = pi*a*b*s^2
@@ -160,8 +159,8 @@ void ContainAdapter::doContainRun()
             intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
             totalElapsedTime = intialElapsedTime + firstArrivalTime;
             // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
-            perimeterAtInitialAttack_ = size_.calculateFirePerimeter(totalElapsedTime);
-            fireSizeAtIntitialAttack_ = size_.calculateFireArea(totalElapsedTime);
+            perimeterAtInitialAttack_ = size_.calculateFirePerimeter(totalElapsedTime, TimeUnits::Minutes);
+            fireSizeAtIntitialAttack_ = size_.calculateFireArea(totalElapsedTime, TimeUnits::Minutes);
         }     
     }
 }
