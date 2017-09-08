@@ -1,2 +1,2 @@
 # Behave
-New implementation of BehavePlus
+A new implementation of the extended Rothermel model
