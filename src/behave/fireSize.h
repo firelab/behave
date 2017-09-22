@@ -39,15 +39,15 @@ public:
 
     double getFireLengthToWidthRatio() const;
     double getEccentricity() const;
-    double getBackingSpreadRate() const;
-    double getEllipticalA(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getEllipticalB(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getEllipticalC(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getFireLength(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getMaxFireWidth(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFireLength(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getMaxFireWidth(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 
-    double calculateFirePerimeter(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double calculateFireArea(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 
 private:
     void calculateFireLengthToWidthRatio();

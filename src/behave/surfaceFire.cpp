@@ -195,7 +195,8 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
     fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
     eccentricity_ = size_->getEccentricity();
-    backingSpreadRate_ = size_->getBackingSpreadRate();
+
+    backingSpreadRate_ = size_->getBackingSpreadRate(SpeedUnits::FeetPerMinute);
 
     calculateFireFirelineIntensity(forwardSpreadRate_);
     calculateFlameLength();

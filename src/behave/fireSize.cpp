@@ -42,39 +42,39 @@ double FireSize::getEccentricity() const
     return eccentricity_;
 }
 
-double FireSize::getBackingSpreadRate() const
+double FireSize::getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
-    return backingSpreadRate_;
+    return SpeedUnits::fromBaseUnits(backingSpreadRate_, spreadRateUnits);
 }
 
-double FireSize::getEllipticalA(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return ellipticalA_ * elapsedTime;
+    return LengthUnits::fromBaseUnits((ellipticalA_ * elapsedTime), lengthUnits);
 }
 
-double FireSize::getEllipticalB(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits ,double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return ellipticalB_ * elapsedTime;
+    return  LengthUnits::fromBaseUnits((ellipticalB_ * elapsedTime), lengthUnits);
 }
 
-double FireSize::getEllipticalC(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return ellipticalC_ * elapsedTime;
+    return LengthUnits::fromBaseUnits((ellipticalC_ * elapsedTime), lengthUnits);
 }
 
-double FireSize::getFireLength(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getFireLength(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return ellipticalB_ * elapsedTime * 2.0;
+    return LengthUnits::fromBaseUnits((ellipticalB_ * elapsedTime * 2.0), lengthUnits);;
 }
 
-double FireSize::getMaxFireWidth(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getMaxFireWidth(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return ellipticalA_ * elapsedTime * 2.0;
+    return LengthUnits::fromBaseUnits((ellipticalA_ * elapsedTime * 2.0), lengthUnits);;
 }
 
 void FireSize::calculateFireLengthToWidthRatio()
@@ -119,7 +119,7 @@ void FireSize::calculateBackingSpreadRate()
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
 }
 
-double FireSize::calculateFirePerimeter(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     double perimeter = 0;
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
@@ -134,11 +134,11 @@ double FireSize::calculateFirePerimeter(double elapsedTime, TimeUnits::TimeUnits
         double h = aMinusBSquared / aPlusBSquared;
         perimeter = M_PI * aPlusB * (1 + (h / 4.0) + ((h*h) / 64.0));
     } 
-    return perimeter;
+    return LengthUnits::fromBaseUnits(perimeter, lengthUnits);
 }
 
-double FireSize::calculateFireArea(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+double FireSize::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    return M_PI * ellipticalA_ * ellipticalB_ * elapsedTime * elapsedTime;
+    return AreaUnits::fromBaseUnits(M_PI * ellipticalA_ * ellipticalB_ * elapsedTime * elapsedTime, areaUnits);
 }

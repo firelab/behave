@@ -213,27 +213,27 @@ double Surface::getMidflameWindspeed() const
 
 double Surface::getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return LengthUnits::fromBaseUnits(size_.getEllipticalA(elapsedTime, timeUnits), lengthUnits);
+    return size_.getEllipticalA(lengthUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return LengthUnits::fromBaseUnits(size_.getEllipticalB(elapsedTime, timeUnits), lengthUnits);
+    return size_.getEllipticalB(lengthUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return LengthUnits::fromBaseUnits(size_.getEllipticalC(elapsedTime, timeUnits), lengthUnits);
+    return size_.getEllipticalC(lengthUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return LengthUnits::fromBaseUnits(size_.calculateFirePerimeter(elapsedTime, timeUnits), lengthUnits);
+    return size_.getFirePerimeter(lengthUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return AreaUnits::fromBaseUnits(size_.calculateFireArea(elapsedTime, timeUnits), areaUnits);
+    return size_.getFireArea(areaUnits, elapsedTime, timeUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover)
