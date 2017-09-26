@@ -688,3 +688,53 @@ double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
 
     return value;
 }
+
+double HeatOfCombustionUnits::toBaseUnits(double value, HeatOfCombustionUnitsEnum units)
+{
+    const double  KILOJOULES_PER_KILOGRAM_TO_BTUS_PER_POUND = 0.42992261392949266;
+
+    switch (units)
+    {
+        case BtusPerPound:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case KilojoulesPerKilogram:
+        {
+            value *= KILOJOULES_PER_KILOGRAM_TO_BTUS_PER_POUND;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}
+
+double HeatOfCombustionUnits::fromBaseUnits(double value, HeatOfCombustionUnitsEnum units)
+{
+    const double BTUS_PER_POUND_TO_KILOJOULES_PER_KILOGRAM = 2.326;
+
+    switch (units)
+    {
+        case BtusPerPound:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case KilojoulesPerKilogram:
+        {
+            value *= BTUS_PER_POUND_TO_KILOJOULES_PER_KILOGRAM;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}

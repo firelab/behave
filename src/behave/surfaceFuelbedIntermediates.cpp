@@ -236,13 +236,13 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     else
     {
         // Proceed as normal
-        loadDead_[0] = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber_);
-        loadDead_[1] = fuelModelSet_->getFuelLoadTenHour(fuelModelNumber_);
-        loadDead_[2] = fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber_);
+        loadDead_[0] = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber_, LoadingUnits::PoundsPerSquareFoot);
+        loadDead_[1] = fuelModelSet_->getFuelLoadTenHour(fuelModelNumber_, LoadingUnits::PoundsPerSquareFoot);
+        loadDead_[2] = fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber_, LoadingUnits::PoundsPerSquareFoot);
         loadDead_[3] = 0.0;
 
-        loadLive_[0] = fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber_);
-        loadLive_[1] = fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber_);
+        loadLive_[0] = fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber_, LoadingUnits::PoundsPerSquareFoot);
+        loadLive_[1] = fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber_, LoadingUnits::PoundsPerSquareFoot);
         loadLive_[2] = 0.0;
         loadLive_[3] = 0.0;
     }
@@ -292,7 +292,7 @@ void SurfaceFuelbedIntermediates::setDeadFuelMoistureOfExtinction()
     }
     else
     {
-        moistureOfExtinction_[SurfaceInputs::FuelConstants::DEAD] = fuelModelSet_->getMoistureOfExtinctionDead(fuelModelNumber_);
+        moistureOfExtinction_[SurfaceInputs::FuelConstants::DEAD] = fuelModelSet_->getMoistureOfExtinctionDead(fuelModelNumber_, MoistureUnits::Fraction);
     }
 }
 
@@ -310,7 +310,7 @@ void SurfaceFuelbedIntermediates::setFuelbedDepth()
     }
     else
     {
-        depth_ = fuelModelSet_->getFuelbedDepth(fuelModelNumber_);
+        depth_ = fuelModelSet_->getFuelbedDepth(fuelModelNumber_, LengthUnits::Feet);
     }
 }
 
@@ -348,13 +348,13 @@ void SurfaceFuelbedIntermediates::setSAV()
     else
     {
         // Proceed as normal
-        savrDead_[0] = fuelModelSet_->getSavrOneHour(fuelModelNumber_);
+        savrDead_[0] = fuelModelSet_->getSavrOneHour(fuelModelNumber_, SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet);
         savrDead_[1] = 109.0;
         savrDead_[2] = 30.0;
-        savrDead_[3] = fuelModelSet_->getSavrLiveHerbaceous(fuelModelNumber_);
+        savrDead_[3] = fuelModelSet_->getSavrLiveHerbaceous(fuelModelNumber_, SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet);
 
-        savrLive_[0] = fuelModelSet_->getSavrLiveHerbaceous(fuelModelNumber_);
-        savrLive_[1] = fuelModelSet_->getSavrLiveWoody(fuelModelNumber_);
+        savrLive_[0] = fuelModelSet_->getSavrLiveHerbaceous(fuelModelNumber_, SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet);
+        savrLive_[1] = fuelModelSet_->getSavrLiveWoody(fuelModelNumber_, SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet);
         savrLive_[2] = 0.0;
         savrLive_[3] = 0.0;
     }
@@ -379,8 +379,8 @@ void SurfaceFuelbedIntermediates::setHeatOfCombustion()
     }
     else
     {
-        heatOfCombustionDead = fuelModelSet_->getHeatOfCombustionDead(fuelModelNumber_);
-        heatOfCombustionLive = fuelModelSet_->getHeatOfCombustionLive(fuelModelNumber_);
+        heatOfCombustionDead = fuelModelSet_->getHeatOfCombustionDead(fuelModelNumber_, HeatOfCombustionUnits::BtusPerPound);
+        heatOfCombustionLive = fuelModelSet_->getHeatOfCombustionLive(fuelModelNumber_, HeatOfCombustionUnits::BtusPerPound);
     }
 
     for (int i = 0; i < SurfaceInputs::FuelConstants::MAX_PARTICLES; i++)
@@ -811,8 +811,7 @@ void SurfaceFuelbedIntermediates::initializeMembers()
 
 double SurfaceFuelbedIntermediates::getFuelbedDepth() const
 {
-    double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber_);
-    return fuelbedDepth;
+    return fuelModelSet_->getFuelbedDepth(fuelModelNumber_, LengthUnits::Feet);
 }
 
 double SurfaceFuelbedIntermediates::getBulkDensity() const

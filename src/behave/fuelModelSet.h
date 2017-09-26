@@ -47,27 +47,28 @@ public:
     ~FuelModelSet();
    
     bool setCustomFuelModel(int fuelModelNumberIn, std::string code, std::string name,
-        double fuelBedDepth, LengthUnits::LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead, 
-        MoistureUnits::MoistureUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive, 
+        double fuelBedDepth, LengthUnits::LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead,
+        MoistureUnits::MoistureUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
+        HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits,
         double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
-        double fuelLoadLiveWoody, LoadingUnits::LoadingUnitsEnum loadingUnits, double savrOneHour, double savrLiveHerbaceous, 
+        double fuelLoadLiveWoody, LoadingUnits::LoadingUnitsEnum loadingUnits, double savrOneHour, double savrLiveHerbaceous,
         double savrLiveWoody, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits, bool isDynamic);
     bool clearCustomFuelModel(int fuelModelNumber);
 
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
-    double getFuelbedDepth(int fuelModelNumber) const;
-    double getMoistureOfExtinctionDead(int fuelModelNumber) const;;
-    double getHeatOfCombustionDead(int fuelModelNumber) const;
-    double getHeatOfCombustionLive(int fuelModelNumber) const;
-    double getFuelLoadOneHour(int fuelModelNumber) const;
-    double getFuelLoadTenHour(int fuelModelNumber) const;
-    double getFuelLoadHundredHour(int fuelModelNumber) const;
-    double getFuelLoadLiveHerbaceous(int fuelModelNumber) const;
-    double getFuelLoadLiveWoody(int fuelModelNumber) const;
-    double getSavrOneHour(int fuelModelNumber) const;
-    double getSavrLiveHerbaceous(int fuelModelNumber) const;
-    double getSavrLiveWoody(int fuelModelNumber) const;
+    double getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const;;
+    double getHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
     bool getIsDynamic(int fuelModelNumber) const;
     bool isFuelModelDefined(int fuelModelNumber) const;
 
@@ -77,7 +78,7 @@ private:
     void initializeAllFuelModelRecords();
     void populateFuelModels();
     void markAsReservedModel(int fuelModelNumber);
-    void setFuelModelRecord(int fuelModelCodeIn, std::string code, std::string name,
+    void setFuelModelRecord(int fuelModelNumber, std::string code, std::string name,
         double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
         double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
         double fuelLoadLiveWoody, double savrOneHourFuel, double savrLiveHerbaceous, double savrLiveWoody,
@@ -105,7 +106,7 @@ private:
         bool isDefined_;                    // If true, record has been populated with values for its fields
     };
 
-    std::vector<FuelModelRecord> FuelModelArray;
+    std::vector<FuelModelRecord> FuelModelArray_;
 
 };
 

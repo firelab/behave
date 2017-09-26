@@ -407,7 +407,7 @@ void SurfaceFire::calculateSlopeFactor()
 double SurfaceFire::getFuelbedDepth() const
 {
     int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
-    double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber);
+    double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber, LengthUnits::Feet);
     return fuelbedDepth;
 }
 

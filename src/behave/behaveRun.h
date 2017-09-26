@@ -51,11 +51,11 @@ public:
 
     // FuelModelSet Methods
     bool isFuelModelDefined(int fuelModelNumber) const;
-	double getFuelLoadOneHour(int fuelModelNumber) const;
-	double getFuelLoadTenHour(int fuelModelNumber) const;
-	double getFuelLoadHundredHour(int fuelModelNumber) const;
-	double getFuelLoadLiveHerbaceous(int fuelModelNumber) const;
-	double getFuelLoadLiveWoody(int fuelModelNumber) const;
+	double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+	double getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+	double getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+	double getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+	double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
     void setFuelModelSet(FuelModelSet& fuelModelSet);
 

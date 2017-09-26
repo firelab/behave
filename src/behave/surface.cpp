@@ -66,12 +66,12 @@ void Surface::memberwiseCopyAssignment(const Surface& rhs)
 
 bool Surface::isAllFuelLoadZero(int fuelModelNumber)
 {
-    // if any of these loads are non-zero, load
-    bool isNonZeroLoad = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber)
-            || fuelModelSet_->getFuelLoadTenHour(fuelModelNumber)
-            || fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber)
-            || fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber)
-            || fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber);
+    // if  all loads are zero, skip calculations
+    bool isNonZeroLoad = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModelSet_->getFuelLoadTenHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot);
 
     bool isZeroLoad = !isNonZeroLoad;
 

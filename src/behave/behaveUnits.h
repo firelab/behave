@@ -159,12 +159,23 @@ struct DensityUnits
 {
     enum DensityUnitsEnum
     {
-        poundsPerCubicFoot, // base density unit
+        PoundsPerCubicFoot, // base density unit
         KilogramsPerCubicMeter
     };
 
     static double toBaseUnits(double value, DensityUnitsEnum units);
     static double fromBaseUnits(double value, DensityUnitsEnum units);
+};
+
+struct HeatOfCombustionUnits
+{
+    enum HeatOfCombustionUnitsEnum
+    {
+        BtusPerPound, // base heat of combustion unit
+        KilojoulesPerKilogram
+    };
+    static double toBaseUnits(double value, HeatOfCombustionUnitsEnum units);
+    static double fromBaseUnits(double value, HeatOfCombustionUnitsEnum units);
 };
 
 struct TemperatureUnits

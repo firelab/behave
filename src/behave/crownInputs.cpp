@@ -45,7 +45,7 @@ void CrownInputs::initializeMembers()
     canopyUserProvidedFirelineIntensity_ = 0;
     moistureFoliar_ = 0;
     canopyBaseHeightUnits_ = LengthUnits::Feet;
-    canopyBulkDensityUnits_ = DensityUnits::poundsPerCubicFoot;
+    canopyBulkDensityUnits_ = DensityUnits::PoundsPerCubicFoot;
 }
 
 double CrownInputs::getCanopyBaseHeight() const

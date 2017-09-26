@@ -79,27 +79,27 @@ bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
 }
 
-double BehaveRun::getFuelLoadOneHour(int fuelModelNumber) const
+double BehaveRun::getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadOneHour(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadOneHour(fuelModelNumber, loadingUnits);
 }
 
-double BehaveRun::getFuelLoadTenHour(int fuelModelNumber) const
+double BehaveRun::getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadTenHour(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadTenHour(fuelModelNumber, loadingUnits);
 }
 
-double BehaveRun::getFuelLoadHundredHour(int fuelModelNumber) const
+double BehaveRun::getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber, loadingUnits);
 }
 
-double BehaveRun::getFuelLoadLiveHerbaceous(int fuelModelNumber) const
+double BehaveRun::getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber, loadingUnits);
 }
 
-double BehaveRun::getFuelLoadLiveWoody(int fuelModelNumber) const
+double BehaveRun::getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber);
+    return fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber, loadingUnits);
 }
