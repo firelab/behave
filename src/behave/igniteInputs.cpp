@@ -17,6 +17,18 @@ IgniteInputs::~IgniteInputs()
 
 }
 
+void IgniteInputs::initializeMembers()
+{
+    moistureOneHour_ = 0.0;
+    moistureHundredHour_ = 0.0;
+    airTemperature_ = 0.0;
+    sunShade_ = 0.0;
+    fuelBedType_ = IgnitionFuelBedType::PonderosaPineLitter;
+    duffDepth_ = 0.0;
+
+    lightningChargeType_ = LightningCharge::Unknown;
+}
+
 void IgniteInputs::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits,
     double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits,
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,

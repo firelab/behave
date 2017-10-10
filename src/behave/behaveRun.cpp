@@ -74,6 +74,15 @@ void BehaveRun::setFuelModelSet(FuelModelSet& fuelModelSet)
     crown.setFuelModelSet(fuelModelSet);
 }
 
+void BehaveRun::reinitialize()
+{
+    surface.initializeMembers();
+    crown.initializeMembers();
+    spot.initializeMembers();
+    ignite.initializeMembers();
+    safety.initializeMembers();
+}
+
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
     return fuelModelSet_->isFuelModelDefined(fuelModelNumber);

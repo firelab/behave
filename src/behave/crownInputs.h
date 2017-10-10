@@ -47,12 +47,12 @@ public:
     CrownInputs();
     ~CrownInputs();
 
-    void setCanopyBaseHeight(double canopyBaseHeight);
-    void setCanopyBulkDensity(double canopyBulkDensity);
+    void initializeMembers();
+
+    void setCanopyBaseHeight(double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
+    void setCanopyBulkDensity(double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyFlameLength(double canopyUserProvidedFlameLength);
     void setCanopyFirelineIntensity(double canopyUserProvidedFirelineIntensity);
-    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits);
-    void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
     void setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits);
 
     double getCanopyBaseHeight() const;
@@ -63,17 +63,15 @@ public:
     LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
 
-    void updateCrownInputs(double canopyBaseHeight, double canopyBulkDensity, double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void updateCrownInputs(double canopyBaseHeight, LengthUnits::LengthUnitsEnum heightUnits, 
+        double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits, double moistureFoliar, 
+        MoistureUnits::MoistureUnitsEnum moistureUnits);
 
 private:
-    void initializeMembers();
-
     double canopyBaseHeight_; //Canopy base height(ft)
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
     double canopyUserProvidedFlameLength_; // Flame length(ft)
     double canopyUserProvidedFirelineIntensity_; // Fireline intensity(ft)
-    LengthUnits::LengthUnitsEnum canopyBaseHeightUnits_; // Units in which canopy base height is measured
-    DensityUnits::DensityUnitsEnum canopyBulkDensityUnits_;   // Units in which density is measured
     double moistureFoliar_; // Tree foliar moisture content (lb water/lb foliage)
 
 };

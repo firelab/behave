@@ -43,6 +43,8 @@ public:
     Spot(const Spot& rhs);
     Spot& operator=(const Spot& rhs);
 
+    void initializeMembers();
+
     void calculateSpottingDistanceFromBurningPile();
     void calculateSpottingDistanceFromSurfaceFire();
     void calculateSpottingDistanceFromTorchingTrees();
@@ -101,7 +103,6 @@ public:
 
 private:
     void memberwiseCopyAssignment(const Spot& rhs);
-    void initializeMembers();
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
     double spotDistanceMountainTerrain(double flatDistance, SpotFireLocation::SpotFireLocationEnum location, 

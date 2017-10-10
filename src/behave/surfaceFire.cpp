@@ -125,7 +125,7 @@ void SurfaceFire::calculateResidenceTime()
 
 void SurfaceFire::calculateFireFirelineIntensity(double forwardSpreadRate)
 {
-    double secondsPerMinute = 60.0;
+    double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
     firelineIntensity_ = forwardSpreadRate * reactionIntensity_ * residenceTime_ / secondsPerMinute;
 }
 

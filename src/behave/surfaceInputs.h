@@ -94,7 +94,8 @@ class SurfaceInputs
 {
 public:
     SurfaceInputs();
-  
+    void initializeMembers();
+
     // Main Surface module inputs setters 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
@@ -234,9 +235,7 @@ public:
         };
     };
 
-private:
-    void initializeMembers();
-   
+private:   
     // Main Suface module inputs
     int fuelModelNumber_;               // 1 to 256
     double moistureOneHour_;            // 1% to 60%

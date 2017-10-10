@@ -70,6 +70,18 @@ double Safety::getSafetyZoneArea(AreaUnits::AreaUnitsEnum areaUnits) const
     return AreaUnits::fromBaseUnits(safetyZoneArea_, areaUnits);
 }
 
+void Safety::initializeMembers()
+{
+    flameHeight_ = 0; 
+    numberOfPersonnel_ = 0;
+    areaPerPerson_ = 0;
+    numberOfEquipment_ = 0;
+    areaPerEquipment_ = 0;
+    separationDistance_ = 0;
+    safetyZoneRadius_ = 0;
+    safetyZoneArea_ = 0;
+}
+
 void Safety::calculateSafetyZoneSeparationDistance()
 {
     separationDistance_ = 4.0 * flameHeight_;

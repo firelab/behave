@@ -40,6 +40,8 @@ public:
     Ignite();
     ~Ignite();
 
+    void initializeMembers();
+
     double calculateFirebrandIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits);
     double calculateLightningIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits);
 

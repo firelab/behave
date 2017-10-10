@@ -53,32 +53,31 @@ public:
 
     void doCrownRun();
   
+    void initializeMembers();
+
     // CROWN Module Setters
     void updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar,
         MoistureUnits::MoistureUnitsEnum  moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
-        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBaseHeight, double canopyBulkDensity);
-    void setCanopyBaseHeight(double canopyBaseHeight);
-    void setCanopyBulkDensity(double canopyBulkDensity);
+        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight, double canopyBaseHeight,
+        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio,  double canopyBulkDensity,
+        DensityUnits::DensityUnitsEnum densityUnits);
+    void setCanopyBaseHeight(double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
+    void setCanopyBulkDensity(double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
     void setMoistureFoliar(double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setCanopyBulkDensityUnits(DensityUnits::DensityUnitsEnum densityUnits);
-    void setCanopyBaseHeightUnits(LengthUnits::LengthUnitsEnum canopyBaseHeightUnits);
 
     // Crown Module Getters
     double getCanopyBaseHeight() const;
     double getCanopyBulkDensity() const;
-    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum desiredUnits) const;
-    double getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
-    double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
-    double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
+    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    //double getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
+    double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getCrownFirelineIntensity() const;
-    double getCrownFlameLength() const;
+    double getCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     FireType::FireTypeEnum getFireType() const;
-    DensityUnits::DensityUnitsEnum getCanopyBulkDensityUnits() const;
-    LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
 
     double getCrownFireLengthToWidthRatio() const;
 
@@ -128,7 +127,6 @@ private:
     Surface surface_;
 
     // Private methods
-    void initializeMembers();
     void memberwiseCopyAssignment(const Crown& rhs);
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();

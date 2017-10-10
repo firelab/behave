@@ -54,6 +54,7 @@ public:
     double calculateFlameLength(double firelineIntensity);
 
     void setFuelModelSet(FuelModelSet& fuelModelSet);
+    void initializeMembers();
 
     // SurfaceFire getters
     double getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
@@ -62,7 +63,7 @@ public:
     double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
-    double getFirelineIntensity() const;
+    double getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getHeatPerUnitArea() const;
     double getMidflameWindspeed() const;
     double getResidenceTime() const;

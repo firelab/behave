@@ -49,6 +49,8 @@ public:
         double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
     double calculateFlameLength(double firelineIntensity);
+   
+    void initializeMembers();
     void skipCalculationForZeroLoad();
 
     // Public getters
@@ -90,7 +92,6 @@ protected:
 
 private:
     void memberwiseCopyAssignment(const SurfaceFire& rhs);
-    void initializeMembers();
     void calculateHeatPerUnitArea();
     void calculateWindAdjustmentFactor();
     void calculateWindFactor();
@@ -126,7 +127,7 @@ private:
     double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
     double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
     double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
-    double spreadRateInDirectionOfInterest_;								// spreadRateInDirectionOfInterest
+    double spreadRateInDirectionOfInterest_;				// spreadRateInDirectionOfInterest
     double heatPerUnitArea_;                                // Heat per unit area (Btu/ft^2)
     double fireLengthToWidthRatio_;
     double residenceTime_;

@@ -127,9 +127,9 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     double canopyBulkDensity = 0.03;
     
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
-        moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
-        windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits,
-        crownRatio, canopyBaseHeight, canopyBulkDensity);
+        moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, 
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyBaseHeight, canopyHeightUnits, 
+        crownRatio, canopyBulkDensity, DensityUnits::PoundsPerCubicFoot);
 }
 
 BOOST_FIXTURE_TEST_SUITE(BehaveRunTestSuite, BehaveRunTest)
@@ -414,7 +414,7 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
 BOOST_AUTO_TEST_CASE(firelineIntensityTest)
 {
     double observedFirelineIntensity = 0.0;
-    double expectedFirelineIntensity = 598.339039;
+    double expectedFirelineIntensity = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
@@ -422,8 +422,18 @@ BOOST_AUTO_TEST_CASE(firelineIntensityTest)
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
-    observedFirelineIntensity = behaveRun.surface.getFirelineIntensity();
+    observedFirelineIntensity = behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
+    expectedFirelineIntensity = 598.339039;
     BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
+
+    // Test upslope oriented mode, 20 foot uplsope wind 
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedFirelineIntensity = behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
+    expectedFirelineIntensity = 2072.730450;
+    BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
+
 }
 
 BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
@@ -533,7 +543,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
 
     expectedCrownFlameLength = 29.320557;
-    observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getCrownFlameLength());
+    observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getCrownFlameLength(LengthUnits::Feet));
     BOOST_CHECK_CLOSE(observedCrownFlameLength, expectedCrownFlameLength, ERROR_TOLERANCE);
 
     expectedCrownFirelineIntensity = 1775.061222;
@@ -568,9 +578,9 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     canopyHeight = 60;
     behaveRun.crown.setCanopyHeight(canopyHeight, LengthUnits::Feet);
     canopyBaseHeight = 30;
-    behaveRun.crown.setCanopyBaseHeight(canopyBaseHeight);
+    behaveRun.crown.setCanopyBaseHeight(canopyBaseHeight, LengthUnits::Feet);
     canopyBulkDensity = 0.06;
-    behaveRun.crown.setCanopyBulkDensity(0.06);
+    behaveRun.crown.setCanopyBulkDensity(0.06, DensityUnits::PoundsPerCubicFoot);
     behaveRun.crown.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRun();
     expectedFireType = (int)FireType::ConditionalCrownFire;
@@ -792,7 +802,7 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     behaveRun.contain.setTactic(ContainTactic::HeadAttack);
     behaveRun.contain.addResource(2, 8, TimeUnits::Hours, 20, SpeedUnits::ChainsPerHour, "test");
     behaveRun.contain.doContainRun();
-    behaveRun.contain.removeAllResources();
+    //behaveRun.contain.removeAllResources();
 
     expectedFinalFireLineLength = 39.539849615;
     expectedPerimeterAtInitialAttack = 36.694893;

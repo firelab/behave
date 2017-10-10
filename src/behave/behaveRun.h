@@ -58,6 +58,7 @@ public:
 	double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
     void setFuelModelSet(FuelModelSet& fuelModelSet);
+    void reinitialize();
 
  // SURFACE Module
 Surface surface;

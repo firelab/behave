@@ -178,6 +178,20 @@ struct HeatOfCombustionUnits
     static double fromBaseUnits(double value, HeatOfCombustionUnitsEnum units);
 };
 
+struct FirelineIntensityUnits
+{
+    enum FirelineIntensityUnitsEnum
+    {
+        BtusPerFootPerSecond,  // base fireline intensity unit
+        BtusPerFootPerMinute,
+        KilojoulesPerMeterPerSecond,
+        KilojoulesPerMeterPerMinute,
+        KilowattsPerMeter
+    };
+    static double toBaseUnits(double value, FirelineIntensityUnitsEnum units);
+    static double fromBaseUnits(double value, FirelineIntensityUnitsEnum units);
+};
+
 struct TemperatureUnits
 {
     enum TemperatureUnitsEnum

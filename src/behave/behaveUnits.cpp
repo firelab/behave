@@ -738,3 +738,89 @@ double HeatOfCombustionUnits::fromBaseUnits(double value, HeatOfCombustionUnitsE
 
     return value;
 }
+
+double FirelineIntensityUnits::toBaseUnits(double value, FirelineIntensityUnitsEnum units)
+{
+    const double BTUS_PER_FOOT_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND = 0.01666666666666667;
+    const double KILOJOULES_PER_METER_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND = 0.0048111983491207696;
+    const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.28867190094724617;
+
+    switch (units)
+    {
+        
+        case BtusPerFootPerSecond:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case BtusPerFootPerMinute:
+        {
+            value *= BTUS_PER_FOOT_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND;
+            break;
+        }
+        case KilojoulesPerMeterPerSecond:
+        {
+            value *= KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND;
+            break;
+        }
+        case KilojoulesPerMeterPerMinute:
+        {
+            value *= KILOJOULES_PER_METER_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND;
+            break;
+        }
+        case KilowattsPerMeter:
+        {
+            value *= KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}
+
+double FirelineIntensityUnits::fromBaseUnits(double value, FirelineIntensityUnitsEnum units)
+{
+    const double BTUS_PER_FOOT_PER_SECOND_TO_BTUS_PER_FOOT_PER_MINUTE = 60;
+    const double BTUS_PER_FOOT_PER_SECOND_TO_KILOJOULES_PER_METER_PER_MINUTE = 207.84842516059365;
+    const double BTUS_PER_FOOT_PER_SECOND_TO_KILOWATTS_PER_METER = 3.4641404193432275;
+
+    switch (units)
+    {
+        
+        case BtusPerFootPerSecond:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case BtusPerFootPerMinute:
+        {
+            value *= BTUS_PER_FOOT_PER_SECOND_TO_BTUS_PER_FOOT_PER_MINUTE;
+            break;
+        }
+        case KilojoulesPerMeterPerSecond:
+        {
+            value *= BTUS_PER_FOOT_PER_SECOND_TO_KILOWATTS_PER_METER;
+            break;
+        }
+        case KilojoulesPerMeterPerMinute:
+        {
+            value *= BTUS_PER_FOOT_PER_SECOND_TO_KILOJOULES_PER_METER_PER_MINUTE;
+            break;
+        }
+        case KilowattsPerMeter:
+        {
+            value *= BTUS_PER_FOOT_PER_SECOND_TO_KILOWATTS_PER_METER;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}

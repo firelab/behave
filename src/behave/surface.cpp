@@ -150,6 +150,12 @@ void Surface::setFuelModelSet(FuelModelSet& fuelModelSet)
     fuelModelSet_ = &fuelModelSet;
 }
 
+void Surface::initializeMembers()
+{
+    surfaceFire_.initializeMembers();
+    surfaceInputs_.initializeMembers();
+}
+
 double Surface::calculateSpreadRateAtVector(double directionOfinterest)
 {
     return surfaceFire_.calculateSpreadRateAtVector(directionOfinterest);
@@ -186,9 +192,9 @@ double Surface::getFireEccentricity() const
     return size_.getEccentricity();
 }
 
-double Surface::getFirelineIntensity() const
+double Surface::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
 {
-    return surfaceFire_.getFirelineIntensity();
+    return FirelineIntensityUnits::fromBaseUnits(surfaceFire_.getFirelineIntensity(), firelineIntensityUnits);
 }
 
 double Surface::getHeatPerUnitArea() const

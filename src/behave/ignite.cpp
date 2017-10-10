@@ -44,6 +44,12 @@ Ignite::~Ignite()
 
 }
 
+void Ignite::initializeMembers()
+{
+    igniteInputs_.initializeMembers();
+    fuelTemperature_ = 0;
+}
+
 double Ignite::calculateFirebrandIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits)
 {
     // Covert temperature to Celcius

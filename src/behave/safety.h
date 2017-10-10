@@ -53,6 +53,8 @@ public:
     double getSafetyZoneRadius(LengthUnits::LengthUnitsEnum lengthUnits) const;
     double getSafetyZoneArea(AreaUnits::AreaUnitsEnum areaUnits) const;
 
+    void initializeMembers();
+
 private:
     void calculateSafetyZoneSeparationDistance();
 
