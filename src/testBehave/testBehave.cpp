@@ -59,13 +59,14 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
 
     behaveRun.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
@@ -85,18 +86,20 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double windDirection = 0;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
     double firstFuelModelCoverage = 0;
+    CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits = CoverUnits::Percent;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
 
     behaveRun.surface.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
-        windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, 
-        canopyHeight, canopyHeightUnits, crownRatio);
+        windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope, 
+        slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
 }
 
 void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
@@ -120,6 +123,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
+    CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
@@ -128,7 +132,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, 
-        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyBaseHeight, canopyHeightUnits, 
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
         crownRatio, canopyBulkDensity, DensityUnits::PoundsPerCubicFoot);
 }
 
@@ -209,6 +213,21 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.503960;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
+    // Test Fuel Model 4, North oriented mode, 20 foot 90 degree wind, 0 degree aspect, 40 percent canopy cover
+    behaveRun.surface.setFuelModelNumber(4);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+    behaveRun.surface.setAspect(0);
+    behaveRun.surface.setWindDirection(90);
+    behaveRun.surface.setWindSpeed(5, SpeedUnits::MilesPerHour, WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
+    behaveRun.surface.setCanopyCover(40, CoverUnits::Percent);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 46.631688;
+    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+
 
     // Test Non-Burnable Fuel
     behaveRun.surface.setFuelModelNumber(91);
@@ -445,68 +464,70 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     setSurfaceInputsForTwoFuelModelsLowMoistureScenario(behaveRun);
 
+    CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
+
     // Do runs for first fuel model coverage 0-100 with step size 10
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(0);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(0, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(10);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(10, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 10.446373;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(20);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(20, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 12.112509;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(30);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(30, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 13.825904;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(40);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(40, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 15.532700;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(50);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(50, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 17.173897;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(60);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(60, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 18.685358;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(70);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(70, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 19.997806;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(80);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(80, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.036826;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(90);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(90, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.722861;
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 
-    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(100);
+    behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(100, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.971217;

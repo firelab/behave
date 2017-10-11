@@ -265,7 +265,7 @@ void SurfaceFire::calculateDirectionOfMaxSpread()
     if (windAndSpreadOrientation == WindAndSpreadOrientationMode::RelativeToNorth)
     {
         double aspect = surfaceInputs_->getAspect();
-        correctedWindDirection -= aspect; // wind direction is now in degrees 
+        correctedWindDirection -= aspect;
     }
 
     double windDirRadians = correctedWindDirection * M_PI / 180.0;

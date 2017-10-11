@@ -242,19 +242,14 @@ double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTi
     return size_.getFireArea(areaUnits, elapsedTime, timeUnits);
 }
 
-void Surface::setCanopyCover(double canopyCover)
+void Surface::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
 {
-    surfaceInputs_.setCanopyCover(canopyCover);
+    surfaceInputs_.setCanopyCover(canopyCover, coverUnits);
 }
 
 void Surface::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits)
 {
     surfaceInputs_.setCanopyHeight(canopyHeight, canopyHeightUnits);
-}
-
-void Surface::setCoverUnits(CoverUnits::CoverUnitsEnum coverUnits)
-{
-    surfaceInputs_.setCoverUnits(coverUnits);
 }
 
 void Surface::setCrownRatio(double crownRatio)
@@ -312,11 +307,6 @@ double Surface::getCrownRatio() const
     return surfaceInputs_.getCrownRatio();
 }
 
-LengthUnits::LengthUnitsEnum Surface::getFlameLengthUnits() const
-{
-    return surfaceInputs_.getFlameLengthUnits();
-}
-
 WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum Surface::getWindAndSpreadOrientationMode() const
 {
     return surfaceInputs_.getWindAndSpreadOrientationMode();
@@ -325,16 +315,6 @@ WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum Surface::getWindA
 WindHeightInputMode::WindHeightInputModeEnum Surface::getWindHeightInputMode() const
 {
     return surfaceInputs_.getWindHeightInputMode();
-}
-
-SlopeUnits::SlopeUnitsEnum Surface::getSlopeUnits() const
-{
-    return surfaceInputs_.getSlopeUnits();
-}
-
-SpeedUnits::SpeedUnitsEnum Surface::getSpreadRateUnits() const
-{
-    return surfaceInputs_.getSpreadRateUnits();
 }
 
 WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum Surface::getWindAdjustmentFactorCalculationMethod() const
@@ -385,11 +365,6 @@ double Surface::getAspect() const
     return surfaceInputs_.getAspect();
 }
 
-CoverUnits::CoverUnitsEnum Surface::getCoverUnits() const
-{
-    return surfaceInputs_.getCoverUnits();
-}
-
 void Surface::setFuelModelNumber(int fuelModelNumber)
 {
     surfaceInputs_.setFuelModelNumber(fuelModelNumber);
@@ -430,20 +405,10 @@ void Surface::setAspect(double aspect)
     surfaceInputs_.setAspect(aspect);
 }
 
-void Surface::setSlopeUnits(SlopeUnits::SlopeUnitsEnum slopeInputMode)
-{
-    surfaceInputs_.setSlopeUnits(slopeInputMode);
-}
-
 void Surface::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
     surfaceInputs_.setWindSpeed(windSpeed, windSpeedUnits, windHeightInputMode);
     surfaceFire_.calculateMidflameWindSpeed();
-}
-
-void Surface::setSpreadRateUnits(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
-{
-    surfaceInputs_.setSpreadRateUnits(spreadRateUnits);
 }
 
 void Surface::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
@@ -481,14 +446,9 @@ void Surface::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnu
     surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
 }
 
-void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage)
+void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, CoverUnits::CoverUnitsEnum coverUnits)
 {
-    surfaceInputs_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage);
-}
-
-void Surface::setFlameLengthUnits(LengthUnits::LengthUnitsEnum flameLengthUnits)
-{
-    surfaceInputs_.setFlameLengthUnits(flameLengthUnits);
+    surfaceInputs_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage, coverUnits);
 }
 
 void Surface::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod)
@@ -500,27 +460,28 @@ void Surface::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, d
     double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        slope, slopeUnits, aspect, canopyCover, canopyHeight, canopyHeightUnits, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
 void Surface::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
-    double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
-    MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
+    double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
+    MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage,
-    TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
-    double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover,
+    CoverUnits::CoverUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, 
-        windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, twoFuelModelsMethod, slope, slopeUnits, aspect, canopyCover, 
-        canopyHeight, canopyHeightUnits, crownRatio);
+        windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope,
+        slopeUnits, aspect, canopyCover,canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
@@ -529,12 +490,12 @@ void Surface::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, dou
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double ageOfRough,
     double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits,
-    double aspect, double canopyCover, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, slopeUnits, aspect, canopyCover, canopyHeight,
-        canopyHeightUnits, crownRatio);
+        ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, slopeUnits, aspect, canopyCover, coverUnits,
+        canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
@@ -543,12 +504,12 @@ void Surface::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, doubl
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits,
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
-    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, double canopyHeight,
+    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, aspenFireSeverity, DBH, moistureOneHour,
         moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits,
-        windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyHeight,
-        canopyHeightUnits, crownRatio);
+        windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits,
+        canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
