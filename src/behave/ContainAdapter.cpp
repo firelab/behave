@@ -276,8 +276,7 @@ Sem::Contain::ContainTactic ContainAdapter::convertAdapterTacticToSemTactic(Cont
 
 ContainAdapterEnums::ContainStatus::ContainStatusEnum ContainAdapter::convertSemStatusToAdapterStatus(Sem::Contain::ContainStatus status)
 {
-    int temp = status;
-    return (ContainAdapterEnums::ContainStatus::ContainStatusEnum)temp;
+    return (ContainAdapterEnums::ContainStatus::ContainStatusEnum)status;
 }
 
 Sem::ContainFlank ContainAdapter::converAdapterFlankToSemFlank(ContainAdapterEnums::ContainFlank::ContainFlankEnum flank)
