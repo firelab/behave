@@ -177,50 +177,50 @@ void ContainAdapter::doContainRun()
         containSim.run();
 
         // Get results from Contain simulation
-         finalCost_ = containSim.finalFireCost();
-         finalFireLineLength_ = LengthUnits::toBaseUnits(containSim.finalFireLine(), LengthUnits::Chains);
-         perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim.finalFirePerimeter(), LengthUnits::Chains);
-         finalFireSize_ = AreaUnits::toBaseUnits(containSim.finalFireSize(), AreaUnits::Acres);
-         finalContainmentArea_ = AreaUnits::toBaseUnits(containSim.finalFireSweep(), AreaUnits::Acres);
-         finalTime_ = TimeUnits::toBaseUnits(containSim.finalFireTime(), TimeUnits::Minutes);
-         containmentStatus_ = convertSemStatusToAdapterStatus(containSim.status());
-         containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
+        finalCost_ = containSim.finalFireCost();
+        finalFireLineLength_ = LengthUnits::toBaseUnits(containSim.finalFireLine(), LengthUnits::Chains);
+        perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim.finalFirePerimeter(), LengthUnits::Chains);
+        finalFireSize_ = AreaUnits::toBaseUnits(containSim.finalFireSize(), AreaUnits::Acres);
+        finalContainmentArea_ = AreaUnits::toBaseUnits(containSim.finalFireSweep(), AreaUnits::Acres);
+        finalTime_ = TimeUnits::toBaseUnits(containSim.finalFireTime(), TimeUnits::Minutes);
+        containmentStatus_ = convertSemStatusToAdapterStatus(containSim.status());
+        containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
 
-         // Calculate effective windspeed needed for Size module
-         // Find the effective windspeed
-         double effectiveWindspeed = 4.0 * (lwRatio_ - 1.0);
-         size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
-         // Find the time elapsed to created the fire at time of report 
-         LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-         double elapsedTime = 1;
-         double ellipticalA = size_.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
-         double ellipticalB = size_.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
+        // Calculate effective windspeed needed for Size module
+        // Find the effective windspeed
+        double effectiveWindspeed = 4.0 * (lwRatio_ - 1.0);
+        size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
+        // Find the time elapsed to created the fire at time of report 
+        LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+        double elapsedTime = 1;
+        double ellipticalA = size_.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
+        double ellipticalB = size_.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
 
-                                                                                                  // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
-                                                                                                  // A = pi*a*b*s^2
-         double reportSizeInSquareFeet = AreaUnits::toBaseUnits(reportSize_, AreaUnits::Acres);
-         double intialElapsedTime = 0; // time for the fire to get to the reported size
-         double totalElapsedTime = 0;
-         double denominator = M_PI * ellipticalA * ellipticalB; // pi*a*b
+        // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
+        // A = pi*a*b*s^2
+        double reportSizeInSquareFeet = AreaUnits::toBaseUnits(reportSize_, AreaUnits::Acres);
+        double intialElapsedTime = 0; // time for the fire to get to the reported size
+        double totalElapsedTime = 0;
+        double denominator = M_PI * ellipticalA * ellipticalB; // pi*a*b
 
-                                                                // Get the time that the first resource begins to attack the fire
-         double firstArrivalTime = force_.firstArrival(Sem::ContainFlank::LeftFlank);
-         if (firstArrivalTime < 0)
-         {
-             firstArrivalTime = 0; // make sure the time isn't negative for some weird reason
-         }
+        // Get the time that the first resource begins to attack the fire
+        double firstArrivalTime = force_.firstArrival(Sem::ContainFlank::LeftFlank);
+        if (firstArrivalTime < 0)
+        {
+            firstArrivalTime = 0; // make sure the time isn't negative for some weird reason
+        }
 
-         // Solve for seconds elapsed for reported fire size to reach its size at time of report assuming constant rate of growth
-         if (denominator > 1.0e-07)
-         {
-             intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
-             totalElapsedTime = intialElapsedTime + firstArrivalTime;
-             // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
-             LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-             perimeterAtInitialAttack_ = size_.getFirePerimeter(lengthUnits, totalElapsedTime, TimeUnits::Minutes);
-             AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::SquareFeet;
-             fireSizeAtIntitialAttack_ = size_.getFireArea(areaUnits, totalElapsedTime, TimeUnits::Minutes);
-         }
+        // Solve for seconds elapsed for reported fire size to reach its size at time of report assuming constant rate of growth
+        if (denominator > 1.0e-07)
+        {
+            intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
+            totalElapsedTime = intialElapsedTime + firstArrivalTime;
+            // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
+            LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+            perimeterAtInitialAttack_ = size_.getFirePerimeter(lengthUnits, totalElapsedTime, TimeUnits::Minutes);
+            AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::SquareFeet;
+            fireSizeAtIntitialAttack_ = size_.getFireArea(areaUnits, totalElapsedTime, TimeUnits::Minutes);
+        }
     }
 }
 
