@@ -82,14 +82,13 @@ class ContainSim
 // Public methods
 public:
     // Custom constructor
-    ContainSim();
     ContainSim(
         double reportSize,
         double reportRate,
-        double diurnalROS[24],
-        int fireStartMinutesStartTime,
-        ContainForce& force,
+        double *diurnalROS,
+        int fireStartMinutesStartTime,      
         double lwRatio=1.,
+        ContainForce *force=0,
         Contain::ContainTactic tactic=Contain::HeadAttack,
         double attackDist=0.,
         bool retry=true,
@@ -99,21 +98,6 @@ public:
         int maxFireTime=1080) ;
     // Virtual destructor
     ~ContainSim( void ) ;
-
-    void updateInputs(
-        double reportSize,
-        double reportRate,
-        double diurnalROS[24],
-        int fireStartMinutesStartTime,
-        ContainForce& force,
-        double lwRatio = 1.,
-        Contain::ContainTactic tactic = Contain::HeadAttack,
-        double attackDist = 0.,
-        bool retry = true,
-        int minSteps = 250,
-        int maxSteps = 1000,
-        int maxFireSize = 1000,
-        int maxFireTime = 1080);
 
     // Access to input properties
     double attackDistance( void ) const ;
@@ -146,21 +130,21 @@ public:
     int    finalResourcesUsed( void ) const ;
 
     // Access to simulation coordinate array
-    std::vector<double> fireHeadX( void ) const ;
-    std::vector<double> firePerimeterX( void ) const ;
-    std::vector<double> firePerimeterY( void ) const ;
+    double* fireHeadX( void ) const ;
+    double* firePerimeterX( void ) const ;
+    double* firePerimeterY( void ) const ;
     int     firePoints( void ) const ;
 
     // Run the simulation!
     void run( void );
- 
+    static void checkmem( const char* fileName, int lineNumber, void* ptr,
+        const char* type, int size ) ;
+
 	// Calculate the area of the uncontained portion of the ellipse
 	double UncontainedArea( double head, double lwRatio, double x, double y, Sem::Contain::ContainTactic tactic  );	 // By DT 1/2013
 
 private:
     void finalStats( void ) ;
-    Contain m_left;
-    //Contain m_right;
 
 // Protected data
 protected:
@@ -173,12 +157,14 @@ protected:
     double   m_xMax;        //!< Maximum X coordinate of constructed line (ch)
     double   m_xMin;        //!< Minimum X coordinate of constructed line (ch)
     double   m_yMax;        //!< Maximum Y coordinate of constructed line (ch)
-    std::vector<double> m_u;           //!< Array of attack point angles at each distance step
-    std::vector<double> m_h;           //!< Array of free burning head positions (radians)
-    std::vector<double> m_x;           //!< Array of perimeter x coordinates (ch)
-    std::vector<double> m_y;           //!< Array of perimeter y coordinates (ch)
-    std::vector<double> m_a;           //!< Array of flank area segments (ch2)
-    std::vector<double> m_p;           //!< Array of flank perimeter segments (ch)
+    double  *m_u;           //!< Array of attack point angles at each distance step
+    double  *m_h;           //!< Array of free burning head positions (radians)
+    double  *m_x;           //!< Array of perimeter x coordinates (ch)
+    double  *m_y;           //!< Array of perimeter y coordinates (ch)
+    double  *m_a;           //!< Array of flank area segments (ch2)
+    double  *m_p;           //!< Array of flank perimeter segments (ch)
+    Contain *m_left;        //!< Left flank Contain object.
+    Contain *m_right;       //!< Right flank Contain object.
     ContainForce *m_force;  //!< Containment forces for both flanks
     int      m_minSteps;    //!< Minimum number of simulation distance steps
     int      m_maxSteps;    //!< Maximum number of simulation distance steps

@@ -60,48 +60,20 @@
                           
  */
 
-Sem::ContainSim::ContainSim():
-        m_finalCost(0.),
-        m_finalPerim(0.),
-        m_finalSize(0.),
-        m_finalSweep(0.),
-        m_finalTime(0.),
-        m_xMax(0.),
-        m_xMin(0.),
-        m_yMax(0.),
-        m_u(0),
-        m_h(0),
-        m_x(0),
-        m_y(0),
-        m_a(0),
-        m_p(0),
-        m_left(),
-        //m_right(),
-        m_size(0),
-        m_pass(0),
-        m_used(0)
-{
-    m_minSteps = 250;
-    m_maxSteps = 1000;
-    m_retry = true;
-    m_maxFireSize = 1000;
-    m_maxFireTime = 1080;
-}
-
 Sem::ContainSim::ContainSim(
-    double reportSize,
-    double reportRate,
-    double diurnalROS[24],
-    int fireStartMinutesStartTime,
-    ContainForce& force,
-    double lwRatio,
-    Sem::Contain::ContainTactic tactic,
-    double attackDist,
-    bool retry,
-    int minSteps,
-    int maxSteps,
-    int maxFireSize,
-    int maxFireTime) :
+        double reportSize,
+        double reportRate,
+        double *diurnalROS,
+        int fireStartMinutesStartTime,
+        double lwRatio,
+        ContainForce *force,
+        Sem::Contain::ContainTactic tactic,
+        double attackDist,
+        bool retry,
+        int minSteps,
+        int maxSteps,
+        int maxFireSize , 
+        int maxFireTime) :
     m_finalCost(0.),
     m_finalPerim(0.),
     m_finalSize(0.),
@@ -116,9 +88,9 @@ Sem::ContainSim::ContainSim(
     m_y(0),
     m_a(0),
     m_p(0),
-    m_left(),
-    //m_right(),
-    m_force(&force),
+    m_left(0),
+    m_right(0),
+    m_force(force),
     m_minSteps(minSteps),
     m_maxSteps(maxSteps),
     m_size(0),
@@ -148,28 +120,31 @@ Sem::ContainSim::ContainSim(
     double attackTime = m_force->firstArrival( LeftFlank );
 
     // Create the left flank
-	  m_left.updateInputs( reportSize, reportRate, 
+	  m_left = new Contain( reportSize, reportRate, 
         diurnalROS,fireStartMinutesStartTime,
         lwRatio, distStep,
         LeftFlank, force, attackTime, tactic, attackDist );
 
+
     if (logLevel > 0) {
-       m_left.containLog( true, " reportSize=%f,  reportRate=%f, lwRatio=%f, tactic=%d ,attackDist=%f   \n",reportSize, reportRate, lwRatio,tactic, attackDist);
-       m_left.containLog( true, "retry=%d minSteps=%d maxSteps=%d maxFireSize=%d maxFireTime=%d \n",    retry,  minSteps, maxSteps,   maxFireSize,  maxFireTime);
-       m_left.containLog( true, "attackTime=%f m_force->numresource=%d \n" , attackTime, m_force->resources());
-       force.logResources( true, m_left );
+       m_left-> containLog( true, " reportSize=%f,  reportRate=%f, lwRatio=%f, tactic=%d ,attackDist=%f   \n",reportSize, reportRate, lwRatio,tactic, attackDist);
+       m_left-> containLog( true, "retry=%d minSteps=%d maxSteps=%d maxFireSize=%d maxFireTime=%d \n",    retry,  minSteps, maxSteps,   maxFireSize,  maxFireTime);
+       m_left-> containLog( true, "attackTime=%f m_force->numresource=%d \n" , attackTime, m_force->resources());
+       force->logResources( true, m_left );
     }
     
     //Check for invalid attack time. The algorithm goes into an endless loop on negative values 
     if (attackTime<0) {
-      m_left.containLog( true, "attackTime=%f m_force->numresource=%d \n" , attackTime, m_force->resources());    
-      force.logResources( true, m_left );
+      m_left-> containLog( true, "attackTime=%f m_force->numresource=%d \n" , attackTime, m_force->resources());    
+      force->logResources( true, m_left );
       throw INVALID_RESOURCE_TIME_ERROR;
     }
     
     // Create the right flank
-    // Right flank not actually created, assumed to be a mirror image of left flank
-       
+    //attackTime = m_force->firstArrival( RightFlank );
+    //m_right = new Contain( reportSize, reportRate, lwRatio,  distStep,
+    //    RightFlank, force, attackTime, tactic, attackDist );
+
     // How big do the arrays need to be?
     //Carmi commented out - m_right is not being initialized anymore 
     //m_size = ( m_right ) ? 2 * m_maxSteps : m_maxSteps;
@@ -177,17 +152,23 @@ Sem::ContainSim::ContainSim(
     m_size =  m_maxSteps+1; 
 
     // Array of attack point angles (radians) at each simulation step.
-    m_u.resize(m_size);
+    m_u = new double[m_size];
+    checkmem( __FILE__, __LINE__, m_u, "double m_u", m_size );
     // Array of free-burning fire head positions (ch) at each simulation step.
-    m_h.resize(m_size);
+    m_h = new double[m_size];
+    checkmem( __FILE__, __LINE__, m_h, "double m_h", m_size );
     // Array of attack point x coordinates (ch) at each simulation step.
-    m_x.resize(m_size);
+    m_x = new double[m_size];
+    checkmem( __FILE__, __LINE__, m_x, "double m_x", m_size );
     // Array of attack point y coordinates (ch) at each simulation step.
-    m_y.resize(m_size);
+    m_y = new double[m_size];
+    checkmem( __FILE__, __LINE__, m_y, "double m_y", m_size );
     // Array of area under the perimeter curve (ch2) burned at each sim step.
-    m_a.resize(m_size);
+    m_a = new double[m_size];
+    checkmem( __FILE__, __LINE__, m_a, "double m_a", m_size );
     // Array of fireline perimeter (ch) constructed at each simulation step.
-    m_p.resize(m_size);
+    m_p = new double[m_size];
+    checkmem( __FILE__, __LINE__, m_p, "double m_p", m_size );
     return;
 }
 
@@ -197,86 +178,14 @@ Sem::ContainSim::ContainSim(
 
 Sem::ContainSim::~ContainSim( void )
 {
-    return;
-}
-
-void Sem::ContainSim::updateInputs(
-    double reportSize, 
-    double reportRate, 
-    double diurnalROS[24],
-    int fireStartMinutesStartTime,
-    ContainForce & force,
-    double lwRatio,
-    Contain::ContainTactic tactic,
-    double attackDist,
-    bool retry,
-    int minSteps,
-    int maxSteps,
-    int maxFireSize,
-    int maxFireTime)
-{
-    int logLevel = 0;
-
-    // Estimate distance step size for the initial simulation.
-    // May be adjusted in subsequent simulations to get the number of
-    // simulation steps in the range [m_minSteps..m_maxSteps].
-    if (m_maxSteps < 10)
-    {
-        m_maxSteps = 10;
-    }
-    //Diane Step's distance is approximately 1 minute regardless of the number of steps allowed
-    double distStep = reportRate / 60.;
-    //double distStep = force->exhausted( LeftFlank ) * ( reportRate / 60. )
-    //                / (double) ( m_maxSteps - 2. );
-
-    // Try attacking at first resource arrival.
-    // If the initial attack forces are overrun, subsequent simulations
-    // delay the initial attack until the next arrival of forces.
-    m_force = &force;
-    double attackTime = m_force->firstArrival(LeftFlank);
-
-    // Create the left flank
-    m_left.updateInputs(reportSize, reportRate,
-        diurnalROS, fireStartMinutesStartTime,
-        lwRatio, distStep,
-        LeftFlank, force, attackTime, tactic, attackDist);
-
-
-    if (logLevel > 0) {
-        m_left.containLog(true, " reportSize=%f,  reportRate=%f, lwRatio=%f, tactic=%d ,attackDist=%f   \n", reportSize, reportRate, lwRatio, tactic, attackDist);
-        m_left.containLog(true, "retry=%d minSteps=%d maxSteps=%d maxFireSize=%d maxFireTime=%d \n", retry, minSteps, maxSteps, maxFireSize, maxFireTime);
-        m_left.containLog(true, "attackTime=%f m_force->numresource=%d \n", attackTime, m_force->resources());
-        force.logResources(true, m_left);
-    }
-
-    //Check for invalid attack time. The algorithm goes into an endless loop on negative values 
-    if (attackTime<0) {
-        m_left.containLog(true, "attackTime=%f m_force->numresource=%d \n", attackTime, m_force->resources());
-        force.logResources(true, m_left);
-        throw INVALID_RESOURCE_TIME_ERROR;
-    }
-
-    // Create the right flank
-    // Right flank not actually created, assumed to be a mirror image of left flank
-
-    // How big do the arrays need to be?
-    //Carmi commented out - m_right is not being initialized anymore 
-    //m_size = ( m_right ) ? 2 * m_maxSteps : m_maxSteps;
-    //allocate an extra so we don't go out of bounds on the arrays
-    m_size = m_maxSteps + 1;
-
-    // Array of attack point angles (radians) at each simulation step.
-    m_u.resize(m_size);
-    // Array of free-burning fire head positions (ch) at each simulation step.
-    m_h.resize(m_size);
-    // Array of attack point x coordinates (ch) at each simulation step.
-    m_x.resize(m_size);
-    // Array of attack point y coordinates (ch) at each simulation step.
-    m_y.resize(m_size);
-    // Array of area under the perimeter curve (ch2) burned at each sim step.
-    m_a.resize(m_size);
-    // Array of fireline perimeter (ch) constructed at each simulation step.
-    m_p.resize(m_size);
+    if ( m_u )      { delete[] m_u;     m_u = 0; }
+    if ( m_h )      { delete[] m_h;     m_h = 0; }
+    if ( m_x )      { delete[] m_x;     m_x = 0; }
+    if ( m_y )      { delete[] m_y;     m_y = 0; }
+    if ( m_a )      { delete[] m_a;     m_a = 0; }
+    if ( m_p )      { delete[] m_p;     m_p = 0; }
+    if ( m_left )   { delete   m_left;  m_left = 0; }
+    if ( m_right )  { delete   m_right; m_right = 0; }
     return;
 }
 
@@ -288,7 +197,7 @@ void Sem::ContainSim::updateInputs(
 
 double Sem::ContainSim::attackDistance( void ) const
 {
-    return( m_left.attackDistance() );
+    return( m_left->attackDistance() );
 }
 
 //------------------------------------------------------------------------------
@@ -299,7 +208,7 @@ double Sem::ContainSim::attackDistance( void ) const
 
 double Sem::ContainSim::attackPointX( void ) const
 {
-    return( m_left.attackPointX() );
+    return( m_left->attackPointX() );
 }
 
 //------------------------------------------------------------------------------
@@ -310,7 +219,7 @@ double Sem::ContainSim::attackPointX( void ) const
 
 double Sem::ContainSim::attackPointY( void ) const
 {
-    return( m_left.attackPointY() );
+    return( m_left->attackPointY() );
 }
 
 //------------------------------------------------------------------------------
@@ -322,7 +231,25 @@ double Sem::ContainSim::attackPointY( void ) const
 
 double Sem::ContainSim::attackTime( void ) const
 {
-    return( m_left.attackTime() );
+    return( m_left->attackTime() );
+}
+
+//------------------------------------------------------------------------------
+/*! \brief Catches memory assignment failures.
+    Re-implement to suit yourself.
+ */
+
+void Sem::ContainSim::checkmem( const char* fileName, int lineNumber, void* ptr,
+    const char* type, int size )
+{
+    if ( ! ptr )
+    {
+        fprintf( stderr,
+            "Memory allocation failure at %s:%d for %d instances of %s.",
+            fileName, lineNumber, size, type );
+        abort();
+    }
+    return;
 }
 
 //------------------------------------------------------------------------------
@@ -334,7 +261,7 @@ double Sem::ContainSim::attackTime( void ) const
 
 double Sem::ContainSim::distanceStep( void ) const
 {
-    return( m_left.distanceStep() );
+    return( m_left->distanceStep() );
 }
 
 //------------------------------------------------------------------------------
@@ -432,11 +359,11 @@ int Sem::ContainSim::finalResourcesUsed( void ) const
 void Sem::ContainSim::finalStats( void )
 {
     // Final time
-    m_finalTime = m_left.m_currentTime;//m_time; // MAF
+    m_finalTime = m_left->m_currentTime;//m_time; // MAF
     // So far we know the containment area and line constructed
     m_finalPerim = m_finalLine;
     m_finalSize = 0.;
-    if ( m_left.m_status == Sem::Contain::Contained )
+    if ( m_left->m_status == Sem::Contain::Contained )
     {
         m_finalSize = m_finalSweep;
     } else {
@@ -455,7 +382,7 @@ void Sem::ContainSim::finalStats( void )
             m_finalCost += m_force->resourceCost( res, m_finalTime ) ;
         }
     }
-    m_left.containLog(false, "=== end simulation=== \n" );
+    m_left-> containLog(false, "=== end simulation=== \n" );
     
     return;
 }
@@ -469,7 +396,7 @@ void Sem::ContainSim::finalStats( void )
 
 double Sem::ContainSim::fireBackAtAttack( void ) const
 {
-    return( m_left.fireBackAtAttack() );
+    return( m_left->fireBackAtAttack() );
 }
 
 //------------------------------------------------------------------------------
@@ -480,7 +407,7 @@ double Sem::ContainSim::fireBackAtAttack( void ) const
 
 double Sem::ContainSim::fireBackAtReport( void ) const
 {
-    return( m_left.fireBackAtReport() );
+    return( m_left->fireBackAtReport() );
 }
 
 //------------------------------------------------------------------------------
@@ -491,7 +418,7 @@ double Sem::ContainSim::fireBackAtReport( void ) const
 
 double Sem::ContainSim::fireHeadAtAttack( void ) const
 {
-    return( m_left.fireHeadAtAttack() );
+    return( m_left->fireHeadAtAttack() );
 }
 
 //------------------------------------------------------------------------------
@@ -502,7 +429,7 @@ double Sem::ContainSim::fireHeadAtAttack( void ) const
 
 double Sem::ContainSim::fireHeadAtReport( void ) const
 {
-    return( m_left.fireHeadAtReport() );
+    return( m_left->fireHeadAtReport() );
 }
 
 //------------------------------------------------------------------------------
@@ -515,7 +442,7 @@ double Sem::ContainSim::fireHeadAtReport( void ) const
     during the simulation (radians).
  */
 
-std::vector<double> Sem::ContainSim::fireHeadX( void ) const
+double* Sem::ContainSim::fireHeadX( void ) const
 {
     return( m_h );
 }
@@ -528,7 +455,7 @@ std::vector<double> Sem::ContainSim::fireHeadX( void ) const
 
 double Sem::ContainSim::fireLwRatioAtReport( void ) const
 {
-    return( m_left.fireLwRatioAtReport() );
+    return( m_left->fireLwRatioAtReport() );
 }
 
 //------------------------------------------------------------------------------
@@ -541,7 +468,7 @@ double Sem::ContainSim::fireLwRatioAtReport( void ) const
     during the simulation.
  */
 
-std::vector<double> Sem::ContainSim::firePerimeterX( void ) const
+double* Sem::ContainSim::firePerimeterX( void ) const
 {
     return( m_x );
 }
@@ -556,7 +483,7 @@ std::vector<double> Sem::ContainSim::firePerimeterX( void ) const
     during the simulation.
  */
 
-std::vector<double> Sem::ContainSim::firePerimeterY( void ) const
+double* Sem::ContainSim::firePerimeterY( void ) const
 {
     return( m_y );
 }
@@ -580,7 +507,7 @@ int Sem::ContainSim::firePoints( void ) const
 
 double Sem::ContainSim::fireReportTime( void ) const
 {
-    return( m_left.fireReportTime() );
+    return( m_left->fireReportTime() );
 }
 
 //------------------------------------------------------------------------------
@@ -591,7 +518,7 @@ double Sem::ContainSim::fireReportTime( void ) const
 
 double Sem::ContainSim::fireSpreadRateAtBack( void ) const
 {
-    return( m_left.fireSpreadRateAtBack() );
+    return( m_left->fireSpreadRateAtBack() );
 }
 
 //------------------------------------------------------------------------------
@@ -602,7 +529,7 @@ double Sem::ContainSim::fireSpreadRateAtBack( void ) const
 
 double Sem::ContainSim::fireSizeAtReport( void ) const
 {
-    return( m_left.fireSizeAtReport() );
+    return( m_left->fireSizeAtReport() );
 }
 
 //------------------------------------------------------------------------------
@@ -613,7 +540,7 @@ double Sem::ContainSim::fireSizeAtReport( void ) const
 
 double Sem::ContainSim::fireSpreadRateAtReport( void ) const
 {
-    return( m_left.fireSpreadRateAtReport() );
+    return( m_left->fireSpreadRateAtReport() );
 }
 
 //------------------------------------------------------------------------------
@@ -624,7 +551,7 @@ double Sem::ContainSim::fireSpreadRateAtReport( void ) const
 
 Sem::ContainForce* Sem::ContainSim::force( void ) const
 {
-    return( m_left.force() );
+    return( m_left->force() );
 }
 
 //------------------------------------------------------------------------------
@@ -697,41 +624,41 @@ void Sem::ContainSim::run( void )
     
     while ( rerun )
     {
-        m_left.containLog( ( logLevel >= 1 ), "\nPass %d Begins:\n", m_pass );
+        m_left->containLog( ( logLevel >= 1 ), "\nPass %d Begins:\n", m_pass );
         // Simulate until forces overrun, fire contained, or maxSteps reached
         int iLeft = 0;              // First index of left half values
-        m_u[iLeft] = m_left.m_u;
-        m_h[iLeft] = m_left.m_h;
-        m_x[iLeft] = m_left.m_x;
-        m_y[iLeft] = m_left.m_y;
+        m_u[iLeft] = m_left->m_u;
+        m_h[iLeft] = m_left->m_h;
+        m_x[iLeft] = m_left->m_x;
+        m_y[iLeft] = m_left->m_y;
         //int iRight = m_maxSteps;  // First index of right half values
-        elapsed = m_left.m_attackTime;
-        m_left.containLog( ( logLevel == 2 ),
+        elapsed = m_left->m_attackTime;
+        m_left->containLog( ( logLevel == 2 ),
             "%d: u=%12.10f,  h=%12.10f,  t=%f\n",
-            iLeft, m_left.m_u, m_left.m_h, elapsed );
+            iLeft, m_left->m_u, m_left->m_h, elapsed );
 
         // This is the main simulation loop!
         m_finalSweep = m_finalLine = m_finalPerim = 0.0;
         totalArea=0.0;
         suma = sumb = sumDT = 0.0;
-        while ( m_left.m_status != Sem::Contain::Overrun
-             && m_left.m_status != Sem::Contain::Contained
-             && m_left.m_step    < m_maxSteps
+        while ( m_left->m_status != Sem::Contain::Overrun
+             && m_left->m_status != Sem::Contain::Contained
+             && m_left->m_step    < m_maxSteps
              && totalArea <  m_maxFireSize
-             && m_left.m_currentTime < m_maxFireTime		 		// MAF
-             && m_left.m_currentTime < m_left.m_exhausted)		// MAF
+             && m_left->m_currentTime < m_maxFireTime		 		// MAF
+             && m_left->m_currentTime < m_left->m_exhausted)		// MAF
         {
             // Store angle and head position in the proper array element
-            m_left.step();
+            m_left->step();
 
             // Store the new angle, head position, and coordinate values
             iLeft++;
                        
-            m_u[iLeft] = m_left.m_u;
-            m_h[iLeft] = m_left.m_h;
-            m_x[iLeft] = m_left.m_x;
-            m_y[iLeft] = m_left.m_y;
-            elapsed = m_left.m_currentTime;//m_time; // MAF
+            m_u[iLeft] = m_left->m_u;
+            m_h[iLeft] = m_left->m_h;
+            m_x[iLeft] = m_left->m_x;
+            m_y[iLeft] = m_left->m_y;
+            elapsed = m_left->m_currentTime;//m_time; // MAF
 //            m_left->containLog( (logLevel == 2 ),
 //                "%d: u=%12.10f,  h=%12.10f,  t=%12.10f\n",
 //                iLeft, m_u[iLeft], m_h[iLeft], elapsed );
@@ -770,19 +697,19 @@ void Sem::ContainSim::run( void )
             // Accumulate area for BOTH flanks (ac)
             m_a[iLeft-1] = 0.2 * area;
             totalArea = m_a[iLeft-1];
-            m_left.containLog( (logLevel == 2 ),
+            m_left->containLog( (logLevel == 2 ),
                 "%d: u=%12.10f,  h=%12.10f,  x=%12.10f, y=%12.10f, t=%12.10f, UCA=%12.10f, CA=%12.1f, TA=%12.10f, TP=%12.10f\n",
                 iLeft, m_u[iLeft], m_h[iLeft], m_x[iLeft], m_y[iLeft], elapsed, UCarea*0.2, (area-UCarea)*0.2, totalArea, m_finalLine );
         }
         // BEHAVEPLUS FIX: Adjust the last x-coordinate for contained head attacks
-        if ( m_left.m_status == Sem::Contain::Contained
-          && m_left.m_tactic == Sem::Contain::HeadAttack )
+        if ( m_left->m_status == Sem::Contain::Contained
+          && m_left->m_tactic == Sem::Contain::HeadAttack )
         {
-            m_x[m_left.m_step] -= 2. * m_left.m_attackDist;
+            m_x[m_left->m_step] -= 2. * m_left->m_attackDist;
 		}
 
-        suma += ( m_y[m_left.m_step] * m_x[0] );
-        sumb += ( m_x[m_left.m_step] * m_y[0] );
+        suma += ( m_y[m_left->m_step] * m_x[0] );
+        sumb += ( m_x[m_left->m_step] * m_y[0] );
         m_finalSweep = ( suma > sumb )
                      ? ( 0.5 * ( suma - sumb ) )
                      : ( 0.5 * ( sumb - suma ) );
@@ -790,7 +717,7 @@ void Sem::ContainSim::run( void )
 
 		// Calculate the area using the trapizoidal rule
 		sumDT = 0;
-		for ( int i = 1; i <= m_left.m_step; i++ )
+		for ( int i = 1; i <= m_left->m_step; i++ )	
 			sumDT = (m_x[i] - m_x[i-1]) * (m_y[i] + m_y[i-1]) + sumDT;
 
 		if ( sumDT < 0 )
@@ -799,41 +726,41 @@ void Sem::ContainSim::run( void )
 		area = sumDT * .5;
 
 		// Add in the area for the uncontained portion of the fire DT 1/2013
-		double UCarea = UncontainedArea( m_h[m_left.m_step], fireLwRatioAtReport(), m_x[m_left.m_step], m_y[m_left.m_step], tactic() );
+		double UCarea = UncontainedArea( m_h[m_left->m_step], fireLwRatioAtReport(), m_x[m_left->m_step], m_y[m_left->m_step], tactic() );
 		area = area + UCarea;
 			
         // Accumulate area for BOTH flanks (ac)
         m_finalSweep = 0.2 * area;
 
         // Cases 1-3: forces are overrun by fire...
-        if ( m_left.m_status == Sem::Contain::Overrun )
+        if ( m_left->m_status == Sem::Contain::Overrun )
         {
             // Case 1: No retry allowed, simulation is complete
             if ( ! m_retry )
             {
                 rerun = false;
-                m_left.containLog( ( logLevel >= 1 ),
+                m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 1: Overrun\n"
                     "    - resources overrun at %3.1f minutes (%d steps)\n"
                     "    - re-run is FALSE\n"
                     "    - FIRE ESCAPES at %3.1f minutes\n",
-                    m_pass, elapsed, m_left.m_step, elapsed );
+                    m_pass, elapsed, m_left->m_step, elapsed );
             }
             // Case 2: Try initial attack after more forces have arrived
-            else if ( ( at = m_force->nextArrival( m_left.m_attackTime,
-                m_left.m_exhausted, LeftFlank ) ) > 0.01 )
+            else if ( ( at = m_force->nextArrival( m_left->m_attackTime,
+                m_left->m_exhausted, LeftFlank ) ) > 0.01 )
             {
-                m_left.containLog( ( logLevel >= 1 ),
+                m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 2: Retry\n"
                     "    - resources overrun at %3.1f minutes (%d steps)\n"
                     "    - Pass %d will wait for IA until %3.1f minutes\n"
                     "    - when line building rate will be %3.2f ch/h\n"
                     "    - RE-RUN\n",
-                    m_pass, elapsed, m_left.m_step, m_pass+1,
+                    m_pass, elapsed, m_left->m_step, m_pass+1,
                     at, m_force->productionRate( at, LeftFlank ) );
                 m_pass++;
-                m_left.m_attackTime = at;
-                m_left.reset();
+                m_left->m_attackTime = at;
+                m_left->reset();
                 rerun = true;
             }
             // Case 3: All resources exhausted
@@ -841,27 +768,27 @@ void Sem::ContainSim::run( void )
             {
                 // No more forces available, so we're done
                 rerun = false;
-                m_left.containLog( ( logLevel >= 1 ),
+                m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 3: Exhausted\n"
                     "    - resources exhausted at %3.1f minutes (%d steps)\n"
                     "    - FIRE ESCAPES at %3.1f minutes\n",
-                    m_pass, elapsed, m_left.m_step, elapsed );
-                m_left.m_status = Sem::Contain::Exhausted;
+                    m_pass, elapsed, m_left->m_step, elapsed );
+                m_left->m_status = Sem::Contain::Exhausted;
             }
         }
         
         // New Case 3: to set rerun to false when the outrun fires are 
         // removed  DT 7/8/10
-        else if (m_left.m_currentTime >= m_left.m_exhausted)
+        else if (m_left->m_currentTime >= m_left->m_exhausted)
         {
                 // No more forces available, so we're done
                 rerun = false;
-                m_left.containLog( ( logLevel >= 1 ),
+                m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 3: Exhausted\n"
                     "    - resources exhausted at %3.1f minutes (%d steps)\n"
                     "    - FIRE ESCAPES at %3.1f minutes\n",
-                    m_pass, elapsed, m_left.m_step, elapsed );
-                m_left.m_status = Sem::Contain::Exhausted;
+                    m_pass, elapsed, m_left->m_step, elapsed );
+                m_left->m_status = Sem::Contain::Exhausted;
         }
         
         // Case 4: maximum number of steps was exceeded
@@ -873,19 +800,19 @@ void Sem::ContainSim::run( void )
             // MAF 9/29/2010, remove factor calc, just reverse previous factor and redo
 		  //factor = (double) m_maxSteps / (double) m_minSteps;
 		  factor = 2.0;	
-            m_left.containLog( ( logLevel >= 1 ),
+            m_left->containLog( ( logLevel >= 1 ),
                 "Pass %d Result 4: Less Precision\n"
                 "    - fire uncontained at %f minutes\n"
                 "    - %d steps exceeds maximum of %d steps\n"
                 "    - increasing Eta from %f to %f chains for next Pass %d\n"
                 "    - RE-RUN\n",
-                m_pass, elapsed, m_left.m_step, m_maxSteps,
-                m_left.m_distStep, (m_left.m_distStep*factor), m_pass+1 );
-            m_left.m_distStep *= factor;
+                m_pass, elapsed, m_left->m_step, m_maxSteps,
+                m_left->m_distStep, (m_left->m_distStep*factor), m_pass+1 );
+            m_left->m_distStep *= factor;
             m_pass++;
             
 		  if(MAXSTEPS_EXCEEDED==false)
-		  {	m_left.reset();
+		  {	m_left->reset();
 			rerun = true;
 		  }
 		  else
@@ -893,7 +820,7 @@ void Sem::ContainSim::run( void )
 		  MAXSTEPS_EXCEEDED=true;
         }
         // Cases 5-6: fire is contained...
-        else if ( m_left.m_status == Sem::Contain::Contained )
+        else if ( m_left->m_status == Sem::Contain::Contained )
         {
             // Case 5: there were insufficient simulation steps...
             if (  iLeft < m_minSteps && MAXSTEPS_EXCEEDED==false) // MAF 9/29/2010 added MAXSTEPS_EXCEEDED check
@@ -903,21 +830,21 @@ void Sem::ContainSim::run( void )
                 // exceed the MAX steps - otherwise we end up looping
                 // Diane 08/10 decrease the step size at a slower rate  
                 factor = 0.5 ; // (double) ( m_left->m_step + 1 ) / ((double) m_minSteps*1.25);
-                m_left.containLog( ( logLevel >= 1 ),
+                m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 5: More Precision\n"
                     "    - fire contained at %3.1f minutes\n"
                     "    - %d steps is less than minimum of %d steps\n"
                     "    - decreasing Eta from %f to %f chains for Pass %d\n"
                     "    - RE-RUN\n",
-                    m_pass, elapsed, m_left.m_step, m_minSteps,
-                    m_left.m_distStep, (m_left.m_distStep * factor), m_pass+1 );
-                m_left.m_distStep *= factor;
+                    m_pass, elapsed, m_left->m_step, m_minSteps,
+                    m_left->m_distStep, (m_left->m_distStep * factor), m_pass+1 );
+                m_left->m_distStep *= factor;
                 m_pass++;
                 
                 // Diane 08/10 decrease the step size at a slower rate 
                 //if(m_pass<10)
                 //{
-                	m_left.reset();
+                	m_left->reset();
                 	rerun = true;
                 //}
                 //else
@@ -926,17 +853,17 @@ void Sem::ContainSim::run( void )
             // Case 6: fire contained within the simulation step range
             else
             {
-                m_left.containLog( ( logLevel >= 1 ),
+                m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d Result 6: Contained\n"
                     "    - FIRE CONTAINED at %3.1f minutes (%d steps)\n",
-                    m_pass, elapsed, m_left.m_step );
+                    m_pass, elapsed, m_left->m_step );
                 rerun = false;
             }
         }
         //Add check for maximum Area
         else if(totalArea >= m_maxFireSize){    	        
-                at = m_force->nextArrival( m_left.m_attackTime,
-                m_left.m_exhausted, LeftFlank );
+                at = m_force->nextArrival( m_left->m_attackTime,
+                m_left->m_exhausted, LeftFlank );
         /*//////////////////////////////////////////////////////////////////////////
         	Removed DT 6/2010 Stop when fire exceeds maximum size
                 if (at > .01){
@@ -955,12 +882,12 @@ void Sem::ContainSim::run( void )
                 }else{
          */
 //                	cout << m_pass << " "  << totalArea << " " <<m_maxFireSize << " " << "\n";
- 					m_left.containLog( ( logLevel >= 1 ),
+ 					m_left->containLog( ( logLevel >= 1 ),
                     "Pass %d total fire size of %3.2f acres exceeds max fire size of %d acres at time %3.1f minutes\n",                    
                     m_pass, totalArea, m_maxFireSize, elapsed);               	
                 	rerun = false;
                 	//Production rate is not longer increasing
-                	m_left.m_status = Sem::Contain::SizeLimitExceeded;
+                	m_left->m_status = Sem::Contain::SizeLimitExceeded;
  //               } 
        
         }
@@ -968,27 +895,27 @@ void Sem::ContainSim::run( void )
 		//------------------------------------------------------------------
 		//  MAF 6/2010
 		//------------------------------------------------------------------
-		else if(((m_left.m_currentTime) > (m_maxFireTime-1)))
-			 {     m_left.m_currentTime=m_maxFireTime;
-    	           m_left.m_status = Sem::Contain::TimeLimitExceeded;
+		else if(((m_left->m_currentTime) > (m_maxFireTime-1)))
+			 {     m_left->m_currentTime=m_maxFireTime;
+    	           m_left->m_status = Sem::Contain::TimeLimitExceeded;
 
 				   rerun=false;
 			 }
         // Case 7: anything else (should never get here!)...
         else
         {
-            m_left.containLog( ( logLevel >= 1 ),
+            m_left->containLog( ( logLevel >= 1 ),
                 "Pass %d Result 7:\n"
                 "    - unknown condition at %3.1f minutes (%d steps)\n"
                 "    - RE-RUN\n",
-                m_pass, elapsed, m_left.m_step );
+                m_pass, elapsed, m_left->m_step );
             rerun = true;
         }
     }
     // Special case for contained head tactic with non-zero offset
-    if ( m_left.m_status == Sem::Contain::Contained
-      && m_left.m_tactic == Sem::Contain::HeadAttack
-      && m_left.m_attackDist > 0.01 )
+    if ( m_left->m_status == Sem::Contain::Contained
+      && m_left->m_tactic == Sem::Contain::HeadAttack
+      && m_left->m_attackDist > 0.01 )
     {
     }
     
@@ -1006,30 +933,30 @@ void Sem::ContainSim::run( void )
     //------------------------------------------------------------------
     //  MAF 6/2010
     //------------------------------------------------------------------
-    if ((m_left.m_currentTime) > (m_maxFireTime-1)) {
-     	m_left.m_currentTime=m_maxFireTime;
-     	m_left.m_status = Sem::Contain::TimeLimitExceeded;
+    if ((m_left->m_currentTime) > (m_maxFireTime-1)) {
+     	m_left->m_currentTime=m_maxFireTime;
+     	m_left->m_status = Sem::Contain::TimeLimitExceeded;
      }
      
     // Simulation complete: display results
     finalStats();
-    m_left.containLog( ( logLevel > 0 ),
-        "\n    Pass %d Step Size  : %f ch\n", m_pass, m_left.m_distStep );
-    m_left.containLog( ( logLevel > 0 ),
-        "    Tactic            : %8s\n", TacticName[m_left.m_tactic] );
-    m_left.containLog( ( logLevel > 0 ),
-        "    Simulation Steps  : %8d\n", m_left.m_step+1 );
-    m_left.containLog( ( logLevel > 0 ),
+    m_left->containLog( ( logLevel > 0 ),
+        "\n    Pass %d Step Size  : %f ch\n", m_pass, m_left->m_distStep );
+    m_left->containLog( ( logLevel > 0 ),
+        "    Tactic            : %8s\n", TacticName[m_left->m_tactic] );
+    m_left->containLog( ( logLevel > 0 ),
+        "    Simulation Steps  : %8d\n", m_left->m_step+1 );
+    m_left->containLog( ( logLevel > 0 ),
         "    Simulation Time   : %8.2f min\n", m_finalTime );
-    m_left.containLog( ( logLevel > 0 ),
-        "    Simulation Result : %s\n", StatusName[m_left.m_status] );
-    m_left.containLog( ( logLevel > 0 ),
+    m_left->containLog( ( logLevel > 0 ),
+        "    Simulation Result : %s\n", StatusName[m_left->m_status] );
+    m_left->containLog( ( logLevel > 0 ),
         "    Containment Line  : %8.4f ch\n", m_finalLine );
-    m_left.containLog( ( logLevel > 0 ),
+    m_left->containLog( ( logLevel > 0 ),
         "    Containment Size  : %8.4f ac\n", m_finalSize );
-    m_left.containLog( ( logLevel > 0 ),
+    m_left->containLog( ( logLevel > 0 ),
         "    Resources Used    : %8d\n", m_used );
-    m_left.containLog( ( logLevel > 0 ),
+    m_left->containLog( ( logLevel > 0 ),
         "    Resource Cost     : %8.0f\n\n", m_finalCost );
     return;
 }
@@ -1049,7 +976,7 @@ void Sem::ContainSim::run( void )
 
 Sem::Contain::ContainStatus Sem::ContainSim::status( void ) const
 {
-    return( m_left.status() );
+    return( m_left->status() );
 }
 
 //------------------------------------------------------------------------------
@@ -1062,7 +989,7 @@ Sem::Contain::ContainStatus Sem::ContainSim::status( void ) const
 
 Sem::Contain::ContainTactic Sem::ContainSim::tactic( void ) const
 {
-    return( m_left.tactic() );
+    return( m_left->tactic() );
 }
 
 // Calculate the size of the uncontained portion of the fire ellipse  by DT 1/2013

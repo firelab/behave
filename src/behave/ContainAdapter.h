@@ -29,11 +29,14 @@
 #ifndef CONTAINADAPTER_H
 #define CONTAINADAPTER_H
 
+#include "Contain.h"
 #include "ContainSim.h"
-#include <string>
+#include "ContainForceAdapter.h"
 
 #include "behaveUnits.h"
 #include "fireSize.h"
+
+#include <string>
 
 //------------------------------------------------------------------------------
 /*! \enum ContainTactic
@@ -41,45 +44,51 @@
 are assigned.
 */
 
-struct ContainTactic
+namespace ContainAdapterEnums
 {
-    enum ContainTacticEnum
+    struct ContainTactic
     {
-        HeadAttack = 0,     //!< Containment forces attack fire head
-        RearAttack = 1      //!< Containment forces attack fire rear
+        enum ContainTacticEnum
+        {
+            HeadAttack = 0,     //!< Containment forces attack fire head
+            RearAttack = 1      //!< Containment forces attack fire rear
+        };
     };
-};
 
-//------------------------------------------------------------------------------
-/*! \enum ContainStatus
-\brief Identifies the current fire containment status.
-*/
-struct ContainStatus
-{
-    enum ContainStatusEnum
+    //------------------------------------------------------------------------------
+    /*! \enum ContainStatus
+    \brief Identifies the current fire containment status.
+    */
+    struct ContainStatus
     {
-        Unreported = 0,     //!< Fire started but not yet reported (init() not called)
-        Reported = 1,     //!< Fire reported but not yet attacked (init() called)
-        Attacked = 2,     //!< Fire attacked but not yet resolved
-        Contained = 3,     //!< Fire contained by attacking forces
-        Overrun = 4,     //!< Attacking forces are overrun
-        Exhausted = 5,     //!< Fire escaped when all resources are exhausted
-        Overflow = 6,     //!< Simulation max step overflow
-        SizeLimitExceeded = 7,      //!< Simulation max fire size exceeded    
-        TimeLimitExceeded = 8	    //!< Simulation max fire time exceeded 
+        enum ContainStatusEnum
+        {
+            Unreported = 0,     //!< Fire started but not yet reported (init() not called)
+            Reported = 1,     //!< Fire reported but not yet attacked (init() called)
+            Attacked = 2,     //!< Fire attacked but not yet resolved
+            Contained = 3,     //!< Fire contained by attacking forces
+            Overrun = 4,     //!< Attacking forces are overrun
+            Exhausted = 5,     //!< Fire escaped when all resources are exhausted
+            Overflow = 6,     //!< Simulation max step overflow
+            SizeLimitExceeded = 7,      //!< Simulation max fire size exceeded    
+            TimeLimitExceeded = 8	    //!< Simulation max fire time exceeded 
+        };
     };
-};
 
-struct ContainFlank
-{
-    enum ContainFlankEnum
+    struct ContainFlank
     {
-        LeftFlank = 0,   //!< Attack left (upper) flank only (full production)
-        RightFlank = 1,   //!< Attack right (lower) flank only (full production)
-        BothFlanks = 2,   //!< Attack both flanks (half of production per flank)
-        NeitherFlank = 3    //!< Attack neither flank (inactive)
+        enum ContainFlankEnum
+        {
+            LeftFlank = 0,   //!< Attack left (upper) flank only (full production)
+            RightFlank = 1,   //!< Attack right (lower) flank only (full production)
+            BothFlanks = 2,   //!< Attack both flanks (half of production per flank)
+            NeitherFlank = 3    //!< Attack neither flank (inactive)
+        };
     };
-};
+}
+
+using std::string;
+using namespace ContainAdapterEnums;
 
 class ContainAdapter
 {
@@ -87,6 +96,8 @@ public:
     ContainAdapter();
     ~ContainAdapter();
 
+    void addResource(Sem::ContainResource& resource);
+    // Construct ContainResource into ContainForce
     void addResource(
         double arrival,
         double duration,
@@ -97,15 +108,21 @@ public:
         double baseCost = 0.0,
         double hourCost = 0.0);
     int removeResourceAt(int index);
-    int removeResourceWithThisDesc(std::string desc);
-    int removeAllResourcesWithThisDesc(std::string desc);
+    int removeResourceWithThisDesc(string desc);
+    int removeAllResourcesWithThisDesc(string desc);
     void removeAllResources();
 
     void setReportSize(double reportSize, AreaUnits::AreaUnitsEnum areaUnits);
     void setReportRate(double reportRate, SpeedUnits::SpeedUnitsEnum speedUnits);
+    void setFireStartTime(int fireStartTime);
     void setLwRatio(double lwRatio);
-    void setTactic(ContainTactic::ContainTacticEnum tactic);
+    void setTactic(ContainAdapterEnums::ContainTactic::ContainTacticEnum tactic);
     void setAttackDistance(double attackDistance, LengthUnits::LengthUnitsEnum lengthUnits);
+    void setRetry(bool retry);
+    void setMinSteps(int minSteps);
+    void setMaxSteps(int maxSteps);
+    void setMaxFireSize(int maxFireSize);
+    void setMaxFireTime(int maxFireTime);
 
     void doContainRun();
 
@@ -120,17 +137,21 @@ public:
     ContainStatus::ContainStatusEnum getContainmentStatus() const;
 
 private:
-    FireSize size_;
+    FireSize size_; 
+
+    Sem::Contain::ContainTactic convertAdapterTacticToSemTactic(ContainAdapterEnums::ContainTactic::ContainTacticEnum tactic);
+    ContainAdapterEnums::ContainStatus::ContainStatusEnum convertSemStatusToAdapterStatus(Sem::Contain::ContainStatus status);
+    Sem::ContainFlank converAdapterFlankToSemFlank(ContainAdapterEnums::ContainFlank::ContainFlankEnum flank);
 
     // Contain Inputs
     double reportSize_;
     double reportRate_;
     double diurnalROS_[24];
+    int fireStartTime_;
     double lwRatio_;
-    Sem::ContainForce force_;
-    ContainTactic::ContainTacticEnum tactic_;
+    ContainForceAdapter force_;
+    Sem::Contain::ContainTactic tactic_;
     double attackDistance_;
-    // Hard-coded input values
     bool retry_;
     int minSteps_;
     int maxSteps_;
@@ -146,8 +167,7 @@ private:
     double finalFireSize_; // Final fire size (area) at containment or escape
     double finalContainmentArea_; // Final containment area at containment or escape
     double finalTime_; // Containment or escape time since report
-
-    ContainStatus::ContainStatusEnum containmentStatus_; // Status of fire at end of contain simultation
+    ContainAdapterEnums::ContainStatus::ContainStatusEnum containmentStatus_;
 };
 
 #endif //CONTAINADAPTER_H

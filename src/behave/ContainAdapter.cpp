@@ -1,29 +1,29 @@
-#define _USE_MATH_DEFINES
-#include <cmath>
-
 #include "containAdapter.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 ContainAdapter::ContainAdapter()
 {
     lwRatio_ = 1.0,
-    tactic_ = ContainTactic::HeadAttack,
+    tactic_ = Sem::Contain::ContainTactic::HeadAttack,
     attackDistance_ = 0.0,
     retry_ = true,
     minSteps_ = 250,
     maxSteps_ = 1000,
     maxFireSize_ = 1000,
     maxFireTime_ = 1080;
-    reportSize_ = 0.0;
-    reportRate_ = 0.0;
+    reportSize_ = 0;
+    reportRate_ = 0;
+    fireStartTime_ = 0;
 
     finalCost_ = 0.0;
     finalFireLineLength_ = 0.0;
     perimeterAtContainment_ = 0.0;
-    fireSizeAtIntitialAttack_ = 0.0;
     finalFireSize_ = 0.0;
     finalContainmentArea_ = 0.0;
-    perimeterAtInitialAttack_ = 0.0;
     finalTime_ = 0.0;
+
+    doContainRun();
 }
 
 ContainAdapter::~ContainAdapter()
@@ -31,23 +31,28 @@ ContainAdapter::~ContainAdapter()
 
 }
 
+void ContainAdapter::addResource(Sem::ContainResource& resource)
+{
+    force_.addResource(resource);
+}
+
 void ContainAdapter::addResource(double arrival, double duration, TimeUnits::TimeUnitsEnum timeUnits, double productionRate, SpeedUnits::SpeedUnitsEnum productionRateUnits,
     std::string description, double baseCost, double hourCost)
 {
     Sem::ContainFlank myflank = Sem::ContainFlank::LeftFlank; // Currently only attacking left flanks is used, production is halved, left flank is mirrored
-    
+
     double productionRateInChainsPerHour = productionRate;
     if (!(productionRateUnits == SpeedUnits::ChainsPerHour))
     {
         double productionRateInFeetPerMinute = SpeedUnits::toBaseUnits(productionRate, productionRateUnits);
         productionRateInChainsPerHour = SpeedUnits::fromBaseUnits(productionRateInFeetPerMinute, SpeedUnits::ChainsPerHour); // Contain expects chains per hour
     }
-   
+
     // Contain expects minutes
-    double durationInMinutes = TimeUnits::toBaseUnits(duration, timeUnits); 
+    double durationInMinutes = TimeUnits::toBaseUnits(duration, timeUnits);
     double arrivalInMinutes = TimeUnits::toBaseUnits(arrival, timeUnits);
-    
-    Sem::ContainResource resource(arrivalInMinutes, productionRateInChainsPerHour, durationInMinutes, myflank, description, baseCost, hourCost);
+
+    Sem::ContainResource resource(arrivalInMinutes, productionRateInChainsPerHour, durationInMinutes, myflank, (char* const)description.c_str(), baseCost, hourCost);
     force_.addResource(resource);
 }
 
@@ -68,7 +73,7 @@ int ContainAdapter::removeAllResourcesWithThisDesc(std::string desc)
 
 void ContainAdapter::removeAllResources()
 {
-    force_.clearResourceVector();
+    force_.resourceVector.clear();
 }
 
 void ContainAdapter::setReportSize(double reportSize, AreaUnits::AreaUnitsEnum areaUnits)
@@ -83,14 +88,19 @@ void ContainAdapter::setReportRate(double reportRate, SpeedUnits::SpeedUnitsEnum
     reportRate_ = SpeedUnits::fromBaseUnits(reportRateInFeetPerMinute, SpeedUnits::ChainsPerHour); // Contain expects chains per hour
 }
 
+void ContainAdapter::setFireStartTime(int fireStartTime)
+{
+    fireStartTime_ = fireStartTime;
+}
+
 void ContainAdapter::setLwRatio(double lwRatio)
 {
     lwRatio_ = lwRatio;
 }
 
-void ContainAdapter::setTactic(ContainTactic::ContainTacticEnum tactic)
+void ContainAdapter::setTactic(ContainAdapterEnums::ContainTactic::ContainTacticEnum tactic)
 {
-    tactic_ = tactic;
+    tactic_ = convertAdapterTacticToSemTactic(tactic);
 }
 
 void ContainAdapter::setAttackDistance(double attackDistance, LengthUnits::LengthUnitsEnum lengthUnits)
@@ -99,73 +109,118 @@ void ContainAdapter::setAttackDistance(double attackDistance, LengthUnits::Lengt
     attackDistance_ = LengthUnits::fromBaseUnits(attackDistanceInFeet, LengthUnits::Chains); // Contain expects chains
 }
 
+void ContainAdapter::setRetry(bool retry)
+{
+    retry_ = retry;
+}
+
+void ContainAdapter::setMinSteps(int minSteps)
+{
+    minSteps_ = minSteps;
+}
+
+void ContainAdapter::setMaxSteps(int maxSteps)
+{
+    maxSteps_ = maxSteps;
+}
+
+void ContainAdapter::setMaxFireSize(int maxFireSize)
+{
+    maxFireSize_ = maxFireSize;
+}
+
+void ContainAdapter::setMaxFireTime(int maxFireTime)
+{
+    maxFireTime_ = maxFireTime;
+}
+
 void ContainAdapter::doContainRun()
 {
-    if (force_.resources() > 0 && reportSize_ != 0)
+    if (force_.resourceVector.size() > 0 && reportSize_ != 0)
     {
-        if (reportRate_ < 0.00001)
-        {
-            reportRate_ = 0.00001; // Contain algorithm can not deal with ROS = 0
-        }
         for (int i = 0; i < 24; i++)
         {
             diurnalROS_[i] = reportRate_;
         }
 
-        int fireStartTime = 0;
-        Sem::Contain::ContainTactic tactic = static_cast<Sem::Contain::ContainTactic>(tactic_);
+        double  resourceArrival;
+        double  resourceBaseCost;
+        double  resourceCost;
+        std::string resourceDescription;
+        double  resourceDuration;
+        Sem::ContainFlank resourceFlank;
+        double  resourceHourCost;
+        double  resourceProduction;
 
-        Sem::ContainSim containSim(reportSize_, reportRate_, diurnalROS_, fireStartTime, force_, lwRatio_,
-            tactic, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
+        Sem::ContainForce oldForce;
+        Sem::ContainForce* oldForcePointer = &oldForce;
+        for (int i = 0; i < force_.resourceVector.size(); i++)
+        {
+            resourceArrival = force_.resourceVector[i].arrival();
+            resourceBaseCost = force_.resourceVector[i].baseCost();
+            resourceDescription = force_.resourceVector[i].description();
+            resourceDuration = force_.resourceVector[i].duration();
+            resourceFlank = force_.resourceVector[i].flank();
+            resourceHourCost = force_.resourceVector[i].hourCost();
+            resourceProduction = force_.resourceVector[i].production();
+
+            char* const desc = (char* const)resourceDescription.c_str();
+            oldForcePointer->addResource(resourceArrival, resourceProduction, resourceDuration, resourceFlank,
+                desc, resourceBaseCost, resourceHourCost);
+        }
+
+        Sem::ContainSim containSim(reportSize_, reportRate_, diurnalROS_, fireStartTime_, lwRatio_,
+            oldForcePointer, tactic_, attackDistance_, retry_, minSteps_, maxSteps_, maxFireSize_,
             maxFireTime_);
 
         // Do Contain simulation
         containSim.run();
 
         // Get results from Contain simulation
-        finalCost_ = containSim.finalFireCost();
-        finalFireLineLength_ = LengthUnits::toBaseUnits(containSim.finalFireLine(), LengthUnits::Chains);
-        perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim.finalFirePerimeter(), LengthUnits::Chains);
-        finalFireSize_ = AreaUnits::toBaseUnits(containSim.finalFireSize(), AreaUnits::Acres);
-        finalContainmentArea_ = AreaUnits::toBaseUnits(containSim.finalFireSweep(), AreaUnits::Acres);
-        finalTime_ = TimeUnits::toBaseUnits(containSim.finalFireTime(), TimeUnits::Minutes);
-        containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
+         finalCost_ = containSim.finalFireCost();
+         finalFireLineLength_ = LengthUnits::toBaseUnits(containSim.finalFireLine(), LengthUnits::Chains);
+         perimeterAtContainment_ = LengthUnits::toBaseUnits(containSim.finalFirePerimeter(), LengthUnits::Chains);
+         finalFireSize_ = AreaUnits::toBaseUnits(containSim.finalFireSize(), AreaUnits::Acres);
+         finalContainmentArea_ = AreaUnits::toBaseUnits(containSim.finalFireSweep(), AreaUnits::Acres);
+         finalTime_ = TimeUnits::toBaseUnits(containSim.finalFireTime(), TimeUnits::Minutes);
+         containmentStatus_ = convertSemStatusToAdapterStatus(containSim.status());
+         containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
 
-        // Calculate effective windspeed needed for Size module
-        // Find the effective windspeed
-        double effectiveWindspeed = 4.0 * (lwRatio_ - 1.0);
-        size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
-        // Find the time elapsed to created the fire at time of report 
-        LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-        double elapsedTime = 1;
-        double ellipticalA = size_.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
-        double ellipticalB = size_.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
+         // Calculate effective windspeed needed for Size module
+         // Find the effective windspeed
+         double effectiveWindspeed = 4.0 * (lwRatio_ - 1.0);
+         size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
+         // Find the time elapsed to created the fire at time of report 
+         LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+         double elapsedTime = 1;
+         double ellipticalA = size_.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
+         double ellipticalB = size_.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
 
-        // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
-        // A = pi*a*b*s^2
-        double reportSizeInSquareFeet = AreaUnits::toBaseUnits(reportSize_, AreaUnits::Acres);
-        double intialElapsedTime = 0; // time for the fire to get to the reported size
-        double totalElapsedTime = 0;
-        double denominator = M_PI * ellipticalA * ellipticalB; // pi*a*b
+                                                                                                  // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
+                                                                                                  // A = pi*a*b*s^2
+         double reportSizeInSquareFeet = AreaUnits::toBaseUnits(reportSize_, AreaUnits::Acres);
+         double intialElapsedTime = 0; // time for the fire to get to the reported size
+         double totalElapsedTime = 0;
+         double denominator = M_PI * ellipticalA * ellipticalB; // pi*a*b
 
-        // Get the time that the first resource begins to attack the fire
-        double firstArrivalTime = force_.firstArrival(Sem::ContainFlank::LeftFlank);
-        if (firstArrivalTime < 0)
-        {
-            firstArrivalTime = 0; // make sure the time isn't negative for some weird reason
-        }
+                                                                // Get the time that the first resource begins to attack the fire
+         double firstArrivalTime = force_.firstArrival(Sem::ContainFlank::LeftFlank);
+         if (firstArrivalTime < 0)
+         {
+             firstArrivalTime = 0; // make sure the time isn't negative for some weird reason
+         }
 
-        // Solve for seconds elapsed for reported fire size to reach its size at time of report assuming constant rate of growth
-        if (denominator > 1.0e-07)
-        {
-            intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
-            totalElapsedTime = intialElapsedTime + firstArrivalTime;
-            // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
-            LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-            perimeterAtInitialAttack_ = size_.getFirePerimeter(lengthUnits, totalElapsedTime, TimeUnits::Minutes);
-            AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::SquareFeet;
-            fireSizeAtIntitialAttack_ = size_.getFireArea(areaUnits, totalElapsedTime, TimeUnits::Minutes);
-        }     
+         // Solve for seconds elapsed for reported fire size to reach its size at time of report assuming constant rate of growth
+         if (denominator > 1.0e-07)
+         {
+             intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
+             totalElapsedTime = intialElapsedTime + firstArrivalTime;
+             // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
+             LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
+             perimeterAtInitialAttack_ = size_.getFirePerimeter(lengthUnits, totalElapsedTime, TimeUnits::Minutes);
+             AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::SquareFeet;
+             fireSizeAtIntitialAttack_ = size_.getFireArea(areaUnits, totalElapsedTime, TimeUnits::Minutes);
+         }
     }
 }
 
@@ -209,7 +264,23 @@ double ContainAdapter::getFinalTimeSinceReport(TimeUnits::TimeUnitsEnum timeUnit
     return TimeUnits::fromBaseUnits(finalTime_, timeUnits);
 }
 
-ContainStatus::ContainStatusEnum ContainAdapter::getContainmentStatus() const
+ContainAdapterEnums::ContainStatus::ContainStatusEnum ContainAdapter::getContainmentStatus() const
 {
     return containmentStatus_;
+}
+
+Sem::Contain::ContainTactic ContainAdapter::convertAdapterTacticToSemTactic(ContainAdapterEnums::ContainTactic::ContainTacticEnum tactic)
+{
+    return (Sem::Contain::ContainTactic)tactic;
+}
+
+ContainAdapterEnums::ContainStatus::ContainStatusEnum ContainAdapter::convertSemStatusToAdapterStatus(Sem::Contain::ContainStatus status)
+{
+    int temp = status;
+    return (ContainAdapterEnums::ContainStatus::ContainStatusEnum)temp;
+}
+
+Sem::ContainFlank ContainAdapter::converAdapterFlankToSemFlank(ContainAdapterEnums::ContainFlank::ContainFlankEnum flank)
+{
+    return (Sem::ContainFlank)flank;
 }

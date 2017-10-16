@@ -143,38 +143,15 @@ static int     m_logLevel = 0;
     \param[in] attackDist Forces build fireline this far from the fire edge (ch).
  */
 
-Sem::Contain::Contain():
-    m_eps(1.),
-    m_eps2(1.),
-    m_a(1.),
-    m_reportHead(0.),
-    m_reportTime(0.),
-    m_backRate(0.),
-    m_reportBack(0.),
-    m_attackHead(0.),
-    m_attackBack(0.),
-    m_exhausted(0.),
-    m_time(0.),
-    m_step(0),
-    m_u(0.),
-    m_u0(0.),
-    m_h(0.),
-    m_h0(0.),
-    m_x(0.),
-    m_y(0.)
-{
-    //reset();
-}
-
 Sem::Contain::Contain(
         double reportSize,
         double reportRate,
-        double diurnalROS[24],
+        double *diurnalROS,
         int fireStartMinutesStartTime,              
         double lwRatio,
         double distStep,
         ContainFlank flank,
-        ContainForce& force,
+        ContainForce *force,
         double attackTime,
         ContainTactic tactic,
         double attackDist ) :
@@ -186,7 +163,7 @@ Sem::Contain::Contain(
     m_distStep(0.01),
     m_flank(flank),
     m_tactic(tactic),
-    m_force(&force),
+    m_force(force),
     m_eps(1.),
     m_eps2(1.),
     m_a(1.),
@@ -211,7 +188,7 @@ Sem::Contain::Contain(
     // Set all the input parameters.
     setReport( reportSize, reportRate, lwRatio, distStep );
     setAttack( flank, force, attackTime, tactic, attackDist );
-    setFireStartTimeMinutes(fireStartMinutesStartTime);
+            
     setDiurnalSpreadRates(diurnalROS);
     // Set all the intermediate parameters.
     reset();
@@ -227,25 +204,6 @@ Sem::Contain::Contain(
 
 Sem::Contain::~Contain( void )
 {
-}
-
-void Sem::Contain::updateInputs(double reportSize, double reportRate, double * diurnalROS, int fireStartMinutesStartTime, double lwRatio, double distStep, ContainFlank flank, ContainForce& force, double attackTime, ContainTactic tactic, double attackDist)
-{
-    // Set all the input parameters.
-    m_status = Unreported;
-    setFireStartTimeMinutes(fireStartMinutesStartTime);
-    setForce(force);
-    setReport(reportSize, reportRate, lwRatio, distStep);
-    setAttack(flank, force, attackTime, tactic, attackDist);
-
-    setDiurnalSpreadRates(diurnalROS);
-
-    reset();
-}
-
-void Sem::Contain::setForce(ContainForce& force)
-{
-    m_force = &force;
 }
 
 //------------------------------------------------------------------------------
@@ -281,12 +239,11 @@ void Sem::Contain::calcU( void )
    //--------------------------------------------------------------------------
    //--------------------------------------------------------------------------
      do
-     {    
-         m_timeIncrement = 0.0;  // MAF  6/2010
-         m_rkpr[0] = (m_step) ? m_rkpr[2] : productionRatio(m_attackHead);
-         m_timeIncrement /= 2.0;  // MAF   6/2010
-         m_rkpr[1] = productionRatio(m_h0 + (0.5 * m_distStep));
-         m_rkpr[2] = productionRatio(m_h0 + m_distStep);
+     {    m_timeIncrement=0.0;  // MAF  6/2010
+          m_rkpr[0] = ( m_step ) ? m_rkpr[2] : productionRatio( m_attackHead );
+          m_timeIncrement/=2.0;  // MAF   6/2010
+	     m_rkpr[1] = productionRatio( m_h0 + ( 0.5 * m_distStep ) );
+	     m_rkpr[2] = productionRatio( m_h0 + m_distStep );
 	     if(m_timeIncrement>1.0)        // mins, m_timeIncrement calc'd & set in productionRatio()
 	     {	m_distStep/=2.0;
 
@@ -1044,7 +1001,7 @@ void Sem::Contain::reset( void )
 
 int Sem::Contain::resources( void ) const
 {
-    return( m_force->m_resourceVector.size() );
+    return( m_force->m_count );
 }
 
 //------------------------------------------------------------------------------
@@ -1088,9 +1045,9 @@ double Sem::Contain::resourceBaseCost( int index ) const
     \return ContainResource's description.
  */
 
-std::string Sem::Contain::resourceDescription( int index ) const
+char * Sem::Contain::resourceDescription( int index ) const
 {
-    return m_force->resourceDescription( index );
+    return( m_force->resourceDescription( index ) );
 }
 
 //------------------------------------------------------------------------------
@@ -1157,11 +1114,11 @@ double Sem::Contain::resourceProduction( int index ) const
     Called only by the constructor.
  */
 
-void Sem::Contain::setAttack( ContainFlank flank, ContainForce& force,
+void Sem::Contain::setAttack( ContainFlank flank, ContainForce *force,
         double attackTime, ContainTactic tactic, double attackDist )
 {
     m_flank      = flank;
-    m_force      = &force;
+    m_force      = force;
     m_attackTime = attackTime;
     m_tactic     = tactic;
     m_attackDist = attackDist;
