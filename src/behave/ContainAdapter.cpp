@@ -136,6 +136,11 @@ void ContainAdapter::setMaxFireTime(int maxFireTime)
 
 void ContainAdapter::doContainRun()
 {
+    if (reportRate_ < 0.00001)
+    {
+        reportRate_ = 0.00001; // Contain algorithm can not deal with zero ROS
+    }
+
     if (force_.resourceVector.size() > 0 && reportSize_ != 0)
     {
         for (int i = 0; i < 24; i++)
@@ -192,25 +197,28 @@ void ContainAdapter::doContainRun()
         size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
         // Find the time elapsed to created the fire at time of report 
         LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-        double elapsedTime = 1;
+        double elapsedTime = 1.0;
         double ellipticalA = size_.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
         double ellipticalB = size_.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Minutes); // get base elliptical dimensions
 
         // Equation for area of ellipse used in Size Module (calculateFireArea() in fireSize.cpp) 
         // A = pi*a*b*s^2
         double reportSizeInSquareFeet = AreaUnits::toBaseUnits(reportSize_, AreaUnits::Acres);
-        double intialElapsedTime = 0; // time for the fire to get to the reported size
-        double totalElapsedTime = 0;
+        double intialElapsedTime = 0.0; // time for the fire to get to the reported size
+        double totalElapsedTime = 0.0;
+        perimeterAtInitialAttack_ = 0.0;
+        fireSizeAtIntitialAttack_ = 0.0;
         double denominator = M_PI * ellipticalA * ellipticalB; // pi*a*b
 
         // Get the time that the first resource begins to attack the fire
         double firstArrivalTime = force_.firstArrival(Sem::ContainFlank::LeftFlank);
         if (firstArrivalTime < 0)
         {
-            firstArrivalTime = 0; // make sure the time isn't negative for some weird reason
+            firstArrivalTime = 0.0; // make sure the time isn't negative for some weird reason
         }
 
         // Solve for seconds elapsed for reported fire size to reach its size at time of report assuming constant rate of growth
+
         if (denominator > 1.0e-07)
         {
             intialElapsedTime = sqrt(reportSizeInSquareFeet / denominator); // s = sqrt(A/(pi*a*b)) 
