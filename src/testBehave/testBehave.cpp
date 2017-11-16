@@ -612,8 +612,10 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
 BOOST_AUTO_TEST_CASE(spotModuleTest)
 {
     double flameLength = 0.0;
-    double expectedSpottingDistance = 0.0;
-    double observedSpottingDistance = 0.0;
+    double expectedFlatSpottingDistance = 0.0;
+    double expectedMountainSpottingDistance = 0.0;
+    double observedMountainSpottingDistance = 0.0;
+    double observedFlatSpottingDistance = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
@@ -641,31 +643,41 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Miles;;
 
 	// Test spotting distance from a burning pile
-	expectedSpottingDistance = 0.021330;
 	behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, 
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits,
 		burningPileflameHeight, elevationUnits, windSpeedAtTwentyFeet, windSpeedUnits);
 	behaveRun.spot.calculateSpottingDistanceFromBurningPile();
-	observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxSpottingDistanceFromBurningPile(spottingDistanceUnits));
-	BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
-
+    expectedMountainSpottingDistance = 0.021330;
+    observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
+	BOOST_CHECK_CLOSE(observedMountainSpottingDistance, expectedMountainSpottingDistance, ERROR_TOLERANCE);
+    expectedFlatSpottingDistance = 0.017067;
+    observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
+    BOOST_CHECK_CLOSE(expectedFlatSpottingDistance, expectedFlatSpottingDistance, ERROR_TOLERANCE);
     // Test spotting distance from surface fire
-    expectedSpottingDistance = 0.164401;
+    
 	behaveRun.spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, windSpeedAtTwentyFeet,
         windSpeedUnits, flameLength, flameHeightUnits);
     behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
-    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
-    
+    expectedMountainSpottingDistance = 0.164401;
+    observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
+    BOOST_CHECK_CLOSE(observedMountainSpottingDistance, expectedMountainSpottingDistance, ERROR_TOLERANCE);
+    expectedFlatSpottingDistance = 0.132964;
+    observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
+    BOOST_CHECK_CLOSE(expectedFlatSpottingDistance, expectedFlatSpottingDistance, ERROR_TOLERANCE);
     // Test spotting distance from torching trees
-    expectedSpottingDistance = 0.222396;
+  
 	behaveRun.spot.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits, 
         treeHeight, treeHeightUnits, treeSpecies, windSpeedAtTwentyFeet, windSpeedUnits);
     behaveRun.spot.calculateSpottingDistanceFromTorchingTrees();
-    observedSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(observedSpottingDistance, expectedSpottingDistance, ERROR_TOLERANCE);
+    expectedMountainSpottingDistance = 0.222396;
+    observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
+    BOOST_CHECK_CLOSE(observedMountainSpottingDistance, expectedMountainSpottingDistance, ERROR_TOLERANCE);
+    expectedFlatSpottingDistance = 0.181449;
+    observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
+    BOOST_CHECK_CLOSE(observedFlatSpottingDistance, expectedFlatSpottingDistance, ERROR_TOLERANCE);
+   
 }
 
 BOOST_AUTO_TEST_CASE(speedUnitConversionTest)

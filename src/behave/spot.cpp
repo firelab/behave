@@ -568,17 +568,17 @@ double Spot::getMaxFlatTerrainSpottingDistanceFromTorchingTrees(LengthUnits::Len
     return LengthUnits::fromBaseUnits(flatDistanceFromTorchingTrees_, spottingDistanceUnits);
 }
 
-double Spot::getMaxSpottingDistanceFromBurningPile(LengthUnits::LengthUnitsEnum spottingDistanceUnits)
+double Spot::getMaxMountainousTerrainSpottingDistanceFromBurningPile(LengthUnits::LengthUnitsEnum spottingDistanceUnits)
 {
     return LengthUnits::fromBaseUnits(mountainDistanceFromBurningPile_, spottingDistanceUnits);
 }
 
-double Spot::getMaxSpottingDistanceFromSurfaceFire(LengthUnits::LengthUnitsEnum spottingDistanceUnits)
+double Spot::getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(LengthUnits::LengthUnitsEnum spottingDistanceUnits)
 {
     return LengthUnits::fromBaseUnits(mountainDistanceFromSurfaceFire_, spottingDistanceUnits);
 }
 
-double Spot::getMaxSpottingDistanceFromTorchingTrees(LengthUnits::LengthUnitsEnum spottingDistanceUnits)
+double Spot::getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(LengthUnits::LengthUnitsEnum spottingDistanceUnits)
 {
     return LengthUnits::fromBaseUnits(mountainDistanceFromTorchingTrees_, spottingDistanceUnits);
 }
