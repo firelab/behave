@@ -242,6 +242,9 @@ void Spot::calculateSpottingDistanceFromBurningPile()
 			// Adjust for mountainous terrain.
 			mountainDistanceFromBurningPile_ = spotDistanceMountainTerrain(flatDistanceFromBurningPile_,
 				location, ridgeToValleyDistance, ridgeToValleyElevation);
+            // Convert distances from miles to feet (base distance unit)
+            flatDistanceFromBurningPile_ = LengthUnits::toBaseUnits(flatDistanceFromBurningPile_, LengthUnits::Miles);
+            mountainDistanceFromBurningPile_ = LengthUnits::toBaseUnits(mountainDistanceFromBurningPile_, LengthUnits::Miles);
 		}
 	}
 }
@@ -284,6 +287,9 @@ void Spot::calculateSpottingDistanceFromSurfaceFire()
             flatDistanceFromSurfaceFire_ = spotDistanceFlatTerrain(firebrandHeightFromSurfaceFire_, coverHeightUsedForSurfaceFire_, windSpeedAtTwentyFeet) + firebrandDrift_;
             mountainDistanceFromSurfaceFire_ = spotDistanceMountainTerrain(flatDistanceFromSurfaceFire_,
                 location, ridgeToValleyDistance, ridgeToValleyElevation);
+            // Convert distances from miles to feet (base distance unit)
+            flatDistanceFromSurfaceFire_ = LengthUnits::toBaseUnits(flatDistanceFromSurfaceFire_, LengthUnits::Miles);
+            mountainDistanceFromSurfaceFire_ = LengthUnits::toBaseUnits(mountainDistanceFromSurfaceFire_, LengthUnits::Miles);
         }
     }
 }
@@ -354,6 +360,9 @@ void Spot::calculateSpottingDistanceFromTorchingTrees()
                 flatDistanceFromTorchingTrees_ = spotDistanceFlatTerrain(firebrandHeightFromTorchingTrees_, coverHeightUsedForTorchingTrees_, windSpeedAtTwentyFeet);
                 mountainDistanceFromTorchingTrees_ = spotDistanceMountainTerrain(flatDistanceFromTorchingTrees_, location, ridgeToValleyDistance,
                     ridgeToValleyElevation);
+                // Convert distances from miles to feet (base distance unit)
+                flatDistanceFromTorchingTrees_ = LengthUnits::toBaseUnits(flatDistanceFromTorchingTrees_, LengthUnits::Miles);
+                mountainDistanceFromTorchingTrees_ = LengthUnits::toBaseUnits(mountainDistanceFromTorchingTrees_, LengthUnits::Miles);
             }
         }
     }

@@ -638,7 +638,7 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     LengthUnits::LengthUnitsEnum treeHeightUnits = LengthUnits::Feet;
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = SpotTreeSpecies::ENGELMANN_SPRUCE;
    
-    LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Feet;;
+    LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Miles;;
 
 	// Test spotting distance from a burning pile
 	expectedSpottingDistance = 0.021330;
