@@ -1,4 +1,4 @@
-#include "containForceAdapter.h"
+#include "ContainForceAdapter.h"
 
 ContainForceAdapter::ContainForceAdapter()
     :resourceVector(0)
