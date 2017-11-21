@@ -42,7 +42,7 @@ public:
     ~ContainForceAdapter();
 
     void addResource(Sem::ContainResource& resource);
-    void ContainForceAdapter::addResource(double arrival, double production, double duration,
+    void addResource(double arrival, double production, double duration,
         Sem::ContainFlank flank, std::string desc, double baseCost, double hourCost);
     double firstArrival(Sem::ContainFlank flank) const;
 
