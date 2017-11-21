@@ -31,6 +31,7 @@
 #ifndef CONTAINFORCEADAPTER_H
 #define CONTAINFORCEADAPTER_H
 
+#include <string>
 #include <vector>
 #include "ContainResource.h"
 
