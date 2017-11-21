@@ -16,11 +16,6 @@ PROJECT(behave)
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
                     ${CMAKE_SOURCE_DIR}/src/cli)      
 
-OPTION(CLI "Enable Behave CLI" OFF)
-IF(CLI)
-    ADD_DEFINITIONS(-DCLI)
-ENDIF(CLI)
-
 OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
 IF(RAWS_BATCH)
     ADD_DEFINITIONS(-DRAWS_BATCH)
@@ -137,10 +132,3 @@ IF(RAWS_BATCH)
         src/rawsBatch/behaveRawsBatch.cpp
         ${HEADERS})
 ENDIF(RAWS_BATCH)
-
-IF(CLI)
-    ADD_EXECUTABLE(behave-cli 
-        ${SOURCE}
-        src/cli/behaveCli.cpp
-        ${HEADERS})
-ENDIF(CLI)
