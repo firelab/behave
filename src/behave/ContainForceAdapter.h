@@ -54,4 +54,4 @@ public:
 private:
 };
 
-#endif // CONTAINADAPTER_H
+#endif // CONTAINFORCEADAPTER_H

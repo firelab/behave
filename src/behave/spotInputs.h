@@ -35,7 +35,7 @@ struct SpotTreeSpecies
     enum SpotTreeSpeciesEnum
     {
         ENGELMANN_SPRUCE = 0,    //  0 Engelmann spruce (Picea engelmannii)
-        DOUGLAS_FIRE = 1,    //  1 Douglas-fir (Pseudotsuga menziessii)
+        DOUGLAS_FIR = 1,    //  1 Douglas-fir (Pseudotsuga menziessii)
         SUBALPINE_FIR = 2,    //  2 Subalpine fir (Abies lasiocarpa)
         WESTERN_HEMLOCK = 3,    //  3 Western hemlock (Tsuga heterophylla)
         PONDEROSA_PINE = 4,    //  4 Ponderosa pine (Pinus ponderosa)
