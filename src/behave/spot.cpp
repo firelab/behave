@@ -403,7 +403,7 @@ void Spot::setRidgeToValleyElevation(double ridgeToValleyElevation, LengthUnits:
 	spotInputs_.setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
 }
 
-void Spot::setTorchingTrees(double torchingTrees)
+void Spot::setTorchingTrees(int torchingTrees)
 {
 	spotInputs_.setTorchingTrees(torchingTrees);
 }
@@ -444,7 +444,7 @@ void Spot::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum
 
 void Spot::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, double torchingTrees, double DBH,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, int torchingTrees, double DBH,
     LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
@@ -488,7 +488,7 @@ double Spot::getRidgeToValleyElevation(LengthUnits::LengthUnitsEnum elevationUni
 	return spotInputs_.getRidgeToValleyElevation(elevationUnits);
 }
 
-double Spot::getTorchingTrees()
+int Spot::getTorchingTrees()
 {
 	return spotInputs_.getTorchingTrees();
 }

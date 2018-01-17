@@ -74,7 +74,7 @@ public:
 	void setLocation(SpotFireLocation::SpotFireLocationEnum location);
 	void setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
 	void setRidgeToValleyElevation(double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits);
-	void setTorchingTrees(double torchingTrees);
+	void setTorchingTrees(int torchingTrees);
 	void setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits);
 	void setTreeSpecies(SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies);
 	void setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
@@ -89,7 +89,7 @@ public:
         SpeedUnits::SpeedUnitsEnum windSpeedUnits, double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
 	void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
         LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-        double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, double torchingTrees, double DBH,
+        double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, int torchingTrees, double DBH,
         LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
         SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
 
@@ -100,7 +100,7 @@ public:
 	SpotFireLocation::SpotFireLocationEnum getLocation();
 	double getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
 	double getRidgeToValleyElevation(LengthUnits::LengthUnitsEnum elevationUnits);
-	double getTorchingTrees();
+	int getTorchingTrees();
 	double getTreeHeight(LengthUnits::LengthUnitsEnum  treeHeightUnits);
 	SpotTreeSpecies::SpotTreeSpeciesEnum getTreeSpecies();
 	double getWindSpeedAtTwentyFeet(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
@@ -126,7 +126,7 @@ private:
 	double windSpeedAtTwentyFeet_;
 	double buringPileFlameHeight_;
 	double surfaceFlameLength_;
-	double torchingTrees_;
+	int torchingTrees_;
 	double treeHeight_;
 	SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies_;
 };
