@@ -633,10 +633,10 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     LengthUnits::LengthUnitsEnum flameHeightUnits = LengthUnits::Feet;
     double windSpeedAtTwentyFeet = 5.0;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
-    double torchingTrees = 15;
-    double DBH = 20;
+    int torchingTrees = 15;
+    double DBH = 20.0;
     LengthUnits::LengthUnitsEnum DBHUnits = LengthUnits::Inches;
-    double treeHeight = 30;
+    double treeHeight = 30.0;
     LengthUnits::LengthUnitsEnum treeHeightUnits = LengthUnits::Feet;
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = SpotTreeSpecies::ENGELMANN_SPRUCE;
    
