@@ -132,3 +132,29 @@ IF(RAWS_BATCH)
         src/rawsBatch/behaveRawsBatch.cpp
         ${HEADERS})
 ENDIF(RAWS_BATCH)
+
+# optional stand-alone executables
+option(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
+option(COMPUTE_SPOT_SURFACE "Build surface spot fire distance calculator" OFF)
+option(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calculator" OFF)
+
+IF(COMPUTE_SPOT_PILE)
+    ADD_EXECUTABLE(compute_spot_distance_pile
+        ${SOURCE}
+        src/spotDistancePile/computePileSpottingDistance.cpp
+        ${HEADERS})
+ENDIF(COMPUTE_SPOT_PILE)
+
+IF(COMPUTE_SPOT_SURFACE)
+    ADD_EXECUTABLE(compute_spot_distance_surface
+        ${SOURCE}
+        src/spotDistanceSurface/computeSurfaceSpottingDistance.cpp
+        ${HEADERS})
+ENDIF(COMPUTE_SPOT_SURFACE)
+
+IF(COMPUTE_SPOT_TORCHING_TREES)
+    ADD_EXECUTABLE(compute_spot_distance_trees
+        ${SOURCE}
+        src/spotDistanceTorchingTrees/computeTorchingTreesSpottingDistance.cpp
+        ${HEADERS})
+ENDIF(COMPUTE_SPOT_TORCHING_TREES)
