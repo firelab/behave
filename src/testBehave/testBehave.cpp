@@ -645,7 +645,7 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
 	// Test spotting distance from a burning pile
 	behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, 
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits,
-		burningPileflameHeight, elevationUnits, windSpeedAtTwentyFeet, windSpeedUnits);
+		burningPileflameHeight, flameHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits);
 	behaveRun.spot.calculateSpottingDistanceFromBurningPile();
     expectedMountainSpottingDistance = 0.021330;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));

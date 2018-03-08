@@ -90,7 +90,7 @@ double LengthUnits::fromBaseUnits(double value, LengthUnits::LengthUnitsEnum uni
     const double FEET_TO_CENTIMETERS = 30.480;
     const double FEET_TO_METERS = 0.3048;
     const double FEET_TO_CHAINS = 0.0151515151515;
-    const double FEET_TO_MILES = 0.000189394;
+    const double FEET_TO_MILES = 0.0001893939393939394;
     const double FEET_TO_KILOMETERS = 0.0003048;
 
     switch (units)
