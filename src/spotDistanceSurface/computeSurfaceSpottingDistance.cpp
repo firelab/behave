@@ -27,7 +27,6 @@
  *
  *****************************************************************************/
 #include "behaveRun.h"
-#include "fuelModelSet.h"
 #include <iostream>
 using namespace std;
 
@@ -148,8 +147,7 @@ int main(int argc, char *argv[])
         cout<<"flame_length              = "<<flameLength<<" m"<<endl;
     }
 
-    FuelModelSet fuelModelSet;
-    BehaveRun behaveRun(fuelModelSet);
+    Spot spot;
 
     double mountainSpottingDistance = 0.0;
     double flatSpottingDistance = 0.0;
@@ -163,15 +161,15 @@ int main(int argc, char *argv[])
     LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Meters;
 
     //spotting distance from surface fire
-    behaveRun.spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, 
+    spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance,
             ridgeToValleyDistanceUnits, ridgeToValleyElevation, elevationUnits,
             downwindCoverHeight, coverHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits,
             flameLength, flameLengthUnits);
 
-    behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
+    spot.calculateSpottingDistanceFromSurfaceFire();
 
-    mountainSpottingDistance = behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits);
-    flatSpottingDistance = behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits);
+    mountainSpottingDistance = spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits);
+    flatSpottingDistance = spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits);
 
     cout<<"\nmountainSpottingDistance = "<<mountainSpottingDistance<<" m"<<endl;
     cout<<"flatSpottingDistance = "<<flatSpottingDistance<<" m\n"<<endl;

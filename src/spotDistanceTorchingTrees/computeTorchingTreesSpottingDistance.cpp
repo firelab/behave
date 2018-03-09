@@ -27,7 +27,6 @@
  *
  *****************************************************************************/
 #include "behaveRun.h"
-#include "fuelModelSet.h"
 #include <iostream>
 using namespace std;
 
@@ -250,8 +249,7 @@ int main(int argc, char *argv[])
         cout<<"tree_species              = "<<species<<endl;
     }
 
-    FuelModelSet fuelModelSet;
-    BehaveRun behaveRun(fuelModelSet);
+    Spot spot;
 
     double mountainSpottingDistance = 0.0;
     double flatSpottingDistance = 0.0;
@@ -266,15 +264,15 @@ int main(int argc, char *argv[])
     LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Meters;
 
     //spotting distance from torching trees
-    behaveRun.spot.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, 
+    spot.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance,
             ridgeToValleyDistanceUnits, ridgeToValleyElevation, elevationUnits,
             downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits, 
             treeHeight, treeHeightUnits, treeSpecies, windSpeedAtTwentyFeet, windSpeedUnits);
 
-    behaveRun.spot.calculateSpottingDistanceFromTorchingTrees();
+    spot.calculateSpottingDistanceFromTorchingTrees();
 
-    mountainSpottingDistance = behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits);
-    flatSpottingDistance = behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits);
+    mountainSpottingDistance = spot.getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits);
+    flatSpottingDistance = spot.getMaxFlatTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits);
 
     cout<<"\nmountainSpottingDistance = "<<mountainSpottingDistance<<" m"<<endl;
     cout<<"flatSpottingDistance = "<<flatSpottingDistance<<" m\n"<<endl;
