@@ -36,24 +36,24 @@ ENDIF(TEST_BEHAVE)
 
 SET(SOURCE
     src/behave/behaveRun.cpp
-	src/behave/behaveUnits.cpp
-	src/behave/Contain.cpp
-	src/behave/ContainAdapter.cpp
-	src/behave/ContainForce.cpp
-	src/behave/ContainForceAdapter.cpp
-	src/behave/ContainResource.cpp
-	src/behave/ContainSim.cpp
+    src/behave/behaveUnits.cpp
+    src/behave/Contain.cpp
+    src/behave/ContainAdapter.cpp
+    src/behave/ContainForce.cpp
+    src/behave/ContainForceAdapter.cpp
+    src/behave/ContainResource.cpp
+    src/behave/ContainSim.cpp
     src/behave/crown.cpp
     src/behave/crownInputs.cpp
-	src/behave/fireSize.cpp
+    src/behave/fireSize.cpp
     src/behave/fuelModelSet.cpp
-	src/behave/ignite.cpp
-	src/behave/igniteInputs.cpp
+    src/behave/ignite.cpp
+    src/behave/igniteInputs.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
-	src/behave/safety.cpp
+    src/behave/safety.cpp
     src/behave/spot.cpp
     src/behave/spotInputs.cpp
     src/behave/surface.cpp
@@ -68,24 +68,24 @@ SET(SOURCE
 
 SET(HEADERS
     src/behave/behaveRun.h
-	src/behave/behaveUnits.h
-	src/behave/Contain.h
-	src/behave/ContainAdapter.h
-	src/behave/ContainForce.h
-	src/behave/ContainForceAdapter.h
-	src/behave/ContainResource.h
-	src/behave/ContainSim.h
+    src/behave/behaveUnits.h
+    src/behave/Contain.h
+    src/behave/ContainAdapter.h
+    src/behave/ContainForce.h
+    src/behave/ContainForceAdapter.h
+    src/behave/ContainResource.h
+    src/behave/ContainSim.h
     src/behave/crown.h
     src/behave/crownInputs.h
-	src/behave/fireSize.h
+    src/behave/fireSize.h
     src/behave/fuelModelSet.h
-	src/behave/ignite.h
-	src/behave/igniteInputs.h
+    src/behave/ignite.h
+    src/behave/igniteInputs.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
     src/behave/randthread.h
-	src/behave/safety.h
+    src/behave/safety.h
     src/behave/spot.h
     src/behave/spotInputs.h
     src/behave/surface.h
@@ -132,3 +132,29 @@ IF(RAWS_BATCH)
         src/rawsBatch/behaveRawsBatch.cpp
         ${HEADERS})
 ENDIF(RAWS_BATCH)
+
+# optional stand-alone executables
+option(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
+option(COMPUTE_SPOT_SURFACE "Build surface spot fire distance calculator" OFF)
+option(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calculator" OFF)
+
+IF(COMPUTE_SPOT_PILE)
+    ADD_EXECUTABLE(compute_spot_distance_pile
+        ${SOURCE}
+        src/spotDistancePile/computePileSpottingDistance.cpp
+        ${HEADERS})
+ENDIF(COMPUTE_SPOT_PILE)
+
+IF(COMPUTE_SPOT_SURFACE)
+    ADD_EXECUTABLE(compute_spot_distance_surface
+        ${SOURCE}
+        src/spotDistanceSurface/computeSurfaceSpottingDistance.cpp
+        ${HEADERS})
+ENDIF(COMPUTE_SPOT_SURFACE)
+
+IF(COMPUTE_SPOT_TORCHING_TREES)
+    ADD_EXECUTABLE(compute_spot_distance_trees
+        ${SOURCE}
+        src/spotDistanceTorchingTrees/computeTorchingTreesSpottingDistance.cpp
+        ${HEADERS})
+ENDIF(COMPUTE_SPOT_TORCHING_TREES)
