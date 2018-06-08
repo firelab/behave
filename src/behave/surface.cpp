@@ -207,9 +207,9 @@ double Surface::getResidenceTime() const
     return surfaceFire_.getResidenceTime();
 }
 
-double Surface::getReactionIntensity() const
+double Surface::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const
 {
-    return surfaceFire_.getReactionIntensity();
+    return surfaceFire_.getReactionIntensity(reactiontionIntensityUnits);
 }
 
 double Surface::getMidflameWindspeed() const
@@ -230,6 +230,21 @@ double Surface::getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double 
 double Surface::getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     return size_.getEllipticalC(lengthUnits, elapsedTime, timeUnits);
+}
+
+double Surface::getSlopeFactor() const
+{
+    return surfaceFire_.getSlopeFactor();
+}
+
+double Surface::getBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const
+{
+    return DensityUnits::fromBaseUnits(surfaceFire_.getBulkDensity(), densityUnits);
+}
+
+double Surface::getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const
+{
+    return surfaceFire_.getHeatSink(heatSinkUnits);
 }
 
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const

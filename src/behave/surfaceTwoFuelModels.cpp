@@ -295,7 +295,7 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
 
         rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(fuelModelNumber_[i], hasDirectionOfInterest, directionOfInterest);
 
-        reactionIntensityForFuelModel_[i] = surfaceFireSpread_->getReactionIntensity();
+        reactionIntensityForFuelModel_[i] = surfaceFireSpread_->getReactionIntensity(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute);
         dirMaxSpreadForFuelModel_[i] = surfaceFireSpread_->getDirectionOfMaxSpread();
         midFlameWindSpeedForFuelModel_[i] = surfaceFireSpread_->getMidflameWindSpeed();
         windAdjustmentFactorForFuelModel_[i] = surfaceFireSpread_->getWindAdjustmentFactor();

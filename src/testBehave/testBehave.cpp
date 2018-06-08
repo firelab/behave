@@ -129,11 +129,12 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     double crownRatio = 0.50;
     double canopyBaseHeight = 6;
     double canopyBulkDensity = 0.03;
-    
+    DensityUnits::DensityUnitsEnum canopyBulkDensityUnits = DensityUnits::PoundsPerCubicFoot;
+
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, 
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
-        crownRatio, canopyBulkDensity, DensityUnits::PoundsPerCubicFoot);
+        crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
 }
 
 BOOST_FIXTURE_TEST_SUITE(BehaveRunTestSuite, BehaveRunTest)
@@ -289,21 +290,21 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
 
     // Test Crown fire length-to-width-ratio
     setCrownInputsLowMoistureScenario(behaveRun);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedCrownLengthToWidthRatio = 1.625;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
     BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
 
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedCrownLengthToWidthRatio = 2.25;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
     BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
 
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(15, windSpeedUnits, windHeightInputMode);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedCrownLengthToWidthRatio = 2.875;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
     BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
@@ -445,10 +446,7 @@ BOOST_AUTO_TEST_CASE(firelineIntensityTest)
     expectedFirelineIntensity = 598.339039;
     BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
 
-    // Test upslope oriented mode, 20 foot uplsope wind 
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
-    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
-    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    // Test unit conversion
     observedFirelineIntensity = behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
     expectedFirelineIntensity = 2072.730450;
     BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
@@ -534,7 +532,7 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
     BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
 }
 
-BOOST_AUTO_TEST_CASE(crownModuleTest)
+BOOST_AUTO_TEST_CASE(crownModuleTestRothermel)
 {
     double canopyHeight = 30;
     double canopyBaseHeight = 6; 
@@ -555,10 +553,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     behaveRun.crown.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
 
     // Test crown fire spread rate, flame length, intensity
-    //setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    //behaveRun.crown.doSurfaceRunInDirectionOfMaxSpread();
     setCrownInputsLowMoistureScenario(behaveRun);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedCrownFireSpreadRate = 10.259921;
     observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireSpreadRate(SpeedUnits::ChainsPerHour));
     BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
@@ -574,14 +570,14 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     // Test fire type, Surface fire expected
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setMoistureOneHour(20, MoistureUnits::Percent);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Surface;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
 
     // Test fire type, Torching fire expected
     setCrownInputsLowMoistureScenario(behaveRun);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Torching;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
@@ -589,7 +585,7 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     // Test fire type, Crowning fire expected
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Crowning;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
@@ -603,10 +599,73 @@ BOOST_AUTO_TEST_CASE(crownModuleTest)
     canopyBulkDensity = 0.06;
     behaveRun.crown.setCanopyBulkDensity(0.06, DensityUnits::PoundsPerCubicFoot);
     behaveRun.crown.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
-    behaveRun.crown.doCrownRun();
+    behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::ConditionalCrownFire;
     observedFireType = (int)behaveRun.crown.getFireType();
     BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+}
+
+BOOST_AUTO_TEST_CASE(crownModuleTestScottAndReinhardt)
+{
+    int fuelModelNumber = 10;
+    double moistureOneHour = 8.0;
+    double moistureTenHour = 9.0;
+    double moistureHundredHour = 10.0;
+    double moistureLiveHerbaceous = 60.0;
+    double moistureLiveWoody = 117.0;
+    double moistureFoliar = 100;
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    double windSpeed = 2187.226624;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::FeetPerMinute;
+    double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
+    double slope = 20;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
+    double aspect = 0;
+    double canopyCover = 50;
+    CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
+    double canopyHeight = 38.104626;
+    double canopyBaseHeight = 2.952756;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    double crownRatio = 0.50;
+    double canopyBulkDensity = 0.01311;
+    DensityUnits::DensityUnitsEnum canopyBulkDensityUnits = DensityUnits::PoundsPerCubicFoot;
+    behaveRun.crown.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    behaveRun.crown.setUserProvidedWindAdjustmentFactor(0.12);
+    behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
+        crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
+
+    double observedActualFireSpreadRate = 0;
+    double expectedActualFireSpreadRate = 0;
+    double observedActualFlameLength = 0;
+    double expectedActualFlameLength = 0;
+    double observedActualFirelineIntensity = 0;
+    double expectedActualFirelineIntensity = 0;
+    double observedCriticalOpenWindSpeed = 0;
+    double expectedCriticalOpenWindSpeed = 0;
+
+    // Test crown fire spread rate, flame length, intensity, passive crown fire expected
+    behaveRun.crown.doCrownRunScottAndReinhardt();
+    expectedActualFireSpreadRate = 65.221842;
+    observedActualFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getActualSpreadRate(SpeedUnits::FeetPerMinute));
+    BOOST_CHECK_CLOSE(observedActualFireSpreadRate, expectedActualFireSpreadRate, ERROR_TOLERANCE);
+
+    expectedActualFlameLength = 60.744542;
+    observedActualFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getActualFlameLength(LengthUnits::Feet));
+    BOOST_CHECK_CLOSE(observedActualFlameLength, expectedActualFlameLength, ERROR_TOLERANCE);
+
+    expectedActualFirelineIntensity = 5293.170672;
+    observedActualFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getActualFirelineIntesity(FirelineIntensityUnits::BtusPerFootPerSecond));
+    BOOST_CHECK_CLOSE(observedActualFirelineIntensity, expectedActualFirelineIntensity, ERROR_TOLERANCE);
+
+    expectedCriticalOpenWindSpeed = 1717.916785;
+    observedCriticalOpenWindSpeed = behaveRun.crown.getCriticalOpenWindSpeed(SpeedUnits::FeetPerMinute);
+    BOOST_CHECK_CLOSE(observedCriticalOpenWindSpeed, expectedCriticalOpenWindSpeed, ERROR_TOLERANCE);
+
+    behaveRun.surface.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
 }
 
 BOOST_AUTO_TEST_CASE(spotModuleTest)

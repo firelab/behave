@@ -130,7 +130,6 @@ struct ProbabilityUnits
     static double fromBaseUnits(double value, ProbabilityUnitsEnum units);
 };
 
-
 struct MoistureUnits
 {
     enum MoistureUnitsEnum
@@ -174,8 +173,49 @@ struct HeatOfCombustionUnits
         BtusPerPound, // base heat of combustion unit
         KilojoulesPerKilogram
     };
+
     static double toBaseUnits(double value, HeatOfCombustionUnitsEnum units);
     static double fromBaseUnits(double value, HeatOfCombustionUnitsEnum units);
+};
+
+struct HeatSinkUnits
+{
+    enum HeatSinkUnitsEnum
+    {
+        BtusPerCubicFoot, // base heat sink unit
+        KilojoulesPerCubicMeter
+    };
+
+    static double toBaseUnits(double value, HeatSinkUnitsEnum units);
+    static double fromBaseUnits(double value, HeatSinkUnitsEnum units);
+};
+
+struct HeatPerUnitAreaUnits
+{
+    enum HeatPerUnitAreaUnitsEnum
+    {
+        BtusPerSquareFoot, // base reaction intensity unit
+        KilojoulesPerSquareMeterPerSecond,
+        KilowattsPerSquareMeter
+    };
+
+    static double toBaseUnits(double value, HeatPerUnitAreaUnitsEnum units);
+    static double fromBaseUnits(double value, HeatPerUnitAreaUnitsEnum units);
+};
+
+struct HeatSourceAndReactionIntensityUnits
+{
+    enum HeatSourceAndReactionIntensityUnitsEnum
+    {
+        BtusPerSquareFootPerMinute, // base reaction intensity unit
+        BtusPerSquareFootPerSecond,
+        KilojoulesPerSquareMeterPerSecond,
+        KilojoulesPerSquareMeterPerMinute,
+        KilowattsPerSquareMeter
+    };
+
+    static double toBaseUnits(double value, HeatSourceAndReactionIntensityUnitsEnum units);
+    static double fromBaseUnits(double value, HeatSourceAndReactionIntensityUnitsEnum units);
 };
 
 struct FirelineIntensityUnits
@@ -188,6 +228,7 @@ struct FirelineIntensityUnits
         KilojoulesPerMeterPerMinute,
         KilowattsPerMeter
     };
+
     static double toBaseUnits(double value, FirelineIntensityUnitsEnum units);
     static double fromBaseUnits(double value, FirelineIntensityUnitsEnum units);
 };

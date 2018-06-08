@@ -165,7 +165,7 @@ void SurfaceFireReactionIntensity::calculateEtaS()
     }
 }
 
-double SurfaceFireReactionIntensity::getReactionIntensity() const
+double SurfaceFireReactionIntensity::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const
 {
     return reactionIntensity_;
 }

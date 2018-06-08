@@ -30,17 +30,6 @@
 
 #include "behaveUnits.h"
 
-struct FireType
-{
-    enum FireTypeEnum
-    {
-        Surface = 0,    // surface fire with no torching or crown fire spread.
-        Torching = 1,   // surface fire with torching.
-        ConditionalCrownFire = 2, // active crown fire possible if the fire transitions to the overstory        
-        Crowning = 3    // active crown fire, fire is spreading through the canopy.
-    };
-};
-
 class CrownInputs
 {
 public:
@@ -55,12 +44,11 @@ public:
     void setCanopyFirelineIntensity(double canopyUserProvidedFirelineIntensity);
     void setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits);
 
-    double getCanopyBaseHeight() const;
-    double getCanopyBulkDensity() const;
+    double getCanopyBaseHeight(LengthUnits::LengthUnitsEnum heightUnits) const;
+    double getCanopyBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const;
     double getCanopyFlameLength() const;
     double getCanopyFirelineIntensity() const;
-    DensityUnits::DensityUnitsEnum  getCanopyBulkDensityUnits() const;
-    LengthUnits::LengthUnitsEnum getCanopyBaseHeightUnits() const;
+ 
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
 
     void updateCrownInputs(double canopyBaseHeight, LengthUnits::LengthUnitsEnum heightUnits, 

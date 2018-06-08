@@ -94,6 +94,8 @@ class SurfaceInputs
 {
 public:
     SurfaceInputs();
+    SurfaceInputs& operator=(const SurfaceInputs& rhs);
+
     void initializeMembers();
 
     // Main Surface module inputs setters 
@@ -229,6 +231,8 @@ public:
     };
 
 private:   
+    void memberwiseCopyAssignment(const SurfaceInputs& rhs);
+
     // Main Suface module inputs
     int fuelModelNumber_;               // 1 to 256
     double moistureOneHour_;            // 1% to 60%

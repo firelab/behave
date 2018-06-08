@@ -46,14 +46,14 @@ void CrownInputs::initializeMembers()
     moistureFoliar_ = 0;
 }
 
-double CrownInputs::getCanopyBaseHeight() const
+double CrownInputs::getCanopyBaseHeight(LengthUnits::LengthUnitsEnum heightUnits) const
 {
-    return canopyBaseHeight_;
+    return LengthUnits::fromBaseUnits(canopyBaseHeight_, heightUnits);
 }
 
-double CrownInputs::getCanopyBulkDensity() const
+double CrownInputs::getCanopyBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const
 {
-    return canopyBulkDensity_;
+    return DensityUnits::fromBaseUnits(canopyBulkDensity_, densityUnits);
 }
 
 double CrownInputs::getCanopyFlameLength() const

@@ -46,15 +46,15 @@ public:
     double calculateReactionIntensity();
     void calculateEtaM();
     void calculateEtaS();
-    double getReactionIntensity() const;
+    double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
 
 private:
     void memberwiseCopyAssignment(const SurfaceFireReactionIntensity& rhs);
 
-    double etaM_[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];                           //< Moisture damping coefficient for  i-th categort (dead/live)
-    double etaS_[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];                           //< Mineral(silica) damping coefficient for i - th categort(dead / live)
-    double reactionIntensityForLifeState_[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];  //< Reaction intensity for i-th category (dead/live)
-    double reactionIntensity_;                                              //< Reaction Intensity, Rothermel 1972, equation 27
+    double etaM_[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];                            // Moisture damping coefficient for  i-th categort (dead/live)
+    double etaS_[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];                            // Mineral(silica) damping coefficient for i - th categort(dead / live)
+    double reactionIntensityForLifeState_[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];   // Reaction intensity for i-th category (dead/live)
+    double reactionIntensity_;                                                              // Reaction Intensity, Rothermel 1972, equation 27 (Btu/ft2/min)
 
     const SurfaceFuelbedIntermediates* surfaceFuelbedIntermediates_;
 

@@ -41,6 +41,17 @@
 
 class FuelModelSet;
 
+struct FireType
+{
+    enum FireTypeEnum
+    {
+        Surface = 0,    // surface fire with no torching or crown fire spread.
+        Torching = 1,   // surface fire with torching.
+        ConditionalCrownFire = 2, // active crown fire possible if the fire transitions to the overstory        
+        Crowning = 3    // active crown fire, fire is spreading through the canopy.
+    };
+};
+
 class Crown
 {
 public:
@@ -51,8 +62,8 @@ public:
     Crown(const Crown &rhs);
     Crown& operator=(const Crown &rhs);
 
-    void doCrownRun();
-  
+    void doCrownRunRothermel();
+    void doCrownRunScottAndReinhardt();
     void initializeMembers();
 
     // CROWN Module Setters
@@ -69,8 +80,8 @@ public:
     void setMoistureFoliar(double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
 
     // Crown Module Getters
-    double getCanopyBaseHeight() const;
-    double getCanopyBulkDensity() const;
+    double getCanopyBaseHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const;
+    double getCanopyBulkDensity(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits) const;
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     //double getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
     double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
@@ -79,7 +90,13 @@ public:
     double getCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     FireType::FireTypeEnum getFireType() const;
 
+    double getActualSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getActualHeatPerUnitArea() const;
+    double getActualFirelineIntesity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
+    double getActualFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+
     double getCrownFireLengthToWidthRatio() const;
+    double getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
 
     // SURFACE Module Inputs Setters
     void updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
@@ -104,6 +121,8 @@ public:
     void setWindDirection(double windDirection);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode);
+    void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
+    void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
 
     // SurfaceInputs getters
     int getFuelModelNumber() const;
@@ -125,17 +144,21 @@ private:
     CrownInputs crownInputs_;
     
     // SURFACE module components
-    Surface surface_;
+    Surface surfaceFuel_;
+    Surface crownFuel_;
 
     // Private methods
     void memberwiseCopyAssignment(const Crown& rhs);
+    void calculateCrownFireActiveWindSpeed();
     void calculateCanopyHeatPerUnitArea();
     void calculateCrownFireHeatPerUnitArea();
     void calculateCrownFuelLoad();
     void calculateCrownFirelineIntensity();
     void calculateCrownFlameLength();
+    void calculatePassiveCrownFlameLength();
     void calculateCrownPowerOfFire();
     void calcuateCrownPowerOfWind();
+    void calculateSurfaceFireCriticalSpreadRateScottAndReinhardt();
     void calculateCrownCriticalFireSpreadRate();
     void calculateCrownCriticalSurfaceFireIntensity();
     void calculateCrownCriticalSurfaceFlameLength();
@@ -145,27 +168,49 @@ private:
     void calculateFireType();
     void calculateWindSpeedAtTwentyFeet();
     void calculateCrownLengthToWidthRatio();
+    void calculateCrownFractionBurned();
 
     // Member variables
     FireType::FireTypeEnum fireType_;               // Classification based on corwn fire active and transition ratios
-    double crownsSurfaceHeatPerUnitArea_;           // Copy of surface hpua used for parallel surface runs (Btu/ft^2)
-    double crownsSurfaceFirelineIntensity_;         // Copy of surface fireline intensity used for parallel surface runs
+    double surfaceFireHeatPerUnitArea_;             // Surface fire hpua used for parallel surface runs (Btu/ft^2)
+    double surfaceFirelineIntensity_;               // Surface fireline intensity used for parallel surface runs
+    double surfaceFireSpreadRate_;                      
+    double surfaceFireFlameLength_;
+    double surfaceFireCriticalSpreadRate_;
     double crownFuelLoad_;                          // Crown fire fuel load (lb / ft^2)
     double canopyHeatPerUnitArea_;                  // Canopy heat per unit area (Btu/ft^2)
     double crownFireHeatPerUnitArea_;               // Crown fire heat per unit area (Btu/ft^2)
     double crownFirelineIntensity_;                 // Crown fire fireline intensity (Btu / ft / s)
     double crownFlameLength_;                       // Crown fire flame length (ft)
     double crownFireSpreadRate_;
-    double crownCriticalSurfaceFireIntensity_;      // Critical surface fire intensity (Btu / ft / s)
-    double crownCriticalFireSpreadRate_;            // Critical crown fire spread rate (ft / min)
-    double crownCriticalSurfaceFlameLength_;        // Critical surface fire flame length (ft)
+    double crownCriticalSurfaceFirelineIntensity_;  // Crown fire's critical surface fire intensity (Btu / ft / s)
+    double crownCriticalFireSpreadRate_;            // Crown fire's critical crown fire spread rate (ft / min)
+    double crownCriticalSurfaceFlameLength_;        // Crown fire's critical surface fire flame length (ft)
     double crownPowerOfFire_;                       // Crown fire 'power of the fire' ( ft*lb / s / ft^2)
     double crownPowerOfWind_;                       // Crown fire 'power of the wind' ( ft*lb / s / ft^2)
     double crownFirePowerRatio_;                    // Crown fire power ratio
     double crownFireActiveRatio_;                   // Crown fire active ratio
     double crownFireTransitionRatio_;               // Crown fire transition ratio
     double crownFireLengthToWidthRatio_;            // Crown fire transition ratio
+    double crownFireActiveWindSpeed_;               // 20 ft windspeed at which active crowning is possible (ft/min)
+    double crownFractionBurned_;
+    double crowningSurfaceFireRos_;                 // Surface fire spread rate at which the active crown fire spread rate is fully achieved (ft/min)
     double windSpeedAtTwentyFeet_;
+
+    double actualSpreadRate_;                       // "Actual" spread rate of the fire, depends on fire type
+    double actualHeatPerUnitArea_;                  // "Actual" fire heat per unit area, depends on fire type
+    double actualFirelineIntesity_;                 // "Actual" fireline intensity, depends on fire type
+    double actualFlameLength_;                      // "Actual" flame length, depends on fire type
+
+    double passiveCrownFireSpreadRate_;
+    double passiveCrownFireHeatPerUnitArea_;
+    double passiveCrownFireLineIntensity_;
+    double passiveCrownFireFlameLength_;
+
+    bool isSurfaceFire_;
+    bool isPassiveCrownFire_;
+    bool isActiveCrownFire_;
+    bool isCrownFire_;
 };
 
 #endif // CROWN_H

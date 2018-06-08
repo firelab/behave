@@ -691,8 +691,8 @@ double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
 
 double HeatOfCombustionUnits::toBaseUnits(double value, HeatOfCombustionUnitsEnum units)
 {
-    const double  KILOJOULES_PER_KILOGRAM_TO_BTUS_PER_POUND = 0.42992261392949266;
-
+    const double  KILOJOULES_PER_KILOGRAM_TO_BTUS_PER_POUND = 0.429592;
+ 
     switch (units)
     {
         case BtusPerPound:
@@ -716,7 +716,7 @@ double HeatOfCombustionUnits::toBaseUnits(double value, HeatOfCombustionUnitsEnu
 
 double HeatOfCombustionUnits::fromBaseUnits(double value, HeatOfCombustionUnitsEnum units)
 {
-    const double BTUS_PER_POUND_TO_KILOJOULES_PER_KILOGRAM = 2.326;
+    const double BTUS_PER_POUND_TO_KILOJOULES_PER_KILOGRAM = 2.32779;
 
     switch (units)
     {
@@ -742,12 +742,11 @@ double HeatOfCombustionUnits::fromBaseUnits(double value, HeatOfCombustionUnitsE
 double FirelineIntensityUnits::toBaseUnits(double value, FirelineIntensityUnitsEnum units)
 {
     const double BTUS_PER_FOOT_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND = 0.01666666666666667;
-    const double KILOJOULES_PER_METER_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND = 0.0048111983491207696;
-    const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.28867190094724617;
+    const double KILOJOULES_PER_METER_PER_MINUTE_TO_BTUS_PER_FOOT_PER_SECOND = 0.00481120819;
+    const double KILOWATTS_PER_METER_TO_BTUS_PER_FOOT_PER_SECOND = 0.2886719;
 
     switch (units)
     {
-        
         case BtusPerFootPerSecond:
         {
             // Already in base, nothing to do
@@ -785,12 +784,11 @@ double FirelineIntensityUnits::toBaseUnits(double value, FirelineIntensityUnitsE
 double FirelineIntensityUnits::fromBaseUnits(double value, FirelineIntensityUnitsEnum units)
 {
     const double BTUS_PER_FOOT_PER_SECOND_TO_BTUS_PER_FOOT_PER_MINUTE = 60;
-    const double BTUS_PER_FOOT_PER_SECOND_TO_KILOJOULES_PER_METER_PER_MINUTE = 207.84842516059365;
-    const double BTUS_PER_FOOT_PER_SECOND_TO_KILOWATTS_PER_METER = 3.4641404193432275;
+    const double BTUS_PER_FOOT_PER_SECOND_TO_KILOJOULES_PER_METER_PER_MINUTE = 207.848;
+    const double BTUS_PER_FOOT_PER_SECOND_TO_KILOWATTS_PER_METER = 3.464140419;
 
     switch (units)
     {
-        
         case BtusPerFootPerSecond:
         {
             // Already in base, nothing to do
@@ -822,5 +820,137 @@ double FirelineIntensityUnits::fromBaseUnits(double value, FirelineIntensityUnit
         }
     }
 
+    return value;
+}
+
+double HeatSourceAndReactionIntensityUnits::toBaseUnits(double value, HeatSourceAndReactionIntensityUnitsEnum units)
+{
+    const double BTUS_PER_SQUARE_FOOT_PER_SECOND_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE = 60;
+    const double KILOJOULES_PER_SQUARE_METER_PER_MINUTE_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE = 0.0880549963329497;
+    //const double KILOWATTS_PER_SQUARE_METER_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE = 5.28329977997698;
+    const double KILOWATTS_PER_SQUARE_METER_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE = 5.27921783108615;
+
+    switch (units)
+    {
+        case BtusPerSquareFootPerMinute:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case BtusPerSquareFootPerSecond:
+        {
+            value *= BTUS_PER_SQUARE_FOOT_PER_SECOND_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE;
+            break;
+        }
+        case KilojoulesPerSquareMeterPerSecond:
+        {
+            value *= KILOWATTS_PER_SQUARE_METER_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE;
+            break;
+        }
+        case KilojoulesPerSquareMeterPerMinute:
+        {
+            value *= KILOJOULES_PER_SQUARE_METER_PER_MINUTE_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE;
+            break;
+        }
+        case KilowattsPerSquareMeter:
+        {
+            value *= KILOWATTS_PER_SQUARE_METER_TO_BTUS_PER_SQUARE_FOOT_PER_MINUTE;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}
+
+double HeatSourceAndReactionIntensityUnits::fromBaseUnits(double value, HeatSourceAndReactionIntensityUnitsEnum units)
+{
+    const double BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_BTUS_PER_SQUARE_FOOT_PER_SECOND = 0.01666666666666667;
+    const double BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_KILOJOULES_PER_SQUARE_METER_PER_MINUTE = 11.356539;
+    //const double BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_KILOWATTS_PER_SQUARE_METER = 0.18927565;
+    const double BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_KILOWATTS_PER_SQUARE_METER = 0.189422;
+
+    switch (units)
+    {
+        case BtusPerSquareFootPerMinute:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case BtusPerSquareFootPerSecond:
+        {
+            value *= BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_BTUS_PER_SQUARE_FOOT_PER_SECOND;
+            break;
+        }
+        case KilojoulesPerSquareMeterPerSecond:
+        {
+            value *= BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_KILOWATTS_PER_SQUARE_METER;
+            break;
+        }
+        case KilojoulesPerSquareMeterPerMinute:
+        {
+            value *= BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_KILOJOULES_PER_SQUARE_METER_PER_MINUTE;
+            break;
+        }
+        case KilowattsPerSquareMeter:
+        {
+            value *= BTUS_PER_SQUARE_FOOT_PER_MINUTE_TO_KILOWATTS_PER_SQUARE_METER;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}
+
+double HeatSinkUnits::toBaseUnits(double value, HeatSinkUnitsEnum units)
+{
+    const double KILOJOULES_PER_CUBIC_METER_TO_BTUS_PER_CUBIC_FOOT = 0.02681849745789;
+    switch (units)
+    {
+        case BtusPerCubicFoot:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case KilojoulesPerCubicMeter:
+        {
+            value *= KILOJOULES_PER_CUBIC_METER_TO_BTUS_PER_CUBIC_FOOT;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+    return value;
+}
+
+double HeatSinkUnits::fromBaseUnits(double value, HeatSinkUnitsEnum units)
+{
+    const double BTUS_PER_CUBIC_FOOT_TO_KILOJOULES_PER_CUBIC_METER = 37.28769673134085;
+    switch (units)
+    {
+        case BtusPerCubicFoot:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case KilojoulesPerCubicMeter:
+        {
+            value *= BTUS_PER_CUBIC_FOOT_TO_KILOJOULES_PER_CUBIC_METER;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
     return value;
 }

@@ -67,11 +67,14 @@ public:
     double getHeatPerUnitArea() const;
     double getMidflameWindspeed() const;
     double getResidenceTime() const;
-    double getReactionIntensity() const;
+    double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
     double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
     double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
     double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
-   
+    double getSlopeFactor() const;
+    double getBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const;
+    double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
+
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
 

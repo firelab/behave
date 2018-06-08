@@ -35,7 +35,7 @@
 #include "windSpeedUtility.h"
 
 Crown::Crown(const FuelModelSet& fuelModelSet)
-    : surface_(fuelModelSet)
+    : surfaceFuel_(fuelModelSet), crownFuel_(fuelModelSet)
 {
     fuelModelSet_ = &fuelModelSet;
     initializeMembers();
@@ -47,7 +47,7 @@ Crown::~Crown()
 }
 
 Crown::Crown(const Crown& rhs)
-    : surface_(*rhs.fuelModelSet_)
+    : surfaceFuel_(*rhs.fuelModelSet_), crownFuel_(*rhs.fuelModelSet_)
 {
     memberwiseCopyAssignment(rhs);
 }
@@ -64,19 +64,20 @@ Crown& Crown::operator=(const Crown& rhs)
 void Crown::memberwiseCopyAssignment(const Crown& rhs)
 {
     fuelModelSet_ = rhs.fuelModelSet_;
-    surface_ = rhs.surface_;
+    surfaceFuel_ = rhs.surfaceFuel_;
+    crownFuel_ = rhs.crownFuel_;
     crownInputs_ = rhs.crownInputs_;
 
     fireType_ = rhs.fireType_;
-    crownsSurfaceHeatPerUnitArea_ = rhs.crownsSurfaceHeatPerUnitArea_;
-    crownsSurfaceFirelineIntensity_ = rhs.crownsSurfaceFirelineIntensity_;
+    surfaceFireHeatPerUnitArea_ = rhs.surfaceFireHeatPerUnitArea_;
+    surfaceFirelineIntensity_ = rhs.surfaceFirelineIntensity_;
     crownFuelLoad_ = rhs.crownFuelLoad_;
     canopyHeatPerUnitArea_ = rhs.canopyHeatPerUnitArea_;
     crownFireHeatPerUnitArea_ = rhs.crownFireHeatPerUnitArea_;
     crownFirelineIntensity_ = rhs.crownFirelineIntensity_;
     crownFlameLength_ = rhs.crownFlameLength_;
     crownFireSpreadRate_ = rhs.crownFireSpreadRate_;
-    crownCriticalSurfaceFireIntensity_ = rhs.crownCriticalSurfaceFireIntensity_;
+    crownCriticalSurfaceFirelineIntensity_ = rhs.crownCriticalSurfaceFirelineIntensity_;
     crownCriticalFireSpreadRate_ = rhs.crownCriticalFireSpreadRate_;
     crownCriticalSurfaceFlameLength_ = rhs.crownCriticalSurfaceFlameLength_;
     crownPowerOfFire_ = rhs.crownPowerOfFire_;
@@ -85,29 +86,174 @@ void Crown::memberwiseCopyAssignment(const Crown& rhs)
     crownFireActiveRatio_ = rhs.crownFireActiveRatio_;
     crownFireTransitionRatio_ = rhs.crownFireTransitionRatio_;
     windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
+    crownFireLengthToWidthRatio_ = rhs.crownFireLengthToWidthRatio_;
+
+    surfaceFireSpreadRate_ = rhs.surfaceFireSpreadRate_;
+    surfaceFireCriticalSpreadRate_ = rhs.surfaceFireCriticalSpreadRate_;
+
+    passiveCrownFireSpreadRate_ = rhs.passiveCrownFireSpreadRate_;
+    passiveCrownFireHeatPerUnitArea_ = rhs.passiveCrownFireHeatPerUnitArea_;
+    passiveCrownFireLineIntensity_ = rhs.passiveCrownFireLineIntensity_;
+    passiveCrownFireFlameLength_ = rhs.passiveCrownFireFlameLength_;
+
+    actualSpreadRate_ = rhs.actualSpreadRate_;
+    actualHeatPerUnitArea_ = rhs.actualHeatPerUnitArea_;
+    actualFirelineIntesity_ = rhs.actualFirelineIntesity_;
+    actualFlameLength_ = rhs.actualFlameLength_;
+
+    isSurfaceFire_ = rhs.isSurfaceFire_;
+    isPassiveCrownFire_ = rhs.isPassiveCrownFire_;
+    isActiveCrownFire_ = rhs.isActiveCrownFire_;
+
+    crownFireActiveWindSpeed_ = rhs.crownFireActiveWindSpeed_;
+    crownFractionBurned_ = rhs.crownFractionBurned_;
 }
 
-void Crown::doCrownRun()
+void Crown::doCrownRunScottAndReinhardt()
+{
+    // This method uses Scott and Reinhardt's linked models method for crown fire (2001)
+
+    double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
+    double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
+    double crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
+
+    surfaceFuel_.setCrownRatio(crownRatio);
+    
+    // Step 1: Do surface run and store values needed for further calculations
+    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
+    surfaceFireSpreadRate_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
+    surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea();
+    surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
+    surfaceFireFlameLength_ = surfaceFuel_.getFlameLength(LengthUnits::Feet); // Byram
+
+    // Step 2: Create the crown fuel model (fire behavior fuel model 10)
+    crownFuel_ = surfaceFuel_;
+    crownFuel_.setFuelModelNumber(10); // Set the crown fuel model used to fuel model 10
+    crownFuel_.setUserProvidedWindAdjustmentFactor(0.4); // Wind adjustment factor is assumed to be 0.4
+    crownFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    crownFuel_.setSlope(0, SlopeUnits::Degrees);
+    crownFuel_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+    crownFuel_.setWindDirection(0.0); // Wind direction is assumed to be upslope
+    crownFuel_.setWindSpeed(surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot), SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
+    // Step 3: Determine crown fire behavior
+    crownFuel_.doSurfaceRunInDirectionOfMaxSpread();
+    
+    crownFireSpreadRate_ = 3.34 * crownFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
+    calculateCrownFireActiveWindSpeed();
+
+    //  Step 4: Calculate remaining crown fire characteristics
+    calculateCrownFuelLoad();
+    calculateCanopyHeatPerUnitArea();
+    calculateCrownFireHeatPerUnitArea();
+    calculateCrownFirelineIntensity();
+    calculateCrownFlameLength();
+    calculateCrownCriticalFireSpreadRate();
+    calculateCrownCriticalSurfaceFireIntensity();
+    calculateCrownCriticalSurfaceFlameLength();
+    calculateCrownFireActiveRatio();
+    calculateCrownFireTransitionRatio();
+
+    calculateCrownPowerOfFire();
+    calculateWindSpeedAtTwentyFeet();
+    calcuateCrownPowerOfWind();
+    calculateCrownLengthToWidthRatio();
+    calcualteCrownFirePowerRatio();
+
+    // Determine if/what type of crown fire has occured
+    calculateFireType();
+
+    // Final fire type
+    isSurfaceFire_ = fireType_ == FireType::Surface || fireType_ == FireType::ConditionalCrownFire;
+    isPassiveCrownFire_ = fireType_ == FireType::Torching;
+    isActiveCrownFire_ = fireType_ == FireType::Crowning;
+    isCrownFire_ = isActiveCrownFire_ || isPassiveCrownFire_;
+
+    // Scott & Reinhardt's critical surface fire spread rate (R'initiation) (ft/min)
+    calculateSurfaceFireCriticalSpreadRateScottAndReinhardt();
+
+    // Scott & Reinhardt crown fraction burned
+    surfaceFuel_.setWindSpeed(crownFireActiveWindSpeed_, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
+    // Do crown run with crowning index wind speed
+    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
+    crowningSurfaceFireRos_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute);
+    calculateCrownFractionBurned();
+
+    // Scott & Reinhardt torching (passive crown) spread rate, hpua, fireline intensity
+    passiveCrownFireSpreadRate_ = surfaceFireSpreadRate_
+        + crownFractionBurned_ * (crownFireSpreadRate_ - surfaceFireSpreadRate_);
+    passiveCrownFireHeatPerUnitArea_ = surfaceFireHeatPerUnitArea_ + canopyHeatPerUnitArea_ * crownFractionBurned_;
+    passiveCrownFireLineIntensity_ = passiveCrownFireHeatPerUnitArea_ * passiveCrownFireSpreadRate_ / 60.0;
+
+    // Scott & Reinhardt torching (passive) flame length
+    calculatePassiveCrownFlameLength();
+    
+    // Determine final fire behavior
+    if (isSurfaceFire_)
+    {
+        actualSpreadRate_ = surfaceFireSpreadRate_;
+        actualHeatPerUnitArea_ = surfaceFireHeatPerUnitArea_;
+        actualFirelineIntesity_ = surfaceFirelineIntensity_;
+        actualFlameLength_ = surfaceFireFlameLength_;
+    }
+    else if (isPassiveCrownFire_)
+    {
+        actualSpreadRate_ = passiveCrownFireSpreadRate_;
+        actualHeatPerUnitArea_ = passiveCrownFireHeatPerUnitArea_;
+        actualFirelineIntesity_ = passiveCrownFireLineIntensity_;
+        actualFlameLength_ = passiveCrownFireFlameLength_;
+    }
+    else if (isActiveCrownFire_)
+    {
+        actualSpreadRate_ = crownFireSpreadRate_;
+        actualHeatPerUnitArea_ = crownFireHeatPerUnitArea_;
+        actualFirelineIntesity_ = crownFirelineIntensity_;
+        actualFlameLength_ = crownFlameLength_;
+    }
+}
+
+void Crown::calculateCrownFractionBurned()
+{
+    // Calculates the crown fraction burned as per Scott & Reinhardt.
+    // Using these parameters:
+    // surfaceFireSpreadRate_: the "actual" surface fire spread rate (ft/min).
+    // surfaceFireCriticalSpreadRate_: surface fire spread rate required to initiate torching/crowning (ft/min).
+    // crowningSurfaceFireRos_: Surface fire spread rate at which the active crown fire spread rate is fully achieved 
+    // and the crown fraction burned is 1.
+    
+    double numerator = surfaceFireSpreadRate_ - surfaceFireCriticalSpreadRate_;
+    double denominator = crowningSurfaceFireRos_ - surfaceFireCriticalSpreadRate_;
+
+    crownFractionBurned_ = (denominator > 1e-07) ? (numerator / denominator) : 0.0;
+    crownFractionBurned_ = (crownFractionBurned_ > 1.0) ? 1.0 : crownFractionBurned_;
+    crownFractionBurned_ = (crownFractionBurned_ < 0.0) ? 0.0 : crownFractionBurned_;
+}
+
+void Crown::doCrownRunRothermel()
 {
     // This method uses Rothermel's 1991 crown fire correlation to calculate Crown fire average spread rate (ft/min)
 
+    double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
+    double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
+    double crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
+    surfaceFuel_.setCrownRatio(crownRatio);
+
     // Step 1: Do surface run and store values needed for further calculations 
-    surface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
-    crownsSurfaceHeatPerUnitArea_ = surface_.getHeatPerUnitArea();
-    crownsSurfaceFirelineIntensity_ = surface_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
-    surface_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
-    double windAdjustmentFactor = 0.4; // wind adjustment factor is assumed to be 0.4 for crown ROS
-    surface_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
+    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Crown ROS output given in direction of max spread 
+    surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea();
+    surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
+    surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    double windAdjustmentFactor = 0.4; // Wind adjustment factor is assumed to be 0.4
+    surfaceFuel_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
 
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
-    surface_.setFuelModelNumber(10);    // set the fuel model used to fuel model 10
-    surface_.setSlope(0.0, SlopeUnits::Degrees); // slope is always assumed to be zero in crown ROS
-    surface_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
-    surface_.setWindDirection(0.0);     // wind direction is assumed to be upslope in crown ROS
+    surfaceFuel_.setFuelModelNumber(10); // Set the fuel model used to fuel model 10
+    surfaceFuel_.setSlope(0.0, SlopeUnits::Degrees); // Slope is assumed to be zero
+    surfaceFuel_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+    surfaceFuel_.setWindDirection(0.0); // Wind direction is assumed to be upslope
 
     // Step 3: Determine crown fire behavior
-    surface_.doSurfaceRunInDirectionOfMaxSpread(); // Crown fire is always in direction of max spread
-    crownFireSpreadRate_ = 3.34 * surface_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
+    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
+    crownFireSpreadRate_ = 3.34 * surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
 
     //  Step 4: Calculate remaining crown fire characteristics
     calculateCrownFuelLoad();
@@ -133,6 +279,33 @@ void Crown::doCrownRun()
     calculateFireType();
 }
 
+void Crown::calculateCrownFireActiveWindSpeed()
+{
+    // The crown fire active wind speed is the wind speed at which 100 per
+    // possible, based on Rothermel’s(1991a) crown fire spread rate model and Van Wagner’s
+    // (1977) criterion for active crown fire spread. CI is a function of canopy bulk density,
+    // slope steepness and surface fuel moisture content
+
+    //double cbd = 16.0185 * canopyBulkDensity;       // Convert from lb/ft3 to kg/m3
+    double  cbd = 16.0185 * getCanopyBulkDensity(DensityUnits::PoundsPerCubicFoot);;       // Convert from lb/ft3 to kg/m3
+    double ractive = 3.28084 * (3.0 / cbd);         // R'active, ft/min
+    double r10 = ractive / 3.34;                    // R'active = 3.324 * R10
+    double propFlux = 0.048317062998571636;         // Fuel model 10 actual propagating flux ratio
+    double reactionIntensity = crownFuel_.getReactionIntensity(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute);
+    double heatSink = crownFuel_.getHeatSink(HeatSinkUnits::BtusPerCubicFoot);
+    double ros0 = reactionIntensity * propFlux / heatSink;
+    double windB = 1.4308256324729873;              // Fuel model 10 actual wind factor B
+    double windBInv = 1.0 / windB;                  // Fuel model 10 actual inverse of wind factor B
+    double windK = 0.0016102128596515481;           // Fuel model 10 actual K = C*pow((beta/betOpt),-E)
+    double slopeFactor = 0.0;
+    double a = ((r10 / ros0) - 1.0 - slopeFactor) / windK;
+    double uMid = pow(a, windBInv);                 // midflame wind speed (ft/min)
+    double u20 = uMid / 0.4;                        // 20-ft wind speed (ft/min) for waf=0.4
+    crownFireActiveWindSpeed_ = u20 / 54.680665;    // CI, km/h
+    crownFireActiveWindSpeed_ = u20;                // ft/min
+    //return u20;
+}
+
 double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
     return SpeedUnits::fromBaseUnits(crownFireSpreadRate_, spreadRateUnits);
@@ -140,7 +313,7 @@ double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
 
 double Crown::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
-    return surface_.getSpreadRate(spreadRateUnits);
+    return surfaceFuel_.getSpreadRate(spreadRateUnits);
 }
 
 double Crown::getCrownFirelineIntensity() const
@@ -158,23 +331,48 @@ FireType::FireTypeEnum Crown::getFireType() const
     return fireType_;
 }
 
+double Crown::getActualSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+{
+    return SpeedUnits::fromBaseUnits(actualSpreadRate_, spreadRateUnits);
+}
+
+double Crown::getActualHeatPerUnitArea() const
+{
+    return actualHeatPerUnitArea_;
+}
+
+double Crown::getActualFirelineIntesity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+    return FirelineIntensityUnits::fromBaseUnits(actualFirelineIntesity_, firelineIntensityUnits);
+}
+
+double Crown::getActualFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
+{
+    return LengthUnits::fromBaseUnits(actualFlameLength_, flameLengthUnits);
+}
+
 double Crown::getCrownFireLengthToWidthRatio() const
 {
     return crownFireLengthToWidthRatio_;
 }
 
+double Crown::getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const
+{
+    return SpeedUnits::fromBaseUnits(crownFireActiveWindSpeed_, speedUnits);
+}
+
 void Crown::initializeMembers()
 {
     fireType_ = FireType::Surface;
-    crownsSurfaceHeatPerUnitArea_ = 0.0;
-    crownsSurfaceFirelineIntensity_ = 0.0;
+    surfaceFireHeatPerUnitArea_ = 0.0;
+    surfaceFirelineIntensity_ = 0.0;
     crownFuelLoad_ = 0.0;
     canopyHeatPerUnitArea_ = 0.0;
     crownFireHeatPerUnitArea_ = 0.0;
     crownFirelineIntensity_ = 0.0;
     crownFlameLength_ = 0.0;
     crownFireSpreadRate_ = 0.0;
-    crownCriticalSurfaceFireIntensity_ = 0.0;
+    crownCriticalSurfaceFirelineIntensity_ = 0.0;
     crownCriticalFireSpreadRate_ = 0.0;
     crownCriticalSurfaceFlameLength_ = 0.0;
     crownPowerOfFire_ = 0.0;
@@ -185,6 +383,20 @@ void Crown::initializeMembers()
     windSpeedAtTwentyFeet_ = 0.0;;
     crownFireLengthToWidthRatio_ = 1.0;
 
+    surfaceFireSpreadRate_ = 0.0;
+    surfaceFireCriticalSpreadRate_ = 0.0;
+
+    passiveCrownFireSpreadRate_ = 0.0;
+    passiveCrownFireHeatPerUnitArea_ = 0.0;
+    passiveCrownFireLineIntensity_ = 0.0;
+    passiveCrownFireFlameLength_ = 0.0;
+
+    isSurfaceFire_ = false;
+    isPassiveCrownFire_ = false;
+    isActiveCrownFire_ = false;
+
+    crownFireActiveWindSpeed_ = 0.0;
+    
     crownInputs_.initializeMembers();
 }
 
@@ -196,22 +408,22 @@ void Crown::calculateCanopyHeatPerUnitArea()
 
 void Crown::calculateCrownFireHeatPerUnitArea()
 {
-    crownFireHeatPerUnitArea_ = crownsSurfaceHeatPerUnitArea_ + canopyHeatPerUnitArea_;
+    crownFireHeatPerUnitArea_ = surfaceFireHeatPerUnitArea_ + canopyHeatPerUnitArea_;
 }
 
 void Crown::calculateCrownFuelLoad()
 {
-    double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
-    double canopyBaseHeight = crownInputs_.getCanopyBaseHeight();
-    double canopyHeight = surface_.getCanopyHeight(LengthUnits::Feet);
+    double canopyBulkDensity = crownInputs_.getCanopyBulkDensity(DensityUnits::PoundsPerCubicFoot);
+    double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
+    double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
     crownFuelLoad_ = canopyBulkDensity * (canopyHeight - canopyBaseHeight);
 }
 
 void Crown::calculateCrownFireTransitionRatio()
 {
-   crownFireTransitionRatio_ = ((crownCriticalSurfaceFireIntensity_ < 1.0e-7)
+   crownFireTransitionRatio_ = ((crownCriticalSurfaceFirelineIntensity_ < 1.0e-7)
         ? (0.00)
-        : (crownsSurfaceFirelineIntensity_ / crownCriticalSurfaceFireIntensity_));
+        : (surfaceFirelineIntensity_ / crownCriticalSurfaceFirelineIntensity_));
 }
 
 void Crown::calculateCrownFirelineIntensity()
@@ -225,28 +437,47 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
     double moistureFoliar = crownInputs_.getMoistureFoliar(MoistureUnits::Percent);
     moistureFoliar = (moistureFoliar < 30.0) ? 30.0 : moistureFoliar;
 
-    double crownBaseHeight = crownInputs_.getCanopyBaseHeight();
     // Convert crown base height to meters and constrain lower limit
-    crownBaseHeight = LengthUnits::fromBaseUnits(crownBaseHeight, LengthUnits::Meters);
+    double crownBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Meters);
     crownBaseHeight = (crownBaseHeight < 0.1) ? 0.1 : crownBaseHeight;
 
     // Critical surface fireline intensity (kW/m)
     FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits = FirelineIntensityUnits::KilowattsPerMeter;
-    // Need to changed value in calculation below from 450 to 460 at some point
-    crownCriticalSurfaceFireIntensity_ = pow((0.010 * crownBaseHeight * (450.0 + 25.9 * moistureFoliar)), 1.5);
-    
+    crownCriticalSurfaceFirelineIntensity_ = pow((0.010 * crownBaseHeight * (460.0 + 25.9 * moistureFoliar)), 1.5);
+
     // Return as Btu/ft/s
-    crownCriticalSurfaceFireIntensity_ = FirelineIntensityUnits::toBaseUnits(crownCriticalSurfaceFireIntensity_, firelineIntensityUnits);
+    crownCriticalSurfaceFirelineIntensity_ = FirelineIntensityUnits::toBaseUnits(crownCriticalSurfaceFirelineIntensity_, firelineIntensityUnits);
 }
 
 void Crown::calculateCrownCriticalSurfaceFlameLength()
 {
-    crownCriticalSurfaceFlameLength_ = surface_.calculateFlameLength(crownCriticalSurfaceFireIntensity_);
+    crownCriticalSurfaceFlameLength_ = surfaceFuel_.calculateFlameLength(crownCriticalSurfaceFirelineIntensity_);
 }
 
 void Crown::calculateCrownFlameLength()
 {
-    crownFlameLength_ = 0.2 * pow(crownFirelineIntensity_, (2.0 / 3.0));
+    // Uses Thomas's (1963) flame length (ft) given a fireline intensity (Btu/ft/s).
+    if (crownFirelineIntensity_ <= 0.0)
+    {
+        crownFlameLength_ = 0.0;
+    }
+    else
+    {
+        crownFlameLength_ = 0.2 * pow(crownFirelineIntensity_, (2.0 / 3.0));
+    }
+}
+
+void Crown::calculatePassiveCrownFlameLength()
+{
+    // Uses Thomas's (1963) flame length (ft) given a fireline intensity (Btu/ft/s).
+    if (passiveCrownFireLineIntensity_ <= 0.0)
+    {
+        passiveCrownFireFlameLength_ = 0.0;
+    }
+    else
+    {
+        passiveCrownFireFlameLength_ = 0.2 * pow(passiveCrownFireLineIntensity_, (2.0 / 3.0));
+    }
 }
 
 void Crown::calculateCrownPowerOfFire()
@@ -271,12 +502,17 @@ void Crown::calcualteCrownFirePowerRatio()
     crownFirePowerRatio_ = (crownPowerOfWind_ > 1e-07) ? (crownPowerOfFire_ / crownPowerOfWind_) : 0.0;
 }
 
+
+void Crown::calculateSurfaceFireCriticalSpreadRateScottAndReinhardt()
+{
+    // Scott & Reinhardt's critical surface fire spread rate (R'initiation) (ft/min)
+    surfaceFireCriticalSpreadRate_ = (60. * crownCriticalSurfaceFirelineIntensity_) / surfaceFireHeatPerUnitArea_;
+}
+
 void Crown::calculateCrownCriticalFireSpreadRate()
 {
-    double canopyBulkDensity = crownInputs_.getCanopyBulkDensity();
-
     // Convert canopy bulk density to Kg/m3
-    double convertedCanopyBulkDensity = DensityUnits::fromBaseUnits(canopyBulkDensity, DensityUnits::KilogramsPerCubicMeter);
+    double convertedCanopyBulkDensity = crownInputs_.getCanopyBulkDensity(DensityUnits::KilogramsPerCubicMeter);
     crownCriticalFireSpreadRate_ = (convertedCanopyBulkDensity < 1e-07) ? 0.00 : (3.0 / convertedCanopyBulkDensity);
 
     // Convert spread rate from m/min to ft/min
@@ -293,16 +529,16 @@ void Crown::calculateCrownFireActiveRatio()
 void Crown::calculateWindSpeedAtTwentyFeet()
 {
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode;
-    windHeightInputMode = surface_.getWindHeightInputMode();
+    windHeightInputMode = surfaceFuel_.getWindHeightInputMode();
 
     if (windHeightInputMode == WindHeightInputMode::TwentyFoot)
     {
-        windSpeedAtTwentyFeet_ = surface_.getWindSpeed(SpeedUnits::FeetPerMinute, windHeightInputMode);
+        windSpeedAtTwentyFeet_ = surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, windHeightInputMode);
     }
     else if (windHeightInputMode == WindHeightInputMode::TenMeter)
     {
         WindSpeedUtility windSpeedUtility;
-        double windSpeedAtTenMeters = surface_.getWindSpeed(SpeedUnits::FeetPerMinute, windHeightInputMode);
+        double windSpeedAtTenMeters = surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, windHeightInputMode);
         windSpeedAtTwentyFeet_ = windSpeedUtility.windSpeedAtTwentyFeetFromTenMeter(windSpeedAtTenMeters);
     }
 }
@@ -360,7 +596,7 @@ void Crown::updateCrownInputs(int fuelModelNumber, double moistureOneHour, doubl
     double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBulkDensity, 
     DensityUnits::DensityUnitsEnum densityUnits)
 {
-    surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+    surfaceFuel_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio);
     crownInputs_.updateCrownInputs(canopyBaseHeight, canopyHeightUnits, canopyBulkDensity, densityUnits, moistureFoliar, moistureUnits);
@@ -389,7 +625,7 @@ void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHou
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits,
     double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
-    surface_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, 
+    surfaceFuel_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, 
         moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
         windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits,
         canopyHeight, canopyHeightUnits, crownRatio);
@@ -397,17 +633,17 @@ void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHou
 
 void  Crown::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
 {
-    surface_.setCanopyCover(canopyCover, coverUnits);
+    surfaceFuel_.setCanopyCover(canopyCover, coverUnits);
 }
 
 void  Crown::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits)
 {
-    surface_.setCanopyHeight(canopyHeight, canopyHeightUnits);
+    surfaceFuel_.setCanopyHeight(canopyHeight, canopyHeightUnits);
 }
 
 void  Crown::setCrownRatio(double crownRatio)
 {
-    surface_.setCrownRatio(crownRatio);
+    surfaceFuel_.setCrownRatio(crownRatio);
 }
 
 void Crown::setFuelModelSet(FuelModelSet & fuelModelSet)
@@ -418,152 +654,150 @@ void Crown::setFuelModelSet(FuelModelSet & fuelModelSet)
 
 void  Crown::setFuelModelNumber(int fuelModelNumber)
 {
-    surface_.setFuelModelNumber(fuelModelNumber);
+    surfaceFuel_.setFuelModelNumber(fuelModelNumber);
 }
 
 void  Crown::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    surface_.setMoistureOneHour(moistureOneHour, moistureUnits);
+    surfaceFuel_.setMoistureOneHour(moistureOneHour, moistureUnits);
 }
 
 void  Crown::setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    surface_.setMoistureTenHour(moistureTenHour, moistureUnits);
+    surfaceFuel_.setMoistureTenHour(moistureTenHour, moistureUnits);
 }
 
 void  Crown::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    surface_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
+    surfaceFuel_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
 }
 
 void  Crown::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    surface_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
+    surfaceFuel_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
 }
 
 void  Crown::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
-    surface_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
+    surfaceFuel_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
 }
 
 void  Crown::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)
 {
-    surface_.setSlope(slope, slopeUnits);
+    surfaceFuel_.setSlope(slope, slopeUnits);
 }
 
 void  Crown::setAspect(double aspect)
 {
-    surface_.setAspect(aspect);
+    surfaceFuel_.setAspect(aspect);
 }
 
 void  Crown::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
-    surface_.setWindSpeed(windSpeed, windSpeedUnits, windHeightInputMode);
+    surfaceFuel_.setWindSpeed(windSpeed, windSpeedUnits, windHeightInputMode);
 }
 
 void  Crown::setWindDirection(double windDirection)
 {
-    surface_.setWindDirection(windDirection);
+    surfaceFuel_.setWindDirection(windDirection);
 }
 
 void Crown::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
-    surface_.setWindHeightInputMode(windHeightInputMode);
+    surfaceFuel_.setWindHeightInputMode(windHeightInputMode);
 }
 
 void  Crown::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode)
 {
-    surface_.setWindAndSpreadOrientationMode(windAndSpreadAngleMode);
+    surfaceFuel_.setWindAndSpreadOrientationMode(windAndSpreadAngleMode);
+}
+
+void Crown::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
+{
+    surfaceFuel_.setUserProvidedWindAdjustmentFactor(userProvidedWindAdjustmentFactor);
+}
+
+void Crown::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod)
+{
+    surfaceFuel_.setWindAdjustmentFactorCalculationMethod(windAdjustmentFactorCalculationMethod);
 }
 
 int Crown::getFuelModelNumber() const
 {
-    return surface_.getFuelModelNumber();
+    return surfaceFuel_.getFuelModelNumber();
 }
 
 double Crown::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surface_.getMoistureOneHour(moistureUnits);
+    return surfaceFuel_.getMoistureOneHour(moistureUnits);
 }
 
 double Crown::getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surface_.getMoistureTenHour(moistureUnits);
+    return surfaceFuel_.getMoistureTenHour(moistureUnits);
 }
 
 double Crown::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surface_.getMoistureHundredHour(moistureUnits);
+    return surfaceFuel_.getMoistureHundredHour(moistureUnits);
 }
 
 double Crown::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surface_.getMoistureLiveHerbaceous(moistureUnits);
+    return surfaceFuel_.getMoistureLiveHerbaceous(moistureUnits);
 }
 
 double Crown::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surface_.getMoistureLiveWoody(moistureUnits);
+    return surfaceFuel_.getMoistureLiveWoody(moistureUnits);
 }
 
 double Crown::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const
 {
-    return surface_.getWindSpeed(windSpeedUnits, windHeightInputMode);
+    return surfaceFuel_.getWindSpeed(windSpeedUnits, windHeightInputMode);
 }
 
 double Crown::getWindDirection() const
 {
-    return surface_.getWindDirection();
+    return surfaceFuel_.getWindDirection();
 }
 
 double Crown::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    return surface_.getSlope(slopeUnits);
+    return surfaceFuel_.getSlope(slopeUnits);
 }
 
 double Crown::getAspect() const
 {
-    return surface_.getAspect();
+    return surfaceFuel_.getAspect();
 }
 
 double Crown::getCanopyCover(CoverUnits::CoverUnitsEnum canopyCoverUnits) const
 {
-    return surface_.getCanopyCover(canopyCoverUnits);
+    return surfaceFuel_.getCanopyCover(canopyCoverUnits);
 }
 
 double Crown::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) const
 {
-    return surface_.getCanopyHeight(canopyHeighUnits);
+    return surfaceFuel_.getCanopyHeight(canopyHeighUnits);
 }
 
 double Crown::getCrownRatio() const
 {
-    return surface_.getCrownRatio();
+    return surfaceFuel_.getCrownRatio();
 }
 
-double Crown::getCanopyBaseHeight() const
+double Crown::getCanopyBaseHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const
 {
-    return crownInputs_.getCanopyBaseHeight();
+    return crownInputs_.getCanopyBaseHeight(canopyHeightUnits);
 }
 
-double Crown::getCanopyBulkDensity() const
+double Crown::getCanopyBulkDensity(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits) const
 {
-    return crownInputs_.getCanopyBulkDensity();
+    return crownInputs_.getCanopyBulkDensity(canopyBulkDensityUnits);
 }
 
 double Crown::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return crownInputs_.getMoistureFoliar(moistureUnits);
 }
-
-//double Crown::getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
-//{
-//    if (fireType_ == FireType::ConditionalCrownFire || fireType_ == FireType::Crowning)
-//    {
-//        return surface_.getSpreadRate(spreadRateUnits);
-//    }
-//    else
-//    {
-//        return SpeedUnits::fromBaseUnits(crownFireSpreadRate_, spreadRateUnits);
-//    }
-//}

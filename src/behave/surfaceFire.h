@@ -67,13 +67,18 @@ public:
     double getHeatPerUnitArea() const;
     double getResidenceTime() const;
     double getWindSpeedLimit() const;
-    double getReactionIntensity() const;
     double getMidflameWindSpeed() const;
+    double getSlopeFactor() const;
+    double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
+    double getBulkDensity() const;
+    double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
 
     double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
  
     void calculateMidflameWindSpeed();
+
+   
 
 protected:
     // Protected setters accessible to friend classes
@@ -89,6 +94,7 @@ protected:
     void setIsWindLimitExceeded(bool isWindLimitExceeded);
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
+    
 
 private:
     void memberwiseCopyAssignment(const SurfaceFire& rhs);
@@ -137,16 +143,9 @@ private:
     double flameLength_;
     double backingSpreadRate_;
    
-    // Elliptical dimensions
-    double eccentricity_;   // deviation from a perfect circle being zero in the case of a perfect circle, unitless real in interval [0,1) 
-    double ellipticalA_;    // semiminor axis, commonly refered to as 'b' in mathematics and 'a' in fire literature (ch)
-    double ellipticalB_;    // semimajor axis, commonly refered to as 'a' in mathematics and 'b' in fire literature (ch)
-    double ellipticalC_;    // distance from center of ellipse to one of its foci, commonly referered to a 'c' in mathematics (ch)
-
     double midflameWindSpeed_; 
     double windAdjustmentFactor_;
     WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;
-    WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod_;
     double canopyCrownFraction_;
 
     double aspenMortality_;

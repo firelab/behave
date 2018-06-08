@@ -36,6 +36,15 @@ SurfaceInputs::SurfaceInputs()
     initializeMembers();
 }
 
+SurfaceInputs & SurfaceInputs::operator=(const SurfaceInputs & rhs)
+{
+    if (this != &rhs)
+    {
+        memberwiseCopyAssignment(rhs);
+    }
+    return *this;
+}
+
 void SurfaceInputs::initializeMembers()
 {
     fuelModelNumber_ = 0;
@@ -469,6 +478,48 @@ double SurfaceInputs::getAspenDBH() const
 AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() const
 {
     return aspenFireSeverity_;
+}
+
+void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
+{
+    fuelModelNumber_ = rhs.fuelModelNumber_;
+    moistureOneHour_ = rhs.moistureOneHour_;
+    moistureTenHour_ = rhs.moistureTenHour_;
+    moistureHundredHour_ = rhs.moistureHundredHour_;
+    moistureLiveHerbaceous_ = rhs.moistureLiveHerbaceous_;
+    moistureLiveWoody_ = rhs.moistureLiveWoody_;
+    windSpeed_ = rhs.windSpeed_;
+    windDirection_ = rhs.windDirection_;
+    slope_ = rhs.slope_;
+    aspect_ = rhs.aspect_;
+
+    isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
+    secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
+    firstFuelModelCoverage_ = rhs.firstFuelModelCoverage_;
+
+    isUsingPalmettoGallberry_ = rhs.isUsingPalmettoGallberry_;
+    ageOfRough_ = rhs.ageOfRough_;
+    heightOfUnderstory_ = rhs.heightOfUnderstory_;
+    palmettoCoverage_ = rhs.palmettoCoverage_;
+    overstoryBasalArea_ = rhs.overstoryBasalArea_;
+
+    isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
+    aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
+    aspenCuringLevel_ = rhs.aspenCuringLevel_;
+    DBH_ = rhs.DBH_;
+    aspenFireSeverity_ = rhs.aspenFireSeverity_;
+
+    elapsedTime_ = rhs.elapsedTime_;
+
+    canopyCover_ = rhs.canopyCover_;
+    canopyHeight_ = rhs.canopyHeight_;
+    crownRatio_ = rhs.crownRatio_;
+    userProvidedWindAdjustmentFactor_ = rhs.userProvidedWindAdjustmentFactor_;
+
+    twoFuelModelsMethod_ = rhs.twoFuelModelsMethod_;
+    windHeightInputMode_ = rhs.windHeightInputMode_;
+    windAndSpreadOrientationMode_ = rhs.windAndSpreadOrientationMode_;
+    windAdjustmentFactorCalculationMethod_ = rhs.windAdjustmentFactorCalculationMethod_;
 }
 
 void SurfaceInputs::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
