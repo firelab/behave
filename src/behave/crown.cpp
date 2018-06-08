@@ -135,13 +135,13 @@ void Crown::doCrownRunScottAndReinhardt()
     crownFuel_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     crownFuel_.setWindDirection(0.0); // Wind direction is assumed to be upslope
     crownFuel_.setWindSpeed(surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot), SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
-    // Step 3: Determine crown fire behavior
-    crownFuel_.doSurfaceRunInDirectionOfMaxSpread();
     
+    // Step 3: Determine crown fire behavior
+    crownFuel_.doSurfaceRunInDirectionOfMaxSpread();    
     crownFireSpreadRate_ = 3.34 * crownFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
-    calculateCrownFireActiveWindSpeed();
 
     //  Step 4: Calculate remaining crown fire characteristics
+    calculateCrownFireActiveWindSpeed();
     calculateCrownFuelLoad();
     calculateCanopyHeatPerUnitArea();
     calculateCrownFireHeatPerUnitArea();
@@ -281,12 +281,14 @@ void Crown::doCrownRunRothermel()
 
 void Crown::calculateCrownFireActiveWindSpeed()
 {
-    // The crown fire active wind speed is the wind speed at which 100 per
-    // possible, based on Rothermel’s(1991a) crown fire spread rate model and Van Wagner’s
-    // (1977) criterion for active crown fire spread. CI is a function of canopy bulk density,
-    // slope steepness and surface fuel moisture content
+    // O'active is the 20-ft wind speed at which the crown canopy becomes fully available
+    // for active fire spread and:
+    // the crown fraction burned approaches 1,
+    // Ractive == R'active, and
+    // the surface fire spread rate would equal R'sa.
+    //
+    //  See Scott & Reinhardt(2001) equation 20 on page 19.
 
-    //double cbd = 16.0185 * canopyBulkDensity;       // Convert from lb/ft3 to kg/m3
     double  cbd = 16.0185 * getCanopyBulkDensity(DensityUnits::PoundsPerCubicFoot);;       // Convert from lb/ft3 to kg/m3
     double ractive = 3.28084 * (3.0 / cbd);         // R'active, ft/min
     double r10 = ractive / 3.34;                    // R'active = 3.324 * R10
@@ -301,7 +303,7 @@ void Crown::calculateCrownFireActiveWindSpeed()
     double a = ((r10 / ros0) - 1.0 - slopeFactor) / windK;
     double uMid = pow(a, windBInv);                 // midflame wind speed (ft/min)
     double u20 = uMid / 0.4;                        // 20-ft wind speed (ft/min) for waf=0.4
-    crownFireActiveWindSpeed_ = u20 / 54.680665;    // CI, km/h
+    crownFireActiveWindSpeed_ = u20 / 54.680665;    // O'active, km/h
     crownFireActiveWindSpeed_ = u20;                // ft/min
     //return u20;
 }
