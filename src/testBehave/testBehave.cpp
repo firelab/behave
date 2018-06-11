@@ -638,28 +638,28 @@ BOOST_AUTO_TEST_CASE(crownModuleTestScottAndReinhardt)
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
         crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
 
-    double observedActualFireSpreadRate = 0;
-    double expectedActualFireSpreadRate = 0;
-    double observedActualFlameLength = 0;
-    double expectedActualFlameLength = 0;
-    double observedActualFirelineIntensity = 0;
-    double expectedActualFirelineIntensity = 0;
+    double observedFinalCrownFireSpreadRate = 0;
+    double expectedFinalCrownFireSpreadRate = 0;
+    double observedFinalCrownFlameLength = 0;
+    double expectedFinalCrownFlameLength = 0;
+    double observedFinalCrownFirelineIntensity = 0;
+    double expectedFinalCrownFirelineIntensity = 0;
     double observedCriticalOpenWindSpeed = 0;
     double expectedCriticalOpenWindSpeed = 0;
 
     // Test crown fire spread rate, flame length, intensity, passive crown fire expected
     behaveRun.crown.doCrownRunScottAndReinhardt();
-    expectedActualFireSpreadRate = 65.221842;
-    observedActualFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getActualSpreadRate(SpeedUnits::FeetPerMinute));
-    BOOST_CHECK_CLOSE(observedActualFireSpreadRate, expectedActualFireSpreadRate, ERROR_TOLERANCE);
+    expectedFinalCrownFireSpreadRate = 65.221842;
+    observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::FeetPerMinute));
+    BOOST_CHECK_CLOSE(observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, ERROR_TOLERANCE);
 
-    expectedActualFlameLength = 60.744542;
-    observedActualFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getActualFlameLength(LengthUnits::Feet));
-    BOOST_CHECK_CLOSE(observedActualFlameLength, expectedActualFlameLength, ERROR_TOLERANCE);
+    expectedFinalCrownFlameLength = 60.744542;
+    observedFinalCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getFinalFlameLength(LengthUnits::Feet));
+    BOOST_CHECK_CLOSE(observedFinalCrownFlameLength, expectedFinalCrownFlameLength, ERROR_TOLERANCE);
 
-    expectedActualFirelineIntensity = 5293.170672;
-    observedActualFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getActualFirelineIntesity(FirelineIntensityUnits::BtusPerFootPerSecond));
-    BOOST_CHECK_CLOSE(observedActualFirelineIntensity, expectedActualFirelineIntensity, ERROR_TOLERANCE);
+    expectedFinalCrownFirelineIntensity = 5293.170672;
+    observedFinalCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getFinalFirelineIntesity(FirelineIntensityUnits::BtusPerFootPerSecond));
+    BOOST_CHECK_CLOSE(observedFinalCrownFirelineIntensity, expectedFinalCrownFirelineIntensity, ERROR_TOLERANCE);
 
     expectedCriticalOpenWindSpeed = 1717.916785;
     observedCriticalOpenWindSpeed = behaveRun.crown.getCriticalOpenWindSpeed(SpeedUnits::FeetPerMinute);

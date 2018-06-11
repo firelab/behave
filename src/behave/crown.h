@@ -83,17 +83,16 @@ public:
     double getCanopyBaseHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const;
     double getCanopyBulkDensity(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits) const;
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    //double getSpreadRateBaseOnFireType(SpeedUnits::SpeedUnitsEnum desiredUnits) const;
     double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getCrownFirelineIntensity() const;
     double getCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     FireType::FireTypeEnum getFireType() const;
 
-    double getActualSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
-    double getActualHeatPerUnitArea() const;
-    double getActualFirelineIntesity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
-    double getActualFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getFinalSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getFinalHeatPerUnitArea() const;
+    double getFinalFirelineIntesity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
+    double getFinalFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
 
     double getCrownFireLengthToWidthRatio() const;
     double getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
@@ -165,7 +164,8 @@ private:
     void calculateCrownFireTransitionRatio();
     void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
-    void calculateFireType();
+    void calculateFireTypeRothermel();
+    void calculateFireTypeScottAndReinhardt();
     void calculateWindSpeedAtTwentyFeet();
     void calculateCrownLengthToWidthRatio();
     void calculateCrownFractionBurned();
@@ -197,10 +197,10 @@ private:
     double crowningSurfaceFireRos_;                 // Surface fire spread rate at which the active crown fire spread rate is fully achieved (ft/min)
     double windSpeedAtTwentyFeet_;
 
-    double actualSpreadRate_;                       // "Actual" spread rate of the fire, depends on fire type
-    double actualHeatPerUnitArea_;                  // "Actual" fire heat per unit area, depends on fire type
-    double actualFirelineIntesity_;                 // "Actual" fireline intensity, depends on fire type
-    double actualFlameLength_;                      // "Actual" flame length, depends on fire type
+    double finalSpreadRate_;                        // "Actual" spread rate of the fire, depends on fire type
+    double finalHeatPerUnitArea_;                   // "Actual" fire heat per unit area, depends on fire type
+    double finalFirelineIntesity_;                  // "Actual" fireline intensity, depends on fire type
+    double finalFlameLength_;                       // "Actual" flame length, depends on fire type
 
     double passiveCrownFireSpreadRate_;
     double passiveCrownFireHeatPerUnitArea_;
