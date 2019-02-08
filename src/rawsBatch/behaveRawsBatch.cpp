@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
 
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RELATIVE_TO_NORTH;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
 
     std::string line = "";
     std::string token = "";
@@ -400,16 +400,16 @@ int main(int argc, char *argv[])
         if (!badData)
         {
             // Feed input values to behave
-            behave.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr,
-                moistureLiveHerb, moistureLiveWoody, MoistureUnits::PERCENT, windSpeed, SpeedUnits::METERS_PER_SECOND,
-                WindHeightInputMode::DIRECT_MIDFLAME, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::DEGREES, aspect, canopyCover,
-                canopyHeight, LengthUnits::FEET, crownRatio);
+            behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr,
+                moistureLiveHerb, moistureLiveWoody, MoistureUnits::Percent, windSpeed, SpeedUnits::MetersPerMinute,
+                WindHeightInputMode::DirectMidflame, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees, aspect, canopyCover, 
+                CoverUnits::Percent, canopyHeight, LengthUnits::Feet, crownRatio);
             // Calculate spread rate and flame length
-            behave.doSurfaceRunInDirectionOfMaxSpread();
+            behave.surface.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate
-            spreadRate = behave.getSurfaceFireSpreadRate(SpeedUnits::CHAINS_PER_HOUR);
+            spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
             // Get other required outputs
-            flameLength = behave.getSurfaceFlameLength(LengthUnits::FEET);
+            flameLength = behave.surface.getFlameLength(LengthUnits::Feet);
             // Convert output to metric
             spreadRate *= CHAINS_PER_HOUR_TO_METERS_PER_SECOND;
             flameLength *= FEET_TO_METERS;

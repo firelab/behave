@@ -168,7 +168,9 @@ private:
     void calculateFireTypeScottAndReinhardt();
     void calculateWindSpeedAtTwentyFeet();
     void calculateCrownLengthToWidthRatio();
+    void calculateCrowningSurfaceFireRateOfSpread();
     void calculateCrownFractionBurned();
+    void assignFinalFireBehaviorBasedOnFireType();
 
     // Member variables
     FireType::FireTypeEnum fireType_;               // Classification based on corwn fire active and transition ratios

@@ -217,10 +217,9 @@ void Crown::doCrownRunScottAndReinhardt()
     // Scott & Reinhardt's critical surface fire spread rate (R'initiation) (ft/min)
     calculateSurfaceFireCriticalSpreadRateScottAndReinhardt();
 
+    calculateCrowningSurfaceFireRateOfSpread();
+
     // Scott & Reinhardt crown fraction burned
-    surfaceFuel_.setWindSpeed(crownFireActiveWindSpeed_, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
-    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Do crown run with crowning fire active wind speed
-    crowningSurfaceFireRos_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute);
     calculateCrownFractionBurned();
 
     // Scott & Reinhardt torching (passive crown) spread rate, hpua, fireline intensity
@@ -233,6 +232,28 @@ void Crown::doCrownRunScottAndReinhardt()
     calculatePassiveCrownFlameLength();
     
     // Determine final fire behavior
+    assignFinalFireBehaviorBasedOnFireType();
+}
+
+void Crown::calculateCrownFractionBurned()
+{
+    // Calculates the crown fraction burned as per Scott & Reinhardt.
+    // Using these parameters:
+    // surfaceFireSpreadRate_: the "actual" surface fire spread rate (ft/min).
+    // surfaceFireCriticalSpreadRate_: surface fire spread rate required to initiate torching/crowning (ft/min).
+    // crowningSurfaceFireRos_: Surface fire spread rate at which the active crown fire spread rate is fully achieved 
+    // and the crown fraction burned is 1.
+    
+    double numerator = surfaceFireSpreadRate_ - surfaceFireCriticalSpreadRate_;
+    double denominator = crowningSurfaceFireRos_ - surfaceFireCriticalSpreadRate_;
+
+    crownFractionBurned_ = (denominator > 1e-07) ? (numerator / denominator) : 0.0;
+    crownFractionBurned_ = (crownFractionBurned_ > 1.0) ? 1.0 : crownFractionBurned_;
+    crownFractionBurned_ = (crownFractionBurned_ < 0.0) ? 0.0 : crownFractionBurned_;
+}
+
+void Crown::assignFinalFireBehaviorBasedOnFireType()
+{
     if (isSurfaceFire_)
     {
         finalSpreadRate_ = surfaceFireSpreadRate_;
@@ -254,23 +275,6 @@ void Crown::doCrownRunScottAndReinhardt()
         finalFirelineIntesity_ = crownFirelineIntensity_;
         finalFlameLength_ = crownFlameLength_;
     }
-}
-
-void Crown::calculateCrownFractionBurned()
-{
-    // Calculates the crown fraction burned as per Scott & Reinhardt.
-    // Using these parameters:
-    // surfaceFireSpreadRate_: the "actual" surface fire spread rate (ft/min).
-    // surfaceFireCriticalSpreadRate_: surface fire spread rate required to initiate torching/crowning (ft/min).
-    // crowningSurfaceFireRos_: Surface fire spread rate at which the active crown fire spread rate is fully achieved 
-    // and the crown fraction burned is 1.
-    
-    double numerator = surfaceFireSpreadRate_ - surfaceFireCriticalSpreadRate_;
-    double denominator = crowningSurfaceFireRos_ - surfaceFireCriticalSpreadRate_;
-
-    crownFractionBurned_ = (denominator > 1e-07) ? (numerator / denominator) : 0.0;
-    crownFractionBurned_ = (crownFractionBurned_ > 1.0) ? 1.0 : crownFractionBurned_;
-    crownFractionBurned_ = (crownFractionBurned_ < 0.0) ? 0.0 : crownFractionBurned_;
 }
 
 void Crown::calculateCrownFireActiveWindSpeed()
@@ -546,6 +550,13 @@ void Crown::calculateCrownLengthToWidthRatio()
     {
         crownFireLengthToWidthRatio_ = 1.0;
     }
+}
+
+void Crown::calculateCrowningSurfaceFireRateOfSpread()
+{
+    surfaceFuel_.setWindSpeed(crownFireActiveWindSpeed_, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
+    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Do crown run with crowning fire active wind speed
+    crowningSurfaceFireRos_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute);
 }
 
 void Crown::calculateFireTypeRothermel()

@@ -297,7 +297,8 @@ double SlopeUnits::fromBaseUnits(double value, SlopeUnitsEnum units)
 double DensityUnits::toBaseUnits(double value, DensityUnitsEnum units)
 {
     // Denisty to base units constants
-    static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.06242796051;
+    //static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.06242796051;
+    static const double KG_PER_CUBIC_METER_TO_LBS_PER_CUBIC_FOOT = 0.06242781786;
 
     if (units == KilogramsPerCubicMeter)
     {
@@ -309,7 +310,8 @@ double DensityUnits::toBaseUnits(double value, DensityUnitsEnum units)
 double DensityUnits::fromBaseUnits(double value, DensityUnitsEnum units)
 {
     // Denisty from base units constants
-    static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.018463390932;
+    //static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.018463390932;
+    static const double LBS_PER_CUBIC_FOOT_TO_KG_PER_CUBIC_METER = 16.0185;
 
     if (units == KilogramsPerCubicMeter)
     {

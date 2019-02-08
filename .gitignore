@@ -194,3 +194,4 @@ ModelManifest.xml
 # vim
 *.swo
 *.swp
+/.vs
