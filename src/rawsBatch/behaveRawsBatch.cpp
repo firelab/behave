@@ -58,10 +58,6 @@ int main(int argc, char *argv[])
 {
     const int MAX_ARGUMENT_INDEX = argc - 1;
 
-    const double METERS_PER_SECOND_TO_MILES_PER_HOUR = 2.236936;
-    const double CHAINS_PER_HOUR_TO_METERS_PER_SECOND = 0.005588;
-    const double FEET_TO_METERS = 0.3048;
-
     std::string inputFileName = "input.txt"; // default input file name
     std::string outFileName = "output.txt"; // default output file name
     std::string runIdentifier = "";
@@ -87,8 +83,6 @@ int main(int argc, char *argv[])
 
     FuelModelSet fuelModelSet;
     BehaveRun behave(fuelModelSet);
-
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
 
     std::string line = "";
     std::string token = "";
@@ -339,7 +333,7 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
-                    if (windDirection < -1000 || windDirection > 1000)
+                    if (windDirection < -360 || windDirection > 360)
                     {
                         // Data is bad
                         badData = true;
@@ -357,7 +351,7 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
-                    if (slope < -1000 || slope > 1000)
+                    if (slope < 0 || slope > 82)
                     {
                         // Data is bad
                         badData = true;
@@ -375,7 +369,7 @@ int main(int argc, char *argv[])
                         // Data is bad
                         badData = true;
                     }
-                    if (aspect < -1000 || aspect > 1000)
+                    if (aspect < -360|| aspect > 360)
                     {
                         // Data is bad
                         badData = true;
@@ -393,26 +387,27 @@ int main(int argc, char *argv[])
         lineCounter++;
         if (lineCounter % 10000 == 0)
         {
-            printf("prcessed %d behave runs\n", lineCounter);
+            printf("processed %d behave runs\n", lineCounter);
         }
 
         // If data is not bad, do calculations
         if (!badData)
         {
             // Feed input values to behave
-            behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHr, moistureTenHr, moistureHundredHr,
-                moistureLiveHerb, moistureLiveWoody, MoistureUnits::Percent, windSpeed, SpeedUnits::MetersPerMinute,
-                WindHeightInputMode::DirectMidflame, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees, aspect, canopyCover, 
-                CoverUnits::Percent, canopyHeight, LengthUnits::Feet, crownRatio);
+            behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHr,
+                moistureTenHr, moistureHundredHr, moistureLiveHerb,
+                moistureLiveWoody, MoistureUnits::Percent, windSpeed,
+                SpeedUnits::MetersPerSecond,
+                WindHeightInputMode::DirectMidflame, windDirection,
+                WindAndSpreadOrientationMode::RelativeToNorth, slope,
+                SlopeUnits::Degrees, aspect, canopyCover, CoverUnits::Percent,
+                canopyHeight, LengthUnits::Feet, crownRatio);
             // Calculate spread rate and flame length
             behave.surface.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate
-            spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
+            spreadRate = behave.surface.getSpreadRate(SpeedUnits::MetersPerSecond);
             // Get other required outputs
-            flameLength = behave.surface.getFlameLength(LengthUnits::Feet);
-            // Convert output to metric
-            spreadRate *= CHAINS_PER_HOUR_TO_METERS_PER_SECOND;
-            flameLength *= FEET_TO_METERS;
+            flameLength = behave.surface.getFlameLength(LengthUnits::Meters);
             // Convert data to string for output to file
             spreadRateString = std::to_string(spreadRate);
             flameLengthString = std::to_string(flameLength);
