@@ -195,3 +195,4 @@ ModelManifest.xml
 *.swo
 *.swp
 /.vs
+*.json

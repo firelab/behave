@@ -19,12 +19,12 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
 OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
 IF(RAWS_BATCH)
     ADD_DEFINITIONS(-DRAWS_BATCH)
-ENDIF(RAWS_BATCH)
+ENDIF()
 
 OPTION(TEST_BEHAVE "Enable Testing" OFF)
 IF(TEST_BEHAVE)
     ADD_DEFINITIONS(-DTEST_BEHAVE)
-ENDIF(TEST_BEHAVE)
+ENDIF()
 
 # Commented out OpenMP requirement for now
 #Make sure OpenMP is supported by compiler
@@ -108,8 +108,9 @@ ADD_EXECUTABLE(behave
     ${HEADERS})
 
 IF(TEST_BEHAVE)
-    SET(Boost_USE_STATIC_LIBS       ON) # only find static libs
-    SET(Boost_USE_MULTITHREADED     OFF)
+    SET(Boost_DEBUG ON) # get verbose info while trying to find Boost 
+    SET(Boost_USE_STATIC_LIBS ON) # only find static libs
+
     FIND_PACKAGE(Boost REQUIRED)
     IF(Boost_FOUND)
         FIND_PACKAGE(Boost 1.61.0 
@@ -124,14 +125,14 @@ IF(TEST_BEHAVE)
             ${HEADERS})
         TARGET_LINK_LIBRARIES(testBehave ${Boost_LIBRARIES})
     ENDIF()
-ENDIF(TEST_BEHAVE)
+ENDIF()
 
 IF(RAWS_BATCH)
     ADD_EXECUTABLE(behave-raws-batch
         ${SOURCE}
         src/rawsBatch/behaveRawsBatch.cpp
         ${HEADERS})
-ENDIF(RAWS_BATCH)
+ENDIF()
 
 # optional stand-alone executables
 option(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
@@ -143,18 +144,18 @@ IF(COMPUTE_SPOT_PILE)
         ${SOURCE}
         src/spotDistancePile/computePileSpottingDistance.cpp
         ${HEADERS})
-ENDIF(COMPUTE_SPOT_PILE)
+ENDIF()
 
 IF(COMPUTE_SPOT_SURFACE)
     ADD_EXECUTABLE(compute_spot_distance_surface
         ${SOURCE}
         src/spotDistanceSurface/computeSurfaceSpottingDistance.cpp
         ${HEADERS})
-ENDIF(COMPUTE_SPOT_SURFACE)
+ENDIF()
 
 IF(COMPUTE_SPOT_TORCHING_TREES)
     ADD_EXECUTABLE(compute_spot_distance_trees
         ${SOURCE}
         src/spotDistanceTorchingTrees/computeTorchingTreesSpottingDistance.cpp
         ${HEADERS})
-ENDIF(COMPUTE_SPOT_TORCHING_TREES)
+ENDIF()
