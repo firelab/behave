@@ -1,43 +1,76 @@
-#define BOOST_TEST_MODULE BehaveTest
-
-#include <boost/test/unit_test.hpp>
 #include <cmath>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include "behaveRun.h"
 #include "fuelModelSet.h"
 
 // Define the error tolerance for double values
-static const double ERROR_TOLERANCE = 1e-06;
+constexpr double error_tolerance = 1e-06;
 
-double roundToSixDecimalPlaces(const double numberToBeRounded) 
+struct TestInfo
 {
-    std::stringstream ss;
-    ss << std::fixed;
-    ss.precision(6); // set to 6 places after decimal
-    ss << numberToBeRounded; // put number to be rounded into the stringstream
-    std::string s = ss.str(); // convert stringstream to string
-    double roundedValue = stod(s); // convert string to double
-    return roundedValue;
-}
-
-struct BehaveRunTest
-{
-    FuelModelSet fuelModelSet;
-    BehaveRun behaveRun;
-
-    BehaveRunTest()
-        : behaveRun(fuelModelSet)
-    {
-        BOOST_TEST_MESSAGE("Setup BehaveRun test");
-    }
-
-    ~BehaveRunTest()
-    {
-        BOOST_TEST_MESSAGE("Teardown BehaveRun test\n");
-    }
+    int numTotalTests = 0;
+    int numFailed = 0;
+    int numPassed = 0;
 };
+
+bool areClose(const double observed, const double expected, const double epsilon);
+
+double roundToSixDecimalPlaces(const double numberToBeRounded);
+
+void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon);
+
+void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun);
+void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun);
+void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun);
+
+void testSurfaceSingleFuelModel(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testFirelineIntensity(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testTwoFuelModels(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testCrownModuleRothermel(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testCrownModuleScottAndReinhardt(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testSpotModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testSpeedUnitConversion(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
+
+int main()
+{
+    TestInfo testInfo;
+    FuelModelSet fuelModelSet;
+    BehaveRun behaveRun(fuelModelSet);
+
+    testSurfaceSingleFuelModel(testInfo, behaveRun);
+    testLengthToWidthRatio(testInfo, behaveRun);
+    testEllipticalDimensions(testInfo, behaveRun);
+    testDirectionOfInterest(testInfo, behaveRun);
+    testFirelineIntensity(testInfo, behaveRun);
+    testTwoFuelModels(testInfo, behaveRun);
+    testCrownModuleRothermel(testInfo, behaveRun);
+    testCrownModuleScottAndReinhardt(testInfo, behaveRun);
+    testSpotModule(testInfo, behaveRun);
+    testSpeedUnitConversion(testInfo, behaveRun);
+    testIgniteModule(testInfo, behaveRun);
+    testSafetyModule(testInfo, behaveRun);
+    testContainModule(testInfo, behaveRun);
+
+    std::cout << "Total tests perfomred: " << testInfo.numTotalTests << "\n";
+    std::cout << "Total tests passed: " << testInfo.numPassed << "\n";
+    std::cout << "Total tests failed: " << testInfo.numFailed << "\n\n";
+
+#ifndef NDEBUG
+    // Make Visual Studio wait while in debug mode
+    std::cout << "Press Enter to continue . . .";
+    std::cin.get();
+#endif
+    return 0;
+}
 
 void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
 {
@@ -137,10 +170,40 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
         crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
 }
 
-BOOST_FIXTURE_TEST_SUITE(BehaveRunTestSuite, BehaveRunTest)
-
-BOOST_AUTO_TEST_CASE(singleFuelModelTest)
+bool areClose(const double observed, const double expected, const double epsilon)
 {
+    return fabs(observed - expected) < epsilon;
+}
+
+double roundToSixDecimalPlaces(const double numberToBeRounded)
+{
+    std::stringstream ss;
+    ss << std::fixed;
+    ss.precision(6); // set to 6 places after decimal
+    ss << numberToBeRounded; // put number to be rounded into the stringstream
+    std::string s = ss.str(); // convert stringstream to string
+    double roundedValue = stod(s); // convert string to double
+    return roundedValue;
+}
+
+void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon)
+{
+    testInfo.numTotalTests++;
+    if(areClose(observed, expected, epsilon))
+    {
+        std::cout << testName << "\npassed successfully\n";
+        testInfo.numPassed++;
+    }
+    else
+    {
+        std::cout << testName << "failed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n";
+        testInfo.numFailed++;
+    }
+}
+
+void testSurfaceSingleFuelModel(struct TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    string testName = "";
     // Observed and expected output
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
@@ -149,7 +212,8 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
 
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
 
-    // Test North oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope
+    std::cout << "Testing Surface, single fuel model\n";
+    testName = "Test north oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope";
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
     behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
@@ -160,9 +224,9 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 19.677584;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test upslope oriented mode, 5 mph 20 foot uplsope wind
+    testName = "Test upslope oriented mode, 5 mph 20 foot uplsope wind";
     behaveRun.surface.setFuelModelNumber(124);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
@@ -173,9 +237,9 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)
+    testName = "Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
@@ -183,9 +247,9 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 7.091665;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test North oriented mode, 20 foot North wind, zero aspect
+    testName = "Test north oriented mode, 20 foot North wind, zero aspect";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(0);
@@ -193,9 +257,9 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test North oriented mode, 20 foot North-East wind (45 degree), 215 degree aspect
+    testName = "Test north oriented mode, 20 foot north-east wind (45 degree), 215 degree aspect";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setAspect(215);
@@ -203,9 +267,9 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 4.113265;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test North oriented mode, 20 foot 45 degree wind, 95 degree aspect
+    testName = "Test north oriented mode, 20 foot 45 degree wind, 95 degree aspect";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setAspect(5);
@@ -213,9 +277,9 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.503960;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test Fuel Model 4, North oriented mode, 20 foot 90 degree wind, 0 degree aspect, 40 percent canopy cover
+    testName = "Test Fuel Model 4, north oriented mode, 20 foot 90 degree wind, 0 degree aspect, 40 percent canopy cover";
     behaveRun.surface.setFuelModelNumber(4);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -227,19 +291,21 @@ BOOST_AUTO_TEST_CASE(singleFuelModelTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 46.631688;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-
-    // Test Non-Burnable Fuel
+    testName = "Test Non-Burnable Fuel";
     behaveRun.surface.setFuelModelNumber(91);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 0.0;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, "Test Non-Burnable Fuel", observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+    std::cout << "Finished testing Surface, single fuel model\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
+void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing length-to-width-ratio\n";
+    string testName = "";
     // Observed and expected output
     double observedLengthToWidthRatio = 0.0;
     double expectedLengthToWidthRatio = 0.0;
@@ -252,7 +318,7 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
-    // Test North oriented mode, north wind, 0 mph 20 foot wind, 0 degree aspect, 0 degree slope
+    testName = "Test length-to-width-ratio, north oriented mode, north wind, 0 mph 20 foot wind, 0 degree aspect, 0 degree slope";
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
     behaveRun.surface.setSlope(0, SlopeUnits::Degrees);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -262,9 +328,9 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.surface.getFireLengthToWidthRatio());
     expectedLengthToWidthRatio = 1.0;
-    BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
-    // Test North oriented mode, 45 degree wind, 5 mph 20 foot wind, 95 degree aspect, 30 degree slope
+    testName = "Test length-to-width-ratio, north oriented mode, 45 degree wind, 5 mph 20 foot wind, 95 degree aspect, 30 degree slope";
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
     behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -274,9 +340,9 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.surface.getFireLengthToWidthRatio());
     expectedLengthToWidthRatio = 1.897769;
-    BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
-    // Test North oriented mode, 45 degree wind, 15 mph 20 foot wind, 95 degree aspect, 30 degree slope
+    testName = "Test length-to-width-ratio, north oriented mode, 45 degree wind, 15 mph 20 foot wind, 95 degree aspect, 30 degree slope";
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
     behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -286,32 +352,40 @@ BOOST_AUTO_TEST_CASE(lengthToWidthRatioTest)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.surface.getFireLengthToWidthRatio());
     expectedLengthToWidthRatio = 2.142422;
-    BOOST_CHECK_CLOSE(observedLengthToWidthRatio, expectedLengthToWidthRatio, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
-    // Test Crown fire length-to-width-ratio
+    testName = "Test crown fire length-to-width-ratio, 0 mph 20 foot wind";
+    behaveRun.crown.setWindSpeed(0, windSpeedUnits, windHeightInputMode);
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRunRothermel();
     expectedCrownLengthToWidthRatio = 1.625;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
-    BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
+    testName = "Test crown fire length-to-width-ratio, 10 mph 20 foot wind";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRunRothermel();
     expectedCrownLengthToWidthRatio = 2.25;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
-    BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
+    testName = "Test crown fire length-to-width-ratio, 15 mph 20 foot wind";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(15, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRunRothermel();
     expectedCrownLengthToWidthRatio = 2.875;
     observedCrownLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
-    BOOST_CHECK_CLOSE(expectedCrownLengthToWidthRatio, observedCrownLengthToWidthRatio, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
+
+    std::cout << "Finished testing length-to-width-ratio\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
+void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing elliptical dimensions\n";
+    string testName = "";
+
     double observedA = 0;
     double observedB = 0;
     double observedC = 0;
@@ -319,24 +393,27 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
     double expectedB = 17.824253;
     double expectedC = 16.187176;
 
+    double elapsedTime = 1;
+
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Chains;
-    // Test fire elliptical dimensions a, b and c (direct mid-flame, upslope mode, 1 hour elapsed time)
+   
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
-    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits, 1, TimeUnits::Hours));
-    BOOST_CHECK_CLOSE(observedA, expectedA, ERROR_TOLERANCE);
+    testName = "Test fire elliptical dimension a with direct mid-flame, upslope mode, 1 hour elapsed time";
+    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Hours));
+    reportTestResult(testInfo, testName, observedA, expectedA, error_tolerance);
+   
+    testName = "Test fire elliptical dimension b with direct mid-flame, upslope mode, 1 hour elapsed time";
+    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Hours));
+    reportTestResult(testInfo, testName, observedB, expectedB, error_tolerance);
 
-    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits, 1, TimeUnits::Hours));
-    BOOST_CHECK_CLOSE(observedB, expectedB, ERROR_TOLERANCE);
-
-    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, 1, TimeUnits::Hours));
-    BOOST_CHECK_CLOSE(observedC, expectedC, ERROR_TOLERANCE);
-
-    double elapsedTime = 1;
+    testName = "Test fire elliptical dimension c with direct mid-flame, upslope mode, 1 hour elapsed time";
+    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, elapsedTime, TimeUnits::Hours));
+    reportTestResult(testInfo, testName, observedC, expectedC, error_tolerance);
 
     // Area
     double expectedArea = 0.0;
@@ -344,11 +421,13 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
 
     expectedArea = 41.783821;
     observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::Acres, elapsedTime, TimeUnits::Hours));
-    BOOST_CHECK_CLOSE(observedArea, expectedArea, ERROR_TOLERANCE);
+    testName = "Test fire elliptical area in acres with direct mid-flame, upslope mode, 1 hour elapsed time";
+    reportTestResult(testInfo, testName, observedArea, expectedArea, error_tolerance);
 
     expectedArea = 0.169093;
     observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::SquareKilometers, elapsedTime, TimeUnits::Hours));
-    BOOST_CHECK_CLOSE(observedArea, expectedArea, ERROR_TOLERANCE);
+    testName = "Test fire elliptical area in km^2 with direct mid-flame, upslope mode, 1 hour elapsed time";
+    reportTestResult(testInfo, testName, observedArea, expectedArea, error_tolerance);
 
     // Perimeter
     double expectedPerimeter = 0.0;
@@ -356,18 +435,23 @@ BOOST_AUTO_TEST_CASE(ellipticalDimensionTest)
 
     expectedPerimeter = 82.808915;
     obeservedPerimeter = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFirePerimeter(LengthUnits::Chains, elapsedTime, TimeUnits::Hours));
-    BOOST_CHECK_CLOSE(obeservedPerimeter, expectedPerimeter, ERROR_TOLERANCE);
+    testName = "Test fire elliptical perimeter in chains with direct mid-flame, upslope mode, 1 hour elapsed time";
+    reportTestResult(testInfo, testName, obeservedPerimeter, expectedPerimeter, error_tolerance);
+
+    std::cout << "Finished testing elliptical dimensions\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(directionOfInterestTest)
+void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing spread rate in direction of interest\n";
+    string testName = "";
     double directionOfInterest = 0;
     double observedSpreadRateInDirectionOfInterest = 0.0;
     double expectedSpreadRateInDirectionOfInterest = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
   
-    // Test upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind
+    testName = "Test upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind";
     directionOfInterest = 90;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
@@ -375,9 +459,9 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 3.016440;
-    BOOST_CHECK_CLOSE(observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
-    // Test upslope oriented mode, 20 foot wind, direction of interest 160 degrees from upslope, 290 degree wind
+    testName = "Test upslope oriented mode, 20 foot wind, direction of interest 160 degrees from upslope, 290 degree wind";
     directionOfInterest = 160;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
@@ -385,9 +469,9 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 1.399262;
-    BOOST_CHECK_CLOSE(observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
-    // Test upslope oriented mode, 20 foot wind, direction of interest 215 degrees from upslope, 215 degree wind
+    testName = "Test upslope oriented mode, 20 foot wind, direction of interest 215 degrees from upslope, 215 degree wind";
     directionOfInterest = 215;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
@@ -395,9 +479,9 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 1.648579;
-    BOOST_CHECK_CLOSE(observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, ERROR_TOLERANCE);
-    
-    // Test North oriented mode, 20 foot 135 degree wind, direction of interest 30 degrees from north, 263 degree aspect
+    reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
+
+    testName = "Test north oriented mode, 20 foot 135 degree wind, direction of interest 30 degrees from north, 263 degree aspect";
     directionOfInterest = 30;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -406,9 +490,9 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 3.504961;
-    BOOST_CHECK_CLOSE(observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
-    // Test North oriented mode, 20 foot north wind, direction of interest 90 degrees from north, 45 degree aspect
+    testName = "Test north oriented mode, 20 foot north wind, direction of interest 90 degrees from north, 45 degree aspect";
     directionOfInterest = 90;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -417,9 +501,9 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 1.803660;
-    BOOST_CHECK_CLOSE(observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
-    // Test North oriented mode, 20 foot 135 degree wind, direction of interest 285 degrees from north, 263 degree aspect
+    testName = "Test north oriented mode, 20 foot 135 degree wind, direction of interest 285 degrees from north, 263 degree aspect";
     directionOfInterest = 285;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -428,33 +512,40 @@ BOOST_AUTO_TEST_CASE(directionOfInterestTest)
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 1.452856;
-    BOOST_CHECK_CLOSE(observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
+
+    std::cout << "Finished testing spread rate in direction of interest\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(firelineIntensityTest)
+void testFirelineIntensity(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing fireline instensity\n";
+    string testName = "";
     double observedFirelineIntensity = 0.0;
     double expectedFirelineIntensity = 0.0;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
-    // Test upslope oriented mode, 20 foot uplsope wind 
+    testName = "Test upslope oriented mode, 20 foot uplsope wind";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedFirelineIntensity = behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
     expectedFirelineIntensity = 598.339039;
-    BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
-
+    reportTestResult(testInfo, testName, observedFirelineIntensity, expectedFirelineIntensity, error_tolerance);
+   
     // Test unit conversion
     observedFirelineIntensity = behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
     expectedFirelineIntensity = 2072.730450;
-    BOOST_CHECK_CLOSE(observedFirelineIntensity, expectedFirelineIntensity, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFirelineIntensity, expectedFirelineIntensity, error_tolerance);
 
+    std::cout << "Finished testing fireline instensity\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
+void testTwoFuelModels(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing Two Fuel Models, first fuel model 1, second fuel model 124\n";
+    string testName = "";
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
 
@@ -464,80 +555,94 @@ BOOST_AUTO_TEST_CASE(twoFuelModelsTest)
 
     CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
 
-    // Do runs for first fuel model coverage 0-100 with step size 10
+    testName = "First fuel model coverage 0";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(0, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 10";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(10, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 10.446373;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 20";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(20, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 12.112509;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 30";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(30, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 13.825904;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 40";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(40, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 15.532700;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 50";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(50, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 17.173897;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 60";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(60, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 18.685358;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 70";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(70, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 19.997806;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 80";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(80, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.036826;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 90";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(90, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.722861;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "First fuel model coverage 100";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(100, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 21.971217;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    std::cout << "Finished testing Two Fuel Models, first fuel model 1, second fuel model 124\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(crownModuleTestRothermel)
+void testCrownModuleRothermel(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing Crown module, Rothermel\n";
+    string testName = "";
     double canopyHeight = 30;
-    double canopyBaseHeight = 6; 
+    double canopyBaseHeight = 6;
     double canopyBulkDensity = 0.03;
-    
+
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
@@ -552,45 +657,47 @@ BOOST_AUTO_TEST_CASE(crownModuleTestRothermel)
 
     behaveRun.crown.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
 
-    // Test crown fire spread rate, flame length, intensity
+    testName = "Test crown fire spread rate";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRunRothermel();
     expectedCrownFireSpreadRate = 10.259921;
     observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireSpreadRate(SpeedUnits::ChainsPerHour));
-    BOOST_CHECK_CLOSE(observedCrownFireSpreadRate, expectedCrownFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedCrownFireSpreadRate, expectedCrownFireSpreadRate, error_tolerance);
 
+    testName = "Test crown fire flame length";
     expectedCrownFlameLength = 29.320557;
     observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getCrownFlameLength(LengthUnits::Feet));
-    BOOST_CHECK_CLOSE(observedCrownFlameLength, expectedCrownFlameLength, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedCrownFlameLength, expectedCrownFlameLength, error_tolerance);
 
+    testName = "Test crown fireline intensity";
     expectedCrownFirelineIntensity = 1775.061222;
     observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getCrownFirelineIntensity());
-    BOOST_CHECK_CLOSE(observedCrownFirelineIntensity, expectedCrownFirelineIntensity, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedCrownFirelineIntensity, expectedCrownFirelineIntensity, error_tolerance);
 
-    // Test fire type, Surface fire expected
+    testName = "Test fire type, Surface fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setMoistureOneHour(20, MoistureUnits::Percent);
     behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Surface;
     observedFireType = (int)behaveRun.crown.getFireType();
-    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+    reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
 
-    // Test fire type, Torching fire expected
+    testName = "Test fire type, Torching fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Torching;
     observedFireType = (int)behaveRun.crown.getFireType();
-    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+    reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
 
-    // Test fire type, Crowning fire expected
+    testName = "Test fire type, Crowning fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Crowning;
     observedFireType = (int)behaveRun.crown.getFireType();
-    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+    reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
 
-    // Test fire type, Conditional crown fire expected
+    testName = "Test fire type, Conditional crown fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     canopyHeight = 60;
     behaveRun.crown.setCanopyHeight(canopyHeight, LengthUnits::Feet);
@@ -602,12 +709,16 @@ BOOST_AUTO_TEST_CASE(crownModuleTestRothermel)
     behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::ConditionalCrownFire;
     observedFireType = (int)behaveRun.crown.getFireType();
-    BOOST_CHECK_EQUAL(observedFireType, expectedFireType);
+    reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
+
+    std::cout << "Finished testing Crown module, Rothermel\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(crownModuleTestScottAndReinhardt)
+void testCrownModuleScottAndReinhardt(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
-    // Test crown fire spread rate, flame length, intensity; Crown fire expected
+    std::cout << "Testing Crown module, Scott and Reinhardt\n";
+    string testName = "";
+
     double observedFinalCrownFireSpreadRate = 0;
     double expectedFinalCrownFireSpreadRate = 0;
     double observedFinalCrownFlameLength = 0;
@@ -616,6 +727,8 @@ BOOST_AUTO_TEST_CASE(crownModuleTestScottAndReinhardt)
     double expectedFinalCrownFirelineIntensity = 0;
     double observedCriticalOpenWindSpeed = 0;
     double expectedCriticalOpenWindSpeed = 0;
+    int expectedFireType = (int)FireType::Surface;
+    int observedFireType = (int)FireType::Surface;
 
     int fuelModelNumber = 10;
     double moistureOneHour = 8.0;
@@ -649,22 +762,31 @@ BOOST_AUTO_TEST_CASE(crownModuleTestScottAndReinhardt)
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
         crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
 
+    testName = "Test crown fire spread rate";
     behaveRun.crown.doCrownRunScottAndReinhardt();
     expectedFinalCrownFireSpreadRate = 65.221842;
     observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::FeetPerMinute));
-    BOOST_CHECK_CLOSE(observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, error_tolerance);
 
+    testName = "Test crown flame length";
     expectedFinalCrownFlameLength = 60.744542;
     observedFinalCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getFinalFlameLength(LengthUnits::Feet));
-    BOOST_CHECK_CLOSE(observedFinalCrownFlameLength, expectedFinalCrownFlameLength, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFinalCrownFlameLength, expectedFinalCrownFlameLength, error_tolerance);
 
+    testName = "Test crown fireline intensity";
     expectedFinalCrownFirelineIntensity = 5293.170672;
     observedFinalCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getFinalFirelineIntesity(FirelineIntensityUnits::BtusPerFootPerSecond));
-    BOOST_CHECK_CLOSE(observedFinalCrownFirelineIntensity, expectedFinalCrownFirelineIntensity, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFinalCrownFirelineIntensity, expectedFinalCrownFirelineIntensity, error_tolerance);
 
+    testName = "Test crown fire critical open wind speed";
     expectedCriticalOpenWindSpeed = 1717.916785;
     observedCriticalOpenWindSpeed = behaveRun.crown.getCriticalOpenWindSpeed(SpeedUnits::FeetPerMinute);
-    BOOST_CHECK_CLOSE(observedCriticalOpenWindSpeed, expectedCriticalOpenWindSpeed, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedCriticalOpenWindSpeed, expectedCriticalOpenWindSpeed, error_tolerance);
+
+    testName = "Test crown fire type, crown fire expected";
+    expectedFireType = (int)FireType::Crowning;
+    observedFireType = (int)behaveRun.crown.getFireType();
+    reportTestResult(testInfo, testName, expectedFireType, observedFireType, error_tolerance);
 
     // Test crown fire spread rate, flame length, intensity; Torching fire expected
     fuelModelNumber = 5;
@@ -699,28 +821,43 @@ BOOST_AUTO_TEST_CASE(crownModuleTestScottAndReinhardt)
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
         crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
 
+    testName = "Test crown fire spread rate";
     behaveRun.crown.doCrownRunScottAndReinhardt();
     expectedFinalCrownFireSpreadRate = 29.47538799999999;
     observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::FeetPerMinute));
-    BOOST_CHECK_CLOSE(observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, error_tolerance);
 
+    testName = "Test crown flame length";
     expectedFinalCrownFlameLength = 12.759447;
     observedFinalCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getFinalFlameLength(LengthUnits::Feet));
-    BOOST_CHECK_CLOSE(observedFinalCrownFlameLength, expectedFinalCrownFlameLength, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFinalCrownFlameLength, expectedFinalCrownFlameLength, error_tolerance);
 
+    testName = "Test crown fireline intensity";
     expectedFinalCrownFirelineIntensity = 509.5687530;
     observedFinalCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getFinalFirelineIntesity(FirelineIntensityUnits::BtusPerFootPerSecond));
-    BOOST_CHECK_CLOSE(observedFinalCrownFirelineIntensity, expectedFinalCrownFirelineIntensity, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedFinalCrownFirelineIntensity, expectedFinalCrownFirelineIntensity, error_tolerance);
 
+    testName = "Test crown fire critical open wind speed";
     expectedCriticalOpenWindSpeed = 3874.421988;
     observedCriticalOpenWindSpeed = behaveRun.crown.getCriticalOpenWindSpeed(SpeedUnits::FeetPerMinute);
-    BOOST_CHECK_CLOSE(observedCriticalOpenWindSpeed, expectedCriticalOpenWindSpeed, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedCriticalOpenWindSpeed, expectedCriticalOpenWindSpeed, error_tolerance);
+
+    testName = "Test crown fire type, torching fire expected expected";
+    expectedFireType = (int)FireType::Torching;
+    observedFireType = (int)behaveRun.crown.getFireType();
+    reportTestResult(testInfo, testName, expectedFireType, observedFireType, error_tolerance);
 
     behaveRun.surface.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
+
+    std::cout << "Finished testing Crown module, Scott and Reinhardt\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(spotModuleTest)
+void testSpotModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing Spot module\n";
+
+    string testName = "";
+
     double flameLength = 0.0;
     double expectedFlatSpottingDistance = 0.0;
     double expectedMountainSpottingDistance = 0.0;
@@ -749,49 +886,62 @@ BOOST_AUTO_TEST_CASE(spotModuleTest)
     double treeHeight = 30.0;
     LengthUnits::LengthUnitsEnum treeHeightUnits = LengthUnits::Feet;
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = SpotTreeSpecies::ENGELMANN_SPRUCE;
-   
     LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Miles;;
 
-	// Test spotting distance from a burning pile
-	behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, 
+    behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits,
-		burningPileflameHeight, flameHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits);
-	behaveRun.spot.calculateSpottingDistanceFromBurningPile();
+        burningPileflameHeight, flameHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits);
+    behaveRun.spot.calculateSpottingDistanceFromBurningPile();
+    
+    testName = "Test mountain spotting distance from burning pile";
     expectedMountainSpottingDistance = 0.021330;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
-	BOOST_CHECK_CLOSE(observedMountainSpottingDistance, expectedMountainSpottingDistance, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
+    
+    testName = "Test flat spotting distance from burning pile";
     expectedFlatSpottingDistance = 0.017067;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(expectedFlatSpottingDistance, expectedFlatSpottingDistance, ERROR_TOLERANCE);
-    // Test spotting distance from surface fire
-    
-	behaveRun.spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
+    reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
+
+    behaveRun.spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, windSpeedAtTwentyFeet,
         windSpeedUnits, flameLength, flameHeightUnits);
     behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
+
+    testName = "Test mountain spotting distance from surface fire";
     expectedMountainSpottingDistance = 0.164401;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(observedMountainSpottingDistance, expectedMountainSpottingDistance, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
+    
+    testName = "Test flat spotting distance from surface fire";
     expectedFlatSpottingDistance = 0.132964;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(expectedFlatSpottingDistance, expectedFlatSpottingDistance, ERROR_TOLERANCE);
-    // Test spotting distance from torching trees
-  
-	behaveRun.spot.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
-        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits, 
+    reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
+    
+    behaveRun.spot.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
+        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits,
         treeHeight, treeHeightUnits, treeSpecies, windSpeedAtTwentyFeet, windSpeedUnits);
     behaveRun.spot.calculateSpottingDistanceFromTorchingTrees();
+    
+    testName = "Test mountain spotting distance from torching trees";
     expectedMountainSpottingDistance = 0.222396;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(observedMountainSpottingDistance, expectedMountainSpottingDistance, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
+    
+    testName = "Test flat spotting distance from from torching trees";
     expectedFlatSpottingDistance = 0.181449;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
-    BOOST_CHECK_CLOSE(observedFlatSpottingDistance, expectedFlatSpottingDistance, ERROR_TOLERANCE);
-   
+    reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
+
+    std::cout << "Finished testing Spot module\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
+void testSpeedUnitConversion(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing speed unit conversion\n";
+
+    string testName = "";
+
     // Observed and expected output
     double observedSurfaceFireSpreadRate = 0.0;
     double expectedSurfaceFireSpreadRate = 0.0;
@@ -801,7 +951,7 @@ BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
-    // Test upslope oriented mode, 20 foot uplsope wind
+    // Test using upslope oriented mode, 20 foot uplsope wind
     behaveRun.surface.setFuelModelNumber(124);
     behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
@@ -811,39 +961,45 @@ BOOST_AUTO_TEST_CASE(speedUnitConversionTest)
     behaveRun.surface.setAspect(0);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
-    // Test surface spread rate in chains per hour
+    testName = "Test surface spread rate in chains per hour";
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 8.876216;
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test surface spread rate in feet per minute
+    testName = "Test surface spread rate in feet per minute";
     expectedSurfaceFireSpreadRate = 9.763838;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::FeetPerMinute));
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test surface spread rate in kilometers per hour
+    testName = "Test surface spread rate in kilometers per hour";
     expectedSurfaceFireSpreadRate = 0.178561;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::KilometersPerHour));
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test surface spread rate in meters per minute
+    testName = "Test surface spread rate in meters per minute";
     expectedSurfaceFireSpreadRate = 2.976018;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MetersPerMinute));
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test surface spread rate in meters per second
+    testName = "Test surface spread rate in meters per second";
     expectedSurfaceFireSpreadRate = 0.049600;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MetersPerSecond));
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    // Test surface spread rate in miles per hour
+    testName = "Test surface spread rate in miles per hour";
     expectedSurfaceFireSpreadRate = 0.110953;
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::MilesPerHour));
-    BOOST_CHECK_CLOSE(observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    std::cout << "Finished testing speed unit conversion\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(igniteModuleTest)
+void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing Ignite module\n";
+
+    string testName = "";
+
     double moistureOneHour = 6.0;
     double moistureHundredHour = 8.0;
     double airTemperature = 80; // Fahrenheit
@@ -867,11 +1023,14 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
 
     behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
         temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
-    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Fraction);
-    BOOST_CHECK_CLOSE(observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, ERROR_TOLERANCE);
 
+    testName = "Test firebrand ignition probability for Douglas fir duff";
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Fraction);
+    reportTestResult(testInfo, testName, observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, error_tolerance);
+
+    testName = "Test lightning ignition probability for Douglas fir duff";
     observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::Fraction);
-    BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLightningIgnitionProbability, expectedLightningIgnitionProbability, error_tolerance);
 
     moistureOneHour = 7.0;
     moistureHundredHour = 9.0;
@@ -886,15 +1045,24 @@ BOOST_AUTO_TEST_CASE(igniteModuleTest)
 
     behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
         temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
-    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Percent);
-    BOOST_CHECK_CLOSE(observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, ERROR_TOLERANCE);
 
+    testName = "Test firebrand ignition probability for Lodgepole pine duff";
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Percent);
+    reportTestResult(testInfo, testName, observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, error_tolerance);
+
+    testName = "Test lightning ignition probability for Lodgepole pine duff";
     observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::Percent);
-    BOOST_CHECK_CLOSE(expectedLightningIgnitionProbability, observedLightningIgnitionProbability, ERROR_TOLERANCE);
+    reportTestResult(testInfo, testName, observedLightningIgnitionProbability, expectedLightningIgnitionProbability, error_tolerance);
+
+    std::cout << "Finished testing Ignite module\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(SafetyModuleTest)
+void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing Safety module\n";
+
+    string testName = "";
+
     double flameHeight = 5; // ft
     int numberOfPersonnel = 6;
     int numberOfEquipment = 1;
@@ -924,13 +1092,24 @@ BOOST_AUTO_TEST_CASE(SafetyModuleTest)
     observedSafetyZoneArea = behaveRun.safety.getSafetyZoneArea(safetyZoneAreaUnits);
     observeSafetyZoneRadius = behaveRun.safety.getSafetyZoneRadius(lengthUnits);
 
-    BOOST_CHECK_CLOSE(observedSeparationDistance, expectedSeparationDistance, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedSafetyZoneArea, expectedSafetyZoneArea, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observeSafetyZoneRadius, expectedSafetyZoneRadius, ERROR_TOLERANCE);
+    testName = "Test separation distance";
+    reportTestResult(testInfo, testName, observedSeparationDistance, expectedSeparationDistance, error_tolerance);
+
+    testName = "Test safety zone area";
+    reportTestResult(testInfo, testName, observedSafetyZoneArea, expectedSafetyZoneArea, error_tolerance);
+
+    testName = "Test safety zone radius";
+    reportTestResult(testInfo, testName, observeSafetyZoneRadius, expectedSafetyZoneRadius, error_tolerance);
+
+    std::cout << "Finished testing Safety module\n\n";
 }
 
-BOOST_AUTO_TEST_CASE(ContainModuleTest)
+void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
 {
+    std::cout << "Testing Contain module\n";
+
+    string testName = "";
+
     double observedFinalFireLineLength = 0;
     double observedPerimeterAtInitialAttack = 0;
     double observedPerimeterAtContainment = 0;
@@ -959,41 +1138,45 @@ BOOST_AUTO_TEST_CASE(ContainModuleTest)
     behaveRun.contain.doContainRun();
     //behaveRun.contain.removeAllResources();
 
+    testName = "Test final fire line length";
     expectedFinalFireLineLength = 39.539849615;
-    expectedPerimeterAtInitialAttack = 36.694893;
-    expectedPerimeterAtContainment = 39.539849615;
-    expectedFireSizeAtInitialAttack = 7.10569878;
-    expectedFinalFireSize = 9.42749714;
-    expectedFinalContainmentArea = 9.42749714;
-    expectedFinalTimeSinceReport = 238.75000000;
-    expectedContainmentStatus = ContainStatus::Contained;
-
     observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength(LengthUnits::Chains);
+    reportTestResult(testInfo, testName, observedFinalFireLineLength, expectedFinalFireLineLength, error_tolerance);
+
+    testName = "Test observed perimeter at initial attack";
+    expectedPerimeterAtInitialAttack = 36.694893;
     observedPerimeterAtInitialAttack = behaveRun.contain.getPerimiterAtInitialAttack(LengthUnits::Chains);
+    reportTestResult(testInfo, testName, observedPerimeterAtInitialAttack, expectedPerimeterAtInitialAttack, error_tolerance);
+
+    testName = "Test observed perimeter at containment";
+    expectedPerimeterAtContainment = 39.539849615;
     observedPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment(LengthUnits::Chains);
+    reportTestResult(testInfo, testName, observedPerimeterAtContainment, expectedPerimeterAtContainment, error_tolerance);
+
+    testName = "Test observed fire size at initial attack";
+    expectedFireSizeAtInitialAttack = 7.10569878;
     observedFireSizeAtInitialAttack = behaveRun.contain.getFireSizeAtInitialAttack(AreaUnits::Acres);
+    reportTestResult(testInfo, testName, observedFireSizeAtInitialAttack, expectedFireSizeAtInitialAttack, error_tolerance);
+
+    testName = "Test observed final fire size";
+    expectedFinalFireSize = 9.42749714;
     observedFinalFireSize = behaveRun.contain.getFinalFireSize(AreaUnits::Acres);
+    reportTestResult(testInfo, testName, observedFinalFireSize, expectedFinalFireSize, error_tolerance);
+
+    testName = "Test observed final containment area";
+    expectedFinalContainmentArea = 9.42749714;
     observedFinalContainmentArea = behaveRun.contain.getFinalContainmentArea(AreaUnits::Acres);
+    reportTestResult(testInfo, testName, observedFinalContainmentArea, expectedFinalContainmentArea, error_tolerance);
+
+    testName = "Test observed final time since report";
+    expectedFinalTimeSinceReport = 238.75000000;
     observedFinalTimeSinceReport = behaveRun.contain.getFinalTimeSinceReport(TimeUnits::Minutes);
+    reportTestResult(testInfo, testName, observedFinalTimeSinceReport, expectedFinalTimeSinceReport, error_tolerance);
+
+    testName = "Test observed containment status";
+    expectedContainmentStatus = ContainStatus::Contained;
     observedContainmentStatus = behaveRun.contain.getContainmentStatus();
+    reportTestResult(testInfo, testName, observedContainmentStatus, expectedContainmentStatus, error_tolerance);
 
-    BOOST_CHECK_CLOSE(observedFinalFireLineLength, expectedFinalFireLineLength, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedPerimeterAtContainment, expectedPerimeterAtContainment, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedFinalContainmentArea, expectedFinalContainmentArea,ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedFireSizeAtInitialAttack, expectedFireSizeAtInitialAttack, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedFinalFireSize, expectedFinalFireSize, ERROR_TOLERANCE);
-    BOOST_CHECK_CLOSE(observedFinalTimeSinceReport, expectedFinalTimeSinceReport, ERROR_TOLERANCE);
-    BOOST_CHECK_EQUAL(observedContainmentStatus, expectedContainmentStatus);
+    std::cout << "Finished testing Contain module\n\n";
 }
-
-BOOST_AUTO_TEST_SUITE_END()  // End BehaveRunTestSuite
-
-#ifndef NDEBUG
-BOOST_AUTO_TEST_CASE(waitInDebug)
-{
-    BOOST_CHECK_EQUAL(0, 0);
-    // Make Visual Studio wait while in debug mode
-    std::cout << "Press Enter to continue . . .";
-    std::cin.get();
-}
-#endif

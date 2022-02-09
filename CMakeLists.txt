@@ -13,26 +13,41 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 PROJECT(behave)
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
-                    ${CMAKE_SOURCE_DIR}/src/cli)      
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave)      
 
+# optional test executable
+OPTION(TEST_BEHAVE "Enable Testing" ON)
+
+# optional stand-alone executables
+OPTION(EXAMPLE_APP "Example client application" ON)
 OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
-IF(RAWS_BATCH)
-    ADD_DEFINITIONS(-DRAWS_BATCH)
-ENDIF()
+OPTION(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
+OPTION(COMPUTE_SPOT_SURFACE "Build surface spot fire distance calculator" OFF)
+OPTION(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calculator" OFF)
 
-OPTION(TEST_BEHAVE "Enable Testing" OFF)
 IF(TEST_BEHAVE)
     ADD_DEFINITIONS(-DTEST_BEHAVE)
 ENDIF()
 
-# Commented out OpenMP requirement for now
-#Make sure OpenMP is supported by compiler
-#FIND_PACKAGE(OpenMP REQUIRED)
-#IF(OPENMP_FOUND)
-#    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-#    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-#ENDIF(OPENMP_FOUND)
+IF(EXAMPLE_APP)
+    ADD_DEFINITIONS(-DEXAMPLE_APP)
+ENDIF()
+
+IF(RAWS_BATCH)
+    ADD_DEFINITIONS(-DRAWS_BATCH)
+ENDIF()
+
+IF(COMPUTE_SPOT_PILE)
+    ADD_DEFINITIONS(-DCOMPUTE_SPOT_PILE)
+ENDIF()
+
+IF(COMPUTE_SPOT_SURFACE)
+    ADD_DEFINITIONS(-DCOMPUTE_SPOT_SURFACE)
+ENDIF()
+
+IF(COMPUTE_SPOT_TORCHING_TREES)
+    ADD_DEFINITIONS(-DCOMPUTE_SPOT_TORCHING_TREES)
+ENDIF()
 
 SET(SOURCE
     src/behave/behaveRun.cpp
@@ -99,32 +114,23 @@ SET(HEADERS
     src/behave/windSpeedUtility.h)
 
 SOURCE_GROUP("Behave Core Source Files" FILES ${SOURCE})
-
 SOURCE_GROUP("Behave Core Header Files" FILES ${HEADERS})
 
-ADD_EXECUTABLE(behave 
-    ${SOURCE} 
-    src/behave/client.cpp 
-    ${HEADERS})
-
 IF(TEST_BEHAVE)
-    SET(Boost_DEBUG ON) # get verbose info while trying to find Boost 
-    SET(Boost_USE_STATIC_LIBS ON) # only find static libs
-
-    FIND_PACKAGE(Boost REQUIRED)
-    IF(Boost_FOUND)
-        FIND_PACKAGE(Boost 1.61.0 
-            COMPONENTS unit_test_framework REQUIRED)
-        INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-        SET(LINK_LIBS ${Boost_LIBRARIES})
         SET(BOOST_TEST_SOURCE
             src/testBehave/testBehave.cpp)
         ADD_EXECUTABLE(testBehave 
             ${SOURCE}
             ${BOOST_TEST_SOURCE}
             ${HEADERS})
-        TARGET_LINK_LIBRARIES(testBehave ${Boost_LIBRARIES})
-    ENDIF()
+        TARGET_LINK_LIBRARIES(testBehave)
+ENDIF()
+
+IF(EXAMPLE_APP)
+    ADD_EXECUTABLE(behave 
+        ${SOURCE} 
+        src/behave/client.cpp 
+        ${HEADERS})
 ENDIF()
 
 IF(RAWS_BATCH)
@@ -133,11 +139,6 @@ IF(RAWS_BATCH)
         src/rawsBatch/behaveRawsBatch.cpp
         ${HEADERS})
 ENDIF()
-
-# optional stand-alone executables
-option(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
-option(COMPUTE_SPOT_SURFACE "Build surface spot fire distance calculator" OFF)
-option(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calculator" OFF)
 
 IF(COMPUTE_SPOT_PILE)
     ADD_EXECUTABLE(compute_spot_distance_pile
