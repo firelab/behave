@@ -82,7 +82,7 @@ struct SurfaceAreaToVolumeUnits
         SquareFeetOverCubicFeet, // base loading unit
         SquareMetersOverCubicMeters,
         SquareInchesOverCubicInches,
-        SquareCentimetersOverCubicCentimers
+        SquareCentimetersOverCubicCentimeters
     };
 
     static double toBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units);
@@ -194,7 +194,7 @@ struct HeatPerUnitAreaUnits
 {
     enum HeatPerUnitAreaUnitsEnum
     {
-        BtusPerSquareFoot, // base reaction intensity unit
+        BtusPerSquareFoot, // base HPUA intensity unit
         KilojoulesPerSquareMeterPerSecond,
         KilowattsPerSquareMeter
     };

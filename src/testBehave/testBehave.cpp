@@ -671,7 +671,7 @@ void testCrownModuleRothermel(struct TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test crown fireline intensity";
     expectedCrownFirelineIntensity = 1775.061222;
-    observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getCrownFirelineIntensity());
+    observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getCrownFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond));
     reportTestResult(testInfo, testName, observedCrownFirelineIntensity, expectedCrownFirelineIntensity, error_tolerance);
 
     testName = "Test fire type, Surface fire expected";

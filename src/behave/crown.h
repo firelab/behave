@@ -85,12 +85,12 @@ public:
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
-    double getCrownFirelineIntensity() const;
+    double getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     FireType::FireTypeEnum getFireType() const;
 
     double getFinalSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
-    double getFinalHeatPerUnitArea() const;
+    double getFinalHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
     double getFinalFirelineIntesity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getFinalFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
 

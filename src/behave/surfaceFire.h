@@ -64,7 +64,7 @@ public:
     double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
-    double getHeatPerUnitArea() const;
+    double getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
     double getResidenceTime() const;
     double getWindSpeedLimit() const;
     double getMidflameWindSpeed() const;
@@ -77,8 +77,6 @@ public:
     bool getIsWindLimitExceeded() const;
  
     void calculateMidflameWindSpeed();
-
-   
 
 protected:
     // Protected setters accessible to friend classes
@@ -95,7 +93,6 @@ protected:
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
     
-
 private:
     void memberwiseCopyAssignment(const SurfaceFire& rhs);
     void calculateHeatPerUnitArea();

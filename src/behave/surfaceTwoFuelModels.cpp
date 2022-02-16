@@ -306,7 +306,7 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
         maxFlameLengthForFuelModel_[i] = surfaceFireSpread_->getMaxFlameLength();
         flameLengthForFuelModel_[i] = surfaceFireSpread_->getFlameLength();
         lengthToWidthRatioForFuelModel_[i] = surfaceFireSpread_->getFireLengthToWidthRatio();
-        heatPerUnitAreaForFuelModel_[i] = surfaceFireSpread_->getHeatPerUnitArea();
+        heatPerUnitAreaForFuelModel_[i] = surfaceFireSpread_->getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     }
 }
 

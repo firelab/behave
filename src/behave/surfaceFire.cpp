@@ -475,9 +475,9 @@ double SurfaceFire::getFireEccentricity() const
     return  size_->getEccentricity();
 }
 
-double SurfaceFire::getHeatPerUnitArea() const
+double SurfaceFire::getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const
 {
-    return heatPerUnitArea_;
+    return HeatPerUnitAreaUnits::fromBaseUnits(heatPerUnitArea_, heatPerUnitAreaUnits);
 }
 
 double  SurfaceFire::getResidenceTime() const

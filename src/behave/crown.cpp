@@ -120,7 +120,7 @@ void Crown::doCrownRunRothermel()
 
     // Step 1: Do surface run and store values needed for further calculations 
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Crown ROS output given in direction of max spread 
-    surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea();
+    surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
     surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
     double windAdjustmentFactor = 0.4; // Wind adjustment factor is assumed to be 0.4
@@ -173,7 +173,7 @@ void Crown::doCrownRunScottAndReinhardt()
     // Step 1: Do surface run and store values needed for further calculations
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
     surfaceFireSpreadRate_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
-    surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea();
+    surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
     surfaceFireFlameLength_ = surfaceFuel_.getFlameLength(LengthUnits::Feet); // Byram
 
@@ -309,9 +309,9 @@ double Crown::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnit
     return surfaceFuel_.getSpreadRate(spreadRateUnits);
 }
 
-double Crown::getCrownFirelineIntensity() const
+double Crown::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
 {
-    return crownFirelineIntensity_;
+    return FirelineIntensityUnits::fromBaseUnits(crownFirelineIntensity_, firelineIntensityUnits);
 }
 
 double Crown::getCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
@@ -329,9 +329,9 @@ double Crown::getFinalSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) con
     return SpeedUnits::fromBaseUnits(finalSpreadRate_, spreadRateUnits);
 }
 
-double Crown::getFinalHeatPerUnitArea() const
+double Crown::getFinalHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const
 {
-    return finalHeatPerUnitArea_;
+    return HeatPerUnitAreaUnits::fromBaseUnits(finalHeatPerUnitArea_, heatPerUnitAreaUnits);
 }
 
 double Crown::getFinalFirelineIntesity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const

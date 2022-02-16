@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <iostream>
+#include <math.h>
 
 #include "behaveRun.h"
 #include "fuelModelSet.h"

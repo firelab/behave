@@ -197,14 +197,14 @@ double Surface::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUn
     return FirelineIntensityUnits::fromBaseUnits(surfaceFire_.getFirelineIntensity(), firelineIntensityUnits);
 }
 
-double Surface::getHeatPerUnitArea() const
+double Surface::getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const
 {
-    return surfaceFire_.getHeatPerUnitArea();
+    return surfaceFire_.getHeatPerUnitArea(heatPerUnitAreaUnits);
 }
 
-double Surface::getResidenceTime() const
+double Surface::getResidenceTime(TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return surfaceFire_.getResidenceTime();
+    return TimeUnits::fromBaseUnits(surfaceFire_.getResidenceTime(), timeUnits);
 }
 
 double Surface::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const
@@ -212,9 +212,9 @@ double Surface::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSo
     return surfaceFire_.getReactionIntensity(reactiontionIntensityUnits);
 }
 
-double Surface::getMidflameWindspeed() const
+double Surface::getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
-    return surfaceFire_.getMidflameWindSpeed();
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getMidflameWindSpeed(), spreadRateUnits);
 }
 
 double Surface::getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const

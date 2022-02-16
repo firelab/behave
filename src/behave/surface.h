@@ -64,9 +64,9 @@ public:
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
-    double getHeatPerUnitArea() const;
-    double getMidflameWindspeed() const;
-    double getResidenceTime() const;
+    double getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
+    double getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getResidenceTime(TimeUnits::TimeUnitsEnum timeUnits) const;
     double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
     double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
     double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
