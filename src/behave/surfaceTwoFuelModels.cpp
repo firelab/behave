@@ -295,7 +295,7 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
 
         rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(fuelModelNumber_[i], hasDirectionOfInterest, directionOfInterest);
 
-        reactionIntensityForFuelModel_[i] = surfaceFireSpread_->getReactionIntensity(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute);
+        reactionIntensityForFuelModel_[i] = surfaceFireSpread_->getReactionIntensity();
         dirMaxSpreadForFuelModel_[i] = surfaceFireSpread_->getDirectionOfMaxSpread();
         midFlameWindSpeedForFuelModel_[i] = surfaceFireSpread_->getMidflameWindSpeed();
         windAdjustmentFactorForFuelModel_[i] = surfaceFireSpread_->getWindAdjustmentFactor();
@@ -306,7 +306,7 @@ void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfI
         maxFlameLengthForFuelModel_[i] = surfaceFireSpread_->getMaxFlameLength();
         flameLengthForFuelModel_[i] = surfaceFireSpread_->getFlameLength();
         lengthToWidthRatioForFuelModel_[i] = surfaceFireSpread_->getFireLengthToWidthRatio();
-        heatPerUnitAreaForFuelModel_[i] = surfaceFireSpread_->getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
+        heatPerUnitAreaForFuelModel_[i] = surfaceFireSpread_->getHeatPerUnitArea();
     }
 }
 

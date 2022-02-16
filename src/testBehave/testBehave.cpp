@@ -191,12 +191,12 @@ void reportTestResult(struct TestInfo& testInfo, const string testName, const do
     testInfo.numTotalTests++;
     if(areClose(observed, expected, epsilon))
     {
-        std::cout << testName << "\npassed successfully\n";
+        //std::cout << testName << "\npassed successfully\n";
         testInfo.numPassed++;
     }
     else
     {
-        std::cout << testName << "failed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n";
+        std::cout << testName << "\nfailed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n";
         testInfo.numFailed++;
     }
 }

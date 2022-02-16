@@ -475,9 +475,9 @@ double SurfaceFire::getFireEccentricity() const
     return  size_->getEccentricity();
 }
 
-double SurfaceFire::getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const
+double SurfaceFire::getHeatPerUnitArea() const
 {
-    return HeatPerUnitAreaUnits::fromBaseUnits(heatPerUnitArea_, heatPerUnitAreaUnits);
+    return heatPerUnitArea_;
 }
 
 double  SurfaceFire::getResidenceTime() const
@@ -500,9 +500,9 @@ double SurfaceFire::getSlopeFactor() const
     return phiS_;
 }
 
-double SurfaceFire::getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const
+double SurfaceFire::getHeatSink() const
 {
-    return HeatSinkUnits::fromBaseUnits(surfaceFuelbedIntermediates_.getHeatSink(), heatSinkUnits);
+    return surfaceFuelbedIntermediates_.getHeatSink();
 }
 
 double SurfaceFire::getBulkDensity() const
@@ -510,9 +510,9 @@ double SurfaceFire::getBulkDensity() const
     return surfaceFuelbedIntermediates_.getBulkDensity();
 }
 
-double SurfaceFire::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const
+double SurfaceFire::getReactionIntensity() const
 {
-    return HeatSourceAndReactionIntensityUnits::fromBaseUnits(reactionIntensity_, reactiontionIntensityUnits);
+    return reactionIntensity_;
 }
 
 double SurfaceFire::getWindAdjustmentFactor() const

@@ -64,14 +64,14 @@ public:
     double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
-    double getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
+    double getHeatPerUnitArea() const;
     double getResidenceTime() const;
     double getWindSpeedLimit() const;
     double getMidflameWindSpeed() const;
     double getSlopeFactor() const;
-    double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
+    double getHeatSink() const;
     double getBulkDensity() const;
-    double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
+    double getReactionIntensity() const;
 
     double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
