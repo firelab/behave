@@ -827,8 +827,8 @@ double FirelineIntensityUnits::fromBaseUnits(double value, FirelineIntensityUnit
 
 double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum units)
 {
-    const double KILOJOULES_PER_SQUARE_TO_METER_PER_SECOND = 0.0879872;
-    const double KILOWATTS_PER_SQUARE_METER_TO_BTUS_PER_SQUARE_FOOT = 0.0879872;
+    const double KILOJOULES_PER_SQUARE_METER_TO_BTUS_PER_SECOND = 0.0879872;
+    const double KILOWATTS_PER_SQUARE_METER_PER_SECOND_TO_BTUS_PER_SQUARE_FOOT = 0.0879872;
   
     switch(units)
     {
@@ -837,15 +837,15 @@ double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum 
             // Already in base, nothing to do
             break;
         }
-        case   KilojoulesPerSquareMeterPerSecond:
+        case KilojoulesPerSquareMeter:
        
         {
-            value *= KILOJOULES_PER_SQUARE_TO_METER_PER_SECOND;
+            value *= KILOJOULES_PER_SQUARE_METER_TO_BTUS_PER_SECOND;
             break;
         }
-        case  KilowattsPerSquareMeter:
+        case  KilowattsPerSquareMeterPerSecond:
         {
-            value *= KILOWATTS_PER_SQUARE_METER_TO_BTUS_PER_SQUARE_FOOT;
+            value *= KILOWATTS_PER_SQUARE_METER_PER_SECOND_TO_BTUS_PER_SQUARE_FOOT;
             break;
         }
         default:
@@ -859,8 +859,8 @@ double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum 
 
 double HeatPerUnitAreaUnits::fromBaseUnits(double value, HeatPerUnitAreaUnitsEnum units)
 {
-    const double BTUS_PER_SQUARE_FOOT_TO_KILOJOULES_PER_SQUARE_METER_PER_SECOND = 11.3653;
-    const double BTUS_PER_SQUARE_FOOT_TO_KILOWATTS_PER_SQUARE_METER = 11.3653;
+    const double BTUS_PER_SQUARE_FOOT_TO_KILOJOULES_PER_SQUARE_METER = 11.3653;
+    const double BTUS_PER_SQUARE_FOOT_TO_KILOWATTS_PER_SQUARE_METER_PER_SECOND = 11.3653;
 
     switch(units)
     {
@@ -869,15 +869,15 @@ double HeatPerUnitAreaUnits::fromBaseUnits(double value, HeatPerUnitAreaUnitsEnu
             // Already in base, nothing to do
             break;
         }
-        case   KilojoulesPerSquareMeterPerSecond:
+        case   KilojoulesPerSquareMeter:
 
         {
-            value *= BTUS_PER_SQUARE_FOOT_TO_KILOJOULES_PER_SQUARE_METER_PER_SECOND;
+            value *= BTUS_PER_SQUARE_FOOT_TO_KILOJOULES_PER_SQUARE_METER;
             break;
         }
-        case  KilowattsPerSquareMeter:
+        case  KilowattsPerSquareMeterPerSecond:
         {
-            value *= BTUS_PER_SQUARE_FOOT_TO_KILOWATTS_PER_SQUARE_METER;
+            value *= BTUS_PER_SQUARE_FOOT_TO_KILOWATTS_PER_SQUARE_METER_PER_SECOND;
             break;
         }
         default:

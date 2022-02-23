@@ -79,7 +79,7 @@ struct SurfaceAreaToVolumeUnits
 {
     enum SurfaceAreaToVolumeUnitsEnum
     {
-        SquareFeetOverCubicFeet, // base loading unit
+        SquareFeetOverCubicFeet, // base SAVR unit
         SquareMetersOverCubicMeters,
         SquareInchesOverCubicInches,
         SquareCentimetersOverCubicCentimeters
@@ -122,7 +122,7 @@ struct ProbabilityUnits
 {
     enum ProbabilityUnitsEnum
     {
-        Fraction, // base cover unit
+        Fraction, // base probability unit
         Percent
     };
 
@@ -134,7 +134,7 @@ struct MoistureUnits
 {
     enum MoistureUnitsEnum
     {
-        Fraction, // base cover unit
+        Fraction, // base moisture unit
         Percent
     };
 
@@ -194,9 +194,9 @@ struct HeatPerUnitAreaUnits
 {
     enum HeatPerUnitAreaUnitsEnum
     {
-        BtusPerSquareFoot, // base HPUA intensity unit
-        KilojoulesPerSquareMeterPerSecond,
-        KilowattsPerSquareMeter
+        BtusPerSquareFoot, // base HPUA unit
+        KilojoulesPerSquareMeter,
+        KilowattsPerSquareMeterPerSecond
     };
 
     static double toBaseUnits(double value, HeatPerUnitAreaUnitsEnum units);
