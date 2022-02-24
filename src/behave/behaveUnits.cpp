@@ -828,7 +828,7 @@ double FirelineIntensityUnits::fromBaseUnits(double value, FirelineIntensityUnit
 double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum units)
 {
     const double KILOJOULES_PER_SQUARE_METER_TO_BTUS_PER_SECOND = 0.0879872;
-    const double KILOWATTS_PER_SQUARE_METER_PER_SECOND_TO_BTUS_PER_SQUARE_FOOT = 0.0879872;
+    const double KILOWATT_SECONDS_PER_SQUARE_METER_PER_TO_BTUS_PER_SQUARE_FOOT = 0.0879872;
   
     switch(units)
     {
@@ -843,9 +843,9 @@ double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum 
             value *= KILOJOULES_PER_SQUARE_METER_TO_BTUS_PER_SECOND;
             break;
         }
-        case  KilowattsPerSquareMeterPerSecond:
+        case  KilowattSecondsPerSquareMeter:
         {
-            value *= KILOWATTS_PER_SQUARE_METER_PER_SECOND_TO_BTUS_PER_SQUARE_FOOT;
+            value *= KILOWATT_SECONDS_PER_SQUARE_METER_PER_TO_BTUS_PER_SQUARE_FOOT;
             break;
         }
         default:
@@ -860,7 +860,7 @@ double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum 
 double HeatPerUnitAreaUnits::fromBaseUnits(double value, HeatPerUnitAreaUnitsEnum units)
 {
     const double BTUS_PER_SQUARE_FOOT_TO_KILOJOULES_PER_SQUARE_METER = 11.3653;
-    const double BTUS_PER_SQUARE_FOOT_TO_KILOWATTS_PER_SQUARE_METER_PER_SECOND = 11.3653;
+    const double BTUS_PER_SQUARE_FOOT_TO_KILOWATT_SECONDS_PER_SQUARE_METER = 11.3653;
 
     switch(units)
     {
@@ -875,9 +875,9 @@ double HeatPerUnitAreaUnits::fromBaseUnits(double value, HeatPerUnitAreaUnitsEnu
             value *= BTUS_PER_SQUARE_FOOT_TO_KILOJOULES_PER_SQUARE_METER;
             break;
         }
-        case  KilowattsPerSquareMeterPerSecond:
+        case  KilowattSecondsPerSquareMeter:
         {
-            value *= BTUS_PER_SQUARE_FOOT_TO_KILOWATTS_PER_SQUARE_METER_PER_SECOND;
+            value *= BTUS_PER_SQUARE_FOOT_TO_KILOWATT_SECONDS_PER_SQUARE_METER;
             break;
         }
         default:

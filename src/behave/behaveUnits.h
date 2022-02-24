@@ -196,7 +196,7 @@ struct HeatPerUnitAreaUnits
     {
         BtusPerSquareFoot, // base HPUA unit
         KilojoulesPerSquareMeter,
-        KilowattsPerSquareMeterPerSecond
+        KilowattSecondsPerSquareMeter
     };
 
     static double toBaseUnits(double value, HeatPerUnitAreaUnitsEnum units);
