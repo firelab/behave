@@ -29,12 +29,10 @@
 *
 ******************************************************************************/
 
-#include "surfaceFire.h"
-
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-#include "fuelModelSet.h"
+#include "surfaceFire.h"
 #include "surfaceFuelbedIntermediates.h"
 #include "surfaceInputs.h"
 #include "windAdjustmentFactor.h"

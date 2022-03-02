@@ -35,7 +35,7 @@
 
 FuelModelSet::FuelModelSet()
 {
-    FuelModelArray_.resize(SurfaceInputs::FuelConstants::NUM_FUEL_MODELS);
+    FuelModelArray_.resize(FuelConstants::NUM_FUEL_MODELS);
     initializeAllFuelModelRecords();
     populateFuelModels();
 }
@@ -107,7 +107,7 @@ void FuelModelSet::initializeSingleFuelModelRecord(int fuelModelNumber)
 
 void FuelModelSet::initializeAllFuelModelRecords()
 {
-    for (int i = 0; i < SurfaceInputs::FuelConstants::NUM_FUEL_MODELS; i++)
+    for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
     {
         initializeSingleFuelModelRecord(i);
     }
@@ -712,7 +712,14 @@ double FuelModelSet::getSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUn
 
 bool FuelModelSet::getIsDynamic(int fuelModelNumber) const
 {
-    return FuelModelArray_[fuelModelNumber].isDynamic_;
+    if(fuelModelNumber <= 0 || fuelModelNumber > 256)
+    {
+        return false;
+    }
+    else
+    {
+        return FuelModelArray_[fuelModelNumber].isDynamic_;
+    }
 }
 
 bool FuelModelSet::isFuelModelDefined(int fuelModelNumber) const
@@ -727,3 +734,14 @@ bool FuelModelSet::isFuelModelDefined(int fuelModelNumber) const
     }
 }
 
+bool FuelModelSet::isFuelModelReserved(int fuelModelNumber) const
+{
+    if(fuelModelNumber <= 0 || fuelModelNumber > 256)
+    {
+        return false;
+    }
+    else
+    {
+        return  FuelModelArray_[fuelModelNumber].isReserved_;
+    }
+}

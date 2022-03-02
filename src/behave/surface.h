@@ -35,7 +35,6 @@
 // The SURFACE module of BehavePlus
 #include "behaveUnits.h"
 #include "fireSize.h"
-#include "fuelModelSet.h"
 #include "surfaceFire.h"
 #include "surfaceInputs.h"
 
@@ -49,7 +48,7 @@ public:
 
     bool isAllFuelLoadZero(int fuelModelNumber);
     void doSurfaceRunInDirectionOfMaxSpread();
-    void doSurfaceRunInDirectionOfInterest(double directionOfinterest);
+    void doSurfaceRunInDirectionOfInterest(double directionOfInterest);
 
     double calculateFlameLength(double firelineIntensity);
 
@@ -65,24 +64,23 @@ public:
     double getFireEccentricity() const;
     double getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
-    double getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const;
     double getResidenceTime(TimeUnits::TimeUnitsEnum timeUnits) const;
     double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
-    double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
-    double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
-    double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
+    double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getSlopeFactor() const;
     double getBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const;
     double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
 
-    double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
-    double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum) const;
+    double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
     void setCrownRatio(double crownRatio);
-    bool isUsingTwoFuelModels() const;
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
@@ -106,7 +104,7 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection, 
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
         double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
-    void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
+    void updateSurfaceInputsForTwoFuelModels(int firstFuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
         MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
@@ -128,6 +126,7 @@ public:
         double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
 
     // SurfaceInputs getters
+    bool isUsingTwoFuelModels() const;
     int getFuelModelNumber() const;
     double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;

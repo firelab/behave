@@ -41,7 +41,7 @@ SurfaceFireReactionIntensity::SurfaceFireReactionIntensity()
 SurfaceFireReactionIntensity::SurfaceFireReactionIntensity(const SurfaceFuelbedIntermediates& surfaceFuelbedIntermediates)
 {
     surfaceFuelbedIntermediates_ = &surfaceFuelbedIntermediates;
-    for (int i = 0; i < SurfaceInputs::FuelConstants::MAX_LIFE_STATES; i++)
+    for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)
     {
         etaM_[i] = 0.0;
         etaS_[i] = 0.0;
@@ -66,7 +66,7 @@ SurfaceFireReactionIntensity& SurfaceFireReactionIntensity::operator=(const Surf
 
 void SurfaceFireReactionIntensity::memberwiseCopyAssignment(const SurfaceFireReactionIntensity& rhs)
 {
-    for (int i = 0; i < SurfaceInputs::FuelConstants::MAX_LIFE_STATES; i++)
+    for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)
     {
         etaM_[i] = rhs.etaM_[i];
         etaS_[i] = rhs.etaS_[i];
@@ -90,22 +90,22 @@ double SurfaceFireReactionIntensity::calculateReactionIntensity()
     double gammaMax = sigmaToTheOnePointFive / (495.0 + (0.0594 * sigmaToTheOnePointFive));
     double gamma = gammaMax * pow(relativePackingRatio, aa) * exp(aa * (1.0 - relativePackingRatio));
 
-    double weightedFuelLoad[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];
-    weightedFuelLoad[SurfaceInputs::FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedFuelLoadByLifeState(SurfaceInputs::FuelConstants::DEAD);
-    weightedFuelLoad[SurfaceInputs::FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedFuelLoadByLifeState(SurfaceInputs::FuelConstants::LIVE);
+    double weightedFuelLoad[FuelConstants::MAX_LIFE_STATES];
+    weightedFuelLoad[FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedFuelLoadByLifeState(FuelConstants::DEAD);
+    weightedFuelLoad[FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedFuelLoadByLifeState(FuelConstants::LIVE);
 
-    double weightedHeat[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];
-    weightedHeat[SurfaceInputs::FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedHeatByLifeState(SurfaceInputs::FuelConstants::DEAD);
-    weightedHeat[SurfaceInputs::FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedHeatByLifeState(SurfaceInputs::FuelConstants::LIVE);
+    double weightedHeat[FuelConstants::MAX_LIFE_STATES];
+    weightedHeat[FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedHeatByLifeState(FuelConstants::DEAD);
+    weightedHeat[FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedHeatByLifeState(FuelConstants::LIVE);
 
     calculateEtaM();
     calculateEtaS();
 
-    for (int i = 0; i < SurfaceInputs::FuelConstants::MAX_LIFE_STATES; i++)
+    for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)
     {
         reactionIntensityForLifeState_[i] = gamma * weightedFuelLoad[i] * weightedHeat[i] * etaM_[i] * etaS_[i];
     }
-    reactionIntensity_ = reactionIntensityForLifeState_[SurfaceInputs::FuelConstants::DEAD] + reactionIntensityForLifeState_[SurfaceInputs::FuelConstants::LIVE];
+    reactionIntensity_ = reactionIntensityForLifeState_[FuelConstants::DEAD] + reactionIntensityForLifeState_[FuelConstants::LIVE];
 
     return reactionIntensity_;
 }
@@ -114,15 +114,15 @@ void SurfaceFireReactionIntensity::calculateEtaM()
 {
     double relativeMoisture = 0;	// (Moisture content) / (Moisture of extinction)
 
-    double weightedMoisture[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];
-    weightedMoisture[SurfaceInputs::FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedMoistureByLifeState(SurfaceInputs::FuelConstants::DEAD);
-    weightedMoisture[SurfaceInputs::FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedMoistureByLifeState(SurfaceInputs::FuelConstants::LIVE);
+    double weightedMoisture[FuelConstants::MAX_LIFE_STATES];
+    weightedMoisture[FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedMoistureByLifeState(FuelConstants::DEAD);
+    weightedMoisture[FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedMoistureByLifeState(FuelConstants::LIVE);
 
-    double moistureOfExtinction[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];
-    moistureOfExtinction[SurfaceInputs::FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getMoistureOfExtinctionByLifeState(SurfaceInputs::FuelConstants::DEAD);
-    moistureOfExtinction[SurfaceInputs::FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getMoistureOfExtinctionByLifeState(SurfaceInputs::FuelConstants::LIVE);
+    double moistureOfExtinction[FuelConstants::MAX_LIFE_STATES];
+    moistureOfExtinction[FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getMoistureOfExtinctionByLifeState(FuelConstants::DEAD);
+    moistureOfExtinction[FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getMoistureOfExtinctionByLifeState(FuelConstants::LIVE);
 
-    for (int i = 0; i < SurfaceInputs::FuelConstants::MAX_LIFE_STATES; i++)
+    for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)
     {
         if (moistureOfExtinction[i] > 0.0)
         {
@@ -142,12 +142,12 @@ void SurfaceFireReactionIntensity::calculateEtaM()
 
 void SurfaceFireReactionIntensity::calculateEtaS()
 {
-    double weightedSilica[SurfaceInputs::FuelConstants::MAX_LIFE_STATES];
-    weightedSilica[SurfaceInputs::FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedSilicaByLifeState(SurfaceInputs::FuelConstants::DEAD);
-    weightedSilica[SurfaceInputs::FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedSilicaByLifeState(SurfaceInputs::FuelConstants::LIVE);
+    double weightedSilica[FuelConstants::MAX_LIFE_STATES];
+    weightedSilica[FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getWeightedSilicaByLifeState(FuelConstants::DEAD);
+    weightedSilica[FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getWeightedSilicaByLifeState(FuelConstants::LIVE);
 
     double etaSDenomitator = 0;
-    for (int i = 0; i < SurfaceInputs::FuelConstants::MAX_LIFE_STATES; i++)
+    for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)
     {
         etaSDenomitator = pow(weightedSilica[i], 0.19);
         if (etaSDenomitator < 1e-6)
