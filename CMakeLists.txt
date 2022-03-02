@@ -61,7 +61,7 @@ SET(SOURCE
     src/behave/crown.cpp
     src/behave/crownInputs.cpp
     src/behave/fireSize.cpp
-    src/behave/fuelModelSet.cpp
+    src/behave/fuelModels.cpp
     src/behave/ignite.cpp
     src/behave/igniteInputs.cpp
     src/behave/newext.cpp
@@ -93,7 +93,7 @@ SET(HEADERS
     src/behave/crown.h
     src/behave/crownInputs.h
     src/behave/fireSize.h
-    src/behave/fuelModelSet.h
+    src/behave/fuelModels.h
     src/behave/ignite.h
     src/behave/igniteInputs.h
     src/behave/newext.h

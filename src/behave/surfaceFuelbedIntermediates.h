@@ -34,7 +34,7 @@
 #include "palmettoGallberry.h" 
 #include "westernAspen.h"
 #include "surfaceInputs.h"
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 
 class SurfaceInputs;
 
@@ -44,7 +44,7 @@ public:
     SurfaceFuelbedIntermediates();
     SurfaceFuelbedIntermediates(const SurfaceFuelbedIntermediates& rhs);
     SurfaceFuelbedIntermediates& operator=(const SurfaceFuelbedIntermediates& rhs);
-    SurfaceFuelbedIntermediates(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs);
+    SurfaceFuelbedIntermediates(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs);
 
     ~SurfaceFuelbedIntermediates();
     void calculateFuelbedIntermediates(int fuelModelNumber);
@@ -99,7 +99,7 @@ private:
     void calculateLiveMoistureOfExtinction();
     void calculatePropagatingFlux();
 
-    const FuelModelSet* fuelModelSet_;      // Pointer to FuelModelSet object
+    const FuelModels* fuelModels_;      // Pointer to FuelModels object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object
     PalmettoGallberry palmettoGallberry_;
     WesternAspen westernAspen_;

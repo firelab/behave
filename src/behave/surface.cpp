@@ -34,11 +34,11 @@
 #include "surfaceTwoFuelModels.h"
 #include "surfaceInputs.h"
 
-Surface::Surface(const FuelModelSet& fuelModelSet)
+Surface::Surface(const FuelModels& fuelModels)
     : surfaceInputs_(),
-    surfaceFire_(fuelModelSet, surfaceInputs_, size_)
+    surfaceFire_(fuelModels, surfaceInputs_, size_)
 {
-    fuelModelSet_ = &fuelModelSet;
+    fuelModels_ = &fuelModels;
 }
 
 // Copy Ctor
@@ -67,11 +67,11 @@ void Surface::memberwiseCopyAssignment(const Surface& rhs)
 bool Surface::isAllFuelLoadZero(int fuelModelNumber)
 {
     // if  all loads are zero, skip calculations
-    bool isNonZeroLoad = fuelModelSet_->getFuelLoadOneHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModelSet_->getFuelLoadTenHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot);
+    bool isNonZeroLoad = fuelModels_->getFuelLoadOneHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModels_->getFuelLoadTenHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModels_->getFuelLoadHundredHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+            || fuelModels_->getFuelLoadLiveWoody(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot);
 
     bool isZeroLoad = !isNonZeroLoad;
 
@@ -97,7 +97,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModelSet_->isFuelModelDefined(fuelModelNumber))
+        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -127,7 +127,7 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     else // Use only one fuel model
     {   
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModelSet_->isFuelModelDefined(fuelModelNumber))
+        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -145,9 +145,9 @@ double Surface::calculateFlameLength(double firelineIntensity)
     return surfaceFire_.calculateFlameLength(firelineIntensity);
 }
 
-void Surface::setFuelModelSet(FuelModelSet& fuelModelSet)
+void Surface::setFuelModels(FuelModels& fuelModels)
 {
-    fuelModelSet_ = &fuelModelSet;
+    fuelModels_ = &fuelModels;
 }
 
 void Surface::initializeMembers()

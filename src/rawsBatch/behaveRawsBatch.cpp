@@ -8,7 +8,7 @@
 #include <string.h>
 #include <algorithm>
 
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 #include "behaveRun.h"
 
 #define EQUAL(a,b) (strcmp(a,b)==0)
@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
     double crownRatio = 0.0;
     double spreadRate = 0;
 
-    FuelModelSet fuelModelSet;
-    BehaveRun behave(fuelModelSet);
+    FuelModels fuelModels;
+    BehaveRun behave(fuelModels);
 
     std::string line = "";
     std::string token = "";

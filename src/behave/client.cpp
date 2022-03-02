@@ -3,7 +3,7 @@
 #include <math.h>
 
 #include "behaveRun.h"
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 
 int main()
 {
@@ -30,8 +30,8 @@ int main()
     double canopyHeight = 0.0;
     double crownRatio = 0.0;
 
-    FuelModelSet fuelModelSet;
-    BehaveRun behave(fuelModelSet);
+    FuelModels fuelModels;
+    BehaveRun behave(fuelModels);
 
     // Setting the wind and spread angle input mode (default is upslope)
     behave.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);

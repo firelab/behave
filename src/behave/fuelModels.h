@@ -29,8 +29,8 @@
 *
 ******************************************************************************/
 
-#ifndef FUELMODELSET_H
-#define FUELMODELSET_H
+#ifndef FUELMODELS_H
+#define FUELMODELS_H
 
 #include "behaveUnits.h"
 #include <string>
@@ -52,15 +52,15 @@ struct FuelConstants
 };
 
 // TODO: Add in a std::map to map fuel codes to the respective fuel model number in FuelModelArray -WMC 02/2017
-class FuelModelSet
+class FuelModels
 {
 public:
-    FuelModelSet();
-    FuelModelSet& operator=(const FuelModelSet& rhs);
-    FuelModelSet(const FuelModelSet& rhs);
-    ~FuelModelSet();
+    FuelModels();
+    FuelModels& operator=(const FuelModels& rhs);
+    FuelModels(const FuelModels& rhs);
+    ~FuelModels();
    
-    bool setCustomFuelModel(int fuelModelNumberIn, std::string code, std::string name,
+    bool setCustomFuelModel(int fuelModelNumber, std::string code, std::string name,
         double fuelBedDepth, LengthUnits::LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead,
         MoistureUnits::MoistureUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
         HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits,
@@ -88,7 +88,7 @@ public:
     bool isFuelModelReserved(int fuelModelNumber) const;
 
 private:
-    void memberwiseCopyAssignment(const FuelModelSet& rhs);
+    void memberwiseCopyAssignment(const FuelModels& rhs);
     void initializeSingleFuelModelRecord(int fuelModelNumber);
     void initializeAllFuelModelRecords();
     void populateFuelModels();
@@ -125,4 +125,4 @@ private:
 
 };
 
-#endif // FUELMODELSET_H
+#endif // FUELMODELS_H

@@ -30,7 +30,7 @@
 #define SURFACEINPUTS_H
 
 #include "behaveUnits.h"
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 
 struct AspenFireSeverity
 {

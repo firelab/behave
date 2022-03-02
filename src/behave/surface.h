@@ -42,7 +42,7 @@ class Surface
 {
 public:
     Surface() = delete; // no default constructor
-    Surface(const FuelModelSet& fuelModelSet);
+    Surface(const FuelModels& fuelModels);
     Surface(const Surface& rhs);
     Surface& operator=(const Surface& rhs);
 
@@ -52,7 +52,7 @@ public:
 
     double calculateFlameLength(double firelineIntensity);
 
-    void setFuelModelSet(FuelModelSet& fuelModelSet);
+    void setFuelModels(FuelModels& fuelModels);
     void initializeMembers();
 
     // SurfaceFire getters
@@ -148,7 +148,7 @@ private:
     void memberwiseCopyAssignment(const Surface& rhs);
     double calculateSpreadRateAtVector(double directionOfinterest);
 
-    const FuelModelSet* fuelModelSet_;
+    const FuelModels* fuelModels_;
 
     // Surface Module components
     SurfaceInputs surfaceInputs_;

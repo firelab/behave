@@ -28,18 +28,18 @@
 
 #include "behaveRun.h"
 
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 
-BehaveRun::BehaveRun(FuelModelSet& fuelModelSet)
-    : surface(fuelModelSet),
-    crown(fuelModelSet)
+BehaveRun::BehaveRun(FuelModels& fuelModels)
+    : surface(fuelModels),
+    crown(fuelModels)
 {
-    fuelModelSet_ = &fuelModelSet;
+    fuelModels_ = &fuelModels;
 }
 
 BehaveRun::BehaveRun(const BehaveRun& rhs)
-    : surface(*rhs.fuelModelSet_),
-    crown(*rhs.fuelModelSet_)
+    : surface(*rhs.fuelModels_),
+    crown(*rhs.fuelModels_)
 {
     memberwiseCopyAssignment(rhs);
 }
@@ -55,7 +55,7 @@ BehaveRun& BehaveRun::operator=(const BehaveRun& rhs)
 
 void BehaveRun::memberwiseCopyAssignment(const BehaveRun& rhs)
 {
-    setFuelModelSet(*rhs.fuelModelSet_);
+    setFuelModels(*rhs.fuelModels_);
     surface = rhs.surface;
     crown = rhs.crown;
     spot = rhs.spot;
@@ -66,12 +66,12 @@ BehaveRun::~BehaveRun()
 
 }
 
-void BehaveRun::setFuelModelSet(FuelModelSet& fuelModelSet)
+void BehaveRun::setFuelModels(FuelModels& fuelModels)
 {
-    // makes this behaveRun's fuelModelSet_ point to the FuelModelSet given to this method as a parameter
-    fuelModelSet_ = &fuelModelSet;
-    surface.setFuelModelSet(fuelModelSet);
-    crown.setFuelModelSet(fuelModelSet);
+    // makes this behaveRun's fuelModels_ point to the FuelModels given to this method as a parameter
+    fuelModels_ = &fuelModels;
+    surface.setFuelModels(fuelModels);
+    crown.setFuelModels(fuelModels);
 }
 
 void BehaveRun::reinitialize()
@@ -85,30 +85,30 @@ void BehaveRun::reinitialize()
 
 bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
 {
-    return fuelModelSet_->isFuelModelDefined(fuelModelNumber);
+    return fuelModels_->isFuelModelDefined(fuelModelNumber);
 }
 
 double BehaveRun::getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadOneHour(fuelModelNumber, loadingUnits);
+    return fuelModels_->getFuelLoadOneHour(fuelModelNumber, loadingUnits);
 }
 
 double BehaveRun::getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadTenHour(fuelModelNumber, loadingUnits);
+    return fuelModels_->getFuelLoadTenHour(fuelModelNumber, loadingUnits);
 }
 
 double BehaveRun::getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadHundredHour(fuelModelNumber, loadingUnits);
+    return fuelModels_->getFuelLoadHundredHour(fuelModelNumber, loadingUnits);
 }
 
 double BehaveRun::getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadLiveHerbaceous(fuelModelNumber, loadingUnits);
+    return fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber, loadingUnits);
 }
 
 double BehaveRun::getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return fuelModelSet_->getFuelLoadLiveWoody(fuelModelNumber, loadingUnits);
+    return fuelModels_->getFuelLoadLiveWoody(fuelModelNumber, loadingUnits);
 }

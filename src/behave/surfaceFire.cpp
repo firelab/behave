@@ -43,12 +43,12 @@ SurfaceFire::SurfaceFire()
 
 }
 
-SurfaceFire::SurfaceFire(const FuelModelSet& fuelModelSet, const SurfaceInputs& surfaceInputs, 
+SurfaceFire::SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs, 
     FireSize& size)
-    : surfaceFuelbedIntermediates_(fuelModelSet, surfaceInputs),
+    : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
       surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
 {
-    fuelModelSet_ = &fuelModelSet;
+    fuelModels_ = &fuelModels;
     size_ = &size;
     surfaceInputs_ = &surfaceInputs;
     initializeMembers();
@@ -416,7 +416,7 @@ void SurfaceFire::calculateSlopeFactor()
 double SurfaceFire::getFuelbedDepth() const
 {
     int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
-    double fuelbedDepth = fuelModelSet_->getFuelbedDepth(fuelModelNumber, LengthUnits::Feet);
+    double fuelbedDepth = fuelModels_->getFuelbedDepth(fuelModelNumber, LengthUnits::Feet);
     return fuelbedDepth;
 }
 

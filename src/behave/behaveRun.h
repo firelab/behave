@@ -43,13 +43,13 @@ class BehaveRun
 {
 public:
     BehaveRun() = delete; // There is no default constructor
-    explicit BehaveRun(FuelModelSet& fuelModelSet);
+    explicit BehaveRun(FuelModels& fuelModels);
     
     BehaveRun(const BehaveRun& rhs);
     BehaveRun& operator=(const BehaveRun& rhs);
     ~BehaveRun();
 
-    // FuelModelSet Methods
+    // Fuel Model Methods
     bool isFuelModelDefined(int fuelModelNumber) const;
 	double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 	double getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -57,7 +57,7 @@ public:
 	double getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 	double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
-    void setFuelModelSet(FuelModelSet& fuelModelSet);
+    void setFuelModels(FuelModels& fuelModels);
     void reinitialize();
 
  // SURFACE Module
@@ -81,8 +81,8 @@ Safety safety;
 private:
     void memberwiseCopyAssignment(const BehaveRun& rhs);
 
-    // Fuel model set (orginal 13, 40 and custom)
-    FuelModelSet* fuelModelSet_;
+    // Fuel models (orginal 13, 40 and custom)
+    FuelModels* fuelModels_;
 };
 
 #endif //BEHAVERUN_H

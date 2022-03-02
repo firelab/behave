@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "behaveRun.h"
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 
 // Define the error tolerance for double values
 constexpr double error_tolerance = 1e-06;
@@ -43,8 +43,8 @@ void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 int main()
 {
     TestInfo testInfo;
-    FuelModelSet fuelModelSet;
-    BehaveRun behaveRun(fuelModelSet);
+    FuelModels fuelModels;
+    BehaveRun behaveRun(fuelModels);
 
     testSurfaceSingleFuelModel(testInfo, behaveRun);
     testLengthToWidthRatio(testInfo, behaveRun);

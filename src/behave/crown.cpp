@@ -31,13 +31,13 @@
 #include "crown.h"
 
 #include <cmath>
-#include "fuelModelSet.h"
+#include "fuelModels.h"
 #include "windSpeedUtility.h"
 
-Crown::Crown(const FuelModelSet& fuelModelSet)
-    : surfaceFuel_(fuelModelSet), crownFuel_(fuelModelSet)
+Crown::Crown(const FuelModels& fuelModels)
+    : surfaceFuel_(fuelModels), crownFuel_(fuelModels)
 {
-    fuelModelSet_ = &fuelModelSet;
+    fuelModels_ = &fuelModels;
     initializeMembers();
 }
 
@@ -47,7 +47,7 @@ Crown::~Crown()
 }
 
 Crown::Crown(const Crown& rhs)
-    : surfaceFuel_(*rhs.fuelModelSet_), crownFuel_(*rhs.fuelModelSet_)
+    : surfaceFuel_(*rhs.fuelModels_), crownFuel_(*rhs.fuelModels_)
 {
     memberwiseCopyAssignment(rhs);
 }
@@ -63,7 +63,7 @@ Crown& Crown::operator=(const Crown& rhs)
 
 void Crown::memberwiseCopyAssignment(const Crown& rhs)
 {
-    fuelModelSet_ = rhs.fuelModelSet_;
+    fuelModels_ = rhs.fuelModels_;
     surfaceFuel_ = rhs.surfaceFuel_;
     crownFuel_ = rhs.crownFuel_;
     crownInputs_ = rhs.crownInputs_;
@@ -655,9 +655,9 @@ void  Crown::setCrownRatio(double crownRatio)
     surfaceFuel_.setCrownRatio(crownRatio);
 }
 
-void Crown::setFuelModelSet(FuelModelSet & fuelModelSet)
+void Crown::setFuelModels(FuelModels & fuelModels)
 {
-    fuelModelSet_ = &fuelModelSet;
+    fuelModels_ = &fuelModels;
 }
 
 

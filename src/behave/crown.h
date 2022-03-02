@@ -39,7 +39,7 @@
 #include "crownInputs.h"
 #include "surface.h"
 
-class FuelModelSet;
+class FuelModels;
 
 struct FireType
 {
@@ -56,7 +56,7 @@ class Crown
 {
 public:
     Crown() = delete; // No default constructor
-    Crown(const FuelModelSet& fuelModelSet);
+    Crown(const FuelModels& fuelModels);
     ~Crown();
 
     Crown(const Crown &rhs);
@@ -107,7 +107,7 @@ public:
     void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCrownRatio(double crownRatio);
-    void setFuelModelSet(FuelModelSet& fuelModelSet);
+    void setFuelModels(FuelModels& fuelModels);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
@@ -139,7 +139,7 @@ public:
     double getCrownRatio() const;
 
 private:
-    const FuelModelSet* fuelModelSet_;
+    const FuelModels* fuelModels_;
     CrownInputs crownInputs_;
     
     // SURFACE module components
