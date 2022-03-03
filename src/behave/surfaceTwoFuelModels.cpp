@@ -328,7 +328,7 @@ void SurfaceTwoFuelModels::calculateSpreadRateBasedOnMethod()
         }
     }
     // else if Finney's 2-dimensional spread rate...
-    else if (twoFuelModelsMethod_ == TwoFuelModelsMethod::TwoFimensional)
+    else if (twoFuelModelsMethod_ == TwoFuelModelsMethod::TwoDimensional)
     {
         //double lbRatio = lengthToWidthRatioForFuelModel_[TwoFuelModels::FIRST]; // get first fuel model's length-to-width ratio
         double lbRatio = lengthToWidthRatioForFuelModel_[SurfaceInputs::TwoFuelModelsContants::SECOND]; // using fuel model's length-to-width ratio seems to agree with BehavePlus

@@ -112,7 +112,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
-    TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = TwoFuelModelsMethod::TwoFimensional;
+    TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = TwoFuelModelsMethod::TwoDimensional;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;

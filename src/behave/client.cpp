@@ -58,7 +58,7 @@ int main()
         moistureHundredHour = 8;
         moistureLiveHerbaceous = 60;
         moistureLiveWoody = 90;
-        TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = TwoFuelModelsMethod::TwoFimensional;
+        TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = TwoFuelModelsMethod::TwoDimensional;
         windSpeed = 5;
         windHeightInputMode = WindHeightInputMode::DirectMidflame;
         windDirection = 180;

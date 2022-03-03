@@ -48,7 +48,7 @@ struct TwoFuelModelsMethod
         NoMethod = 0,          // Don't use TwoFuel Models method
         Arithmetic = 1,         // Use arithmetic mean
         Harmonic = 2,           // Use harmoic mean
-        TwoFimensional = 3     // Use Finney's two dimensional method
+        TwoDimensional = 3     // Use Finney's two dimensional method
     };
 };
 
