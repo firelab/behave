@@ -66,14 +66,6 @@ BehaveRun::~BehaveRun()
 
 }
 
-void BehaveRun::setFuelModels(FuelModels& fuelModels)
-{
-    // makes this behaveRun's fuelModels_ point to the FuelModels given to this method as a parameter
-    fuelModels_ = &fuelModels;
-    surface.setFuelModels(fuelModels);
-    crown.setFuelModels(fuelModels);
-}
-
 void BehaveRun::reinitialize()
 {
     surface.initializeMembers();
@@ -83,9 +75,42 @@ void BehaveRun::reinitialize()
     safety.initializeMembers();
 }
 
-bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
+void BehaveRun::setFuelModels(FuelModels& fuelModels)
 {
-    return fuelModels_->isFuelModelDefined(fuelModelNumber);
+    // makes this behaveRun's fuelModels_ point to the FuelModels given to this method as a parameter
+    fuelModels_ = &fuelModels;
+    surface.setFuelModels(fuelModels);
+    crown.setFuelModels(fuelModels);
+}
+
+std::string BehaveRun::getFuelCode(int fuelModelNumber) const
+{
+    return fuelModels_->getFuelCode(fuelModelNumber);
+}
+
+std::string BehaveRun::getFuelName(int fuelModelNumber) const
+{
+    return fuelModels_->getFuelName(fuelModelNumber);
+}
+
+double BehaveRun::getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const
+{
+    return fuelModels_->getFuelbedDepth(fuelModelNumber, lengthUnits);
+}
+
+double BehaveRun::getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber, moistureUnits);
+}
+
+double BehaveRun::getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return fuelModels_->getHeatOfCombustionDead(fuelModelNumber, heatOfCombustionUnits);
+}
+
+double BehaveRun::getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return fuelModels_->getHeatOfCombustionLive(fuelModelNumber, heatOfCombustionUnits);
 }
 
 double BehaveRun::getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
@@ -111,4 +136,39 @@ double BehaveRun::getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::L
 double BehaveRun::getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return fuelModels_->getFuelLoadLiveWoody(fuelModelNumber, loadingUnits);
+}
+
+double BehaveRun::getFuelSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrOneHour(fuelModelNumber, savrUnits);
+}
+
+double BehaveRun::getFuelSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrLiveHerbaceous(fuelModelNumber, savrUnits);
+}
+
+double BehaveRun::getFuelSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrLiveWoody(fuelModelNumber, savrUnits);
+}
+
+bool BehaveRun::isFuelDynamic(int fuelModelNumber) const
+{
+    return fuelModels_->getIsDynamic(fuelModelNumber);
+}
+
+bool BehaveRun::isFuelModelDefined(int fuelModelNumber) const
+{
+    return fuelModels_->isFuelModelDefined(fuelModelNumber);
+}
+
+bool BehaveRun::isFuelModelReserved(int fuelModelNumber) const
+{
+    return fuelModels_->isFuelModelReserved(fuelModelNumber);
+}
+
+bool BehaveRun::isAllFuelLoadZero(int fuelModelNumber) const
+{
+    return fuelModels_->isAllFuelLoadZero(fuelModelNumber);
 }

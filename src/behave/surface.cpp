@@ -66,16 +66,7 @@ void Surface::memberwiseCopyAssignment(const Surface& rhs)
 
 bool Surface::isAllFuelLoadZero(int fuelModelNumber)
 {
-    // if  all loads are zero, skip calculations
-    bool isNonZeroLoad = fuelModels_->getFuelLoadOneHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModels_->getFuelLoadTenHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModels_->getFuelLoadHundredHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
-            || fuelModels_->getFuelLoadLiveWoody(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot);
-
-    bool isZeroLoad = !isNonZeroLoad;
-
-    return isZeroLoad;
+   return fuelModels_->isAllFuelLoadZero(fuelModelNumber);
 }
 
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
@@ -270,6 +261,96 @@ void Surface::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum 
 void Surface::setCrownRatio(double crownRatio)
 {
     surfaceInputs_.setCrownRatio(crownRatio);
+}
+
+std::string Surface::getFuelCode(int fuelModelNumber) const
+{
+    return fuelModels_->getFuelCode(fuelModelNumber);
+}
+
+std::string Surface::getFuelName(int fuelModelNumber) const
+{
+    return fuelModels_->getFuelName(fuelModelNumber);
+}
+
+double Surface::getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const
+{
+    return fuelModels_->getFuelbedDepth(fuelModelNumber, lengthUnits);
+}
+
+double Surface::getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber, moistureUnits);
+}
+
+double Surface::getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return fuelModels_->getHeatOfCombustionDead(fuelModelNumber, heatOfCombustionUnits);
+}
+
+double Surface::getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return fuelModels_->getHeatOfCombustionLive(fuelModelNumber, heatOfCombustionUnits);
+}
+
+double Surface::getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadOneHour(fuelModelNumber, loadingUnits);
+}
+
+double Surface::getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadTenHour(fuelModelNumber, loadingUnits);
+}
+
+double Surface::getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadHundredHour(fuelModelNumber, loadingUnits);
+}
+
+double Surface::getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber, loadingUnits);
+}
+
+double Surface::getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadLiveWoody(fuelModelNumber, loadingUnits);
+}
+
+double Surface::getFuelSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrOneHour(fuelModelNumber, savrUnits);
+}
+
+double Surface::getFuelSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrLiveHerbaceous(fuelModelNumber, savrUnits);
+}
+
+double Surface::getFuelSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrLiveWoody(fuelModelNumber, savrUnits);
+}
+
+bool Surface::isFuelDynamic(int fuelModelNumber) const
+{
+    return fuelModels_->getIsDynamic(fuelModelNumber);
+}
+
+bool Surface::isFuelModelDefined(int fuelModelNumber) const
+{
+    return fuelModels_->isFuelModelDefined(fuelModelNumber);
+}
+
+bool Surface::isFuelModelReserved(int fuelModelNumber) const
+{
+    return fuelModels_->isFuelModelReserved(fuelModelNumber);
+}
+
+bool Surface::isAllFuelLoadZero(int fuelModelNumber) const
+{
+    return fuelModels_->isAllFuelLoadZero(fuelModelNumber);
 }
 
 bool Surface::isUsingTwoFuelModels() const

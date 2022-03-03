@@ -745,3 +745,15 @@ bool FuelModels::isFuelModelReserved(int fuelModelNumber) const
         return  FuelModelArray_[fuelModelNumber].isReserved_;
     }
 }
+
+bool FuelModels::isAllFuelLoadZero(int fuelModelNumber) const
+{
+    // if  all loads are zero, skip calculations
+    bool isZeroLoad = !(getFuelLoadOneHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+        || getFuelLoadTenHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+        || getFuelLoadHundredHour(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+        || getFuelLoadLiveHerbaceous(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot)
+        || getFuelLoadLiveWoody(fuelModelNumber, LoadingUnits::PoundsPerSquareFoot));
+
+    return isZeroLoad;
+}

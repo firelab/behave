@@ -56,7 +56,7 @@ class Crown
 {
 public:
     Crown() = delete; // No default constructor
-    Crown(const FuelModels& fuelModels);
+    Crown(FuelModels& fuelModels);
     ~Crown();
 
     Crown(const Crown &rhs);
@@ -65,6 +65,8 @@ public:
     void doCrownRunRothermel();
     void doCrownRunScottAndReinhardt();
     void initializeMembers();
+
+    void setFuelModels(FuelModels& fuelModels);
 
     // CROWN Module Setters
     void updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
@@ -97,6 +99,26 @@ public:
     double getCrownFireLengthToWidthRatio() const;
     double getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
 
+    // Fuel Model Getter Methods
+    std::string getFuelCode(int fuelModelNumber) const;
+    std::string getFuelName(int fuelModelNumber) const;
+    double getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const;
+    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const;;
+    double getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getFuelSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getFuelSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getFuelSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    bool isFuelDynamic(int fuelModelNumber) const;
+    bool isFuelModelDefined(int fuelModelNumber) const;
+    bool isFuelModelReserved(int fuelModelNumber) const;
+    bool isAllFuelLoadZero(int fuelModelNumber) const;
+
     // SURFACE Module Inputs Setters
     void updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
@@ -107,7 +129,6 @@ public:
     void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCrownRatio(double crownRatio);
-    void setFuelModels(FuelModels& fuelModels);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
@@ -139,7 +160,7 @@ public:
     double getCrownRatio() const;
 
 private:
-    const FuelModels* fuelModels_;
+    FuelModels* fuelModels_;
     CrownInputs crownInputs_;
     
     // SURFACE module components

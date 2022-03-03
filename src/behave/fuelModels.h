@@ -86,6 +86,7 @@ public:
     bool getIsDynamic(int fuelModelNumber) const;
     bool isFuelModelDefined(int fuelModelNumber) const;
     bool isFuelModelReserved(int fuelModelNumber) const;
+    bool isAllFuelLoadZero(int fuelModelNumber) const;
 
 private:
     void memberwiseCopyAssignment(const FuelModels& rhs);

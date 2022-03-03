@@ -34,7 +34,7 @@
 #include "fuelModels.h"
 #include "windSpeedUtility.h"
 
-Crown::Crown(const FuelModels& fuelModels)
+Crown::Crown(FuelModels& fuelModels)
     : surfaceFuel_(fuelModels), crownFuel_(fuelModels)
 {
     fuelModels_ = &fuelModels;
@@ -393,6 +393,11 @@ void Crown::initializeMembers()
     crownInputs_.initializeMembers();
 }
 
+void Crown::setFuelModels(FuelModels& fuelModels)
+{
+    fuelModels_ = &fuelModels;
+}
+
 void Crown::calculateCanopyHeatPerUnitArea()
 {
     const double LOW_HEAT_OF_COMBUSTION = 8000.0; // Low heat of combustion (hard coded to 8000 Btu/lbs)
@@ -626,6 +631,96 @@ void Crown::setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnit
     crownInputs_.setMoistureFoliar(moistureFoliar, moistureUnits);
 }
 
+std::string Crown::getFuelCode(int fuelModelNumber) const
+{
+    return fuelModels_->getFuelCode(fuelModelNumber);
+}
+
+std::string Crown::getFuelName(int fuelModelNumber) const
+{
+    return fuelModels_->getFuelName(fuelModelNumber);
+}
+
+double Crown::getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const
+{
+    return fuelModels_->getFuelbedDepth(fuelModelNumber, lengthUnits);
+}
+
+double Crown::getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber, moistureUnits);
+}
+
+double Crown::getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return fuelModels_->getHeatOfCombustionDead(fuelModelNumber, heatOfCombustionUnits);
+}
+
+double Crown::getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return fuelModels_->getHeatOfCombustionLive(fuelModelNumber, heatOfCombustionUnits);
+}
+
+double Crown::getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadOneHour(fuelModelNumber, loadingUnits);
+}
+
+double Crown::getFuelLoadTenHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadTenHour(fuelModelNumber, loadingUnits);
+}
+
+double Crown::getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadHundredHour(fuelModelNumber, loadingUnits);
+}
+
+double Crown::getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadLiveHerbaceous(fuelModelNumber, loadingUnits);
+}
+
+double Crown::getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return fuelModels_->getFuelLoadLiveWoody(fuelModelNumber, loadingUnits);
+}
+
+double Crown::getFuelSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrOneHour(fuelModelNumber, savrUnits);
+}
+
+double Crown::getFuelSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrLiveHerbaceous(fuelModelNumber, savrUnits);
+}
+
+double Crown::getFuelSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return fuelModels_->getSavrLiveWoody(fuelModelNumber, savrUnits);
+}
+
+bool Crown::isFuelDynamic(int fuelModelNumber) const
+{
+    return fuelModels_->getIsDynamic(fuelModelNumber);
+}
+
+bool Crown::isFuelModelDefined(int fuelModelNumber) const
+{
+    return fuelModels_->isFuelModelDefined(fuelModelNumber);
+}
+
+bool Crown::isFuelModelReserved(int fuelModelNumber) const
+{
+    return fuelModels_->isFuelModelReserved(fuelModelNumber);
+}
+
+bool Crown::isAllFuelLoadZero(int fuelModelNumber) const
+{
+    return fuelModels_->isAllFuelLoadZero(fuelModelNumber);
+}
+
 void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, 
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
     MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
@@ -654,12 +749,6 @@ void  Crown::setCrownRatio(double crownRatio)
 {
     surfaceFuel_.setCrownRatio(crownRatio);
 }
-
-void Crown::setFuelModels(FuelModels & fuelModels)
-{
-    fuelModels_ = &fuelModels;
-}
-
 
 void  Crown::setFuelModelNumber(int fuelModelNumber)
 {
