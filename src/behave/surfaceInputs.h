@@ -37,7 +37,7 @@ struct AspenFireSeverity
     enum AspenFireSeverityEnum
     {
        Low = 0,
-       Mmoderate = 1
+       Moderate = 1
     };
 };
 

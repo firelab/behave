@@ -115,7 +115,12 @@ void Crown::doCrownRunRothermel()
 
     double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
-    double crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
+    double crownRatio = 0;
+    if(canopyHeight > 0)
+    {
+        crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
+    }
+  
     surfaceFuel_.setCrownRatio(crownRatio);
 
     // Step 1: Do surface run and store values needed for further calculations 
@@ -123,6 +128,8 @@ void Crown::doCrownRunRothermel()
     surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
     surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    surfaceFireSpreadRate_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Byram
+    surfaceFireFlameLength_ = surfaceFuel_.getFlameLength(LengthUnits::Feet); // Byram
     double windAdjustmentFactor = 0.4; // Wind adjustment factor is assumed to be 0.4
     surfaceFuel_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
 
@@ -243,7 +250,7 @@ void Crown::calculateCrownFractionBurned()
     // surfaceFireCriticalSpreadRate_: surface fire spread rate required to initiate torching/crowning (ft/min).
     // crowningSurfaceFireRos_: Surface fire spread rate at which the active crown fire spread rate is fully achieved 
     // and the crown fraction burned is 1.
-    
+   
     double numerator = surfaceFireSpreadRate_ - surfaceFireCriticalSpreadRate_;
     double denominator = crowningSurfaceFireRos_ - surfaceFireCriticalSpreadRate_;
 
@@ -268,7 +275,7 @@ void Crown::assignFinalFireBehaviorBasedOnFireType()
         finalFirelineIntesity_ = passiveCrownFireLineIntensity_;
         finalFlameLength_ = passiveCrownFireFlameLength_;
     }
-    else if (isActiveCrownFire_)
+    else if (isActiveCrownFire_) 
     {
         finalSpreadRate_ = crownFireSpreadRate_;
         finalHeatPerUnitArea_ = crownFireHeatPerUnitArea_;
@@ -354,6 +361,11 @@ double Crown::getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) co
     return SpeedUnits::fromBaseUnits(crownFireActiveWindSpeed_, speedUnits);
 }
 
+double Crown::getCrownFractionBurned() const
+{
+    return crownFractionBurned_;
+}
+
 void Crown::initializeMembers()
 {
     fireType_ = FireType::Surface;
@@ -375,7 +387,7 @@ void Crown::initializeMembers()
     crownFireTransitionRatio_ = 0.0;
     windSpeedAtTwentyFeet_ = 0.0;;
     crownFireLengthToWidthRatio_ = 1.0;
-
+    crownFractionBurned_ = 0.0;
     surfaceFireSpreadRate_ = 0.0;
     surfaceFireCriticalSpreadRate_ = 0.0;
 

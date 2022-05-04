@@ -98,6 +98,7 @@ public:
 
     double getCrownFireLengthToWidthRatio() const;
     double getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
+    double getCrownFractionBurned() const;
 
     // Fuel Model Getter Methods
     std::string getFuelCode(int fuelModelNumber) const;
