@@ -31,7 +31,8 @@ int main()
     double crownRatio = 0.0;
 
     FuelModels fuelModels;
-    BehaveRun behave(fuelModels);
+    SpeciesMasterTable mortalitySpeciesTable;
+    BehaveRun behave(fuelModels, mortalitySpeciesTable);
 
     // Setting the wind and spread angle input mode (default is upslope)
     behave.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);

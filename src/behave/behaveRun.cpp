@@ -30,16 +30,19 @@
 
 #include "fuelModels.h"
 
-BehaveRun::BehaveRun(FuelModels& fuelModels)
+BehaveRun::BehaveRun(FuelModels& fuelModels, SpeciesMasterTable& speciesMasterTable)
     : surface(fuelModels),
-    crown(fuelModels)
+    crown(fuelModels),
+    mortality(speciesMasterTable)
 {
     fuelModels_ = &fuelModels;
+    speciesMasterTable_ = &speciesMasterTable;
 }
 
 BehaveRun::BehaveRun(const BehaveRun& rhs)
     : surface(*rhs.fuelModels_),
-    crown(*rhs.fuelModels_)
+    crown(*rhs.fuelModels_),
+    mortality(*rhs.speciesMasterTable_)
 {
     memberwiseCopyAssignment(rhs);
 }

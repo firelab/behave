@@ -33,6 +33,7 @@
 #include "ContainAdapter.h"
 #include "crown.h"
 #include "ignite.h"
+#include "mortality.h"
 #include "safety.h"
 #include "spot.h"
 #include "surface.h"
@@ -43,7 +44,7 @@ class BehaveRun
 {
 public:
     BehaveRun() = delete; // There is no default constructor
-    explicit BehaveRun(FuelModels& fuelModels);
+    explicit BehaveRun(FuelModels& fuelModels, SpeciesMasterTable& speciesMasterTable);
     
     BehaveRun(const BehaveRun& rhs);
     BehaveRun& operator=(const BehaveRun& rhs);
@@ -91,11 +92,17 @@ ContainAdapter contain;
 //  Safety Module
 Safety safety;
 
+// Mortality Module
+Mortality mortality;
+
 private:
     void memberwiseCopyAssignment(const BehaveRun& rhs);
 
     // Fuel models (orginal 13, 40 and custom)
     FuelModels* fuelModels_;
+
+    // Tree species data for Mortality Module
+    SpeciesMasterTable* speciesMasterTable_;
 };
 
 #endif //BEHAVERUN_H

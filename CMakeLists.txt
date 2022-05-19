@@ -9,7 +9,11 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 # Make use of c++11
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+IF(MSVC)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std=c++11")
+ELSE()
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+ENDIF(MSVC)
 
 PROJECT(behave)
 
@@ -52,6 +56,7 @@ ENDIF()
 SET(SOURCE
     src/behave/behaveRun.cpp
     src/behave/behaveUnits.cpp
+    src/behave/canopy_coefficient_table.cpp
     src/behave/Contain.cpp
     src/behave/ContainAdapter.cpp
     src/behave/ContainForce.cpp
@@ -64,11 +69,15 @@ SET(SOURCE
     src/behave/fuelModels.cpp
     src/behave/ignite.cpp
     src/behave/igniteInputs.cpp
+    src/behave/mortality.cpp
+	src/behave/mortality_equation_table.cpp
+	src/behave/mortality_inputs.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
     src/behave/safety.cpp
+    src/behave/species_master_table.cpp
     src/behave/spot.cpp
     src/behave/spotInputs.cpp
     src/behave/surface.cpp
@@ -84,6 +93,7 @@ SET(SOURCE
 SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveUnits.h
+    src/behave/canopy_coefficient_table.h
     src/behave/Contain.h
     src/behave/ContainAdapter.h
     src/behave/ContainForce.h
@@ -96,11 +106,15 @@ SET(HEADERS
     src/behave/fuelModels.h
     src/behave/ignite.h
     src/behave/igniteInputs.h
+    src/behave/mortality.h
+	src/behave/mortality_equation_table.h
+	src/behave/mortality_inputs.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
     src/behave/randthread.h
     src/behave/safety.h
+    src/behave/species_master_table.h
     src/behave/spot.h
     src/behave/spotInputs.h
     src/behave/surface.h

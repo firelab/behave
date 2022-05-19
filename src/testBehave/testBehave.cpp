@@ -39,12 +39,14 @@ void testSpeedUnitConversion(struct TestInfo& testInfo, BehaveRun& behaveRun);
 void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testMortalityModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
     TestInfo testInfo;
     FuelModels fuelModels;
-    BehaveRun behaveRun(fuelModels);
+    SpeciesMasterTable mortalitySpeciesTable;
+    BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
 
     testSurfaceSingleFuelModel(testInfo, behaveRun);
     testLengthToWidthRatio(testInfo, behaveRun);
@@ -59,6 +61,7 @@ int main()
     testIgniteModule(testInfo, behaveRun);
     testSafetyModule(testInfo, behaveRun);
     testContainModule(testInfo, behaveRun);
+    testMortalityModule(testInfo, behaveRun);
 
     std::cout << "Total tests perfomred: " << testInfo.numTotalTests << "\n";
     std::cout << "Total tests passed: " << testInfo.numPassed << "\n";
@@ -1177,6 +1180,16 @@ void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     expectedContainmentStatus = ContainStatus::Contained;
     observedContainmentStatus = behaveRun.contain.getContainmentStatus();
     reportTestResult(testInfo, testName, observedContainmentStatus, expectedContainmentStatus, error_tolerance);
+
+    std::cout << "Finished testing Contain module\n\n";
+}
+
+void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::cout << "Testing Mortality module\n";
+
+    // TODO: Create test for Mortality module
+    // Stub for now
 
     std::cout << "Finished testing Contain module\n\n";
 }
