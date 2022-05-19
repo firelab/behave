@@ -1191,5 +1191,5 @@ void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun)
     // TODO: Create test for Mortality module
     // Stub for now
 
-    std::cout << "Finished testing Contain module\n\n";
+    std::cout << "Finished testing Mortality module\n\n";
 }
