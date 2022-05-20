@@ -152,8 +152,8 @@ int main()
         "fire_severity"
     };   // This vecctor is for getting the name of an input from its enum value
 
-    RegionCode region = RegionCode::south_east;
-    EquationType equationType = EquationType::bole_char;
+    RegionCode region = RegionCode::interior_west;
+    EquationType equationType = EquationType::crown_scorch;
 
     behave.mortality.setRegion(region);
     behave.mortality.setEquationType(equationType);
@@ -162,7 +162,7 @@ int main()
     speciesInRegion = behave.mortality.getSpeciesRecordVectorForRegion(region);
     speciesInRegion = behave.mortality.getSpeciesRecordVectorForRegionAndEquationType(region, equationType);
 
-    string speciesCode = "ACRU";
+    string speciesCode = "ABBA";
     behave.mortality.setSpeciesCode(speciesCode);
 
     // Query the species master table for various info
@@ -187,9 +187,9 @@ int main()
         double testGetTreeDensityByArea = behave.mortality.getTreeDensityPerUnitArea(AreaUnits::Acres);
         behave.mortality.setDBH(5.0, LengthUnits::Inches);
         double testGetDBH = behave.mortality.getDBH(LengthUnits::Feet);
-        behave.mortality.setTreeHeight(29.0, LengthUnits::Feet);
+        behave.mortality.setTreeHeight(35.0, LengthUnits::Feet);
         double testGetTreeHeight = behave.mortality.getTreeHeight(LengthUnits::Feet);
-        behave.mortality.setCrownRatio(3);
+        behave.mortality.setCrownRatio(0.30); // A value between 0.0 and 1.0 is valid
         behave.mortality.setCrownDamage(25.0);
         behave.mortality.setCambiumKillRating(3.2);
         behave.mortality.setBeetleDamage(BeetleDamage::yes);

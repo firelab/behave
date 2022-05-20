@@ -501,10 +501,9 @@ double  Mortality::calculateMortalityCrownScorch()
     mortalityInputs_.setBarkThickness(calculateBarkThickness(), LengthUnits::Inches);
 
     treeHeight = mortalityInputs_.getTreeHeight(LengthUnits::Feet); // Note-1                        
-    LCR = mortalityInputs_.getCrownRatio(); // crown ratio 
-
-    HCR = treeHeight * (LCR / 10.0);
+    HCR = treeHeight * (mortalityInputs_.getCrownRatio());
     f_B = flameLengthOrScorchHeightValue - (treeHeight - HCR);
+
     if(f_B <= 0)
     {
         f_B = 0;
@@ -688,7 +687,7 @@ double  Mortality::calculateMortalityCrownScorch()
         // Change 9-6-2016 - new Black Hills PiPo, see Duncan Lutes's .docx document saved in fofem project folder 
         case 21:
         {
-            f = mortalityInputs_.getCrownRatio() / 10.0; // crown ratio 
+            f = mortalityInputs_.getCrownRatio(); // crown ratio 
             CBH = mortalityInputs_.getTreeHeight(LengthUnits::Feet) - (mortalityInputs_.getTreeHeight(LengthUnits::Feet) * f);
             P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Inches), flameLengthOrScorchHeightValue, blackHillsFlameLength);
             break;
