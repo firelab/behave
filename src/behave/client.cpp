@@ -49,8 +49,6 @@ int main()
         std::cout << "compass north" << std::endl << std::endl;
     }
 
-   
-
     for (int i = 0; i <= 10; i++)
     {
         fuelModelNumber = i;
@@ -130,6 +128,126 @@ int main()
     // Direction of Max Spread test
     directionOfMaxSpread = behave.surface.getDirectionOfMaxSpread();
     std::cout << "Direction of maximum spread is " << round(directionOfMaxSpread) << " degrees" << std::endl << std::endl;
+
+    // Example usage of Mortality module
+    double probalilityOfMortality = 0;
+
+    vector<SpeciesMasterTableRecord> speciesInRegion;
+
+    vector<bool> requiredFieldVector;
+
+    vector<std::string> fieldNameStrings =
+    {
+        "region",
+        "flame_length_or_scorch_height_switch",
+        "flame_length_or_scorch_height_value",
+        "equation_type",
+        "dbh",
+        "tree_height",
+        "crown_ratio",
+        "crown_damage",
+        "cambium_kill_rating",
+        "beetle_damage",
+        "bole_char_height",
+        "fire_severity"
+    };   // This vecctor is for getting the name of an input from its enum value
+
+    RegionCode region = RegionCode::south_east;
+    EquationType equationType = EquationType::bole_char;
+
+    behave.mortality.setRegion(region);
+    behave.mortality.setEquationType(equationType);
+
+    // Get species lists by region or by region and equation type to narrow down further
+    speciesInRegion = behave.mortality.getSpeciesRecordVectorForRegion(region);
+    speciesInRegion = behave.mortality.getSpeciesRecordVectorForRegionAndEquationType(region, equationType);
+
+    string speciesCode = "ACRU";
+    behave.mortality.setSpeciesCode(speciesCode);
+
+    // Query the species master table for various info
+    int numSpeciesRecords = behave.mortality.getNumberOfRecordsInSpeciesTable();
+    int speciesIndex = behave.mortality.getSpeciesTableIndexFromSpeciesCode(speciesCode);
+    bool isInRegion = behave.mortality.checkIsInRegionAtSpeciesTableIndex(speciesIndex, region);
+   
+    // With species and equation type selected, find out the required inputs
+    bool isInputOk = false;
+    if(isInRegion)
+    {
+        isInputOk = behave.mortality.updateInputsForSpeciesCodeAndEquationType(speciesCode, equationType);
+    }
+
+    if(isInputOk)
+    {
+        behave.mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::flame_length);
+        behave.mortality.setFlameLengthOrScorchHeightValue(4.0, LengthUnits::Feet);
+
+        // Not all of inputs are needed for every equation type, requirements vary, inpsect requiredFieldVector to see which are needed
+        behave.mortality.setTreeDensityPerUnitArea(100, AreaUnits::Acres);
+        double testGetTreeDensityByArea = behave.mortality.getTreeDensityPerUnitArea(AreaUnits::Acres);
+        behave.mortality.setDBH(5.0, LengthUnits::Inches);
+        double testGetDBH = behave.mortality.getDBH(LengthUnits::Feet);
+        behave.mortality.setTreeHeight(29.0, LengthUnits::Feet);
+        double testGetTreeHeight = behave.mortality.getTreeHeight(LengthUnits::Feet);
+        behave.mortality.setCrownRatio(3);
+        behave.mortality.setCrownDamage(25.0);
+        behave.mortality.setCambiumKillRating(3.2);
+        behave.mortality.setBeetleDamage(BeetleDamage::yes);
+        behave.mortality.setBoleCharHeight(2.0, LengthUnits::Feet);
+        double testGetBoleCharHeight = behave.mortality.getBoleCharHeight(LengthUnits::Feet);
+
+        requiredFieldVector = behave.mortality.getRequiredFieldVector();
+
+        for(int i = (int)RequiredFieldNames::dbh; i < requiredFieldVector.size(); i++)
+        {
+            if(requiredFieldVector[i] == true)
+            {
+                RequiredFieldNames currentRequiredFieldName = static_cast<RequiredFieldNames>(i);
+                if((currentRequiredFieldName == RequiredFieldNames::dbh) && behave.mortality.getDBH(LengthUnits::Inches) < 0)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::tree_height) && behave.mortality.getTreeHeight(LengthUnits::Feet) < 0)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && behave.mortality.getCrownRatio() < 0)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::crown_damage) && behave.mortality.getCrownDamage() < 0)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::cambium_kill_rating) && behave.mortality.getCambiumKillRating() < 0)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::beetle_damage) && behave.mortality.getBeetleDamage() == BeetleDamage::not_set)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::bole_char_height) && behave.mortality.getBoleCharHeight(LengthUnits::Feet) < 0)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+                if((currentRequiredFieldName == RequiredFieldNames::fire_severity) && behave.mortality.getFireSeverity() == FireSeverity::not_set)
+                {
+                    std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
+                }
+            }
+        }
+
+        probalilityOfMortality = behave.mortality.calculateMortality(ProbabilityUnits::Fraction);
+
+        probalilityOfMortality = behave.mortality.getProbabilityOfMortality(ProbabilityUnits::Percent);
+
+        std::cout << "Probability of behave.mortality: " << std::setprecision(3) << probalilityOfMortality << "%\n";
+    }
+    else
+    {
+        std::cout << "Error, species not found\n";
+    }
 
 #ifndef NDEBUG
     std::cout << "Press Enter to continue";
