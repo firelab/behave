@@ -33,6 +33,7 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
     // Length to base units constants
     const double INCHES_TO_FEET = 0.08333333333333;
     const double METERS_TO_FEET = 3.2808398950131;
+    const double MILLIMETERS_TO_FEET = 0.003280839895;
     const double CENTIMETERS_TO_FEET = 0.03280839895;
     const double CHAINS_TO_FEET = 66.0;
     const double MILES_TO_FEET = 5280.0;
@@ -48,6 +49,11 @@ double LengthUnits::toBaseUnits(double value, LengthUnits::LengthUnitsEnum units
         case Inches:
         {
             value *= INCHES_TO_FEET;
+            break;
+        }
+        case Millimeters:
+        {
+            value *= MILLIMETERS_TO_FEET;
             break;
         }
         case Centimeters:
@@ -143,6 +149,7 @@ double SpeedUnits::toBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     // Velocity to base units constants
     const double METERS_PER_SECOND_TO_FEET_PER_MINUTE = 196.8503937;
     const double METERS_PER_MINUTE_TO_FEET_PER_MINUTE = 3.28084;
+    const double METERS_PER_HOUR_TO_FEET_PER_MINUTE = 0.0547;
     const double CHAINS_PER_HOUR_TO_FEET_PER_MINUTE = 1.1;
     const double MILES_PER_HOUR_TO_FEET_PER_MINUTE = 88;
     const double KILOMETERS_PER_HOUR_TO_FEET_PER_MINUTE = 54.680665;
@@ -162,6 +169,11 @@ double SpeedUnits::toBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
         case   MetersPerMinute:
         {
             value *= METERS_PER_MINUTE_TO_FEET_PER_MINUTE;
+            break;
+        }
+        case   MetersPerHour:
+        {
+            value *= METERS_PER_HOUR_TO_FEET_PER_MINUTE;
             break;
         }
         case ChainsPerHour:
@@ -192,6 +204,7 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     // Velocity from base units constants
     const double FEET_PER_MINUTE_TO_METERS_PER_SECOND = 0.00508;
     const double FEET_PER_MINUTE_TO_METERS_PER_MINUTE = 0.3048;
+    const double FEET_PER_MINUTE_TO_METERS_PER_HOUR = 18.288;
     const double FEET_PER_MINUTE_TO_CHAINS_PER_HOUR = 10.0 / 11.0;
     const double FEET_PER_MINUTE_TO_MILES_PER_HOUR = 0.01136363636;
     const double FEET_PER_MINUTE_TO_KILOMETERS_PER_HOUR = 0.018288;
@@ -211,6 +224,11 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
         case   MetersPerMinute:
         {
             value *= FEET_PER_MINUTE_TO_METERS_PER_MINUTE;
+            break;
+        }
+        case   MetersPerHour:
+        {
+            value *= FEET_PER_MINUTE_TO_METERS_PER_HOUR;
             break;
         }
         case ChainsPerHour:
@@ -326,7 +344,7 @@ double LoadingUnits::toBaseUnits(double value, LoadingUnitsEnum units)
     const double KILOGRAMS_PER_SQUARE_METER_TO_POUNDS_PER_SQUARE_FOOT = 0.2048161436225217;
     const double TONS_PER_ACRE_TO_POUNDS_PER_SQUARE_FOOT = 0.045913682277318638;
     const double TONNES_PER_HECTARE_TO_POUNDS_PER_SQUARE_FOOT = 0.02048161436225217;
- 
+
     switch (units)
     {
         case PoundsPerSquareFoot:
@@ -397,7 +415,7 @@ double LoadingUnits::fromBaseUnits(double value, LoadingUnitsEnum units)
 double SurfaceAreaToVolumeUnits::toBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units)
 {
     const double SQUARE_METERS_OVER_CUBIC_METERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 3.280839895013123;
-    
+
     const double SQUARE_INCHES_OVER_CUBIC_INCHES_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.083333333333333;
     const double SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.03280839895013123;
 
@@ -558,6 +576,16 @@ double TimeUnits::toBaseUnits(double value, TimeUnitsEnum units)
             value *= 60;
             break;
         }
+        case Days:
+        {
+            value *= 1440;
+            break;
+        }
+        case Years:
+        {
+            value *= 525600;
+            break;
+        }
         default:
         {
             ; // TODO: Handle error
@@ -583,6 +611,16 @@ double TimeUnits::fromBaseUnits(double value, TimeUnitsEnum units)
         case Hours:
         {
             value /= 60.0;
+            break;
+        }
+        case Days:
+        {
+            value /= 1440;
+            break;
+        }
+        case Years:
+        {
+            value /= 525600;
             break;
         }
         default:
@@ -649,7 +687,7 @@ double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
     const double SQUARE_FEET_TO_SQUARE_KILOMETERS = 9.290304e-08;
     const double SQUARE_FEET_TO_SQUARE_METERS = 0.0929030353835;
     const double SQUARE_FEET_TO_SQUARE_MILES = 3.5870064279e-08;
- 
+
     switch (units)
     {
         case SquareFeet:
@@ -694,7 +732,7 @@ double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
 double HeatOfCombustionUnits::toBaseUnits(double value, HeatOfCombustionUnitsEnum units)
 {
     const double  KILOJOULES_PER_KILOGRAM_TO_BTUS_PER_POUND = 0.429592;
- 
+
     switch (units)
     {
         case BtusPerPound:
@@ -829,7 +867,7 @@ double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum 
 {
     const double KILOJOULES_PER_SQUARE_METER_TO_BTUS_PER_SECOND = 0.0879872;
     const double KILOWATT_SECONDS_PER_SQUARE_METER_PER_TO_BTUS_PER_SQUARE_FOOT = 0.0879872;
-  
+
     switch(units)
     {
         case BtusPerSquareFoot :
@@ -838,7 +876,7 @@ double HeatPerUnitAreaUnits::toBaseUnits(double value, HeatPerUnitAreaUnitsEnum 
             break;
         }
         case KilojoulesPerSquareMeter:
-       
+
         {
             value *= KILOJOULES_PER_SQUARE_METER_TO_BTUS_PER_SECOND;
             break;
@@ -1019,4 +1057,3 @@ double HeatSinkUnits::fromBaseUnits(double value, HeatSinkUnitsEnum units)
     }
     return value;
 }
-
