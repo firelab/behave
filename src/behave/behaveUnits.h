@@ -50,6 +50,7 @@ struct LengthUnits
     {
         Feet, // base length unit
         Inches,
+        Millimeters,
         Centimeters,
         Meters,
         Chains,
@@ -90,16 +91,17 @@ struct SurfaceAreaToVolumeUnits
 };
 
 
-struct SpeedUnits 
+struct SpeedUnits
 {
     enum SpeedUnitsEnum
     {
         FeetPerMinute, // base velocity unit
         ChainsPerHour,
-        MetersPerSecond,	
+        MetersPerSecond,
         MetersPerMinute,
+        MetersPerHour,
         MilesPerHour,
-        KilometersPerHour
+        KilometersPerHour,
     };
 
     static double toBaseUnits(double value, SpeedUnitsEnum units);
@@ -145,7 +147,7 @@ struct MoistureUnits
 struct SlopeUnits
 {
     enum SlopeUnitsEnum
-    {			   
+    {
         Degrees, // base slope unit
         Percent
     };
@@ -252,7 +254,9 @@ struct TimeUnits
     {
         Minutes, // base time unit
         Seconds,
-        Hours
+        Hours,
+        Days,
+        Years
     };
 
     static double toBaseUnits(double value, TimeUnitsEnum units);
