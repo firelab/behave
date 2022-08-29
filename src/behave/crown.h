@@ -185,14 +185,11 @@ private:
     void calculateCrownFirelineIntensity();
     void calculateCrownFlameLength();
     void calculatePassiveCrownFlameLength();
-    void calculateCrownPowerOfFire();
-    void calcuateCrownPowerOfWind();
     void calculateSurfaceFireCriticalSpreadRateScottAndReinhardt();
     void calculateCrownCriticalFireSpreadRate();
     void calculateCrownCriticalSurfaceFireIntensity();
     void calculateCrownCriticalSurfaceFlameLength();
     void calculateCrownFireTransitionRatio();
-    void calcualteCrownFirePowerRatio();
     void calculateCrownFireActiveRatio();
     void calculateFireTypeRothermel();
     void calculateFireTypeScottAndReinhardt();
@@ -218,9 +215,6 @@ private:
     double crownCriticalSurfaceFirelineIntensity_;  // Crown fire's critical surface fire intensity (Btu / ft / s)
     double crownCriticalFireSpreadRate_;            // Crown fire's critical crown fire spread rate (ft / min)
     double crownCriticalSurfaceFlameLength_;        // Crown fire's critical surface fire flame length (ft)
-    double crownPowerOfFire_;                       // Crown fire 'power of the fire' ( ft*lb / s / ft^2)
-    double crownPowerOfWind_;                       // Crown fire 'power of the wind' ( ft*lb / s / ft^2)
-    double crownFirePowerRatio_;                    // Crown fire power ratio
     double crownFireActiveRatio_;                   // Crown fire active ratio
     double crownFireTransitionRatio_;               // Crown fire transition ratio
     double crownFireLengthToWidthRatio_;            // Crown fire transition ratio

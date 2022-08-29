@@ -80,9 +80,6 @@ void Crown::memberwiseCopyAssignment(const Crown& rhs)
     crownCriticalSurfaceFirelineIntensity_ = rhs.crownCriticalSurfaceFirelineIntensity_;
     crownCriticalFireSpreadRate_ = rhs.crownCriticalFireSpreadRate_;
     crownCriticalSurfaceFlameLength_ = rhs.crownCriticalSurfaceFlameLength_;
-    crownPowerOfFire_ = rhs.crownPowerOfFire_;
-    crownPowerOfWind_ = rhs.crownPowerOfWind_;
-    crownFirePowerRatio_ = rhs.crownFirePowerRatio_;
     crownFireActiveRatio_ = rhs.crownFireActiveRatio_;
     crownFireTransitionRatio_ = rhs.crownFireTransitionRatio_;
     windSpeedAtTwentyFeet_ = rhs.windSpeedAtTwentyFeet_;
@@ -157,11 +154,8 @@ void Crown::doCrownRunRothermel()
     calculateCrownCriticalSurfaceFlameLength();
     calculateCrownFireTransitionRatio();
 
-    calculateCrownPowerOfFire();
     calculateWindSpeedAtTwentyFeet();
-    calcuateCrownPowerOfWind();
     calculateCrownLengthToWidthRatio();
-    calcualteCrownFirePowerRatio();
 
     // Determine if/what type of crown fire has occured
     calculateFireTypeRothermel();
@@ -212,12 +206,8 @@ void Crown::doCrownRunScottAndReinhardt()
     calculateCrownCriticalSurfaceFlameLength();
     calculateCrownFireActiveRatio();
     calculateCrownFireTransitionRatio();
-
-    calculateCrownPowerOfFire();
     calculateWindSpeedAtTwentyFeet();
-    calcuateCrownPowerOfWind();
     calculateCrownLengthToWidthRatio();
-    calcualteCrownFirePowerRatio();
 
     // Determine if/what type of crown fire has occured
     calculateFireTypeRothermel();
@@ -409,9 +399,6 @@ void Crown::initializeMembers()
     crownCriticalSurfaceFirelineIntensity_ = 0.0;
     crownCriticalFireSpreadRate_ = 0.0;
     crownCriticalSurfaceFlameLength_ = 0.0;
-    crownPowerOfFire_ = 0.0;
-    crownPowerOfWind_ = 0.0;
-    crownFirePowerRatio_ = 0.0;
     crownFireActiveRatio_ = 0.0;
     crownFireTransitionRatio_ = 0.0;
     windSpeedAtTwentyFeet_ = 0.0;;
@@ -518,29 +505,6 @@ void Crown::calculatePassiveCrownFlameLength()
         passiveCrownFireFlameLength_ = 0.2 * pow(passiveCrownFireLineIntensity_, (2.0 / 3.0));
     }
 }
-
-void Crown::calculateCrownPowerOfFire()
-{
-    crownPowerOfFire_ = crownFirelineIntensity_ / 129.0;
-}
-
-void Crown::calcuateCrownPowerOfWind()
-{
-    const double SECONDS_PER_MINUTE = 60.0;
-
-    double WindspeedMinusCrownROS = 0.0;
-
-    // Eq. 7, Rothermel 1991
-    WindspeedMinusCrownROS = (windSpeedAtTwentyFeet_ - crownFireSpreadRate_) / SECONDS_PER_MINUTE;
-    WindspeedMinusCrownROS = (WindspeedMinusCrownROS < 1e-07) ? 0.0 : WindspeedMinusCrownROS;
-    crownPowerOfWind_ = 0.00106 * (WindspeedMinusCrownROS * WindspeedMinusCrownROS * WindspeedMinusCrownROS);
-}
-
-void Crown::calcualteCrownFirePowerRatio()
-{
-    crownFirePowerRatio_ = (crownPowerOfWind_ > 1e-07) ? (crownPowerOfFire_ / crownPowerOfWind_) : 0.0;
-}
-
 
 void Crown::calculateSurfaceFireCriticalSpreadRateScottAndReinhardt()
 {
