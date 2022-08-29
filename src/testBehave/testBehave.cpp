@@ -63,7 +63,7 @@ int main()
     testContainModule(testInfo, behaveRun);
     testMortalityModule(testInfo, behaveRun);
 
-    std::cout << "Total tests perfomred: " << testInfo.numTotalTests << "\n";
+    std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     std::cout << "Total tests passed: " << testInfo.numPassed << "\n";
     std::cout << "Total tests failed: " << testInfo.numFailed << "\n\n";
 
