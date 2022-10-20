@@ -21,6 +21,7 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave)
 
 # optional test executable
 OPTION(TEST_BEHAVE "Enable Testing" ON)
+OPTION(TEST_CONTAIN "Enable Testing Contain" ON)
 
 # optional stand-alone executables
 OPTION(EXAMPLE_APP "Example client application" ON)
@@ -31,6 +32,10 @@ OPTION(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calcu
 
 IF(TEST_BEHAVE)
     ADD_DEFINITIONS(-DTEST_BEHAVE)
+ENDIF()
+
+IF(TEST_CONTAIN)
+    ADD_DEFINITIONS(-DTEST_CONTAIN)
 ENDIF()
 
 IF(EXAMPLE_APP)
@@ -134,6 +139,16 @@ IF(TEST_BEHAVE)
         SET(BOOST_TEST_SOURCE
             src/testBehave/testBehave.cpp)
         ADD_EXECUTABLE(testBehave 
+            ${SOURCE}
+            ${BOOST_TEST_SOURCE}
+            ${HEADERS})
+        TARGET_LINK_LIBRARIES(testBehave)
+ENDIF()
+
+IF(TEST_CONTAIN)
+        SET(BOOST_TEST_SOURCE
+            src/testBehave/testContain.cpp)
+        ADD_EXECUTABLE(testContain
             ${SOURCE}
             ${BOOST_TEST_SOURCE}
             ${HEADERS})

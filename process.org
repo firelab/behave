@@ -1,0 +1,196 @@
+#+TITLE: Processing
+#+AUTHOR: RJ Sheperd
+
+
+
+* C++
+:PROPERTIES:
+:header-args:C++:  :engine postgresql
+:header-args:C+++: :dbhost localhost
+:header-args:C+++: :dbport 5433
+:header-args:C+++: :database behave
+:header-args:C+++: :dbuser behave
+:header-args:C+++: :dbpassword behave
+:END:
+
+** String->Double
+#+BEGIN_SRC C++ :includes '(<sstream> <iostream> <charconv>)
+  double str2double (std::string & str) {
+    char * cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    char * cstr_end = cstr;
+    double x = strtod(cstr, &cstr_end);
+    if(cstr == cstr_end) { 
+      //you have an error!
+      return 0;
+    } else {
+      return x;
+    }
+  }
+
+  int main() {
+    std::string value{"3.14159"};
+    std::cout << "Got: " << str2double(value);
+  }
+#+END_SRC
+
+#+RESULTS:
+: Got: 3.14159
+
+** Indexed Maps of Double/Strings
+#+BEGIN_SRC C++ :includes '(<map> <iostream> <string>)
+
+  template <typename T, typename U>
+  void print_map(const std::map<T, U>& m) {
+    // iterate using C++17 facilities
+    for (const auto& [key, value] : m) {
+      std::cout << '[' << key << "] = " << value << "; ";
+    }
+    std::cout << "\n";
+  }
+
+
+  //  void print_map(const std::map<int, std::string>& m) {
+  //    // iterate using C++17 facilities
+  //    for (const auto& [key, value] : m)
+  //      std::cout << '[' << key << "] = " << value << "; ";
+  //  }
+
+  int main() {
+    std::string value{"3.14159"};
+
+    std::map<int, std::string> mymap{{0, "Test"},{3, "First"}, {5, "Second"}};
+    // print_map<int, std::string>(mymap);
+
+    std::map<int, double> doublesmap{{1, 3.14159},{2, 5.0}, {5, 35.0}};
+    // print_map<int, double>(doublesmap);
+
+    //std::cout << doublesmap[6];
+    std::cout << mymap.count(6);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 0
+
+** Multi-Map
+#+BEGIN_SRC C++ :includes '(<vector> <map> <iostream> <string>)
+
+  template <typename T, typename U>
+  void print_map(const std::map<T, U>& m) {
+    // iterate using C++17 facilities
+    for (const auto& [key, value] : m) {
+      std::cout << '[' << key << "] = " << value << "; ";
+    }
+    std::cout << "\n";
+  }
+
+  int main() {
+    std::vector<std::map<int, std::string>> vecofmaps;
+    std::map<int, std::string> mymap{{0, "Test"},{3, "First"}, {5, "Second"}};
+    mymap[7] = "Derp";
+    vecofmaps.push_back(mymap);
+    print_map<int, std::string>(vecofmaps[0]);
+  }
+#+END_SRC
+
+#+RESULTS:
+: [0] = Test; [3] = First; [5] = Second; [7] = Derp;
+
+
+** Parse CSV
+#+BEGIN_SRC C++ :includes '(<iostream> <vector> <map> <fstream> <sstream> <iomanip> <cctype>) :var csv_file_name="contain.csv" :exports results
+
+  double str2double (std::string & str) {
+    char * cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    char * cstr_end = cstr;
+    double x = strtod(cstr, &cstr_end);
+    if(cstr == cstr_end) { 
+      //you have an error!
+      return 0;
+    } else {
+      return x;
+    }
+  }
+
+  bool beginsWithNumber(std::string const & str) {
+    if (str.length() == 0) {
+      return false;
+    }
+    return isdigit(str[0]);
+  }
+
+  int main() {
+    std::string filename{csv_file_name};
+    std::ifstream input{filename};
+
+    if (!input.is_open()) {
+      std::cerr << "Couldn't read file: " << filename << "\n";
+      return 1; 
+    }
+
+    std::vector<std::string> csvHeaders;
+    std::vector<std::map<int, std::string>> csvStringRows;
+    std::vector<std::map<int, double>> csvDoubleRows;
+
+    // Parse header row
+    std::string line;
+    std::getline(input, line);
+    std::istringstream ss(std::move(line));
+    std::vector<std::string> headerRow;
+    for (std::string value; std::getline(ss, value, ',');) {
+      csvHeaders.push_back(std::move(value));
+    }
+
+    // Parse value rows
+    int rowIndex = 0;
+    for (std::string line; std::getline(input, line);) {
+      std::istringstream ss(std::move(line));
+      std::map<int, std::string> strmap;
+      std::map<int, double> doublemap;
+      int colIndex = 0;
+      // std::getline can split on other characters, here we use ','
+      for (std::string value; std::getline(ss, value, ',');) {
+        if (beginsWithNumber(value)) {
+          doublemap[colIndex] = str2double(value);
+        } else {
+          strmap[colIndex] = value;
+        }
+        colIndex++;
+      }
+
+      csvStringRows.push_back(strmap);
+      csvDoubleRows.push_back(doublemap);
+      rowIndex++;
+    }
+
+    // Print out our table
+    for (const std::string & value : csvHeaders) {
+      std::cout << std::setw(10) << value;
+      std::cout << "\t";
+    }
+    std::cout << "\n";
+
+    // Print out our table
+    for (int i = 0; i < csvStringRows.size(); i++) {
+      for (int j = 0; j < csvHeaders.size(); j++) {
+        std::map<int, double> doubleRow = csvDoubleRows[i];
+        std::map<int, std::string> strRow = csvStringRows[i];
+
+        if (doubleRow.count(j)) {
+          std::cout << std::setw(10) << doubleRow[j];
+        } else if (strRow.count(j)) {
+          std::cout << std::setw(10) << strRow[j];
+        }
+
+        std::cout << "\t";
+      }
+      std::cout << "\n";
+    }
+  }
+#+END_SRC
+
+#+RESULTS:
+| First | Second | Third |
+|     1 |      2 | three |
