@@ -13,6 +13,16 @@
 :header-args:C+++: :dbpassword behave
 :END:
 
+** Vectors
+
+#+BEGIN_SRC C++ :includes '(<vector> <iostream> <string>)
+  std::vector<int> myvec = {1,2,3};
+  std::cout << myvec[0];
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 ** String->Double
 #+BEGIN_SRC C++ :includes '(<sstream> <iostream> <charconv>)
   double str2double (std::string & str) {
@@ -131,8 +141,8 @@
     }
 
     std::vector<std::string> csvHeaders;
-    std::vector<std::map<int, std::string>> csvStringRows;
-    std::vector<std::map<int, double>> csvDoubleRows;
+    std::vector<std::map<std::string, std::string>> csvStringRows;
+    std::vector<std::map<std::string, double>> csvDoubleRows;
 
     // Parse header row
     std::string line;
@@ -147,15 +157,16 @@
     int rowIndex = 0;
     for (std::string line; std::getline(input, line);) {
       std::istringstream ss(std::move(line));
-      std::map<int, std::string> strmap;
-      std::map<int, double> doublemap;
+      std::map<std::string, std::string> strmap;
+      std::map<std::string, double> doublemap;
       int colIndex = 0;
       // std::getline can split on other characters, here we use ','
       for (std::string value; std::getline(ss, value, ',');) {
+        std::string header = csvHeaders[colIndex];
         if (beginsWithNumber(value)) {
-          doublemap[colIndex] = str2double(value);
+          doublemap[header] = str2double(value);
         } else {
-          strmap[colIndex] = value;
+          strmap[header] = value;
         }
         colIndex++;
       }
@@ -174,14 +185,14 @@
 
     // Print out our table
     for (int i = 0; i < csvStringRows.size(); i++) {
-      for (int j = 0; j < csvHeaders.size(); j++) {
-        std::map<int, double> doubleRow = csvDoubleRows[i];
-        std::map<int, std::string> strRow = csvStringRows[i];
+      for (std::string header : csvHeaders) {
+        std::map<std::string, double> doubleRow = csvDoubleRows[i];
+        std::map<std::string, std::string> strRow = csvStringRows[i];
 
-        if (doubleRow.count(j)) {
-          std::cout << std::setw(10) << doubleRow[j];
-        } else if (strRow.count(j)) {
-          std::cout << std::setw(10) << strRow[j];
+        if (doubleRow.count(header)) {
+          std::cout << std::setw(10) << doubleRow[header];
+        } else if (strRow.count(header)) {
+          std::cout << std::setw(10) << strRow[header];
         }
 
         std::cout << "\t";
