@@ -1,17 +1,7 @@
 #+TITLE: Processing
 #+AUTHOR: RJ Sheperd
 
-
-
 * C++
-:PROPERTIES:
-:header-args:C++:  :engine postgresql
-:header-args:C+++: :dbhost localhost
-:header-args:C+++: :dbport 5433
-:header-args:C+++: :database behave
-:header-args:C+++: :dbuser behave
-:header-args:C+++: :dbpassword behave
-:END:
 
 ** Vectors
 
@@ -107,9 +97,10 @@
 #+RESULTS:
 : [0] = Test; [3] = First; [5] = Second; [7] = Derp;
 
-
 ** Parse CSV
 #+BEGIN_SRC C++ :includes '(<iostream> <vector> <map> <fstream> <sstream> <iomanip> <cctype>) :var csv_file_name="contain.csv" :exports results
+
+
 
   double str2double (std::string & str) {
     char * cstr = new char[str.length() + 1];
@@ -131,18 +122,47 @@
     return isdigit(str[0]);
   }
 
-  int main() {
-    std::string filename{csv_file_name};
+  void printCSVData(std::vector<std::string> csvHeaders,
+                    std::vector<std::map<std::string, std::string>> csvStringRows,
+                    std::vector<std::map<std::string, double>> csvDoubleRows) {
+
+    // Print out our table
+    for (const std::string & value : csvHeaders) {
+      std::cout << std::setw(10) << value;
+      std::cout << "\t";
+    }
+    std::cout << "\n";
+
+    // Print out our table
+    for (int i = 0; i < csvStringRows.size(); i++) {
+      for (std::string header : csvHeaders) {
+        std::map<std::string, double> doubleRow = csvDoubleRows[i];
+        std::map<std::string, std::string> strRow = csvStringRows[i];
+
+        if (doubleRow.count(header)) {
+          std::cout << std::setw(10) << doubleRow[header];
+        } else if (strRow.count(header)) {
+          std::cout << std::setw(10) << strRow[header];
+        }
+
+        std::cout << "\t";
+      }
+      std::cout << "\n";
+    }
+
+  }
+
+  int parseCSVFile(std::string filename,
+                   std::vector<std::string> csvHeaders,
+                   std::vector<std::map<std::string, std::string>> csvStringRows,
+                   std::vector<std::map<std::string, double>> csvDoubleRows) {
+
     std::ifstream input{filename};
 
     if (!input.is_open()) {
       std::cerr << "Couldn't read file: " << filename << "\n";
       return 1; 
     }
-
-    std::vector<std::string> csvHeaders;
-    std::vector<std::map<std::string, std::string>> csvStringRows;
-    std::vector<std::map<std::string, double>> csvDoubleRows;
 
     // Parse header row
     std::string line;
@@ -176,6 +196,44 @@
       rowIndex++;
     }
 
+    return 0; 
+  }
+
+#+END_SRC
+
+#+RESULTS:
+| First | Second | Third |
+|     1 |      2 | three |
+
+
+** Testing
+
+#+BEGIN_SRC C++ :flags -I ./src/behave :includes '(<iostream> <vector> <map> <fstream> <sstream> <iomanip> <cctype> <cmath> <string> <vector> <map> "behaveRun.h" "fuelModels.h") :var csv_file_name="contain.csv" :exports results
+
+  double str2double (std::string & str) {
+    char * cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    char * cstr_end = cstr;
+    double x = strtod(cstr, &cstr_end);
+    if(cstr == cstr_end) { 
+      //you have an error!
+      return 0;
+    } else {
+      return x;
+    }
+  }
+
+  bool beginsWithNumber(std::string const & str) {
+    if (str.length() == 0) {
+      return false;
+    }
+    return isdigit(str[0]);
+  }
+
+  void printCSVData(std::vector<std::string> csvHeaders,
+                    std::vector<std::map<std::string, std::string>> csvStringRows,
+                    std::vector<std::map<std::string, double>> csvDoubleRows) {
+
     // Print out our table
     for (const std::string & value : csvHeaders) {
       std::cout << std::setw(10) << value;
@@ -199,9 +257,152 @@
       }
       std::cout << "\n";
     }
+
   }
+
+  int parseCSVFile(std::string filename,
+                   std::vector<std::string> & csvHeaders,
+                   std::vector<std::map<std::string, std::string>> & csvStringRows,
+                   std::vector<std::map<std::string, double>> & csvDoubleRows) {
+
+    std::ifstream input{filename};
+
+    if (!input.is_open()) {
+      std::cerr << "Couldn't read file: " << filename << "\n";
+      return 1; 
+    }
+
+    // Parse header row
+    std::string line;
+    std::getline(input, line);
+    std::istringstream ss(std::move(line));
+    std::vector<std::string> headerRow;
+    for (std::string value; std::getline(ss, value, ',');) {
+      csvHeaders.push_back(std::move(value));
+    }
+
+    // Parse value rows
+    int rowIndex = 0;
+    for (std::string line; std::getline(input, line);) {
+      std::istringstream ss(std::move(line));
+      std::map<std::string, std::string> strmap;
+      std::map<std::string, double> doublemap;
+      int colIndex = 0;
+      // std::getline can split on other characters, here we use ','
+      for (std::string value; std::getline(ss, value, ',');) {
+        std::string header = csvHeaders[colIndex];
+        if (beginsWithNumber(value)) {
+          doublemap[header] = str2double(value);
+        } else {
+          strmap[header] = value;
+        }
+        colIndex++;
+      }
+
+      csvStringRows.push_back(strmap);
+      csvDoubleRows.push_back(doublemap);
+      rowIndex++;
+    }
+
+    return 0; 
+  }
+
+    struct TestInfo
+  {
+    int numTotalTests = 0;
+    int numFailed = 0;
+    int numPassed = 0;
+  };
+
+  struct ContainInputs {
+    double attackDistance = 0.00;
+    double lwRatio = 0.00;
+    double reportRate = 0.00;
+    double reportSize = 0.00;
+    ContainTactic::ContainTacticEnum tactic = ContainTactic::HeadAttack;
+    double resourceArrival = 0.00;
+    double resourceProduction = 0.00;
+    double resourceDuration = 0.00;
+    std::string resourceDesc = "";
+  };
+
+  struct ContainOutputs {
+    double fireLineLength = 0.00;
+    double perimeterAtInitialAttack = 0.00;
+    double perimeterAtContainment = 0.00;
+    double fireSizeAtInitialAttack = 0.00;
+    double fireSize = 0.00;
+    double containmentArea = 0.00;
+    double timeSinceReport = 0.00;
+    ContainStatus::ContainStatusEnum containmentStatus = ContainStatus::Unreported;
+  };
+
+  int main() {
+
+    TestInfo testInfo;
+    FuelModels fuelModels;
+    ContainInputs containInputs;
+    ContainOutputs containOutputs;
+    SpeciesMasterTable mortalitySpeciesTable;
+    BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
+
+    std::string csvFilename{"contain.csv"};
+
+
+    std::map<std::string, ContainStatus::ContainStatusEnum> containStatus{{"Unreported", ContainStatus::Unreported},
+                                                                          {"Reported", ContainStatus::Reported},
+                                                                          {"Contained", ContainStatus::Contained},
+                                                                          {"Overrun", ContainStatus::Overrun},
+                                                                          {"Exhausted", ContainStatus::Exhausted},
+                                                                          {"SizeLimitExceeded", ContainStatus::SizeLimitExceeded},
+                                                                          {"TimeLimitExceeded", ContainStatus::TimeLimitExceeded}};
+
+    std::map<std::string, ContainTactic::ContainTacticEnum> containTactic{{"HeadAttack", ContainTactic::HeadAttack},
+                                                                          {"RearAttack", ContainTactic::RearAttack}};
+
+
+    std::vector<std::string> csvHeaders;
+    std::vector<std::map<std::string, std::string>> csvStringRows;
+    std::vector<std::map<std::string, double>> csvDoubleRows;
+
+    int result = parseCSVFile(csvFilename, csvHeaders, csvStringRows, csvDoubleRows);
+
+    if (result == 0) {
+      printCSVData(csvHeaders, csvStringRows, csvDoubleRows);
+    }
+
+    // Perform Tests using ContainInputs
+    for (int i = 0; i < csvStringRows.size(); i++) {
+
+      std::map<std::string, double> doubleRow = csvDoubleRows[i];
+      std::map<std::string, std::string> stringRow = csvStringRows[i];
+
+      // Set up Inputs
+      containInputs.attackDistance = doubleRow["attackDistance"];
+      containInputs.lwRatio = doubleRow["lwRatio"];
+      containInputs.reportRate = doubleRow["reportRate"];
+      containInputs.reportSize = doubleRow["reportSize"];
+      containInputs.tactic = containTactic[stringRow["tactic"]];
+      containInputs.resourceArrival = doubleRow["resourceArrival"];
+      containInputs.resourceProduction = doubleRow["resourceProduction"];
+      containInputs.resourceDuration = doubleRow["resourceDuration"];
+      containInputs.resourceDesc = stringRow["resourceDesc"];
+
+      // Set up Outputs
+      containOutputs.fireLineLength = doubleRow["fireLineLength"];
+      containOutputs.perimeterAtInitialAttack = doubleRow["perimeterAtInitialAttack"];
+      containOutputs.perimeterAtContainment = doubleRow["perimeterAtContainment"];
+      containOutputs.fireSizeAtInitialAttack = doubleRow["fireSizeAtInitialAttack"];
+      containOutputs.fireSize = doubleRow["fireSize"];
+      containOutputs.containmentArea = doubleRow["containmentArea"];
+      containOutputs.timeSinceReport = doubleRow["timeSinceReport"];
+      containOutputs.containmentStatus = containStatus[stringRow["containmentStatus"]];
+
+    };
+
+  }
+
+
 #+END_SRC
 
 #+RESULTS:
-| First | Second | Third |
-|     1 |      2 | three |

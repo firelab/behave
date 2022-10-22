@@ -1,2 +1,2 @@
-First,Second,Third
-1,2,three
+attackDistance,lwRatio,reportRate,reportSize,tactic,resourceArrival,resourceProduction,resourceDuration,desc,finalFireLength,perimeterAtInitialAttack,perimeterAtContainment,fireSizeAtInitialAttack,finalFireSize,finalContainmentArea,finalTimeSinceReport,containmentStatus
+0.0,3.0,5.0,1.0,HeadAttack,2.0,8.0,20.0,testing,39.539849615,36.694893,39.539849615,7.10569878,9.42749714,9.42749714,238.75000000,Contained
