@@ -13,7 +13,7 @@
 // Helper Function Headers
 bool areClose(const double observed, const double expected, const double epsilon);
 double roundToSixDecimalPlaces(const double numberToBeRounded);
-void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon);
+void reportTestResult(int row, struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon);
 double str2double (std::string & str);
 bool beginsWithNumber(std::string const & str);
 
@@ -61,7 +61,7 @@ struct ContainOutputs {
 };
 
 // Testing Function Headers
-void testContainModule(struct TestInfo& testInfo, ContainInputs& containInputs, ContainOutputs& containOutputs, BehaveRun& behaveRun);
+void testContainModule(int row, struct TestInfo& testInfo, ContainInputs& containInputs, ContainOutputs& containOutputs, BehaveRun& behaveRun);
 
 int main(int argc, char * argv[])
 {
@@ -131,7 +131,7 @@ int main(int argc, char * argv[])
       containOutputs.timeSinceReport = doubleRow["timeSinceReport"];
       containOutputs.containmentStatus = containStatus[stringRow["containmentStatus"]];
 
-      testContainModule(testInfo, containInputs, containOutputs, behaveRun);
+      testContainModule(i, testInfo, containInputs, containOutputs, behaveRun);
 
   };
   std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
@@ -184,7 +184,7 @@ double roundToSixDecimalPlaces(const double numberToBeRounded)
     return roundedValue;
 }
 
-void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon)
+void reportTestResult(int row, struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon)
 {
     testInfo.numTotalTests++;
     if(areClose(observed, expected, epsilon))
@@ -194,12 +194,12 @@ void reportTestResult(struct TestInfo& testInfo, const string testName, const do
     }
     else
     {
-        std::cout << testName << "\nfailed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n";
+      std::cout << testName << "\n(Row: " << row << ")" << "\nfailed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n\n";
         testInfo.numFailed++;
     }
 }
 
-void testContainModule(struct TestInfo& testInfo, ContainInputs& inputs, ContainOutputs& expected, BehaveRun& behaveRun)
+void testContainModule(int row, struct TestInfo& testInfo, ContainInputs& inputs, ContainOutputs& expected, BehaveRun& behaveRun)
 {
     std::cout << "Testing Contain module\n";
 
@@ -233,35 +233,35 @@ void testContainModule(struct TestInfo& testInfo, ContainInputs& inputs, Contain
     // Compare Results
     testName = "Test final fire line length";
     observedFinalFireLineLength = behaveRun.contain.getFinalFireLineLength(LengthUnits::Chains);
-    reportTestResult(testInfo, testName, observedFinalFireLineLength, expected.fireLineLength, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedFinalFireLineLength, expected.fireLineLength, error_tolerance);
 
     testName = "Test observed perimeter at initial attack";
     observedPerimeterAtInitialAttack = behaveRun.contain.getPerimiterAtInitialAttack(LengthUnits::Chains);
-    reportTestResult(testInfo, testName, observedPerimeterAtInitialAttack, expected.perimeterAtInitialAttack, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedPerimeterAtInitialAttack, expected.perimeterAtInitialAttack, error_tolerance);
 
     testName = "Test observed perimeter at containment";
     observedPerimeterAtContainment = behaveRun.contain.getPerimeterAtContainment(LengthUnits::Chains);
-    reportTestResult(testInfo, testName, observedPerimeterAtContainment, expected.perimeterAtContainment, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedPerimeterAtContainment, expected.perimeterAtContainment, error_tolerance);
 
     testName = "Test observed fire size at initial attack";
     observedFireSizeAtInitialAttack = behaveRun.contain.getFireSizeAtInitialAttack(AreaUnits::Acres);
-    reportTestResult(testInfo, testName, observedFireSizeAtInitialAttack, expected.fireSizeAtInitialAttack, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedFireSizeAtInitialAttack, expected.fireSizeAtInitialAttack, error_tolerance);
 
     testName = "Test observed final fire size";
     observedFinalFireSize = behaveRun.contain.getFinalFireSize(AreaUnits::Acres);
-    reportTestResult(testInfo, testName, observedFinalFireSize, expected.fireSize, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedFinalFireSize, expected.fireSize, error_tolerance);
 
     testName = "Test observed final containment area";
     observedFinalContainmentArea = behaveRun.contain.getFinalContainmentArea(AreaUnits::Acres);
-    reportTestResult(testInfo, testName, observedFinalContainmentArea, expected.containmentArea, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedFinalContainmentArea, expected.containmentArea, error_tolerance);
 
     testName = "Test observed final time since report";
     observedFinalTimeSinceReport = behaveRun.contain.getFinalTimeSinceReport(TimeUnits::Minutes);
-    reportTestResult(testInfo, testName, observedFinalTimeSinceReport, expected.timeSinceReport, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedFinalTimeSinceReport, expected.timeSinceReport, error_tolerance);
 
     testName = "Test observed containment status";
     observedContainmentStatus = behaveRun.contain.getContainmentStatus();
-    reportTestResult(testInfo, testName, observedContainmentStatus, expected.containmentStatus, error_tolerance);
+    reportTestResult(row, testInfo, testName, observedContainmentStatus, expected.containmentStatus, error_tolerance);
 
     std::cout << "Finished testing Contain module\n\n";
 }
