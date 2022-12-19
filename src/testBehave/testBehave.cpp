@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include "behaveRun.h"
@@ -9,6 +10,9 @@
 // Define the error tolerance for double values
 constexpr double error_tolerance = 1e-06;
 
+using namespace std;
+using ofstream = std::basic_ofstream<char>;
+
 struct TestInfo
 {
     int numTotalTests = 0;
@@ -16,11 +20,23 @@ struct TestInfo
     int numPassed = 0;
 };
 
+ofstream file{ "/home/tdog/Documents/BehavePlusOutput/SB2_SB3/behaveOutput_SB2_SB3_Fuels.csv", ios::out|ios::app };
+ofstream moisturefile{ "/home/tdog/Documents/BehavePlusOutput/moistureOutput.csv", ios::out|ios::app };
+ofstream fuelmodelfile{ "/home/tdog/Documents/BehavePlusOutput/fuelModelOutput.csv", ios::out|ios::app };
+
 bool areClose(const double observed, const double expected, const double epsilon);
 
 double roundToSixDecimalPlaces(const double numberToBeRounded);
 
 void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon);
+
+void writeToOutput(BehaveRun& behaveRun, double ROS, string);
+bool writeToMoistureOutput( void );
+bool addMoisScenario(const string &file,
+                           const string &name, const string &desc,
+                           double dead1,    double dead10,   double dead100,  double dead1000,
+                           double liveHerb, double liveWood);
+bool writeToFuelModelOutput( void );
 
 void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun);
 void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun);
@@ -40,11 +56,31 @@ void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
 
+void generateSurfaceSingleFuelModelData(struct TestInfo& testInfo, BehaveRun& behaveRun);
+
 int main()
 {
     TestInfo testInfo;
     FuelModels fuelModels;
     BehaveRun behaveRun(fuelModels);
+
+//    file << "FuelModel,FuelDescription,MoistureScenario,Dead1hr,Dead10hr,Dead100hr,Herbaceous,Woody,WindSpeed,"
+//            "20ftWindSpeed,Slope(%),HeatPerUnitArea(BtusPerSquareFoot),FireLineIntensity(BtusPerFootPerSecond),"
+//            "FlameLength(Feet),CanopyCover(%),ROS(ChainsPerHour)" << endl;
+
+    file << "FuelModel,FuelDescription,MoistureScenario,Dead1hr,Dead10hr,Dead100hr,Herbaceous,Woody,WindSpeed,"
+            "20ftWindSpeed,Slope(%),HeatPerUnitArea(BtusPerSquareFoot),FireLineIntensity(BtusPerFootPerSecond),"
+            "FL,CC,ROS(ChainsPerHour),WeightedMoistureDead,WeightedMoistureLive,MoEDead, MoELive,"
+            "etaMDead,etaMLive,ReactionIntensity,NoWindNoSlopeSpreadRate" << endl;
+
+    moisturefile <<"Name|Description|Dead1hr|Dead10hr|Dead100hr|Dead1000hr|LiveHerbaceous|LiveWoody" << endl;
+    fuelmodelfile << "FuelModelNumber|Code|Name|FuelBedDepth|MoEDead|HeatOfCombustionDead|HeatOfCombustionLive|"
+                  << "FuelLoad1Hr|FuelLoad10Hr|FuelLoad100Hr|"
+                  << "FuelLoadHerbaceous|FuelLoadWoody|SAVR1Hr|SAVRHerbaceous|SAVRWoody|Dynamic|Reserved" << endl;
+
+    generateSurfaceSingleFuelModelData(testInfo, behaveRun);
+    writeToMoistureOutput();
+    writeToFuelModelOutput();
 
     testSurfaceSingleFuelModel(testInfo, behaveRun);
     testLengthToWidthRatio(testInfo, behaveRun);
@@ -60,7 +96,7 @@ int main()
     testSafetyModule(testInfo, behaveRun);
     testContainModule(testInfo, behaveRun);
 
-    std::cout << "Total tests perfomred: " << testInfo.numTotalTests << "\n";
+    std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     std::cout << "Total tests passed: " << testInfo.numPassed << "\n";
     std::cout << "Total tests failed: " << testInfo.numFailed << "\n\n";
 
@@ -199,6 +235,101 @@ void reportTestResult(struct TestInfo& testInfo, const string testName, const do
         std::cout << testName << "\nfailed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n";
         testInfo.numFailed++;
     }
+}
+
+void generateSurfaceSingleFuelModelData(struct TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    FuelModels _fuelModels;
+    string testName = "";
+    // Observed and expected output
+    double observedSurfaceFireSpreadRate = 0.0;
+    double expectedSurfaceFireSpreadRate = 0.0;
+    double windSpeedAddition = 0.0;
+//    const int fuelModelNumbers[]{121, 122, 123, 124, 142, 162, 182};
+    const int fuelModelNumbers[]{202, 203, 171, 172, 173, 174, 175, 176, 177, 178, 179};
+//    const int fuelModelNumbers[]{181, 182, 183, 184, 185, 186, 187, 188, 189};
+    const double canopyCover[]{0, 20, 40, 60, 80};
+    const char label[]{'A', 'B', 'C', 'D', 'E', 'F',
+                       'G', 'H', 'I', 'J', 'K', 'L',
+                       'M', 'N', 'O', 'P', 'Q', 'R',
+                       'S', 'T', 'U', 'V', 'W','X', 'Y', 'Z'};
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    Surface surfaceObj = behaveRun.surface;
+
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+
+    std::cout << "Testing Surface, single fuel model\n";
+    testName = "Test north oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope";
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+
+    for (const auto element : canopyCover)
+    {
+        behaveRun.surface.setCanopyCover(element, canopyCoverUnits);
+
+        // Vary wind speeds by 1 mph increments
+        for (int i = 0; i < 31; i++)
+        {
+            windSpeedAddition = (double) i * 1;
+            int idx = 0;
+
+            behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
+            behaveRun.surface.setSlope(0, SlopeUnits::Degrees);
+            behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+            behaveRun.surface.setWindSpeed(5 + windSpeedAddition, windSpeedUnits, windHeightInputMode);
+            behaveRun.surface.setWindDirection(0);
+            behaveRun.surface.setAspect(95);
+            behaveRun.surface.getFuelLoadOneHour(123, LoadingUnits::PoundsPerSquareFoot);
+
+            for (int j = 0; j < 31; j++)
+            {
+                behaveRun.surface.setMoistureOneHour(2.0 + (double) j * 0.5,  MoistureUnits::Percent);
+                behaveRun.surface.setMoistureTenHour(3.0 + (double) j * 0.5,  MoistureUnits::Percent);
+                behaveRun.surface.setMoistureHundredHour(4.0 + (double) j * 0.5,  MoistureUnits::Percent);
+                behaveRun.surface.setMoistureLiveHerbaceous(20.0 + (double) j * 5,  MoistureUnits::Percent);
+                behaveRun.surface.setMoistureLiveWoody(50.0 + (double) j * 5,  MoistureUnits::Percent);
+
+//                string moistureScenario = "\"MS" + to_string(idx) + " ("
+//                                          + to_string((int)behaveRun.surface.getMoistureOneHour(MoistureUnits::Percent)) + "-"
+//                                          + to_string((int)behaveRun.surface.getMoistureTenHour(MoistureUnits::Percent)) + "-"
+//                                          + to_string((int)behaveRun.surface.getMoistureHundredHour(MoistureUnits::Percent)) + "-"
+//                                          + to_string((int)behaveRun.surface.getMoistureLiveHerbaceous(MoistureUnits::Percent)) + "-"
+//                                          + to_string((int)behaveRun.surface.getMoistureLiveWoody(MoistureUnits::Percent))
+//                                          + ")\"";
+
+                string moistureScenario = to_string(idx);
+                idx++;
+//                for (const auto fuelModelNumber : _fuelModels.FuelModelArray_)
+//                for (const auto fuelModelNumber : _fuelModels.FuelModelArray_)
+//                {
+//                    if ( fuelModelNumber.fuelModelNumber_ != 0 )
+//                    {
+//                        behaveRun.surface.setFuelModelNumber(fuelModelNumber.fuelModelNumber_);
+//                        behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+//                        observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+//                        writeToOutput(behaveRun, observedSurfaceFireSpreadRate, moistureScenario);
+//                    }
+//                }
+                for (const auto fuelModelNumber : fuelModelNumbers)
+                {
+                    behaveRun.surface.setFuelModelNumber(fuelModelNumber);
+                    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+                    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+                    writeToOutput(behaveRun, observedSurfaceFireSpreadRate, moistureScenario);
+                }
+            }
+
+//            for (int l=0; l < 10; l++)
+//            {
+//
+//            }
+
+        }
+    }
+
+
+    std::cout << "Finished generating Surface, single fuel model data \n\n";
 }
 
 void testSurfaceSingleFuelModel(struct TestInfo& testInfo, BehaveRun& behaveRun)
@@ -1179,4 +1310,180 @@ void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     reportTestResult(testInfo, testName, observedContainmentStatus, expectedContainmentStatus, error_tolerance);
 
     std::cout << "Finished testing Contain module\n\n";
+}
+
+void writeToOutput(BehaveRun& behaveRun, double ROS, string moistureScenario)
+{
+    file << behaveRun.surface.getFuelCode(behaveRun.surface.getFuelModelNumber()) << ","
+         << "\"" << behaveRun.surface.getFuelName(behaveRun.surface.getFuelModelNumber()) << "\","
+         << moistureScenario << ","
+         << behaveRun.surface.getMoistureOneHour(MoistureUnits::MoistureUnitsEnum::Percent) << ","
+         << behaveRun.surface.getMoistureTenHour(MoistureUnits::MoistureUnitsEnum::Percent) << ","
+         << behaveRun.surface.getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum::Percent) << ","
+         << behaveRun.surface.getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum::Percent) << ","
+         << behaveRun.surface.getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum::Percent) << ","
+         << behaveRun.surface.getWindSpeed(SpeedUnits::SpeedUnitsEnum::MilesPerHour,WindHeightInputMode::WindHeightInputModeEnum::TwentyFoot) << ","
+         << behaveRun.surface.getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum::MilesPerHour) << ","
+         << behaveRun.surface.getSlope(SlopeUnits::SlopeUnitsEnum::Percent) << ","
+         << behaveRun.surface.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot) << ","
+         << behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond) << ","
+         << behaveRun.surface.getFlameLength(LengthUnits::Feet) << ","
+         << behaveRun.surface.getCanopyCover(CoverUnits::Percent) << ","
+         << ROS << ","
+         << behaveRun.surface.surfaceFire_.getWeightedMoisture_Dead() << ","
+         << behaveRun.surface.surfaceFire_.getWeightedMoisture_Live() << ","
+         << behaveRun.surface.surfaceFire_.getMoE_Dead() << ","
+         << behaveRun.surface.surfaceFire_.getMoE_Live() << ","
+         << behaveRun.surface.surfaceFire_.getetaMDead() << ","
+         << behaveRun.surface.surfaceFire_.getetaMLive() << ","
+         << behaveRun.surface.surfaceFire_.getReactionIntensity() << ","
+         << behaveRun.surface.surfaceFire_.getNoWindNoSlopeSpreadRate()
+         << endl;
+}
+
+bool writeToMoistureOutput( void )
+{
+    if ( ! ( addMoisScenario ( "", "1-low",
+                               "TSTMDL (3,4,5,70,70)",
+                               0.03, 0.04, 0.05, 0.08, 0.70, 0.70 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "2-med",
+                               "TSTMDL (6,7,8,120,120)",
+                               0.06, 0.07, 0.08, 0.14, 1.20, 1.20 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "3-high",
+                               "TSTMDL (12,13,14,170,170)",
+                               0.12, 0.13, 0.14, 0.24, 1.70, 1.70 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d1l1",
+                               "Very low dead, fully-cured herb",
+                               0.03, 0.04, 0.05, 0.07, 0.30, 0.60 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d1l2",
+                               "Very low dead, 2/3-cured herb",
+                               0.03, 0.04, 0.05, 0.07, 0.60, 0.90 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d1l3",
+                               "Very low dead, 1/3-cured herb",
+                               0.03, 0.04, 0.05, 0.07, 0.90, 1.20 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d1l4",
+                               "Very low dead, fully-green herb",
+                               0.03, 0.04, 0.05, 0.07, 1.20, 1.50 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d2l1",
+                               "Low dead, fully-cured herb",
+                               0.06, 0.07, 0.08, 0.10, 0.30, 0.60 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d2l2",
+                               "Low dead, 2/3-cured herb",
+                               0.06, 0.07, 0.08, 0.10, 0.60, 0.90 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d2l3",
+                               "Low dead, 1/3-cured herb",
+                               0.06, 0.07, 0.08, 0.10, 0.90, 1.20 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d2l4",
+                               "Low dead, fully-green herb",
+                               0.06, 0.07, 0.08, 0.10, 1.20, 1.50 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d3l1",
+                               "Moderate dead, fully-cured herb",
+                               0.09, 0.10, 0.11, 0.12, 0.30, 0.60 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d3l2",
+                               "Moderate dead, 2/3-cured herb",
+                               0.09, 0.10, 0.11, 0.12, 0.60, 0.90 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d3l3",
+                               "Moderate dead, 1/3-cured herb",
+                               0.09, 0.10, 0.11, 0.12, 0.90, 1.20 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d3l4",
+                               "Moderate dead, fully-green herb",
+                               0.09, 0.10, 0.11, 0.12, 1.20, 1.50 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d4l1",
+                               "High dead, fully-cured herb",
+                               0.12, 0.13, 0.14, 0.16, 0.30, 0.60 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d4l2",
+                               "High dead, 2/3-cured herb",
+                               0.12, 0.13, 0.14, 0.16, 0.60, 0.90 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d4l3",
+                               "High dead, 1/3-cured herb",
+                               0.12, 0.13, 0.14, 0.16, 0.90, 1.20 ) ) )
+        return( false );
+
+    if ( ! ( addMoisScenario ( "", "d4l4",
+                               "High dead, fully-green herb",
+                               0.12, 0.13, 0.14, 0.16, 1.20, 1.50 ) ) )
+        return( false );
+
+    return( true );
+}
+
+bool addMoisScenario(const string &file,
+                     const string &name, const string &desc,
+                     double dead1,    double dead10,   double dead100,  double dead1000,
+                     double liveHerb, double liveWood)
+{
+    moisturefile << name << "| "
+            << desc << "| "
+            << dead1 << "| "
+            << dead10 << "| "
+            << dead100 << "| "
+            << dead1000 << "| "
+            << liveHerb << "| "
+            << liveWood << endl;
+
+    return true;
+}
+
+bool writeToFuelModelOutput( void )
+{
+    FuelModels _fuelModels;
+
+    for (const auto fuelModelNumber : _fuelModels.FuelModelArray_)
+    {
+        if (fuelModelNumber.fuelModelNumber_ != 0 && fuelModelNumber.code_ != "NO CODE")
+        {
+            fuelmodelfile << fuelModelNumber.fuelModelNumber_ << "| "
+                          << fuelModelNumber.code_ << "| "
+                          << fuelModelNumber.name_ << "| "
+                          << fuelModelNumber.fuelbedDepth_ << "| "
+                          << fuelModelNumber.moistureOfExtinctionDead_ << "| "
+                          << fuelModelNumber.heatOfCombustionDead_ << "| "
+                          << fuelModelNumber.heatOfCombustionLive_ << "| "
+                          << fuelModelNumber.fuelLoadOneHour_ << "| "
+                          << fuelModelNumber.fuelLoadTenHour_ << "| "
+                          << fuelModelNumber.fuelLoadHundredHour_ << "| "
+                          << fuelModelNumber.fuelLoadLiveHerbaceous_ << "| "
+                          << fuelModelNumber.fuelLoadLiveWoody_ << "| "
+                          << fuelModelNumber.savrOneHour_ << "| "
+                          << fuelModelNumber.savrLiveHerbaceous_ << "| "
+                          << fuelModelNumber.savrLiveWoody_ << "| "
+                          << fuelModelNumber.isDynamic_ << "| "
+                          << fuelModelNumber.isReserved_ << "| "
+                          <<  endl;
+        }
+    }
 }

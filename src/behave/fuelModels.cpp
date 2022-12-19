@@ -279,7 +279,7 @@ void FuelModels::populateFuelModels()
 
     // Code GRx: Grass
     // Index 100 Available for custom GR model
-    double f = 2000.0 / 43560.0;
+    double f = 2000.0 / 43560.0;  //conversion from tons/acre to lbs/sq-ft
     setFuelModelRecord(101, "GR1", "Short, sparse, dry climate grass (D)",
         0.4, 0.15, 8000, 8000,
         0.10*f, 0, 0, 0.30*f, 0,
@@ -471,7 +471,63 @@ void FuelModels::populateFuelModels()
         markAsReservedModel(i);
     }
     // 171-179 available for custom timber and understory models
+    setFuelModelRecord(171, "SB2A",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.0, 0.25, 8000, 8000,
+                       4.25*f, 4.0*f, 4.0*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+    setFuelModelRecord(172, "SB2B",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.0, 0.25, 8000, 8000,
+                       4.75*f, 3.875*f, 3.75*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+    setFuelModelRecord(173, "SB2C",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.0, 0.25, 8000, 8000,
+                       5.00*f, 3.5*f, 3.5*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+    setFuelModelRecord(174, "SB2D",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.0, 0.25, 8000, 8000,
+                       5.25*f, 3.125*f, 3.25*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
 
+    setFuelModelRecord(175, "SB2E",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.1, 0.25, 8000, 8000,
+                       4.75*f, 3.875*f, 3.75*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+    setFuelModelRecord(176, "SB2F",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.1, 0.25, 8000, 8000,
+                       5.00*f, 3.5*f, 3.5*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+    setFuelModelRecord(177, "SB2G",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.1, 0.25, 8000, 8000,
+                       5.25*f, 3.125*f, 3.25*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+
+    setFuelModelRecord(178, "SB2H",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.0, 0.25, 8000, 8000,
+                       5.5*f, 2.75*f, 3.0*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
+
+    setFuelModelRecord(179, "SB2I",
+                       "Moderate load, humid climate timber-grass-shrub (D)",
+                       1.2, 0.25, 8000, 8000,
+                       5.5*f, 2.75*f, 3.0*f, 0, 0,
+                       1800, 1600, 1400,
+                       true, true);
     // Timber and litter
     // 180 available for custom timber and litter models
     setFuelModelRecord(181, "TL1",
@@ -502,7 +558,7 @@ void FuelModels::populateFuelModels()
         "High load conifer litter (S)",
         0.6, 0.25, 8000, 8000,
         1.15*f, 2.5*f, 4.4*f, 0, 0,
-        2000, 1800, 160,
+        2000, 1800, 1600,
         true, true);
     setFuelModelRecord(186, "TL6",
         "High load broadleaf litter (S)",

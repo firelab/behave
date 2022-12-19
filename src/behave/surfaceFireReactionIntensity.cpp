@@ -122,6 +122,11 @@ void SurfaceFireReactionIntensity::calculateEtaM()
     moistureOfExtinction[FuelConstants::DEAD] = surfaceFuelbedIntermediates_->getMoistureOfExtinctionByLifeState(FuelConstants::DEAD);
     moistureOfExtinction[FuelConstants::LIVE] = surfaceFuelbedIntermediates_->getMoistureOfExtinctionByLifeState(FuelConstants::LIVE);
 
+    MoE_Dead_ = moistureOfExtinction[FuelConstants::DEAD];
+    MoE_Live_ = moistureOfExtinction[FuelConstants::LIVE];
+    weightedMoistureDead_ = weightedMoisture[FuelConstants::DEAD];
+    weightedMoistureLive_ = weightedMoisture[FuelConstants::LIVE];
+
     for (int i = 0; i < FuelConstants::MAX_LIFE_STATES; i++)
     {
         if (moistureOfExtinction[i] > 0.0)
@@ -169,3 +174,36 @@ double SurfaceFireReactionIntensity::getReactionIntensity(HeatSourceAndReactionI
 {
     return reactionIntensity_;
 }
+
+/*  These gets were added by Thomas DeVera for SIG research puproses June 24, 2022
+ *
+*/
+double SurfaceFireReactionIntensity::getetaMDead() const
+{
+    return  etaM_[FuelConstants::DEAD];
+}
+
+double SurfaceFireReactionIntensity::getetaMLive() const
+{
+    return  etaM_[FuelConstants::LIVE];
+}
+
+double SurfaceFireReactionIntensity::getWeightedMoistureDead() const
+{
+    return weightedMoistureDead_;
+};
+
+double SurfaceFireReactionIntensity::getWeightedMoistureLive() const
+{
+    return weightedMoistureLive_;
+};
+
+double SurfaceFireReactionIntensity::getMoistureExtinctionDead() const
+{
+    return MoE_Dead_;
+};
+
+double SurfaceFireReactionIntensity::getMoistureExtinctionLive() const
+{
+    return MoE_Live_;
+};

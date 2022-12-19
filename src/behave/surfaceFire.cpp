@@ -201,7 +201,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
     if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
-        spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest);
+        spreadRateInDirectionOfInterest_ = (directionOfInterest);
         calculateFireFirelineIntensity(spreadRateInDirectionOfInterest_);
         calculateFlameLength();
     }
@@ -522,6 +522,47 @@ bool SurfaceFire::getIsWindLimitExceeded() const
 {
     return isWindLimitExceeded_;
 }
+
+
+/*  These gets were added by Thomas DeVera for SIG research puproses June 24, 2022
+ *
+ *
+    // No-wind no-slope spread rate and parameters
+    noWindNoSlopeSpreadRate_ = calculateNoWindNoSlopeSpreadRate(reactionIntensity_, propagatingFlux, heatSink);
+ */
+double SurfaceFire::getetaMDead() const {
+    return surfaceFireReactionIntensity_.getetaMDead();
+}
+
+double SurfaceFire::getetaMLive() const {
+    return surfaceFireReactionIntensity_.getetaMLive();
+}
+
+double SurfaceFire::getMoE_Dead() const
+{
+    return surfaceFireReactionIntensity_.getMoistureExtinctionDead();
+};
+
+double SurfaceFire::getMoE_Live() const
+{
+    return surfaceFireReactionIntensity_.getMoistureExtinctionLive();
+};
+
+double SurfaceFire::getWeightedMoisture_Dead() const
+{
+    return surfaceFireReactionIntensity_.getWeightedMoistureDead();
+};
+
+double SurfaceFire::getWeightedMoisture_Live() const
+{
+    return surfaceFireReactionIntensity_.getWeightedMoistureLive();
+};
+
+double SurfaceFire::getNoWindNoSlopeSpreadRate() const
+{
+    return noWindNoSlopeSpreadRate_;
+}
+
 
 void SurfaceFire::setDirectionOfMaxSpread(double directionOFMaxSpread)
 {

@@ -164,6 +164,8 @@ public:
     WindHeightInputMode::WindHeightInputModeEnum getWindHeightInputMode() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
 
+    SurfaceFire surfaceFire_;
+
 private:
     void memberwiseCopyAssignment(const Surface& rhs);
     double calculateSpreadRateAtVector(double directionOfinterest);
@@ -172,7 +174,7 @@ private:
 
     // Surface Module components
     SurfaceInputs surfaceInputs_;
-    SurfaceFire surfaceFire_;
+//    SurfaceFire surfaceFire_;
 
     // Size Module
     FireSize size_;

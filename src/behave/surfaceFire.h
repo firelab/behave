@@ -73,6 +73,14 @@ public:
     double getBulkDensity() const;
     double getReactionIntensity() const;
 
+    double getetaMDead() const;
+    double getetaMLive() const;
+    double getMoE_Dead() const;
+    double getMoE_Live() const;
+    double getWeightedMoisture_Dead() const;
+    double getWeightedMoisture_Live() const;
+    double getNoWindNoSlopeSpreadRate() const;
+
     double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
  

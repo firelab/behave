@@ -88,21 +88,9 @@ public:
     bool isFuelModelReserved(int fuelModelNumber) const;
     bool isAllFuelLoadZero(int fuelModelNumber) const;
 
-private:
-    void memberwiseCopyAssignment(const FuelModels& rhs);
-    void initializeSingleFuelModelRecord(int fuelModelNumber);
-    void initializeAllFuelModelRecords();
-    void populateFuelModels();
-    void markAsReservedModel(int fuelModelNumber);
-    void setFuelModelRecord(int fuelModelNumber, std::string code, std::string name,
-        double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
-        double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
-        double fuelLoadLiveWoody, double savrOneHourFuel, double savrLiveHerbaceous, double savrLiveWoody,
-        bool isDynamic, bool isReserved);
-
     struct FuelModelRecord
     {
-        int fuelModelNumber_;               // Standard ID number for fuel model 
+        int fuelModelNumber_;               // Standard ID number for fuel model
         std::string code_;                  // Fuel model code, usually 2 letters followed by number,(e.g., "GR1")
         std::string name_;                  // Fuel model name, (e.g., "Humid Climate Grass")
         double fuelbedDepth_;               // Fuelbed depth in feet
@@ -123,6 +111,42 @@ private:
     };
 
     std::vector<FuelModelRecord> FuelModelArray_;
+
+private:
+    void memberwiseCopyAssignment(const FuelModels& rhs);
+    void initializeSingleFuelModelRecord(int fuelModelNumber);
+    void initializeAllFuelModelRecords();
+    void populateFuelModels();
+    void markAsReservedModel(int fuelModelNumber);
+    void setFuelModelRecord(int fuelModelNumber, std::string code, std::string name,
+        double fuelBedDepth, double moistureOfExtinctionDead, double heatOfCombustionDead, double heatOfCombustionLive,
+        double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
+        double fuelLoadLiveWoody, double savrOneHourFuel, double savrLiveHerbaceous, double savrLiveWoody,
+        bool isDynamic, bool isReserved);
+
+//    struct FuelModelRecord
+//    {
+//        int fuelModelNumber_;               // Standard ID number for fuel model
+//        std::string code_;                  // Fuel model code, usually 2 letters followed by number,(e.g., "GR1")
+//        std::string name_;                  // Fuel model name, (e.g., "Humid Climate Grass")
+//        double fuelbedDepth_;               // Fuelbed depth in feet
+//        double moistureOfExtinctionDead_;   // Dead fuel extinction moisture content (fraction)
+//        double heatOfCombustionDead_;       // Dead fuel heat of combustion (Btu/lb)
+//        double heatOfCombustionLive_;       // Live fuel heat of combustion (Btu/lb)
+//        double fuelLoadOneHour_;            // Dead 1 hour fuel loading (lb/ft^2)
+//        double fuelLoadTenHour_;            // Dead 10 hour fuel loading (lb/ft^2)
+//        double fuelLoadHundredHour_;        // Dead 100 hour fuel loading (lb/ft^2)
+//        double fuelLoadLiveHerbaceous_;     // Live herb fuel loading (lb/ft^2)
+//        double fuelLoadLiveWoody_;          // Live wood fuel loading (lb/ft^2)
+//        double savrOneHour_;                // Dead 1-h fuel surface area to volume ratio (ft^2/ft^3)
+//        double savrLiveHerbaceous_;         // Live herb surface area to volume ratio (ft^2/ft^3)
+//        double savrLiveWoody_;              // Live wood surface area to volume ratio (ft^2/ft^3)
+//        bool isDynamic_;                    // If true, the fuel model is dynamic
+//        bool isReserved_;                   // If true, record cannot be used for custom fuel model
+//        bool isDefined_;                    // If true, record has been populated with values for its fields
+//    };
+//
+//    std::vector<FuelModelRecord> FuelModelArray_;
 
 };
 
