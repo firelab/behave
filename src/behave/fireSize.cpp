@@ -81,7 +81,11 @@ void FireSize::calculateFireLengthToWidthRatio()
 {
     if (effectiveWindSpeed_ > 1.0e-07)
     {
-        fireLengthToWidthRatio_ = 1.0 + (0.25 * effectiveWindSpeed_);
+        fireLengthToWidthRatio_ = .936*exp(.1147*effectiveWindSpeed_)+.461*exp(-.0692*effectiveWindSpeed_)-.397;
+
+        // maximum eccentricity
+        if (fireLengthToWidthRatio_>8.0)
+            fireLengthToWidthRatio_=8.0;
     }
     else
     {
@@ -104,12 +108,17 @@ void FireSize::calculateEllipticalDimensions()
     ellipticalA_ = 0.0;
     ellipticalB_ = 0.0;
     ellipticalC_ = 0.0;
+    part_ = 0.0;
+    hb_ratio_ = 0.0;          // Alexander 1985 heading/backing ratio
 
     // Internally A, B, and C are in terms of ft travelled in one minute
     ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2.0;
     if (fireLengthToWidthRatio_ > 1e-07)
     {
-        ellipticalA_ = ellipticalB_ / fireLengthToWidthRatio_;
+        part_=sqrt(pow(fireLengthToWidthRatio_, 2)-1);
+        hb_ratio_=(fireLengthToWidthRatio_+part_)/(fireLengthToWidthRatio_-part_);
+
+        ellipticalA_ = ellipticalB_ / hb_ratio_;
     }
     ellipticalC_ = ellipticalB_ - backingSpreadRate_;
 }

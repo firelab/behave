@@ -69,6 +69,9 @@ private:
     double backingSpreadRate_;
     double backingSpreadDistance_;
     double fireLengthToWidthRatio_;
+
+    double part_;              // Intermediate variable used to calculate Alexandar 1985 ratio
+    double hb_ratio_;          // Alexander 1985 heading/backing ratio
 };
 
 #endif // FIRESIZE_H
