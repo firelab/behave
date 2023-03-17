@@ -75,8 +75,8 @@ SET(SOURCE
     src/behave/ignite.cpp
     src/behave/igniteInputs.cpp
     src/behave/mortality.cpp
-	src/behave/mortality_equation_table.cpp
-	src/behave/mortality_inputs.cpp
+    src/behave/mortality_equation_table.cpp
+    src/behave/mortality_inputs.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
@@ -112,8 +112,8 @@ SET(HEADERS
     src/behave/ignite.h
     src/behave/igniteInputs.h
     src/behave/mortality.h
-	src/behave/mortality_equation_table.h
-	src/behave/mortality_inputs.h
+    src/behave/mortality_equation_table.h
+    src/behave/mortality_inputs.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h

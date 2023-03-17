@@ -307,7 +307,7 @@
     return 0; 
   }
 
-    struct TestInfo
+  struct TestInfo
   {
     int numTotalTests = 0;
     int numFailed = 0;
