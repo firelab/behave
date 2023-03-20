@@ -1,0 +1,9 @@
+fuelModelNumber,moistureOneHour,moistureTenHour,moistureHundredHour,moistureLiveHerbaceous,moistureLiveWoody,moistureUnits,slope,slopeUnits,aspect,windAndSpreadOrientationMode,windSpeed,windSpeedUnits,windHeightInputMode,windDirection,canopyCover,canopyCoverUnits,canopyHeight,canopyHeightUnits,crownRatio,spreadRate
+124,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Degrees",95,"RelativeToNorth",5,"MilesPerHour","TwentyFoot",45,50,"Percent",30.0,"Feet",0.5,19.677584
+124,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Percent",0,"RelativeToUpslope",5,"MilesPerHour","TwentyFoot",0,50,"Percent",30.0,"Feet",0.5,8.876216
+124,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Percent",0,"RelativeToUpslope",5,"MilesPerHour","TwentyFoot",90,50,"Percent",30.0,"Feet",0.5,7.091665
+124,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Percent",0,"RelativeToNorth",5,"MilesPerHour","TwentyFoot",0,50,"Percent",30.0,"Feet",0.5,8.876216
+124,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Percent",215,"RelativeToNorth",5,"MilesPerHour","TwentyFoot",45,50,"Percent",30.0,"Feet",0.5,4.113265
+124,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Percent",5,"RelativeToNorth",5,"MilesPerHour","TwentyFoot",45,50,"Percent",30.0,"Feet",0.5,8.503960
+4,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Degrees",0,"RelativeToNorth",5,"MilesPerHour","TwentyFoot",90,40,"Percent",30.0,"Feet",0.5,46.631688
+91,6.0,7.0,8.0,60.0,90.0,"Percent",30,"Degrees",0,"RelativeToNorth",5,"MilesPerHour","TwentyFoot",90,40,"Percent",30.0,"Feet",0.5,0.0

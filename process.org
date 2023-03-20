@@ -406,3 +406,368 @@
 #+END_SRC
 
 #+RESULTS:
+
+*** Surface
+
+#+BEGIN_SRC C++ :flags -I ./src/behave :includes '(<iostream> <vector> <map> <fstream> <sstream> <iomanip> <cctype> <cmath> <string> <vector> <map> "behaveRun.h" "fuelModels.h") :var csv_file_name="surface.csv" :exports results
+
+  double str2double (std::string & str) {
+    char * cstr = new char[str.length() + 1];
+    strcpy(cstr, str.c_str());
+    char * cstr_end = cstr;
+    double x = strtod(cstr, &cstr_end);
+    if(cstr == cstr_end) { 
+      //you have an error!
+      return 0;
+    } else {
+      return x;
+    }
+  }
+
+  bool beginsWithNumber(std::string const & str) {
+    if (str.length() == 0) {
+      return false;
+    }
+    return isdigit(str[0]);
+  }
+
+  void printCSVData(std::vector<std::string> csvHeaders,
+                    std::vector<std::map<std::string, std::string>> csvStringRows,
+                    std::vector<std::map<std::string, double>> csvDoubleRows) {
+
+    // Print out our table
+    for (const std::string & value : csvHeaders) {
+      std::cout << std::setw(10) << value;
+      std::cout << "\t";
+    }
+    std::cout << "\n";
+
+    // Print out our table
+    for (int i = 0; i < csvStringRows.size(); i++) {
+      for (std::string header : csvHeaders) {
+        std::map<std::string, double> doubleRow = csvDoubleRows[i];
+        std::map<std::string, std::string> strRow = csvStringRows[i];
+
+        if (doubleRow.count(header)) {
+          std::cout << std::setw(10) << doubleRow[header];
+        } else if (strRow.count(header)) {
+          std::cout << std::setw(10) << strRow[header];
+        }
+
+        std::cout << "\t";
+      }
+      std::cout << "\n";
+    }
+
+  }
+
+  int parseCSVFile(std::string filename,
+                   std::vector<std::string> & csvHeaders,
+                   std::vector<std::map<std::string, std::string>> & csvStringRows,
+                   std::vector<std::map<std::string, double>> & csvDoubleRows) {
+
+    std::ifstream input{filename};
+
+    if (!input.is_open()) {
+      std::cerr << "Couldn't read file: " << filename << "\n";
+      return 1; 
+    }
+
+    // Parse header row
+    std::string line;
+    std::getline(input, line);
+    std::istringstream ss(std::move(line));
+    std::vector<std::string> headerRow;
+    for (std::string value; std::getline(ss, value, ',');) {
+      csvHeaders.push_back(std::move(value));
+    }
+
+    // Parse value rows
+    int rowIndex = 0;
+    for (std::string line; std::getline(input, line);) {
+      std::istringstream ss(std::move(line));
+      std::map<std::string, std::string> strmap;
+      std::map<std::string, double> doublemap;
+      int colIndex = 0;
+      // std::getline can split on other characters, here we use ','
+      for (std::string value; std::getline(ss, value, ',');) {
+        std::string header = csvHeaders[colIndex];
+        if (beginsWithNumber(value)) {
+          doublemap[header] = str2double(value);
+        } else {
+          strmap[header] = value;
+        }
+        colIndex++;
+      }
+
+      csvStringRows.push_back(strmap);
+      csvDoubleRows.push_back(doublemap);
+      rowIndex++;
+    }
+
+    return 0; 
+  }
+
+  struct TestInfo
+  {
+    int numTotalTests = 0;
+    int numFailed = 0;
+    int numPassed = 0;
+  };
+
+  struct SurfaceTestInputs {
+    int fuelModelNumber = 0;
+    double moistureOneHour = 0.0;
+    double moistureTenHour = 0.0;
+    double moistureHundredHour = 0.0;
+    double moistureLiveHerbaceous = 0.0;
+    double moistureLiveWoody = 0.0;
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    double windSpeed = 0.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
+    double slope = 0.0;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
+    double aspect = 0.0;
+    double canopyCover = 0.0;
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    double canopyHeight = 0.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    double crownRatio = 0.0;
+  };
+
+  struct SurfaceTestOutputs {
+    double spreadRate = 0.00;
+    double spreadRateInDirectionOfInterest = 0.00;
+    double directionOfMaxSpread = 0.00;
+    double flameLength = 0.00;
+    double fireLengthToWidthRatio = 0.00;
+    double fireEccentricity = 0.00;
+    double firelineIntensity = 0.00;
+    double heatPerUnitArea = 0.00;
+    double midflameWindspeed = 0.00;
+    double residenceTime = 0.00;
+    double reactionIntensity = 0.00;
+    double ellipticalA = 0.00;
+    double ellipticalB = 0.00;
+    double ellipticalC = 0.00;
+    double slopeFactor = 0.00;
+    double bulkDensity = 0.00;
+    double heatSink = 0.00;
+    double firePerimeter = 0.00;
+    double fireArea = 0.00;
+  };
+
+  int main() {
+
+    TestInfo testInfo;
+    FuelModels fuelModels;
+    SurfaceTestInputs surfaceInputs;
+    SurfaceTestOutputs surfaceOutputs;
+    SpeciesMasterTable mortalitySpeciesTable;
+    BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
+
+    std::string csvFilename = csv_file_name;
+
+    /**** Units/Enum Maps ****/
+    std::map<std::string, LengthUnits::LengthUnitsEnum> lengthUnits{
+      {"Feet", LengthUnits::Feet},
+      {"Inches", LengthUnits::Inches},
+      {"Millimeters", LengthUnits::Millimeters},
+      {"Centimeters", LengthUnits::Centimeters},
+      {"Meters", LengthUnits::Meters},
+      {"Chains", LengthUnits::Chains},
+      {"Miles", LengthUnits::Miles},
+      {"Kilometers", LengthUnits::Kilometers}
+    };
+
+    std::map<std::string, SlopeUnits::SlopeUnitsEnum> slopeUnits{{"Degrees", SlopeUnits::Degrees},
+                                                                 {"Percent", SlopeUnits::Percent}};
+
+    std::map<std::string, SpeedUnits::SpeedUnitsEnum> speedUnits{
+      {"FeetPerMinute", SpeedUnits::FeetPerMinute},
+      {"ChainsPerHour", SpeedUnits::ChainsPerHour},
+      {"MetersPerSecond", SpeedUnits::MetersPerSecond},
+      {"MetersPerMinute", SpeedUnits::MetersPerMinute},
+      {"MetersPerHour", SpeedUnits::MetersPerHour},
+      {"MilesPerHour", SpeedUnits::MilesPerHour},
+      {"KilometersPerHour", SpeedUnits::KilometersPerHour}
+    };
+
+    std::map<std::string, CoverUnits::CoverUnitsEnum> coverUnits{{"Fraction", CoverUnits::Fraction},
+                                                                 {"Percent", CoverUnits::Percent}};
+
+    std::map<std::string, MoistureUnits::MoistureUnitsEnum> moistureUnits{{"Fraction", MoistureUnits::Fraction},
+                                                                          {"Percent", MoistureUnits::Percent}};
+
+    std::map<std::string, WindHeightInputMode::WindHeightInputModeEnum> windHeightInputMode{{"DirectMidflame", WindHeightInputMode::DirectMidflame},
+                                                                                            {"TwentyFoot", WindHeightInputMode::TwentyFoot},
+                                                                                            {"TenMeter", WindHeightInputMode::TenMeter}};
+
+    std::map<std::string, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum> windAndSpreadOrientationMode{
+      {"RelativeToUpslope", WindAndSpreadOrientationMode::RelativeToUpslope},
+      {"RelativeToNorth", WindAndSpreadOrientationMode::RelativeToNorth}
+    };
+
+
+    /**** CSV Data ****/
+    std::vector<std::string> csvHeaders;
+    std::vector<std::map<std::string, std::string>> csvStringRows;
+    std::vector<std::map<std::string, double>> csvDoubleRows;
+
+    int result = parseCSVFile(csvFilename, csvHeaders, csvStringRows, csvDoubleRows);
+
+    if (result == 0) {
+      printCSVData(csvHeaders, csvStringRows, csvDoubleRows);
+    }
+
+    // Perform Tests using ContainInputs
+    for (int i = 0; i < csvStringRows.size(); i++) {
+
+      std::map<std::string, double> doubleRow = csvDoubleRows[i];
+      std::map<std::string, std::string> stringRow = csvStringRows[i];
+
+      // Set up Inputs
+      surfaceInputs.fuelModelNumber = doubleRow["fuelModelNumber"];
+      surfaceInputs.moistureOneHour = doubleRow["moistureOneHour"];
+      surfaceInputs.moistureTenHour = doubleRow["moistureTenHour"];
+      surfaceInputs.moistureHundredHour = doubleRow["moistureHundredHour"];
+      surfaceInputs.moistureLiveHerbaceous = doubleRow["moistureLiveHerbaceous"];
+      surfaceInputs.moistureLiveWoody = doubleRow["moistureLiveWoody"];
+      surfaceInputs.moistureUnits = moistureUnits[stringRow["moistureUnits"]];
+      surfaceInputs.windSpeed = doubleRow["windSpeed"];
+      surfaceInputs.windHeightInputMode = windHeightInputMode[stringRow["windHeightInputMode"]];
+      surfaceInputs.windSpeedUnits = speedUnits[stringRow["windSpeedUnits"]];
+      surfaceInputs.windDirection = doubleRow["windDirection"];
+      surfaceInputs.windAndSpreadOrientationMode = windAndSpreadOrientationMode[stringRow["windAndSpreadOrientationMode"]];
+      surfaceInputs.slope = doubleRow["slope"];
+      surfaceInputs.slopeUnits = slopeUnits[stringRow["slopeUnits"]];
+      surfaceInputs.aspect = doubleRow["aspect"];
+      surfaceInputs.canopyCover = doubleRow["canopyCover"];
+      surfaceInputs.canopyCoverUnits = coverUnits[stringRow["canopyCoverUnits"]];
+      surfaceInputs.canopyHeight = doubleRow["canopyHeight"];
+      surfaceInputs.canopyHeightUnits = lengthUnits[stringRow["canopyHeightUnits"]];
+      surfaceInputs.crownRatio = doubleRow["crownRatio"];
+
+      // Set up Outputs
+      surfaceOutputs.spreadRate = doubleRow["spreadRate"];
+      surfaceOutputs.spreadRateInDirectionOfInterest = doubleRow["spreadRateInDirectionOfInterest"];
+      surfaceOutputs.directionOfMaxSpread = doubleRow["directionOfMaxSpread"];
+      surfaceOutputs.flameLength = doubleRow["flameLength"];
+      surfaceOutputs.fireLengthToWidthRatio = doubleRow["fireLengthToWidthRatio"];
+      surfaceOutputs.fireEccentricity = doubleRow["fireEccentricity"];
+      surfaceOutputs.firelineIntensity = doubleRow["firelineIntensity"];
+      surfaceOutputs.heatPerUnitArea = doubleRow["heatPerUnitArea"];
+      surfaceOutputs.midflameWindspeed = doubleRow["midflameWindspeed"];
+      surfaceOutputs.residenceTime = doubleRow["residenceTime"];
+      surfaceOutputs.reactionIntensity = doubleRow["reactionIntensity"];
+      surfaceOutputs.ellipticalA = doubleRow["ellipticalA"];
+      surfaceOutputs.ellipticalB = doubleRow["ellipticalB"];
+      surfaceOutputs.ellipticalC = doubleRow["ellipticalC"];
+      surfaceOutputs.slopeFactor = doubleRow["slopeFactor"];
+      surfaceOutputs.bulkDensity = doubleRow["bulkDensity"];
+      surfaceOutputs.heatSink = doubleRow["heatSink"];
+      surfaceOutputs.firePerimeter = doubleRow["firePerimeter"];
+      surfaceOutputs.fireArea = doubleRow["fireArea"];
+    };
+  }
+
+
+#+END_SRC
+
+#+RESULTS:
+
+**** Surface Test Data
+#+BEGIN_SRC c++
+  std::cout << "Testing Surface, single fuel model\n";
+  testName = "Test north oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope";
+  WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+  behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
+  behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+  behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
+  behaveRun.surface.setWindDirection(45);
+  behaveRun.surface.setAspect(95);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 19.677584;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test upslope oriented mode, 5 mph 20 foot uplsope wind";
+  behaveRun.surface.setFuelModelNumber(124);
+  behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
+  behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+  behaveRun.surface.setWindDirection(0);
+  behaveRun.surface.setSlope(30, SlopeUnits::Percent);
+  behaveRun.surface.setAspect(0);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 8.876216;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)";
+  behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+  behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
+  behaveRun.surface.setWindDirection(90);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 7.091665;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test north oriented mode, 20 foot North wind, zero aspect";
+  behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+  behaveRun.surface.setWindDirection(0);
+  behaveRun.surface.setAspect(0);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 8.876216;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test north oriented mode, 20 foot north-east wind (45 degree), 215 degree aspect";
+  behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+  behaveRun.surface.setAspect(215);
+  behaveRun.surface.setWindDirection(45);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 4.113265;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test north oriented mode, 20 foot 45 degree wind, 95 degree aspect";
+  behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+  behaveRun.surface.setAspect(5);
+  behaveRun.surface.setWindDirection(45);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 8.503960;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test Fuel Model 4, north oriented mode, 20 foot 90 degree wind, 0 degree aspect, 40 percent canopy cover";
+  behaveRun.surface.setFuelModelNumber(4);
+  behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+  behaveRun.surface.setAspect(0);
+  behaveRun.surface.setWindDirection(90);
+  behaveRun.surface.setWindSpeed(5, SpeedUnits::MilesPerHour, WindHeightInputMode::TwentyFoot);
+  behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
+  behaveRun.surface.setCanopyCover(40, CoverUnits::Percent);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 46.631688;
+  reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+  testName = "Test Non-Burnable Fuel";
+  behaveRun.surface.setFuelModelNumber(91);
+  behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+  observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+  expectedSurfaceFireSpreadRate = 0.0;
+  reportTestResult(testInfo, "Test Non-Burnable Fuel", observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+  std::cout << "Finished testing Surface, single fuel model\n\n";
+
+#+END_SRC

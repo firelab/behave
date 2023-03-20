@@ -22,6 +22,7 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave)
 # optional test executable
 OPTION(TEST_BEHAVE "Enable Testing" ON)
 OPTION(TEST_CONTAIN "Enable Testing Contain" ON)
+OPTION(TEST_CONTAIN "Enable Testing Surface" ON)
 
 # optional stand-alone executables
 OPTION(EXAMPLE_APP "Example client application" ON)
@@ -36,6 +37,10 @@ ENDIF()
 
 IF(TEST_CONTAIN)
     ADD_DEFINITIONS(-DTEST_CONTAIN)
+ENDIF()
+
+IF(TEST_SURFACE)
+    ADD_DEFINITIONS(-DTEST_SURFACE)
 ENDIF()
 
 IF(EXAMPLE_APP)
@@ -152,7 +157,17 @@ IF(TEST_CONTAIN)
             ${SOURCE}
             ${BOOST_TEST_SOURCE}
             ${HEADERS})
-        TARGET_LINK_LIBRARIES(testBehave)
+        TARGET_LINK_LIBRARIES(testContain)
+ENDIF()
+
+IF(TEST_CONTAIN)
+        SET(BOOST_TEST_SOURCE
+            src/testBehave/testSurface.cpp)
+        ADD_EXECUTABLE(testSurface
+            ${SOURCE}
+            ${BOOST_TEST_SOURCE}
+            ${HEADERS})
+        TARGET_LINK_LIBRARIES(testSurface)
 ENDIF()
 
 IF(EXAMPLE_APP)
