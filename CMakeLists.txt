@@ -10,9 +10,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 # Make use of c++11
 IF(MSVC)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std=c++11")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std=c++14")
 ELSE()
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 ENDIF(MSVC)
 
 PROJECT(behave)
@@ -70,8 +70,8 @@ SET(SOURCE
     src/behave/ignite.cpp
     src/behave/igniteInputs.cpp
     src/behave/mortality.cpp
-	src/behave/mortality_equation_table.cpp
-	src/behave/mortality_inputs.cpp
+    src/behave/mortality_equation_table.cpp
+    src/behave/mortality_inputs.cpp
     src/behave/newext.cpp
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
@@ -107,8 +107,8 @@ SET(HEADERS
     src/behave/ignite.h
     src/behave/igniteInputs.h
     src/behave/mortality.h
-	src/behave/mortality_equation_table.h
-	src/behave/mortality_inputs.h
+    src/behave/mortality_equation_table.h
+    src/behave/mortality_inputs.h
     src/behave/newext.h
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
