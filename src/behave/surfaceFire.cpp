@@ -367,7 +367,7 @@ void SurfaceFire::calculateWindAdjustmentFactor()
     {
         windAdjustmentFactor_ = windAdjustmentFactor.calculateWindAdjustmentFactorWithCrownRatio(canopyCover, canopyHeight, crownRatio, fuelbedDepth);
     }
-    else if((windAdjustmentFactorCalculationMethod == WindAdjustmentFactorCalculationMethod::DontUseCrownRatio))
+    else if(windAdjustmentFactorCalculationMethod == WindAdjustmentFactorCalculationMethod::DontUseCrownRatio)
     {
         windAdjustmentFactor_ = windAdjustmentFactor.calculateWindAdjustmentFactorWithoutCrownRatio(canopyCover, canopyHeight, fuelbedDepth);
     }
