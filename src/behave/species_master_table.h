@@ -23,28 +23,20 @@ enum class RegionCode
 
 /*.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.- */
 /*                          Species Master Table Record                      */
-class SpeciesMasterTableRecord
+struct SpeciesMasterTableRecord
 {
-public:
-    SpeciesMasterTableRecord();
-    SpeciesMasterTableRecord(const SpeciesMasterTableRecord& rhs);
-    SpeciesMasterTableRecord& operator=(const SpeciesMasterTableRecord& rhs);
-    ~SpeciesMasterTableRecord();
-
-    string speciesCode_;
-    string scientificName_;
-    string commonName_;
-    int  mortalityEquationNumber_;
-    int  barkEquationNumber_;
-    int  crownCoefficientCode_ ; /* canopy cover equation #, (FVS Species Index No. )      */
-    int8_t  regionInteriorWest_; // Region 1
-    int8_t  regionPacificWest_; // Region 2
-    int8_t  regionNorthEast_; // Region 3
-    int8_t  regionSouthEast_;  // Region 4
-    EquationType equationType_;
-    CrownDamageEquationCode crownDamageEquationCode_;
-private:
-    void memberwiseCopyAssignment(const SpeciesMasterTableRecord& rhs);
+    string speciesCode = "";
+    string scientificName = "";
+    string commonName = "";
+    int  mortalityEquationNumber = -1;
+    int  barkEquationNumber = -1;
+    int  crownCoefficientCode; /* canopy cover equation #, (FVS Species Index No. )      */
+    int8_t  regionInteriorWest = false; // Region 1
+    int8_t  regionPacificWest = false; // Region 2
+    int8_t  regionNorthEast = false; // Region 3
+    int8_t  regionSouthEast = false;  // Region 4
+    EquationType equationType = EquationType::not_set;
+    CrownDamageEquationCode crownDamageEquationCode = CrownDamageEquationCode::not_set;
 };
 
 class SpeciesMasterTable

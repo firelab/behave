@@ -284,42 +284,42 @@ double Mortality::calculateMortality(ProbabilityUnits::ProbabilityUnitsEnum prob
 
 string Mortality::getSpeciesCodeAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].speciesCode_;
+    return speciesMasterTable_->record_[index].speciesCode;
 }
 
 string Mortality::getScientificNameAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].scientificName_;
+    return speciesMasterTable_->record_[index].scientificName;
 }
 
 string Mortality::getCommonNameAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].commonName_;
+    return speciesMasterTable_->record_[index].commonName;
 }
 
 int Mortality::getMortalityEquationNumberAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].mortalityEquationNumber_;
+    return speciesMasterTable_->record_[index].mortalityEquationNumber;
 }
 
 int Mortality::getBarkEquationNumberAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].barkEquationNumber_;
+    return speciesMasterTable_->record_[index].barkEquationNumber;
 }
 
 int Mortality::getCrownCoefficientCodeAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].crownCoefficientCode_;
+    return speciesMasterTable_->record_[index].crownCoefficientCode;
 }
 
 EquationType Mortality::getEquationTypeAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].equationType_;
+    return speciesMasterTable_->record_[index].equationType;
 }
 
 CrownDamageEquationCode Mortality::getCrownDamageEquationCodeAtSpeciesTableIndex(int index) const
 {
-    return speciesMasterTable_->record_[index].crownDamageEquationCode_;
+    return speciesMasterTable_->record_[index].crownDamageEquationCode;
 }
 
 bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region) const
@@ -330,7 +330,7 @@ bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region)
     {
         case RegionCode::interior_west:
         {
-            if(speciesMasterTable_->record_[index].regionInteriorWest_ == (int)RegionCode::interior_west)
+            if(speciesMasterTable_->record_[index].regionInteriorWest == (int)RegionCode::interior_west)
             {
                 isInRegion = true;
             }
@@ -339,7 +339,7 @@ bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region)
       
         case RegionCode::pacific_west:
         {
-            if(speciesMasterTable_->record_[index].regionPacificWest_ == (int)RegionCode::pacific_west)
+            if(speciesMasterTable_->record_[index].regionPacificWest == (int)RegionCode::pacific_west)
             {
                 isInRegion = true;
             }
@@ -347,7 +347,7 @@ bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region)
         }
         case RegionCode::north_east:
         {
-            if(speciesMasterTable_->record_[index].regionNorthEast_ == (int)RegionCode::north_east)
+            if(speciesMasterTable_->record_[index].regionNorthEast == (int)RegionCode::north_east)
             {
                 isInRegion = true;
             }
@@ -355,7 +355,7 @@ bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region)
         }
         case RegionCode::south_east:
         {
-            if(speciesMasterTable_->record_[index].regionSouthEast_ == (int)RegionCode::south_east)
+            if(speciesMasterTable_->record_[index].regionSouthEast == (int)RegionCode::south_east)
             {
                 isInRegion = true;
             }
@@ -1737,7 +1737,7 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
         {
             case RegionCode::interior_west:
             {
-                if(speciesMasterTable_->record_[i].regionInteriorWest_ == (int)RegionCode::interior_west)
+                if(speciesMasterTable_->record_[i].regionInteriorWest == (int)RegionCode::interior_west)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1745,7 +1745,7 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
             }
             case RegionCode::pacific_west:
             {
-                if(speciesMasterTable_->record_[i].regionPacificWest_ == (int)RegionCode::pacific_west)
+                if(speciesMasterTable_->record_[i].regionPacificWest == (int)RegionCode::pacific_west)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1753,7 +1753,7 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
             }
             case RegionCode::north_east:
             {
-                if(speciesMasterTable_->record_[i].regionNorthEast_ == (int)RegionCode::north_east)
+                if(speciesMasterTable_->record_[i].regionNorthEast == (int)RegionCode::north_east)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1761,7 +1761,7 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
             }
             case RegionCode::south_east:
             {
-                if(speciesMasterTable_->record_[i].regionSouthEast_ == (int)RegionCode::south_east)
+                if(speciesMasterTable_->record_[i].regionSouthEast == (int)RegionCode::south_east)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1794,8 +1794,8 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
         {
             case RegionCode::interior_west:
             {
-                if((speciesMasterTable_->record_[i].regionInteriorWest_ == (int)RegionCode::interior_west) &&
-                    (speciesMasterTable_->record_[i].equationType_ == equationType))
+                if((speciesMasterTable_->record_[i].regionInteriorWest == (int)RegionCode::interior_west) &&
+                    (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1803,8 +1803,8 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
             }
             case RegionCode::pacific_west:
             {
-                if((speciesMasterTable_->record_[i].regionPacificWest_ == (int)RegionCode::pacific_west) &&
-                    (speciesMasterTable_->record_[i].equationType_ == equationType))
+                if((speciesMasterTable_->record_[i].regionPacificWest == (int)RegionCode::pacific_west) &&
+                    (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1812,8 +1812,8 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
             }
             case RegionCode::north_east:
             {
-                if((speciesMasterTable_->record_[i].regionNorthEast_ == (int)RegionCode::north_east) &&
-                    (speciesMasterTable_->record_[i].equationType_ == equationType))
+                if((speciesMasterTable_->record_[i].regionNorthEast == (int)RegionCode::north_east) &&
+                    (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1821,8 +1821,8 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
             }
             case RegionCode::south_east:
             {
-                if((speciesMasterTable_->record_[i].regionSouthEast_ == (int)RegionCode::south_east) &&
-                    (speciesMasterTable_->record_[i].equationType_ == equationType))
+                if((speciesMasterTable_->record_[i].regionSouthEast == (int)RegionCode::south_east) &&
+                    (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1895,9 +1895,9 @@ bool Mortality::updateInputsForSpeciesCodeAndEquationType(std::string speciesCod
     
     if(speciesIndex >= 0)
     {
-        mortalityInputs_.setEquationType(speciesMasterTable_->record_[speciesIndex].equationType_);
-        mortalityInputs_.setCrownScorchOrBoleCharEquationNumber(speciesMasterTable_->record_[speciesIndex].mortalityEquationNumber_);
-        mortalityInputs_.setCrownDamageEquationCode(speciesMasterTable_->record_[speciesIndex].crownDamageEquationCode_);
+        mortalityInputs_.setEquationType(speciesMasterTable_->record_[speciesIndex].equationType);
+        mortalityInputs_.setCrownScorchOrBoleCharEquationNumber(speciesMasterTable_->record_[speciesIndex].mortalityEquationNumber);
+        mortalityInputs_.setCrownDamageEquationCode(speciesMasterTable_->record_[speciesIndex].crownDamageEquationCode);
 
         mortalityInputs_.isFieldRequiredVector_ = equationRequiredFieldTable_.getRequiredFieldVector(mortalityInputs_.getEquationType(), mortalityInputs_.getCrownDamageEquationCode());
         mortalityInputs_.setCrownDamageType(equationRequiredFieldTable_.getCrownDamageType(mortalityInputs_.getEquationType(), mortalityInputs_.getCrownDamageEquationCode()));
@@ -1928,7 +1928,7 @@ double Mortality::calculateBarkThickness()
         return -1;
     }
 
-    barkEquation = speciesMasterTable_->record_[index].barkEquationNumber_;
+    barkEquation = speciesMasterTable_->record_[index].barkEquationNumber;
 
     switch(barkEquation)
     {
@@ -2170,7 +2170,7 @@ double Mortality::calculateCrownCover()
 
     speciesTableIndex = speciesMasterTable_->getSpeciesTableIndexFromSpeciesCodeAndEquationType(mortalityInputs_.getSpeciesCode(), mortalityInputs_.getEquationType()); // Get index into Species table
 
-    const int canopyCoefficientTableIndex = speciesMasterTable_->record_[speciesTableIndex].crownCoefficientCode_;
+    const int canopyCoefficientTableIndex = speciesMasterTable_->record_[speciesTableIndex].crownCoefficientCode;
 
     /* Get Diameter of Crown using Coefficients                                  */
     if(mortalityInputs_.getTreeHeight(LengthUnits::Feet) <= 4.5) // Small trees
