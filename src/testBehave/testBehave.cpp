@@ -473,7 +473,7 @@ void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun)
 
     expectedArea = 0.223725;
     observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::SquareKilometers, elapsedTime, TimeUnits::Hours));
-    testName = "Test fire elliptical area in km^2 with direct mid-flame, upslope mode, 1 hour minutes elapsed time";
+    testName = "Test fire elliptical area in km^2 with direct mid-flame, upslope mode, 1 hour elapsed time";
     reportTestResult(testInfo, testName, observedArea, expectedArea, error_tolerance);
 
     // Perimeter
