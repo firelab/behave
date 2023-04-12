@@ -18,7 +18,6 @@ struct TestInfo
     const std::string reset_text_color = "\u001b[0m";
     const std::string red_text_color = "\u001b[31m";
     const std::string green_text_color = "\u001b[32m";
-
 };
 
 bool areClose(const double observed, const double expected, const double epsilon);
@@ -354,7 +353,21 @@ void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun)
     expectedLengthToWidthRatio = 1.0;
     reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
+    testName = "Test length-to-width-ratio, north oriented mode, 0 degree wind, 5 mph midflame wind, 0 degree aspect, 0 degree slope";
+    windHeightInputMode = WindHeightInputMode::DirectMidflame;
+    behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
+    behaveRun.surface.setSlope(0, SlopeUnits::Degrees);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+    behaveRun.surface.setWindSpeed(5, windSpeedUnits, windHeightInputMode);
+    behaveRun.surface.setWindDirection(0);
+    behaveRun.surface.setAspect(0);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.surface.getFireLengthToWidthRatio());
+    expectedLengthToWidthRatio = 1.590064;
+    reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
+
     testName = "Test length-to-width-ratio, north oriented mode, 45 degree wind, 5 mph 20 foot wind, 95 degree aspect, 30 degree slope";
+    windHeightInputMode = WindHeightInputMode::TwentyFoot;
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
     behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
@@ -363,7 +376,7 @@ void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setAspect(95);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.surface.getFireLengthToWidthRatio());
-    expectedLengthToWidthRatio = 1.897769;
+    expectedLengthToWidthRatio = 1.375624;
     reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
     testName = "Test length-to-width-ratio, north oriented mode, 45 degree wind, 15 mph 20 foot wind, 95 degree aspect, 30 degree slope";
@@ -375,7 +388,7 @@ void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setAspect(95);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.surface.getFireLengthToWidthRatio());
-    expectedLengthToWidthRatio = 2.142422;
+    expectedLengthToWidthRatio = 1.519936;
     reportTestResult(testInfo, testName, observedLengthToWidthRatio, expectedLengthToWidthRatio, error_tolerance);
 
     testName = "Test crown fire length-to-width-ratio, 0 mph 20 foot wind";
@@ -413,51 +426,61 @@ void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun)
     double observedA = 0;
     double observedB = 0;
     double observedC = 0;
-    double expectedA = 7.4618580;
-    double expectedB = 17.824253;
-    double expectedC = 16.187176;
+    double expectedA = 0.628905;
+    double expectedB = 1.0;
+    double expectedC = 0.777482;
 
-    double elapsedTime = 1;
+    double elapsedTime = 3.5869124; // 3.5869124 minutes chosen so that semimajor axis = 1.0 
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Chains;
    
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
-    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
+    behaveRun.surface.setSlope(0, SlopeUnits::Degrees);
+    behaveRun.surface.setWindSpeed(5, SpeedUnits::MilesPerHour, WindHeightInputMode::DirectMidflame);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
 
-    testName = "Test fire elliptical dimension a with direct mid-flame, upslope mode, 1 hour elapsed time";
-    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Hours));
+    testName = "Test fire elliptical dimension a with 5 mph direct mid-flame, upslope mode, 3.5869124 minutes elapsed time";
+    observedA = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalA(lengthUnits, elapsedTime, TimeUnits::Minutes));
     reportTestResult(testInfo, testName, observedA, expectedA, error_tolerance);
    
-    testName = "Test fire elliptical dimension b with direct mid-flame, upslope mode, 1 hour elapsed time";
-    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Hours));
+    testName = "Test fire elliptical dimension b with 5 mph direct mid-flame, upslope mode, 3.5869124 minutes elapsed time";
+    observedB = roundToSixDecimalPlaces(behaveRun.surface.getEllipticalB(lengthUnits, elapsedTime, TimeUnits::Minutes));
     reportTestResult(testInfo, testName, observedB, expectedB, error_tolerance);
 
-    testName = "Test fire elliptical dimension c with direct mid-flame, upslope mode, 1 hour elapsed time";
-    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, elapsedTime, TimeUnits::Hours));
+    testName = "Test fire elliptical dimension c with 5 mph direct mid-flame, upslope mode, 3.5869124 minutes elapsed time";
+    observedC = roundToSixDecimalPlaces(observedC = behaveRun.surface.getEllipticalC(lengthUnits, elapsedTime, TimeUnits::Minutes));
     reportTestResult(testInfo, testName, observedC, expectedC, error_tolerance);
 
+    // Heading to Backing Ratio
+    double expectedHeadingToBackingRatio = 7.988029;
+    double observedHeadingToBackingRatio = 0.0;
+
+    testName = "Test fire heading to backing ratio with 5 mph direct mid-flame, upslope mode";
+    observedHeadingToBackingRatio = roundToSixDecimalPlaces(observedHeadingToBackingRatio = behaveRun.surface.getHeadingToBackingRatio());
+    reportTestResult(testInfo, testName, observedHeadingToBackingRatio, expectedHeadingToBackingRatio, error_tolerance);
+
     // Area
+    elapsedTime = 1.0;
     double expectedArea = 0.0;
     double observedArea = 0.0;
 
-    expectedArea = 41.783821;
+    expectedArea = 55.283555;
     observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::Acres, elapsedTime, TimeUnits::Hours));
     testName = "Test fire elliptical area in acres with direct mid-flame, upslope mode, 1 hour elapsed time";
     reportTestResult(testInfo, testName, observedArea, expectedArea, error_tolerance);
 
-    expectedArea = 0.169093;
+    expectedArea = 0.223725;
     observedArea = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFireArea(AreaUnits::SquareKilometers, elapsedTime, TimeUnits::Hours));
-    testName = "Test fire elliptical area in km^2 with direct mid-flame, upslope mode, 1 hour elapsed time";
+    testName = "Test fire elliptical area in km^2 with direct mid-flame, upslope mode, 1 hour minutes elapsed time";
     reportTestResult(testInfo, testName, observedArea, expectedArea, error_tolerance);
 
     // Perimeter
     double expectedPerimeter = 0.0;
     double obeservedPerimeter = 0.0;
 
-    expectedPerimeter = 82.808915;
+    expectedPerimeter = 86.71476;
     obeservedPerimeter = roundToSixDecimalPlaces(observedArea = behaveRun.surface.getFirePerimeter(LengthUnits::Chains, elapsedTime, TimeUnits::Hours));
     testName = "Test fire elliptical perimeter in chains with direct mid-flame, upslope mode, 1 hour elapsed time";
     reportTestResult(testInfo, testName, obeservedPerimeter, expectedPerimeter, error_tolerance);
@@ -482,7 +505,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindDirection(45);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 3.016440;
+    expectedSpreadRateInDirectionOfInterest = 4.929573;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test upslope oriented mode, 20 foot wind, direction of interest 160 degrees from upslope, 290 degree wind";
@@ -492,7 +515,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindDirection(290);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 1.399262;
+    expectedSpreadRateInDirectionOfInterest = 2.765342;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test upslope oriented mode, 20 foot wind, direction of interest 215 degrees from upslope, 215 degree wind";
@@ -502,7 +525,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindDirection(215);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 1.648579;
+    expectedSpreadRateInDirectionOfInterest = 2.675125;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test north oriented mode, 20 foot 135 degree wind, direction of interest 30 degrees from north, 263 degree aspect";
@@ -513,7 +536,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setAspect(135);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 3.504961;
+    expectedSpreadRateInDirectionOfInterest = 4.180938;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test north oriented mode, 20 foot north wind, direction of interest 90 degrees from north, 45 degree aspect";
@@ -524,7 +547,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setAspect(45);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 1.803660;
+    expectedSpreadRateInDirectionOfInterest = 3.438243;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test north oriented mode, 20 foot 135 degree wind, direction of interest 285 degrees from north, 263 degree aspect";
@@ -535,7 +558,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setAspect(263);
     behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 1.452856;
+    expectedSpreadRateInDirectionOfInterest = 2.944975;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     std::cout << "Finished testing spread rate in direction of interest\n\n";
@@ -590,63 +613,63 @@ void testTwoFuelModels(struct TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(10, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 10.446373;
+    expectedSurfaceFireSpreadRate = 10.470801;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 20";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(20, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 12.112509;
+    expectedSurfaceFireSpreadRate = 12.189713;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 30";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(30, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 13.825904;
+    expectedSurfaceFireSpreadRate = 13.958900;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 40";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(40, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 15.532700;
+    expectedSurfaceFireSpreadRate = 15.706408;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 50";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(50, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 17.173897;
+    expectedSurfaceFireSpreadRate = 17.362382;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 60";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(60, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 18.685358;
+    expectedSurfaceFireSpreadRate = 18.859066;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 70";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(70, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 19.997806;
+    expectedSurfaceFireSpreadRate = 20.130802;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 80";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(80, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 21.036826;
+    expectedSurfaceFireSpreadRate = 21.114030;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 90";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(90, coverUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
-    expectedSurfaceFireSpreadRate = 21.722861;
+    expectedSurfaceFireSpreadRate = 21.747289;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
     testName = "First fuel model coverage 100";
@@ -1168,7 +1191,7 @@ void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     reportTestResult(testInfo, testName, observedFinalFireLineLength, expectedFinalFireLineLength, error_tolerance);
 
     testName = "Test observed perimeter at initial attack";
-    expectedPerimeterAtInitialAttack = 36.694893;
+    expectedPerimeterAtInitialAttack = 37.51917991;
     observedPerimeterAtInitialAttack = behaveRun.contain.getPerimiterAtInitialAttack(LengthUnits::Chains);
     reportTestResult(testInfo, testName, observedPerimeterAtInitialAttack, expectedPerimeterAtInitialAttack, error_tolerance);
 
@@ -1178,7 +1201,7 @@ void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     reportTestResult(testInfo, testName, observedPerimeterAtContainment, expectedPerimeterAtContainment, error_tolerance);
 
     testName = "Test observed fire size at initial attack";
-    expectedFireSizeAtInitialAttack = 7.10569878;
+    expectedFireSizeAtInitialAttack = 8.954501709;
     observedFireSizeAtInitialAttack = behaveRun.contain.getFireSizeAtInitialAttack(AreaUnits::Acres);
     reportTestResult(testInfo, testName, observedFireSizeAtInitialAttack, expectedFireSizeAtInitialAttack, error_tolerance);
 
