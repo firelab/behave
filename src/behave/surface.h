@@ -62,6 +62,7 @@ public:
     double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
+    double getHeadingToBackingRatio() const;
     double getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
     double getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const;
@@ -73,7 +74,6 @@ public:
     double getSlopeFactor() const;
     double getBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const;
     double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
-
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 

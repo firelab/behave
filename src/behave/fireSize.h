@@ -39,6 +39,7 @@ public:
 
     double getFireLengthToWidthRatio() const;
     double getEccentricity() const;
+    double getHeadingToBackingRatio() const;
     double getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
@@ -47,7 +48,7 @@ public:
     double getMaxFireWidth(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-
+   
 private:
     void calculateFireLengthToWidthRatio();
     void calculateSurfaceFireEccentricity();

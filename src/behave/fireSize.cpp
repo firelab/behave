@@ -146,6 +146,11 @@ double FireSize::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, doub
     return LengthUnits::fromBaseUnits(perimeter, lengthUnits);
 }
 
+double FireSize::getHeadingToBackingRatio() const
+{
+    return headingToBackingRatio_;
+}
+
 double FireSize::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     elapsedTime = TimeUnits::toBaseUnits(elapsedTime, timeUnits);

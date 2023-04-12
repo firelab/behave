@@ -183,6 +183,11 @@ double Surface::getFireEccentricity() const
     return size_.getEccentricity();
 }
 
+double Surface::getHeadingToBackingRatio() const
+{
+    return  size_.getHeadingToBackingRatio();
+}
+
 double Surface::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
 {
     return FirelineIntensityUnits::fromBaseUnits(surfaceFire_.getFirelineIntensity(), firelineIntensityUnits);
