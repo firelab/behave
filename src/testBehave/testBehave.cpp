@@ -14,6 +14,11 @@ struct TestInfo
     int numTotalTests = 0;
     int numFailed = 0;
     int numPassed = 0;
+
+    const std::string reset_text_color = "\u001b[0m";
+    const std::string red_text_color = "\u001b[31m";
+    const std::string green_text_color = "\u001b[32m";
+
 };
 
 bool areClose(const double observed, const double expected, const double epsilon);
@@ -64,8 +69,24 @@ int main()
     testMortalityModule(testInfo, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
+    if(testInfo.numPassed > 0)
+    {
+        std::cout << testInfo.green_text_color;
+    }
     std::cout << "Total tests passed: " << testInfo.numPassed << "\n";
+    if(testInfo.numPassed > 0)
+    {
+        std::cout << testInfo.reset_text_color;
+    }
+    if(testInfo.numFailed > 0)
+    {
+        std::cout << testInfo.red_text_color;
+    }
     std::cout << "Total tests failed: " << testInfo.numFailed << "\n\n";
+    if(testInfo.numFailed > 0)
+    {
+        std::cout << testInfo.reset_text_color;
+    }
 
 #ifndef NDEBUG
     // Make Visual Studio wait while in debug mode
@@ -194,12 +215,12 @@ void reportTestResult(struct TestInfo& testInfo, const string testName, const do
     testInfo.numTotalTests++;
     if(areClose(observed, expected, epsilon))
     {
-        //std::cout << testName << "\npassed successfully\n";
+        std::cout << testName << "\n" << testInfo.green_text_color << "Passed successfully" << testInfo.reset_text_color << "\n\n";
         testInfo.numPassed++;
     }
     else
     {
-        std::cout << testName << "\nfailed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << "\n";
+        std::cout << testInfo.red_text_color << testName << "\n" << "Failed\nobserved value " << observed << " differs from expected value " << expected << " by more than " << epsilon << testInfo.reset_text_color << "\n\n";
         testInfo.numFailed++;
     }
 }
