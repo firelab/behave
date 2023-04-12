@@ -45,7 +45,6 @@ public:
     double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireLength(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getMaxFireWidth(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
 
@@ -68,10 +67,8 @@ private:
     double forwardSpreadDistance_;
     double backingSpreadRate_;
     double backingSpreadDistance_;
-    double fireLengthToWidthRatio_;
-
-    double part_;              // Intermediate variable used to calculate Alexandar 1985 ratio
-    double hb_ratio_;          // Alexander 1985 heading/backing ratio
+    double fireLengthToWidthRatio_;           
+    double headingToBackingRatio_; // Alexander 1985 heading/backing ratio
 };
 
 #endif // FIRESIZE_H

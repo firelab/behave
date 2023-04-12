@@ -108,17 +108,17 @@ void FireSize::calculateEllipticalDimensions()
     ellipticalA_ = 0.0;
     ellipticalB_ = 0.0;
     ellipticalC_ = 0.0;
-    part_ = 0.0;
-    hb_ratio_ = 0.0;          // Alexander 1985 heading/backing ratio
+    headingToBackingRatio_ = 0.0;          // Alexander 1985 heading/backing ratio
 
+    double part = 0.0; // Intermediate variable used to calculate Alexandar 1985 ratio
     // Internally A, B, and C are in terms of ft travelled in one minute
     ellipticalB_ = (forwardSpreadRate_ + backingSpreadRate_) / 2.0;
     if (fireLengthToWidthRatio_ > 1e-07)
     {
-        part_=sqrt(pow(fireLengthToWidthRatio_, 2)-1);
-        hb_ratio_=(fireLengthToWidthRatio_+part_)/(fireLengthToWidthRatio_-part_);
+        part = sqrt(pow(fireLengthToWidthRatio_, 2)-1);
+        headingToBackingRatio_ =(fireLengthToWidthRatio_+part)/(fireLengthToWidthRatio_-part);
 
-        ellipticalA_ = ellipticalB_ / hb_ratio_;
+        ellipticalA_ = ellipticalB_ / fireLengthToWidthRatio_;
     }
     ellipticalC_ = ellipticalB_ - backingSpreadRate_;
 }
