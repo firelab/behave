@@ -24,26 +24,26 @@ bool areClose(const double observed, const double expected, const double epsilon
 
 double roundToSixDecimalPlaces(const double numberToBeRounded);
 
-void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon);
+void reportTestResult(TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon);
 
 void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun);
 void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun);
 void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun);
 
-void testSurfaceSingleFuelModel(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testFirelineIntensity(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testTwoFuelModels(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testCrownModuleRothermel(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testCrownModuleScottAndReinhardt(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testSpotModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testSpeedUnitConversion(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
-void testMortalityModule(struct TestInfo& testInfo, BehaveRun& behaveRun);
+void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun);
+void testLengthToWidthRatio(TestInfo& testInfo, BehaveRun& behaveRun);
+void testEllipticalDimensions(TestInfo& testInfo, BehaveRun& behaveRun);
+void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun);
+void testFirelineIntensity(TestInfo& testInfo, BehaveRun& behaveRun);
+void testTwoFuelModels(TestInfo& testInfo, BehaveRun& behaveRun);
+void testCrownModuleRothermel(TestInfo& testInfo, BehaveRun& behaveRun);
+void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSpeedUnitConversion(TestInfo& testInfo, BehaveRun& behaveRun);
+void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSafetyModule(TestInfo& testInfo, BehaveRun& behaveRun);
+void testContainModule(TestInfo& testInfo, BehaveRun& behaveRun);
+void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
@@ -209,7 +209,7 @@ double roundToSixDecimalPlaces(const double numberToBeRounded)
     return roundedValue;
 }
 
-void reportTestResult(struct TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon)
+void reportTestResult(TestInfo& testInfo, const string testName, const double observed, const double expected, const double epsilon)
 {
     testInfo.numTotalTests++;
     if(areClose(observed, expected, epsilon))
@@ -224,7 +224,7 @@ void reportTestResult(struct TestInfo& testInfo, const string testName, const do
     }
 }
 
-void testSurfaceSingleFuelModel(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     string testName = "";
     // Observed and expected output
@@ -325,7 +325,7 @@ void testSurfaceSingleFuelModel(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing Surface, single fuel model\n\n";
 }
 
-void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testLengthToWidthRatio(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing length-to-width-ratio\n";
     string testName = "";
@@ -418,7 +418,7 @@ void testLengthToWidthRatio(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing length-to-width-ratio\n\n";
 }
 
-void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testEllipticalDimensions(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing elliptical dimensions\n";
     string testName = "";
@@ -488,7 +488,7 @@ void testEllipticalDimensions(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing elliptical dimensions\n\n";
 }
 
-void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing spread rate in direction of interest\n";
     string testName = "";
@@ -564,7 +564,7 @@ void testDirectionOfInterest(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing spread rate in direction of interest\n\n";
 }
 
-void testFirelineIntensity(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testFirelineIntensity(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing fireline instensity\n";
     string testName = "";
@@ -589,7 +589,7 @@ void testFirelineIntensity(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing fireline instensity\n\n";
 }
 
-void testTwoFuelModels(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testTwoFuelModels(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Two Fuel Models, first fuel model 1, second fuel model 124\n";
     string testName = "";
@@ -682,7 +682,7 @@ void testTwoFuelModels(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing Two Fuel Models, first fuel model 1, second fuel model 124\n\n";
 }
 
-void testCrownModuleRothermel(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testCrownModuleRothermel(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Crown module, Rothermel\n";
     string testName = "";
@@ -761,7 +761,7 @@ void testCrownModuleRothermel(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing Crown module, Rothermel\n\n";
 }
 
-void testCrownModuleScottAndReinhardt(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Crown module, Scott and Reinhardt\n";
     string testName = "";
@@ -899,7 +899,7 @@ void testCrownModuleScottAndReinhardt(struct TestInfo& testInfo, BehaveRun& beha
     std::cout << "Finished testing Crown module, Scott and Reinhardt\n\n";
 }
 
-void testSpotModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Spot module\n";
 
@@ -983,7 +983,7 @@ void testSpotModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing Spot module\n\n";
 }
 
-void testSpeedUnitConversion(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testSpeedUnitConversion(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing speed unit conversion\n";
 
@@ -1041,7 +1041,7 @@ void testSpeedUnitConversion(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing speed unit conversion\n\n";
 }
 
-void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Ignite module\n";
 
@@ -1104,7 +1104,7 @@ void testIgniteModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing Ignite module\n\n";
 }
 
-void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testSafetyModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Safety module\n";
 
@@ -1151,7 +1151,7 @@ void testSafetyModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
     std::cout << "Finished testing Safety module\n\n";
 }
 
-void testContainModule(struct TestInfo& testInfo, BehaveRun& behaveRun)
+void testContainModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Contain module\n";
 
