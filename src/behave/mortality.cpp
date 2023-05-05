@@ -1978,6 +1978,7 @@ double Mortality::calculateBarkThickness()
         case 9:
         {
             f = 0.03;
+            break;
         }
         case 10:
         {
