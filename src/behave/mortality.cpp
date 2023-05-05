@@ -326,45 +326,48 @@ bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region)
 {
     bool isInRegion = false;
 
-    switch(region)
+    if((index >= 0) && (index < speciesMasterTable_->record_.size()))
     {
-        case RegionCode::interior_west:
+        switch(region)
         {
-            if(speciesMasterTable_->record_[index].regionInteriorWest == (int)RegionCode::interior_west)
+            case RegionCode::interior_west:
             {
-                isInRegion = true;
+                if(speciesMasterTable_->record_[index].regionInteriorWest == (int)RegionCode::interior_west)
+                {
+                    isInRegion = true;
+                }
+                break;
             }
-            break;
-        }
-      
-        case RegionCode::pacific_west:
-        {
-            if(speciesMasterTable_->record_[index].regionPacificWest == (int)RegionCode::pacific_west)
+
+            case RegionCode::pacific_west:
             {
-                isInRegion = true;
+                if(speciesMasterTable_->record_[index].regionPacificWest == (int)RegionCode::pacific_west)
+                {
+                    isInRegion = true;
+                }
+                break;
             }
-            break;
-        }
-        case RegionCode::north_east:
-        {
-            if(speciesMasterTable_->record_[index].regionNorthEast == (int)RegionCode::north_east)
+            case RegionCode::north_east:
             {
-                isInRegion = true;
+                if(speciesMasterTable_->record_[index].regionNorthEast == (int)RegionCode::north_east)
+                {
+                    isInRegion = true;
+                }
+                break;
             }
-            break;
-        }
-        case RegionCode::south_east:
-        {
-            if(speciesMasterTable_->record_[index].regionSouthEast == (int)RegionCode::south_east)
+            case RegionCode::south_east:
             {
-                isInRegion = true;
+                if(speciesMasterTable_->record_[index].regionSouthEast == (int)RegionCode::south_east)
+                {
+                    isInRegion = true;
+                }
+                break;
             }
-            break;
-        }
-        default: // error case
-        {
-            isInRegion = false;
-            break;
+            default: // error case
+            {
+                isInRegion = false;
+                break;
+            }
         }
     }
 
@@ -689,7 +692,7 @@ double  Mortality::calculateMortalityCrownScorch()
         {
             f = mortalityInputs_.getCrownRatio(); // crown ratio 
             CBH = mortalityInputs_.getTreeHeight(LengthUnits::Feet) - (mortalityInputs_.getTreeHeight(LengthUnits::Feet) * f);
-            P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Inches), flameLengthOrScorchHeightValue, blackHillsFlameLength);
+            P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Feet), flameLengthOrScorchHeightValue, blackHillsFlameLength);
             break;
         }
         default:
