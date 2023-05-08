@@ -11,11 +11,13 @@ CanopyCoefficientTable::CanopyCoefficientTable():record_
 /* Idx No code    "a" coeff. "b" coeff. | "ratio" coeff.                           */
 
      {
+        { -1,    "",          0,         0,           0 },  /* Dummy record to make index same as equation code */
         {  1,  "SF",     3.9723,    0.5177,       0.473 },
         {  2,  "WF",     3.8166,    0.5229,       0.452 },
         {  3,  "GF",     4.1870,    0.5341,       0.489 },
         {  4,  "AF",     3.2348,    0.5179,       0.385 },
         {  5,  "RF",     3.1146,    0.5780,       0.345 },
+        { -1,    "",          0,         0,           0 },  /* Dummy record, currently unused equation code */
         {  7,  "NF",     3.0614,    0.6276,       0.320 },
         {  8,  "YC",     3.5341,    0.5374,       0.331 },
         {  9,   "C",     4.0920,    0.4912,       0.412 },
@@ -47,8 +49,9 @@ CanopyCoefficientTable::CanopyCoefficientTable():record_
         { 35,  "HT",     4.5859,    0.4841,       0.468 },
         { 36,  "CH",     4.5859,    0.4841,       0.468 },
         { 37,  "WI",     4.5859,    0.4841,       0.468 },
-        { 39,   "",      4.4215,    0.5329,       0.517 },  /* Other */
-        { -1,   "",          0,         0,            0 }
+        { -1,    "",          0,         0,           0 },  /* Dummy record, currently unused equation code */
+        { 39,    "",      4.4215,    0.5329,      0.517 },  /* Other */
+        { -1,    "",          0,         0,           0 }
 }
 {
  
