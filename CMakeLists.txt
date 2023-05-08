@@ -21,6 +21,7 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave)
 
 # optional test executable
 OPTION(TEST_BEHAVE "Enable Testing" ON)
+OPTION(TEST_MORTALITY "Enable Mortality Testing" ON)
 
 # optional stand-alone executables
 OPTION(EXAMPLE_APP "Example client application" ON)
@@ -31,6 +32,10 @@ OPTION(COMPUTE_SPOT_TORCHING_TREES "Build torching tree spot fire distance calcu
 
 IF(TEST_BEHAVE)
     ADD_DEFINITIONS(-DTEST_BEHAVE)
+ENDIF()
+
+IF(TEST_MORTALITY)
+    ADD_DEFINITIONS(-DTEST_MORTALITY)
 ENDIF()
 
 IF(EXAMPLE_APP)
@@ -138,6 +143,16 @@ IF(TEST_BEHAVE)
             ${BOOST_TEST_SOURCE}
             ${HEADERS})
         TARGET_LINK_LIBRARIES(testBehave)
+ENDIF()
+
+IF(TEST_MORTALITY)
+    SET(BOOST_TEST_SOURCE
+            src/testMortality/mortality_client.cpp)
+    ADD_EXECUTABLE(testMortality
+            ${SOURCE}
+            ${BOOST_TEST_SOURCE}
+            ${HEADERS})
+    TARGET_LINK_LIBRARIES(testMortality)
 ENDIF()
 
 IF(EXAMPLE_APP)
