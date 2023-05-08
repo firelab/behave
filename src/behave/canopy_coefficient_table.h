@@ -47,8 +47,5 @@ class CanopyCoefficientTable
 {
 public:
     CanopyCoefficientTable();
-
-    int CCT_Get(int i_No);
-  
     vector<CanopyCoefficientTableRecord> record_;
 };
