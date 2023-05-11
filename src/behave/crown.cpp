@@ -333,7 +333,7 @@ double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
 double Crown::getCrownFireSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     double elapsedTimeInBaseUnits = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
-    double spreadRateInBaseUnits = finalSpreadRate_;
+    double spreadRateInBaseUnits = crownFireSpreadRate_;
     double spreadDistanceInBaseUnits = spreadRateInBaseUnits * elapsedTimeInBaseUnits;
     return LengthUnits::fromBaseUnits(spreadDistanceInBaseUnits, lengthUnits);
 }
