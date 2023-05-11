@@ -41,6 +41,7 @@ public:
     double getEccentricity() const;
     double getHeadingToBackingRatio() const;
     double getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getFlankingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getEllipticalB(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
@@ -54,6 +55,7 @@ private:
     void calculateSurfaceFireEccentricity();
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
+    void calculateFlankingSpreadRate();
 
     // Inputs
     double effectiveWindSpeed_; // internally stored in mph
@@ -65,9 +67,8 @@ private:
     double ellipticalB_; // semi-major axis of fire ellipse
     double ellipticalC_; // distance from center of ellipse to a focus
     double eccentricity_; // measure of deviance from perfect circle, ranges from [0,1)
-    double forwardSpreadDistance_;
-    double backingSpreadRate_;
-    double backingSpreadDistance_;
+    double backingSpreadRate_; // spread rate 180 degrees from max spread
+    double flankingSpreadRate_; // spread rate at widest part of ellipse breadth
     double fireLengthToWidthRatio_;           
     double headingToBackingRatio_; // Alexander 1985 heading/backing ratio
 };

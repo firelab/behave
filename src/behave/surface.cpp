@@ -162,6 +162,16 @@ double Surface::getSpreadRateInDirectionOfInterest(SpeedUnits::SpeedUnitsEnum sp
     return SpeedUnits::fromBaseUnits(surfaceFire_.getSpreadRateInDirectionOfInterest(), spreadRateUnits);
 }
 
+double Surface::getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
+{
+    return SpeedUnits::fromBaseUnits(size_.getBackingSpreadRate(SpeedUnits::FeetPerMinute), spreadRateUnits);
+}
+
+double Surface::getFlankingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
+{
+    return SpeedUnits::fromBaseUnits(size_.getFlankingSpreadRate(SpeedUnits::FeetPerMinute), spreadRateUnits);
+}
+
 double Surface::getDirectionOfMaxSpread() const
 {
     double directionOfMaxSpread = surfaceFire_.getDirectionOfMaxSpread();

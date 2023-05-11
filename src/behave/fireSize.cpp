@@ -28,7 +28,7 @@ void FireSize::calculateFireBasicDimensions(double effectiveWindSpeed, SpeedUnit
     calculateFireLengthToWidthRatio();
     calculateSurfaceFireEccentricity();
     calculateBackingSpreadRate();
-
+    calculateFlankingSpreadRate();
     calculateEllipticalDimensions();
 }
 
@@ -45,6 +45,11 @@ double FireSize::getEccentricity() const
 double FireSize::getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
     return SpeedUnits::fromBaseUnits(backingSpreadRate_, spreadRateUnits);
+}
+
+double FireSize::getFlankingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+{
+    return SpeedUnits::fromBaseUnits(flankingSpreadRate_, spreadRateUnits);
 }
 
 double FireSize::getEllipticalA(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
@@ -126,6 +131,13 @@ void FireSize::calculateEllipticalDimensions()
 void FireSize::calculateBackingSpreadRate()
 {
     backingSpreadRate_ = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 + eccentricity_);
+}
+
+void FireSize::calculateFlankingSpreadRate()
+{
+    const double fireLength = backingSpreadRate_ + forwardSpreadRate_;
+    const double width = fireLength / fireLengthToWidthRatio_;
+    flankingSpreadRate_ = width * 0.5;
 }
 
 double FireSize::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
