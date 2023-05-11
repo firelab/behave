@@ -330,9 +330,22 @@ double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits)
     return SpeedUnits::fromBaseUnits(crownFireSpreadRate_, spreadRateUnits);
 }
 
+double Crown::getCrownFireSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+{
+    double elapsedTimeInBaseUnits = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
+    double spreadRateInBaseUnits = finalSpreadRate_;
+    double spreadDistanceInBaseUnits = spreadRateInBaseUnits * elapsedTimeInBaseUnits;
+    return LengthUnits::fromBaseUnits(spreadDistanceInBaseUnits, lengthUnits);
+}
+
 double Crown::getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
     return surfaceFuel_.getSpreadRate(spreadRateUnits);
+}
+
+double Crown::getSurfaceFireSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+{
+    return surfaceFuel_.getSpreadDistance(lengthUnits, elapsedTime, timeUnits);
 }
 
 double Crown::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const

@@ -86,7 +86,9 @@ public:
     double getCanopyBulkDensity(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits) const;
     double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getCrownFireSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getSurfaceFireSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     FireType::FireTypeEnum getFireType() const;
