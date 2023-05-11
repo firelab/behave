@@ -262,6 +262,31 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedSurfaceFireSpreadRate = 8.876216;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    testName = "Test backing spreadrate upslope oriented mode, 5 mph 20 foot uplsope wind";
+    double observedBackingRate = behaveRun.surface.getBackingSpreadRate(SpeedUnits::ChainsPerHour);
+    double expectedBackingRate = 2.91614659;
+    reportTestResult(testInfo, testName, observedBackingRate, expectedBackingRate, error_tolerance);
+
+    testName = "Test flanking spreadrate upslope oriented mode, 5 mph 20 foot uplsope wind";
+    double observedFlankingRate = behaveRun.surface.getFlankingSpreadRate(SpeedUnits::ChainsPerHour);
+    double expectedFlankingRate = 5.08766627;
+    reportTestResult(testInfo, testName, observedFlankingRate, expectedFlankingRate, error_tolerance);
+
+    testName = "Test spread distance upslope oriented mode, 5 mph 20 foot uplsope wind";
+    double observedSpreadDistance = behaveRun.surface.getSpreadDistance(LengthUnits::Chains, 2.0, TimeUnits::Hours);
+    double expectedSpreadDistance = 17.7524327;
+    reportTestResult(testInfo, testName, observedSpreadDistance, expectedSpreadDistance, error_tolerance);
+    
+    testName = "Test backing distance upslope oriented mode, 5 mph 20 foot uplsope wind";
+    double observedBackingDistance = behaveRun.surface.getBackingSpreadDistance(LengthUnits::Chains, 2.0, TimeUnits::Hours);
+    double expectedBackingDistance = 5.8322932;
+    reportTestResult(testInfo, testName, observedBackingDistance, expectedBackingDistance, error_tolerance);
+
+    testName = "Test flanking distance upslope oriented mode, 5 mph 20 foot uplsope wind";
+    double observedFlankingDistance = behaveRun.surface.getFlankingSpreadDistance(LengthUnits::Chains, 2.0, TimeUnits::Hours);
+    double expectedFlankingDistance = 10.17533253;
+    reportTestResult(testInfo, testName, observedFlankingDistance, expectedFlankingDistance, error_tolerance);
+
     testName = "Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);

@@ -60,6 +60,10 @@ public:
     double getSpreadRateInDirectionOfInterest(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     double getFlankingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
+    double getSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getSpreadDistanceInDirectionOfInterest(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getBackingSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits);
+    double getFlankingSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits);
     double getDirectionOfMaxSpread() const;
     double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     double getFireLengthToWidthRatio() const;

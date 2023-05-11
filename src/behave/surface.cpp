@@ -172,6 +172,38 @@ double Surface::getFlankingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits
     return SpeedUnits::fromBaseUnits(size_.getFlankingSpreadRate(SpeedUnits::FeetPerMinute), spreadRateUnits);
 }
 
+double Surface::getSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+{
+    double elapsedTimeInBaseUnits = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
+    double spreadRateInBaseUnits = surfaceFire_.getSpreadRate();
+    double spreadDistanceInBaseUnits = spreadRateInBaseUnits * elapsedTimeInBaseUnits;
+    return LengthUnits::fromBaseUnits(spreadDistanceInBaseUnits, lengthUnits);
+}
+
+double Surface::getSpreadDistanceInDirectionOfInterest(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+{
+    double elapsedTimeInBaseUnits = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
+    double spreadRateInBaseUnits = surfaceFire_.getSpreadRateInDirectionOfInterest();
+    double spreadDistanceInBaseUnits = spreadRateInBaseUnits * elapsedTimeInBaseUnits;
+    return LengthUnits::fromBaseUnits(spreadDistanceInBaseUnits, lengthUnits);
+}
+
+double Surface::getBackingSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits)
+{
+    double elapsedTimeInBaseUnits = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
+    double spreadRateInBaseUnits = size_.getBackingSpreadRate(SpeedUnits::FeetPerMinute);
+    double spreadDistanceInBaseUnits = spreadRateInBaseUnits * elapsedTimeInBaseUnits;
+    return LengthUnits::fromBaseUnits(spreadDistanceInBaseUnits, lengthUnits);
+}
+
+double Surface::getFlankingSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits)
+{
+    double elapsedTimeInBaseUnits = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
+    double spreadRateInBaseUnits = size_.getFlankingSpreadRate(SpeedUnits::FeetPerMinute);
+    double spreadDistanceInBaseUnits = spreadRateInBaseUnits * elapsedTimeInBaseUnits;
+    return LengthUnits::fromBaseUnits(spreadDistanceInBaseUnits, lengthUnits);
+}
+
 double Surface::getDirectionOfMaxSpread() const
 {
     double directionOfMaxSpread = surfaceFire_.getDirectionOfMaxSpread();
