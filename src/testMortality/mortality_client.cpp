@@ -1,13 +1,13 @@
-#include <iostream>
 #include "mortality.h"
 
 #include<algorithm>
 #include<cmath>
 #include<fstream>
-#include <sstream>
+#include<iostream>
+#include<locale>
+#include<sstream>
 #include<string>
 #include<vector>
-
 
 class readFile {
 public:
