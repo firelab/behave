@@ -213,6 +213,16 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
 double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
 {
+    // Constrain direction of interest to range of [0, 359] degrees
+    while(directionOfInterest < 0.0)
+    {
+        directionOfInterest += 360.0;
+    }
+    while(directionOfInterest >= 360.0)
+    {
+        directionOfInterest -= 360.0;
+    }
+
     double rosVector = forwardSpreadRate_;
     double eccentricity_ = size_->getEccentricity();
     if (forwardSpreadRate_) // if forward spread rate is not zero
