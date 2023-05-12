@@ -31,6 +31,7 @@
 
 #include "behaveUnits.h"
 #include "fuelModels.h"
+#include "surfaceTwoFuelModels.h"
 
 struct AspenFireSeverity
 {
@@ -38,17 +39,6 @@ struct AspenFireSeverity
     {
        Low = 0,
        Moderate = 1
-    };
-};
-
-struct TwoFuelModelsMethod
-{
-    enum TwoFuelModelsMethodEnum
-    {
-        NoMethod = 0,          // Don't use TwoFuel Models method
-        Arithmetic = 1,         // Use arithmetic mean
-        Harmonic = 2,           // Use harmoic mean
-        TwoDimensional = 3     // Use Finney's two dimensional method
     };
 };
 
@@ -204,16 +194,6 @@ public:
     double getAspenCuringLevel() const;
     double getAspenDBH() const;
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
-
-    struct TwoFuelModelsContants
-    {
-        enum TwoFuelModelsContantsEnum
-        {
-            FIRST = 0,              // Index of the first fuel model
-            SECOND = 1,             // Index of the second fuel model
-            NUMBER_OF_MODELS = 2,   // Numbe of fuel models used in TwoFuel Models method
-        };
-    };
 
 private:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);

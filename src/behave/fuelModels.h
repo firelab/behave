@@ -36,12 +36,19 @@
 #include <string>
 #include <vector>
 
+struct FuelLifeState
+{
+    enum FuelLifeStateEnum
+    {
+        DEAD = 0,                   // Index associated with dead fuels
+        LIVE = 1,                   // Index associated with live fuels
+    };
+};
+
 struct FuelConstants
 {
     enum FuelConstantsEnum
     {
-        DEAD = 0,                   // Index associated with dead fuels
-        LIVE = 1,                   // Index associated with live fuels
         MAX_LIFE_STATES = 2,        // Number of life states, live and dead
         MAX_LIVE_SIZE_CLASSES = 3,  // Maximum number of live size classes
         MAX_DEAD_SIZE_CLASSES = 4,  // Maximum number of dead size classes
