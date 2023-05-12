@@ -33,6 +33,29 @@
 #include "fuelModels.h"
 #include "surfaceTwoFuelModels.h"
 
+struct MoistureClassInput
+{
+    enum MoistureClassInputEnum
+    {
+        OneHour = 0,               // Associated with dead fuel 1 hour moisture
+        TenHour = 1,               // Associated with dead fuel 10 hour moisture
+        HundredHour = 2,           // Associated with dead fuel 100 hour moisture
+        LiveHerbaceous = 3,        // Associated with live fuel herbaceous moisture
+        LiveWoody = 4,             // Associated with live  fuel woody moisture
+        DeadAggregate = 5,         // Associated with aggregate dead fuel moisture
+        LiveAggregate = 6          // Associated with aggregate live fuel moisture
+    };
+};
+
+struct LiveFuelMoistureInput
+{
+    enum LiveFuelMoistureInputEnum
+    {
+       
+        Aggregate = 2               // Index associated with aggregate live fuel moisture
+    };
+};
+
 struct AspenFireSeverity
 {
     enum AspenFireSeverityEnum
@@ -80,6 +103,18 @@ struct WindHeightInputMode
     };
 };
 
+struct MoistureInputMode
+{
+    enum MoistureInputModeEnum
+    {
+        BySizeClass = 0,                    // User enters moisture for each size class
+        AllAggregate = 1,                   // User enters aggregate moisture for dead and live fuels
+        DeadAggregateAndLiveSizeClass = 2,  // User enters aggregate moisture for dead fuels and for each live size class
+        LiveAggregateAndDeadSizeClass = 3,  // User enters aggregate moisture for live fuels and for each dead size class
+        MoistureScenario = 4                // User enters a moisture scenario           
+    };
+};
+
 class SurfaceInputs
 {
 public:
@@ -101,6 +136,9 @@ public:
     void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureDeadAggregate(double moistureDeadAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureLiveAggregate(double moistureLiveAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
     void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
@@ -119,8 +157,10 @@ public:
     double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureDeadAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getWindSpeed() const;
     double getWindDirection() const;
     double getSlope() const;
@@ -133,6 +173,8 @@ public:
     double getUserProvidedWindAdjustmentFactor() const;
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
     double getElapsedTime() const;
+    bool isMoistureClassInputNeeded(MoistureClassInput::MoistureClassInputEnum moistureSizeClass) const;
+    MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
@@ -198,17 +240,24 @@ public:
 private:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);
 
-    // Main Suface module inputs
     int fuelModelNumber_;               // 1 to 256
+
+    // Weather/Terrain inputs
+    double windSpeed_;                  // measured wind speed in feet per minute
+    double windDirection_;              // degrees, 0-360
+    double slope_;                      // gradient 0-600 or degrees 0-80  
+    double aspect_;                     // aspect of slope in degrees, 0-360
+
+    // Moisture Inputs
+    MoistureInputMode::MoistureInputModeEnum moistureInputMode_;
     double moistureOneHour_;            // 1% to 60%
     double moistureTenHour_;            // 1% to 60%		
     double moistureHundredHour_;        // 1% to 60%
     double moistureLiveHerbaceous_;     // 30% to 300%
     double moistureLiveWoody_;          // 30% to 300%
-    double windSpeed_;                  // measured wind speed in feet per minute
-    double windDirection_;              // degrees, 0-360
-    double slope_;                      // gradient 0-600 or degrees 0-80  
-    double aspect_;                     // aspect of slope in degrees, 0-360
+    double moistureDeadAggregate_;      // Aggregate dead moisture 1% to 60%
+    double moistureLiveAggregate_;      // Aggregate live moisture 30% to 300%
+    bool isUsingMoistureScenario_;      // Moisture is entered as a moisture scenario
 
     // Two Fuel Models inputs
     bool isUsingTwoFuelModels_;         // Whether fire spread calculation is using Two Fuel Models

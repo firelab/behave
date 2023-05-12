@@ -43,7 +43,7 @@ SurfaceFire::SurfaceFire()
 
 }
 
-SurfaceFire::SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs, 
+SurfaceFire::SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs,
     FireSize& size)
     : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
       surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
@@ -207,6 +207,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     }
 
     calculateHeatPerUnitArea();
+    calculateHeatSource();
 
     return forwardSpreadRate_;
 }
@@ -423,6 +424,12 @@ void SurfaceFire::calculateSlopeFactor()
     phiS_ = 5.275 * pow(packingRatio, -0.3) * (slopex * slopex);
 }
 
+void SurfaceFire::calculateHeatSource()
+{
+    double propogatingFlux = surfaceFuelbedIntermediates_.getPropagatingFlux();
+    heatSource_ = reactionIntensity_ * propogatingFlux * (1 + phiS_ + phiW_);
+}
+
 double SurfaceFire::getFuelbedDepth() const
 {
     int fuelModelNumber = surfaceInputs_->getFuelModelNumber();
@@ -521,6 +528,11 @@ double SurfaceFire::getBulkDensity() const
 double SurfaceFire::getReactionIntensity() const
 {
     return reactionIntensity_;
+}
+
+double SurfaceFire::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
+{
+    return surfaceFuelbedIntermediates_.getWeightedMoistureByLifeState(lifeState);
 }
 
 double SurfaceFire::getWindAdjustmentFactor() const

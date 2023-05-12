@@ -58,7 +58,6 @@ struct FuelConstants
     };
 };
 
-// TODO: Add in a std::map to map fuel codes to the respective fuel model number in FuelModelArray -WMC 02/2017
 class FuelModels
 {
 public:
@@ -130,7 +129,6 @@ private:
     };
 
     std::vector<FuelModelRecord> FuelModelArray_;
-
 };
 
 #endif // FUELMODELS_H

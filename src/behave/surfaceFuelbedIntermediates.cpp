@@ -74,8 +74,6 @@ void SurfaceFuelbedIntermediates::memberwiseCopyAssignment(const SurfaceFuelbedI
     depth_ = rhs.depth_;
     relativePackingRatio_ = rhs.relativePackingRatio_;
     fuelModelNumber_ = rhs.fuelModelNumber_;
-    liveFuelMois_ = rhs.liveFuelMois_;
-    liveFuelMext_ = rhs.liveFuelMext_;
     sigma_ = rhs.sigma_;
     bulkDensity_ = rhs.bulkDensity_;
     packingRatio_ = rhs.packingRatio_;
@@ -274,7 +272,7 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
         moistureDead_[1] = surfaceInputs_->getMoistureTenHour(MoistureUnits::Fraction);
         moistureDead_[2] = surfaceInputs_->getMoistureHundredHour(MoistureUnits::Fraction);
         moistureDead_[3] = surfaceInputs_->getMoistureOneHour(MoistureUnits::Fraction);
-
+  
         moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous(MoistureUnits::Fraction);
         moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
     }
@@ -462,6 +460,19 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
         totalSilicaContent_ = 0.030;
     }
 
+    MoistureInputMode::MoistureInputModeEnum moistureInputMode = surfaceInputs_->getMoistureInputMode();
+    bool isMoistureDeadAggregated = (moistureInputMode == MoistureInputMode::AllAggregate) || (moistureInputMode == MoistureInputMode::DeadAggregateAndLiveSizeClass);
+    bool isMoistureLiveAggregated = (moistureInputMode == MoistureInputMode::AllAggregate) || (moistureInputMode == MoistureInputMode::LiveAggregateAndDeadSizeClass);
+
+    if(isMoistureDeadAggregated)
+    {
+        weightedMoisture_[FuelLifeState::DEAD] = surfaceInputs_->getMoistureDeadAggregateValue(MoistureUnits::Fraction);
+    }
+    if(isMoistureLiveAggregated)
+    {
+        weightedMoisture_[FuelLifeState::LIVE] = surfaceInputs_->getMoistureLiveAggregateValue(MoistureUnits::Fraction);
+    }
+
     for (int i = 0; i < FuelConstants::MAX_PARTICLES; i++)
     {
         if (savrDead_[i] > 1.0e-07)
@@ -469,7 +480,10 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
             wnDead[i] = loadDead_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
             weightedHeat_[FuelLifeState::DEAD] += fractionOfTotalSurfaceAreaDead_[i] * heatDead_[i]; // weighted heat content
             weightedSilica_[FuelLifeState::DEAD] += fractionOfTotalSurfaceAreaDead_[i] * silicaEffectiveDead_[i]; // weighted silica content
-            weightedMoisture_[FuelLifeState::DEAD] += fractionOfTotalSurfaceAreaDead_[i] * moistureDead_[i]; // weighted moisture content
+            if(!isMoistureDeadAggregated)
+            {
+                weightedMoisture_[FuelLifeState::DEAD] += fractionOfTotalSurfaceAreaDead_[i] * moistureDead_[i]; // weighted moisture content
+            }
             weightedSavr[FuelLifeState::DEAD] += fractionOfTotalSurfaceAreaDead_[i] * savrDead_[i]; // weighted SAVR
             totalLoadForLifeState_[FuelLifeState::DEAD] += loadDead_[i];
         }
@@ -478,7 +492,10 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
             wnLive[i] = loadLive_[i] * (1.0 - totalSilicaContent_); // Rothermel 1972, equation 24
             weightedHeat_[FuelLifeState::LIVE] += fractionOfTotalSurfaceAreaLive_[i] * heatLive_[i]; // weighted heat content
             weightedSilica_[FuelLifeState::LIVE] += fractionOfTotalSurfaceAreaLive_[i] * silicaEffectiveLive_[i]; // weighted silica content
-            weightedMoisture_[FuelLifeState::LIVE] += fractionOfTotalSurfaceAreaLive_[i] * moistureLive_[i]; // weighted moisture content
+            if(!isMoistureLiveAggregated)
+            {
+                weightedMoisture_[FuelLifeState::LIVE] += fractionOfTotalSurfaceAreaLive_[i] * moistureLive_[i]; // weighted moisture content
+            }
             weightedSavr[FuelLifeState::LIVE] += fractionOfTotalSurfaceAreaLive_[i] * savrLive_[i]; // weighted SAVR
             totalLoadForLifeState_[FuelLifeState::LIVE] += loadLive_[i];
         }
@@ -759,8 +776,6 @@ void SurfaceFuelbedIntermediates::initializeMembers()
     depth_ = 0.0;
     relativePackingRatio_ = 0.0;
     fuelModelNumber_ = 0;
-    liveFuelMois_ = 0.0;
-    liveFuelMext_ = 0.0;
     sigma_ = 0.0;
     bulkDensity_ = 0.0;
     packingRatio_ = 0.0;
@@ -844,27 +859,27 @@ double SurfaceFuelbedIntermediates::getHeatSink() const
     return heatSink_;
 }
 
-double SurfaceFuelbedIntermediates::getWeightedMoistureByLifeState(int lifeState) const
+double SurfaceFuelbedIntermediates::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return weightedMoisture_[lifeState];
 }
 
-double SurfaceFuelbedIntermediates::getMoistureOfExtinctionByLifeState(int lifeState) const
+double SurfaceFuelbedIntermediates::getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return moistureOfExtinction_[lifeState];
 }
 
-double SurfaceFuelbedIntermediates::getWeightedHeatByLifeState(int lifeState) const
+double SurfaceFuelbedIntermediates::getWeightedHeatByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return weightedHeat_[lifeState];
 }
 
-double SurfaceFuelbedIntermediates::getWeightedSilicaByLifeState(int lifeState) const
+double SurfaceFuelbedIntermediates::getWeightedSilicaByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return weightedSilica_[lifeState];
 }
 
-double SurfaceFuelbedIntermediates::getWeightedFuelLoadByLifeState(int lifeState) const
+double SurfaceFuelbedIntermediates::getWeightedFuelLoadByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return weightedFuelLoad_[lifeState];
 }

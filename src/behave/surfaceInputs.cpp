@@ -52,12 +52,18 @@ void SurfaceInputs::initializeMembers()
     moistureOneHour_ = 0.0;
     moistureTenHour_ = 0.0;
     moistureHundredHour_ = 0.0;
+    moistureDeadAggregate_ = -1.0;
     moistureLiveHerbaceous_ = 0.0;
     moistureLiveWoody_ = 0.0;
+    moistureLiveAggregate_ = -1.0;
     slope_ = 0.0;
     aspect_ = 0.0;
     windSpeed_ = 0.0;
     windDirection_ = 0.0;
+
+    moistureInputMode_ = MoistureInputMode::BySizeClass;
+
+    isUsingMoistureScenario_ = false;
 
     isUsingTwoFuelModels_ = false;
     isUsingPalmettoGallberry_ = false;
@@ -97,10 +103,9 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits,
     double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
+    moistureInputMode_ = MoistureInputMode::BySizeClass;
     setSlope(slope, slopeUnits);
     aspect_ = aspect;
-
- 
 
     setFuelModelNumber(fuelModelNumber);
    
@@ -143,6 +148,7 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits,
     double aspect, double canopyCover, CoverUnits::CoverUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
+    moistureInputMode_ = MoistureInputMode::BySizeClass;
     int fuelModelNumber = firstfuelModelNumber;
     updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, 
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
@@ -162,6 +168,7 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
+    moistureInputMode_ = MoistureInputMode::BySizeClass;
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits,
@@ -182,6 +189,7 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
+    moistureInputMode_ = MoistureInputMode::BySizeClass;
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits,
@@ -267,6 +275,26 @@ void SurfaceInputs::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, Moi
 void SurfaceInputs::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     moistureLiveWoody_ = MoistureUnits::toBaseUnits(moistureLiveWoody, moistureUnits);
+}
+
+void SurfaceInputs::setMoistureDeadAggregate(double moistureDeadAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    moistureDeadAggregate_ = MoistureUnits::toBaseUnits(moistureDeadAggregate, moistureUnits);
+    moistureOneHour_ = MoistureUnits::toBaseUnits(moistureDeadAggregate, moistureUnits);
+    moistureTenHour_ = MoistureUnits::toBaseUnits(moistureDeadAggregate, moistureUnits);
+    moistureHundredHour_ = MoistureUnits::toBaseUnits(moistureDeadAggregate, moistureUnits);
+}
+
+void SurfaceInputs::setMoistureLiveAggregate(double moistureLiveAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    moistureLiveAggregate_ = MoistureUnits::toBaseUnits(moistureLiveAggregate, moistureUnits);
+    moistureLiveWoody_ = MoistureUnits::toBaseUnits(moistureLiveAggregate, moistureUnits);
+    moistureLiveHerbaceous_ = MoistureUnits::toBaseUnits(moistureLiveAggregate, moistureUnits);
+}
+
+void SurfaceInputs::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)
+{
+    moistureInputMode_ = moistureInputMode;
 }
 
 void SurfaceInputs::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)
@@ -390,6 +418,11 @@ double SurfaceInputs::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum mo
     return MoistureUnits::fromBaseUnits(moistureHundredHour_, moistureUnits);
 }
 
+double SurfaceInputs::getMoistureDeadAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return MoistureUnits::fromBaseUnits(moistureDeadAggregate_, moistureUnits);
+}
+
 double SurfaceInputs::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return MoistureUnits::fromBaseUnits(moistureLiveHerbaceous_, moistureUnits);
@@ -398,6 +431,11 @@ double SurfaceInputs::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum
 double SurfaceInputs::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return MoistureUnits::fromBaseUnits(moistureLiveWoody_, moistureUnits);
+}
+
+double SurfaceInputs::getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return MoistureUnits::fromBaseUnits(moistureLiveAggregate_, moistureUnits);
 }
 
 void SurfaceInputs::setAgeOfRough(double ageOfRough)
@@ -493,6 +531,12 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     slope_ = rhs.slope_;
     aspect_ = rhs.aspect_;
 
+    moistureDeadAggregate_ = rhs.moistureDeadAggregate_;
+    moistureLiveAggregate_ = rhs.moistureLiveAggregate_;
+    isUsingMoistureScenario_ = rhs.isUsingMoistureScenario_;
+
+    moistureInputMode_ = rhs.moistureInputMode_;
+
     isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
     secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
     firstFuelModelCoverage_ = rhs.firstFuelModelCoverage_;
@@ -550,4 +594,44 @@ WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum
 double SurfaceInputs::getElapsedTime() const
 {
     return elapsedTime_;
+}
+
+bool SurfaceInputs::isMoistureClassInputNeeded(MoistureClassInput::MoistureClassInputEnum moistureClass) const
+{
+    bool isMoistureClassNeeded = false;
+
+    if((moistureClass == MoistureClassInput::OneHour ||
+        moistureClass == MoistureClassInput::TenHour ||
+        moistureClass == MoistureClassInput::HundredHour) &&
+        (moistureInputMode_ == MoistureInputMode::BySizeClass ||
+            moistureInputMode_ == MoistureInputMode::LiveAggregateAndDeadSizeClass))
+    {
+        isMoistureClassNeeded = true;
+    }
+    else if(moistureClass == MoistureClassInput::DeadAggregate &&
+        (moistureInputMode_ == MoistureInputMode::AllAggregate ||
+            moistureInputMode_ == MoistureInputMode::DeadAggregateAndLiveSizeClass))
+    {
+        isMoistureClassNeeded = true;
+    }
+    else if((moistureClass == MoistureClassInput::LiveHerbaceous ||
+        moistureClass == MoistureClassInput::LiveWoody) &&
+        (moistureInputMode_ == MoistureInputMode::BySizeClass ||
+            moistureInputMode_ == MoistureInputMode::DeadAggregateAndLiveSizeClass))
+    {
+        isMoistureClassNeeded = true;
+    }
+    else if(moistureClass == MoistureClassInput::LiveAggregate &&
+        (moistureInputMode_ == MoistureInputMode::AllAggregate ||
+            moistureInputMode_ == MoistureInputMode::LiveAggregateAndDeadSizeClass))
+    {
+        isMoistureClassNeeded = true;
+    }
+
+    return isMoistureClassNeeded;
+}
+
+MoistureInputMode::MoistureInputModeEnum SurfaceInputs::getMoistureInputMode() const
+{
+    return moistureInputMode_;
 }

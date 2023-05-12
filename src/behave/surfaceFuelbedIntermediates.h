@@ -57,11 +57,11 @@ public:
     double getRelativePackingRatio() const;
     double getSigma() const;
     double getHeatSink() const;
-    double getWeightedMoistureByLifeState(int lifeState) const;
-    double getMoistureOfExtinctionByLifeState(int lifeState) const;
-    double getWeightedHeatByLifeState(int lifeState) const;
-    double getWeightedSilicaByLifeState(int lifeState) const;
-    double getWeightedFuelLoadByLifeState(int lifeState) const;
+    double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
+    double getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
+    double getWeightedHeatByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
+    double getWeightedSilicaByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
+    double getWeightedFuelLoadByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
 
     // Palmetto-Gallberry
     double getPalmettoGallberyDeadOneHourLoad() const;
@@ -107,11 +107,11 @@ private:
     // Member variables
     int numberOfSizeClasses_[FuelConstants::MAX_LIFE_STATES];                           // Number of size classes in the currently used fuel model
     double depth_;                                                                      // Depth of fuelbed in feet
-    double weightedMoisture_[FuelConstants::MAX_LIFE_STATES];                           // Weighted moisture content for both live and dead fuels
+    double weightedMoisture_[FuelConstants::MAX_LIFE_STATES];                           // Weighted (characteristic) moisture content for both live and dead fuels
     double totalSurfaceArea_[FuelConstants::MAX_LIFE_STATES];                           // Total surface area for both live and dead fuels
-    double weightedHeat_[FuelConstants::MAX_LIFE_STATES];                               // Weighted heat content for both live and dead fuels
-    double weightedSilica_[FuelConstants::MAX_LIFE_STATES];                             // Weighted silica content for both live and dead fuels
-    double weightedFuelLoad_[FuelConstants::MAX_LIFE_STATES];                           // Weighted fuel loading for both live and dead fuels
+    double weightedHeat_[FuelConstants::MAX_LIFE_STATES];                               // Weighted (characteristic) heat content for both live and dead fuels
+    double weightedSilica_[FuelConstants::MAX_LIFE_STATES];                             // Weighted (characteristic) silica content for both live and dead fuels
+    double weightedFuelLoad_[FuelConstants::MAX_LIFE_STATES];                           // Weighted (characteristic) fuel loading for both live and dead fuels
     double moistureOfExtinction_[FuelConstants::MAX_LIFE_STATES];                       // Moisture of extinction for both live and dead fuels
     double fractionOfTotalSurfaceArea_[FuelConstants::MAX_LIFE_STATES];                 // Ratio of surface area to total surface area
     double fuelDensity_[FuelConstants::MAX_LIFE_STATES];                                // Fuel density for live and dead fuels
@@ -137,8 +137,6 @@ private:
     bool isUsingWesternAspen_;
 
     int fuelModelNumber_;           // The number associated with the current fuel model being used
-    double liveFuelMois_;           // Live fuel moisture content
-    double liveFuelMext_;           // Live fuel moisture of extinction 
     double heatSink_;               // Rothermel 1972, Denominator of equation 52
     double sigma_;                  // Fuelbed characteristic SAVR, Rothermel 1972 
     double bulkDensity_;            // Ovendry bulk density in lbs/ft^2, Rothermale 1972, equation 40

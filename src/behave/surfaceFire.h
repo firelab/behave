@@ -72,7 +72,7 @@ public:
     double getHeatSink() const;
     double getBulkDensity() const;
     double getReactionIntensity() const;
-
+    double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWindAdjustmentFactor() const;
     bool getIsWindLimitExceeded() const;
  
@@ -99,13 +99,14 @@ private:
     void calculateWindAdjustmentFactor();
     void calculateWindFactor();
     void calculateSlopeFactor();
+    void calculateHeatSource();
 
     void calculateResidenceTime();
     void calculateFireFirelineIntensity(double forwardSpreadRate);
     void calculateFlameLength();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
- 
+  
     void calculateEffectiveWindSpeed();
     void applyWindSpeedLimit();
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
@@ -139,7 +140,8 @@ private:
     double maxFlameLength_;                                 // Flame length computed from spread rate in max direction, used in SAFETY
     double flameLength_;
     double backingSpreadRate_;
-   
+    double heatSource_;
+
     double midflameWindSpeed_; 
     double windAdjustmentFactor_;
     WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;

@@ -82,6 +82,7 @@ public:
     double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
 
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
@@ -91,8 +92,11 @@ public:
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits); 
+    void setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
     void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
@@ -159,6 +163,8 @@ public:
     double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    bool isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::MoistureClassInputEnum moistureClass) const;
+    MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
     double getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const;
     double getWindDirection() const;
     double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;

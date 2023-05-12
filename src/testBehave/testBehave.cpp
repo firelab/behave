@@ -287,6 +287,99 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     double expectedFlankingDistance = 10.17533253;
     reportTestResult(testInfo, testName, observedFlankingDistance, expectedFlankingDistance, error_tolerance);
 
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    
+    testName = "Test aggregate live and dead moisture input mode, 5 mph 20 foot uplsope wind";
+    behaveRun.surface.setMoistureInputMode(MoistureInputMode::AllAggregate);
+    behaveRun.surface.setMoistureDeadAggregate(3.0, moistureUnits);
+    behaveRun.surface.setMoistureLiveAggregate(80.0, moistureUnits);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 8.589431;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    testName = "Test check for 1 hour input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    bool observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::OneHour);
+    bool expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for 10 hour moisture input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::TenHour);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for 100 hour moisture input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::HundredHour);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for live herb moisture input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::LiveHerbaceous);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for live woody moisture input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::LiveWoody);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for aggregate dead moisture input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::DeadAggregate);
+    expectedIsMoistureClassNeeded = true;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for aggregate live moisture input requirment for current fuel and aggregate moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::LiveAggregate);
+    expectedIsMoistureClassNeeded = true;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    behaveRun.surface.setMoistureInputMode(MoistureInputMode::DeadAggregateAndLiveSizeClass);
+
+    testName = "Test check for 1 hour input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::OneHour);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for 10 hour moisture input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::TenHour);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for 100 hour moisture input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::HundredHour);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for live herb moisture input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::LiveHerbaceous);
+    expectedIsMoistureClassNeeded = true;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for live woody moisture input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::LiveWoody);
+    expectedIsMoistureClassNeeded = true;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for aggregate dead moisture input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::DeadAggregate);
+    expectedIsMoistureClassNeeded = true;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test check for aggregate live moisture input requirment for current fuel and aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    observedIsMoistureClassNeeded = behaveRun.surface.isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::LiveAggregate);
+    expectedIsMoistureClassNeeded = false;
+    reportTestResult(testInfo, testName, (double)observedIsMoistureClassNeeded, (double)observedIsMoistureClassNeeded, error_tolerance);
+
+    testName = "Test aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun); // reset moisture
+    behaveRun.surface.setMoistureDeadAggregate(3.0, moistureUnits);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 9.752679;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun); // reset moisture
+    
     testName = "Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)";
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);

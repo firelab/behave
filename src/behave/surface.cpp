@@ -295,6 +295,11 @@ double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTi
     return size_.getFireArea(areaUnits, elapsedTime, timeUnits);
 }
 
+double Surface::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
+{
+    return surfaceFire_.getWeightedMoistureByLifeState(lifeState);
+}
+
 void Surface::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
 {
     surfaceInputs_.setCanopyCover(canopyCover, coverUnits);
@@ -435,6 +440,79 @@ double Surface::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUn
     return surfaceInputs_.getMoistureLiveWoody(moistureUnits);
 }
 
+bool Surface::isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::MoistureClassInputEnum moistureClass) const
+{
+    int currentFuelModel = surfaceInputs_.getFuelModelNumber();
+    bool isMoistureClassInputNeeded = surfaceInputs_.isMoistureClassInputNeeded(moistureClass);
+    bool isFuelLoadNonZeroForSizeClass = false;
+    
+    double fuelLoad = 0.0;
+
+    LoadingUnits::LoadingUnitsEnum loadingUnits = LoadingUnits::PoundsPerSquareFoot;
+    if(moistureClass == MoistureClassInput::OneHour)
+    {
+        fuelLoad = fuelModels_->getFuelLoadOneHour(currentFuelModel, loadingUnits);
+        if(fuelLoad > 0.0)
+        {
+            isFuelLoadNonZeroForSizeClass = true;
+        }
+    }
+    else if(moistureClass == MoistureClassInput::TenHour)
+    {
+        fuelLoad = fuelModels_->getFuelLoadTenHour(currentFuelModel, loadingUnits);
+        if(fuelLoad > 0.0)
+        {
+            isFuelLoadNonZeroForSizeClass = true;
+        }
+    }
+    else if(moistureClass == MoistureClassInput::HundredHour)
+    {
+        fuelLoad = fuelModels_->getFuelLoadHundredHour(currentFuelModel, loadingUnits);
+        if(fuelLoad > 0.0)
+        {
+            isFuelLoadNonZeroForSizeClass = true;
+        }
+    }
+    else if(moistureClass == MoistureClassInput::LiveHerbaceous)
+    {
+        fuelLoad = fuelModels_->getFuelLoadLiveHerbaceous(currentFuelModel, loadingUnits);
+        if(fuelLoad > 0.0)
+        {
+            isFuelLoadNonZeroForSizeClass = true;
+        }
+    }
+    else if(moistureClass == MoistureClassInput::LiveWoody)
+    {
+        fuelLoad = fuelModels_->getFuelLoadLiveWoody(currentFuelModel, loadingUnits);
+        if(fuelLoad > 0.0)
+        {
+            isFuelLoadNonZeroForSizeClass = true;
+        }
+    }
+    else if(moistureClass == MoistureClassInput::DeadAggregate)
+    {
+        // All fuels have at least one non-zero dead component
+        isFuelLoadNonZeroForSizeClass = true;
+    }
+    else if(moistureClass == MoistureClassInput::LiveAggregate)
+    {
+        double fuelHerbaceous = fuelModels_->getFuelLoadLiveHerbaceous(currentFuelModel, loadingUnits);
+        double fuelWoody = fuelModels_->getFuelLoadLiveWoody(currentFuelModel, loadingUnits);
+
+        if((fuelHerbaceous > 0.0) || (fuelWoody > 0.0))
+        {
+            isFuelLoadNonZeroForSizeClass = true;
+        }
+    }
+
+    return isMoistureClassInputNeeded && isFuelLoadNonZeroForSizeClass;
+}
+
+MoistureInputMode::MoistureInputModeEnum Surface::getMoistureInputMode() const
+{
+    return surfaceInputs_.getMoistureInputMode();
+}
+
 double Surface::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
 {
     return CoverUnits::fromBaseUnits(surfaceInputs_.getCanopyCover(), coverUnits);
@@ -528,6 +606,11 @@ void Surface::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::
     surfaceInputs_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
 }
 
+void Surface::setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surfaceInputs_.setMoistureDeadAggregate(moistureDead, moistureUnits);
+}
+
 void Surface::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
@@ -536,6 +619,16 @@ void Surface::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureU
 void Surface::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
+}
+
+void Surface::setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surfaceInputs_.setMoistureLiveAggregate(moistureLive, moistureUnits);
+}
+
+void Surface::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)
+{
+    surfaceInputs_.setMoistureInputMode(moistureInputMode);
 }
 
 void Surface::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)
