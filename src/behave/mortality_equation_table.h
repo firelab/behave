@@ -2,7 +2,9 @@
 *
 *
 *********************************************************/
-#pragma once
+
+#ifndef MORTALITY_EQUATION_TABLE_H
+#define MORTALITY_EQUATION_TABLE_H
 
 #include <functional>
 #include <vector>
@@ -103,3 +105,5 @@ private:
         CrownDamageEquationCode crownDamageEquationCode, vector<bool>& isFieldRequired);
     void resetIsFieldRequiredVector(vector<bool>& isFieldRequired);
 };
+
+#endif //MORTALITY_EQUATION_TABLE_H

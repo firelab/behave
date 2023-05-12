@@ -1,10 +1,12 @@
 /*{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}
-// Name: mortality_inpuits.h
+// Name: mortality_inputs.h
 // Desc: New version of Mortality for CodeBlocks
 //
 //{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}*/
 //-------------------------------------------------
-#pragma once 
+
+#ifndef MORTALITY_INPUTS_H
+#define MORTALITY_INPUTS_H
 
 #include "behaveUnits.h"
 #include "mortality_equation_table.h"
@@ -113,3 +115,5 @@ private:
 
     double barkThickness_;             // Not input by user, but calculated if needed for further calcuation
 };
+
+#endif //MORTALITY_INPUTS_H

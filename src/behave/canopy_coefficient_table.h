@@ -26,9 +26,11 @@
 
 /*.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.- */
 /*                        Crown Coefficients                                 */
-/* The Crown Code is the FVS 2 char species code, which is what the Table 8 */
+/* The Crown Code is the FVS 2 char species code, which is what the Table 8  */
 /*  document used.                                                           */
-#pragma once
+
+#ifndef CANOPY_COEFFICIENT_TABLE_H
+#define CANOPY_COEFFICIENT_TABLE_H
 
 #include <vector>
 
@@ -49,3 +51,5 @@ public:
     CanopyCoefficientTable();
     vector<CanopyCoefficientTableRecord> record_;
 };
+
+#endif // CANOPY_COEFFICIENT_TABLE_H

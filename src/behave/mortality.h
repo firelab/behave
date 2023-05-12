@@ -3,7 +3,9 @@
 // Desc: Main interface for Morality CodeBlock
 //
 //*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}
-#pragma once 
+
+#ifndef MORTALITY_H
+#define MORTALITY_H
 
 #include <string>
 #include <vector>
@@ -204,3 +206,5 @@ private:
     double gloabalTotalCoveragePrefireLive_;
     double globalTotalCoverPostfireLive_;
 };
+
+#endif //MORTALITY_H

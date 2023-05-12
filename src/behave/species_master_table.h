@@ -2,7 +2,9 @@
 * Name: species_master_table.h
 * Desc:
 *}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}{*}*/
-#pragma once
+
+#ifndef SPECIES_MASTER_TABLE_H
+#define SPECIES_MASTER_TABLE_H
 
 #include "canopy_coefficient_table.h"
 #include "mortality_equation_table.h"
@@ -60,3 +62,5 @@ public:
         int8_t region1, int8_t  region2, int8_t  region3, int8_t region4, EquationType equationType,
         CrownDamageEquationCode crownDamageEquationCode);
 };
+
+#endif // SPECIES_MASTER_TABLE_H
