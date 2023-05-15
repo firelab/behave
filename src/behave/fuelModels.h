@@ -128,7 +128,7 @@ private:
         bool isDefined_;                    // If true, record has been populated with values for its fields
     };
 
-    std::vector<FuelModelRecord> FuelModelArray_;
+    std::vector<FuelModelRecord> FuelModelVector_;
 };
 
 #endif // FUELMODELS_H
