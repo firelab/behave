@@ -427,7 +427,8 @@ void SurfaceFire::calculateSlopeFactor()
 void SurfaceFire::calculateHeatSource()
 {
     double propogatingFlux = surfaceFuelbedIntermediates_.getPropagatingFlux();
-    heatSource_ = reactionIntensity_ * propogatingFlux * (1 + phiS_ + phiW_);
+    double windSlopeAdjustedSpreadRateOverNoWindNoSlopeSpreadRate = forwardSpreadRate_ / noWindNoSlopeSpreadRate_;
+    heatSource_ = windSlopeAdjustedSpreadRateOverNoWindNoSlopeSpreadRate * reactionIntensity_ * propogatingFlux;
 }
 
 double SurfaceFire::getFuelbedDepth() const
@@ -520,6 +521,11 @@ double SurfaceFire::getHeatSink() const
     return surfaceFuelbedIntermediates_.getHeatSink();
 }
 
+double SurfaceFire::getHeatSource() const
+{
+    return heatSource_;
+}
+
 double SurfaceFire::getBulkDensity() const
 {
     return surfaceFuelbedIntermediates_.getBulkDensity();
@@ -538,6 +544,11 @@ double SurfaceFire::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateE
 double SurfaceFire::getWindAdjustmentFactor() const
 {
     return windAdjustmentFactor_;
+}
+
+double SurfaceFire::getCharacteristicSAVR() const
+{
+    return surfaceFuelbedIntermediates_.getSigma();
 }
 
 bool SurfaceFire::getIsWindLimitExceeded() const

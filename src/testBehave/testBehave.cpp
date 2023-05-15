@@ -236,7 +236,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
 
     std::cout << "Testing Surface, single fuel model\n";
-    testName = "Test north oriented mode, 45 degree wind, 5 mph 20 foot wind, 30 degree slope";
+    testName = "Test north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     behaveRun.surface.setWindHeightInputMode(windHeightInputMode);
     behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
@@ -248,6 +248,25 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 19.677584;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    testName = "Test characteristic SAVR for north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";
+    double observedCharacteristicSAVR = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet));
+    double expectedCharacteristicSAVR = 1631.128734;
+    reportTestResult(testInfo, testName, observedCharacteristicSAVR, expectedCharacteristicSAVR, error_tolerance);
+
+    testName = "Test heat source for north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";
+    double observedHeatSource = roundToSixDecimalPlaces(behaveRun.surface.getHeatSource(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute));
+    double expectedHeatSource = 4983.061169;
+    reportTestResult(testInfo, testName, observedHeatSource, expectedHeatSource, error_tolerance);
+
+    testName = "Test heat source for north oriented mode, 0 degree wind, 0 degree aspect, 5 mph 20 foot wind, 0 degree slope";
+    behaveRun.surface.setWindDirection(0);
+    behaveRun.surface.setAspect(0);
+    behaveRun.surface.setSlope(0, SlopeUnits::Degrees);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedHeatSource = roundToSixDecimalPlaces(behaveRun.surface.getHeatSource(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute));
+    expectedHeatSource = 1164.267376;
+    reportTestResult(testInfo, testName, observedHeatSource, expectedHeatSource, error_tolerance);
 
     testName = "Test upslope oriented mode, 5 mph 20 foot uplsope wind";
     behaveRun.surface.setFuelModelNumber(124);

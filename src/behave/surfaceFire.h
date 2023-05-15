@@ -70,10 +70,12 @@ public:
     double getMidflameWindSpeed() const;
     double getSlopeFactor() const;
     double getHeatSink() const;
+    double getHeatSource() const;
     double getBulkDensity() const;
     double getReactionIntensity() const;
     double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWindAdjustmentFactor() const;
+    double getCharacteristicSAVR() const;
     bool getIsWindLimitExceeded() const;
  
     void calculateMidflameWindSpeed();

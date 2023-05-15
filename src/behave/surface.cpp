@@ -285,6 +285,11 @@ double Surface::getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) cons
     return HeatSinkUnits::fromBaseUnits(surfaceFire_.getHeatSink(), heatSinkUnits);
 }
 
+double Surface::getHeatSource(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum heatSourceUnits) const
+{
+    return HeatSourceAndReactionIntensityUnits::fromBaseUnits(surfaceFire_.getHeatSource(), heatSourceUnits);
+}
+
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
     return size_.getFirePerimeter(lengthUnits, elapsedTime, timeUnits);
@@ -298,6 +303,11 @@ double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTi
 double Surface::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return surfaceFire_.getWeightedMoistureByLifeState(lifeState);
+}
+
+double Surface::getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getCharacteristicSAVR(), savrUnits);
 }
 
 void Surface::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)

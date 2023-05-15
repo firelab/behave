@@ -80,9 +80,11 @@ public:
     double getSlopeFactor() const;
     double getBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const;
     double getHeatSink(HeatSinkUnits::HeatSinkUnitsEnum heatSinkUnits) const;
+    double getHeatSource(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum heatSourceUnits) const;
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
+    double getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
 
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
