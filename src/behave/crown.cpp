@@ -109,7 +109,6 @@ void Crown::memberwiseCopyAssignment(const Crown& rhs)
 void Crown::doCrownRunRothermel()
 {
     // This method uses Rothermel's 1991 crown fire correlation to calculate Crown fire average spread rate (ft/min)
-
     double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
     double crownRatio = 0;
@@ -121,24 +120,26 @@ void Crown::doCrownRunRothermel()
     surfaceFuel_.setCrownRatio(crownRatio);
 
     // Step 1: Do surface run and store values needed for further calculations 
+    surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Crown ROS output given in direction of max spread 
     surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
-    surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
     surfaceFireSpreadRate_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Byram
     surfaceFireFlameLength_ = surfaceFuel_.getFlameLength(LengthUnits::Feet); // Byram
-    double windAdjustmentFactor = 0.4; // Wind adjustment factor is assumed to be 0.4
-    surfaceFuel_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
-
+    
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
-    surfaceFuel_.setFuelModelNumber(10); // Set the fuel model used to fuel model 10
-    surfaceFuel_.setSlope(0.0, SlopeUnits::Degrees); // Slope is assumed to be zero
-    surfaceFuel_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
-    surfaceFuel_.setWindDirection(0.0); // Wind direction is assumed to be upslope
+    crownFuel_ = surfaceFuel_;
+    crownFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    double windAdjustmentFactor = 0.4; // Wind adjustment factor is assumed to be 0.4 for crown fuels
+    crownFuel_.setUserProvidedWindAdjustmentFactor(windAdjustmentFactor);
+    crownFuel_.setFuelModelNumber(10); // Set the fuel model used to fuel model 10
+    crownFuel_.setSlope(0.0, SlopeUnits::Degrees); // Slope is assumed to be zero
+    crownFuel_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
+    crownFuel_.setWindDirection(0.0); // Wind direction is assumed to be upslope
 
     // Step 3: Determine crown fire behavior
-    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
-    crownFireSpreadRate_ = 3.34 * surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
+    crownFuel_.doSurfaceRunInDirectionOfMaxSpread();
+    crownFireSpreadRate_ = 3.34 * crownFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
 
     // Step 4: Calculate remaining crown fire characteristics
     calculateCrownFuelLoad();
@@ -166,7 +167,6 @@ void Crown::doCrownRunRothermel()
 void Crown::doCrownRunScottAndReinhardt()
 {
     // Scott and Reinhardt (2001) linked models method for crown fire
-
     double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
     double crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
@@ -174,6 +174,8 @@ void Crown::doCrownRunScottAndReinhardt()
     surfaceFuel_.setCrownRatio(crownRatio);
 
     // Step 1: Do surface run and store values needed for further calculations
+    const double windSpeed = surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
+    surfaceFuel_.setWindSpeed(windSpeed, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
     surfaceFireSpreadRate_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Rothermel 1991
     surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
@@ -183,12 +185,12 @@ void Crown::doCrownRunScottAndReinhardt()
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
     crownFuel_ = surfaceFuel_;
     crownFuel_.setFuelModelNumber(10); // Set the crown fuel model used to fuel model 10
-    crownFuel_.setUserProvidedWindAdjustmentFactor(0.4); // Wind adjustment factor is assumed to be 0.4
     crownFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    crownFuel_.setUserProvidedWindAdjustmentFactor(0.4); // Wind adjustment factor is assumed to be 0.4
     crownFuel_.setSlope(0, SlopeUnits::Degrees);
     crownFuel_.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     crownFuel_.setWindDirection(0.0); // Wind direction is assumed to be upslope
-    crownFuel_.setWindSpeed(surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot), SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
+    crownFuel_.setWindSpeed(windSpeed, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
 
     // Step 3: Determine crown fire behavior
     crownFuel_.doSurfaceRunInDirectionOfMaxSpread();
@@ -430,7 +432,6 @@ void Crown::initializeMembers()
     isActiveCrownFire_ = false;
 
     crownFireActiveWindSpeed_ = 0.0;
-
     crownInputs_.initializeMembers();
 }
 
@@ -577,9 +578,11 @@ void Crown::calculateCrownLengthToWidthRatio()
 
 void Crown::calculateCrowningSurfaceFireRateOfSpread()
 {
+    Surface surfaceTemp = surfaceFuel_; // Remember state to undo side-effects of this method
     surfaceFuel_.setWindSpeed(crownFireActiveWindSpeed_, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Do crown run with crowning fire active wind speed
     crowningSurfaceFireRos_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute);
+    surfaceFuel_ = surfaceTemp; // Restore state
 }
 
 void Crown::calculateFireTypeRothermel()
@@ -796,6 +799,12 @@ void  Crown::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::M
     surfaceFuel_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
 }
 
+void Crown::setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surfaceFuel_.setMoistureDeadAggregate(moistureDead, moistureUnits);
+    crownFuel_.setMoistureDeadAggregate(moistureDead, moistureUnits);
+}
+
 void  Crown::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
@@ -804,6 +813,19 @@ void  Crown::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUn
 void  Crown::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
+    crownFuel_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
+}
+
+void Crown::setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits)
+{
+    surfaceFuel_.setMoistureLiveAggregate(moistureLive, moistureUnits);
+    crownFuel_.setMoistureLiveAggregate(moistureLive, moistureUnits);
+}
+
+void Crown::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)
+{
+    surfaceFuel_.setMoistureInputMode(moistureInputMode);
+    crownFuel_.setMoistureInputMode(moistureInputMode);
 }
 
 void  Crown::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)
@@ -829,6 +851,7 @@ void  Crown::setWindDirection(double windDirection)
 void Crown::setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode)
 {
     surfaceFuel_.setWindHeightInputMode(windHeightInputMode);
+    crownFuel_.setWindHeightInputMode(windHeightInputMode);
 }
 
 void  Crown::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadAngleMode)

@@ -940,37 +940,48 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     DensityUnits::DensityUnitsEnum canopyBulkDensityUnits = DensityUnits::PoundsPerCubicFoot;
 
     behaveRun.crown.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
-    behaveRun.crown.setUserProvidedWindAdjustmentFactor(0.12);
+    behaveRun.crown.setUserProvidedWindAdjustmentFactor(0.4);
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
         crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
 
-    testName = "Test crown fire spread rate";
+    testName = "Test Scott and Reinhardt crown fire spread rate";
     behaveRun.crown.doCrownRunScottAndReinhardt();
     expectedFinalCrownFireSpreadRate = 65.221842;
     observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::FeetPerMinute));
     reportTestResult(testInfo, testName, observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, error_tolerance);
 
-    testName = "Test crown flame length";
+    testName = "Test Scott and Reinhardt crown flame length";
     expectedFinalCrownFlameLength = 60.744542;
     observedFinalCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getFinalFlameLength(LengthUnits::Feet));
     reportTestResult(testInfo, testName, observedFinalCrownFlameLength, expectedFinalCrownFlameLength, error_tolerance);
 
-    testName = "Test crown fireline intensity";
+    testName = "Test Scott and Reinhardt crown fireline intensity";
     expectedFinalCrownFirelineIntensity = 5293.170672;
     observedFinalCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getFinalFirelineIntesity(FirelineIntensityUnits::BtusPerFootPerSecond));
     reportTestResult(testInfo, testName, observedFinalCrownFirelineIntensity, expectedFinalCrownFirelineIntensity, error_tolerance);
 
-    testName = "Test crown fire critical open wind speed";
+    testName = "Test Scott and Reinhardt crown fire critical open wind speed";
     expectedCriticalOpenWindSpeed = 1717.916785;
     observedCriticalOpenWindSpeed = behaveRun.crown.getCriticalOpenWindSpeed(SpeedUnits::FeetPerMinute);
     reportTestResult(testInfo, testName, observedCriticalOpenWindSpeed, expectedCriticalOpenWindSpeed, error_tolerance);
 
-    testName = "Test crown fire type, crown fire expected";
+    testName = "Test Scott and Reinhardt crown fire type, crown fire expected";
     expectedFireType = (int)FireType::Crowning;
     observedFireType = (int)behaveRun.crown.getFireType();
     reportTestResult(testInfo, testName, expectedFireType, observedFireType, error_tolerance);
+
+    behaveRun.crown.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
+    testName = "Test Scott and Reinhardt crown fire spread rate with aggregate moisture";
+    behaveRun.crown.setMoistureInputMode(MoistureInputMode::AllAggregate);
+    behaveRun.crown.setMoistureDeadAggregate(9.0, moistureUnits);
+    behaveRun.crown.setMoistureLiveAggregate(100.0, moistureUnits);
+    behaveRun.crown.setWindSpeed(2187.2266239, windSpeedUnits, WindHeightInputMode::TwentyFoot);
+    behaveRun.crown.doCrownRunScottAndReinhardt();
+    expectedFinalCrownFireSpreadRate = 64.016394;
+    observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::ChainsPerHour));
+    reportTestResult(testInfo, testName, observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, error_tolerance);
 
     // Test crown fire spread rate, flame length, intensity; Torching fire expected
     fuelModelNumber = 5;
