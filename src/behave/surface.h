@@ -169,6 +169,7 @@ public:
     MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
     double getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const;
     double getWindDirection() const;
+    double getUserProvidedWindAdjustmentFactor() const;
     double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getAspect() const;
     double getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const;

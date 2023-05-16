@@ -586,6 +586,11 @@ double Surface::getWindDirection() const
     return surfaceInputs_.getWindDirection();
 }
 
+double Surface::getUserProvidedWindAdjustmentFactor() const
+{
+    return surfaceInputs_.getUserProvidedWindAdjustmentFactor();
+}
+
 double Surface::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
     return SlopeUnits::fromBaseUnits(surfaceInputs_.getSlope(), slopeUnits);
