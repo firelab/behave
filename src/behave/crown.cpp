@@ -822,6 +822,21 @@ void Crown::setMoistureLiveAggregate(double moistureLive, MoistureUnits::Moistur
     crownFuel_.setMoistureLiveAggregate(moistureLive, moistureUnits);
 }
 
+void Crown::setMoistureScenarios(MoistureScenarios& moistureScenarios)
+{
+    surfaceFuel_.setMoistureScenarios(moistureScenarios);
+}
+
+bool Crown::setMoistureScenarioByName(std::string moistureScenarioName)
+{
+    return surfaceFuel_.setMoistureScenarioByName(moistureScenarioName);
+}
+
+bool Crown::setMoistureScenarioByIndex(int moistureScenarioIndex)
+{
+    return surfaceFuel_.setMoistureScenarioByIndex(moistureScenarioIndex);
+}
+
 void Crown::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)
 {
     surfaceFuel_.setMoistureInputMode(moistureInputMode);
@@ -897,6 +912,91 @@ double Crown::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistur
 double Crown::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return surfaceFuel_.getMoistureLiveWoody(moistureUnits);
+}
+
+int Crown::getNumberOfMoistureScenarios()
+{
+    return surfaceFuel_.getNumberOfMoistureScenarios();
+}
+
+int Crown::getMoistureScenarioIndexByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioIndexByName(name);
+}
+
+bool Crown::getIsMoistureScenarioDefinedByName(const std::string name)
+{
+    return surfaceFuel_.getIsMoistureScenarioDefinedByName(name);
+}
+
+std::string Crown::getMoistureScenarioDecriptionByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioDecriptionByName(name);
+}
+
+double Crown::getMoistureScenarioOneHourByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioOneHourByName(name);
+}
+
+double Crown::getMoistureScenarioTenHourByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioTenHourByName(name);
+}
+
+double Crown::getMoistureScenarioHundredHourByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioHundredHourByName(name);
+}
+
+double Crown::getMoistureScenarioLiveHerbaceousByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioLiveHerbaceousByName(name);
+}
+
+double Crown::getMoistureScenarioLiveWoodyByName(const std::string name)
+{
+    return surfaceFuel_.getMoistureScenarioLiveWoodyByName(name);
+}
+
+bool Crown::getIsMoistureScenarioDefinedByIndex(const int index)
+{
+    return surfaceFuel_.getIsMoistureScenarioDefinedByIndex(index);
+}
+
+std::string Crown::getMoistureScenarioNameByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioNameByIndex(index);
+}
+
+std::string Crown::getMoistureScenarioDecriptionByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioDecriptionByIndex(index);
+}
+
+double Crown::getMoistureScenarioOneHourByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioOneHourByIndex(index);
+}
+
+double Crown::getMoistureScenarioTenHourByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioTenHourByIndex(index);
+}
+
+double Crown::getMoistureScenarioHundredHourByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioHundredHourByIndex(index);
+}
+
+double Crown::getMoistureScenarioLiveHerbaceousByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioLiveHerbaceousByIndex(index);
+}
+
+double Crown::getMoistureScenarioLiveWoodyByIndex(const int index)
+{
+    return surfaceFuel_.getMoistureScenarioLiveWoodyByIndex(index);
 }
 
 double Crown::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const

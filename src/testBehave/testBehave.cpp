@@ -50,7 +50,9 @@ int main()
     TestInfo testInfo;
     FuelModels fuelModels;
     SpeciesMasterTable mortalitySpeciesTable;
+    MoistureScenarios moistureScenarios;
     BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
+    behaveRun.setMoistureScenarios(moistureScenarios);
 
     testSurfaceSingleFuelModel(testInfo, behaveRun);
     testLengthToWidthRatio(testInfo, behaveRun);
@@ -308,6 +310,23 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
     
+    testName = "Test moisture scenario input mode, D1L1 Scenario, 5 mph 20 foot uplsope wind";
+    behaveRun.surface.setMoistureInputMode(MoistureInputMode::MoistureScenario);
+    std::string moistureScenarioName = "D1L1";
+    behaveRun.surface.setMoistureScenarioByName(moistureScenarioName);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 15.023945;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    testName = "Test moisture scenario input mode, D2L3 Scenario, 5 mph 20 foot uplsope wind";
+    moistureScenarioName = "d2L3"; // testing case insensitivity
+    behaveRun.surface.setMoistureScenarioByName(moistureScenarioName);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 1.978840;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
     testName = "Test aggregate live and dead moisture input mode, 5 mph 20 foot uplsope wind";
     behaveRun.surface.setMoistureInputMode(MoistureInputMode::AllAggregate);
     behaveRun.surface.setMoistureDeadAggregate(3.0, moistureUnits);
@@ -391,12 +410,14 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test aggregate dead and live size class moisture input mode, 5 mph 20 foot uplsope wind";
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun); // reset moisture
+    behaveRun.surface.setMoistureInputMode(MoistureInputMode::DeadAggregateAndLiveSizeClass);
     behaveRun.surface.setMoistureDeadAggregate(3.0, moistureUnits);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 9.752679;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    behaveRun.surface.setMoistureInputMode(MoistureInputMode::BySizeClass);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun); // reset moisture
     
     testName = "Test upslope oriented mode, 5 mph 20 foot wind cross-slope left to right (90 degrees)";
@@ -972,14 +993,22 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     observedFireType = (int)behaveRun.crown.getFireType();
     reportTestResult(testInfo, testName, expectedFireType, observedFireType, error_tolerance);
 
-    behaveRun.crown.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
     testName = "Test Scott and Reinhardt crown fire spread rate with aggregate moisture";
     behaveRun.crown.setMoistureInputMode(MoistureInputMode::AllAggregate);
     behaveRun.crown.setMoistureDeadAggregate(9.0, moistureUnits);
     behaveRun.crown.setMoistureLiveAggregate(100.0, moistureUnits);
+    behaveRun.crown.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
     behaveRun.crown.setWindSpeed(2187.2266239, windSpeedUnits, WindHeightInputMode::TwentyFoot);
     behaveRun.crown.doCrownRunScottAndReinhardt();
     expectedFinalCrownFireSpreadRate = 64.016394;
+    observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::ChainsPerHour));
+    reportTestResult(testInfo, testName, observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, error_tolerance);
+
+    testName = "Test Scott and Reinhardt crown fire spread rate with moisture scenario D3L2";
+    behaveRun.crown.setMoistureInputMode(MoistureInputMode::MoistureScenario);
+    behaveRun.crown.setMoistureScenarioByName("D3L2");
+    behaveRun.crown.doCrownRunScottAndReinhardt();
+    expectedFinalCrownFireSpreadRate = 68.334996;
     observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::ChainsPerHour));
     reportTestResult(testInfo, testName, observedFinalCrownFireSpreadRate, expectedFinalCrownFireSpreadRate, error_tolerance);
 
@@ -1009,6 +1038,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     canopyBulkDensity = 0.003746;
     canopyBulkDensityUnits = DensityUnits::PoundsPerCubicFoot;
 
+    behaveRun.crown.setMoistureInputMode(MoistureInputMode::BySizeClass);
     behaveRun.crown.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
     behaveRun.crown.setUserProvidedWindAdjustmentFactor(0.15);
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,

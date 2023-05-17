@@ -31,6 +31,7 @@
 
 #include "behaveUnits.h"
 #include "fuelModels.h"
+#include "moistureScenarios.h"
 #include "surfaceTwoFuelModels.h"
 
 struct MoistureClassInput
@@ -138,6 +139,8 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureDeadAggregate(double moistureDeadAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureLiveAggregate(double moistureLiveAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    bool setMoistureScenarioByName(std::string moistureScenarioName);
+    bool setMoistureScenarioByIndex(int moistureScenarioIndex);
     void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
@@ -161,6 +164,7 @@ public:
     double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    void updateMoisturesBasedOnInputMode();
     double getWindSpeed() const;
     double getWindDirection() const;
     double getSlope() const;
@@ -175,6 +179,8 @@ public:
     double getElapsedTime() const;
     bool isMoistureClassInputNeeded(MoistureClassInput::MoistureClassInputEnum moistureSizeClass) const;
     MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
+    std::string getCurrentMoistureScenarioName() const;
+    int getCurrentMoistureScenarioIndex() const;
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
@@ -237,9 +243,10 @@ public:
     double getAspenDBH() const;
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
 
+    MoistureScenarios* moistureScenarios; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
 private:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);
-
+   
     int fuelModelNumber_;               // 1 to 256
 
     // Weather/Terrain inputs
@@ -257,7 +264,9 @@ private:
     double moistureLiveWoody_;          // 30% to 300%
     double moistureDeadAggregate_;      // Aggregate dead moisture 1% to 60%
     double moistureLiveAggregate_;      // Aggregate live moisture 30% to 300%
-    bool isUsingMoistureScenario_;      // Moisture is entered as a moisture scenario
+    std::string currentMoistureScenarioName_;  // Currently used moisture scenario name
+    int currentMoistureScenarioIndex_;         // Currently used moisture scenario vector index
+    std::vector<double> moistureValuesBySizeClass_; // Stores moisture values which will be used during surface and crown runs
 
     // Two Fuel Models inputs
     bool isUsingTwoFuelModels_;         // Whether fire spread calculation is using Two Fuel Models

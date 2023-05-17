@@ -645,4 +645,7 @@ void SurfaceFire::initializeMembers()
     canopyCrownFraction_ = 0.0;
 
     aspenMortality_ = 0.0;
+
+    surfaceFuelbedIntermediates_ = SurfaceFuelbedIntermediates(*fuelModels_, *surfaceInputs_);
+    surfaceFireReactionIntensity_ = SurfaceFireReactionIntensity(surfaceFuelbedIntermediates_);
 }

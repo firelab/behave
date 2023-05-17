@@ -86,6 +86,12 @@ void BehaveRun::setFuelModels(FuelModels& fuelModels)
     crown.setFuelModels(fuelModels);
 }
 
+void BehaveRun::setMoistureScenarios(MoistureScenarios& moistureScenarios)
+{
+    surface.setMoistureScenarios(moistureScenarios);
+    crown.setMoistureScenarios(moistureScenarios);
+}
+
 std::string BehaveRun::getFuelCode(int fuelModelNumber) const
 {
     return fuelModels_->getFuelCode(fuelModelNumber);

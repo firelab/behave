@@ -53,6 +53,7 @@ public:
     void reinitialize();
 
     void setFuelModels(FuelModels& fuelModels);
+    void setMoistureScenarios(MoistureScenarios& moistureScenarios);
 
     // Fuel Model Getter Methods
     std::string getFuelCode(int fuelModelNumber) const;

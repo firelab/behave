@@ -71,6 +71,7 @@ bool Surface::isAllFuelLoadZero(int fuelModelNumber)
 
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
 {
+    surfaceInputs_.updateMoisturesBasedOnInputMode();
     double directionOfInterest = -1; // dummy value
     bool hasDirectionOfInterest = false;
     if (isUsingTwoFuelModels())
@@ -103,6 +104,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
 
 void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
 {
+    surfaceInputs_.updateMoisturesBasedOnInputMode();
     bool hasDirectionOfInterest = true;
     if (isUsingTwoFuelModels())
     {
@@ -440,6 +442,11 @@ double Surface::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moisture
     return surfaceInputs_.getMoistureHundredHour(moistureUnits);
 }
 
+double Surface::getMoistureDeadAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return surfaceInputs_.getMoistureDeadAggregateValue(moistureUnits);
+}
+
 double Surface::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureLiveHerbaceous(moistureUnits);
@@ -448,6 +455,11 @@ double Surface::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moist
 double Surface::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureLiveWoody(moistureUnits);
+}
+
+double Surface::getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return surfaceInputs_.getMoistureLiveAggregateValue(moistureUnits);
 }
 
 bool Surface::isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::MoistureClassInputEnum moistureClass) const
@@ -523,6 +535,91 @@ MoistureInputMode::MoistureInputModeEnum Surface::getMoistureInputMode() const
     return surfaceInputs_.getMoistureInputMode();
 }
 
+int Surface::getNumberOfMoistureScenarios()
+{
+    return surfaceInputs_.moistureScenarios->getNumberOfMoistureScenarios();
+}
+
+int Surface::getMoistureScenarioIndexByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioIndexByName(name);
+}
+
+bool Surface::getIsMoistureScenarioDefinedByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByName(name);
+}
+
+std::string Surface::getMoistureScenarioDecriptionByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioDecriptionByName(name);
+}
+
+double Surface::getMoistureScenarioOneHourByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioOneHourByName(name);
+}
+
+double Surface::getMoistureScenarioTenHourByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioTenHourByName(name);
+}
+
+double Surface::getMoistureScenarioHundredHourByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioHundredHourByName(name);
+}
+
+double Surface::getMoistureScenarioLiveHerbaceousByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveHerbaceousByName(name);
+}
+
+double Surface::getMoistureScenarioLiveWoodyByName(const std::string name)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveWoodyByName(name);
+}
+
+bool Surface::getIsMoistureScenarioDefinedByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByIndex(index);
+}
+
+std::string Surface::getMoistureScenarioNameByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioNameByIndex(index);
+}
+
+std::string Surface::getMoistureScenarioDecriptionByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioDecriptionByIndex(index);
+}
+
+double Surface::getMoistureScenarioOneHourByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioOneHourByIndex(index);
+}
+
+double Surface::getMoistureScenarioTenHourByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioTenHourByIndex(index);
+}
+
+double Surface::getMoistureScenarioHundredHourByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioHundredHourByIndex(index);
+}
+
+double Surface::getMoistureScenarioLiveHerbaceousByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveHerbaceousByIndex(index);
+}
+
+double Surface::getMoistureScenarioLiveWoodyByIndex(const int index)
+{
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveWoodyByIndex(index);
+}
+
 double Surface::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
 {
     return CoverUnits::fromBaseUnits(surfaceInputs_.getCanopyCover(), coverUnits);
@@ -586,11 +683,6 @@ double Surface::getWindDirection() const
     return surfaceInputs_.getWindDirection();
 }
 
-double Surface::getUserProvidedWindAdjustmentFactor() const
-{
-    return surfaceInputs_.getUserProvidedWindAdjustmentFactor();
-}
-
 double Surface::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
     return SlopeUnits::fromBaseUnits(surfaceInputs_.getSlope(), slopeUnits);
@@ -641,9 +733,25 @@ void Surface::setMoistureLiveAggregate(double moistureLive, MoistureUnits::Moist
     surfaceInputs_.setMoistureLiveAggregate(moistureLive, moistureUnits);
 }
 
+void Surface::setMoistureScenarios(MoistureScenarios& moistureScenarios)
+{
+    surfaceInputs_.moistureScenarios = &moistureScenarios;
+}
+
+bool Surface::setMoistureScenarioByName(std::string moistureScenarioName)
+{
+    return surfaceInputs_.setMoistureScenarioByName(moistureScenarioName);
+}
+
+bool Surface::setMoistureScenarioByIndex(int moistureScenarioIndex)
+{
+    return surfaceInputs_.setMoistureScenarioByIndex(moistureScenarioIndex);
+}
+
 void Surface::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)
 {
     surfaceInputs_.setMoistureInputMode(moistureInputMode);
+    surfaceInputs_.updateMoisturesBasedOnInputMode();
 }
 
 void Surface::setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits)

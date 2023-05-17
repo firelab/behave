@@ -74,6 +74,7 @@ SET(SOURCE
     src/behave/fuelModels.cpp
     src/behave/ignite.cpp
     src/behave/igniteInputs.cpp
+    src/behave/moistureScenarios.cpp
     src/behave/mortality.cpp
     src/behave/mortality_equation_table.cpp
     src/behave/mortality_inputs.cpp
