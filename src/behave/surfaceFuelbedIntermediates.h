@@ -133,9 +133,6 @@ private:
     double sizeSortedFractionOfSurfaceAreaDead_[FuelConstants::MAX_SAVR_SIZE_CLASSES];  // Intermediate fuel weighting values for dead fuels
     double sizeSortedFractionOfSurfaceAreaLive_[FuelConstants::MAX_SAVR_SIZE_CLASSES];  // Intermediate fuel weighting values for live fuels
 
-    bool isUsingPalmettoGallberry_;
-    bool isUsingWesternAspen_;
-
     int fuelModelNumber_;           // The number associated with the current fuel model being used
     double heatSink_;               // Rothermel 1972, Denominator of equation 52
     double sigma_;                  // Fuelbed characteristic SAVR, Rothermel 1972 

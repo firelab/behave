@@ -31,6 +31,9 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun);
 void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun);
 
 void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun);
+void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun);
+void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun);
+void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun);
 void testLengthToWidthRatio(TestInfo& testInfo, BehaveRun& behaveRun);
 void testEllipticalDimensions(TestInfo& testInfo, BehaveRun& behaveRun);
 void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun);
@@ -54,6 +57,9 @@ int main()
     BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
     behaveRun.setMoistureScenarios(moistureScenarios);
 
+    testCalculateScorchHeight(testInfo, behaveRun);
+    testPalmettoGallberry(testInfo, behaveRun);
+    testWesternAspen(testInfo, behaveRun);
     testSurfaceSingleFuelModel(testInfo, behaveRun);
     testLengthToWidthRatio(testInfo, behaveRun);
     testEllipticalDimensions(testInfo, behaveRun);
@@ -481,6 +487,100 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedSurfaceFireSpreadRate = 0.0;
     reportTestResult(testInfo, "Test Non-Burnable Fuel", observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
     std::cout << "Finished testing Surface, single fuel model\n\n";
+}
+
+void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::string testName = "Test calculate scorch height from air tempeature, wind and fireline intensity";
+    double firelineInstensity = 50.0;
+    double midflameWindspeed = 5.0;
+    double airTemperature = 80.0;
+    double observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
+        midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, LengthUnits::Feet);
+    double expectedScorchHeight = 14.164211;
+    reportTestResult(testInfo, "Test Non-Burnable Fuel", observedScorchHeight, expectedScorchHeight, error_tolerance);
+}
+
+void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    double moistureOneHour = 6.0;
+    double moistureTenHour = 7.0;
+    double moistureHundredHour = 8.0;
+    double moistureLiveHerbaceous = 60.0;
+    double moistureLiveWoody = 90.0;
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    double windSpeed = 5.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
+    double firstFuelModelCoverage = 0;
+    CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits = CoverUnits::Percent;
+    double slope = 30.0;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
+    double aspect = 0;
+    double canopyCover = 50;
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    double canopyHeight = 30.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    double crownRatio = 0.50;
+    double ageOfRough = 10; // years
+    double heightOfUnderstory = 4; // feet
+    double palmetoCoverage = 50; // feet
+    double overstoryBasalArea = 50;
+
+    std::string testName = "Test Palmetto-Gallberry spread rate";
+    behaveRun.surface.setIsUsingPalmettoGallberry(true);
+    BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits = BasalAreaUnits::SquareFeetPerAcre;
+    behaveRun.surface.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits,
+        windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, ageOfRough, heightOfUnderstory, palmetoCoverage, overstoryBasalArea, basalAreaUnits,
+        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    double observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    double expectedSurfaceFireSpreadRate = 12.521131;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+    behaveRun.surface.setIsUsingPalmettoGallberry(false);
+}
+
+void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::string testName = "Test Western Aspen spread rate";
+    behaveRun.surface.setIsUsingWesternAspen(true);
+    int aspenFuelModel = 3;
+    double aspenCuringLevel = 50.0;
+    CuringLevelUnits::CuringLevelEnum curingLevelUnits = CuringLevelUnits::Percent;
+    double slope = 30.0;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
+    double aspect = 0;
+    double canopyCover = 50;
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    double canopyHeight = 30.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    double crownRatio = 0.50;
+    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity = AspenFireSeverity::Low;
+    double dbh = 10.0;
+    LengthUnits::LengthUnitsEnum dbhUnits = LengthUnits::Inches;
+    double moistureOneHour = 6.0;
+    double moistureTenHour = 7.0;
+    double moistureHundredHour = 8.0;
+    double moistureLiveHerbaceous = 60.0;
+    double moistureLiveWoody = 90.0;
+    MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::Percent;
+    double windSpeed = 5.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
+
+    behaveRun.surface.updateSurfaceInputsForWesternAspen(aspenFuelModel, aspenCuringLevel, curingLevelUnits, aspenFireSeverity, dbh, dbhUnits,
+        moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, mositureUnits,
+        windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect,
+        canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    double observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    double expectedSurfaceFireSpreadRate = 0.847629;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+    behaveRun.surface.setIsUsingWesternAspen(false);
 }
 
 void testLengthToWidthRatio(TestInfo& testInfo, BehaveRun& behaveRun)

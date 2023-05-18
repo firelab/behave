@@ -272,6 +272,24 @@ double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
     return value;
 }
 
+double CuringLevelUnits::toBaseUnits(double value, CuringLevelEnum units)
+{
+    if(units == Percent)
+    {
+        value /= 100.0;
+    }
+    return value;
+}
+
+double CuringLevelUnits::fromBaseUnits(double value, CuringLevelEnum units)
+{
+    if(units == Percent)
+    {
+        value *= 100.0;
+    }
+    return value;
+}
+
 double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
 {
     if (units == Percent)
@@ -726,6 +744,54 @@ double AreaUnits::fromBaseUnits(double value, AreaUnitsEnum units)
         }
     }
 
+    return value;
+}
+
+double BasalAreaUnits::toBaseUnits(double value, BasalAreaUnitsEnum units)
+{
+    const double SQUARE_FEET_PER_ACRE_TO_SQUARE_METERS_PER_HECTARE = 0.229568;
+
+    switch(units)
+    {
+        case SquareFeetPerAcre:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case SquareMetersPerHectare:
+        {
+            value *= SQUARE_FEET_PER_ACRE_TO_SQUARE_METERS_PER_HECTARE;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
+
+    return value;
+}
+
+double BasalAreaUnits::fromBaseUnits(double value, BasalAreaUnitsEnum units)
+{
+    const double SQUARE_METERS_PER_HECTARE_TO_SQUARE_FEET_PER_ACRE = 4.356;
+    switch(units)
+    {
+        case SquareFeetPerAcre:
+        {
+            // Already in base, nothing to do
+            break;
+        }
+        case SquareMetersPerHectare:
+        {
+            value *= SQUARE_METERS_PER_HECTARE_TO_SQUARE_FEET_PER_ACRE;
+            break;
+        }
+        default:
+        {
+            ; // TODO: Handle error
+        }
+    }
     return value;
 }
 

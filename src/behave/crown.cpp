@@ -491,7 +491,8 @@ void Crown::calculateCrownCriticalSurfaceFireIntensity()
 
 void Crown::calculateCrownCriticalSurfaceFlameLength()
 {
-    crownCriticalSurfaceFlameLength_ = surfaceFuel_.calculateFlameLength(crownCriticalSurfaceFirelineIntensity_);
+    crownCriticalSurfaceFlameLength_ = surfaceFuel_.calculateFlameLength(crownCriticalSurfaceFirelineIntensity_,
+        FirelineIntensityUnits::BtusPerFootPerSecond, LengthUnits::Feet);
 }
 
 void Crown::calculateCrownFlameLength()

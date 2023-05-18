@@ -47,6 +47,8 @@ SurfaceInputs & SurfaceInputs::operator=(const SurfaceInputs & rhs)
 
 void SurfaceInputs::initializeMembers()
 {
+    airTemperature_ = -500.0; // impossible temperature below absolute zero, indicates hasn't been set by user
+
     fuelModelNumber_ = 0;
     secondFuelModelNumber_ = 0;
     moistureOneHour_ = 0.0;
@@ -63,6 +65,7 @@ void SurfaceInputs::initializeMembers()
 
     moistureInputMode_ = MoistureInputMode::BySizeClass;
 
+    isCalculatingScorchHeight_ = false;
     isUsingTwoFuelModels_ = false;
     isUsingPalmettoGallberry_ = false;
     isUsingWesternAspen_ = false;
@@ -86,7 +89,7 @@ void SurfaceInputs::initializeMembers()
     aspenFuelModelNumber_ = -1;
     aspenCuringLevel_ = 0.0;
     aspenFireSeverity_ = AspenFireSeverity::Low;
-    DBH_ = 0.0;
+    dbh_ = 0.0;
 
     elapsedTime_ = TimeUnits::toBaseUnits(1, TimeUnits::Hours);
 
@@ -133,9 +136,6 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     setWindAndSpreadOrientationMode(windAndSpreadOrientationMode);
     isUsingTwoFuelModels_ = false;
     setTwoFuelModelsMethod(TwoFuelModelsMethod::NoMethod);
-   
-    isUsingPalmettoGallberry_ = false;
-    isUsingWesternAspen_ = false;
 
     setCanopyCover(canopyCover, coverUnits);
     setCanopyHeight(canopyHeight, canopyHeightUnits);
@@ -165,7 +165,7 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, 
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-    double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, 
+    double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits,
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
@@ -175,14 +175,13 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
         crownRatio);
 
     setAgeOfRough(ageOfRough);
-    setHeightOfUnderstory(heightOfUnderstory);
-    setPalmettoCoverage(palmettoCoverage);
-    setOverstoryBasalArea(overstoryBasalArea);
-    isUsingPalmettoGallberry_ = true;
+    setHeightOfUnderstory(heightOfUnderstory, canopyHeightUnits);
+    setPalmettoCoverage(palmettoCoverage, coverUnits);
+    setOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
 }
 
-void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel,
-    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour,
+void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
+    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, 
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
@@ -195,10 +194,9 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
         crownRatio);
 
     setAspenFuelModelNumber(aspenFuelModelNumber);
-    setAspenCuringLevel(aspenCuringLevel);
+    setAspenCuringLevel(aspenCuringLevel, curingLevelUnits);
     setAspenFireSeverity(aspenFireSeverity);
-    setAspenDBH(DBH);
-    isUsingWesternAspen_ = true;
+    setAspenDBH(dbh, dbhUnits);
 }
 
 void SurfaceInputs::setAspenFuelModelNumber(int aspenFuelModelNumber)
@@ -206,19 +204,24 @@ void SurfaceInputs::setAspenFuelModelNumber(int aspenFuelModelNumber)
     aspenFuelModelNumber_ = aspenFuelModelNumber;
 }
 
-void SurfaceInputs::setAspenCuringLevel(double aspenCuringLevel)
+void SurfaceInputs::setAspenCuringLevel(double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits)
 {
-    aspenCuringLevel_ = aspenCuringLevel;
+    aspenCuringLevel_ = CuringLevelUnits::toBaseUnits(aspenCuringLevel, curingLevelUnits);
 }
 
-void SurfaceInputs::setAspenDBH(double DBH)
+void SurfaceInputs::setAspenDBH(double dbh, LengthUnits::LengthUnitsEnum dbhUnits)
 {
-    DBH_ = DBH;
+    dbh_ = LengthUnits::toBaseUnits(dbh, dbhUnits);
 }
 
 void SurfaceInputs::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity)
 {
     aspenFireSeverity_ = aspenFireSeverity;
+}
+
+void SurfaceInputs::setIsUsingWesternAspen(bool isUsingWesternAspen)
+{
+    isUsingWesternAspen_ = isUsingWesternAspen;
 }
 
 void SurfaceInputs::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
@@ -381,9 +384,9 @@ int SurfaceInputs::getFuelModelNumber() const
     return fuelModelNumber_;
 }
 
-double SurfaceInputs::getSlope() const
+double SurfaceInputs::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    return slope_;
+    return SlopeUnits::fromBaseUnits(slope_, slopeUnits);
 }
 
 double SurfaceInputs::getAspect() const
@@ -406,7 +409,7 @@ bool SurfaceInputs::isUsingTwoFuelModels() const
     return isUsingTwoFuelModels_;
 }
 
-bool SurfaceInputs::isUsingPalmettoGallberry() const
+bool SurfaceInputs::getIsUsingPalmettoGallberry() const
 {
     return isUsingPalmettoGallberry_;
 }
@@ -426,9 +429,9 @@ double SurfaceInputs::getWindDirection() const
     return windDirection_;
 }
 
-double SurfaceInputs::getWindSpeed() const
+double SurfaceInputs::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const
 {
-    return windSpeed_;
+    return SpeedUnits::fromBaseUnits(windSpeed_, windSpeedUnits);
 }
 
 double SurfaceInputs::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
@@ -476,42 +479,46 @@ double SurfaceInputs::getAgeOfRough() const
     return ageOfRough_;
 }
 
-void SurfaceInputs::setHeightOfUnderstory(double heightOfUnderstory)
+void SurfaceInputs::setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits)
 {
-    heightOfUnderstory_ = heightOfUnderstory;
+    heightOfUnderstory_ = LengthUnits::toBaseUnits(heightOfUnderstory, heightUnits);
 }
 
-double SurfaceInputs::getHeightOfUnderstory() const
+double SurfaceInputs::getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const
 {
-    return heightOfUnderstory_;
+    return  LengthUnits::fromBaseUnits(heightOfUnderstory_, heightUnits);
+}
+void SurfaceInputs::setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits)
+{
+    palmettoCoverage_ = CoverUnits::toBaseUnits(palmettoCoverage, coverUnits);
 }
 
-void SurfaceInputs::setPalmettoCoverage(double palmettoCoverage)
+double SurfaceInputs::getPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
 {
-    palmettoCoverage_ = palmettoCoverage;
+    return CoverUnits::fromBaseUnits(palmettoCoverage_, coverUnits);
 }
 
-double SurfaceInputs::getPalmettoCoverage() const
+void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits)
 {
-    return palmettoCoverage_;
+    overstoryBasalArea_ = BasalAreaUnits::toBaseUnits(overstoryBasalArea, basalAreaUnits);
 }
 
-void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea)
+void SurfaceInputs::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
 {
-    overstoryBasalArea_ = overstoryBasalArea;
+    isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
 }
 
-double SurfaceInputs::getOverstoryBasalArea() const
+double SurfaceInputs::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
 {
-    return overstoryBasalArea_;
+    return BasalAreaUnits::fromBaseUnits(overstoryBasalArea_, basalAreaUnits);
 }
 
-double SurfaceInputs::getCanopyCover() const
+double SurfaceInputs::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
 {
-    return canopyCover_;
+    return CoverUnits::fromBaseUnits(canopyCover_, coverUnits);
 }
 
-double SurfaceInputs::getCanopyHeight() const
+double SurfaceInputs::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const
 {
     return canopyHeight_;
 }
@@ -521,7 +528,7 @@ double SurfaceInputs::getCrownRatio() const
     return crownRatio_;
 }
 
-bool SurfaceInputs::isUsingWesternAspen() const
+bool SurfaceInputs::getIsUsingWesternAspen() const
 {
     return isUsingWesternAspen_;
 }
@@ -531,14 +538,14 @@ int SurfaceInputs::getAspenFuelModelNumber() const
     return aspenFuelModelNumber_;
 }
 
-double SurfaceInputs::getAspenCuringLevel() const
+double SurfaceInputs::getAspenCuringLevel(CuringLevelUnits::CuringLevelEnum curingLevelUnits) const
 {
-    return aspenCuringLevel_;
+    return CuringLevelUnits::fromBaseUnits(aspenCuringLevel_, curingLevelUnits);
 }
 
-double SurfaceInputs::getAspenDBH() const
+double SurfaceInputs::getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const
 {
-    return DBH_;
+    return LengthUnits::fromBaseUnits(dbh_, dbhUnits);
 }
 
 AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() const
@@ -548,6 +555,8 @@ AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() c
 
 void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
 {
+    airTemperature_ = rhs.airTemperature_;
+
     fuelModelNumber_ = rhs.fuelModelNumber_;
     moistureOneHour_ = rhs.moistureOneHour_;
     moistureTenHour_ = rhs.moistureTenHour_;
@@ -563,6 +572,7 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     moistureLiveAggregate_ = rhs.moistureLiveAggregate_;
     moistureInputMode_ = rhs.moistureInputMode_;
 
+    isCalculatingScorchHeight_ = rhs.isCalculatingScorchHeight_;
     isUsingTwoFuelModels_ = rhs.isUsingTwoFuelModels_;
     secondFuelModelNumber_ = rhs.secondFuelModelNumber_;
     firstFuelModelCoverage_ = rhs.firstFuelModelCoverage_;
@@ -576,7 +586,7 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     isUsingWesternAspen_ = rhs.isUsingWesternAspen_;
     aspenFuelModelNumber_ = rhs.aspenFuelModelNumber_;
     aspenCuringLevel_ = rhs.aspenCuringLevel_;
-    DBH_ = rhs.DBH_;
+    dbh_ = rhs.dbh_;
     aspenFireSeverity_ = rhs.aspenFireSeverity_;
 
     elapsedTime_ = rhs.elapsedTime_;
@@ -666,6 +676,16 @@ void SurfaceInputs::setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum 
     elapsedTime_ = TimeUnits::toBaseUnits(elapsedTime, timeUnits);
 }
 
+void SurfaceInputs::setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits)
+{
+    airTemperature_ = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
+}
+
+void SurfaceInputs::setIsCalculatingScorchHeight(bool IsCalculatingScorchHeight)
+{
+    isCalculatingScorchHeight_ = IsCalculatingScorchHeight;
+}
+
 double SurfaceInputs::getUserProvidedWindAdjustmentFactor() const
 {
     return userProvidedWindAdjustmentFactor_;
@@ -676,9 +696,19 @@ WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum
     return windAdjustmentFactorCalculationMethod_;
 }
 
-double SurfaceInputs::getElapsedTime() const
+double SurfaceInputs::getElapsedTime(TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return elapsedTime_;
+    return TimeUnits::fromBaseUnits(elapsedTime_, timeUnits);
+}
+
+double SurfaceInputs::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) const
+{
+    return TemperatureUnits::fromBaseUnits(airTemperature_, temperatureUnits);
+}
+
+bool SurfaceInputs::getIsCalculatingScorchHeight() const
+{
+    return isCalculatingScorchHeight_;
 }
 
 bool SurfaceInputs::isMoistureClassInputNeeded(MoistureClassInput::MoistureClassInputEnum moistureClass) const

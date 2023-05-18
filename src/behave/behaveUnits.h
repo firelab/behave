@@ -44,6 +44,18 @@ struct AreaUnits
     static double fromBaseUnits(double value, AreaUnitsEnum units);
 };
 
+struct BasalAreaUnits
+{
+    enum BasalAreaUnitsEnum
+    {
+        SquareFeetPerAcre, // base area unit
+        SquareMetersPerHectare
+    };
+
+    static double toBaseUnits(double value, BasalAreaUnitsEnum units);
+    static double fromBaseUnits(double value, BasalAreaUnitsEnum units);
+};
+
 struct LengthUnits
 {
     enum LengthUnitsEnum
@@ -90,7 +102,6 @@ struct SurfaceAreaToVolumeUnits
     static double fromBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units);
 };
 
-
 struct SpeedUnits
 {
     enum SpeedUnitsEnum
@@ -118,6 +129,18 @@ struct CoverUnits
 
     static double toBaseUnits(double value, CoverUnitsEnum units);
     static double fromBaseUnits(double value, CoverUnitsEnum units);
+};
+
+struct CuringLevelUnits
+{
+    enum CuringLevelEnum
+    {
+        Fraction, // base cover unit
+        Percent
+    };
+
+    static double toBaseUnits(double value, CuringLevelEnum units);
+    static double fromBaseUnits(double value, CuringLevelEnum units);
 };
 
 struct ProbabilityUnits

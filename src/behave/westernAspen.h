@@ -46,24 +46,42 @@ public:
     double getAspenHeatOfCombustionDead();
     double getAspenHeatOfCombustionLive();
     double getAspenMoistureOfExtinctionDead();
-    double getAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
-    double getAspenLoadDeadTenHour(int aspenFuelModelNumber);
-    double getAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel);
-    double getAspenLoadLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
-    double getAspenSavrDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
+
+    double getAspenLoadDeadOneHour();
+    double getAspenLoadDeadTenHour();
+    double getAspenLoadLiveHerbaceous();
+    double getAspenLoadLiveWoody();
+    double getAspenSavrDeadOneHour();
     double getAspenSavrDeadTenHour();
     double getAspenSavrLiveHerbaceous();
-    double getAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
-    
+    double getAspenSavrLiveWoody();
+
+    double calculateAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
+    double calculateAspenLoadDeadTenHour(int aspenFuelModelNumber);
+    double calculateAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel);
+    double calculateAspenLoadLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
+    double calculateAspenSavrDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
+    double calculateAspenSavrDeadTenHour();
+    double calculateAspenSavrLiveHerbaceous();
+    double calculateAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel);
+
     // Mortality must be calculated AFTER spread rate
     double calculateAspenMortality(int severity, double flameLength, double DBH);
 
 private:
     double aspenInterpolate(double curing, double* valueArray);
-
+   
     // Member variables
     double DBH_;
     double mortality_;
+    double aspenDeadOneHour_;
+    double aspenDeadTenHour_;
+    double aspenLiveHerbaceous_;
+    double aspenLiveWoody_;
+    double aspenSavrDeadOneHour_;
+    double aspenSavrDeadTenHour_;
+    double aspenSavrLiveHerbaceous_;
+    double aspenSavrLiveWoody_;
 };
 
 #endif // WESTERNASPEN_H

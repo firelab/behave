@@ -89,7 +89,8 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        if (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber))
+        bool isUsingPalmettoGallberryOrWesternAspen = surfaceInputs_.getIsUsingPalmettoGallberry() || surfaceInputs_.getIsUsingWesternAspen();
+        if (!isUsingPalmettoGallberryOrWesternAspen && (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber)))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -133,9 +134,49 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
     }
 }
 
-double Surface::calculateFlameLength(double firelineIntensity)
+//------------------------------------------------------------------------------
+/*! \brief Calculates flame length from fireline (Byram's) intensity.
+ *
+ *  \param firelineIntensity Fireline (Byram's) intensity (btu/ft/s).
+ *
+ *  \return Flame length.
+ */
+
+double Surface::calculateFlameLength(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
+    LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
-    return surfaceFire_.calculateFlameLength(firelineIntensity);
+    firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
+    double flameLength = ((firelineIntensity < 1.0e-07)
+        ? (0.0)
+        : (0.45 * pow(firelineIntensity, 0.46)));
+    return LengthUnits::fromBaseUnits(flameLength, flameLengthUnits);
+}
+
+//------------------------------------------------------------------------------
+/*! \brief Calculates scorch height from fireline intensity, wind speed, and
+ *  air temperature.
+ *
+ *  \param firelineIntensity Fireline (Byram's) intensity (btu/ft/s).
+ *  \param windSpeed         Wind speed at midlame height (upslope)
+ *  \param airTemperature    Air temperature (degrees F).
+ *
+ *  \return Scorch height
+ */
+
+double Surface::calculateScorchHeight(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
+    double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits,
+    LengthUnits::LengthUnitsEnum scorchHeightUnits)
+{
+    firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
+    
+    airTemperature = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
+    double scorchHeight = ((firelineIntensity < 1.0e-07)
+        ? (0.0)
+        : ((63. / (140. - airTemperature))
+            * pow(firelineIntensity, 1.166667)
+            / sqrt(firelineIntensity + (midFlameWindSpeed * midFlameWindSpeed * midFlameWindSpeed))
+            ));
+    return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
 }
 
 void Surface::setFuelModels(FuelModels& fuelModels)
@@ -622,12 +663,12 @@ double Surface::getMoistureScenarioLiveWoodyByIndex(const int index)
 
 double Surface::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
 {
-    return CoverUnits::fromBaseUnits(surfaceInputs_.getCanopyCover(), coverUnits);
+    return surfaceInputs_.getCanopyCover(coverUnits);
 }
 
 double Surface::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const
 {
-    return LengthUnits::fromBaseUnits(surfaceInputs_.getCanopyHeight(), canopyHeightUnits);
+    return surfaceInputs_.getCanopyHeight(canopyHeightUnits);
 }
 
 double Surface::getCrownRatio() const
@@ -648,6 +689,56 @@ WindHeightInputMode::WindHeightInputModeEnum Surface::getWindHeightInputMode() c
 WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum Surface::getWindAdjustmentFactorCalculationMethod() const
 {
     return surfaceInputs_.getWindAdjustmentFactorCalculationMethod();
+}
+
+double Surface::getAgeOfRough() const
+{
+    return surfaceInputs_.getAgeOfRough();
+}
+
+double Surface::getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const
+{
+    return surfaceInputs_.getHeightOfUnderstory(heightUnits);
+}
+
+double Surface::getPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
+{
+    return surfaceInputs_.getPalmettoCoverage(coverUnits);
+}
+
+double Surface::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
+{
+    return surfaceInputs_.getOverstoryBasalArea(basalAreaUnits);
+}
+
+bool Surface::getIsUsingPalmettoGallberry() const
+{
+    return surfaceInputs_.getIsUsingPalmettoGallberry();
+}
+
+bool Surface::getIsUsingWesternAspen() const
+{
+    return surfaceInputs_.getIsUsingWesternAspen();
+}
+
+int Surface::getAspenFuelModelNumber() const
+{
+    return surfaceInputs_.getAspenFuelModelNumber();
+}
+
+double Surface::getAspenCuringLevel(CuringLevelUnits::CuringLevelEnum curingLevelUnits) const
+{
+    return surfaceInputs_.getAspenCuringLevel(curingLevelUnits);
+}
+
+double Surface::getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const
+{
+    return surfaceInputs_.getAspenDBH(dbhUnits);
+}
+
+AspenFireSeverity::AspenFireSeverityEnum Surface::getAspenFireSeverity() const
+{
+    return surfaceInputs_.getAspenFireSeverity();
 }
 
 double Surface::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
@@ -685,7 +776,7 @@ double Surface::getWindDirection() const
 
 double Surface::getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    return SlopeUnits::fromBaseUnits(surfaceInputs_.getSlope(), slopeUnits);
+    return surfaceInputs_.getSlope(slopeUnits);
 }
 
 double Surface::getAspect() const
@@ -848,27 +939,77 @@ void Surface::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, dou
     double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double ageOfRough,
-    double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits,
+    double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits,
     double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, slope, slopeUnits, aspect, canopyCover, coverUnits,
+        ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, basalAreaUnits, slope, slopeUnits, aspect, canopyCover, coverUnits,
         canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
-void Surface::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, 
-    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double DBH, double moistureOneHour, double moistureTenHour, 
+void Surface::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
+    AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour, 
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits,
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
     SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
-    surfaceInputs_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, aspenFireSeverity, DBH, moistureOneHour,
-        moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits,
-        windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits,
-        canopyHeight, canopyHeightUnits, crownRatio);
+    surfaceInputs_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, curingLevelUnits, aspenFireSeverity,
+        dbh, dbhUnits, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits,
+        windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect,
+        canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
+}
+
+void Surface::setAspenFuelModelNumber(int aspenFuelModelNumber)
+{
+    surfaceInputs_.setAspenFuelModelNumber(aspenFuelModelNumber);
+}
+
+void Surface::setAspenCuringLevel(double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits)
+{
+    surfaceInputs_.setAspenCuringLevel(aspenCuringLevel, curingLevelUnits);
+}
+
+void Surface::setAspenDBH(double dbh, LengthUnits::LengthUnitsEnum dbhUnits)
+{
+    surfaceInputs_.setAspenDBH(dbh, dbhUnits);
+}
+
+void Surface::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity)
+{
+    surfaceInputs_.setAspenFireSeverity(aspenFireSeverity);
+}
+
+void Surface::setIsUsingWesternAspen(bool isUsingWesternAspen)
+{
+    surfaceInputs_.setIsUsingWesternAspen(isUsingWesternAspen);
+}
+
+void Surface::setAgeOfRough(double ageOfRough)
+{
+    surfaceInputs_.setAgeOfRough(ageOfRough);
+}
+
+void Surface::setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits)
+{
+    surfaceInputs_.setHeightOfUnderstory(heightOfUnderstory, heightUnits);
+}
+
+void Surface::setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits)
+{
+    surfaceInputs_.setPalmettoCoverage(palmettoCoverage, coverUnits);
+}
+
+void Surface::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits)
+{
+    surfaceInputs_.setOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
+}
+
+void Surface::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
+{
+    surfaceInputs_.setIsUsingPalmettoGallberry(isUsingPalmettoGallberry);
 }

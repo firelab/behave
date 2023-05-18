@@ -44,13 +44,13 @@ public:
     SurfaceFire(const SurfaceFire& rhs);
     SurfaceFire& operator=(const SurfaceFire& rhs);
     SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs, FireSize& size);
+    void initializeMembers();
+
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
     double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false, 
         double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
-    double calculateFlameLength(double firelineIntensity);
-   
-    void initializeMembers();
+    void calculateMidflameWindSpeed();
     void skipCalculationForZeroLoad();
 
     // Public getters
@@ -78,8 +78,6 @@ public:
     double getCharacteristicSAVR() const;
     bool getIsWindLimitExceeded() const;
  
-    void calculateMidflameWindSpeed();
-
 protected:
     // Protected setters accessible to friend classes
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
@@ -106,6 +104,7 @@ private:
     void calculateResidenceTime();
     void calculateFireFirelineIntensity(double forwardSpreadRate);
     void calculateFlameLength();
+    void calculateScorchHeight();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
   
@@ -143,6 +142,7 @@ private:
     double flameLength_;
     double backingSpreadRate_;
     double heatSource_;
+    double scorchHeight_;
 
     double midflameWindSpeed_; 
     double windAdjustmentFactor_;
