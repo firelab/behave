@@ -66,6 +66,7 @@ double PalmettoGallberry::calculatePalmettoGallberyDeadOneHourLoad(double ageOfR
 
 double PalmettoGallberry::calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage)
 {
+    palmettoCoverage *= 100.0; // convert fraction to percent
     palmettoGallberyDeadTenHourLoad_ = -0.00775
         + 0.00021 * palmettoCoverage
         + 0.00007 * ageOfRough * ageOfRough;
@@ -78,6 +79,7 @@ double PalmettoGallberry::calculatePalmettoGallberyDeadTenHourLoad(double ageOfR
 
 double PalmettoGallberry::calculatePalmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage)
 {
+    palmettoCoverage *= 100.0; // convert fraction to percent
     palmettoGallberyDeadFoliageLoad_ = 0.00221 * pow(ageOfRough, 0.51263) * exp(0.02482 * palmettoCoverage);
     return palmettoGallberyDeadFoliageLoad_;
 }
@@ -115,6 +117,7 @@ double PalmettoGallberry::calculatePalmettoGallberyLiveTenHourLoad(double ageOfR
 double PalmettoGallberry::calculatePalmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage,
     double heightOfUnderstory)
 {
+    palmettoCoverage *= 100.0; // convert fraction to percent
     palmettoGallberyLiveFoliageLoad_ = -0.0036
         + 0.00253 * ageOfRough
         + 0.00049 * palmettoCoverage
