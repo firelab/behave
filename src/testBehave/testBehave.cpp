@@ -264,6 +264,16 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     double expectedLiveMoistureOfExtinction = 137.968551;
     reportTestResult(testInfo, testName, observedLiveMoistureOfExtinction, expectedLiveMoistureOfExtinction, error_tolerance);
 
+    testName = "Test characteristic live moisture, 5 mph 20 foot uplsope wind";
+    double observedCharacteristicLiveMoisture = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicMoistureByLifeState(FuelLifeState::LIVE, moistureUnits));
+    double expectedCharacteristicLiveMoisture = 85.874007;
+    reportTestResult(testInfo, testName, observedCharacteristicLiveMoisture, expectedCharacteristicLiveMoisture, error_tolerance);
+
+    testName = "Test characteristic dead moisture, 5 mph 20 foot uplsope wind";
+    double observedCharacteristicDeadMoisture = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicMoistureByLifeState(FuelLifeState::DEAD, moistureUnits));
+    double expectedCharacteristicDeadMoisture = 6.005463;
+    reportTestResult(testInfo, testName, observedCharacteristicDeadMoisture, expectedCharacteristicDeadMoisture, error_tolerance);
+
     testName = "Test characteristic SAVR for north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";
     double observedCharacteristicSAVR = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet));
     double expectedCharacteristicSAVR = 1631.128734;

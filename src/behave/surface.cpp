@@ -343,7 +343,7 @@ double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTi
     return size_.getFireArea(areaUnits, elapsedTime, timeUnits);
 }
 
-double Surface::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return MoistureUnits::fromBaseUnits(surfaceFire_.getWeightedMoistureByLifeState(lifeState), moistureUnits);
 }
