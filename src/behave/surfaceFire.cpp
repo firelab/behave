@@ -572,6 +572,11 @@ double SurfaceFire::getReactionIntensity() const
     return reactionIntensity_;
 }
 
+double SurfaceFire::getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
+{
+    return surfaceFuelbedIntermediates_.getMoistureOfExtinctionByLifeState(lifeState);
+}
+
 double SurfaceFire::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return surfaceFuelbedIntermediates_.getWeightedMoistureByLifeState(lifeState);

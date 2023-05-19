@@ -257,6 +257,18 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedSurfaceFireSpreadRate = 19.677584;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
+    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+
+    testName = "Test live moisture of extinction, 5 mph 20 foot uplsope wind";
+    double observedLiveMoistureOfExtinction = roundToSixDecimalPlaces(behaveRun.surface.getMoistureOfExtinctionByLifeState(FuelLifeState::LIVE, moistureUnits));
+    double expectedLiveMoistureOfExtinction = 137.968551;
+    reportTestResult(testInfo, testName, observedLiveMoistureOfExtinction, expectedLiveMoistureOfExtinction, error_tolerance);
+
+    testName = "Test dead moisture of extinction, 5 mph 20 foot uplsope wind";
+    double observedDeadMoistureOfExtinction = roundToSixDecimalPlaces(behaveRun.surface.getMoistureOfExtinctionByLifeState(FuelLifeState::DEAD, moistureUnits));
+    double expectedDeadMoistureOfExtinction = 0.40; // Moisture of extinction is a property of fuel models
+    reportTestResult(testInfo, testName, observedLiveMoistureOfExtinction, expectedLiveMoistureOfExtinction, error_tolerance);
+
     testName = "Test characteristic SAVR for north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";
     double observedCharacteristicSAVR = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet));
     double expectedCharacteristicSAVR = 1631.128734;
@@ -314,8 +326,6 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     double expectedFlankingDistance = 10.17533253;
     reportTestResult(testInfo, testName, observedFlankingDistance, expectedFlankingDistance, error_tolerance);
 
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
-    
     testName = "Test moisture scenario input mode, D1L1 Scenario, 5 mph 20 foot uplsope wind";
     behaveRun.surface.setMoistureInputMode(MoistureInputMode::MoistureScenario);
     std::string moistureScenarioName = "D1L1";
@@ -485,7 +495,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 0.0;
-    reportTestResult(testInfo, "Test Non-Burnable Fuel", observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
     std::cout << "Finished testing Surface, single fuel model\n\n";
 }
 
@@ -498,7 +508,7 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     double observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, LengthUnits::Feet);
     double expectedScorchHeight = 14.164211;
-    reportTestResult(testInfo, "Test Non-Burnable Fuel", observedScorchHeight, expectedScorchHeight, error_tolerance);
+    reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
 }
 
 void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun)
