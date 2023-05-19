@@ -473,7 +473,7 @@ bool Mortality::checkIsInRegionFromSpeciesCode(string speciesCode, RegionCode re
 *******************************************************************************************************/
 double  Mortality::calculateMortalityCrownScorch()
 {
-    double f, barkThicknessPrime, DBHcm, treeHeight, LCR, HCR, f_B, crownKilled, CSL, P, Fl, CH;
+    double f, barkThicknessPrime, DBHcm, treeHeight, LCR, HCR, CSL, P, Fl, CH;
     double  blackHillsFlameLength, CBH;
     double  flameLengthOrScorchHeightValue, DBH;
     int  mortalityEquationNumber;
@@ -485,8 +485,8 @@ double  Mortality::calculateMortalityCrownScorch()
     blackHillsFlameLength = Calc_Flame(flameLengthOrScorchHeightValue); // For Black Hills PiPo 
 
     // But if it's Flame Length - convert 
-    if (mortalityInputs_.getFlameLengthOrScorchHeightSwitch() == FlameLengthOrScorchHeightSwitch::flame_length) // if flame length 
-    {        
+    if(mortalityInputs_.getFlameLengthOrScorchHeightSwitch() == FlameLengthOrScorchHeightSwitch::flame_length) // if flame length 
+    {
         // convert to scorch height    
         flameLengthOrScorchHeightValue = Calc_Scorch(mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet));
         // save flame length for Black Hills PiPo 
@@ -494,7 +494,7 @@ double  Mortality::calculateMortalityCrownScorch()
     }
 
     // NOTE NOTE - FuelCalc relies on the exact text "Species" being in this error message 
-    if (speciesMasterTable_->getSpeciesTableIndexFromSpeciesCodeAndEquationType(mortalityInputs_.getSpeciesCode(), mortalityInputs_.getEquationType()) == -1) // Check for Valid Species        
+    if(speciesMasterTable_->getSpeciesTableIndexFromSpeciesCodeAndEquationType(mortalityInputs_.getSpeciesCode(), mortalityInputs_.getEquationType()) == -1) // Check for Valid Species        
     {
         //sprintf(cr_ErrMes, "Invalid Species: %s", mortalityInputs_.speciesCode_);
         return -1.0;
@@ -505,15 +505,15 @@ double  Mortality::calculateMortalityCrownScorch()
 
     treeHeight = mortalityInputs_.getTreeHeight(LengthUnits::Feet); // Note-1                        
     HCR = treeHeight * (mortalityInputs_.getCrownRatio());
-    f_B = flameLengthOrScorchHeightValue - (treeHeight - HCR);
+    treeCrownLengthScorched_ = flameLengthOrScorchHeightValue - (treeHeight - HCR);
 
-    if(f_B <= 0)
+    if(treeCrownLengthScorched_ <= 0.0)
     {
-        f_B = 0;
+        treeCrownLengthScorched_ = 0.0;
     }
-    if(f_B > HCR)
+    if(treeCrownLengthScorched_ > HCR)
     {
-        f_B = HCR;
+        treeCrownLengthScorched_ = HCR;
     }
 
     // Calc crown killed                                                         
@@ -521,13 +521,13 @@ double  Mortality::calculateMortalityCrownScorch()
     //  % = 0 -> 100, scorched basically means killed                            
     if(HCR > 0.0)
     {
-        crownKilled = 100.0 * (f_B * (2.0 * HCR - f_B) / (HCR * HCR));
-        CSL = 100.0 * (f_B / HCR);
+        treeCrownVolumeScorched_ = treeCrownLengthScorched_ * (2.0 * HCR - treeCrownLengthScorched_) / (HCR * HCR);
+        CSL = 100.0 * (treeCrownLengthScorched_ / HCR);
     }
     else
     {
-        crownKilled = 0;
-        CSL = 0;
+        treeCrownVolumeScorched_ = 0.0;
+        CSL = 0.0;
         //strcpy(cr_ErrMes, "Mortality Calculaton is attempting to Divide by 0");
         return -1.0;
     }
@@ -536,51 +536,52 @@ double  Mortality::calculateMortalityCrownScorch()
 
     mortalityEquationNumber = mortalityInputs_.getCrownScorchOrBoleCharEquationNumber(); // Get equation number               
 
-    switch (mortalityEquationNumber)
+    double crownVolumeScorchedPercent = treeCrownVolumeScorched_ * 100.0;
+    switch(mortalityEquationNumber)
     {
         case 1:
         {
-            if (DBH >= 1)
+            if(DBH >= 1.0)
             {
-                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownKilled * crownKilled)));
+                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownVolumeScorchedPercent * crownVolumeScorchedPercent)));
             }
-            else if (CSL > 50)
+            else if(CSL > 50.0)
             {
-                P = 1;
+                P = 1.0;
             }
-            else if (treeHeight < 3)
+            else if(treeHeight < 3.0)
             {
-                P = 1;
+                P = 1.0;
             }
             else
             {
                 mortalityInputs_.setBarkThickness(calculateBarkThickness(), LengthUnits::Inches);
-                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownKilled * crownKilled)));
+                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownVolumeScorchedPercent * crownVolumeScorchedPercent)));
                 P = P + (1.0 - P) * (1.0 - ((treeHeight - 3.0) / (((1.0 / DBH) * treeHeight) - 3.0)));
             }
             break;
         }
         case 3:
         {
-            if (DBH > 1)
+            if(DBH > 1.0)
             {
-                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownKilled * crownKilled)));
+                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownVolumeScorchedPercent * crownVolumeScorchedPercent)));
             }
-            else if (CSL > 50)
+            else if(CSL > 50.0)
             {
                 P = 1.0;
             }
-            else if (treeHeight < 3)
+            else if(treeHeight < 3.0)
             {
                 P = 1.0;
             }
             else
             {
                 mortalityInputs_.setBarkThickness(calculateBarkThickness(), LengthUnits::Inches);
-                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownKilled * crownKilled)));
+                P = 1.0 / (1.0 + exp(-1.941 + (6.316 * (1.0 - exp(-mortalityInputs_.getBarkThickness(LengthUnits::Inches)))) - 0.000535 * (crownVolumeScorchedPercent * crownVolumeScorchedPercent)));
                 P = P + (1.0 - P) * (1.0 - ((treeHeight - 3.0) / (((1.0 / DBH) * treeHeight) - 3.0)));
             }
-            if (P < 0.8)
+            if(P < 0.8)
             {
                 P = 0.8;
             }
@@ -590,7 +591,7 @@ double  Mortality::calculateMortalityCrownScorch()
         {
             Fl = Calc_Flame(flameLengthOrScorchHeightValue);
             CH = Fl / 1.8;
-            if (mortalityInputs_.getFireSeverity() ==  FireSeverity::low)
+            if(mortalityInputs_.getFireSeverity() == FireSeverity::low)
             {
                 // Fire Severity - See Note-3 Above     
                 P = 1.0 / (1.0 + exp((0.251 * DBH * 2.54) - (0.07 * CH * 2.54 * 12.0) - 4.407));
@@ -611,29 +612,29 @@ double  Mortality::calculateMortalityCrownScorch()
         // that we had to use a value at 1->10   
         case 5:
         {
-            if (CSL <= 0)
+            if(CSL <= 0.0)
             {
-                P = 0;
+                P = 0.0;
                 break;
             }
             DBHcm = LengthUnits::fromBaseUnits(DBH, LengthUnits::Centimeters);
             barkThicknessPrime = 0.435 + (0.031 * DBHcm);
-            f = crownKilled / 10.0; // see comments just above 
+            f = crownVolumeScorchedPercent / 10.0; // see comments just above 
             barkThicknessPrime = 0.169 + (5.136 * barkThicknessPrime) + (14.492 * Squaredouble(barkThicknessPrime)) - (0.348 * Squaredouble(f));
             P = 1.0 / (1.0 + exp(barkThicknessPrime));
             //sprintf(cr, "%20.18f ", P);
 
             // I don't know if these conditions could 
             // happen but I'm checking anyway  
-            if (P > 1.0)               
+            if(P > 1.0)
             {
-                P = 1.0;                   
+                P = 1.0;
             }
-            if (P < 0)
+            if(P < 0.0)
             {
-                P = 0;
+                P = 0.0;
             }
-            break; 
+            break;
         }
         // test-pfi 
         // New equations from Sharon - april/may 2008                                
@@ -644,7 +645,7 @@ double  Mortality::calculateMortalityCrownScorch()
         }
         case 11:
         {
-            P = SubalpineFir(crownKilled); // ABILAS                            
+            P = SubalpineFir(crownVolumeScorchedPercent); // ABILAS                            
             break;
         }
         case 12:
@@ -654,12 +655,12 @@ double  Mortality::calculateMortalityCrownScorch()
         }
         case 14:
         {
-            P = WesternLarch(crownKilled, DBH); // LAROCC                            
+            P = WesternLarch(crownVolumeScorchedPercent, DBH); // LAROCC                            
             break;
         }
         case 15:
         {
-            P = EngelmannSpruce(crownKilled); // PICENG                            
+            P = EngelmannSpruce(crownVolumeScorchedPercent); // PICENG                            
             break;
         }
         case 16:
@@ -669,7 +670,7 @@ double  Mortality::calculateMortalityCrownScorch()
         }
         case 17:
         {
-            P = WhitebarkPine(crownKilled, DBH); // PINALB                      
+            P = WhitebarkPine(crownVolumeScorchedPercent, DBH); // PINALB                      
             break;
         }
         case 18:
@@ -679,12 +680,12 @@ double  Mortality::calculateMortalityCrownScorch()
         }
         case 19:
         {
-            P = PonderosaJeffreyPine(crownKilled);
+            P = PonderosaJeffreyPine(crownVolumeScorchedPercent);
             break;
         }
         case 20:
         {
-            P = DouglasFir(crownKilled);
+            P = DouglasFir(crownVolumeScorchedPercent);
             break;
         }
         // Change 9-6-2016 - new Black Hills PiPo, see Duncan Lutes's .docx document saved in fofem project folder 

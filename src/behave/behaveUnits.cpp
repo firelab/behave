@@ -272,9 +272,27 @@ double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
     return value;
 }
 
+double MortalityRateUnits::toBaseUnits(double value, MortalityRateUnitsEnum units)
+{
+    if (units == Percent)
+    {
+        value /= 100.0;
+    }
+    return value;
+}
+
+double MortalityRateUnits::fromBaseUnits(double value, MortalityRateUnitsEnum units)
+{
+    if (units == Percent)
+    {
+        value *= 100.0;
+    }
+    return value;
+}
+
 double CuringLevelUnits::toBaseUnits(double value, CuringLevelEnum units)
 {
-    if(units == Percent)
+    if (units == Percent)
     {
         value /= 100.0;
     }
@@ -283,7 +301,7 @@ double CuringLevelUnits::toBaseUnits(double value, CuringLevelEnum units)
 
 double CuringLevelUnits::fromBaseUnits(double value, CuringLevelEnum units)
 {
-    if(units == Percent)
+    if (units == Percent)
     {
         value *= 100.0;
     }

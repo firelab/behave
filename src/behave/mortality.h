@@ -98,6 +98,8 @@ public:
     double getProbabilityOfMortality(ProbabilityUnits::ProbabilityUnitsEnum probabilityUnits) const;   // Individual Species Probility of Mortality
     double getTotalPrefireTrees() const;        // Total Prefire Trees               
     double getKilledTrees() const;
+    double getTreeCrownLengthScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const;
+    double getTreeCrownVolumeScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const;
 
     double getBasalAreaPrefire() const;         // Prefire Basal Area                
     double getBasalAreaKillled() const;         // Basal Area of Killed trees        
@@ -171,7 +173,9 @@ private:
     static constexpr const double ce_scorch_upper_limit = 245.0;
 
     // Outputs
-    // These values are calculated for a single Species                          
+    // These values are calculated for a single Species     
+    double treeCrownLengthScorched_;     // Scorch height - (Canopy height - Live crown length)
+    double treeCrownVolumeScorched_;         // Percentage (or fraction) of the tree crown volume that is scorched
     double probabilityOfMortality_;      // Individual Species Probility of Mortality
     double totalPrefireTrees_;           // Total Prefire Trees               
     double killedTrees_;

@@ -131,11 +131,23 @@ struct CoverUnits
     static double fromBaseUnits(double value, CoverUnitsEnum units);
 };
 
+struct MortalityRateUnits
+{
+    enum MortalityRateUnitsEnum
+    {
+        Fraction, // base mortality rate unit
+        Percent
+    };
+
+    static double toBaseUnits(double value, MortalityRateUnitsEnum units);
+    static double fromBaseUnits(double value, MortalityRateUnitsEnum units);
+};
+
 struct CuringLevelUnits
 {
     enum CuringLevelEnum
     {
-        Fraction, // base cover unit
+        Fraction, // base curing level unit
         Percent
     };
 
