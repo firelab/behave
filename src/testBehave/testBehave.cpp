@@ -260,13 +260,8 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
 
     testName = "Test live moisture of extinction, 5 mph 20 foot uplsope wind";
-    double observedLiveMoistureOfExtinction = roundToSixDecimalPlaces(behaveRun.surface.getMoistureOfExtinctionByLifeState(FuelLifeState::LIVE, moistureUnits));
+    double observedLiveMoistureOfExtinction = roundToSixDecimalPlaces(behaveRun.surface.getLiveFuelMoistureOfExtinction(moistureUnits));
     double expectedLiveMoistureOfExtinction = 137.968551;
-    reportTestResult(testInfo, testName, observedLiveMoistureOfExtinction, expectedLiveMoistureOfExtinction, error_tolerance);
-
-    testName = "Test dead moisture of extinction, 5 mph 20 foot uplsope wind";
-    double observedDeadMoistureOfExtinction = roundToSixDecimalPlaces(behaveRun.surface.getMoistureOfExtinctionByLifeState(FuelLifeState::DEAD, moistureUnits));
-    double expectedDeadMoistureOfExtinction = 0.40; // Moisture of extinction is a property of fuel models
     reportTestResult(testInfo, testName, observedLiveMoistureOfExtinction, expectedLiveMoistureOfExtinction, error_tolerance);
 
     testName = "Test characteristic SAVR for north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";

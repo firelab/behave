@@ -348,9 +348,9 @@ double Surface::getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum 
     return MoistureUnits::fromBaseUnits(surfaceFire_.getWeightedMoistureByLifeState(lifeState), moistureUnits);
 }
 
-double Surface::getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getLiveFuelMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(lifeState), moistureUnits);
+    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::LIVE), moistureUnits);
 }
 
 double Surface::getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
