@@ -29,62 +29,68 @@
 
 SpotInputs::SpotInputs()
 {
-	initializeMembers();
+  initializeMembers();
 }
 
 void SpotInputs::setBurningPileFlameHeight(double buringPileFlameHeight, LengthUnits::LengthUnitsEnum flameHeightUnits)
 {
-	buringPileFlameHeight_ = LengthUnits::toBaseUnits(buringPileFlameHeight, flameHeightUnits);
+  buringPileFlameHeight_ = LengthUnits::toBaseUnits(buringPileFlameHeight, flameHeightUnits);
 }
 
 void SpotInputs::setDBH(double DBH, LengthUnits::LengthUnitsEnum DBHUnits)
 {
-	DBH_ = LengthUnits::toBaseUnits(DBH, DBHUnits);
+  DBH_ = LengthUnits::toBaseUnits(DBH, DBHUnits);
 }
 
 void SpotInputs::setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits)
 {
-	downwindCoverHeight_ = LengthUnits::toBaseUnits(downwindCoverHeight, coverHeightUnits);
+  double dch = LengthUnits::toBaseUnits(downwindCoverHeight, coverHeightUnits);
+  downwindCoverHeight_ = ( downwindOpenCanopy_ ) ? 0.5 * dch : dch;
+}
+
+void SpotInputs::setDownwindOpenCanopy(int downwindOpenCanopy)
+{
+  downwindOpenCanopy_ = downwindOpenCanopy;
 }
 
 void SpotInputs::setSurfaceFlameLength(double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
-	surfaceFlameLength_ = LengthUnits::toBaseUnits(surfaceFlameLength, flameLengthUnits);
+  surfaceFlameLength_ = LengthUnits::toBaseUnits(surfaceFlameLength, flameLengthUnits);
 }
 
 void SpotInputs::setLocation(SpotFireLocation::SpotFireLocationEnum location)
 {
-	location_ = location;
+  location_ = location;
 }
 
 void SpotInputs::setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits)
 {
-	ridgeToValleyDistance_ = LengthUnits::toBaseUnits(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
+  ridgeToValleyDistance_ = LengthUnits::toBaseUnits(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
 }
 
 void SpotInputs::setRidgeToValleyElevation(double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits)
 {
-	ridgeToValleyElevation_ = LengthUnits::toBaseUnits(ridgeToValleyElevation, elevationUnits);
+  ridgeToValleyElevation_ = LengthUnits::toBaseUnits(ridgeToValleyElevation, elevationUnits);
 }
 
 void SpotInputs::setTorchingTrees(int torchingTrees)
 {
-	torchingTrees_ = torchingTrees;
+  torchingTrees_ = torchingTrees;
 }
 
 void SpotInputs::setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits)
 {
-	treeHeight_ = LengthUnits::toBaseUnits(treeHeight, treeHeightUnits);
+  treeHeight_ = LengthUnits::toBaseUnits(treeHeight, treeHeightUnits);
 }
 
 void SpotInputs::setTreeSpecies(SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies)
 {
-	treeSpecies_ = treeSpecies;
+  treeSpecies_ = treeSpecies;
 }
 
 void SpotInputs::setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
-	windSpeedAtTwentyFeet_ = SpeedUnits::toBaseUnits(windSpeedAtTwentyFeet, windSpeedUnits);
+  windSpeedAtTwentyFeet_ = SpeedUnits::toBaseUnits(windSpeedAtTwentyFeet, windSpeedUnits);
 }
 
 void SpotInputs::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,

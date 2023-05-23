@@ -39,7 +39,7 @@ class Spot
 public:
     Spot();
     ~Spot();
-    
+
     Spot(const Spot& rhs);
     Spot& operator=(const Spot& rhs);
 
@@ -49,10 +49,11 @@ public:
     void calculateSpottingDistanceFromSurfaceFire();
     void calculateSpottingDistanceFromTorchingTrees();
 
-	// Spot Inputs Setters
+  // Spot Inputs Setters
     void setBurningPileFlameHeight(double buringPileflameHeight, LengthUnits::LengthUnitsEnum flameHeightUnits);
     void setDBH(double DBH, LengthUnits::LengthUnitsEnum DBHUnits);
     void setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits);
+    void setDownwindOpenCanopy(int downwindOpenCanopy);
     void setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
     void setLocation(SpotFireLocation::SpotFireLocationEnum location);
     void setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
@@ -62,21 +63,21 @@ public:
     void setTreeSpecies(SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies);
     void setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
 
-	void updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+  void updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
         LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
         double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, double buringPileFlameHeight,
         LengthUnits::LengthUnitsEnum flameHeightUnits, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
-	void updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+  void updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
         LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
         double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, double windSpeedAtTwentyFeet,
         SpeedUnits::SpeedUnitsEnum windSpeedUnits, double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
-	void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+  void updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
         LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
         double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, int torchingTrees, double DBH,
         LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
         SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
 
-	// Spot Inputs Getters
+  // Spot Inputs Getters
     double getBurningPileFlameHeight(LengthUnits::LengthUnitsEnum flameHeightUnits);
     double getDBH(LengthUnits::LengthUnitsEnum DBHUnits);
     double getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits);
@@ -89,7 +90,7 @@ public:
     SpotTreeSpecies::SpotTreeSpeciesEnum getTreeSpecies();
     double getWindSpeedAtTwentyFeet(SpeedUnits::SpeedUnitsEnum windSpeedUnits);
 
-	// Spot Outputs Getters
+  // Spot Outputs Getters
     double getCoverHeightUsedForBurningPile(LengthUnits::LengthUnitsEnum coverHeightUnits);
     double getCoverHeightUsedForSurfaceFire(LengthUnits::LengthUnitsEnum coverHeightUnits);
     double getCoverHeightUsedForTorchingTrees(LengthUnits::LengthUnitsEnum coverHeightUnits);
@@ -110,8 +111,8 @@ private:
     void memberwiseCopyAssignment(const Spot& rhs);
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
-    double spotDistanceMountainTerrain(double flatDistance, SpotFireLocation::SpotFireLocationEnum location, 
-		double ridgeToValleyDistance, double ridgeToValleyElevation);
+    double spotDistanceMountainTerrain(double flatDistance, SpotFireLocation::SpotFireLocationEnum location,
+    double ridgeToValleyDistance, double ridgeToValleyElevation);
 
     SpotInputs spotInputs_;
 
@@ -119,7 +120,7 @@ private:
     double speciesFlameDurationParameters_[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS];
     double firebrandHeightFactors_[SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotInputs::SpotArrayConstants::NUM_COLS];
 
-	// Outputs
+  // Outputs
     double coverHeightUsedForSurfaceFire_;      // Actual tree / vegetation ht used for surface fire(ft)
     double coverHeightUsedForBurningPile_;      // Actual tree / vegetation ht used for burning pile(ft)
     double coverHeightUsedForTorchingTrees_;    // Actual tree / vegetation ht used for burning pile(ft)
