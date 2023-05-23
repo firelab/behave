@@ -97,6 +97,7 @@ public:
   double getBurningPileFlameHeight(LengthUnits::LengthUnitsEnum flameHeightUnits);
   double getDBH(LengthUnits::LengthUnitsEnum DBHUnits);
   double getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits);
+  int getDownwindOpenCanopy();
   double getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits);
   SpotFireLocation::SpotFireLocationEnum getLocation();
   double getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
