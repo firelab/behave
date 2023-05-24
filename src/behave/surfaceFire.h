@@ -47,7 +47,7 @@ public:
     void initializeMembers();
 
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
-    double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false, 
+    double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false,
         double directionOfInterest = -1.0);
     double calculateSpreadRateAtVector(double directionOfInterest);
     void calculateMidflameWindSpeed();
@@ -73,12 +73,13 @@ public:
     double getHeatSource() const;
     double getBulkDensity() const;
     double getReactionIntensity() const;
+    double getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState);
     double getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWindAdjustmentFactor() const;
     double getCharacteristicSAVR() const;
     bool getIsWindLimitExceeded() const;
- 
+
 protected:
     // Protected setters accessible to friend classes
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
@@ -93,7 +94,7 @@ protected:
     void setIsWindLimitExceeded(bool isWindLimitExceeded);
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
-    
+
 private:
     void memberwiseCopyAssignment(const SurfaceFire& rhs);
     void calculateHeatPerUnitArea();
@@ -108,7 +109,7 @@ private:
     void calculateScorchHeight();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
-  
+
     void calculateEffectiveWindSpeed();
     void applyWindSpeedLimit();
     double convertDirectionOfSpreadToRelativeToNorth(double directionOfMaxSpreadFromUpslope) const;
@@ -119,7 +120,7 @@ private:
     FireSize* size_;
     SurfaceFuelbedIntermediates surfaceFuelbedIntermediates_;
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
-  
+
     // Member variables
     bool isWindLimitExceeded_;
     double directionOfInterest_;
@@ -145,7 +146,7 @@ private:
     double heatSource_;
     double scorchHeight_;
 
-    double midflameWindSpeed_; 
+    double midflameWindSpeed_;
     double windAdjustmentFactor_;
     WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;
     double canopyCrownFraction_;

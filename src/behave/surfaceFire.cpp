@@ -1,7 +1,7 @@
 /******************************************************************************
 *
 * Project:  CodeBlocks
-* Purpose:  Class for calculating values associated with surface fires used 
+* Purpose:  Class for calculating values associated with surface fires used
 *           in Rothermel Model
 * Author:   William Chatham <wchatham@fs.fed.us>
 * Credits:  Some of the code in this file is, in part or in whole, from
@@ -46,7 +46,7 @@ SurfaceFire::SurfaceFire()
 SurfaceFire::SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs,
     FireSize& size)
     : surfaceFuelbedIntermediates_(fuelModels, surfaceInputs),
-      surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_) 
+      surfaceFireReactionIntensity_(surfaceFuelbedIntermediates_)
 {
     fuelModels_ = &fuelModels;
     size_ = &size;
@@ -222,14 +222,14 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
         applyWindSpeedLimit();
     }
 
-    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::FeetPerMinute);    
+    effectiveWindSpeed_ = SpeedUnits::fromBaseUnits(effectiveWindSpeed_, SpeedUnits::FeetPerMinute);
     calculateResidenceTime();
 
     // Calculate fire ellipse and related properties
     size_->calculateFireBasicDimensions(effectiveWindSpeed_, SpeedUnits::FeetPerMinute, forwardSpreadRate_, SpeedUnits::FeetPerMinute);
 
     fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
-   
+
     backingSpreadRate_ = size_->getBackingSpreadRate(SpeedUnits::FeetPerMinute);
 
     calculateFireFirelineIntensity(forwardSpreadRate_);
@@ -368,7 +368,7 @@ void SurfaceFire::calculateHeatPerUnitArea()
 
 void  SurfaceFire::calculateWindSpeedLimit()
 {
-    windSpeedLimit_ = 0.9 * reactionIntensity_; 
+    windSpeedLimit_ = 0.9 * reactionIntensity_;
     if (phiS_ > 0.0)
     {
         if (phiS_ > windSpeedLimit_)
@@ -383,13 +383,13 @@ void SurfaceFire::calculateWindFactor()
 {
     double sigma = surfaceFuelbedIntermediates_.getSigma();
     double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
- 
+
     windC_ = 7.47 * exp(-0.133 * pow(sigma, 0.55));
     windB_ = 0.02526 * pow(sigma, 0.54);
     windE_ = 0.715 * exp(-0.000359*sigma);
 
     // midflameWindSpeed is in ft/min
-    if (midflameWindSpeed_ < 1.0e-07) 
+    if (midflameWindSpeed_ < 1.0e-07)
     {
         phiW_ = 0.0;
     }
@@ -408,7 +408,7 @@ void SurfaceFire::calculateWindAdjustmentFactor()
     double crownRatio = surfaceInputs_->getCrownRatio();
     double fuelbedDepth = surfaceFuelbedIntermediates_.getFuelbedDepth();
 
-    WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod = 
+    WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod =
         surfaceInputs_->getWindAdjustmentFactorCalculationMethod();
     if(windAdjustmentFactorCalculationMethod == WindAdjustmentFactorCalculationMethod::UseCrownRatio)
     {
@@ -570,6 +570,11 @@ double SurfaceFire::getBulkDensity() const
 double SurfaceFire::getReactionIntensity() const
 {
     return reactionIntensity_;
+}
+
+double SurfaceFire::getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState)
+{
+    return surfaceFireReactionIntensity_.getSurfaceFireReactionIntensityForLifeState(lifeState);
 }
 
 double SurfaceFire::getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const

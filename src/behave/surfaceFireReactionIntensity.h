@@ -47,6 +47,7 @@ public:
     void calculateEtaM();
     void calculateEtaS();
     double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
+    double getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState);
 
 private:
     void memberwiseCopyAssignment(const SurfaceFireReactionIntensity& rhs);
