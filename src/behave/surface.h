@@ -70,10 +70,14 @@ public:
     double getFlankingSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits);
     double getDirectionOfMaxSpread() const;
     double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getBackingFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getFlankingFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
     double getHeadingToBackingRatio() const;
     double getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
+    double getBackingFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
+    double getFlankingFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     double getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const;
     double getMidflameWindspeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const;
     double getResidenceTime(TimeUnits::TimeUnitsEnum timeUnits) const;

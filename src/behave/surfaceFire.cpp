@@ -161,6 +161,18 @@ void SurfaceFire::calculateFireFirelineIntensity(double forwardSpreadRate)
     firelineIntensity_ = forwardSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
 }
 
+void SurfaceFire::calculateBackingFireFirelineIntensity(double backingSpreadRate)
+{
+  double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
+  backingFirelineIntensity_ = backingSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
+}
+
+void SurfaceFire::calculateFlankingFireFirelineIntensity(double flankingSpreadRate)
+{
+  double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
+  flankingFirelineIntensity_ = flankingSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
+}
+
 void SurfaceFire::skipCalculationForZeroLoad()
 {
     initializeMembers();
@@ -172,6 +184,22 @@ void SurfaceFire::calculateFlameLength()
     flameLength_ = ((firelineIntensity_ < 1.0e-07)
         ? (0.0)
         : (0.45 * pow(firelineIntensity_, 0.46)));
+}
+
+void SurfaceFire::calculateBackingFlameLength()
+{
+  // Byram 1959, Albini 1976
+  backingFlameLength_ = ((backingFirelineIntensity_ < 1.0e-07)
+                         ? (0.0)
+                         : (0.45 * pow(backingFirelineIntensity_, 0.46)));
+}
+
+void SurfaceFire::calculateFlankingFlameLength()
+{
+  // Byram 1959, Albini 1976
+  flankingFlameLength_ = ((flankingFirelineIntensity_ < 1.0e-07)
+                          ? (0.0)
+                          : (0.45 * pow(flankingFirelineIntensity_, 0.46)));
 }
 
 void SurfaceFire::calculateScorchHeight()
@@ -231,9 +259,16 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
 
     backingSpreadRate_ = size_->getBackingSpreadRate(SpeedUnits::FeetPerMinute);
+    flankingSpreadRate_ = size_->getFlankingSpreadRate(SpeedUnits::FeetPerMinute);
 
     calculateFireFirelineIntensity(forwardSpreadRate_);
+    calculateBackingFireFirelineIntensity(backingSpreadRate_);
+    calculateFlankingFireFirelineIntensity(flankingSpreadRate_);
+
     calculateFlameLength();
+    calculateBackingFlameLength();
+    calculateFlankingFlameLength();
+
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
     if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
@@ -507,9 +542,29 @@ double SurfaceFire::getFirelineIntensity() const
     return firelineIntensity_;
 }
 
+double SurfaceFire::getBackingFirelineIntensity() const
+{
+  return backingFirelineIntensity_;
+}
+
+double SurfaceFire::getFlankingFirelineIntensity() const
+{
+  return flankingFirelineIntensity_;
+}
+
 double SurfaceFire::getFlameLength() const
 {
     return flameLength_;
+}
+
+double SurfaceFire::getBackingFlameLength() const
+{
+  return backingFlameLength_;
+}
+
+double SurfaceFire::getFlankingFlameLength() const
+{
+  return flankingFlameLength_;
 }
 
 double SurfaceFire::getMaxFlameLength() const
