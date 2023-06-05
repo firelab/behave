@@ -572,7 +572,7 @@ double SurfaceFire::getReactionIntensity() const
     return reactionIntensity_;
 }
 
-double SurfaceFire::getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState)
+double SurfaceFire::getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return surfaceFireReactionIntensity_.getSurfaceFireReactionIntensityForLifeState(lifeState);
 }

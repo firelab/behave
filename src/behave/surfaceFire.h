@@ -73,7 +73,7 @@ public:
     double getHeatSource() const;
     double getBulkDensity() const;
     double getReactionIntensity() const;
-    double getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState);
+    double getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getMoistureOfExtinctionByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWindAdjustmentFactor() const;

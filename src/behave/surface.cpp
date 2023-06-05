@@ -293,7 +293,7 @@ double Surface::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSo
     return HeatSourceAndReactionIntensityUnits::fromBaseUnits(surfaceFire_.getReactionIntensity(), reactiontionIntensityUnits);
 }
 
-double Surface::getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState)
+double Surface::getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const
 {
     return surfaceFire_.getSurfaceFireReactionIntensityForLifeState(lifeState);
 }
