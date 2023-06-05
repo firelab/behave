@@ -134,7 +134,7 @@ void SurfaceFireReactionIntensity::calculateEtaM()
         }
         else
         {
-            etaM_[i] = 1.0 - (2.59 * relativeMoisture) + (5.11 * relativeMoisture * relativeMoisture) - 
+            etaM_[i] = 1.0 - (2.59 * relativeMoisture) + (5.11 * relativeMoisture * relativeMoisture) -
                 (3.52 * relativeMoisture * relativeMoisture * relativeMoisture);
         }
     }
@@ -168,4 +168,9 @@ void SurfaceFireReactionIntensity::calculateEtaS()
 double SurfaceFireReactionIntensity::getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const
 {
     return reactionIntensity_;
+}
+
+double getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState)
+{
+  return  reactionIntensityForLifeState_[lifeState];
 }

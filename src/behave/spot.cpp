@@ -84,59 +84,59 @@ void Spot::memberwiseCopyAssignment(const Spot& rhs)
 
 void Spot::initializeMembers()
 {
-	// Set up speciesFlameHeightParameters_
-	const double tempSpeciesFlameHeightParameters[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS] =
-	{
-		{ 15.7, 0.451 },  //  0 Engelmann spruce
-		{ 15.7, 0.451 },  //  1 Douglas-fir
-		{ 15.7, 0.451 },  //  2 subalpine fir
-		{ 15.7, 0.451 },  //  3 western hemlock
-		{ 12.9, 0.453 },  //  4 ponderosa pine
-		{ 12.9, 0.453 },  //  5 lodgepole pine
-		{ 12.9, 0.453 },  //  6 western white pine
-		{ 16.5, 0.515 },  //  7 grand fir
-		{ 16.5, 0.515 },  //  8 balsam fir
-		{ 2.71, 1.000 },  //  9 slash pine
-		{ 2.71, 1.000 },  // 10 longleaf pine
-		{ 2.71, 1.000 },  // 11 pond pine
-		{ 2.71, 1.000 },  // 12 shortleaf pine
-		{ 2.71, 1.000 }   // 13 loblolly pine
-						  //{12.9, .453 },  // 14 western larch (guessed)
-						  //{15.7, .515 }   // 15 western red cedar (guessed)
-	};
-	memcpy(speciesFlameHeightParameters_, tempSpeciesFlameHeightParameters, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
+  // Set up speciesFlameHeightParameters_
+  const double tempSpeciesFlameHeightParameters[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS] =
+  {
+    { 15.7, 0.451 },  //  0 Engelmann spruce
+    { 15.7, 0.451 },  //  1 Douglas-fir
+    { 15.7, 0.451 },  //  2 subalpine fir
+    { 15.7, 0.451 },  //  3 western hemlock
+    { 12.9, 0.453 },  //  4 ponderosa pine
+    { 12.9, 0.453 },  //  5 lodgepole pine
+    { 12.9, 0.453 },  //  6 western white pine
+    { 16.5, 0.515 },  //  7 grand fir
+    { 16.5, 0.515 },  //  8 balsam fir
+    { 2.71, 1.000 },  //  9 slash pine
+    { 2.71, 1.000 },  // 10 longleaf pine
+    { 2.71, 1.000 },  // 11 pond pine
+    { 2.71, 1.000 },  // 12 shortleaf pine
+    { 2.71, 1.000 }   // 13 loblolly pine
+              //{12.9, .453 },  // 14 western larch (guessed)
+              //{15.7, .515 }   // 15 western red cedar (guessed)
+  };
+  memcpy(speciesFlameHeightParameters_, tempSpeciesFlameHeightParameters, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameHeightParameters_[0]));
 
-	// Set up speciesFlameDurationParameters_
-	const double tempSpeciesFlameDurationParameters[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS] =
-	{
-		{ 12.6, -0.256 },  //  0 Engelmann spruce
-		{ 10.7, -0.278 },  //  1 Douglas-fir
-		{ 10.7, -0.278 },  //  2 subalpine fir
-		{ 6.30, -0.249 },  //  3 western hemlock
-		{ 12.6, -0.256 },  //  4 ponderosa pine
-		{ 12.6, -0.256 },  //  5 lodgepole pine
-		{ 10.7, -0.278 },  //  6 western white pine
-		{ 10.7, -0.278 },  //  7 grand fir
-		{ 10.7, -0.278 },  //  8 balsam fir
-		{ 11.9, -0.389 },  //  9 slash pine
-		{ 11.9, -0.389 },  // 10 longleaf pine
-		{ 7.91, -0.344 },  // 11 pond pine
-		{ 7.91, -0.344 },  // 12 shortleaf pine
-		{ 13.5, -0.544 }   // 13 loblolly pine
-						   //{ 6.3, -.249},   // 14 western larch (guessed)
-						   //{ 12.6, -.256}   // 15 western red cedar (guessed)
-	};
-	memcpy(speciesFlameDurationParameters_, tempSpeciesFlameDurationParameters, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
+  // Set up speciesFlameDurationParameters_
+  const double tempSpeciesFlameDurationParameters[SpotInputs::SpotArrayConstants::NUM_SPECIES][SpotInputs::SpotArrayConstants::NUM_COLS] =
+  {
+    { 12.6, -0.256 },  //  0 Engelmann spruce
+    { 10.7, -0.278 },  //  1 Douglas-fir
+    { 10.7, -0.278 },  //  2 subalpine fir
+    { 6.30, -0.249 },  //  3 western hemlock
+    { 12.6, -0.256 },  //  4 ponderosa pine
+    { 12.6, -0.256 },  //  5 lodgepole pine
+    { 10.7, -0.278 },  //  6 western white pine
+    { 10.7, -0.278 },  //  7 grand fir
+    { 10.7, -0.278 },  //  8 balsam fir
+    { 11.9, -0.389 },  //  9 slash pine
+    { 11.9, -0.389 },  // 10 longleaf pine
+    { 7.91, -0.344 },  // 11 pond pine
+    { 7.91, -0.344 },  // 12 shortleaf pine
+    { 13.5, -0.544 }   // 13 loblolly pine
+               //{ 6.3, -.249},   // 14 western larch (guessed)
+               //{ 12.6, -.256}   // 15 western red cedar (guessed)
+  };
+  memcpy(speciesFlameDurationParameters_, tempSpeciesFlameDurationParameters, SpotInputs::SpotArrayConstants::NUM_SPECIES * sizeof(speciesFlameDurationParameters_[0]));
 
-	// Set up firebrandHeightFactors_
-	const double tempFirebrandHeightFactors[SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotInputs::SpotArrayConstants::NUM_COLS] =
-	{
-		{ 4.24, 0.332 },
-		{ 3.64, 0.391 },
-		{ 2.78, 0.418 },
-		{ 4.70, 0.000 }
-	};
-	memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
+  // Set up firebrandHeightFactors_
+  const double tempFirebrandHeightFactors[SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS][SpotInputs::SpotArrayConstants::NUM_COLS] =
+  {
+    { 4.24, 0.332 },
+    { 3.64, 0.391 },
+    { 2.78, 0.418 },
+    { 4.70, 0.000 }
+  };
+  memcpy(firebrandHeightFactors_, tempFirebrandHeightFactors, SpotInputs::SpotArrayConstants::NUM_FIREBRAND_ROWS * sizeof(firebrandHeightFactors_[0]));
 
     coverHeightUsedForSurfaceFire_ = 0.0;
     coverHeightUsedForBurningPile_ = 0.0;
@@ -212,52 +212,52 @@ double Spot::spotDistanceFlatTerrain(
 
 void Spot::calculateSpottingDistanceFromBurningPile()
 {
-	// Get needed inputs
-	SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
-	double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
-	double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
-	double downwindCoverHeight = spotInputs_.getDownwindCoverHeight(LengthUnits::Feet);
-	double windSpeedAtTwentyFeet = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::MilesPerHour);
-	double burningPileflameHeight = spotInputs_.getBurningPileFlameHeight(LengthUnits::Feet);
+  // Get needed inputs
+  SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
+  double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
+  double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
+  double downwindCoverHeight = spotInputs_.getDownwindCoverHeight(LengthUnits::Feet);
+  double windSpeedAtTwentyFeet = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::MilesPerHour);
+  double burningPileflameHeight = spotInputs_.getBurningPileFlameHeight(LengthUnits::Feet);
 
-	// Initialize return values
-	firebrandHeightFromBurningPile_ = 0.0;
-	flatDistanceFromBurningPile_ = 0.0;
-	mountainDistanceFromBurningPile_ = 0.0;
+  // Initialize return values
+  firebrandHeightFromBurningPile_ = 0.0;
+  flatDistanceFromBurningPile_ = 0.0;
+  mountainDistanceFromBurningPile_ = 0.0;
 
-	// Determine maximum firebrand height
-	if ((windSpeedAtTwentyFeet > 1e-7) && (burningPileflameHeight > 1e-7))
-	{
-		// Determine maximum firebrand height
-		firebrandHeightFromBurningPile_ = 12.2 * burningPileflameHeight;
+  // Determine maximum firebrand height
+  if ((windSpeedAtTwentyFeet > 1e-7) && (burningPileflameHeight > 1e-7))
+  {
+    // Determine maximum firebrand height
+    firebrandHeightFromBurningPile_ = 12.2 * burningPileflameHeight;
 
-		// Cover height used in calculation of flatDist.
-		coverHeightUsedForBurningPile_ = calculateSpotCriticalCoverHeight(firebrandHeightFromBurningPile_, downwindCoverHeight);
-		if (coverHeightUsedForBurningPile_ > 1e-7)
-		{
-			// Flat terrain spotting distance.
-			flatDistanceFromBurningPile_ = 0.000718 * windSpeedAtTwentyFeet * sqrt(coverHeightUsedForBurningPile_)
-				* (0.362 + sqrt(firebrandHeightFromBurningPile_ / coverHeightUsedForBurningPile_) / 2.0
-					* log(firebrandHeightFromBurningPile_ / coverHeightUsedForBurningPile_));
-			// Adjust for mountainous terrain.
-			mountainDistanceFromBurningPile_ = spotDistanceMountainTerrain(flatDistanceFromBurningPile_,
-				location, ridgeToValleyDistance, ridgeToValleyElevation);
+    // Cover height used in calculation of flatDist.
+    coverHeightUsedForBurningPile_ = calculateSpotCriticalCoverHeight(firebrandHeightFromBurningPile_, downwindCoverHeight);
+    if (coverHeightUsedForBurningPile_ > 1e-7)
+    {
+      // Flat terrain spotting distance.
+      flatDistanceFromBurningPile_ = 0.000718 * windSpeedAtTwentyFeet * sqrt(coverHeightUsedForBurningPile_)
+        * (0.362 + sqrt(firebrandHeightFromBurningPile_ / coverHeightUsedForBurningPile_) / 2.0
+          * log(firebrandHeightFromBurningPile_ / coverHeightUsedForBurningPile_));
+      // Adjust for mountainous terrain.
+      mountainDistanceFromBurningPile_ = spotDistanceMountainTerrain(flatDistanceFromBurningPile_,
+        location, ridgeToValleyDistance, ridgeToValleyElevation);
             // Convert distances from miles to feet (base distance unit)
             flatDistanceFromBurningPile_ = LengthUnits::toBaseUnits(flatDistanceFromBurningPile_, LengthUnits::Miles);
             mountainDistanceFromBurningPile_ = LengthUnits::toBaseUnits(mountainDistanceFromBurningPile_, LengthUnits::Miles);
-		}
-	}
+    }
+  }
 }
 
 void Spot::calculateSpottingDistanceFromSurfaceFire()
 {
-	// Get needed inputs
-	SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
-	double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
-	double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
-	double downwindCoverHeight = spotInputs_.getDownwindCoverHeight(LengthUnits::Feet);
-	double windSpeedAtTwentyFeet = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::MilesPerHour);
-	double flameLength = spotInputs_.getSurfaceFlameLength(LengthUnits::Feet);
+  // Get needed inputs
+  SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
+  double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
+  double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
+  double downwindCoverHeight = spotInputs_.getDownwindCoverHeight(LengthUnits::Feet);
+  double windSpeedAtTwentyFeet = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::MilesPerHour);
+  double flameLength = spotInputs_.getSurfaceFlameLength(LengthUnits::Feet);
 
     // Initialize return values
     firebrandHeightFromSurfaceFire_ = 0.0;
@@ -296,16 +296,16 @@ void Spot::calculateSpottingDistanceFromSurfaceFire()
 
 void Spot::calculateSpottingDistanceFromTorchingTrees()
 {
-	// Get needed inputs
-	SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
-	double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
-	double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
-	double downwindCoverHeight = spotInputs_.getDownwindCoverHeight(LengthUnits::Feet);
-	double windSpeedAtTwentyFeet = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::MilesPerHour);
-	double torchingTrees = spotInputs_.getTorchingTrees();
-	double DBH = spotInputs_.getDBH(LengthUnits::Inches);
-	double treeHeight = spotInputs_.getTreeHeight(LengthUnits::Feet);
-	SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = spotInputs_.getTreeSpecies();
+  // Get needed inputs
+  SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
+  double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
+  double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
+  double downwindCoverHeight = spotInputs_.getDownwindCoverHeight(LengthUnits::Feet);
+  double windSpeedAtTwentyFeet = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::MilesPerHour);
+  double torchingTrees = spotInputs_.getTorchingTrees();
+  double DBH = spotInputs_.getDBH(LengthUnits::Inches);
+  double treeHeight = spotInputs_.getTreeHeight(LengthUnits::Feet);
+  SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = spotInputs_.getTreeSpecies();
 
     // Initialize return variables
     flameRatio_ = 0.0;
@@ -375,52 +375,57 @@ void Spot::setBurningPileFlameHeight(double buringPileFlameHeight, LengthUnits::
 
 void Spot::setDBH(double DBH, LengthUnits::LengthUnitsEnum DBHUnits)
 {
-	spotInputs_.setDBH(DBH, DBHUnits);
+  spotInputs_.setDBH(DBH, DBHUnits);
 }
 
 void Spot::setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits)
 {
-	spotInputs_.setDownwindCoverHeight(downwindCoverHeight, coverHeightUnits);
+  spotInputs_.setDownwindCoverHeight(downwindCoverHeight, coverHeightUnits);
+}
+
+void Spot::setDownwindOpenCanopy(int downwindOpenCanopy)
+{
+  spotInputs_.setDownwindOpenCanopy(downwindOpenCanopy);
 }
 
 void Spot::setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
-	spotInputs_.setSurfaceFlameLength(flameLength, flameLengthUnits);
+  spotInputs_.setSurfaceFlameLength(flameLength, flameLengthUnits);
 }
 
 void Spot::setLocation(SpotFireLocation::SpotFireLocationEnum location)
 {
-	spotInputs_.setLocation(location);
+  spotInputs_.setLocation(location);
 }
 
 void Spot::setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits)
 {
-	spotInputs_.setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
+  spotInputs_.setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
 }
 
 void Spot::setRidgeToValleyElevation(double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits)
 {
-	spotInputs_.setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
+  spotInputs_.setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
 }
 
 void Spot::setTorchingTrees(int torchingTrees)
 {
-	spotInputs_.setTorchingTrees(torchingTrees);
+  spotInputs_.setTorchingTrees(torchingTrees);
 }
 
 void Spot::setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits)
 {
-	spotInputs_.setTreeHeight(treeHeight, treeHeightUnits);
+  spotInputs_.setTreeHeight(treeHeight, treeHeightUnits);
 }
 
 void Spot::setTreeSpecies(SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies)
 {
-	spotInputs_.setTreeSpecies(treeSpecies);
+  spotInputs_.setTreeSpecies(treeSpecies);
 }
 
 void Spot::setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
-	spotInputs_.setWindSpeedAtTwentyFeet(windSpeedAtTwentyFeet, windSpeedUnits);
+  spotInputs_.setWindSpeedAtTwentyFeet(windSpeedAtTwentyFeet, windSpeedUnits);
 }
 
 void Spot::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
@@ -428,8 +433,8 @@ void Spot::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum
     double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, double buringPileFlameHeight,
     LengthUnits::LengthUnitsEnum flameHeightUnits, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
-	spotInputs_.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation, 
-        elevationUnits, downwindCoverHeight, coverHeightUnits, buringPileFlameHeight, flameHeightUnits, windSpeedAtTwentyFeet, 
+  spotInputs_.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation,
+        elevationUnits, downwindCoverHeight, coverHeightUnits, buringPileFlameHeight, flameHeightUnits, windSpeedAtTwentyFeet,
         windSpeedUnits);
 }
 
@@ -438,7 +443,7 @@ void Spot::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum
     double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, double windSpeedAtTwentyFeet,
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
-	spotInputs_.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation, 
+  spotInputs_.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation,
         elevationUnits, downwindCoverHeight, coverHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits, surfaceFlameLength, flameLengthUnits);
 }
 
@@ -448,64 +453,69 @@ void Spot::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEn
     LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
-	spotInputs_.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation,
-        elevationUnits, downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits, treeHeight, treeHeightUnits, treeSpecies, 
+  spotInputs_.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation,
+        elevationUnits, downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits, treeHeight, treeHeightUnits, treeSpecies,
         windSpeedAtTwentyFeet, windSpeedUnits);
 }
 
 double Spot::getBurningPileFlameHeight(LengthUnits::LengthUnitsEnum flameHeightUnits)
 {
-	return spotInputs_.getBurningPileFlameHeight(flameHeightUnits);
+  return spotInputs_.getBurningPileFlameHeight(flameHeightUnits);
 }
 
 double Spot::getDBH(LengthUnits::LengthUnitsEnum DBHUnits)
 {
-	return spotInputs_.getDBH(DBHUnits);
+  return spotInputs_.getDBH(DBHUnits);
 }
 
 double Spot::getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits)
 {
-	return spotInputs_.getDownwindCoverHeight(coverHeightUnits);
+  return spotInputs_.getDownwindCoverHeight(coverHeightUnits);
+}
+
+int Spot::getDownwindOpenCanopy()
+{
+    return spotInputs_.getDownwindOpenCanopy();
 }
 
 double Spot::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
-	return spotInputs_.getSurfaceFlameLength(flameLengthUnits);
+  return spotInputs_.getSurfaceFlameLength(flameLengthUnits);
 }
 
 SpotFireLocation::SpotFireLocationEnum Spot::getLocation()
 {
-	return spotInputs_.getLocation();
+  return spotInputs_.getLocation();
 }
 
 double Spot::getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits)
 {
-	return spotInputs_.getRidgeToValleyDistance(ridgeToValleyDistanceUnits);
+  return spotInputs_.getRidgeToValleyDistance(ridgeToValleyDistanceUnits);
 }
 
 double Spot::getRidgeToValleyElevation(LengthUnits::LengthUnitsEnum elevationUnits)
 {
-	return spotInputs_.getRidgeToValleyElevation(elevationUnits);
+  return spotInputs_.getRidgeToValleyElevation(elevationUnits);
 }
 
 int Spot::getTorchingTrees()
 {
-	return spotInputs_.getTorchingTrees();
+  return spotInputs_.getTorchingTrees();
 }
 
 double Spot::getTreeHeight(LengthUnits::LengthUnitsEnum  treeHeightUnits)
 {
-	return spotInputs_.getTreeHeight(treeHeightUnits);
+  return spotInputs_.getTreeHeight(treeHeightUnits);
 }
 
 SpotTreeSpecies::SpotTreeSpeciesEnum Spot::getTreeSpecies()
 {
-	return spotInputs_.getTreeSpecies();
+  return spotInputs_.getTreeSpecies();
 }
 
 double Spot::getWindSpeedAtTwentyFeet(SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
-	return spotInputs_.getWindSpeedAtTwentyFeet(windSpeedUnits);
+  return spotInputs_.getWindSpeedAtTwentyFeet(windSpeedUnits);
 }
 
 double Spot::getCoverHeightUsedForBurningPile(LengthUnits::LengthUnitsEnum coverHeightUnits)
