@@ -60,7 +60,11 @@ public:
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
     double getFirelineIntensity() const;
+    double getBackingFirelineIntensity() const;
+    double getFlankingFirelineIntensity() const;
     double getFlameLength() const;
+    double getBackingFlameLength() const;
+    double getFlankingFlameLength() const;
     double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
@@ -105,7 +109,11 @@ private:
 
     void calculateResidenceTime();
     void calculateFireFirelineIntensity(double forwardSpreadRate);
+    void calculateBackingFireFirelineIntensity(double backingSpreadRate);
+    void calculateFlankingFireFirelineIntensity(double flankingSpreadRate);
     void calculateFlameLength();
+    void calculateBackingFlameLength();
+    void calculateFlankingFlameLength();
     void calculateScorchHeight();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
@@ -134,15 +142,20 @@ private:
     double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
     double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
     double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
+    double backingSpreadRate_;
+    double flankingSpreadRate_;
     double spreadRateInDirectionOfInterest_;				// spreadRateInDirectionOfInterest
     double heatPerUnitArea_;                                // Heat per unit area (Btu/ft^2)
     double fireLengthToWidthRatio_;
     double residenceTime_;
     double reactionIntensity_;
     double firelineIntensity_;
+    double backingFirelineIntensity_;
+    double flankingFirelineIntensity_;
     double maxFlameLength_;                                 // Flame length computed from spread rate in max direction, used in SAFETY
     double flameLength_;
-    double backingSpreadRate_;
+    double backingFlameLength_;
+    double flankingFlameLength_;
     double heatSource_;
     double scorchHeight_;
 
