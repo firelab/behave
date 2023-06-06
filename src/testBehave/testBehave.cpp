@@ -510,9 +510,10 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     double firelineInstensity = 50.0;
     double midflameWindspeed = 5.0;
     double airTemperature = 80.0;
+    LengthUnits::LengthUnitsEnum scorchLengthUnits = LengthUnits::Feet;
     double observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
-        midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, LengthUnits::Feet);
-    double expectedScorchHeight = 14.164211;
+        midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
+    double expectedScorchHeight = 7.617325;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
 }
 
@@ -1228,47 +1229,68 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = SpotTreeSpecies::ENGELMANN_SPRUCE;
     LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Miles;;
 
+    SpotDownindCanopyMode::SpotDownindCanopyModeEnum downWindCanopyMode = SpotDownindCanopyMode::CLOSED;
+
     behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
-        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits,
+        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
         burningPileflameHeight, flameHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits);
     behaveRun.spot.calculateSpottingDistanceFromBurningPile();
     
-    testName = "Test mountain spotting distance from burning pile";
+    testName = "Test mountain spotting distance from burning pile, closed downwind canopy";
     expectedMountainSpottingDistance = 0.021330;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
     
-    testName = "Test flat spotting distance from burning pile";
+    testName = "Test flat spotting distance from burning pile, closed downwind canopy";
     expectedFlatSpottingDistance = 0.017067;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
 
+    downWindCanopyMode = SpotDownindCanopyMode::OPEN;
+
+    behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
+        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
+        burningPileflameHeight, flameHeightUnits, windSpeedAtTwentyFeet, windSpeedUnits);
+    behaveRun.spot.calculateSpottingDistanceFromBurningPile();
+
+    testName = "Test mountain spotting distance from burning pile, open downwind canopy";
+    expectedMountainSpottingDistance = 0.030863;
+    observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
+    reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
+
+    testName = "Test flat spotting distance from burning pile, closed downwind canopy";
+    expectedFlatSpottingDistance = 0.024700;
+    observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
+    reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
+
+    downWindCanopyMode = SpotDownindCanopyMode::CLOSED;
+
     behaveRun.spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
-        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, windSpeedAtTwentyFeet,
-        windSpeedUnits, flameLength, flameHeightUnits);
+        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
+        windSpeedAtTwentyFeet, windSpeedUnits, flameLength, flameHeightUnits);
     behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
 
-    testName = "Test mountain spotting distance from surface fire";
+    testName = "Test mountain spotting distance from surface fire, closed downwind canopy";
     expectedMountainSpottingDistance = 0.164401;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
     
-    testName = "Test flat spotting distance from surface fire";
+    testName = "Test flat spotting distance from surface fire, closed downwind canopy";
     expectedFlatSpottingDistance = 0.132964;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
     
     behaveRun.spot.updateSpotInputsForTorchingTrees(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
-        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, torchingTrees, DBH, DBHUnits,
-        treeHeight, treeHeightUnits, treeSpecies, windSpeedAtTwentyFeet, windSpeedUnits);
+        ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
+        torchingTrees, DBH, DBHUnits, treeHeight, treeHeightUnits, treeSpecies, windSpeedAtTwentyFeet, windSpeedUnits);
     behaveRun.spot.calculateSpottingDistanceFromTorchingTrees();
     
-    testName = "Test mountain spotting distance from torching trees";
+    testName = "Test mountain spotting distance from torching trees, closed downwind canopy";
     expectedMountainSpottingDistance = 0.222396;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
     
-    testName = "Test flat spotting distance from from torching trees";
+    testName = "Test flat spotting distance from from torching trees, closed downwind canopy";
     expectedFlatSpottingDistance = 0.181449;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
