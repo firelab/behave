@@ -506,7 +506,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 
 void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
 {
-    std::string testName = "Test calculate scorch height from air tempeature, wind and fireline intensity";
+    std::string testName = "Test calculate scorch height from 80 F air tempeature, 5 mph wind and 50 Btu/ft/s fireline intensity";
     double firelineInstensity = 50.0;
     double midflameWindspeed = 5.0;
     double airTemperature = 80.0;
@@ -514,6 +514,15 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     double observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
     double expectedScorchHeight = 7.617325;
+    reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
+
+    testName = "Test calculate scorch height from 70 F air tempeature, 300 ft/min wind and 55 Btu/ft/s fireline intensity";
+    midflameWindspeed = 300.0;
+    firelineInstensity = 55;
+    airTemperature = 70.0;
+    observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
+        midflameWindspeed, SpeedUnits::FeetPerMinute, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
+   expectedScorchHeight = 9.923720;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
 }
 

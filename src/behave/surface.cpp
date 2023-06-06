@@ -169,12 +169,15 @@ double Surface::calculateScorchHeight(double firelineIntensity, FirelineIntensit
 {
     firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
 
+    double midFlameWindSpeedInBaseUnits = SpeedUnits::toBaseUnits(midFlameWindSpeed, windSpeedUnits);
+    double midFlameWindSpeedInMilesPerHour = SpeedUnits::fromBaseUnits(midFlameWindSpeedInBaseUnits, SpeedUnits::MilesPerHour);
+
     airTemperature = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
     double scorchHeight = ((firelineIntensity < 1.0e-07)
         ? (0.0)
         : ((63. / (140. - airTemperature))
             * pow(firelineIntensity, 1.166667)
-            / sqrt(firelineIntensity + (midFlameWindSpeed * midFlameWindSpeed * midFlameWindSpeed))
+            / sqrt(firelineIntensity + (midFlameWindSpeedInMilesPerHour * midFlameWindSpeedInMilesPerHour * midFlameWindSpeedInMilesPerHour))
             ));
     return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
 }
