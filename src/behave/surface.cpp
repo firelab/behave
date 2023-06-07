@@ -72,8 +72,10 @@ bool Surface::isAllFuelLoadZero(int fuelModelNumber)
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
 {
     surfaceInputs_.updateMoisturesBasedOnInputMode();
-    double directionOfInterest = -1; // dummy value
+    double directionOfInterest = 0.0;
     bool hasDirectionOfInterest = false;
+    SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
+
     if (isUsingTwoFuelModels())
     {
         // Calculate spread rate for Two Fuel Models
@@ -83,7 +85,7 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
         double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
         int secondFuelModelNumber = surfaceInputs_.getSecondFuelModelNumber();
         surfaceTwoFuelModels.calculateWeightedSpreadRate(twoFuelModelsMethod, firstFuelModelNumber, firstFuelModelCoverage,
-            secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+            secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest, directionMode);
     }
     else // Use only one fuel model
     {
@@ -98,12 +100,12 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
         else
         {
             // Calculate spread rate
-            surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+            surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest, directionMode);
         }
     }
 }
 
-void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
+void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
 {
     surfaceInputs_.updateMoisturesBasedOnInputMode();
     bool hasDirectionOfInterest = true;
@@ -116,7 +118,7 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
         double firstFuelModelCoverage = surfaceInputs_.getFirstFuelModelCoverage();
         int secondFuelModelNumber = surfaceInputs_.getSecondFuelModelNumber();
         surfaceTwoFuelModels.calculateWeightedSpreadRate(twoFuelModelsMethod, firstFuelModelNumber, firstFuelModelCoverage,
-            secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+            secondFuelModelNumber, hasDirectionOfInterest, directionOfInterest, directionMode);
     }
     else // Use only one fuel model
     {
@@ -129,7 +131,7 @@ void Surface::doSurfaceRunInDirectionOfInterest(double directionOfInterest)
         else
         {
             // Calculate spread rate
-            surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest);
+            surfaceFire_.calculateForwardSpreadRate(fuelModelNumber, hasDirectionOfInterest, directionOfInterest, directionMode);
         }
     }
 }
@@ -193,9 +195,9 @@ void Surface::initializeMembers()
     surfaceInputs_.initializeMembers();
 }
 
-double Surface::calculateSpreadRateAtVector(double directionOfinterest)
+double Surface::calculateSpreadRateAtVector(double directionOfinterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
 {
-    return surfaceFire_.calculateSpreadRateAtVector(directionOfinterest);
+    return surfaceFire_.calculateSpreadRateAtVector(directionOfinterest, directionMode);
 }
 
 double Surface::getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const

@@ -48,7 +48,7 @@ public:
 
     bool isAllFuelLoadZero(int fuelModelNumber);
     void doSurfaceRunInDirectionOfMaxSpread();
-    void doSurfaceRunInDirectionOfInterest(double directionOfInterest);
+    void doSurfaceRunInDirectionOfInterest(double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
 
     double calculateFlameLength(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
         LengthUnits::LengthUnitsEnum flameLengthUnits);
@@ -237,7 +237,7 @@ public:
 
 private:
     void memberwiseCopyAssignment(const Surface& rhs);
-    double calculateSpreadRateAtVector(double directionOfinterest);
+    double calculateSpreadRateAtVector(double directionOfinterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
 
     const FuelModels* fuelModels_;
 

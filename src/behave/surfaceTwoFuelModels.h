@@ -32,29 +32,10 @@
 #ifndef SURFACETWOFUELMODELS_H
 #define SURFACETWOFUELMODELS_H
 
+#include "surfaceInputs.h"
+
 class SurfaceFuelbedIntermediates;
 class SurfaceFire;
-
-struct TwoFuelModelsMethod
-{
-    enum TwoFuelModelsMethodEnum
-    {
-        NoMethod = 0,          // Don't use TwoFuel Models method
-        Arithmetic = 1,         // Use arithmetic mean
-        Harmonic = 2,           // Use harmoic mean
-        TwoDimensional = 3     // Use Finney's two dimensional method
-    };
-};
-
-struct TwoFuelModelsContants
-{
-    enum TwoFuelModelsContantsEnum
-    {
-        FIRST = 0,              // Index of the first fuel model
-        SECOND = 1,             // Index of the second fuel model
-        NUMBER_OF_MODELS = 2,   // Numbe of fuel models used in TwoFuel Models method
-    };
-};
 
 class SurfaceTwoFuelModels
 {
@@ -62,7 +43,7 @@ public:
     SurfaceTwoFuelModels(SurfaceFire& surfaceFireSpread);
     void calculateWeightedSpreadRate(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
         int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
-        bool hasDirectionOfInterest = false, double directionOfInterest = -1);
+        bool hasDirectionOfInterest, double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
 
     //public getters
     bool getWindLimitExceeded() const;
@@ -82,7 +63,7 @@ public:
 private:
     double surfaceFireExpectedSpreadRate(double* ros, double* coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals);
-    void calculateFireOutputsForEachModel(bool hasDirectionOfInterest = false, double directionOfInterest = -1);
+    void calculateFireOutputsForEachModel(bool hasDirectionOfInterest, double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
     void calculateSpreadRateBasedOnMethod();
 
     SurfaceFire* surfaceFireSpread_;

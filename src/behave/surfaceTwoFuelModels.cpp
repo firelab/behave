@@ -110,7 +110,7 @@ double SurfaceTwoFuelModels::getFireLengthToWidthRatio() const
 
 void SurfaceTwoFuelModels::calculateWeightedSpreadRate(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
     int firstFuelModelNumber, double firstFuelModelCoverage, int secondFuelModelNumber,
-    bool hasDirectionOfInterest, double directionOfInterest)
+    bool hasDirectionOfInterest, double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
 {   
     fuelModelNumber_[TwoFuelModelsContants::FIRST] = firstFuelModelNumber;
     fuelModelNumber_[TwoFuelModelsContants::SECOND] = secondFuelModelNumber;
@@ -119,7 +119,7 @@ void SurfaceTwoFuelModels::calculateWeightedSpreadRate(TwoFuelModelsMethod::TwoF
     coverageForFuelModel_[TwoFuelModelsContants::SECOND] = 1 - coverageForFuelModel_[TwoFuelModelsContants::FIRST];
 
     // Calculate fire outputs for each fuel model
-    calculateFireOutputsForEachModel(hasDirectionOfInterest, directionOfInterest);
+    calculateFireOutputsForEachModel(hasDirectionOfInterest, directionOfInterest, directionMode);
     
     //------------------------------------------------
     // Determine and store combined fuel model outputs
@@ -287,13 +287,13 @@ double SurfaceTwoFuelModels::surfaceFireExpectedSpreadRate(double* ros, double* 
     return(expectedRos);
 }
 
-void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfInterest, double directionOfInterest)
+void SurfaceTwoFuelModels::calculateFireOutputsForEachModel(bool hasDirectionOfInterest, double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
 {
     for (int i = 0; i < TwoFuelModelsContants::NUMBER_OF_MODELS; i++)
     {
         fuelbedDepthForFuelModel_[i] = surfaceFireSpread_->getFuelbedDepth();
 
-        rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(fuelModelNumber_[i], hasDirectionOfInterest, directionOfInterest);
+        rosForFuelModel_[i] = surfaceFireSpread_->calculateForwardSpreadRate(fuelModelNumber_[i], hasDirectionOfInterest, directionOfInterest, directionMode);
 
         reactionIntensityForFuelModel_[i] = surfaceFireSpread_->getReactionIntensity();
         dirMaxSpreadForFuelModel_[i] = surfaceFireSpread_->getDirectionOfMaxSpread();

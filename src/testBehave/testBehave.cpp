@@ -281,7 +281,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test heat source for north oriented mode, 45 degree wind, 95 degree aspect, 5 mph 20 foot wind, 30 degree slope";
     double observedHeatSource = roundToSixDecimalPlaces(behaveRun.surface.getHeatSource(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute));
-    double expectedHeatSource = 4983.061169;
+    double expectedHeatSource = 5177.248579;
     reportTestResult(testInfo, testName, observedHeatSource, expectedHeatSource, error_tolerance);
 
     testName = "Test heat source for north oriented mode, 0 degree wind, 0 degree aspect, 5 mph 20 foot wind, 0 degree slope";
@@ -778,27 +778,35 @@ void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
     double directionOfInterest = 0;
     double observedSpreadRateInDirectionOfInterest = 0.0;
     double expectedSpreadRateInDirectionOfInterest = 0.0;
+    double observedFlameLengthInDirectionOfInterest = 0.0;
+    double expectedFlameLengthInDirectionOfInterest = 0.0;
+    SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromPerimeter;
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
   
-    testName = "Test upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind";
+    testName = "Test perimeter spread direction mode upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind";
     directionOfInterest = 90;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
-    behaveRun.surface.setWindDirection(45);
-    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
-    observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 4.929573;
+    behaveRun.surface.setWindDirection(0);
+    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
+    observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::FeetPerMinute));
+    expectedSpreadRateInDirectionOfInterest = 5.596433;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
+
+    testName = "Test perimeter spread direction mode upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind flame length";
+    observedFlameLengthInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getFlameLength(LengthUnits::Feet));
+    expectedFlameLengthInDirectionOfInterest = 6.5981480000000001;
+    reportTestResult(testInfo, testName, observedFlameLengthInDirectionOfInterest, expectedFlameLengthInDirectionOfInterest, error_tolerance);
 
     testName = "Test upslope oriented mode, 20 foot wind, direction of interest 160 degrees from upslope, 290 degree wind";
     directionOfInterest = 160;
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(290);
-    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 2.765342;
+    expectedSpreadRateInDirectionOfInterest = 2.766387;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test upslope oriented mode, 20 foot wind, direction of interest 215 degrees from upslope, 215 degree wind";
@@ -806,10 +814,12 @@ void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToUpslope);
     behaveRun.surface.setWindDirection(215);
-    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
-    expectedSpreadRateInDirectionOfInterest = 2.675125;
+    expectedSpreadRateInDirectionOfInterest = 2.818063;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
+
+    surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
 
     testName = "Test north oriented mode, 20 foot 135 degree wind, direction of interest 30 degrees from north, 263 degree aspect";
     directionOfInterest = 30;
@@ -817,7 +827,7 @@ void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(280);
     behaveRun.surface.setAspect(135);
-    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 4.180938;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
@@ -828,7 +838,7 @@ void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(0);
     behaveRun.surface.setAspect(45);
-    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 3.438243;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
@@ -839,7 +849,7 @@ void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
     behaveRun.surface.setWindDirection(280);
     behaveRun.surface.setAspect(263);
-    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    behaveRun.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     observedSpreadRateInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRateInDirectionOfInterest(SpeedUnits::ChainsPerHour));
     expectedSpreadRateInDirectionOfInterest = 2.944975;
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
@@ -1280,12 +1290,12 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
 
     testName = "Test mountain spotting distance from surface fire, closed downwind canopy";
-    expectedMountainSpottingDistance = 0.164401;
+    expectedMountainSpottingDistance = 0.107189;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
     
     testName = "Test flat spotting distance from surface fire, closed downwind canopy";
-    expectedFlatSpottingDistance = 0.132964;
+    expectedFlatSpottingDistance = 0.086155999999999996;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
     

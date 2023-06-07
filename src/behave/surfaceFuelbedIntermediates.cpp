@@ -395,8 +395,8 @@ void SurfaceFuelbedIntermediates::setHeatOfCombustion()
 void SurfaceFuelbedIntermediates::calculatePropagatingFlux()
 {
     propagatingFlux_ = (sigma_ < 1.0e-07)
-        ? (0.)
-        : (exp((0.792 + 0.681 * sqrt(sigma_)) * (packingRatio_ + 0.1)) / (192. + 0.2595 * sigma_));
+        ? (0.0)
+        : (exp((0.792 + (0.681 * sqrt(sigma_))) * (packingRatio_ + 0.1)) / (192.0 + 0.2595 * sigma_));
 }
 
 void SurfaceFuelbedIntermediates::calculateHeatSink()

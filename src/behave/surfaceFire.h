@@ -47,9 +47,9 @@ public:
     void initializeMembers();
 
     double calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink);
-    double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest = false,
-        double directionOfInterest = -1.0);
-    double calculateSpreadRateAtVector(double directionOfInterest);
+    double calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest,
+        double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
+    double calculateSpreadRateAtVector(double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
     void calculateMidflameWindSpeed();
     void skipCalculationForZeroLoad();
 
@@ -104,7 +104,7 @@ private:
     void calculateHeatSource();
 
     void calculateResidenceTime();
-    void calculateFireFirelineIntensity(double forwardSpreadRate);
+    void calculateFirelineIntensity(double forwardSpreadRate);
     void calculateFlameLength();
     void calculateScorchHeight();
     void calculateWindSpeedLimit();

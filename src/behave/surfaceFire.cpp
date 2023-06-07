@@ -186,7 +186,7 @@ void SurfaceFire::calculateScorchHeight()
             ));
 }
 
-double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest, double directionOfInterest)
+double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDirectionOfInterest, double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
 {
     // Reset member variables to prepare for next calculation
     initializeMembers();
@@ -232,23 +232,24 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
     backingSpreadRate_ = size_->getBackingSpreadRate(SpeedUnits::FeetPerMinute);
 
-    calculateFireFirelineIntensity(forwardSpreadRate_);
+    calculateHeatPerUnitArea();
+    calculateFirelineIntensity(forwardSpreadRate_);
     calculateFlameLength();
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
-    if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
+
+    spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);
+
+    if (!hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
-        spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest);
-        calculateFireFirelineIntensity(spreadRateInDirectionOfInterest_);
-        calculateFlameLength();
+        spreadRateInDirectionOfInterest_ = forwardSpreadRate_;
     }
 
-    calculateHeatPerUnitArea();
     calculateHeatSource();
 
-    return forwardSpreadRate_;
+    return spreadRateInDirectionOfInterest_;
 }
 
-double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
+double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
 {
     // Constrain direction of interest to range of [0, 359] degrees
     while(directionOfInterest < 0.0)
@@ -276,9 +277,30 @@ double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest)
         {
             beta = (360.0 - beta);
         }
-        if (fabs(beta) > 0.1)
+ 
+        double radians = beta * M_PI / 180.0;
+
+        // Equation for spread rate at angle psi along elliptical perimeter,  Catchpole et al. (1982)
+        // L = forwardSpreadDistance + backingSpreadDistance
+        // f = L/2
+        // g = forwardSpreadDistance – f
+        // h = flankingSpreadDistance
+        // Rpsi = (g * cos(psi)) + sqrt((f^2 * cos^2(psi)) + (h^2 sin^2(psi)))
+        double L = forwardSpreadRate_ + backingSpreadRate_;
+        double f = L / 2.0;
+        double g = forwardSpreadRate_ - f;
+        double h = size_->getFlankingSpreadRate(SpeedUnits::FeetPerMinute);
+        double cosBeta = cos(radians);
+        double sinBeta = sin(radians);
+
+        rosVector = (g * cos(radians)) + sqrt((f * f * cosBeta * cosBeta) + (h * h * sinBeta * sinBeta));
+
+        // rosVector perpendicular to perimeter at angle beta used to calculate fireline intensity and flame length
+        calculateFirelineIntensity(rosVector);
+        calculateFlameLength();
+    
+        if (directionMode == SurfaceFireSpreadDirectionMode::FromIgnitionPoint)
         {
-            double radians = beta * M_PI / 180.0;
             rosVector = forwardSpreadRate_ * (1.0 - eccentricity_) / (1.0 - eccentricity_ * cos(radians));
         }
     }

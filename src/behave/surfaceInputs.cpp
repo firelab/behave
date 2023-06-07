@@ -74,6 +74,7 @@ void SurfaceInputs::initializeMembers()
     windHeightInputMode_ = WindHeightInputMode::DirectMidflame;
     twoFuelModelsMethod_ = TwoFuelModelsMethod::NoMethod;
     windAdjustmentFactorCalculationMethod_ = WindAdjustmentFactorCalculationMethod::UseCrownRatio;
+    surfaceFireSpreadDirectionMode_ = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
 
     firstFuelModelCoverage_ = 0.0;
 
@@ -600,6 +601,7 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     windHeightInputMode_ = rhs.windHeightInputMode_;
     windAndSpreadOrientationMode_ = rhs.windAndSpreadOrientationMode_;
     windAdjustmentFactorCalculationMethod_ = rhs.windAdjustmentFactorCalculationMethod_;
+    surfaceFireSpreadDirectionMode_ = rhs.surfaceFireSpreadDirectionMode_;
 
     moistureScenarios = rhs.moistureScenarios;
     currentMoistureScenarioName_ = rhs.currentMoistureScenarioName_;

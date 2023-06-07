@@ -65,6 +65,7 @@ int main()
         SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
         aspect = 250;
         directionOfInterest = 0;
+        SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
 
         // std::cout << "The direction of interest is " << directionOfInterest << " degrees" << std::endl;
 
@@ -83,7 +84,7 @@ int main()
             moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, MoistureUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode,
             windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope,
             slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
-        behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+        behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
         spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
         //spreadRate = floor(spreadRate * 10 + 0.5) / 10;
         std::cout << "Spread rate for the two fuel models " << firstFuelModelNumber << " and " << secondFuelModelNumber << " with first fuel coverage " << firstFuelModelCoverage * 100 << "%" << std::endl;
@@ -115,11 +116,13 @@ int main()
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     crownRatio = 0.50;
 
+    SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
+
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 
         MoistureUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
         aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
-    behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest);
+    behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
     flameLength = behave.surface.getFlameLength(LengthUnits::Feet);

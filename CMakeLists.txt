@@ -126,6 +126,7 @@ SET(HEADERS
     src/behave/surface.h
     src/behave/surfaceFireReactionIntensity.h
     src/behave/surfaceFuelbedIntermediates.h
+    src/behave/surfaceInputEnums.h
     src/behave/surfaceInputs.h
     src/behave/surfaceFire.h
     src/behave/surfaceTwoFuelModels.h

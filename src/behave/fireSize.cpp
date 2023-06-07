@@ -87,10 +87,11 @@ void FireSize::calculateFireLengthToWidthRatio()
     if (effectiveWindSpeed_ > 1.0e-07)
     {
         fireLengthToWidthRatio_ = .936*exp(.1147*effectiveWindSpeed_)+.461*exp(-.0692*effectiveWindSpeed_)-.397;
-
         // maximum eccentricity
-        if (fireLengthToWidthRatio_>8.0)
-            fireLengthToWidthRatio_=8.0;
+        if (fireLengthToWidthRatio_ > 8.0)
+        {
+            fireLengthToWidthRatio_ = 8.0;
+        }
     }
     else
     {
