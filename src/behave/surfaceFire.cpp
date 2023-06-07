@@ -155,7 +155,7 @@ void SurfaceFire::calculateResidenceTime()
         : (384. / sigma));
 }
 
-void SurfaceFire::calculateFireFirelineIntensity(double forwardSpreadRate)
+void SurfaceFire::calculateFirelineIntensity(double forwardSpreadRate)
 {
     double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
     firelineIntensity_ = forwardSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
@@ -462,9 +462,8 @@ void SurfaceFire::calculateSlopeFactor()
 
 void SurfaceFire::calculateHeatSource()
 {
-    double propogatingFlux = surfaceFuelbedIntermediates_.getPropagatingFlux();
-    double windSlopeAdjustedSpreadRateOverNoWindNoSlopeSpreadRate = forwardSpreadRate_ / noWindNoSlopeSpreadRate_;
-    heatSource_ = windSlopeAdjustedSpreadRateOverNoWindNoSlopeSpreadRate * reactionIntensity_ * propogatingFlux;
+    double propagatingFlux = surfaceFuelbedIntermediates_.getPropagatingFlux();
+    heatSource_ = reactionIntensity_ * propagatingFlux * (1.0 + phiS_ + phiW_);
 }
 
 double SurfaceFire::getFuelbedDepth() const
