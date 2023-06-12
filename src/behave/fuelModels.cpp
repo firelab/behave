@@ -35,7 +35,7 @@
 
 FuelModels::FuelModels()
 {
-    FuelModelVector_.resize(FuelConstants::NUM_FUEL_MODELS);
+    FuelModelVector_.resize(FuelConstants::MaxFuelModels);
     initializeAllFuelModelRecords();
     populateFuelModels();
 }
@@ -107,7 +107,7 @@ void FuelModels::initializeSingleFuelModelRecord(int fuelModelNumber)
 
 void FuelModels::initializeAllFuelModelRecords()
 {
-    for (int i = 0; i < FuelConstants::NUM_FUEL_MODELS; i++)
+    for (int i = 0; i < FuelConstants::MaxFuelModels; i++)
     {
         initializeSingleFuelModelRecord(i);
     }

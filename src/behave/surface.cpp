@@ -91,8 +91,9 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        bool isUsingPalmettoGallberryOrWesternAspen = surfaceInputs_.getIsUsingPalmettoGallberry() || surfaceInputs_.getIsUsingWesternAspen();
-        if (!isUsingPalmettoGallberryOrWesternAspen && (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber)))
+        bool isUsingChaparralOrPalmettoGallberryOrWesternAspen = surfaceInputs_.getIsUsingPalmettoGallberry() || surfaceInputs_.getIsUsingWesternAspen() ||
+            surfaceInputs_.getIsUsingChaparral();
+        if (!isUsingChaparralOrPalmettoGallberryOrWesternAspen && (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber)))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -360,7 +361,7 @@ double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStat
 
 double Surface::getLiveFuelMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::LIVE), moistureUnits);
+    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::Live), moistureUnits);
 }
 
 double Surface::getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
@@ -1002,6 +1003,56 @@ void Surface::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspe
 void Surface::setIsUsingWesternAspen(bool isUsingWesternAspen)
 {
     surfaceInputs_.setIsUsingWesternAspen(isUsingWesternAspen);
+}
+
+void Surface::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType)
+{
+    surfaceInputs_.setChaparralFuelType(chaparralFuelType);
+}
+
+void Surface::setChaparralFuelBedDepth(double chaparralFuelBedDepth)
+{
+    surfaceInputs_.setChaparralFuelBedDepth(chaparralFuelBedDepth);
+}
+
+void Surface::setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction)
+{
+    surfaceInputs_.setChaparralFuelDeadLoadFraction(chaparralFuelDeadLoadFraction);
+}
+
+void Surface::setChaparralTotalFuelLoad(double chaparralTotalFuelLoad)
+{
+    surfaceInputs_.setChaparralTotalFuelLoad(chaparralTotalFuelLoad);
+}
+
+void Surface::setIsUsingChaparral(bool isUsingChaparral)
+{
+    surfaceInputs_.setIsUsingChaparral(isUsingChaparral);
+}
+
+ChaparralFuelType::ChaparralFuelTypeEnum Surface::getChaparralFuelType() const
+{
+    return surfaceInputs_.getChaparralFuelType();
+}
+
+double Surface::getChaparralFuelBedDepth() const
+{
+    return surfaceInputs_.getChaparralFuelBedDepth();
+}
+
+double Surface::getChaparralFuelDeadLoadFraction() const
+{
+    return surfaceInputs_.getChaparralFuelDeadLoadFraction();
+}
+
+double Surface::getChaparralTotalFuelLoad() const
+{
+    return surfaceInputs_.getChaparralTotalFuelLoad();
+}
+
+bool Surface::getIsUsingChaparral() const
+{
+    return surfaceInputs_.getIsUsingChaparral();
 }
 
 void Surface::setAgeOfRough(double ageOfRough)

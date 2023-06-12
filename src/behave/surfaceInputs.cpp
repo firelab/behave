@@ -69,6 +69,7 @@ void SurfaceInputs::initializeMembers()
     isUsingTwoFuelModels_ = false;
     isUsingPalmettoGallberry_ = false;
     isUsingWesternAspen_ = false;
+    isUsingChaparral_ = false;
 
     windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RelativeToUpslope;
     windHeightInputMode_ = WindHeightInputMode::DirectMidflame;
@@ -223,6 +224,12 @@ void SurfaceInputs::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnu
 void SurfaceInputs::setIsUsingWesternAspen(bool isUsingWesternAspen)
 {
     isUsingWesternAspen_ = isUsingWesternAspen;
+    if (isUsingWesternAspen_)
+    {
+        // Special case fuel models are mutually exclusive
+        isUsingChaparral_ = false;
+        isUsingPalmettoGallberry_ = false;
+    }
 }
 
 void SurfaceInputs::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
@@ -507,6 +514,12 @@ void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUn
 void SurfaceInputs::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
 {
     isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
+    if (isUsingPalmettoGallberry_)
+    {
+        // Special case fuel models are mutually exclusive
+        isUsingChaparral_ = false;
+        isUsingWesternAspen_ = false;
+    }
 }
 
 double SurfaceInputs::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
@@ -554,6 +567,62 @@ AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() c
     return aspenFireSeverity_;
 }
 
+void SurfaceInputs::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType)
+{
+    chaparralFuelType_ = chaparralFuelType;
+}
+
+void SurfaceInputs::setChaparralFuelBedDepth(double chaparralFuelBedDepth)
+{
+    chaparralFuelBedDepth_ = chaparralFuelBedDepth;
+}
+
+void SurfaceInputs::setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction)
+{
+    chaparralFuelDeadLoadFraction_ = chaparralFuelDeadLoadFraction;
+}
+
+void SurfaceInputs::setChaparralTotalFuelLoad(double chaparralTotalFuelLoad)
+{
+    chaparralTotalFuelLoad_ = chaparralTotalFuelLoad;
+}
+
+void SurfaceInputs::setIsUsingChaparral(bool isUsingChaparral)
+{
+    isUsingChaparral_ = isUsingChaparral;
+    if (isUsingChaparral_)
+    {
+        // Special case fuel models are mutually exclusive
+        isUsingPalmettoGallberry_ = false;
+        isUsingWesternAspen_ = false;
+    }
+}
+
+ChaparralFuelType::ChaparralFuelTypeEnum SurfaceInputs::getChaparralFuelType() const
+{
+    return chaparralFuelType_;
+}
+
+double SurfaceInputs::getChaparralFuelBedDepth() const
+{
+    return chaparralFuelBedDepth_;
+}
+
+double SurfaceInputs::getChaparralFuelDeadLoadFraction() const
+{
+    return chaparralFuelDeadLoadFraction_;
+}
+
+double SurfaceInputs::getChaparralTotalFuelLoad() const
+{
+    return chaparralTotalFuelLoad_;
+}
+
+bool SurfaceInputs::getIsUsingChaparral() const
+{
+    return isUsingChaparral_;
+}
+
 void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
 {
     airTemperature_ = rhs.airTemperature_;
@@ -589,6 +658,8 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     aspenCuringLevel_ = rhs.aspenCuringLevel_;
     dbh_ = rhs.dbh_;
     aspenFireSeverity_ = rhs.aspenFireSeverity_;
+
+    isUsingChaparral_ = rhs.isUsingChaparral_;
 
     elapsedTime_ = rhs.elapsedTime_;
 

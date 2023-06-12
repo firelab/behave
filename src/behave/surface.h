@@ -161,6 +161,20 @@ public:
     void setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity);
     void setIsUsingWesternAspen(bool isUsingWesternAspen);
 
+    // Chaparral inputs setters
+    void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType);
+    void setChaparralFuelBedDepth(double chaparralFuelBedDepth);
+    void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction);
+    void setChaparralTotalFuelLoad(double chaparralTotalFuelLoad);
+    void setIsUsingChaparral(bool isUsingChaparral);
+
+    // Chaparral inputs getters
+    ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
+    double getChaparralFuelBedDepth() const;
+    double getChaparralFuelDeadLoadFraction() const;
+    double getChaparralTotalFuelLoad() const;
+    bool getIsUsingChaparral() const;
+
     // Fuel Model Getter Methods
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;

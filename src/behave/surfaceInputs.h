@@ -167,6 +167,20 @@ public:
     double getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const;
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
 
+    // Chaparral inputs setters
+    void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType);
+    void setChaparralFuelBedDepth(double chaparralFuelBedDepth);
+    void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction);
+    void setChaparralTotalFuelLoad(double chaparralTotalFuelLoad);
+    void setIsUsingChaparral(bool isUsingChaparral);
+
+    // Chaparral inputs getters
+    ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
+    double getChaparralFuelBedDepth() const;
+    double getChaparralFuelDeadLoadFraction() const;
+    double getChaparralTotalFuelLoad() const;
+    bool getIsUsingChaparral() const;
+
     MoistureScenarios* moistureScenarios; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
 private:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);
@@ -212,6 +226,13 @@ private:
     double aspenCuringLevel_;
     double dbh_;
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity_;
+
+    // Chaparral inputs
+    ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType_;
+    double chaparralFuelBedDepth_;
+    double chaparralFuelDeadLoadFraction_;
+    double chaparralTotalFuelLoad_;
+    bool isUsingChaparral_;
 
     // For Size Module
     double elapsedTime_;

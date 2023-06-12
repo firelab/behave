@@ -92,6 +92,7 @@ void SurfaceFire::initializeMembers()
     flameLength_ = 0.0;
     maxFlameLength_ = 0.0;
     backingSpreadRate_ = 0.0;
+    scorchHeight_ = 0.0;
 
     midflameWindSpeed_ = 0.0;
     windAdjustmentFactor_ = 0.0;
@@ -130,6 +131,7 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
     flameLength_ = rhs.flameLength_;
     maxFlameLength_ = rhs.maxFlameLength_;
     backingSpreadRate_ = rhs.backingSpreadRate_;
+    scorchHeight_ = rhs.scorchHeight_;
 
     midflameWindSpeed_ = rhs.midflameWindSpeed_;
     windAdjustmentFactor_ = rhs.windAdjustmentFactor_;

@@ -62,6 +62,7 @@ SET(SOURCE
     src/behave/behaveRun.cpp
     src/behave/behaveUnits.cpp
     src/behave/canopy_coefficient_table.cpp
+    src/behave/chaparralFuel.cpp
     src/behave/Contain.cpp
     src/behave/ContainAdapter.cpp
     src/behave/ContainForce.cpp
@@ -100,6 +101,7 @@ SET(HEADERS
     src/behave/behaveRun.h
     src/behave/behaveUnits.h
     src/behave/canopy_coefficient_table.h
+    src/behave/chaparralFuel.h
     src/behave/Contain.h
     src/behave/ContainAdapter.h
     src/behave/ContainForce.h

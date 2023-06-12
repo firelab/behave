@@ -31,6 +31,7 @@
 #ifndef SURFACEFUELBEDINTERMEDIATES_H
 #define SURFACEFUELBEDINTERMEDIATES_H
 
+#include "chaparralFuel.h"
 #include "palmettoGallberry.h" 
 #include "westernAspen.h"
 #include "surfaceInputs.h"
@@ -83,16 +84,16 @@ private:
     void setMoistureContent();
     void setDeadFuelMoistureOfExtinction();
     void setFuelbedDepth();
-    void setSAV();
+    void setSAVR();
     void countSizeClasses();
     void dynamicLoadTransfer();
     void calculateFractionOfTotalSurfaceAreaForLifeStates();
     void calculateTotalSurfaceAreaForLifeState(int lifeCategory);
     void calculateFractionOfTotalSurfaceAreaForSizeClasses(int lifeCategory);
-    void sumFractionOfTotalSurfaceAreaBySizeClass(const double areaWeightingFactorDeadOrLive[FuelConstants::MAX_PARTICLES],
-        const double savrDeadOrLive[FuelConstants::MAX_PARTICLES], double summedWeightingFactors[FuelConstants::MAX_PARTICLES]);
-    void assignFractionOfTotalSurfaceAreaBySizeClass(const double savrDeadOrLive[FuelConstants::MAX_PARTICLES],
-        const double summedWeightingFactors[FuelConstants::MAX_PARTICLES], double sizeSortedWeightingFactorsDeadOrLive[FuelConstants::MAX_PARTICLES]);
+    void sumFractionOfTotalSurfaceAreaBySizeClass(const double areaWeightingFactorDeadOrLive[FuelConstants::MaxParticles],
+        const double savrDeadOrLive[FuelConstants::MaxParticles], double summedWeightingFactors[FuelConstants::MaxParticles]);
+    void assignFractionOfTotalSurfaceAreaBySizeClass(FuelLifeState::FuelLifeStateEnum lifeState, const double savrDeadOrLive[FuelConstants::MaxParticles],
+        const double summedWeightingFactors[FuelConstants::MaxParticles], double sizeSortedWeightingFactorsDeadOrLive[FuelConstants::MaxParticles]);
     void setHeatOfCombustion();
     void calculateCharacteristicSAVR();
     void calculateHeatSink();
@@ -101,37 +102,39 @@ private:
 
     const FuelModels* fuelModels_;      // Pointer to FuelModels object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object
+    ChaparralFuel chaparralFuel_;
     PalmettoGallberry palmettoGallberry_;
     WesternAspen westernAspen_;
-
+    
     // Member variables
-    int numberOfSizeClasses_[FuelConstants::MAX_LIFE_STATES];                           // Number of size classes in the currently used fuel model
-    double depth_;                                                                      // Depth of fuelbed in feet
-    double weightedMoisture_[FuelConstants::MAX_LIFE_STATES];                           // Weighted (characteristic) moisture content for both live and dead fuels
-    double totalSurfaceArea_[FuelConstants::MAX_LIFE_STATES];                           // Total surface area for both live and dead fuels
-    double weightedHeat_[FuelConstants::MAX_LIFE_STATES];                               // Weighted (characteristic) heat content for both live and dead fuels
-    double weightedSilica_[FuelConstants::MAX_LIFE_STATES];                             // Weighted (characteristic) silica content for both live and dead fuels
-    double weightedFuelLoad_[FuelConstants::MAX_LIFE_STATES];                           // Weighted (characteristic) fuel loading for both live and dead fuels
-    double moistureOfExtinction_[FuelConstants::MAX_LIFE_STATES];                       // Moisture of extinction for both live and dead fuels
-    double fractionOfTotalSurfaceArea_[FuelConstants::MAX_LIFE_STATES];                 // Ratio of surface area to total surface area
-    double fuelDensity_[FuelConstants::MAX_LIFE_STATES];                                // Fuel density for live and dead fuels
-    double totalLoadForLifeState_[FuelConstants::MAX_LIFE_STATES];                      // Total fuel load for live and dead fuels
-    double moistureDead_[FuelConstants::MAX_PARTICLES];                                 // Moisture content for dead fuels by size class
-    double moistureLive_[FuelConstants::MAX_PARTICLES];                                 // Moisture content for live fuels by size class
-    double loadDead_[FuelConstants::MAX_PARTICLES];			        			        // Fuel load for dead fuels by size class
-    double loadLive_[FuelConstants::MAX_PARTICLES];					        	        // Fuel load for live fuels by size class
-    double savrDead_[FuelConstants::MAX_PARTICLES];				    		            // Surface area to volume ratio for dead fuels by size class
-    double savrLive_[FuelConstants::MAX_PARTICLES];                                     // Surface area to volume ratio for live fuels by size class
-    double surfaceAreaDead_[FuelConstants::MAX_PARTICLES];                              // Surface area for dead size classes 
-    double surfaceAreaLive_[FuelConstants::MAX_PARTICLES];                              // Surface area for live size classes
-    double heatDead_[FuelConstants::MAX_PARTICLES];                                     // Heat of combustion for dead size classes
-    double heatLive_[FuelConstants::MAX_PARTICLES];                                     // Heat of combustion for live size classes
-    double silicaEffectiveDead_[FuelConstants::MAX_PARTICLES];                          // Effective silica constent for dead size classes
-    double silicaEffectiveLive_[FuelConstants::MAX_PARTICLES];                          // Effective silica constent for live size classes
-    double fractionOfTotalSurfaceAreaDead_[FuelConstants::MAX_PARTICLES];               // Fraction of surface area for dead size classes
-    double fractionOfTotalSurfaceAreaLive_[FuelConstants::MAX_PARTICLES];               // Fraction of surface area for live size classes
-    double sizeSortedFractionOfSurfaceAreaDead_[FuelConstants::MAX_SAVR_SIZE_CLASSES];  // Intermediate fuel weighting values for dead fuels
-    double sizeSortedFractionOfSurfaceAreaLive_[FuelConstants::MAX_SAVR_SIZE_CLASSES];  // Intermediate fuel weighting values for live fuels
+    int numberOfSizeClasses_[FuelConstants::MaxLifeStates];                         // Number of size classes in the currently used fuel model
+    double depth_;                                                                  // Depth of fuelbed in feet
+    double weightedMoisture_[FuelConstants::MaxLifeStates];                         // Weighted (characteristic) moisture content for both live and dead fuels
+    double totalSurfaceArea_[FuelConstants::MaxLifeStates];                         // Total surface area for both live and dead fuels
+    double weightedHeat_[FuelConstants::MaxLifeStates];                             // Weighted (characteristic) heat content for both live and dead fuels
+    double weightedSilica_[FuelConstants::MaxLifeStates];                           // Weighted (characteristic) silica content for both live and dead fuels
+    double weightedFuelLoad_[FuelConstants::MaxLifeStates];                         // Weighted (characteristic) fuel loading for both live and dead fuels
+    double moistureOfExtinction_[FuelConstants::MaxLifeStates];                     // Moisture of extinction for both live and dead fuels
+    double fractionOfTotalSurfaceArea_[FuelConstants::MaxLifeStates];               // Ratio of surface area to total surface area
+    double totalLoadForLifeState_[FuelConstants::MaxLifeStates];                    // Total fuel load for live and dead fuels
+    double fuelDensityDead_[FuelConstants::MaxParticles];                           // Fuel density for live fuels by size class
+    double fuelDensityLive_[FuelConstants::MaxParticles];                           // Fuel density for dead fuels by size class
+    double moistureDead_[FuelConstants::MaxParticles];                              // Moisture content for dead fuels by size class
+    double moistureLive_[FuelConstants::MaxParticles];                              // Moisture content for live fuels by size class
+    double loadDead_[FuelConstants::MaxParticles];			        			    // Fuel load for dead fuels by size class
+    double loadLive_[FuelConstants::MaxParticles];					        	    // Fuel load for live fuels by size class
+    double savrDead_[FuelConstants::MaxParticles];				    		        // Surface area to volume ratio for dead fuels by size class
+    double savrLive_[FuelConstants::MaxParticles];                                  // Surface area to volume ratio for live fuels by size class
+    double surfaceAreaDead_[FuelConstants::MaxParticles];                           // Surface area for dead size classes 
+    double surfaceAreaLive_[FuelConstants::MaxParticles];                           // Surface area for live size classes
+    double heatOfCombustionDead_[FuelConstants::MaxParticles];                      // Heat of combustion for dead size classes
+    double heatOfCombustionLive_[FuelConstants::MaxParticles];                      // Heat of combustion for live size classes
+    double silicaEffectiveDead_[FuelConstants::MaxParticles];                       // Effective silica constent for dead size classes
+    double silicaEffectiveLive_[FuelConstants::MaxParticles];                       // Effective silica constent for live size classes
+    double fractionOfTotalSurfaceAreaDead_[FuelConstants::MaxParticles];            // Fraction of surface area for dead size classes
+    double fractionOfTotalSurfaceAreaLive_[FuelConstants::MaxParticles];            // Fraction of surface area for live size classes
+    double sizeSortedFractionOfSurfaceAreaDead_[FuelConstants::MaxSavrSizeClasses]; // Intermediate fuel weighting values for dead fuels
+    double sizeSortedFractionOfSurfaceAreaLive_[FuelConstants::MaxSavrSizeClasses]; // Intermediate fuel weighting values for live fuels
 
     int fuelModelNumber_;           // The number associated with the current fuel model being used
     double heatSink_;               // Rothermel 1972, Denominator of equation 52
@@ -139,7 +142,7 @@ private:
     double bulkDensity_;            // Ovendry bulk density in lbs/ft^2, Rothermale 1972, equation 40
     double packingRatio_;           // Packing ratio, Rothermel 1972, equation 31 
     double relativePackingRatio_;   // Packing ratio divided by the optimum packing ratio, Rothermel 1972, term in RHS equation 47
-    double totalSilicaContent_;     // Total silica content in percent, Albini 1976, p. 91
+    double totalSilicaContent_;     // Total silica content (fraction), Albini 1976, p. 91
     double propagatingFlux_;
 };
 

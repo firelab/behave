@@ -57,10 +57,10 @@ int main()
     BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
     behaveRun.setMoistureScenarios(moistureScenarios);
 
+    testSurfaceSingleFuelModel(testInfo, behaveRun);
     testCalculateScorchHeight(testInfo, behaveRun);
     testPalmettoGallberry(testInfo, behaveRun);
     testWesternAspen(testInfo, behaveRun);
-    testSurfaceSingleFuelModel(testInfo, behaveRun);
     testLengthToWidthRatio(testInfo, behaveRun);
     testEllipticalDimensions(testInfo, behaveRun);
     testDirectionOfInterest(testInfo, behaveRun);
@@ -265,12 +265,12 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     reportTestResult(testInfo, testName, observedLiveMoistureOfExtinction, expectedLiveMoistureOfExtinction, error_tolerance);
 
     testName = "Test characteristic live moisture, 5 mph 20 foot uplsope wind";
-    double observedCharacteristicLiveMoisture = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicMoistureByLifeState(FuelLifeState::LIVE, moistureUnits));
+    double observedCharacteristicLiveMoisture = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicMoistureByLifeState(FuelLifeState::Live, moistureUnits));
     double expectedCharacteristicLiveMoisture = 85.874007;
     reportTestResult(testInfo, testName, observedCharacteristicLiveMoisture, expectedCharacteristicLiveMoisture, error_tolerance);
 
     testName = "Test characteristic dead moisture, 5 mph 20 foot uplsope wind";
-    double observedCharacteristicDeadMoisture = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicMoistureByLifeState(FuelLifeState::DEAD, moistureUnits));
+    double observedCharacteristicDeadMoisture = roundToSixDecimalPlaces(behaveRun.surface.getCharacteristicMoistureByLifeState(FuelLifeState::Dead, moistureUnits));
     double expectedCharacteristicDeadMoisture = 6.005463;
     reportTestResult(testInfo, testName, observedCharacteristicDeadMoisture, expectedCharacteristicDeadMoisture, error_tolerance);
 
