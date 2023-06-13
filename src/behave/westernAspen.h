@@ -42,19 +42,20 @@ public:
     double getAspenMortality() const;
 
     // The following getter methods are used to populate FuelModel data fields 
-    double getAspenFuelBedDepth(int typeIndex);
-    double getAspenHeatOfCombustionDead();
-    double getAspenHeatOfCombustionLive();
-    double getAspenMoistureOfExtinctionDead();
+    double getAspenFuelBedDepth(int typeIndex) const;
+    double getAspenHeatOfCombustionDead() const;
+    double getAspenHeatOfCombustionLive() const;
+    double getAspenMoistureOfExtinctionDead() const;
 
-    double getAspenLoadDeadOneHour();
-    double getAspenLoadDeadTenHour();
-    double getAspenLoadLiveHerbaceous();
-    double getAspenLoadLiveWoody();
-    double getAspenSavrDeadOneHour();
-    double getAspenSavrDeadTenHour();
-    double getAspenSavrLiveHerbaceous();
-    double getAspenSavrLiveWoody();
+    double getAspenLoadDeadOneHour() const;
+    double getAspenLoadDeadTenHour() const;
+    double getAspenLoadLiveHerbaceous() const;
+    double getAspenLoadLiveWoody() const;
+
+    double getAspenSavrDeadOneHour() const;
+    double getAspenSavrDeadTenHour() const;
+    double getAspenSavrLiveHerbaceous() const;
+    double getAspenSavrLiveWoody() const;
 
     double calculateAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel);
     double calculateAspenLoadDeadTenHour(int aspenFuelModelNumber);

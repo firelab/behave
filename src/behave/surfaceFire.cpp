@@ -99,8 +99,6 @@ void SurfaceFire::initializeMembers()
     windAdjustmentFactorShelterMethod_ = WindAdjustmentFactorShelterMethod::Unsheltered;
     canopyCrownFraction_ = 0.0;
 
-    aspenMortality_ = 0.0;
-
     surfaceFuelbedIntermediates_ = SurfaceFuelbedIntermediates(*fuelModels_, *surfaceInputs_);
     surfaceFireReactionIntensity_ = SurfaceFireReactionIntensity(surfaceFuelbedIntermediates_);
 }
@@ -137,8 +135,6 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
     windAdjustmentFactor_ = rhs.windAdjustmentFactor_;
     windAdjustmentFactorShelterMethod_ = rhs.windAdjustmentFactorShelterMethod_;
     canopyCrownFraction_ = rhs.canopyCrownFraction_;
-
-    aspenMortality_ = rhs.aspenMortality_;
 }
 
 double SurfaceFire::calculateNoWindNoSlopeSpreadRate(double reactionIntensity, double propagatingFlux, double heatSink)
@@ -623,6 +619,206 @@ double SurfaceFire::getCharacteristicSAVR() const
 bool SurfaceFire::getIsWindLimitExceeded() const
 {
     return isWindLimitExceeded_;
+}
+
+double SurfaceFire::getPalmettoGallberryMoistureOfExtinctionDead() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberryMoistureOfExtinctionDead();
+}
+
+double SurfaceFire::getPalmettoGallberryHeatOfCombustionDead() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberryHeatOfCombustionDead();
+}
+
+double SurfaceFire::getPalmettoGallberryHeatOfCombustionLive() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberryHeatOfCombustionLive();
+}
+
+double SurfaceFire::getPalmettoGallberyDeadOneHourLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadOneHourLoad();
+}
+
+double SurfaceFire::getPalmettoGallberyDeadTenHourLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadTenHourLoad();
+}
+
+double SurfaceFire::getPalmettoGallberyDeadFoliageLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadFoliageLoad();
+}
+
+double SurfaceFire::getPalmettoGallberyFuelBedDepth() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyFuelBedDepth();
+}
+
+double SurfaceFire::getPalmettoGallberyLitterLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyLitterLoad();
+}
+
+double SurfaceFire::getPalmettoGallberyLiveOneHourLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveOneHourLoad();
+}
+
+double SurfaceFire::getPalmettoGallberyLiveTenHourLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveTenHourLoad();
+}
+
+double SurfaceFire::getPalmettoGallberyLiveFoliageLoad() const
+{
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveFoliageLoad();
+}
+
+double SurfaceFire::getAspenMortality() const
+{
+    return surfaceFuelbedIntermediates_.getAspenMortality();
+}
+
+double SurfaceFire::getAspenFuelBedDepth(int typeIndex) const
+{
+    return surfaceFuelbedIntermediates_.getAspenFuelBedDepth(typeIndex);
+}
+
+double SurfaceFire::getAspenHeatOfCombustionDead() const
+{
+    return surfaceFuelbedIntermediates_.getAspenHeatOfCombustionDead();
+}
+
+double SurfaceFire::getAspenHeatOfCombustionLive() const
+{
+    return surfaceFuelbedIntermediates_.getAspenHeatOfCombustionLive();
+}
+
+double SurfaceFire::getAspenMoistureOfExtinctionDead() const
+{
+    return surfaceFuelbedIntermediates_.getAspenMoistureOfExtinctionDead();
+}
+
+double SurfaceFire::getAspenLoadDeadOneHour() const
+{
+    return surfaceFuelbedIntermediates_.getAspenLoadDeadOneHour();
+}
+
+double SurfaceFire::getAspenLoadDeadTenHour() const
+{
+    return surfaceFuelbedIntermediates_.getAspenLoadDeadTenHour();
+}
+
+double SurfaceFire::getAspenLoadLiveHerbaceous() const
+{
+    return surfaceFuelbedIntermediates_.getAspenLoadLiveHerbaceous();
+}
+
+double SurfaceFire::getAspenLoadLiveWoody() const
+{
+    return surfaceFuelbedIntermediates_.getAspenLoadLiveWoody();
+}
+
+double SurfaceFire::getAspenSavrDeadOneHour() const
+{
+    return surfaceFuelbedIntermediates_.getAspenSavrDeadOneHour();
+}
+
+double SurfaceFire::getAspenSavrDeadTenHour() const
+{
+    return surfaceFuelbedIntermediates_.getAspenSavrDeadTenHour();
+}
+
+double SurfaceFire::getAspenSavrLiveHerbaceous() const
+{
+    return surfaceFuelbedIntermediates_.getAspenSavrLiveHerbaceous();
+}
+
+double SurfaceFire::getAspenSavrLiveWoody() const
+{
+    return surfaceFuelbedIntermediates_.getAspenSavrLiveWoody();
+}
+
+double SurfaceFire::getChaparralAge() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralAge();
+}
+
+double SurfaceFire::getChaparralDaysSinceMayFirst() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralDaysSinceMayFirst();
+}
+
+double SurfaceFire::getChaparralDeadFuelFraction() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralDeadFuelFraction();
+}
+
+double SurfaceFire::getChaparralDeadMoistureOfExtinction() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralDeadMoistureOfExtinction();
+}
+
+double SurfaceFire::getChaparralLiveMoistureOfExtinction() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralLiveMoistureOfExtinction();
+}
+
+double SurfaceFire::getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralDensity(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralFuelBedDepth() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralFuelBedDepth();
+}
+
+double SurfaceFire::getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralHeatOfCombustion(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralLoad(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralMoisture(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralSavr(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralEffectiveSilicaContent(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFuelbedIntermediates_.getChaparralTotalSilicaContent(lifeState, sizeClass);
+}
+
+double SurfaceFire::getChaparralTotalDeadFuelLoad() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralTotalDeadFuelLoad();
+}
+
+double SurfaceFire::getChaparralTotalFuelLoad() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralTotalFuelLoad();
+}
+
+double SurfaceFire::getChaparralTotalLiveFuelLoad() const
+{
+    return surfaceFuelbedIntermediates_.getChaparralTotalLiveFuelLoad();
 }
 
 void SurfaceFire::setDirectionOfMaxSpread(double directionOFMaxSpread)

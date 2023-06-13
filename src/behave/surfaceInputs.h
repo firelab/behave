@@ -133,19 +133,19 @@ public:
         double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits, double slope,
        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
         LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
-    void setAgeOfRough(double ageOfRough);
-    void setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits);
-    void setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits);
-    void setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits);
+    void setPalmettoGallberryAgeOfRough(double ageOfRough);
+    void setPalmettoGallberryHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits);
+    void setPalmettoGallberryPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits);
+    void setPalmettoGallberryOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits);
     void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
 
     // Palmetto-Gallberry getters
-    double getAgeOfRough() const;
-    double getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const;
-    double getPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const;
-    double getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const;
     bool getIsUsingPalmettoGallberry() const;
-
+    double getPalmettoGallberryAgeOfRough() const;
+    double getPalmettoGallberryHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const;
+    double getPalmettoGallberryPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getPalmettoGallberryOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const;
+  
     // Westerm Aspen inputs setters
     void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour,
@@ -169,16 +169,16 @@ public:
 
     // Chaparral inputs setters
     void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType);
-    void setChaparralFuelBedDepth(double chaparralFuelBedDepth);
+    void setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits::LengthUnitsEnum depthUnits);
     void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction);
-    void setChaparralTotalFuelLoad(double chaparralTotalFuelLoad);
+    void setChaparralTotalFuelLoad(double chaparralTotalFuelLoad, LoadingUnits::LoadingUnitsEnum fuelLoadUnits);
     void setIsUsingChaparral(bool isUsingChaparral);
 
     // Chaparral inputs getters
     ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
-    double getChaparralFuelBedDepth() const;
+    double getChaparralFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const;
     double getChaparralFuelDeadLoadFraction() const;
-    double getChaparralTotalFuelLoad() const;
+    double getChaparralTotalFuelLoad(LoadingUnits::LoadingUnitsEnum fuelLoadUnits) const;
     bool getIsUsingChaparral() const;
 
     MoistureScenarios* moistureScenarios; // Moisture scenarios (optional list of moisture scenarios to simplify user input 

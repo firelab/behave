@@ -194,10 +194,10 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     if (surfaceInputs_->getIsUsingPalmettoGallberry())
     {
         // Calculate load values for Palmetto-Gallberry
-        double ageOfRough = surfaceInputs_->getAgeOfRough();
-        double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory(LengthUnits::Feet);
-        double palmettoCoverage = surfaceInputs_->getPalmettoCoverage(CoverUnits::Fraction);
-        double overstoryBasalArea = surfaceInputs_->getOverstoryBasalArea(BasalAreaUnits::SquareFeetPerAcre);
+        double ageOfRough = surfaceInputs_->getPalmettoGallberryAgeOfRough();
+        double heightOfUnderstory = surfaceInputs_->getPalmettoGallberryHeightOfUnderstory(LengthUnits::Feet);
+        double palmettoCoverage = surfaceInputs_->getPalmettoGallberryPalmettoCoverage(CoverUnits::Fraction);
+        double overstoryBasalArea = surfaceInputs_->getPalmettoGallberryOverstoryBasalArea(BasalAreaUnits::SquareFeetPerAcre);
 
         loadDead_[0] = palmettoGallberry_.calculatePalmettoGallberyDeadOneHourLoad(ageOfRough, heightOfUnderstory);
         loadDead_[1] = palmettoGallberry_.calculatePalmettoGallberyDeadTenHourLoad(ageOfRough, palmettoCoverage);
@@ -237,7 +237,7 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     else if (surfaceInputs_->getIsUsingChaparral())
     {
         chaparralFuel_.setChaparralFuelType(surfaceInputs_->getChaparralFuelType());
-        chaparralFuel_.setTotalFuelLoadAndDeadFuelFraction(surfaceInputs_->getChaparralTotalFuelLoad(), surfaceInputs_->getChaparralFuelDeadLoadFraction());
+        chaparralFuel_.setTotalFuelLoadAndDeadFuelFraction(surfaceInputs_->getChaparralTotalFuelLoad(LoadingUnits::PoundsPerSquareFoot), surfaceInputs_->getChaparralFuelDeadLoadFraction());
  
         for (int i = 0; i < FuelConstants::MaxParticles; i++)
         {
@@ -334,7 +334,7 @@ void SurfaceFuelbedIntermediates::setFuelbedDepth()
 {
     if (surfaceInputs_->getIsUsingPalmettoGallberry())
     {
-        double heightOfUnderstory = surfaceInputs_->getHeightOfUnderstory(LengthUnits::Feet);
+        double heightOfUnderstory = surfaceInputs_->getPalmettoGallberryHeightOfUnderstory(LengthUnits::Feet);
         depth_ = palmettoGallberry_.calculatePalmettoGallberyFuelBedDepth(heightOfUnderstory);
     }
     else if (surfaceInputs_->getIsUsingWesternAspen())
@@ -344,8 +344,8 @@ void SurfaceFuelbedIntermediates::setFuelbedDepth()
     }
     else if (surfaceInputs_->getIsUsingChaparral())
     {
-        depth_ = surfaceInputs_->getChaparralFuelBedDepth();
-        chaparralFuel_.setDepthAndDeadFuelFraction(surfaceInputs_->getChaparralFuelBedDepth(), surfaceInputs_->getChaparralFuelDeadLoadFraction());
+        depth_ = surfaceInputs_->getChaparralFuelBedDepth(LengthUnits::Feet);
+        chaparralFuel_.setDepthAndDeadFuelFraction(depth_, surfaceInputs_->getChaparralFuelDeadLoadFraction());
     }
     else
     {
@@ -972,6 +972,21 @@ double SurfaceFuelbedIntermediates::getWeightedFuelLoadByLifeState(FuelLifeState
     return weightedFuelLoad_[lifeState];
 }
 
+double SurfaceFuelbedIntermediates::getPalmettoGallberryMoistureOfExtinctionDead() const
+{
+    return palmettoGallberry_.getMoistureOfExtinctionDead();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberryHeatOfCombustionDead() const
+{
+    return palmettoGallberry_.getHeatOfCombustionDead();
+}
+
+double SurfaceFuelbedIntermediates::getPalmettoGallberryHeatOfCombustionLive() const
+{
+    return palmettoGallberry_.getHeatOfCombustionLive();
+}
+
 double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadOneHourLoad() const
 {
     return palmettoGallberry_.getPalmettoGallberyDeadOneHourLoad();
@@ -1015,4 +1030,149 @@ double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveFoliageLoad() const
 double SurfaceFuelbedIntermediates::getAspenMortality() const
 {
     return westernAspen_.getAspenMortality();
+}
+
+double SurfaceFuelbedIntermediates::getAspenFuelBedDepth(int typeIndex) const
+{
+    return westernAspen_.getAspenFuelBedDepth(typeIndex);
+}
+
+double SurfaceFuelbedIntermediates::getAspenHeatOfCombustionDead() const
+{
+    return westernAspen_.getAspenHeatOfCombustionDead();
+}
+
+double SurfaceFuelbedIntermediates::getAspenHeatOfCombustionLive() const
+{
+    return westernAspen_.getAspenHeatOfCombustionLive();
+}
+
+double SurfaceFuelbedIntermediates::getAspenMoistureOfExtinctionDead() const
+{
+    return westernAspen_.getAspenMoistureOfExtinctionDead();
+}
+
+double SurfaceFuelbedIntermediates::getAspenLoadDeadOneHour() const
+{
+    return westernAspen_.getAspenLoadDeadOneHour();
+}
+
+double SurfaceFuelbedIntermediates::getAspenLoadDeadTenHour() const
+{
+    return westernAspen_.getAspenLoadDeadTenHour();
+}
+
+double SurfaceFuelbedIntermediates::getAspenLoadLiveHerbaceous() const
+{
+    return westernAspen_.getAspenLoadLiveHerbaceous();
+}
+
+double SurfaceFuelbedIntermediates::getAspenLoadLiveWoody() const
+{
+    return westernAspen_.getAspenLoadLiveWoody();
+}
+
+double SurfaceFuelbedIntermediates::getAspenSavrDeadOneHour() const
+{
+    return westernAspen_.getAspenSavrDeadOneHour();
+}
+
+double SurfaceFuelbedIntermediates::getAspenSavrDeadTenHour() const
+{
+    return westernAspen_.getAspenSavrDeadTenHour();
+}
+
+double SurfaceFuelbedIntermediates::getAspenSavrLiveHerbaceous() const
+{
+    return westernAspen_.getAspenSavrLiveHerbaceous();
+}
+
+double SurfaceFuelbedIntermediates::getAspenSavrLiveWoody() const
+{
+    return westernAspen_.getAspenSavrLiveWoody();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralAge() const
+{
+    return chaparralFuel_.getAge();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralDaysSinceMayFirst() const
+{
+    return chaparralFuel_.getDaysSinceMayFirst();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralDeadFuelFraction() const
+{
+    return chaparralFuel_.getDeadFuelFraction();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralDeadMoistureOfExtinction() const
+{
+    return chaparralFuel_.getDeadMoistureOfExtinction();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralLiveMoistureOfExtinction() const
+{
+    return chaparralFuel_.getLiveMoistureOfExtinction();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getDensity(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralFuelBedDepth() const
+{
+    return chaparralFuel_.getFuelBedDepth();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getHeatOfCombustion(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getLoad(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getMoisture(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getSavr(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getEffectiveSilicaContent(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return chaparralFuel_.getTotalSilicaContent(lifeState, sizeClass);
+}
+
+double SurfaceFuelbedIntermediates::getChaparralTotalDeadFuelLoad() const
+{
+    return chaparralFuel_.getTotalDeadFuelLoad();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralTotalFuelLoad() const
+{
+    return chaparralFuel_.getTotalFuelLoad();
+}
+
+double SurfaceFuelbedIntermediates::getChaparralTotalLiveFuelLoad() const
+{
+    return chaparralFuel_.getTotalLiveFuelLoad();
+}
+
+ChaparralFuelType::ChaparralFuelTypeEnum SurfaceFuelbedIntermediates::getChaparralFuelType() const
+{
+    return chaparralFuel_.getChaparralFuelType();
 }

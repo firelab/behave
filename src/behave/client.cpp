@@ -61,10 +61,10 @@ int main()
         aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
 
     behave.surface.setIsUsingChaparral(true);
-    behave.surface.setChaparralFuelBedDepth(3);
+    behave.surface.setChaparralFuelBedDepth(3, LengthUnits::Feet);
     behave.surface.setChaparralFuelType(ChaparralFuelType::NotSet);
     behave.surface.setChaparralFuelDeadLoadFraction(0.25);
-    behave.surface.setChaparralTotalFuelLoad(1.0);
+    behave.surface.setChaparralTotalFuelLoad(1.0, LoadingUnits::PoundsPerSquareFoot);
     behave.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
     behave.surface.setSlope(0, SlopeUnits::Percent);
 

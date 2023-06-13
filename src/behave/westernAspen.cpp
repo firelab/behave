@@ -77,24 +77,64 @@ double WesternAspen::aspenInterpolate(double curing, double* valueArray)
     return value;
 }
 
-double WesternAspen::getAspenFuelBedDepth(int aspenFuelModelNumber)
+double WesternAspen::getAspenFuelBedDepth(int aspenFuelModelNumber) const
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     double Depth[] = { 0.65, 0.30, 0.18, 0.50, 0.18 };
     return Depth[aspenFuelModelIndex];
 }
 
-double WesternAspen::getAspenMoistureOfExtinctionDead()
+double WesternAspen::getAspenMoistureOfExtinctionDead() const
 {
     return 0.25;
 }
 
-double WesternAspen::getAspenHeatOfCombustionDead()
+double WesternAspen::getAspenLoadDeadOneHour() const
+{
+    return aspenDeadOneHour_;
+}
+
+double WesternAspen::getAspenLoadDeadTenHour() const
+{
+    return aspenDeadTenHour_;
+}
+
+double WesternAspen::getAspenLoadLiveHerbaceous() const
+{
+    return aspenLiveHerbaceous_;
+}
+
+double WesternAspen::getAspenLoadLiveWoody() const
+{
+    return aspenLiveWoody_;
+}
+
+double WesternAspen::getAspenSavrDeadOneHour() const
+{
+    return aspenSavrDeadOneHour_;
+}
+
+double WesternAspen::getAspenSavrDeadTenHour() const
+{
+    return aspenSavrDeadTenHour_;
+}
+
+double WesternAspen::getAspenSavrLiveHerbaceous() const
+{
+    return aspenSavrLiveHerbaceous_;
+}
+
+double WesternAspen::getAspenSavrLiveWoody() const
+{
+    return aspenSavrLiveWoody_;
+}
+
+double WesternAspen::getAspenHeatOfCombustionDead() const
 {
     return 8000.0;
 }
 
-double WesternAspen::getAspenHeatOfCombustionLive()
+double WesternAspen::getAspenHeatOfCombustionLive() const
 {
     return 8000.0;
 }

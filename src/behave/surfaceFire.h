@@ -80,6 +80,53 @@ public:
     double getCharacteristicSAVR() const;
     bool getIsWindLimitExceeded() const;
 
+    // Palmetto-Gallberry getters
+    double getPalmettoGallberryMoistureOfExtinctionDead() const;
+    double getPalmettoGallberryHeatOfCombustionDead() const;
+    double getPalmettoGallberryHeatOfCombustionLive() const;
+    double getPalmettoGallberyDeadOneHourLoad() const;
+    double getPalmettoGallberyDeadTenHourLoad() const;
+    double getPalmettoGallberyDeadFoliageLoad() const;
+    double getPalmettoGallberyFuelBedDepth() const;
+    double getPalmettoGallberyLitterLoad() const;
+    double getPalmettoGallberyLiveOneHourLoad() const;
+    double getPalmettoGallberyLiveTenHourLoad() const;
+    double getPalmettoGallberyLiveFoliageLoad() const;
+
+    // Western Aspen getters
+    double getAspenMortality() const;
+    double getAspenFuelBedDepth(int typeIndex) const;
+    double getAspenHeatOfCombustionDead() const;
+    double getAspenHeatOfCombustionLive() const;
+    double getAspenMoistureOfExtinctionDead() const;
+    double getAspenLoadDeadOneHour() const;
+    double getAspenLoadDeadTenHour() const;
+    double getAspenLoadLiveHerbaceous() const;
+    double getAspenLoadLiveWoody() const;
+    double getAspenSavrDeadOneHour() const;
+    double getAspenSavrDeadTenHour() const;
+    double getAspenSavrLiveHerbaceous() const;
+    double getAspenSavrLiveWoody() const;
+    
+    // Chaparral getters
+    double getChaparralAge() const;
+    double getChaparralDaysSinceMayFirst() const;
+    double getChaparralDeadFuelFraction() const;
+    double getChaparralDeadMoistureOfExtinction() const;
+    double getChaparralLiveMoistureOfExtinction() const;
+    double getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralFuelBedDepth() const;
+    double getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralTotalDeadFuelLoad() const;
+    double getChaparralTotalFuelLoad() const;
+    double getChaparralTotalLiveFuelLoad() const;
+    ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
+
 protected:
     // Protected setters accessible to friend classes
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
@@ -150,8 +197,6 @@ private:
     double windAdjustmentFactor_;
     WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;
     double canopyCrownFraction_;
-
-    double aspenMortality_;
 };
 
 #endif // SURFACEFIRE_H
