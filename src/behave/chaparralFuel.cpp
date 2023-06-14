@@ -8,7 +8,7 @@ ChaparralFuel::ChaparralFuel() :
     deadFuelFraction_(0.0),
     deadMoistureOfExtinction_(0.3),
     liveMoistureOfExtinction_(0.65),
-    fuelBedDepth_(1.0),
+    fuelBedDepth_(0.0),
     totalDeadLoad_(0.0),
     totalFuelLoad_(0.0),
     totalLiveLoad_(0.0),
@@ -203,19 +203,14 @@ ChaparralFuelType::ChaparralFuelTypeEnum ChaparralFuel::getChaparralFuelType() c
     return fuelType_;
 }
 
-void ChaparralFuel::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum fuelType)
-{
-    fuelType_ = fuelType;
-}
-
 //------------------------------------------------------------------------------
 /*!    \brief Initializes the fuel load arrays.
  */
 void ChaparralFuel::initializeFuelArrays()
 {
     deadMoistureOfExtinction_ = 0.3;
-    int dead = 0;
-    int live = 1;
+    const int dead = 0;
+    const int live = 1;
     // Fuel load and particle density
     for (int life = 0; life < static_cast<int>(FuelConstants::MaxLifeStates); life++)
     {
@@ -293,13 +288,6 @@ void ChaparralFuel::setDate(int month, int day)
         updateLiveFuelHeatFromDate();
 }
 
-void ChaparralFuel::setTotalFuelLoadAndDeadFuelFraction(double totalFuelLoad, double deadFuelFraction)
-{
-    totalFuelLoad_ = totalFuelLoad;
-    deadFuelFraction_ = deadFuelFraction;
-    updateFuelLoads();
-}
-
 //------------------------------------------------------------------------------
 /*!   \brief Sets the seasonal date
  *    \param daysSinceMayFirst
@@ -312,15 +300,28 @@ void ChaparralFuel::setDate(int daysSinceMayFirst)
 }
 
 //------------------------------------------------------------------------------
-/*!   \brief Sets the fuel bed depth and the dead fuel fraction and then uses
+/*!   \brief Sets the fuel bed depth and the fuel type and then uses
  *    depth to derive age, and the derived age to derive the total fuel load.
  */
-void ChaparralFuel::setDepthAndDeadFuelFraction(double depth, double deadFuelFraction)
+
+void ChaparralFuel::setDepth(double depth)
 {
-        deadFuelFraction_ = deadFuelFraction;
-        updateAgeFromDepth();
-        updateTotalFuelLoadFromAge();
-        updateFuelLoads();
+    fuelBedDepth_ = depth;
+}
+
+void ChaparralFuel::setDeadFuelFraction(double deadFuelFraction)
+{
+    deadFuelFraction_ = deadFuelFraction;
+}
+
+void ChaparralFuel::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum fuelType)
+{
+    fuelType_ = fuelType;
+}
+
+void ChaparralFuel::setTotalFuelLoad(double totalFuelLoad)
+{
+    totalFuelLoad_ = totalFuelLoad;
 }
 
 void ChaparralFuel::setMoisture(double moistureValue, FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass)
@@ -359,6 +360,21 @@ void ChaparralFuel::setLiveFuelMoisture(double liveLeafMoisture, double liveWood
     {
         moisture_[0][size] = liveWoodMoisture;
     }
+}
+
+//------------------------------------------------------------------------------
+/*!   \brief Uses depth to derive age, and the derived age to derive the total fuel load.
+ */
+void ChaparralFuel::updateFuelLoadFromDepthAndDeadFuelFraction()
+{
+    updateFuelLoads();
+}
+
+void ChaparralFuel::updateFuelLoadFromDepthAndFuelType()
+{
+    updateAgeFromDepth();
+    updateTotalFuelLoadFromAge();
+    updateFuelLoads();
 }
 
 //------------------------------------------------------------------------------
@@ -443,7 +459,7 @@ void ChaparralFuel::updateLiveFuelMoistureFromDate()
 
 void ChaparralFuel::updateAgeFromDepth()
 {
-    if (fuelType_ == ChaparralFuelType::Chemise)
+    if (fuelType_ == ChaparralFuelType::Chamise)
     {
         age_ = exp(3.912023 * sqrt(fuelBedDepth_ / 7.5));
     }
@@ -459,7 +475,7 @@ void ChaparralFuel::updateAgeFromDepth()
 
 void ChaparralFuel::updateFuelBedDepthFromAge()
 {
-    if (fuelType_ == ChaparralFuelType::Chemise)
+    if (fuelType_ == ChaparralFuelType::Chamise)
     {
         double x = log(age_) / 3.912023;
         fuelBedDepth_ = 7.5 * x * x;
@@ -477,15 +493,22 @@ void ChaparralFuel::updateFuelBedDepthFromAge()
 
 void ChaparralFuel::updateTotalFuelLoadFromAge()
 {
-    if (fuelType_ == ChaparralFuelType::Chemise)
+    if (fuelType_ == ChaparralFuelType::Chamise)
     {
-        double tpa = age_ / (1.4459 + 0.0315 * age_);
+        /* NOTE - Rothermel & Philpot(1973) used a factor of 0.0315 for chamise age,
+         * while Cohen used 0.0347 in FIRECAST.According to Faith Ann Heinsch :
+         * We are going to use Cohen’s calculation from FIRECAST.The change has to do
+         * with the fact that we are creating a proxy age from fuel bed depth rather than
+         * using an entered age.He had to make some corrections for that assumption.
+         */
+        double loadFactor = 0.0347;	// Chamise load factor from Cohen's FIRECAST code
+        double tpa = age_ / (1.4459 + loadFactor * age_);
         totalFuelLoad_ = tpa * 2000.0 / 43560.0;
     }
     else if (fuelType_ == ChaparralFuelType::MixedBrush)
     {
         double tpa = age_ / (0.4849 + 0.0170 * age_);
-        totalFuelLoad_ = tpa * 2000. / 43560.;
+        totalFuelLoad_ = tpa * 2000. / 43560.0;
     }
     else if (fuelType_ == ChaparralFuelType::NotSet)
     {

@@ -81,22 +81,25 @@ public:
     double getTotalLiveFuelLoad() const;
     ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
 
-    // Mutator that must be invoked before all other mutators
+    // Mutators
+    void setDepth(double depth);
+    void setDeadFuelFraction(double deadFuelFraction);
     void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum fuelType);
+    void setTotalFuelLoad(double totalFuelLoad);
 
     // Mutators that automatically update other parameters
     void setAge(double years);
     void setDate(int daysSinceMayFirst);
     void setDate(int month, int day);
-    void setTotalFuelLoadAndDeadFuelFraction(double totalFuelLoad, double deadFuelFraction);
-    void setDepthAndDeadFuelFraction(double depth, double deadFuelFraction);
-
+   
     // Mutators that override previously estimated parameters
     void setMoisture(double moistureValue, FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass);
     void setLiveFuelHeatOfCombustion(double liveLeafHeatOfCombustion, double liveWoodHeatOfCombustion);
     void setLiveFuelMoisture(double liveLeafMoisture, double liveWoodMositure);
  
     // Updaters
+    void updateFuelLoadFromDepthAndDeadFuelFraction();
+    void updateFuelLoadFromDepthAndFuelType();
     void updateDeadFuelFractionFromAge();
     void updateFuelLoads();
     void updateLiveFuelHeatFromDate();
