@@ -592,87 +592,87 @@ MoistureInputMode::MoistureInputModeEnum Surface::getMoistureInputMode() const
     return surfaceInputs_.getMoistureInputMode();
 }
 
-int Surface::getNumberOfMoistureScenarios()
+int Surface::getNumberOfMoistureScenarios() const
 {
     return surfaceInputs_.moistureScenarios->getNumberOfMoistureScenarios();
 }
 
-int Surface::getMoistureScenarioIndexByName(const std::string name)
+int Surface::getMoistureScenarioIndexByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioIndexByName(name);
 }
 
-bool Surface::getIsMoistureScenarioDefinedByName(const std::string name)
+bool Surface::getIsMoistureScenarioDefinedByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByName(name);
 }
 
-std::string Surface::getMoistureScenarioDescriptionByName(const std::string name)
+std::string Surface::getMoistureScenarioDescriptionByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioDescriptionByName(name);
 }
 
-double Surface::getMoistureScenarioOneHourByName(const std::string name)
+double Surface::getMoistureScenarioOneHourByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioOneHourByName(name);
 }
 
-double Surface::getMoistureScenarioTenHourByName(const std::string name)
+double Surface::getMoistureScenarioTenHourByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioTenHourByName(name);
 }
 
-double Surface::getMoistureScenarioHundredHourByName(const std::string name)
+double Surface::getMoistureScenarioHundredHourByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioHundredHourByName(name);
 }
 
-double Surface::getMoistureScenarioLiveHerbaceousByName(const std::string name)
+double Surface::getMoistureScenarioLiveHerbaceousByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveHerbaceousByName(name);
 }
 
-double Surface::getMoistureScenarioLiveWoodyByName(const std::string name)
+double Surface::getMoistureScenarioLiveWoodyByName(const std::string name) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveWoodyByName(name);
 }
 
-bool Surface::getIsMoistureScenarioDefinedByIndex(const int index)
+bool Surface::getIsMoistureScenarioDefinedByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByIndex(index);
 }
 
-std::string Surface::getMoistureScenarioNameByIndex(const int index)
+std::string Surface::getMoistureScenarioNameByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioNameByIndex(index);
 }
 
-std::string Surface::getMoistureScenarioDescriptionByIndex(const int index)
+std::string Surface::getMoistureScenarioDescriptionByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioDescriptionByIndex(index);
 }
 
-double Surface::getMoistureScenarioOneHourByIndex(const int index)
+double Surface::getMoistureScenarioOneHourByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioOneHourByIndex(index);
 }
 
-double Surface::getMoistureScenarioTenHourByIndex(const int index)
+double Surface::getMoistureScenarioTenHourByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioTenHourByIndex(index);
 }
 
-double Surface::getMoistureScenarioHundredHourByIndex(const int index)
+double Surface::getMoistureScenarioHundredHourByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioHundredHourByIndex(index);
 }
 
-double Surface::getMoistureScenarioLiveHerbaceousByIndex(const int index)
+double Surface::getMoistureScenarioLiveHerbaceousByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveHerbaceousByIndex(index);
 }
 
-double Surface::getMoistureScenarioLiveWoodyByIndex(const int index)
+double Surface::getMoistureScenarioLiveWoodyByIndex(const int index) const
 {
     return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveWoodyByIndex(index);
 }
@@ -812,42 +812,42 @@ AspenFireSeverity::AspenFireSeverityEnum Surface::getAspenFireSeverity() const
     return surfaceInputs_.getAspenFireSeverity();
 }
 
-double Surface::getAspenLoadDeadOneHour(LoadingUnits::LoadingUnitsEnum loadingUnits)
+double Surface::getAspenLoadDeadOneHour(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadDeadOneHour(), loadingUnits);
 }
 
-double Surface::getAspenLoadDeadTenHour(LoadingUnits::LoadingUnitsEnum loadingUnits)
+double Surface::getAspenLoadDeadTenHour(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadDeadTenHour(), loadingUnits);
 }
 
-double Surface::getAspenLoadLiveHerbaceous(LoadingUnits::LoadingUnitsEnum loadingUnits)
+double Surface::getAspenLoadLiveHerbaceous(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadLiveHerbaceous(), loadingUnits);
 }
 
-double Surface::getAspenLoadLiveWoody(LoadingUnits::LoadingUnitsEnum loadingUnits)
+double Surface::getAspenLoadLiveWoody(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadLiveWoody(), loadingUnits);
 }
 
-double Surface::getAspenSavrDeadOneHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+double Surface::getAspenSavrDeadOneHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
 {
     return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrDeadOneHour(), savrUnits);
 }
 
-double Surface::getAspenSavrDeadTenHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+double Surface::getAspenSavrDeadTenHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
 {
     return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrDeadTenHour(), savrUnits);
 }
 
-double Surface::getAspenSavrLiveHerbaceous(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+double Surface::getAspenSavrLiveHerbaceous(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
 {
     return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrLiveHerbaceous(), savrUnits);
 }
 
-double Surface::getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+double Surface::getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
 {
     return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrLiveWoody(), savrUnits);
 }
