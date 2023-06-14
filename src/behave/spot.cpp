@@ -487,7 +487,7 @@ double Spot::getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnit
 
 SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum Spot::getDownwindCanopyMode() const
 {
-    return spotInputs_.getDownindCanopyMode();
+    return spotInputs_.getDownWindCanopyMode();
 }
 
 double Spot::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const

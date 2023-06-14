@@ -153,7 +153,7 @@ double SpotInputs::getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeig
     return LengthUnits::fromBaseUnits(downwindCoverHeight_, coverHeightUnits);
 }
 
-SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum SpotInputs::getDownindCanopyMode() const
+SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum SpotInputs::getDownWindCanopyMode() const
 {
     return downwindCanopyMode_;
 }

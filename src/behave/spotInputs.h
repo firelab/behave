@@ -107,7 +107,7 @@ public:
     double getBurningPileFlameHeight(LengthUnits::LengthUnitsEnum flameHeightUnits) const;
     double getDBH(LengthUnits::LengthUnitsEnum DBHUnits) const;
     double getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits) const;
-    SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum getDownindCanopyMode() const;
+    SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum getDownWindCanopyMode() const;
     double getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
     SpotFireLocation::SpotFireLocationEnum getLocation() const;
     double getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits) const;
