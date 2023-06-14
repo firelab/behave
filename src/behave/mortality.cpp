@@ -1863,6 +1863,16 @@ double Mortality::getKilledTrees() const
     return killedTrees_;
 }
 
+double Mortality::getTreeCrownLengthScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const
+{
+  return MortalityRateUnits::fromBaseUnits(treeCrownLengthScorched_, mortalityRateUnits);
+}
+
+double Mortality::getTreeCrownVolumeScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const
+{
+  return MortalityRateUnits::fromBaseUnits(treeCrownVolumeScorched_, mortalityRateUnits);
+}
+
 double Mortality::getBasalAreaPrefire() const
 {
     return basalAreaPrefire_;

@@ -174,8 +174,8 @@ double Spot::calculateSpotCriticalCoverHeight(double firebrandHeight, double cov
 
 double Spot::calculateDownwindCanopyCoverHeight() const
 {
-    SpotDownindCanopyMode::SpotDownindCanopyModeEnum downwindCanopyMode = getDownwindCanopyMode();
-    if (downwindCanopyMode == SpotDownindCanopyMode::OPEN)
+    SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode = getDownwindCanopyMode();
+    if (downwindCanopyMode == SpotDownWindCanopyMode::OPEN)
     {
         return spotInputs_.getDownwindCoverHeight(LengthUnits::Feet) * 0.5;
     }
@@ -396,7 +396,7 @@ void Spot::setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::Lengt
     spotInputs_.setDownwindCoverHeight(downwindCoverHeight, coverHeightUnits);
 }
 
-void Spot::setDownwindCanopyMode(SpotDownindCanopyMode::SpotDownindCanopyModeEnum downwindCanopyMode)
+void Spot::setDownwindCanopyMode(SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode)
 {
     spotInputs_.setDownwindCanopyMode(downwindCanopyMode);
 }
@@ -443,7 +443,7 @@ void Spot::setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet, SpeedUnits::Sp
 
 void Spot::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownindCanopyMode::SpotDownindCanopyModeEnum downwindCanopyMode,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode,
     double buringPileFlameHeight, LengthUnits::LengthUnitsEnum flameHeightUnits, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
     spotInputs_.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation, elevationUnits,
@@ -452,7 +452,7 @@ void Spot::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum
 
 void Spot::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownindCanopyMode::SpotDownindCanopyModeEnum downwindCanopyMode, double windSpeedAtTwentyFeet,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode, double windSpeedAtTwentyFeet,
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
     spotInputs_.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits, ridgeToValleyElevation,elevationUnits,
@@ -461,7 +461,7 @@ void Spot::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum
 
 void Spot::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownindCanopyMode::SpotDownindCanopyModeEnum downwindCanopyMode, int torchingTrees, double DBH,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode, int torchingTrees, double DBH,
     LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
@@ -485,9 +485,9 @@ double Spot::getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnit
     return calculateDownwindCanopyCoverHeight();
 }
 
-SpotDownindCanopyMode::SpotDownindCanopyModeEnum Spot::getDownwindCanopyMode() const
+SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum Spot::getDownwindCanopyMode() const
 {
-    return spotInputs_.getDownindCanopyMode();
+    return spotInputs_.getDownWindCanopyMode();
 }
 
 double Spot::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const

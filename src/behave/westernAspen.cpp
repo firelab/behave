@@ -142,7 +142,7 @@ double WesternAspen::getAspenHeatOfCombustionLive() const
 double WesternAspen::calculateAspenLoadDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
-    static double Load[5][6] = 
+    static double Load[5][6] =
     {
         { 0.800, 0.893, 1.056, 1.218, 1.379, 1.4595 },
         { 0.738, 0.930, 1.056, 1.183, 1.309, 1.3720 },
@@ -173,7 +173,7 @@ double WesternAspen::calculateAspenLoadDeadTenHour(int aspenFuelModelNumber)
 double WesternAspen::calculateAspenLoadLiveHerbaceous(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
-    static double Load[5][6] = 
+    static double Load[5][6] =
     {
         { 0.335, 0.234, 0.167, 0.100, 0.033, 0.000 },
         { 0.665, 0.465, 0.332, 0.199, 0.067, 0.000 },
@@ -192,7 +192,7 @@ double WesternAspen::calculateAspenLoadLiveHerbaceous(int aspenFuelModelNumber, 
 double WesternAspen::calculateAspenLoadLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
-    static double Load[5][6] = 
+    static double Load[5][6] =
     {
         { 0.403, 0.403, 0.333, 0.283, 0.277, 0.2740 },
         { 0.000, 0.000, 0.000, 0.000, 0.000, 0.0000 },
@@ -228,7 +228,7 @@ double WesternAspen::calculateAspenMortality(int severity, double flameLength, d
 double WesternAspen::calculateAspenSavrDeadOneHour(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
-    static double Savr[5][6] = 
+    static double Savr[5][6] =
     {
         { 1440., 1620., 1910., 2090., 2220., 2285. },
         { 1480., 1890., 2050., 2160., 2240., 2280. },
@@ -259,7 +259,7 @@ double WesternAspen::calculateAspenSavrLiveHerbaceous()
 double WesternAspen::calculateAspenSavrLiveWoody(int aspenFuelModelNumber, double aspenCuringLevel)
 {
     int aspenFuelModelIndex = aspenFuelModelNumber - 1;
-    double Savr[5][6] = 
+    double Savr[5][6] =
     {
         { 2440., 2440., 2310., 2090., 1670., 1670. },
         { 2440., 2440., 2440., 2440., 2440., 2440. },

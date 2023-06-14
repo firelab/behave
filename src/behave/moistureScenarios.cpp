@@ -60,7 +60,7 @@ bool MoistureScenarios::getIsMoistureScenarioDefinedByName(const std::string nam
     return isMoistureScenarioDefined;
 }
 
-std::string MoistureScenarios::getMoistureScenarioDecriptionByName(const std::string name)
+std::string MoistureScenarios::getMoistureScenarioDescriptionByName(const std::string name)
 {
     std::string description = "Error: Scenario " + name + " is not defined";
     int index = getMoistureScenarioIndexByName(name);
@@ -147,7 +147,7 @@ std::string MoistureScenarios::getMoistureScenarioNameByIndex(const int index)
     return name;
 }
 
-std::string MoistureScenarios::getMoistureScenarioDecriptionByIndex(const int index)
+std::string MoistureScenarios::getMoistureScenarioDescriptionByIndex(const int index)
 {
     std::string description = "Error: Scenario with vector index " + std::to_string(index) + " is not defined";
     if((index >= 0) && (index < moistureScenarioVector_.size()))

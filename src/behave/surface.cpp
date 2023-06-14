@@ -607,9 +607,9 @@ bool Surface::getIsMoistureScenarioDefinedByName(const std::string name)
     return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByName(name);
 }
 
-std::string Surface::getMoistureScenarioDecriptionByName(const std::string name)
+std::string Surface::getMoistureScenarioDescriptionByName(const std::string name)
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioDecriptionByName(name);
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioDescriptionByName(name);
 }
 
 double Surface::getMoistureScenarioOneHourByName(const std::string name)
@@ -647,9 +647,9 @@ std::string Surface::getMoistureScenarioNameByIndex(const int index)
     return surfaceInputs_.moistureScenarios->getMoistureScenarioNameByIndex(index);
 }
 
-std::string Surface::getMoistureScenarioDecriptionByIndex(const int index)
+std::string Surface::getMoistureScenarioDescriptionByIndex(const int index)
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioDecriptionByIndex(index);
+    return surfaceInputs_.moistureScenarios->getMoistureScenarioDescriptionByIndex(index);
 }
 
 double Surface::getMoistureScenarioOneHourByIndex(const int index)

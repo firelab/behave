@@ -1248,7 +1248,7 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies = SpotTreeSpecies::ENGELMANN_SPRUCE;
     LengthUnits::LengthUnitsEnum spottingDistanceUnits = LengthUnits::Miles;;
 
-    SpotDownindCanopyMode::SpotDownindCanopyModeEnum downWindCanopyMode = SpotDownindCanopyMode::CLOSED;
+    SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downWindCanopyMode = SpotDownWindCanopyMode::CLOSED;
 
     behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
@@ -1265,7 +1265,7 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
 
-    downWindCanopyMode = SpotDownindCanopyMode::OPEN;
+    downWindCanopyMode = SpotDownWindCanopyMode::OPEN;
 
     behaveRun.spot.updateSpotInputsForBurningPile(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
@@ -1282,7 +1282,7 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromBurningPile(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
 
-    downWindCanopyMode = SpotDownindCanopyMode::CLOSED;
+    downWindCanopyMode = SpotDownWindCanopyMode::CLOSED;
 
     behaveRun.spot.updateSpotInputsForSurfaceFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
         ridgeToValleyElevation, elevationUnits, downwindCoverHeight, coverHeightUnits, downWindCanopyMode,
