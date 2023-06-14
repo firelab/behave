@@ -131,7 +131,7 @@ struct ChaparralFuelType
     enum ChaparralFuelTypeEnum
     {
         NotSet = 0,
-        Chemise = 1,
+        Chamise = 1,
         MixedBrush = 2
     };
 };
