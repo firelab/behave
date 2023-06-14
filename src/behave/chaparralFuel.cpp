@@ -496,10 +496,10 @@ void ChaparralFuel::updateTotalFuelLoadFromAge()
     if (fuelType_ == ChaparralFuelType::Chamise)
     {
         /* NOTE - Rothermel & Philpot(1973) used a factor of 0.0315 for chamise age,
-         * while Cohen used 0.0347 in FIRECAST.According to Faith Ann Heinsch :
-         * We are going to use Cohen’s calculation from FIRECAST.The change has to do
+         * while Cohen used 0.0347 in FIRECAST. According to Faith Ann Heinsch,
+         * we are going to use Cohen’s calculation from FIRECAST.The change has to do
          * with the fact that we are creating a proxy age from fuel bed depth rather than
-         * using an entered age.He had to make some corrections for that assumption.
+         * using an entered age. He had to make some corrections for that assumption.
          */
         double loadFactor = 0.0347;	// Chamise load factor from Cohen's FIRECAST code
         double tpa = age_ / (1.4459 + loadFactor * age_);

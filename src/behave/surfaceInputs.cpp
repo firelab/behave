@@ -567,6 +567,11 @@ AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() c
     return aspenFireSeverity_;
 }
 
+void SurfaceInputs::setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum fuelLoadInputMode)
+{
+    chaparralFuelLoadInputMode_ = fuelLoadInputMode;
+}
+
 void SurfaceInputs::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType)
 {
     chaparralFuelType_ = chaparralFuelType;
@@ -596,6 +601,11 @@ void SurfaceInputs::setIsUsingChaparral(bool isUsingChaparral)
         isUsingPalmettoGallberry_ = false;
         isUsingWesternAspen_ = false;
     }
+}
+
+ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum SurfaceInputs::getChaparralFuelLoadInputMode() const
+{
+    return chaparralFuelLoadInputMode_;
 }
 
 ChaparralFuelType::ChaparralFuelTypeEnum SurfaceInputs::getChaparralFuelType() const

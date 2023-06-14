@@ -32,6 +32,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun);
 
 void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun);
 void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun);
+void testChaparral(TestInfo& testInfo, BehaveRun& behaveRun);
 void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun);
 void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun);
 void testLengthToWidthRatio(TestInfo& testInfo, BehaveRun& behaveRun);
@@ -57,7 +58,10 @@ int main()
     BehaveRun behaveRun(fuelModels, mortalitySpeciesTable);
     behaveRun.setMoistureScenarios(moistureScenarios);
 
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
+
     testSurfaceSingleFuelModel(testInfo, behaveRun);
+    testChaparral(testInfo, behaveRun);
     testCalculateScorchHeight(testInfo, behaveRun);
     testPalmettoGallberry(testInfo, behaveRun);
     testWesternAspen(testInfo, behaveRun);
@@ -522,8 +526,64 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     airTemperature = 70.0;
     observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::FeetPerMinute, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
-   expectedScorchHeight = 9.923720;
+    expectedScorchHeight = 9.923720;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
+}
+
+void testChaparral(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::string testName = "";
+    double observedSurfaceFireSpreadRate = 0.0;
+    double expectedSurfaceFireSpreadRate = 0.0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
+    behaveRun.surface.setWindAndSpreadOrientationMode(windAndSpreadOrientationMode);
+    behaveRun.surface.setWindDirection(0.0);
+
+    testName = "Test Chaparral spread rate, direct fuel load input mode, depth 1 foot, 25% dead fuel, 0.333 lbs/ft^2, 3 mph wind,  0% slope";
+    behaveRun.surface.setIsUsingChaparral(true);
+    behaveRun.surface.setChaparralFuelBedDepth(1.0, LengthUnits::Feet);
+    behaveRun.surface.setChaparralFuelType(ChaparralFuelType::NotSet);
+    behaveRun.surface.setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::DirectFuelLoad);
+    behaveRun.surface.setChaparralFuelDeadLoadFraction(0.25);
+    behaveRun.surface.setChaparralTotalFuelLoad(0.333, LoadingUnits::PoundsPerSquareFoot);
+    behaveRun.surface.setWindSpeed(3.0, SpeedUnits::MilesPerHour, WindHeightInputMode::DirectMidflame);
+    behaveRun.surface.setSlope(0.0, SlopeUnits::Percent);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 1.792546;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+    
+    testName = "Test Chaparral spread rate, fuel load from type chamise, depth 2 foot, 33% dead fuel, 4 mph wind, 10% slope";
+    behaveRun.surface.setIsUsingChaparral(true);
+    behaveRun.surface.setChaparralFuelBedDepth(2.0, LengthUnits::Feet);
+    behaveRun.surface.setChaparralFuelType(ChaparralFuelType::Chamise);
+    behaveRun.surface.setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::FuelLoadFromDepthAndChaparralType);
+    behaveRun.surface.setChaparralFuelDeadLoadFraction(0.33);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
+    behaveRun.surface.setWindSpeed(4.0, SpeedUnits::MilesPerHour, WindHeightInputMode::DirectMidflame);
+    behaveRun.surface.setSlope(10.0, SlopeUnits::Percent);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 6.108717;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    testName = "Test Chaparral spread rate, fuel load from type mixed brush, depth 3 foot, 50% dead fuel,5 mph wind, 20% slope";
+    behaveRun.surface.setIsUsingChaparral(true);
+    behaveRun.surface.setChaparralFuelBedDepth(3.0, LengthUnits::Feet);
+    behaveRun.surface.setChaparralFuelType(ChaparralFuelType::MixedBrush);
+    behaveRun.surface.setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::FuelLoadFromDepthAndChaparralType);
+    behaveRun.surface.setChaparralFuelDeadLoadFraction(0.50);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
+    behaveRun.surface.setWindSpeed(5.0, SpeedUnits::MilesPerHour, WindHeightInputMode::DirectMidflame);
+    behaveRun.surface.setSlope(20.0, SlopeUnits::Percent);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    expectedSurfaceFireSpreadRate = 13.945025;
+    reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+
+    windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
+    behaveRun.surface.setIsUsingChaparral(false);
+    behaveRun.surface.setWindAndSpreadOrientationMode(windAndSpreadOrientationMode);
 }
 
 void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun)

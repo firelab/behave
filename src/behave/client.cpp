@@ -62,7 +62,8 @@ int main()
 
     behave.surface.setIsUsingChaparral(true);
     behave.surface.setChaparralFuelBedDepth(3, LengthUnits::Feet);
-    behave.surface.setChaparralFuelType(ChaparralFuelType::NotSet);
+    behave.surface.setChaparralFuelType(ChaparralFuelType::Chamise);
+    behave.surface.setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::FuelLoadFromDepthAndChaparralType);
     behave.surface.setChaparralFuelDeadLoadFraction(0.25);
     behave.surface.setChaparralTotalFuelLoad(1.0, LoadingUnits::PoundsPerSquareFoot);
     behave.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);

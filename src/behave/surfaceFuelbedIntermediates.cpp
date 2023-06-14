@@ -141,9 +141,9 @@ void SurfaceFuelbedIntermediates::calculateFuelbedIntermediates(int fuelModelNum
 
     fuelModelNumber_ = fuelModelNumber;
 
-    setFuelLoad();
-
     setFuelbedDepth();
+
+    setFuelLoad();
 
     countSizeClasses();
 
@@ -236,9 +236,24 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     }
     else if (surfaceInputs_->getIsUsingChaparral())
     {
-        chaparralFuel_.setChaparralFuelType(surfaceInputs_->getChaparralFuelType());
-        chaparralFuel_.setTotalFuelLoadAndDeadFuelFraction(surfaceInputs_->getChaparralTotalFuelLoad(LoadingUnits::PoundsPerSquareFoot), surfaceInputs_->getChaparralFuelDeadLoadFraction());
- 
+        ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum chaparralFuelInputMode = surfaceInputs_->getChaparralFuelLoadInputMode();
+      
+        chaparralFuel_.setDeadFuelFraction(surfaceInputs_->getChaparralFuelDeadLoadFraction());
+
+        if (chaparralFuelInputMode == ChaparralFuelLoadInputMode::DirectFuelLoad)
+        {
+            chaparralFuel_.setTotalFuelLoad(surfaceInputs_->getChaparralTotalFuelLoad(LoadingUnits::PoundsPerSquareFoot));
+            chaparralFuel_.updateFuelLoadFromDepthAndDeadFuelFraction();
+        }
+        else if (chaparralFuelInputMode == ChaparralFuelLoadInputMode::FuelLoadFromDepthAndChaparralType)
+        {
+            ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType = surfaceInputs_->getChaparralFuelType();
+
+            chaparralFuel_.setChaparralFuelType(surfaceInputs_->getChaparralFuelType());
+            chaparralFuel_.setDepth(depth_);
+            chaparralFuel_.setChaparralFuelType(chaparralFuelType);
+            chaparralFuel_.updateFuelLoadFromDepthAndFuelType();
+        }
         for (int i = 0; i < FuelConstants::MaxParticles; i++)
         {
             loadDead_[i] = chaparralFuel_.getLoad(FuelLifeState::Dead, i);
@@ -345,7 +360,7 @@ void SurfaceFuelbedIntermediates::setFuelbedDepth()
     else if (surfaceInputs_->getIsUsingChaparral())
     {
         depth_ = surfaceInputs_->getChaparralFuelBedDepth(LengthUnits::Feet);
-        chaparralFuel_.setDepthAndDeadFuelFraction(depth_, surfaceInputs_->getChaparralFuelDeadLoadFraction());
+        chaparralFuel_.setDepth(depth_);
     }
     else
     {

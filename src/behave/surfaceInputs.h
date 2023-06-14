@@ -168,6 +168,7 @@ public:
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
 
     // Chaparral inputs setters
+    void setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum fuelLoadInputMode);
     void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType);
     void setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits::LengthUnitsEnum depthUnits);
     void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction);
@@ -175,6 +176,7 @@ public:
     void setIsUsingChaparral(bool isUsingChaparral);
 
     // Chaparral inputs getters
+    ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum getChaparralFuelLoadInputMode() const;
     ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
     double getChaparralFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const;
     double getChaparralFuelDeadLoadFraction() const;
@@ -228,6 +230,7 @@ private:
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity_;
 
     // Chaparral inputs
+    ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum chaparralFuelLoadInputMode_;
     ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType_;
     double chaparralFuelBedDepth_;
     double chaparralFuelDeadLoadFraction_;

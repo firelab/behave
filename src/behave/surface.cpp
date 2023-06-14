@@ -1100,6 +1100,11 @@ void Surface::setIsUsingWesternAspen(bool isUsingWesternAspen)
     surfaceInputs_.setIsUsingWesternAspen(isUsingWesternAspen);
 }
 
+void Surface::setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum fuelLoadInputMode)
+{
+    surfaceInputs_.setChaparralFuelLoadInputMode(fuelLoadInputMode);
+}
+
 void Surface::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType)
 {
     surfaceInputs_.setChaparralFuelType(chaparralFuelType);

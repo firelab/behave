@@ -162,6 +162,7 @@ public:
     void setIsUsingWesternAspen(bool isUsingWesternAspen);
 
     // Chaparral inputs setters
+    void setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum fuelLoadInputMode);
     void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType);
     void setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits::LengthUnitsEnum depthUnts);
     void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction);

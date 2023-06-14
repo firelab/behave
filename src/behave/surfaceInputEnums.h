@@ -144,4 +144,13 @@ struct ChaparralContants
     };
 };
 
+struct ChaparralFuelLoadInputMode
+{
+    enum ChaparralFuelInputLoadModeEnum
+    {
+        DirectFuelLoad = 1,
+        FuelLoadFromDepthAndChaparralType = 2
+    };
+};
+
 #endif // SURFACEINPUTENUMS_H
