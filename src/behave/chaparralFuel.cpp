@@ -501,8 +501,8 @@ void ChaparralFuel::updateTotalFuelLoadFromAge()
          * with the fact that we are creating a proxy age from fuel bed depth rather than
          * using an entered age. He had to make some corrections for that assumption.
          */
-        double loadFactor = 0.0347;	// Chamise load factor from Cohen's FIRECAST code
-        double tpa = age_ / (1.4459 + loadFactor * age_);
+        double chamiseLoadFactor = 0.0347;	// Chamise load factor from Cohen's FIRECAST code
+        double tpa = age_ / (1.4459 + chamiseLoadFactor * age_);
         totalFuelLoad_ = tpa * 2000.0 / 43560.0;
     }
     else if (fuelType_ == ChaparralFuelType::MixedBrush)
