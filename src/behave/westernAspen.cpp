@@ -48,6 +48,31 @@ void WesternAspen::initializeMembers()
     mortality_ = 0.0;
 }
 
+double WesternAspen::getAspenLoadDeadOneHour() {
+  return aspenDeadOneHour_;
+}
+double WesternAspen::getAspenLoadDeadTenHour() {
+  return aspenDeadTenHour_;
+}
+double WesternAspen::getAspenLoadLiveHerbaceous() {
+  return aspenLiveHerbaceous_;
+}
+double WesternAspen::getAspenLoadLiveWoody() {
+  return aspenLiveWoody_;
+}
+double WesternAspen::getAspenSavrDeadOneHour() {
+  return aspenSavrDeadOneHour_;
+}
+double WesternAspen::getAspenSavrDeadTenHour() {
+  return aspenSavrDeadTenHour_;
+}
+double WesternAspen::getAspenSavrLiveHerbaceous() {
+  return aspenSavrLiveHerbaceous_;
+}
+double WesternAspen::getAspenSavrLiveWoody() {
+  return aspenSavrLiveWoody_;
+}
+
 double WesternAspen::getAspenDBH() const
 {
     return DBH_;

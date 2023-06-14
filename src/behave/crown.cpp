@@ -930,9 +930,9 @@ bool Crown::getIsMoistureScenarioDefinedByName(const std::string name)
     return surfaceFuel_.getIsMoistureScenarioDefinedByName(name);
 }
 
-std::string Crown::getMoistureScenarioDecriptionByName(const std::string name)
+std::string Crown::getMoistureScenarioDescriptionByName(const std::string name)
 {
-    return surfaceFuel_.getMoistureScenarioDecriptionByName(name);
+    return surfaceFuel_.getMoistureScenarioDescriptionByName(name);
 }
 
 double Crown::getMoistureScenarioOneHourByName(const std::string name)
@@ -970,9 +970,9 @@ std::string Crown::getMoistureScenarioNameByIndex(const int index)
     return surfaceFuel_.getMoistureScenarioNameByIndex(index);
 }
 
-std::string Crown::getMoistureScenarioDecriptionByIndex(const int index)
+std::string Crown::getMoistureScenarioDescriptionByIndex(const int index)
 {
-    return surfaceFuel_.getMoistureScenarioDecriptionByIndex(index);
+    return surfaceFuel_.getMoistureScenarioDescriptionByIndex(index);
 }
 
 double Crown::getMoistureScenarioOneHourByIndex(const int index)

@@ -163,7 +163,7 @@ public:
     int getNumberOfMoistureScenarios();
     int getMoistureScenarioIndexByName(const std::string name);
     bool getIsMoistureScenarioDefinedByName(const std::string name);
-    std::string getMoistureScenarioDecriptionByName(const std::string name);
+    std::string getMoistureScenarioDescriptionByName(const std::string name);
     double getMoistureScenarioOneHourByName(const std::string name);
     double getMoistureScenarioTenHourByName(const std::string name);
     double getMoistureScenarioHundredHourByName(const std::string name);
@@ -171,7 +171,7 @@ public:
     double getMoistureScenarioLiveWoodyByName(const std::string name);
     bool getIsMoistureScenarioDefinedByIndex(const int index);
     std::string getMoistureScenarioNameByIndex(const int index);
-    std::string getMoistureScenarioDecriptionByIndex(const int index);
+    std::string getMoistureScenarioDescriptionByIndex(const int index);
     double getMoistureScenarioOneHourByIndex(const int index);
     double getMoistureScenarioTenHourByIndex(const int index);
     double getMoistureScenarioHundredHourByIndex(const int index);

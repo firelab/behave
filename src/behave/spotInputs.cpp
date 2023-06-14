@@ -47,7 +47,7 @@ void SpotInputs::setDownwindCoverHeight(double downwindCoverHeight, LengthUnits:
     downwindCoverHeight_ = LengthUnits::toBaseUnits(downwindCoverHeight, coverHeightUnits);
 }
 
-void SpotInputs::setDownwindCanopyMode(SpotDownindCanopyMode::SpotDownindCanopyModeEnum downwindCanopyMode)
+void SpotInputs::setDownwindCanopyMode(SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode)
 {
     downwindCanopyMode_ = downwindCanopyMode;
 }
@@ -94,7 +94,7 @@ void SpotInputs::setWindSpeedAtTwentyFeet(double windSpeedAtTwentyFeet, SpeedUni
 
 void SpotInputs::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownindCanopyMode::SpotDownindCanopyModeEnum downindCanopyMode,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downindCanopyMode,
     double buringPileFlameHeight, LengthUnits::LengthUnitsEnum flameHeightUnits, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
     setLocation(location);
@@ -108,7 +108,7 @@ void SpotInputs::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocati
 
 void SpotInputs::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownindCanopyMode::SpotDownindCanopyModeEnum downindCanopyMode,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downindCanopyMode,
     double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
     setLocation(location);
@@ -122,7 +122,7 @@ void SpotInputs::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocati
 
 void SpotInputs::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
     LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
-    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownindCanopyMode::SpotDownindCanopyModeEnum downindCanopyMode,
+    double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downindCanopyMode,
     int torchingTrees, double DBH, LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
@@ -153,7 +153,7 @@ double SpotInputs::getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeig
     return LengthUnits::fromBaseUnits(downwindCoverHeight_, coverHeightUnits);
 }
 
-SpotDownindCanopyMode::SpotDownindCanopyModeEnum SpotInputs::getDownindCanopyMode() const
+SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum SpotInputs::getDownindCanopyMode() const
 {
     return downwindCanopyMode_;
 }
@@ -201,7 +201,7 @@ double SpotInputs::getWindSpeedAtTwentyFeet(SpeedUnits::SpeedUnitsEnum windSpeed
 void SpotInputs::initializeMembers()
 {
     downwindCoverHeight_ = 0.0;
-    downwindCanopyMode_ = SpotDownindCanopyMode::CLOSED;
+    downwindCanopyMode_ = SpotDownWindCanopyMode::CLOSED;
     location_ = SpotFireLocation::MIDSLOPE_WINDWARD;
     ridgeToValleyDistance_ = 0.0;
     ridgeToValleyElevation_ = 0.0;
