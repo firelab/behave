@@ -80,6 +80,53 @@ public:
     double getCharacteristicSAVR() const;
     bool getIsWindLimitExceeded() const;
 
+    // Palmetto-Gallberry getters
+    double getPalmettoGallberryMoistureOfExtinctionDead() const;
+    double getPalmettoGallberryHeatOfCombustionDead() const;
+    double getPalmettoGallberryHeatOfCombustionLive() const;
+    double getPalmettoGallberyDeadOneHourLoad() const;
+    double getPalmettoGallberyDeadTenHourLoad() const;
+    double getPalmettoGallberyDeadFoliageLoad() const;
+    double getPalmettoGallberyFuelBedDepth() const;
+    double getPalmettoGallberyLitterLoad() const;
+    double getPalmettoGallberyLiveOneHourLoad() const;
+    double getPalmettoGallberyLiveTenHourLoad() const;
+    double getPalmettoGallberyLiveFoliageLoad() const;
+
+    // Western Aspen getters
+    double getAspenMortality() const;
+    double getAspenFuelBedDepth(int typeIndex) const;
+    double getAspenHeatOfCombustionDead() const;
+    double getAspenHeatOfCombustionLive() const;
+    double getAspenMoistureOfExtinctionDead() const;
+    double getAspenLoadDeadOneHour() const;
+    double getAspenLoadDeadTenHour() const;
+    double getAspenLoadLiveHerbaceous() const;
+    double getAspenLoadLiveWoody() const;
+    double getAspenSavrDeadOneHour() const;
+    double getAspenSavrDeadTenHour() const;
+    double getAspenSavrLiveHerbaceous() const;
+    double getAspenSavrLiveWoody() const;
+    
+    // Chaparral getters
+    double getChaparralAge() const;
+    double getChaparralDaysSinceMayFirst() const;
+    double getChaparralDeadFuelFraction() const;
+    double getChaparralDeadMoistureOfExtinction() const;
+    double getChaparralLiveMoistureOfExtinction() const;
+    double getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralFuelBedDepth() const;
+    double getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralTotalDeadFuelLoad() const;
+    double getChaparralTotalFuelLoad() const;
+    double getChaparralTotalLiveFuelLoad() const;
+    ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
+
 protected:
     // Protected setters accessible to friend classes
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
@@ -126,21 +173,21 @@ private:
     double directionOfInterest_;
     double effectiveWindSpeed_;
     double windSpeedLimit_;
-    double phiS_;											// Slope factor, Rothermel 1972, equation 51
-    double phiW_;											// Wind factor, Rothermel 1972, equation 47
-    double windB_;											// Rothermel 1972, Equation 49
-    double windC_;											// Rothermel 1972, Equation 48
-    double windE_;											// Rothermel 1972, Equation 50
-    double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
-    double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
-    double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
-    double spreadRateInDirectionOfInterest_;				// spreadRateInDirectionOfInterest
-    double heatPerUnitArea_;                                // Heat per unit area (Btu/ft^2)
+    double phiS_;                               // Slope factor, Rothermel 1972, equation 51
+    double phiW_;                               // Wind factor, Rothermel 1972, equation 47
+    double windB_;                              // Rothermel 1972, Equation 49
+    double windC_;                              // Rothermel 1972, Equation 48
+    double windE_;                              // Rothermel 1972, Equation 50
+    double directionOfMaxSpread_;               // Direction of max fire spread in degrees clockwise from upslope
+    double noWindNoSlopeSpreadRate_;            // No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
+    double forwardSpreadRate_;                  // Maximum rate of fire spread rate, Rothermel 1972, equation 52
+    double spreadRateInDirectionOfInterest_;    // spreadRateInDirectionOfInterest
+    double heatPerUnitArea_;                    // Heat per unit area (Btu/ft^2)
     double fireLengthToWidthRatio_;
     double residenceTime_;
     double reactionIntensity_;
     double firelineIntensity_;
-    double maxFlameLength_;                                 // Flame length computed from spread rate in max direction, used in SAFETY
+    double maxFlameLength_;                     // Flame length computed from spread rate in max direction, used in SAFETY
     double flameLength_;
     double backingSpreadRate_;
     double heatSource_;
@@ -150,8 +197,6 @@ private:
     double windAdjustmentFactor_;
     WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum windAdjustmentFactorShelterMethod_;
     double canopyCrownFraction_;
-
-    double aspenMortality_;
 };
 
 #endif // SURFACEFIRE_H

@@ -34,11 +34,48 @@ int main()
     SpeciesMasterTable mortalitySpeciesTable;
     BehaveRun behave(fuelModels, mortalitySpeciesTable);
 
+    fuelModelNumber = 1;
+    moistureOneHour = 6;
+    moistureTenHour = 7;
+    moistureHundredHour = 8;
+    moistureLiveHerbaceous = 60;
+    moistureLiveWoody = 90;
+    windSpeed = 5;
+    windDirection = 42;
+
+    slope = 30;
+    aspect = 291;
+    directionOfInterest = 63;
+    canopyCover = 0.50; // 50%
+    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    canopyHeight = 6;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    crownRatio = 0.50;
+
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = behave.surface.getWindAndSpreadOrientationMode();
+    SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
+
+    // Single fuel model test
+    behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
+        MoistureUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
+        aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+
+    behave.surface.setIsUsingChaparral(true);
+    behave.surface.setChaparralFuelBedDepth(3, LengthUnits::Feet);
+    behave.surface.setChaparralFuelType(ChaparralFuelType::NotSet);
+    behave.surface.setChaparralFuelDeadLoadFraction(0.25);
+    behave.surface.setChaparralTotalFuelLoad(1.0, LoadingUnits::PoundsPerSquareFoot);
+    behave.surface.setWindHeightInputMode(WindHeightInputMode::DirectMidflame);
+    behave.surface.setSlope(0, SlopeUnits::Percent);
+
+    behave.surface.doSurfaceRunInDirectionOfMaxSpread();
+    spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
+
     // Setting the wind and spread angle input mode (default is upslope)
     behave.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
 
     // Checking  wind and spread angle input mode
-    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = behave.surface.getWindAndSpreadOrientationMode();
+   
     std::cout << "Wind and spread direction are in degrees clockwise relative to ";
     if (windAndSpreadOrientationMode == WindAndSpreadOrientationMode::RelativeToUpslope)
     {
@@ -111,12 +148,12 @@ int main()
     aspect = 291;
     directionOfInterest = 63;
     canopyCover = 0.50; // 50%
-    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    canopyCoverUnits = CoverUnits::Percent;
     canopyHeight = 6;
-    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    canopyHeightUnits = LengthUnits::Feet;
     crownRatio = 0.50;
 
-    SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
+    surfaceFireSpreadDirectionMode = SurfaceFireSpreadDirectionMode::FromIgnitionPoint;
 
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 

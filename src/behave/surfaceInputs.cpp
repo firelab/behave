@@ -69,6 +69,7 @@ void SurfaceInputs::initializeMembers()
     isUsingTwoFuelModels_ = false;
     isUsingPalmettoGallberry_ = false;
     isUsingWesternAspen_ = false;
+    isUsingChaparral_ = false;
 
     windAndSpreadOrientationMode_ = WindAndSpreadOrientationMode::RelativeToUpslope;
     windHeightInputMode_ = WindHeightInputMode::DirectMidflame;
@@ -175,10 +176,10 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits,
         crownRatio);
 
-    setAgeOfRough(ageOfRough);
-    setHeightOfUnderstory(heightOfUnderstory, canopyHeightUnits);
-    setPalmettoCoverage(palmettoCoverage, coverUnits);
-    setOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
+    setPalmettoGallberryAgeOfRough(ageOfRough);
+    setPalmettoGallberryHeightOfUnderstory(heightOfUnderstory, canopyHeightUnits);
+    setPalmettoGallberryPalmettoCoverage(palmettoCoverage, coverUnits);
+    setPalmettoGallberryOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
 }
 
 void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
@@ -223,6 +224,12 @@ void SurfaceInputs::setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnu
 void SurfaceInputs::setIsUsingWesternAspen(bool isUsingWesternAspen)
 {
     isUsingWesternAspen_ = isUsingWesternAspen;
+    if (isUsingWesternAspen_)
+    {
+        // Special case fuel models are mutually exclusive
+        isUsingChaparral_ = false;
+        isUsingPalmettoGallberry_ = false;
+    }
 }
 
 void SurfaceInputs::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
@@ -470,36 +477,36 @@ double SurfaceInputs::getMoistureLiveAggregateValue(MoistureUnits::MoistureUnits
     return MoistureUnits::fromBaseUnits(moistureValuesBySizeClass_[MoistureClassInput::LiveAggregate], moistureUnits);
 }
 
-void SurfaceInputs::setAgeOfRough(double ageOfRough)
+void SurfaceInputs::setPalmettoGallberryAgeOfRough(double ageOfRough)
 {
     ageOfRough_ = ageOfRough;
 }
 
-double SurfaceInputs::getAgeOfRough() const
+double SurfaceInputs::getPalmettoGallberryAgeOfRough() const
 {
     return ageOfRough_;
 }
 
-void SurfaceInputs::setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits)
+void SurfaceInputs::setPalmettoGallberryHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits)
 {
     heightOfUnderstory_ = LengthUnits::toBaseUnits(heightOfUnderstory, heightUnits);
 }
 
-double SurfaceInputs::getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const
+double SurfaceInputs::getPalmettoGallberryHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const
 {
     return  LengthUnits::fromBaseUnits(heightOfUnderstory_, heightUnits);
 }
-void SurfaceInputs::setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits)
+void SurfaceInputs::setPalmettoGallberryPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits)
 {
     palmettoCoverage_ = CoverUnits::toBaseUnits(palmettoCoverage, coverUnits);
 }
 
-double SurfaceInputs::getPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
+double SurfaceInputs::getPalmettoGallberryPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
 {
     return CoverUnits::fromBaseUnits(palmettoCoverage_, coverUnits);
 }
 
-void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits)
+void SurfaceInputs::setPalmettoGallberryOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits)
 {
     overstoryBasalArea_ = BasalAreaUnits::toBaseUnits(overstoryBasalArea, basalAreaUnits);
 }
@@ -507,9 +514,15 @@ void SurfaceInputs::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUn
 void SurfaceInputs::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
 {
     isUsingPalmettoGallberry_ = isUsingPalmettoGallberry;
+    if (isUsingPalmettoGallberry_)
+    {
+        // Special case fuel models are mutually exclusive
+        isUsingChaparral_ = false;
+        isUsingWesternAspen_ = false;
+    }
 }
 
-double SurfaceInputs::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
+double SurfaceInputs::getPalmettoGallberryOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
 {
     return BasalAreaUnits::fromBaseUnits(overstoryBasalArea_, basalAreaUnits);
 }
@@ -554,6 +567,62 @@ AspenFireSeverity::AspenFireSeverityEnum SurfaceInputs::getAspenFireSeverity() c
     return aspenFireSeverity_;
 }
 
+void SurfaceInputs::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType)
+{
+    chaparralFuelType_ = chaparralFuelType;
+}
+
+void SurfaceInputs::setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits::LengthUnitsEnum depthUnits)
+{
+    chaparralFuelBedDepth_ = LengthUnits::toBaseUnits(chaparralFuelBedDepth, depthUnits);
+}
+
+void SurfaceInputs::setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction)
+{
+    chaparralFuelDeadLoadFraction_ = chaparralFuelDeadLoadFraction;
+}
+
+void SurfaceInputs::setChaparralTotalFuelLoad(double chaparralTotalFuelLoad, LoadingUnits::LoadingUnitsEnum fuelLoadUnits)
+{
+    chaparralTotalFuelLoad_ = LoadingUnits::toBaseUnits(chaparralTotalFuelLoad, fuelLoadUnits);
+}
+
+void SurfaceInputs::setIsUsingChaparral(bool isUsingChaparral)
+{
+    isUsingChaparral_ = isUsingChaparral;
+    if (isUsingChaparral_)
+    {
+        // Special case fuel models are mutually exclusive
+        isUsingPalmettoGallberry_ = false;
+        isUsingWesternAspen_ = false;
+    }
+}
+
+ChaparralFuelType::ChaparralFuelTypeEnum SurfaceInputs::getChaparralFuelType() const
+{
+    return chaparralFuelType_;
+}
+
+double SurfaceInputs::getChaparralFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const
+{
+    return LengthUnits::fromBaseUnits(chaparralFuelBedDepth_, depthUnits);
+}
+
+double SurfaceInputs::getChaparralFuelDeadLoadFraction() const
+{
+    return chaparralFuelDeadLoadFraction_;
+}
+
+double SurfaceInputs::getChaparralTotalFuelLoad(LoadingUnits::LoadingUnitsEnum fuelLoadUnits) const
+{
+    return LoadingUnits::fromBaseUnits(chaparralTotalFuelLoad_, fuelLoadUnits);
+}
+
+bool SurfaceInputs::getIsUsingChaparral() const
+{
+    return isUsingChaparral_;
+}
+
 void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
 {
     airTemperature_ = rhs.airTemperature_;
@@ -589,6 +658,8 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     aspenCuringLevel_ = rhs.aspenCuringLevel_;
     dbh_ = rhs.dbh_;
     aspenFireSeverity_ = rhs.aspenFireSeverity_;
+
+    isUsingChaparral_ = rhs.isUsingChaparral_;
 
     elapsedTime_ = rhs.elapsedTime_;
 

@@ -161,6 +161,13 @@ public:
     void setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity);
     void setIsUsingWesternAspen(bool isUsingWesternAspen);
 
+    // Chaparral inputs setters
+    void setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType);
+    void setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits::LengthUnitsEnum depthUnts);
+    void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction);
+    void setChaparralTotalFuelLoad(double chaparralTotalFuelLoad, LoadingUnits::LoadingUnitsEnum fuelLoadUnits);
+    void setIsUsingChaparral(bool isUsingChaparral);
+
     // Fuel Model Getter Methods
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
@@ -222,11 +229,22 @@ public:
     WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() const;
 
     // Palmetto-Gallberry getters
+    bool getIsUsingPalmettoGallberry() const;
     double getAgeOfRough() const;
     double getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const;
-    double getPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getPalmettoGallberryCoverage(CoverUnits::CoverUnitsEnum coverUnits) const;
     double getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const;
-    bool getIsUsingPalmettoGallberry() const;
+    double getPalmettoGallberryMoistureOfExtinctionDead(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getPalmettoGallberryHeatOfCombustionDead(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getPalmettoGallberyDeadOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyDeadTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyDeadFoliageLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyLitterLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyLiveOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyLiveTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyLiveFoliageLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const;
 
     // Western Aspen getters
     bool getIsUsingWesternAspen() const;
@@ -234,6 +252,35 @@ public:
     double getAspenCuringLevel(CuringLevelUnits::CuringLevelEnum curingLevelUnits) const;
     double getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const;
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
+    double getAspenLoadDeadOneHour(LoadingUnits::LoadingUnitsEnum loadingUnits);
+    double getAspenLoadDeadTenHour(LoadingUnits::LoadingUnitsEnum loadingUnits);
+    double getAspenLoadLiveHerbaceous(LoadingUnits::LoadingUnitsEnum loadingUnits);
+    double getAspenLoadLiveWoody(LoadingUnits::LoadingUnitsEnum loadingUnits);
+    double getAspenSavrDeadOneHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits);
+    double getAspenSavrDeadTenHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits);
+    double getAspenSavrLiveHerbaceous(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits);
+    double getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits);
+
+    // Chaparral getters
+    bool getIsUsingChaparral() const;
+    ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
+    double getChaparralFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const;
+    double getChaparralFuelDeadLoadFraction() const;
+    double getChaparralTotalFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralAge(TimeUnits::TimeUnitsEnum ageUnits) const;
+    double getChaparralDaysSinceMayFirst() const;
+    double getChaparralDeadFuelFraction() const;
+    double getChaparralDeadMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getChaparralLiveMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, DensityUnits::DensityUnitsEnum densityUnits) const;
+    double getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
+    double getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
+    double getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
 private:
     void memberwiseCopyAssignment(const Surface& rhs);

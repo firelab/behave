@@ -36,28 +36,6 @@
 #include <string>
 #include <vector>
 
-struct FuelLifeState
-{
-    enum FuelLifeStateEnum
-    {
-        DEAD = 0,                   // Index associated with dead fuels
-        LIVE = 1,                   // Index associated with live fuels
-    };
-};
-
-struct FuelConstants
-{
-    enum FuelConstantsEnum
-    {
-        MAX_LIFE_STATES = 2,        // Number of life states, live and dead
-        MAX_LIVE_SIZE_CLASSES = 3,  // Maximum number of live size classes
-        MAX_DEAD_SIZE_CLASSES = 4,  // Maximum number of dead size classes
-        MAX_PARTICLES = 4,          // Maximum number of size classes within a life state (dead/live)
-        MAX_SAVR_SIZE_CLASSES = 5,  // Maximum number of SAVR size classes
-        NUM_FUEL_MODELS = 256       // Maximum number of fuel models
-    };
-};
-
 class FuelModels
 {
 public:

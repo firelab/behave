@@ -91,8 +91,9 @@ void Surface::doSurfaceRunInDirectionOfMaxSpread()
     {
         // Calculate spread rate
         int fuelModelNumber = surfaceInputs_.getFuelModelNumber();
-        bool isUsingPalmettoGallberryOrWesternAspen = surfaceInputs_.getIsUsingPalmettoGallberry() || surfaceInputs_.getIsUsingWesternAspen();
-        if (!isUsingPalmettoGallberryOrWesternAspen && (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber)))
+        bool isUsingChaparralOrPalmettoGallberryOrWesternAspen = surfaceInputs_.getIsUsingPalmettoGallberry() || surfaceInputs_.getIsUsingWesternAspen() ||
+            surfaceInputs_.getIsUsingChaparral();
+        if (!isUsingChaparralOrPalmettoGallberryOrWesternAspen && (isAllFuelLoadZero(fuelModelNumber) || !fuelModels_->isFuelModelDefined(fuelModelNumber)))
         {
             // No fuel to burn, spread rate is zero
             surfaceFire_.skipCalculationForZeroLoad();
@@ -360,7 +361,7 @@ double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStat
 
 double Surface::getLiveFuelMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::LIVE), moistureUnits);
+    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::Live), moistureUnits);
 }
 
 double Surface::getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
@@ -706,29 +707,84 @@ WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum
     return surfaceInputs_.getWindAdjustmentFactorCalculationMethod();
 }
 
+bool Surface::getIsUsingPalmettoGallberry() const
+{
+    return surfaceInputs_.getIsUsingPalmettoGallberry();
+}
+
 double Surface::getAgeOfRough() const
 {
-    return surfaceInputs_.getAgeOfRough();
+    return surfaceInputs_.getPalmettoGallberryAgeOfRough();
 }
 
 double Surface::getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const
 {
-    return surfaceInputs_.getHeightOfUnderstory(heightUnits);
+    return surfaceInputs_.getPalmettoGallberryHeightOfUnderstory(heightUnits);
 }
 
-double Surface::getPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
+double Surface::getPalmettoGallberryCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
 {
-    return surfaceInputs_.getPalmettoCoverage(coverUnits);
+    return surfaceInputs_.getPalmettoGallberryPalmettoCoverage(coverUnits);
 }
 
 double Surface::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
 {
-    return surfaceInputs_.getOverstoryBasalArea(basalAreaUnits);
+    return surfaceInputs_.getPalmettoGallberryOverstoryBasalArea(basalAreaUnits);
 }
 
-bool Surface::getIsUsingPalmettoGallberry() const
+double Surface::getPalmettoGallberryMoistureOfExtinctionDead(MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
-    return surfaceInputs_.getIsUsingPalmettoGallberry();
+    return MoistureUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryMoistureOfExtinctionDead(), moistureUnits);
+}
+
+double Surface::getPalmettoGallberryHeatOfCombustionDead(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryHeatOfCombustionDead(), heatOfCombustionUnits);
+}
+
+double Surface::getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return  HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryHeatOfCombustionLive(), heatOfCombustionUnits);
+}
+
+double Surface::getPalmettoGallberyDeadOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadOneHourLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyDeadTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadTenHourLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyDeadFoliageLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadFoliageLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyLitterLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLitterLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyLiveOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveOneHourLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyLiveTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveTenHourLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyLiveFoliageLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveFoliageLoad(), loadingUnits);
+}
+
+double Surface::getPalmettoGallberyFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const
+{
+    return LengthUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyFuelBedDepth(), depthUnits);
 }
 
 bool Surface::getIsUsingWesternAspen() const
@@ -754,6 +810,46 @@ double Surface::getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const
 AspenFireSeverity::AspenFireSeverityEnum Surface::getAspenFireSeverity() const
 {
     return surfaceInputs_.getAspenFireSeverity();
+}
+
+double Surface::getAspenLoadDeadOneHour(LoadingUnits::LoadingUnitsEnum loadingUnits)
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadDeadOneHour(), loadingUnits);
+}
+
+double Surface::getAspenLoadDeadTenHour(LoadingUnits::LoadingUnitsEnum loadingUnits)
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadDeadTenHour(), loadingUnits);
+}
+
+double Surface::getAspenLoadLiveHerbaceous(LoadingUnits::LoadingUnitsEnum loadingUnits)
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadLiveHerbaceous(), loadingUnits);
+}
+
+double Surface::getAspenLoadLiveWoody(LoadingUnits::LoadingUnitsEnum loadingUnits)
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getAspenLoadLiveWoody(), loadingUnits);
+}
+
+double Surface::getAspenSavrDeadOneHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+{
+    return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrDeadOneHour(), savrUnits);
+}
+
+double Surface::getAspenSavrDeadTenHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+{
+    return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrDeadTenHour(), savrUnits);
+}
+
+double Surface::getAspenSavrLiveHerbaceous(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+{
+    return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrLiveHerbaceous(), savrUnits);
+}
+
+double Surface::getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits)
+{
+    return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrLiveWoody(), savrUnits);
 }
 
 double Surface::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits,
@@ -1004,24 +1100,144 @@ void Surface::setIsUsingWesternAspen(bool isUsingWesternAspen)
     surfaceInputs_.setIsUsingWesternAspen(isUsingWesternAspen);
 }
 
+void Surface::setChaparralFuelType(ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType)
+{
+    surfaceInputs_.setChaparralFuelType(chaparralFuelType);
+}
+
+void Surface::setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits::LengthUnitsEnum depthUnts)
+{
+    surfaceInputs_.setChaparralFuelBedDepth(chaparralFuelBedDepth, depthUnts);
+}
+
+void Surface::setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction)
+{
+    surfaceInputs_.setChaparralFuelDeadLoadFraction(chaparralFuelDeadLoadFraction);
+}
+
+void Surface::setChaparralTotalFuelLoad(double chaparralTotalFuelLoad, LoadingUnits::LoadingUnitsEnum fuelLoadUnits)
+{
+    surfaceInputs_.setChaparralTotalFuelLoad(chaparralTotalFuelLoad, fuelLoadUnits);
+}
+
+void Surface::setIsUsingChaparral(bool isUsingChaparral)
+{
+    surfaceInputs_.setIsUsingChaparral(isUsingChaparral);
+}
+
+ChaparralFuelType::ChaparralFuelTypeEnum Surface::getChaparralFuelType() const
+{
+    return surfaceInputs_.getChaparralFuelType();
+}
+
+double Surface::getChaparralFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const
+{
+    return surfaceInputs_.getChaparralFuelBedDepth(depthUnits);
+}
+
+double Surface::getChaparralFuelDeadLoadFraction() const
+{
+    return surfaceInputs_.getChaparralFuelDeadLoadFraction();
+}
+
+double Surface::getChaparralTotalFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return surfaceInputs_.getChaparralTotalFuelLoad(loadingUnits);
+}
+
+double Surface::getChaparralAge(TimeUnits::TimeUnitsEnum ageUnits) const
+{
+    return surfaceFire_.getChaparralAge();
+}
+
+double Surface::getChaparralDaysSinceMayFirst() const
+{
+    return surfaceFire_.getChaparralDaysSinceMayFirst();
+}
+
+double Surface::getChaparralDeadFuelFraction() const
+{
+    return surfaceFire_.getChaparralDeadFuelFraction();
+}
+
+double Surface::getChaparralDeadMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralDeadMoistureOfExtinction(), moistureUnits);
+}
+
+double Surface::getChaparralLiveMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return  MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralLiveMoistureOfExtinction(), moistureUnits);
+}
+
+double Surface::getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, DensityUnits::DensityUnitsEnum densityUnits) const
+{
+    return DensityUnits::fromBaseUnits(surfaceFire_.getChaparralDensity(lifeState, sizeClass), densityUnits);
+}
+
+double Surface::getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
+{
+    return HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getChaparralHeatOfCombustion(lifeState, sizeClass), heatOfCombustionUnits);
+}
+
+double Surface::getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(lifeState, sizeClass), loadingUnits);
+}
+
+double Surface::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+{
+    return MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralMoisture(lifeState, sizeClass), moistureUnits);
+}
+
+double Surface::getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
+{
+    return  SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getChaparralSavr(lifeState, sizeClass), savrUnits);
+}
+
+double Surface::getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFire_.getChaparralEffectiveSilicaContent(lifeState, sizeClass);
+}
+
+double Surface::getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
+{
+    return surfaceFire_.getChaparralTotalSilicaContent(lifeState, sizeClass);
+}
+
+double Surface::getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralTotalDeadFuelLoad(), loadingUnits);
+}
+
+double Surface::getChaparralTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralTotalLiveFuelLoad(), loadingUnits);
+}
+
+bool Surface::getIsUsingChaparral() const
+{
+    return surfaceInputs_.getIsUsingChaparral();
+}
+
 void Surface::setAgeOfRough(double ageOfRough)
 {
-    surfaceInputs_.setAgeOfRough(ageOfRough);
+    surfaceInputs_.setPalmettoGallberryAgeOfRough(ageOfRough);
 }
 
 void Surface::setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits)
 {
-    surfaceInputs_.setHeightOfUnderstory(heightOfUnderstory, heightUnits);
+    surfaceInputs_.setPalmettoGallberryHeightOfUnderstory(heightOfUnderstory, heightUnits);
 }
 
 void Surface::setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits)
 {
-    surfaceInputs_.setPalmettoCoverage(palmettoCoverage, coverUnits);
+    surfaceInputs_.setPalmettoGallberryPalmettoCoverage(palmettoCoverage, coverUnits);
 }
 
 void Surface::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits)
 {
-    surfaceInputs_.setOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
+    surfaceInputs_.setPalmettoGallberryOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
 }
 
 void Surface::setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry)
