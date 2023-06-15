@@ -1,4 +1,4 @@
-#include "ChaparralFuel.h"
+#include "chaparralFuel.h"
 #include <math.h>
 
 //------------------------------------------------------------------------------
