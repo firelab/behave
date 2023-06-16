@@ -60,7 +60,11 @@ public:
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
     double getFirelineIntensity() const;
+    double getBackingFirelineIntensity() const;
+    double getFlankingFirelineIntensity() const;
     double getFlameLength() const;
+    double getBackingFlameLength() const;
+    double getFlankingFlameLength() const;
     double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
@@ -107,7 +111,7 @@ public:
     double getAspenSavrDeadTenHour() const;
     double getAspenSavrLiveHerbaceous() const;
     double getAspenSavrLiveWoody() const;
-    
+
     // Chaparral getters
     double getChaparralAge() const;
     double getChaparralDaysSinceMayFirst() const;
@@ -151,8 +155,12 @@ private:
     void calculateHeatSource();
 
     void calculateResidenceTime();
-    void calculateFirelineIntensity(double forwardSpreadRate);
+    void calculateFireFirelineIntensity(double forwardSpreadRate);
+    void calculateBackingFireFirelineIntensity(double backingSpreadRate);
+    void calculateFlankingFireFirelineIntensity(double flankingSpreadRate);
     void calculateFlameLength();
+    void calculateBackingFlameLength();
+    void calculateFlankingFlameLength();
     void calculateScorchHeight();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
@@ -173,23 +181,28 @@ private:
     double directionOfInterest_;
     double effectiveWindSpeed_;
     double windSpeedLimit_;
-    double phiS_;                               // Slope factor, Rothermel 1972, equation 51
-    double phiW_;                               // Wind factor, Rothermel 1972, equation 47
-    double windB_;                              // Rothermel 1972, Equation 49
-    double windC_;                              // Rothermel 1972, Equation 48
-    double windE_;                              // Rothermel 1972, Equation 50
-    double directionOfMaxSpread_;               // Direction of max fire spread in degrees clockwise from upslope
-    double noWindNoSlopeSpreadRate_;            // No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
-    double forwardSpreadRate_;                  // Maximum rate of fire spread rate, Rothermel 1972, equation 52
-    double spreadRateInDirectionOfInterest_;    // spreadRateInDirectionOfInterest
-    double heatPerUnitArea_;                    // Heat per unit area (Btu/ft^2)
+    double phiS_;											// Slope factor, Rothermel 1972, equation 51
+    double phiW_;											// Wind factor, Rothermel 1972, equation 47
+    double windB_;											// Rothermel 1972, Equation 49
+    double windC_;											// Rothermel 1972, Equation 48
+    double windE_;											// Rothermel 1972, Equation 50
+    double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
+    double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
+    double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
+    double backingSpreadRate_;
+    double flankingSpreadRate_;
+    double spreadRateInDirectionOfInterest_;				// spreadRateInDirectionOfInterest
+    double heatPerUnitArea_;                                // Heat per unit area (Btu/ft^2)
     double fireLengthToWidthRatio_;
     double residenceTime_;
     double reactionIntensity_;
     double firelineIntensity_;
-    double maxFlameLength_;                     // Flame length computed from spread rate in max direction, used in SAFETY
+    double backingFirelineIntensity_;
+    double flankingFirelineIntensity_;
+    double maxFlameLength_;                                 // Flame length computed from spread rate in max direction, used in SAFETY
     double flameLength_;
-    double backingSpreadRate_;
+    double backingFlameLength_;
+    double flankingFlameLength_;
     double heatSource_;
     double scorchHeight_;
 

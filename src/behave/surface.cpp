@@ -264,6 +264,16 @@ double Surface::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) co
     return LengthUnits::fromBaseUnits(surfaceFire_.getFlameLength(), flameLengthUnits);
 }
 
+double Surface::getBackingFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
+{
+  return LengthUnits::fromBaseUnits(surfaceFire_.getBackingFlameLength(), flameLengthUnits);
+}
+
+double Surface::getFlankingFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
+{
+  return LengthUnits::fromBaseUnits(surfaceFire_.getFlankingFlameLength(), flameLengthUnits);
+}
+
 double Surface::getFireLengthToWidthRatio() const
 {
     return size_.getFireLengthToWidthRatio();
@@ -282,6 +292,16 @@ double Surface::getHeadingToBackingRatio() const
 double Surface::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
 {
     return FirelineIntensityUnits::fromBaseUnits(surfaceFire_.getFirelineIntensity(), firelineIntensityUnits);
+}
+
+double Surface::getBackingFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+  return FirelineIntensityUnits::fromBaseUnits(surfaceFire_.getBackingFirelineIntensity(), firelineIntensityUnits);
+}
+
+double Surface::getFlankingFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+  return FirelineIntensityUnits::fromBaseUnits(surfaceFire_.getFlankingFirelineIntensity(), firelineIntensityUnits);
 }
 
 double Surface::getHeatPerUnitArea(HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) const
