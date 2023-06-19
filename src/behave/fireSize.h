@@ -50,7 +50,7 @@ public:
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
    
-private:
+protected:
     void calculateFireLengthToWidthRatio();
     void calculateSurfaceFireEccentricity();
     void calculateEllipticalDimensions();

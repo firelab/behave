@@ -146,7 +146,7 @@ protected:
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
 
-private:
+protected:
     void memberwiseCopyAssignment(const SurfaceFire& rhs);
     void calculateHeatPerUnitArea();
     void calculateWindAdjustmentFactor();

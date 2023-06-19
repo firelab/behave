@@ -55,7 +55,7 @@ public:
         double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits, double moistureFoliar, 
         MoistureUnits::MoistureUnitsEnum moistureUnits);
 
-private:
+protected:
     double canopyBaseHeight_; //Canopy base height(ft)
     double canopyBulkDensity_; // Canopy bulk density(lb / ft3)
     double canopyUserProvidedFlameLength_; // Flame length(ft)

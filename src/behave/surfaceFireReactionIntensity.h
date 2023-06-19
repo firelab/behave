@@ -49,7 +49,7 @@ public:
     double getReactionIntensity(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) const;
     double getSurfaceFireReactionIntensityForLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
 
-private:
+protected:
     void memberwiseCopyAssignment(const SurfaceFireReactionIntensity& rhs);
 
     double etaM_[FuelConstants::MaxLifeStates];                            // Moisture damping coefficient for  i-th categort (dead/live)

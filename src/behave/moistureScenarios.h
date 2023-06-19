@@ -64,7 +64,7 @@ public:
     double getMoistureScenarioLiveHerbaceousByIndex(const int index);
     double getMoistureScenarioLiveWoodyByIndex(const int index);
    
-private:
+protected:
     void memberwiseCopyAssignment(const MoistureScenarios& rhs);
     void setMoistureScenarioRecord(const std::string name, const std::string description,
         const double moistureOneHour, const double moistureTenHour, const double moistureHundredHour,

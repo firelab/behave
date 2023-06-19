@@ -108,7 +108,7 @@ public:
     void updateFuelBedDepthFromAge();
     void updateTotalFuelLoadFromAge();
 
-private:
+protected:
     void initializeFuelArrays();
     bool isGoodSizeClassIndex(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
 

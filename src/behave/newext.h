@@ -70,7 +70,7 @@ public:
                 double p_maxRos ) ;
 
 // Private methods
-private:
+protected:
     void   freeExtension( void ) ;
     double getFasterProbs( long p_block ) ;
     void   init( void );
@@ -89,7 +89,7 @@ public:
     double   **m_rosArray;      //!< 2x array with spread rates in it
 
 // Private data
-private:
+protected:
     double     m_prob;          //!< prob of faster spread rates
     double     m_latProb;       //!< Probability of lateral fuel combination
     long       m_blocks;        //!< number of allocations (blocks)

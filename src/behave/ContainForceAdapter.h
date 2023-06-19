@@ -51,7 +51,7 @@ public:
     int removeAllResourcesWithThisDesc(std::string desc);
 
     std::vector<Sem::ContainResource> resourceVector;
-private:
+protected:
 };
 
 #endif // CONTAINFORCEADAPTER_H

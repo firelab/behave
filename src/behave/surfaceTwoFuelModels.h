@@ -61,7 +61,7 @@ public:
     double getflameLength() const;
     double getFireLengthToWidthRatio() const;
 
-private:
+protected:
     double surfaceFireExpectedSpreadRate(double* ros, double* coverage, int fuels,
         double lbRatio, int samples, int depth, int laterals);
     void calculateFireOutputsForEachModel(bool hasDirectionOfInterest, double directionOfInterest,

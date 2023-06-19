@@ -72,7 +72,7 @@ public:
     bool isFuelModelReserved(int fuelModelNumber) const;
     bool isAllFuelLoadZero(int fuelModelNumber) const;
 
-private:
+protected:
     void memberwiseCopyAssignment(const FuelModels& rhs);
     void initializeSingleFuelModelRecord(int fuelModelNumber);
     void initializeAllFuelModelRecords();

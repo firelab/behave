@@ -109,7 +109,7 @@ public:
     double getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const;
     double getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const;
 
-private:
+protected:
     void memberwiseCopyAssignment(const Spot& rhs);
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double calculateDownwindCanopyCoverHeight() const;

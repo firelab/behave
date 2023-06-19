@@ -108,7 +108,7 @@ public:
     double prefireCanopyCover() const;          // Prefire Canopy Cover              
     double postfireCanopyCover() const;         // Postfire Canopy Cover             
 
-private:
+protected:
     void memberwiseCopyAssignment(const Mortality& rhs);
     void initializeOutputs();
 

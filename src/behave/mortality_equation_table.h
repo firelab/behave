@@ -86,7 +86,7 @@ public:
     CrownDamageType crownDamageType_;
     CrownDamageEquationCode crownDamageEquationCode_;
     vector<bool> isFieldRequiredVector_; // stores a bool for each of the equation dependent required inputs
-private:
+protected:
     void memberwiseCopyAssignment(const EquationRequiredFieldTableRecord& rhs);
 };
 
@@ -99,7 +99,7 @@ public:
     vector<bool> getRequiredFieldVector(EquationType equationType, CrownDamageEquationCode crownDamageEquationCode);
     CrownDamageType getCrownDamageType(EquationType equationType, CrownDamageEquationCode crownDamageEquationCode) const;
 
-private:
+protected:
     vector<EquationRequiredFieldTableRecord> record_;
     void insertRecord(EquationType equationType, CrownDamageType crownDamageType,
         CrownDamageEquationCode crownDamageEquationCode, vector<bool>& isFieldRequired);
