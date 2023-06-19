@@ -102,6 +102,12 @@ public:
     double getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
     double getCrownFractionBurned() const;
 
+    double getCrownCriticalFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getCrownCriticalSurfaceFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
+    double getCrownCriticalSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getCrownFireActiveRatio() const;
+    double getCrownTransitionRatio() const;
+
     // Fuel Model Getter Methods
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
@@ -184,11 +190,6 @@ public:
     double getCanopyCover(CoverUnits::CoverUnitsEnum canopyCoverUnits) const;
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) const;
     double getCrownRatio() const;
-    double getCrownCriticalFireSpreadRate() const;
-    double getCrownCriticalSurfaceFirelineIntensity();
-    double getCrownCriticalSurfaceFlameLength() const;
-    double getCrownFireActiveRatio() const;
-    double getCrownTransitionRatio() const;
 
 protected:
     struct CrownModelType

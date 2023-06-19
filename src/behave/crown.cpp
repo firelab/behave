@@ -327,16 +327,19 @@ void Crown::calculateCrownFireActiveWindSpeed()
     crownFireActiveWindSpeed_ = uMid / 0.4;         // 20-ft wind speed (ft/min) for waf=0.4
 }
 
-double Crown::getCrownCriticalFireSpreadRate() const {
-  return crownCriticalFireSpreadRate_;
+double Crown::getCrownCriticalFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+{
+  return SpeedUnits::fromBaseUnits(crownCriticalFireSpreadRate_, spreadRateUnits);
 }
 
-double Crown::getCrownCriticalSurfaceFirelineIntensity() {
-  return crownCriticalSurfaceFirelineIntensity_;
+double Crown::getCrownCriticalSurfaceFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+  return FirelineIntensityUnits::fromBaseUnits(crownCriticalSurfaceFirelineIntensity_, firelineIntensityUnits);
 }
 
-double Crown::getCrownCriticalSurfaceFlameLength() const {
-  return crownCriticalSurfaceFirelineIntensity_;
+double Crown::getCrownCriticalSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
+{
+  return LengthUnits::fromBaseUnits(crownFlameLength_, flameLengthUnits);
 }
 
 double Crown::getCrownFireActiveRatio() const {
