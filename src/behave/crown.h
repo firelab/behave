@@ -188,10 +188,7 @@ public:
     double getCrownCriticalSurfaceFirelineIntensity();
     double getCrownCriticalSurfaceFlameLength() const;
     double getCrownFireActiveRatio() const;
-    double getCrownFireSpreadRate() const;
     double getCrownTransitionRatio() const;
-
-
 
 protected:
     struct CrownModelType

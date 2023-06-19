@@ -331,6 +331,10 @@ double Crown::getCrownCriticalFireSpreadRate() const {
   return crownCriticalFireSpreadRate_;
 }
 
+double Crown::getCrownCriticalSurfaceFirelineIntensity() {
+  return crownCriticalSurfaceFirelineIntensity_;
+}
+
 double Crown::getCrownCriticalSurfaceFlameLength() const {
   return crownCriticalSurfaceFirelineIntensity_;
 }
@@ -341,10 +345,6 @@ double Crown::getCrownFireActiveRatio() const {
 
 double Crown::getCrownTransitionRatio() const {
   return crownFireTransitionRatio_;
-}
-
-double Crown::getCrownCriticalSurfaceFirelineIntensity() {
-  return crownCriticalSurfaceFirelineIntensity_;
 }
 
 double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
