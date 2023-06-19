@@ -119,14 +119,14 @@ void Crown::doCrownRunRothermel()
 
     surfaceFuel_.setCrownRatio(crownRatio);
 
-    // Step 1: Do surface run and store values needed for further calculations 
+    // Step 1: Do surface run and store values needed for further calculations
     surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
-    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Crown ROS output given in direction of max spread 
+    surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Crown ROS output given in direction of max spread
     surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
     surfaceFireSpreadRate_ = surfaceFuel_.getSpreadRate(SpeedUnits::FeetPerMinute); // Byram
     surfaceFireFlameLength_ = surfaceFuel_.getFlameLength(LengthUnits::Feet); // Byram
-    
+
     // Step 2: Create the crown fuel model (fire behavior fuel model 10)
     crownFuel_ = surfaceFuel_;
     crownFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
@@ -242,7 +242,7 @@ void Crown::calculateCrownFractionBurned()
     // Using these parameters:
     // surfaceFireSpreadRate_: the "actual" surface fire spread rate (ft/min).
     // surfaceFireCriticalSpreadRate_: surface fire spread rate required to initiate torching/crowning (ft/min).
-    // crowningSurfaceFireRos_: Surface fire spread rate at which the active crown fire spread rate is fully achieved 
+    // crowningSurfaceFireRos_: Surface fire spread rate at which the active crown fire spread rate is fully achieved
     // and the crown fraction burned is 1.
 
     double numerator = surfaceFireSpreadRate_ - surfaceFireCriticalSpreadRate_;
@@ -325,6 +325,26 @@ void Crown::calculateCrownFireActiveWindSpeed()
     double a = ((r10 / ros0) - 1.0 - slopeFactor) / windK;
     double uMid = pow(a, windBInv);                 // midflame wind speed (ft/min)
     crownFireActiveWindSpeed_ = uMid / 0.4;         // 20-ft wind speed (ft/min) for waf=0.4
+}
+
+double Crown::getCrownCriticalFireSpreadRate() const {
+  return crownCriticalFireSpreadRate_;
+}
+
+double Crown::getCrownCriticalSurfaceFlameLength() const {
+  return crownCriticalSurfaceFirelineIntensity_;
+}
+
+double Crown::getCrownFireActiveRatio() const {
+  return crownFireActiveRatio_;
+}
+
+double Crown::getCrownTransitionRatio() const {
+  return crownFireTransitionRatio_;
+}
+
+double Crown::getCrownCriticalSurfaceFirelineIntensity() {
+  return crownCriticalSurfaceFirelineIntensity_;
 }
 
 double Crown::getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
@@ -600,7 +620,7 @@ void Crown::calculateFireTypeRothermel()
         {
             fireType_ = FireType::Surface; // Surface fire
         }
-        else // crownFireActiveRatio_ >= 1.0 
+        else // crownFireActiveRatio_ >= 1.0
         {
             fireType_ = FireType::ConditionalCrownFire; // Conditional crown fire
         }

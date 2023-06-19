@@ -29,7 +29,7 @@
 ******************************************************************************/
 
 // TODO: Add unit conversions for energy and incorporate into calculateCrownCriticalSurfaceFireIntensity() - WMC 11/16
-// TODO: Allow for use case in which Crown is run completely without Surface, will involve allowing direct input of HPUA 
+// TODO: Allow for use case in which Crown is run completely without Surface, will involve allowing direct input of HPUA
 //       and surface flame length, as well as setting all other pertinent surface inputs in Crown's copy of Surface - WMC 11/16
 
 #ifndef CROWN_H
@@ -47,7 +47,7 @@ struct FireType
     {
         Surface = 0,    // surface fire with no torching or crown fire spread.
         Torching = 1,   // surface fire with torching.
-        ConditionalCrownFire = 2, // active crown fire possible if the fire transitions to the overstory        
+        ConditionalCrownFire = 2, // active crown fire possible if the fire transitions to the overstory
         Crowning = 3    // active crown fire, fire is spreading through the canopy.
     };
 };
@@ -184,6 +184,14 @@ public:
     double getCanopyCover(CoverUnits::CoverUnitsEnum canopyCoverUnits) const;
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) const;
     double getCrownRatio() const;
+    double getCrownCriticalFireSpreadRate() const;
+    double getCrownCriticalSurfaceFirelineIntensity();
+    double getCrownCriticalSurfaceFlameLength() const;
+    double getCrownFireActiveRatio() const;
+    double getCrownFireSpreadRate() const;
+    double getCrownTransitionRatio() const;
+
+
 
 protected:
     struct CrownModelType
