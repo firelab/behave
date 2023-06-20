@@ -767,12 +767,12 @@ double Surface::getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits::
     return  HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryHeatOfCombustionLive(), heatOfCombustionUnits);
 }
 
-double Surface::getPalmettoGallberyDeadOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyDeadFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadOneHourLoad(), loadingUnits);
 }
 
-double Surface::getPalmettoGallberyDeadTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyDeadMediumFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadTenHourLoad(), loadingUnits);
 }
@@ -787,12 +787,12 @@ double Surface::getPalmettoGallberyLitterLoad(LoadingUnits::LoadingUnitsEnum loa
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLitterLoad(), loadingUnits);
 }
 
-double Surface::getPalmettoGallberyLiveOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyLiveFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveOneHourLoad(), loadingUnits);
 }
 
-double Surface::getPalmettoGallberyLiveTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyLiveMediumFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveTenHourLoad(), loadingUnits);
 }

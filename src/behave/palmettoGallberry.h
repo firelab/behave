@@ -49,26 +49,26 @@ public:
     double getMoistureOfExtinctionDead() const;
     double getHeatOfCombustionDead() const;
     double getHeatOfCombustionLive() const;
-    double getPalmettoGallberyDeadOneHourLoad() const;
-    double getPalmettoGallberyDeadTenHourLoad() const;
+    double getPalmettoGallberyDeadFineFuelLoad() const;
+    double getPalmettoGallberyDeadMediumFuelLoad() const;
     double getPalmettoGallberyDeadFoliageLoad() const;
     double getPalmettoGallberyFuelBedDepth() const;
     double getPalmettoGallberyLitterLoad() const;
-    double getPalmettoGallberyLiveOneHourLoad() const;
-    double getPalmettoGallberyLiveTenHourLoad() const;
+    double getPalmettoGallberyLiveFineFuelLoad() const;
+    double getPalmettoGallberyLiveMediumFuelLoad() const;
     double getPalmettoGallberyLiveFoliageLoad() const;
 
 private:
     double moistureOfExtinctionDead_;
     double heatOfCombustionDead_;
     double heatOfCombustionLive_;
-    double palmettoGallberyDeadOneHourLoad_;
-    double palmettoGallberyDeadTenHourLoad_;
-    double palmettoGallberyDeadFoliageLoad_;
+    double palmettoGallberyDeadFineFuelLoad_;
+    double palmettoGallberyDeadMediumFuelLoad_;
+    double palmettoGallberyDeadFoliageFuelLoad_;
     double palmettoGallberyFuelBedDepth_;
     double palmettoGallberyLitterLoad_;
-    double palmettoGallberyLiveOneHourLoad_;
-    double palmettoGallberyLiveTenHourLoad_;
+    double palmettoGallberyLiveFineFuelLoad_;
+    double palmettoGallberyLiveMediumFuelLoad_;
     double palmettoGallberyLiveFoliageLoad_;
 };
 

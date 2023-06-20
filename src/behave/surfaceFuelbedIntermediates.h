@@ -66,13 +66,13 @@ public:
     double getPalmettoGallberryMoistureOfExtinctionDead() const;
     double getPalmettoGallberryHeatOfCombustionDead() const;
     double getPalmettoGallberryHeatOfCombustionLive() const;
-    double getPalmettoGallberyDeadOneHourLoad() const;
-    double getPalmettoGallberyDeadTenHourLoad() const;
+    double getPalmettoGallberyDeadFineFuelLoad() const;
+    double getPalmettoGallberyDeadMediumFuelLoad() const;
     double getPalmettoGallberyDeadFoliageLoad() const;
     double getPalmettoGallberyFuelBedDepth() const;
     double getPalmettoGallberyLitterLoad() const;
-    double getPalmettoGallberyLiveOneHourLoad() const;
-    double getPalmettoGallberyLiveTenHourLoad() const;
+    double getPalmettoGallberyLiveFineFuelLoad() const;
+    double getPalmettoGallberyLiveTenMediumFuelLoad() const;
     double getPalmettoGallberyLiveFoliageLoad() const;
 
     // Western Aspen getters

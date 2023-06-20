@@ -693,12 +693,12 @@ double SurfaceFire::getPalmettoGallberryHeatOfCombustionLive() const
 
 double SurfaceFire::getPalmettoGallberyDeadOneHourLoad() const
 {
-    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadOneHourLoad();
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadFineFuelLoad();
 }
 
 double SurfaceFire::getPalmettoGallberyDeadTenHourLoad() const
 {
-    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadTenHourLoad();
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyDeadMediumFuelLoad();
 }
 
 double SurfaceFire::getPalmettoGallberyDeadFoliageLoad() const
@@ -718,12 +718,12 @@ double SurfaceFire::getPalmettoGallberyLitterLoad() const
 
 double SurfaceFire::getPalmettoGallberyLiveOneHourLoad() const
 {
-    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveOneHourLoad();
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveFineFuelLoad();
 }
 
 double SurfaceFire::getPalmettoGallberyLiveTenHourLoad() const
 {
-    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveTenHourLoad();
+    return surfaceFuelbedIntermediates_.getPalmettoGallberyLiveTenMediumFuelLoad();
 }
 
 double SurfaceFire::getPalmettoGallberyLiveFoliageLoad() const

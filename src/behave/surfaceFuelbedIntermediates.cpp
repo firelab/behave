@@ -1002,14 +1002,14 @@ double SurfaceFuelbedIntermediates::getPalmettoGallberryHeatOfCombustionLive() c
     return palmettoGallberry_.getHeatOfCombustionLive();
 }
 
-double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadOneHourLoad() const
+double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadFineFuelLoad() const
 {
-    return palmettoGallberry_.getPalmettoGallberyDeadOneHourLoad();
+    return palmettoGallberry_.getPalmettoGallberyDeadFineFuelLoad();
 }
 
-double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadTenHourLoad() const
+double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadMediumFuelLoad() const
 {
-    return palmettoGallberry_.getPalmettoGallberyDeadTenHourLoad();
+    return palmettoGallberry_.getPalmettoGallberyDeadMediumFuelLoad();
 }
 
 double SurfaceFuelbedIntermediates::getPalmettoGallberyDeadFoliageLoad() const
@@ -1027,14 +1027,14 @@ double SurfaceFuelbedIntermediates::getPalmettoGallberyLitterLoad() const
     return palmettoGallberry_.getPalmettoGallberyLitterLoad();
 }
 
-double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveOneHourLoad() const
+double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveFineFuelLoad() const
 {
-    return palmettoGallberry_.getPalmettoGallberyLiveOneHourLoad();
+    return palmettoGallberry_.getPalmettoGallberyLiveFineFuelLoad();
 }
 
-double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveTenHourLoad() const
+double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveTenMediumFuelLoad() const
 {
-    return palmettoGallberry_.getPalmettoGallberyLiveTenHourLoad();
+    return palmettoGallberry_.getPalmettoGallberyLiveMediumFuelLoad();
 }
 
 double SurfaceFuelbedIntermediates::getPalmettoGallberyLiveFoliageLoad() const
