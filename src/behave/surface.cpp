@@ -1205,29 +1205,54 @@ double Surface::getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum li
     return HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getChaparralHeatOfCombustion(lifeState, sizeClass), heatOfCombustionUnits);
 }
 
-double Surface::getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getChaparralLoadDeadLessThanQuarterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(lifeState, sizeClass), loadingUnits);
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 0), loadingUnits);
+}
+
+double Surface::getChaparralLoadDeadQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 1), loadingUnits);
+}
+
+double Surface::getChaparralLoadDeadHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 2), loadingUnits);
+}
+
+double Surface::getChaparralLoadDeadOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 3), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveLeaves(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 0), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveStemsLessThanQuaterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 1), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 2), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 3), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 4), loadingUnits);
 }
 
 double Surface::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralMoisture(lifeState, sizeClass), moistureUnits);
-}
-
-double Surface::getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
-{
-    return  SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getChaparralSavr(lifeState, sizeClass), savrUnits);
-}
-
-double Surface::getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
-{
-    return surfaceFire_.getChaparralEffectiveSilicaContent(lifeState, sizeClass);
-}
-
-double Surface::getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
-{
-    return surfaceFire_.getChaparralTotalSilicaContent(lifeState, sizeClass);
 }
 
 double Surface::getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
