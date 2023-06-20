@@ -260,7 +260,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     flankingSpreadRate_ = size_->getFlankingSpreadRate(SpeedUnits::FeetPerMinute);
 
     calculateHeatPerUnitArea();
-    calculateFireFirelineIntensity(forwardSpreadRate_);
+    calculateFirelineIntensity(forwardSpreadRate_);
     calculateBackingFireFirelineIntensity(backingSpreadRate_);
     calculateFlankingFireFirelineIntensity(flankingSpreadRate_);
 
