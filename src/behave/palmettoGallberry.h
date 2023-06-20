@@ -37,14 +37,14 @@ public:
     PalmettoGallberry();
     void initializeMembers();
 
-    double calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory);
-    double calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage);
+    double calculatePalmettoGallberyDeadFineFuelLoad(double ageOfRough, double heightOfUnderstory);
+    double calculatePalmettoGallberyDeadMediumFuelLoad(double ageOfRough, double palmettoCoverage);
     double calculatePalmettoGallberyDeadFoliageLoad(double ageOfRough, double palmettoCoverage);
-    double calculatePalmettoGallberyFuelBedDepth(double heightOfUnderstory);
     double calculatePalmettoGallberyLitterLoad(double ageOfRough, double overstoryBasalArea);
-    double calculatePalmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory);
-    double calculatePalmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory);
+    double calculatePalmettoGallberyLiveFineFuelLoad(double ageOfRough, double heightOfUnderstory);
+    double calculatePalmettoGallberyLiveMediumFuelLoad(double ageOfRough, double heightOfUnderstory);
     double calculatePalmettoGallberyLiveFoliageLoad(double ageOfRough, double palmettoCoverage, double heightOfUnderstory);
+    double calculatePalmettoGallberyFuelBedDepth(double heightOfUnderstory);
 
     double getMoistureOfExtinctionDead() const;
     double getHeatOfCombustionDead() const;

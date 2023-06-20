@@ -52,7 +52,7 @@ void PalmettoGallberry::initializeMembers()
     palmettoGallberyLiveFoliageLoad_ = 0.0;
 }
 
-double PalmettoGallberry::calculatePalmettoGallberyDeadOneHourLoad(double ageOfRough, double heightOfUnderstory)
+double PalmettoGallberry::calculatePalmettoGallberyDeadFineFuelLoad(double ageOfRough, double heightOfUnderstory)
 {
     palmettoGallberyDeadFineFuelLoad_ = -0.00121
         + 0.00379 * log(ageOfRough)
@@ -64,7 +64,7 @@ double PalmettoGallberry::calculatePalmettoGallberyDeadOneHourLoad(double ageOfR
     return palmettoGallberyDeadFineFuelLoad_;
 }
 
-double PalmettoGallberry::calculatePalmettoGallberyDeadTenHourLoad(double ageOfRough, double palmettoCoverage)
+double PalmettoGallberry::calculatePalmettoGallberyDeadMediumFuelLoad(double ageOfRough, double palmettoCoverage)
 {
     palmettoCoverage *= 100.0; // convert fraction to percent
     palmettoGallberyDeadMediumFuelLoad_ = -0.00775
@@ -96,13 +96,13 @@ double PalmettoGallberry::calculatePalmettoGallberyLitterLoad(double ageOfRough,
     return palmettoGallberyLitterLoad_;
 }
 
-double PalmettoGallberry::calculatePalmettoGallberyLiveOneHourLoad(double ageOfRough, double heightOfUnderstory)
+double PalmettoGallberry::calculatePalmettoGallberyLiveFineFuelLoad(double ageOfRough, double heightOfUnderstory)
 {
     palmettoGallberyLiveFineFuelLoad_ = 0.00546 + 0.00092 * ageOfRough + 0.00212 * heightOfUnderstory * heightOfUnderstory;
     return palmettoGallberyLiveFineFuelLoad_;
 }
 
-double PalmettoGallberry::calculatePalmettoGallberyLiveTenHourLoad(double ageOfRough, double heightOfUnderstory)
+double PalmettoGallberry::calculatePalmettoGallberyLiveMediumFuelLoad(double ageOfRough, double heightOfUnderstory)
 {
     palmettoGallberyLiveMediumFuelLoad_ = -0.02128
         + 0.00014 * ageOfRough * ageOfRough

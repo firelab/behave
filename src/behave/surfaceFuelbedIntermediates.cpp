@@ -199,14 +199,14 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
         double palmettoCoverage = surfaceInputs_->getPalmettoGallberryPalmettoCoverage(CoverUnits::Fraction);
         double overstoryBasalArea = surfaceInputs_->getPalmettoGallberryOverstoryBasalArea(BasalAreaUnits::SquareFeetPerAcre);
 
-        loadDead_[0] = palmettoGallberry_.calculatePalmettoGallberyDeadOneHourLoad(ageOfRough, heightOfUnderstory);
-        loadDead_[1] = palmettoGallberry_.calculatePalmettoGallberyDeadTenHourLoad(ageOfRough, palmettoCoverage);
+        loadDead_[0] = palmettoGallberry_.calculatePalmettoGallberyDeadFineFuelLoad(ageOfRough, heightOfUnderstory);
+        loadDead_[1] = palmettoGallberry_.calculatePalmettoGallberyDeadMediumFuelLoad(ageOfRough, palmettoCoverage);
         loadDead_[2] = palmettoGallberry_.calculatePalmettoGallberyDeadFoliageLoad(ageOfRough, palmettoCoverage);
         loadDead_[3] = palmettoGallberry_.calculatePalmettoGallberyLitterLoad(ageOfRough, overstoryBasalArea);
         loadDead_[4] = 0.0;
 
-        loadLive_[0] = palmettoGallberry_.calculatePalmettoGallberyLiveOneHourLoad(ageOfRough, heightOfUnderstory);
-        loadLive_[1] = palmettoGallberry_.calculatePalmettoGallberyLiveTenHourLoad(ageOfRough, heightOfUnderstory);
+        loadLive_[0] = palmettoGallberry_.calculatePalmettoGallberyLiveFineFuelLoad(ageOfRough, heightOfUnderstory);
+        loadLive_[1] = palmettoGallberry_.calculatePalmettoGallberyLiveMediumFuelLoad(ageOfRough, heightOfUnderstory);
         loadLive_[2] = palmettoGallberry_.calculatePalmettoGallberyLiveFoliageLoad(ageOfRough, palmettoCoverage, heightOfUnderstory);
         loadLive_[3] = 0.0;
         loadLive_[4] = 0.0;
