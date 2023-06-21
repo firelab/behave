@@ -35,7 +35,7 @@ class FireSize
 public:
     FireSize();
     ~FireSize();
-    void calculateFireBasicDimensions(double effectiveWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedRateUnits, double forwardSpreadRate, SpeedUnits::SpeedUnitsEnum spreadRateUnits);
+    void calculateFireBasicDimensions(bool isCrown, double effectiveWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedRateUnits, double forwardSpreadRate, SpeedUnits::SpeedUnitsEnum spreadRateUnits);
 
     double getFireLengthToWidthRatio() const;
     double getEccentricity() const;
@@ -47,12 +47,13 @@ public:
     double getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireLength(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getMaxFireWidth(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFirePerimeter(bool isCrown, LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFireArea(bool isCrown, AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
    
 private:
-    void calculateFireLengthToWidthRatio();
-    void calculateSurfaceFireEccentricity();
+    void calculateSurfaceFireLengthToWidthRatio();
+    void calculateCrownFireLengthToWidthRatio();
+    void calculateFireEccentricity();
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
     void calculateFlankingSpreadRate();

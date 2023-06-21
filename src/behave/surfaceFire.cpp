@@ -252,7 +252,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     calculateResidenceTime();
 
     // Calculate fire ellipse and related properties
-    size_->calculateFireBasicDimensions(effectiveWindSpeed_, SpeedUnits::FeetPerMinute, forwardSpreadRate_, SpeedUnits::FeetPerMinute);
+    size_->calculateFireBasicDimensions(false, effectiveWindSpeed_, SpeedUnits::FeetPerMinute, forwardSpreadRate_, SpeedUnits::FeetPerMinute);
 
     fireLengthToWidthRatio_ = size_->getFireLengthToWidthRatio();
 

@@ -366,12 +366,12 @@ double Surface::getHeatSource(HeatSourceAndReactionIntensityUnits::HeatSourceAnd
 
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return size_.getFirePerimeter(lengthUnits, elapsedTime, timeUnits);
+    return size_.getFirePerimeter(false, lengthUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return size_.getFireArea(areaUnits, elapsedTime, timeUnits);
+    return size_.getFireArea(false, areaUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const
