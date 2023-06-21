@@ -515,7 +515,7 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     double midflameWindspeed = 5.0;
     double airTemperature = 80.0;
     LengthUnits::LengthUnitsEnum scorchLengthUnits = LengthUnits::Feet;
-    double observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
+    double observedScorchHeight = behaveRun.mortality.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
     double expectedScorchHeight = 7.617325;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
@@ -524,7 +524,7 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     midflameWindspeed = 300.0;
     firelineInstensity = 55;
     airTemperature = 70.0;
-    observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
+    observedScorchHeight = behaveRun.mortality.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::FeetPerMinute, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
     expectedScorchHeight = 9.923720;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);

@@ -52,9 +52,6 @@ public:
 
     double calculateFlameLength(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
         LengthUnits::LengthUnitsEnum flameLengthUnits);
-    double calculateScorchHeight(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
-        double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature,
-        TemperatureUnits::TemperatureUnitsEnum temperatureUnits, LengthUnits::LengthUnitsEnum scorchHeightUnits);
 
     void setFuelModels(FuelModels& fuelModels);
     void initializeMembers();
