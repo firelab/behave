@@ -51,8 +51,9 @@ public:
     double getFireArea(bool isCrown, AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
    
 protected:
-    void calculateFireLengthToWidthRatio();
-    void calculateSurfaceFireEccentricity();
+    void calculateSurfaceFireLengthToWidthRatio();
+    void calculateCrownFireLengthToWidthRatio();
+    void calculateFireEccentricity();
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
     void calculateFlankingSpreadRate();
