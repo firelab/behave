@@ -85,7 +85,7 @@ public:
     double getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits);
     LightningCharge::LightningChargeEnum getLightningChargeType();
      
-private:
+protected:
     double moistureOneHour_;
     double moistureHundredHour_;
     double airTemperature_;

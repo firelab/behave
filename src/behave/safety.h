@@ -55,7 +55,7 @@ public:
 
     void initializeMembers();
 
-private:
+protected:
     void calculateSafetyZoneSeparationDistance();
 
     //Inputs

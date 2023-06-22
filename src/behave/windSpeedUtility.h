@@ -38,7 +38,7 @@ public:
     double windSpeedAtMidflame(double windSpeedAtTwentyFeet, double windAdjustmentFactor);
     double windSpeedAtTwentyFeetFromTenMeter(double windSpeedAtTenMeters);
 
-private:
+protected:
     double windSpeedAtMidflame_;
     double windSpeedAtTenMeters_;
     double windSpeedAtTwentyFeet_;

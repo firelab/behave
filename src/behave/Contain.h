@@ -169,7 +169,7 @@ public:
     bool   setDiurnalSpreadRates(double *rates);         // hourly, added MAF 10/6/2008
 
     // Computational methods
-private:
+protected:
   
     void    calcCoordinates( void ) ;
     void    calcU( void ) ;

@@ -289,7 +289,7 @@ public:
     double getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getChaparralTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
-private:
+protected:
     void memberwiseCopyAssignment(const Surface& rhs);
     double calculateSpreadRateAtVector(double directionOfinterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode);
 

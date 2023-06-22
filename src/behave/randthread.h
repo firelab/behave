@@ -89,7 +89,7 @@ public:
         double *p_m_latRosArray, long p_lessIgns);
 
     // Private methods:
-private:
+protected:
     void    addNewPath(long *NumPath2, double p_time, long p_loc,
         long p_ignitionPt, double p_relCellSize);
     void    calcEllipticalDimensions(void);
@@ -105,7 +105,7 @@ private:
         double **ros, long FastFlank);
 
     //Private data
-private:
+protected:
     double      m_lbRatio;      //!< elliptical fire length-to-breadth ratio
     double      m_a;            //!< elliptical fire spread rate dimensions
     double      m_b;            //!< elliptical fire spread rate dimensions

@@ -20,7 +20,7 @@ public:
     int getDataTypeIndex(const string& str);
     int getDataIndex(const string& str);
 
-private:
+protected:
     std::fstream file;
     string lineDetails;
     int itemCount = 0;

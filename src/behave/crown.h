@@ -187,7 +187,7 @@ public:
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) const;
     double getCrownRatio() const;
 
-private:
+protected:
     struct CrownModelType
     {
         enum CrownModelTypeEnum

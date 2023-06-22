@@ -50,10 +50,9 @@ public:
     double getFirePerimeter(bool isCrown, LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(bool isCrown, AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
    
-private:
-    void calculateSurfaceFireLengthToWidthRatio();
-    void calculateCrownFireLengthToWidthRatio();
-    void calculateFireEccentricity();
+protected:
+    void calculateFireLengthToWidthRatio();
+    void calculateSurfaceFireEccentricity();
     void calculateEllipticalDimensions();
     void calculateBackingSpreadRate();
     void calculateFlankingSpreadRate();

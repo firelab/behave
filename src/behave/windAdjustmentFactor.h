@@ -44,7 +44,7 @@ public:
     double getCanopyCrownFraction() const;
     WindAdjustmentFactorShelterMethod::WindAdjustmentFactorShelterMethodEnum getWindAdjustmentFactorShelterMethod() const;
 
-private:
+protected:
     void calculateWindAdjustmentFactorShelterMethod(const double canopyCover, const double canopyHeight, const double fuelbedDepth);
     void applyLogProfile(const double canopyCover, const double canopyHeight, const double fuelbedDepth);
     double	windAdjustmentFactor_;

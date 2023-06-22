@@ -109,7 +109,7 @@ public:
     double getChaparralTotalLiveFuelLoad() const;
     ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
 
-private:
+protected:
     void initializeMembers();
     void memberwiseCopyAssignment(const SurfaceFuelbedIntermediates& rhs);
     void setFuelLoad();

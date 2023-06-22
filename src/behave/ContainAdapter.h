@@ -136,7 +136,7 @@ public:
     double getFinalTimeSinceReport(TimeUnits::TimeUnitsEnum timeUnits) const;
     ContainStatus::ContainStatusEnum getContainmentStatus() const;
 
-private:
+protected:
     FireSize size_; 
 
     Sem::Contain::ContainTactic convertAdapterTacticToSemTactic(ContainAdapterEnums::ContainTactic::ContainTacticEnum tactic);

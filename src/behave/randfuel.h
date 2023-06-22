@@ -94,7 +94,7 @@ public:
         double ***p_rs, long p_oldCols);
 
     // Private methods
-private:
+protected:
     bool    allocRandThreads(void);
     void    calcSpreadRates(void);
     void    closeRandThreads(void);
@@ -102,7 +102,7 @@ private:
     void    init(void);
 
     // Private data
-private:
+protected:
     long        m_samples;          //!< number of cols in block
     long        m_depths;           //!< number rows in block
     long        m_fuels;            //!< number of fuel types

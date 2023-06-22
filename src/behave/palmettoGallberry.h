@@ -58,7 +58,7 @@ public:
     double getPalmettoGallberyLiveMediumFuelLoad() const;
     double getPalmettoGallberyLiveFoliageLoad() const;
 
-private:
+protected:
     double moistureOfExtinctionDead_;
     double heatOfCombustionDead_;
     double heatOfCombustionLive_;

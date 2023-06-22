@@ -143,7 +143,7 @@ public:
 	// Calculate the area of the uncontained portion of the ellipse
 	double UncontainedArea( double head, double lwRatio, double x, double y, Sem::Contain::ContainTactic tactic  );	 // By DT 1/2013
 
-private:
+protected:
     void finalStats( void ) ;
 
 // Protected data

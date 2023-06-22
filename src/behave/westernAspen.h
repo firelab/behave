@@ -69,7 +69,7 @@ public:
     // Mortality must be calculated AFTER spread rate
     double calculateAspenMortality(int severity, double flameLength, double DBH);
 
-private:
+protected:
     double aspenInterpolate(double curing, double* valueArray);
    
     // Member variables

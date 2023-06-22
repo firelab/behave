@@ -83,7 +83,7 @@ public:
 
     vector<bool> isFieldRequiredVector_; // stores a bool for each of the equation dependent required inputs
 
-private:
+protected:
     void memberwiseCopyAssignment(const MortalityInputs& rhs);
 
     // Inputs..................

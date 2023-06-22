@@ -127,7 +127,7 @@ public:
         };
     };
 
-private:
+protected:
     void initializeMembers();
 
     double DBH_;

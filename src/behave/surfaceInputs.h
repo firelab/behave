@@ -184,7 +184,7 @@ public:
     bool getIsUsingChaparral() const;
 
     MoistureScenarios* moistureScenarios; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
-private:   
+protected:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);
    
     bool isCalculatingScorchHeight_;    // Switch to determine whether scorch height is calculated (requires air temperature to be set)

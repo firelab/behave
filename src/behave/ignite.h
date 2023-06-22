@@ -71,7 +71,7 @@ public:
     // neccessary based on the current value of fuel bed used by the ignite module 
     bool isFuelDepthNeeded();
 
-private:
+protected:
     double calculateFuelTemperature();
 
     IgniteInputs igniteInputs_;

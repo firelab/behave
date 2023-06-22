@@ -96,7 +96,7 @@ Safety safety;
 // Mortality Module
 Mortality mortality;
 
-private:
+protected:
     void memberwiseCopyAssignment(const BehaveRun& rhs);
 
     // Fuel models (orginal 13, 40 and custom)
