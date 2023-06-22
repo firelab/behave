@@ -83,6 +83,8 @@ public:
     double getWindAdjustmentFactor() const;
     double getCharacteristicSAVR() const;
     bool getIsWindLimitExceeded() const;
+    double getRelativePackingRatio() const;
+    double getPackingRatio()const;
 
     // Palmetto-Gallberry getters
     double getPalmettoGallberryMoistureOfExtinctionDead() const;

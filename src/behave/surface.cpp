@@ -359,6 +359,14 @@ double Surface::getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVol
     return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getCharacteristicSAVR(), savrUnits);
 }
 
+double Surface::getRelativePackingRatio() const {
+  return surfaceFire_.getRelativePackingRatio();
+}
+
+double Surface::getPackingRatio() const {
+  return surfaceFire_.getPackingRatio();
+}
+
 void Surface::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
 {
     surfaceInputs_.setCanopyCover(canopyCover, coverUnits);

@@ -676,6 +676,14 @@ bool SurfaceFire::getIsWindLimitExceeded() const
     return isWindLimitExceeded_;
 }
 
+double SurfaceFire::getRelativePackingRatio() const {
+  return surfaceFuelbedIntermediates_.getRelativePackingRatio();
+}
+
+double SurfaceFire::getPackingRatio() const {
+  return surfaceFuelbedIntermediates_.getPackingRatio();
+}
+
 double SurfaceFire::getPalmettoGallberryMoistureOfExtinctionDead() const
 {
     return surfaceFuelbedIntermediates_.getPalmettoGallberryMoistureOfExtinctionDead();
