@@ -515,7 +515,7 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     double midflameWindspeed = 5.0;
     double airTemperature = 80.0;
     LengthUnits::LengthUnitsEnum scorchLengthUnits = LengthUnits::Feet;
-    double observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
+    double observedScorchHeight = behaveRun.mortality.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::MilesPerHour, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
     double expectedScorchHeight = 7.617325;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
@@ -524,7 +524,7 @@ void testCalculateScorchHeight(TestInfo& testInfo, BehaveRun& behaveRun)
     midflameWindspeed = 300.0;
     firelineInstensity = 55;
     airTemperature = 70.0;
-    observedScorchHeight = behaveRun.surface.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
+    observedScorchHeight = behaveRun.mortality.calculateScorchHeight(firelineInstensity, FirelineIntensityUnits::BtusPerFootPerSecond,
         midflameWindspeed, SpeedUnits::FeetPerMinute, airTemperature, TemperatureUnits::Fahrenheit, scorchLengthUnits);
     expectedScorchHeight = 9.923720;
     reportTestResult(testInfo, testName, observedScorchHeight, expectedScorchHeight, error_tolerance);
@@ -1046,35 +1046,56 @@ void testCrownModuleRothermel(TestInfo& testInfo, BehaveRun& behaveRun)
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
-    double observedCrownFireSpreadRate = 0;
-    double expectedCrownFireSpreadRate = 0;
-    double observedCrownFlameLength = 0;
-    double expectedCrownFlameLength = 0;
-    double observedCrownFirelineIntensity = 0;
-    double expectedCrownFirelineIntensity = 0;
+    double observedCrownFireSpreadRate = 0.0;
+    double expectedCrownFireSpreadRate = 0.0;
+    double observedCrownFlameLength = 0.0;
+    double expectedCrownFlameLength = 0.0;
+    double observedCrownFirelineIntensity = 0.0;
+    double expectedCrownFirelineIntensity = 0.0;
+    double observedCrownFireLengthToWidthRatio = 0.0;
+    double expectedCrownFireLengthToWidthRatio = 0.0;
+    double observedCrownFireArea = 0.0;
+    double expectedCrownFireArea = 0.0;
+    double observedCrownFirePerimeter = 0.0;
+    double expectedCrownFirePerimeter = 0.0;
     int expectedFireType = (int)FireType::Surface;
     int observedFireType = (int)FireType::Surface;
 
     behaveRun.crown.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
 
-    testName = "Test crown fire spread rate";
+    testName = "Test crown Rothermel fire spread rate";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRunRothermel();
     expectedCrownFireSpreadRate = 10.259921;
     observedCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireSpreadRate(SpeedUnits::ChainsPerHour));
     reportTestResult(testInfo, testName, observedCrownFireSpreadRate, expectedCrownFireSpreadRate, error_tolerance);
 
-    testName = "Test crown fire flame length";
+    testName = "Test crown fire Rothermel length-to-width ratio";
+    expectedCrownFireLengthToWidthRatio = 1.625;
+    observedCrownFireLengthToWidthRatio = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireLengthToWidthRatio());
+    reportTestResult(testInfo, testName, observedCrownFireLengthToWidthRatio, expectedCrownFireLengthToWidthRatio, error_tolerance);
+
+    testName = "Test crown fire Rothermel area";
+    expectedCrownFireArea = 5.087736;
+    observedCrownFireArea = roundToSixDecimalPlaces(behaveRun.crown.getCrownFireArea(AreaUnits::Acres, 1.0, TimeUnits::Hours));
+    reportTestResult(testInfo, testName, observedCrownFireArea, expectedCrownFireArea, error_tolerance);
+
+    testName = "Test crown fire Rothermel perimeter";
+    expectedCrownFirePerimeter = 26.033937;
+    observedCrownFirePerimeter = roundToSixDecimalPlaces(behaveRun.crown.getCrownFirePerimeter(LengthUnits::Chains, 1.0, TimeUnits::Hours));
+    reportTestResult(testInfo, testName, observedCrownFireArea, expectedCrownFireArea, error_tolerance);
+
+    testName = "Test crown fire Rothermel flame length";
     expectedCrownFlameLength = 29.320557;
     observedCrownFlameLength = roundToSixDecimalPlaces(behaveRun.crown.getCrownFlameLength(LengthUnits::Feet));
     reportTestResult(testInfo, testName, observedCrownFlameLength, expectedCrownFlameLength, error_tolerance);
 
-    testName = "Test crown fireline intensity";
+    testName = "Test crown Rothermel fireline intensity";
     expectedCrownFirelineIntensity = 1775.061222;
     observedCrownFirelineIntensity = roundToSixDecimalPlaces(behaveRun.crown.getCrownFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond));
     reportTestResult(testInfo, testName, observedCrownFirelineIntensity, expectedCrownFirelineIntensity, error_tolerance);
 
-    testName = "Test fire type, Surface fire expected";
+    testName = "Test fire type Rothermel, Surface fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setMoistureOneHour(20, MoistureUnits::Percent);
     behaveRun.crown.doCrownRunRothermel();
@@ -1082,14 +1103,14 @@ void testCrownModuleRothermel(TestInfo& testInfo, BehaveRun& behaveRun)
     observedFireType = (int)behaveRun.crown.getFireType();
     reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
 
-    testName = "Test fire type, Torching fire expected";
+    testName = "Test fire type Rothermel, Torching fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Torching;
     observedFireType = (int)behaveRun.crown.getFireType();
     reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
 
-    testName = "Test fire type, Crowning fire expected";
+    testName = "Test fire type Rothermel, Crowning fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     behaveRun.crown.setWindSpeed(10, windSpeedUnits, windHeightInputMode);
     behaveRun.crown.doCrownRunRothermel();
@@ -1097,7 +1118,7 @@ void testCrownModuleRothermel(TestInfo& testInfo, BehaveRun& behaveRun)
     observedFireType = (int)behaveRun.crown.getFireType();
     reportTestResult(testInfo, testName, observedFireType, expectedFireType, error_tolerance);
 
-    testName = "Test fire type, Conditional crown fire expected";
+    testName = "Test fire type Rothermel, Conditional crown fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
     canopyHeight = 60;
     behaveRun.crown.setCanopyHeight(canopyHeight, LengthUnits::Feet);

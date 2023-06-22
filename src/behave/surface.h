@@ -52,9 +52,6 @@ public:
 
     double calculateFlameLength(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
         LengthUnits::LengthUnitsEnum flameLengthUnits);
-    double calculateScorchHeight(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
-        double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature,
-        TemperatureUnits::TemperatureUnitsEnum temperatureUnits, LengthUnits::LengthUnitsEnum scorchHeightUnits);
 
     void setFuelModels(FuelModels& fuelModels);
     void initializeMembers();
@@ -242,12 +239,12 @@ public:
     double getPalmettoGallberryMoistureOfExtinctionDead(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getPalmettoGallberryHeatOfCombustionDead(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
-    double getPalmettoGallberyDeadOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
-    double getPalmettoGallberyDeadTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyDeadFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyDeadMediumFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getPalmettoGallberyDeadFoliageLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getPalmettoGallberyLitterLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
-    double getPalmettoGallberyLiveOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
-    double getPalmettoGallberyLiveTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyLiveFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getPalmettoGallberyLiveMediumFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getPalmettoGallberyLiveFoliageLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getPalmettoGallberyFuelBedDepth(LengthUnits::LengthUnitsEnum depthUnits) const;
 
@@ -279,11 +276,16 @@ public:
     double getChaparralLiveMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, DensityUnits::DensityUnitsEnum densityUnits) const;
     double getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
-    double getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadDeadLessThanQuarterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadDeadQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadDeadHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadDeadOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadLiveLeaves(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadLiveStemsLessThanQuaterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadLiveQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadLiveHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getChaparralLoadLiveOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
-    double getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
-    double getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const;
     double getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getChaparralTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 

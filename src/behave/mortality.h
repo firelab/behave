@@ -23,6 +23,10 @@ public:
     Mortality& operator=(const Mortality& rhs);
     ~Mortality();
 
+    double calculateScorchHeight(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
+        double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature,
+        TemperatureUnits::TemperatureUnitsEnum temperatureUnits, LengthUnits::LengthUnitsEnum scorchHeightUnits);
+
     // Mortality Inputs setters (for indiviual species)
     void setRegion(RegionCode region);
     void setSpeciesCode(std::string speciesCode);

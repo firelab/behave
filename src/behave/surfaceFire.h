@@ -155,7 +155,7 @@ protected:
     void calculateHeatSource();
 
     void calculateResidenceTime();
-    void calculateFireFirelineIntensity(double forwardSpreadRate);
+    void calculateFirelineIntensity(double forwardSpreadRate);
     void calculateBackingFireFirelineIntensity(double backingSpreadRate);
     void calculateFlankingFireFirelineIntensity(double flankingSpreadRate);
     void calculateFlameLength();

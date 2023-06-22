@@ -99,6 +99,8 @@ public:
     double getFinalFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
 
     double getCrownFireLengthToWidthRatio() const;
+    double getCrownFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getCrownFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getCriticalOpenWindSpeed(SpeedUnits::SpeedUnitsEnum speedUnits) const;
     double getCrownFractionBurned() const;
 
@@ -201,6 +203,9 @@ protected:
     Surface surfaceFuel_;
     Surface crownFuel_;
 
+    // SIZE
+    FireSize crownFireSize_;
+
     // Private methods
     void memberwiseCopyAssignment(const Crown& rhs);
     void calculateCrownFireActiveWindSpeed();
@@ -219,7 +224,6 @@ protected:
     void calculateFireTypeRothermel();
     void calculateFireTypeScottAndReinhardt();
     void calculateWindSpeedAtTwentyFeet();
-    void calculateCrownLengthToWidthRatio();
     void calculateCrowningSurfaceFireRateOfSpread();
     void calculateCrownFractionBurned();
     void assignFinalFireBehaviorBasedOnFireType(CrownModelType::CrownModelTypeEnum);
@@ -242,7 +246,7 @@ protected:
     double crownCriticalSurfaceFlameLength_;        // Crown fire's critical surface fire flame length (ft)
     double crownFireActiveRatio_;                   // Crown fire active ratio
     double crownFireTransitionRatio_;               // Crown fire transition ratio
-    double crownFireLengthToWidthRatio_;            // Crown fire transition ratio
+    double crownFireLengthToWidthRatio_;            // Crown fire length-to-width ratio
     double crownFireActiveWindSpeed_;               // 20 ft windspeed at which active crowning is possible (ft/min)
     double crownFractionBurned_;
     double crowningSurfaceFireRos_;                 // Surface fire spread rate at which the active crown fire spread rate is fully achieved (ft/min)

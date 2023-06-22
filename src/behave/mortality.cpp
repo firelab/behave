@@ -61,6 +61,36 @@ Mortality::~Mortality()
    
 }
 
+//------------------------------------------------------------------------------
+/*! \brief Calculates scorch height from fireline intensity, wind speed, and
+ *  air temperature.
+ *
+ *  \param firelineIntensity Fireline (Byram's) intensity (btu/ft/s).
+ *  \param windSpeed         Wind speed at midlame height (upslope)
+ *  \param airTemperature    Air temperature (degrees F).
+ *
+ *  \return Scorch height
+ */
+
+double Mortality::calculateScorchHeight(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
+    double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits,
+    LengthUnits::LengthUnitsEnum scorchHeightUnits)
+{
+    firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
+
+    double midFlameWindSpeedInBaseUnits = SpeedUnits::toBaseUnits(midFlameWindSpeed, windSpeedUnits);
+    double midFlameWindSpeedInMilesPerHour = SpeedUnits::fromBaseUnits(midFlameWindSpeedInBaseUnits, SpeedUnits::MilesPerHour);
+
+    airTemperature = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
+    double scorchHeight = ((firelineIntensity < 1.0e-07)
+        ? (0.0)
+        : ((63. / (140. - airTemperature))
+            * pow(firelineIntensity, 1.166667)
+            / sqrt(firelineIntensity + (midFlameWindSpeedInMilesPerHour * midFlameWindSpeedInMilesPerHour * midFlameWindSpeedInMilesPerHour))
+            ));
+    return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
+}
+
 void Mortality::setRegion(RegionCode region)
 {
     mortalityInputs_.setRegion(region);

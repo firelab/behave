@@ -6,14 +6,10 @@
 # and links to the qtmain.lib library on Windows.
 # *****************************************************************************
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2.3)
 
-# Make use of c++11
-IF(MSVC)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std=c++14")
-ELSE()
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-ENDIF(MSVC)
+# Make use of c++14
+SET(CMAKE_CXX_STANDARD 14)
 
 PROJECT(behave)
 

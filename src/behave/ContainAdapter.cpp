@@ -194,7 +194,7 @@ void ContainAdapter::doContainRun()
         // Calculate effective windspeed needed for Size module
         // Find the effective windspeed
         double effectiveWindspeed = 4.0 * (lwRatio_ - 1.0);
-        size_.calculateFireBasicDimensions(effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
+        size_.calculateFireBasicDimensions(false, effectiveWindspeed, SpeedUnits::MilesPerHour, reportRate_, SpeedUnits::ChainsPerHour);
         // Find the time elapsed to created the fire at time of report 
         LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
         double elapsedTime = 1.0;
@@ -225,9 +225,9 @@ void ContainAdapter::doContainRun()
             totalElapsedTime = intialElapsedTime + firstArrivalTime;
             // Use total time elapsed to solve for perimeter and area of fire at time of initial attack
             LengthUnits::LengthUnitsEnum lengthUnits = LengthUnits::Feet;
-            perimeterAtInitialAttack_ = size_.getFirePerimeter(lengthUnits, totalElapsedTime, TimeUnits::Minutes);
+            perimeterAtInitialAttack_ = size_.getFirePerimeter(false, lengthUnits, totalElapsedTime, TimeUnits::Minutes);
             AreaUnits::AreaUnitsEnum areaUnits = AreaUnits::SquareFeet;
-            fireSizeAtIntitialAttack_ = size_.getFireArea(areaUnits, totalElapsedTime, TimeUnits::Minutes);
+            fireSizeAtIntitialAttack_ = size_.getFireArea(false, areaUnits, totalElapsedTime, TimeUnits::Minutes);
         }
     }
 }

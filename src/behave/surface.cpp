@@ -155,36 +155,6 @@ double Surface::calculateFlameLength(double firelineIntensity, FirelineIntensity
     return LengthUnits::fromBaseUnits(flameLength, flameLengthUnits);
 }
 
-//------------------------------------------------------------------------------
-/*! \brief Calculates scorch height from fireline intensity, wind speed, and
- *  air temperature.
- *
- *  \param firelineIntensity Fireline (Byram's) intensity (btu/ft/s).
- *  \param windSpeed         Wind speed at midlame height (upslope)
- *  \param airTemperature    Air temperature (degrees F).
- *
- *  \return Scorch height
- */
-
-double Surface::calculateScorchHeight(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
-    double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits,
-    LengthUnits::LengthUnitsEnum scorchHeightUnits)
-{
-    firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
-
-    double midFlameWindSpeedInBaseUnits = SpeedUnits::toBaseUnits(midFlameWindSpeed, windSpeedUnits);
-    double midFlameWindSpeedInMilesPerHour = SpeedUnits::fromBaseUnits(midFlameWindSpeedInBaseUnits, SpeedUnits::MilesPerHour);
-
-    airTemperature = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
-    double scorchHeight = ((firelineIntensity < 1.0e-07)
-        ? (0.0)
-        : ((63. / (140. - airTemperature))
-            * pow(firelineIntensity, 1.166667)
-            / sqrt(firelineIntensity + (midFlameWindSpeedInMilesPerHour * midFlameWindSpeedInMilesPerHour * midFlameWindSpeedInMilesPerHour))
-            ));
-    return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
-}
-
 void Surface::setFuelModels(FuelModels& fuelModels)
 {
     fuelModels_ = &fuelModels;
@@ -366,12 +336,12 @@ double Surface::getHeatSource(HeatSourceAndReactionIntensityUnits::HeatSourceAnd
 
 double Surface::getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits , double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return size_.getFirePerimeter(lengthUnits, elapsedTime, timeUnits);
+    return size_.getFirePerimeter(false, lengthUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
 {
-    return size_.getFireArea(areaUnits, elapsedTime, timeUnits);
+    return size_.getFireArea(false, areaUnits, elapsedTime, timeUnits);
 }
 
 double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const
@@ -767,12 +737,12 @@ double Surface::getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits::
     return  HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryHeatOfCombustionLive(), heatOfCombustionUnits);
 }
 
-double Surface::getPalmettoGallberyDeadOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyDeadFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadOneHourLoad(), loadingUnits);
 }
 
-double Surface::getPalmettoGallberyDeadTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyDeadMediumFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyDeadTenHourLoad(), loadingUnits);
 }
@@ -787,12 +757,12 @@ double Surface::getPalmettoGallberyLitterLoad(LoadingUnits::LoadingUnitsEnum loa
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLitterLoad(), loadingUnits);
 }
 
-double Surface::getPalmettoGallberyLiveOneHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyLiveFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveOneHourLoad(), loadingUnits);
 }
 
-double Surface::getPalmettoGallberyLiveTenHourLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getPalmettoGallberyLiveMediumFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
     return LoadingUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberyLiveTenHourLoad(), loadingUnits);
 }
@@ -1205,29 +1175,54 @@ double Surface::getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum li
     return HeatOfCombustionUnits::fromBaseUnits(surfaceFire_.getChaparralHeatOfCombustion(lifeState, sizeClass), heatOfCombustionUnits);
 }
 
-double Surface::getChaparralLoad(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, LoadingUnits::LoadingUnitsEnum loadingUnits) const
+double Surface::getChaparralLoadDeadLessThanQuarterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
 {
-    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(lifeState, sizeClass), loadingUnits);
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 0), loadingUnits);
+}
+
+double Surface::getChaparralLoadDeadQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 1), loadingUnits);
+}
+
+double Surface::getChaparralLoadDeadHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 2), loadingUnits);
+}
+
+double Surface::getChaparralLoadDeadOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Dead, 3), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveLeaves(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 0), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveStemsLessThanQuaterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 1), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 2), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 3), loadingUnits);
+}
+
+double Surface::getChaparralLoadLiveOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const
+{
+    return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 4), loadingUnits);
 }
 
 double Surface::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     return MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralMoisture(lifeState, sizeClass), moistureUnits);
-}
-
-double Surface::getChaparralSavr(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
-{
-    return  SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getChaparralSavr(lifeState, sizeClass), savrUnits);
-}
-
-double Surface::getChaparralEffectiveSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
-{
-    return surfaceFire_.getChaparralEffectiveSilicaContent(lifeState, sizeClass);
-}
-
-double Surface::getChaparralTotalSilicaContent(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass) const
-{
-    return surfaceFire_.getChaparralTotalSilicaContent(lifeState, sizeClass);
 }
 
 double Surface::getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
