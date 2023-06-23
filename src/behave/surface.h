@@ -93,6 +93,10 @@ public:
     double getLiveFuelMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
 
+    // SurfaceIntermediate Getters
+    double getRelativePackingRatio() const;
+    double getPackingRatio()const;
+
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
