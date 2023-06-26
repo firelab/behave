@@ -134,7 +134,6 @@ public:
     void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCrownRatio(double crownRatio);
-    void setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
@@ -157,7 +156,6 @@ public:
     void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
 
     // SurfaceInputs getters
-    double getElapsedTime(TimeUnits::TimeUnitsEnum timeUnits);
     int getFuelModelNumber() const;
     double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
     double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
