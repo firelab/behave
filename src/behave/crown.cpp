@@ -780,6 +780,11 @@ void  Crown::setCrownRatio(double crownRatio)
     surfaceFuel_.setCrownRatio(crownRatio);
 }
 
+void Crown::setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits)
+{
+  surfaceFuel_.setElapsedTime(elapsedTime, timeUnits);
+}
+
 void  Crown::setFuelModelNumber(int fuelModelNumber)
 {
     surfaceFuel_.setFuelModelNumber(fuelModelNumber);
@@ -888,6 +893,10 @@ void Crown::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalcula
 int Crown::getFuelModelNumber() const
 {
     return surfaceFuel_.getFuelModelNumber();
+}
+
+double Crown::getElapsedTime(TimeUnits::TimeUnitsEnum timeUnits) {
+  return surfaceFuel_.getElapsedTime(timeUnits);
 }
 
 double Crown::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const

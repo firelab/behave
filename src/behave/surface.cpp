@@ -382,6 +382,14 @@ void Surface::setCrownRatio(double crownRatio)
     surfaceInputs_.setCrownRatio(crownRatio);
 }
 
+void Surface::setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) {
+  surfaceInputs_.setElapsedTime(elapsedTime, timeUnits);
+}
+
+double Surface::getElapsedTime(TimeUnits::TimeUnitsEnum timeUnits) const {
+  surfaceInputs_.getElapsedTime(timeUnits);
+}
+
 std::string Surface::getFuelCode(int fuelModelNumber) const
 {
     return fuelModels_->getFuelCode(fuelModelNumber);
