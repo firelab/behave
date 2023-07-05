@@ -247,11 +247,8 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
         }
         else if (chaparralFuelInputMode == ChaparralFuelLoadInputMode::FuelLoadFromDepthAndChaparralType)
         {
-            ChaparralFuelType::ChaparralFuelTypeEnum chaparralFuelType = surfaceInputs_->getChaparralFuelType();
-
             chaparralFuel_.setChaparralFuelType(surfaceInputs_->getChaparralFuelType());
             chaparralFuel_.setDepth(depth_);
-            chaparralFuel_.setChaparralFuelType(chaparralFuelType);
             chaparralFuel_.updateFuelLoadFromDepthAndFuelType();
         }
         for (int i = 0; i < FuelConstants::MaxParticles; i++)
