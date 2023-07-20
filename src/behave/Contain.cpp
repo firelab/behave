@@ -649,7 +649,7 @@ double Sem::Contain::fireSizeAtReport( void ) const
 
 double Sem::Contain::fireSpreadRateAtBack( void ) const
 {
-    return( m_reportBack );
+    return( m_backRate );
 }
 
 //------------------------------------------------------------------------------
