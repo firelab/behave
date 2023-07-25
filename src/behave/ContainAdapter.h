@@ -168,6 +168,15 @@ protected:
     double finalContainmentArea_; // Final containment area at containment or escape
     double finalTime_; // Containment or escape time since report
     ContainAdapterEnums::ContainStatus::ContainStatusEnum containmentStatus_;
+
+    // ContainSim Outputs
+    double* m_x;          //!< Array of perimeter x coordinates (ch)
+    double* m_y;          //!< Array of perimeter y coordinates (ch)
+    int m_size;           //!< Size of the m_x and m_y arrays
+    double m_reportHead;  //!< Fire head position at report time (ch)
+    double m_reportBack;  //!< Fire back position at report time (ch)
+    double m_attackHead;  //!< Fire head position at first attack (ch)
+    double m_attackBack;  //!< Fire back position at first attack (ch)
 };
 
 #endif //CONTAINADAPTER_H

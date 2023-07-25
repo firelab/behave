@@ -181,6 +181,15 @@ void ContainAdapter::doContainRun()
         // Do Contain simulation
         containSim.run();
 
+        // Store Values from ContainSim For Access in SIGContainAdapter
+        m_size       = containSim.firePoints();
+        m_x          = containSim.firePerimeterX();
+        m_y          = containSim.firePerimeterY();
+        m_reportHead = containSim.fireHeadAtReport();
+        m_reportBack = containSim.fireBackAtReport();
+        m_attackHead = containSim.fireHeadAtAttack();
+        m_attackBack = containSim.fireBackAtAttack();
+
         // Get results from Contain simulation
         finalCost_ = containSim.finalFireCost();
         finalFireLineLength_ = LengthUnits::toBaseUnits(containSim.finalFireLine(), LengthUnits::Chains);
