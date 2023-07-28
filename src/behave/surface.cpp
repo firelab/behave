@@ -387,7 +387,7 @@ void Surface::setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUn
 }
 
 double Surface::getElapsedTime(TimeUnits::TimeUnitsEnum timeUnits) const {
-  surfaceInputs_.getElapsedTime(timeUnits);
+  return surfaceInputs_.getElapsedTime(timeUnits);
 }
 
 std::string Surface::getFuelCode(int fuelModelNumber) const
