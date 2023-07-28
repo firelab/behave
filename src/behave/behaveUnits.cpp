@@ -308,6 +308,24 @@ double CuringLevelUnits::fromBaseUnits(double value, CuringLevelEnum units)
     return value;
 }
 
+double FractionUnits::toBaseUnits(double value, FractionUnitsEnum units)
+{
+    if (units == Percent)
+    {
+        value /= 100.0;
+    }
+    return value;
+}
+
+double FractionUnits::fromBaseUnits(double value, FractionUnitsEnum units)
+{
+    if (units == Percent)
+    {
+        value *= 100.0;
+    }
+    return value;
+}
+
 double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
 {
     if (units == Percent)
@@ -446,6 +464,100 @@ double LoadingUnits::fromBaseUnits(double value, LoadingUnitsEnum units)
         }
     }
     return value;
+}
+
+double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
+  // Pressure to base units constants
+  const double KILOPASCAL_TO_PASCAL      = 1e3;
+  const double MEGAPASCAL_TO_PASCAL      = 1e6;
+  const double GIGAPASCAL_TO_PASCAL      = 1e9;
+  const double BAR_TO_PASCAL             = 1e5;
+  const double ATMOSPHERE_TO_PASCAL      = 101325;
+  const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
+  const double POUNDS_PER_SQUARE_INCH    = 6894.757
+
+  switch (units) {
+  case Pascal: {
+    // Already in base, nothing to do
+    break;
+  }
+  case KiloPascal: {
+    value /= KILOPASCAL_TO_PASCAL;
+    break;
+  }
+  case MegaPascal: {
+    value /= MEGAPASCAL_TO_PASCAL;
+    break;
+  }
+  case GigaPascal: {
+    value /= GIGAPASCAL_TO_PASCAL;
+    break;
+  }
+  case Bar: {
+    value /= BAR_TO_PASCAL;
+    break;
+  }
+  case Atmosphere: {
+    value /= ATMOSPHERE_TO_PASCAL;
+    break;
+  }
+  case TechAtmosphere: {
+    value /= TECH_ATMOSPHERE_TO_PASCAL;
+    break;
+  }
+  case PoundPerSquareInch: {
+    value /= POUNDS_PER_SQUARE_INCH;
+    break;
+  }
+  }
+}
+
+double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
+  // Pressure to base units constants
+  const double KILOPASCAL_TO_PASCAL      = 1e3;
+  const double MEGAPASCAL_TO_PASCAL      = 1e6;
+  const double GIGAPASCAL_TO_PASCAL      = 1e9;
+  const double BAR_TO_PASCAL             = 1e5;
+  const double ATMOSPHERE_TO_PASCAL      = 101325;
+  const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
+  const double POUNDS_PER_SQUARE_INCH    = 6894.757
+
+  switch (units) {
+  case Pascal: {
+    // Already in base, nothing to do
+    break;
+  }
+  case KiloPascal: {
+    value *= KILOPASCAL_TO_PASCAL;
+    break;
+  }
+  case MegaPascal: {
+    value *= MEGAPASCAL_TO_PASCAL;
+    break;
+  }
+  case GigaPascal: {
+    value *= GIGAPASCAL_TO_PASCAL;
+    break;
+  }
+  case Bar: {
+    value *= BAR_TO_PASCAL;
+    break;
+  }
+  case Atmosphere: {
+    value *= ATMOSPHERE_TO_PASCAL;
+    break;
+  }
+  case TechAtmosphere: {
+    value *= TECH_ATMOSPHERE_TO_PASCAL;
+    break;
+  }
+  case PoundPerSquareInch: {
+    value *= POUNDS_PER_SQUARE_INCH;
+    break;
+  }
+  }
+
+  return value;
 }
 
 double SurfaceAreaToVolumeUnits::toBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units)

@@ -88,6 +88,24 @@ struct LoadingUnits
     static double fromBaseUnits(double value, LoadingUnitsEnum units);
 };
 
+struct PressureUnits
+{
+    enum PressureUnitsEnum
+    {
+        Pascal,              // base loading unit
+        KiloPascal,          // kPa
+        MegaPascal,          // MPa
+        GigaPascal,          // GPa
+        Bar,                 // bar
+        Atmosphere,          // atm
+        TechnicalAtmosphere, // at
+        PoundPerSquareInch   // psi
+    };
+
+    static double toBaseUnits(double value, PressureUnitsEnum units);
+    static double fromBaseUnits(double value, PressureUnitsEnum units);
+};
+
 struct SurfaceAreaToVolumeUnits
 {
     enum SurfaceAreaToVolumeUnitsEnum
@@ -153,6 +171,18 @@ struct CuringLevelUnits
 
     static double toBaseUnits(double value, CuringLevelEnum units);
     static double fromBaseUnits(double value, CuringLevelEnum units);
+};
+
+struct FractionUnits
+{
+    enum FractionUnitsEnum
+    {
+        Fraction, // base fraction unit
+        Percent
+    };
+
+    static double toBaseUnits(double value, FractionUnitsEnum units);
+    static double fromBaseUnits(double value, FractionUnitsEnum units);
 };
 
 struct ProbabilityUnits
