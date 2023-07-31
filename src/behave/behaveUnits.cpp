@@ -474,7 +474,7 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
   const double BAR_TO_PASCAL             = 1e5;
   const double ATMOSPHERE_TO_PASCAL      = 101325;
   const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
-  const double POUNDS_PER_SQUARE_INCH    = 6894.757
+  const double POUNDS_PER_SQUARE_INCH    = 6894.757;
 
   switch (units) {
   case Pascal: {
@@ -501,7 +501,7 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
     value /= ATMOSPHERE_TO_PASCAL;
     break;
   }
-  case TechAtmosphere: {
+  case TechnicalAtmosphere: {
     value /= TECH_ATMOSPHERE_TO_PASCAL;
     break;
   }
@@ -520,7 +520,7 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
   const double BAR_TO_PASCAL             = 1e5;
   const double ATMOSPHERE_TO_PASCAL      = 101325;
   const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
-  const double POUNDS_PER_SQUARE_INCH    = 6894.757
+  const double POUNDS_PER_SQUARE_INCH    = 6894.757;
 
   switch (units) {
   case Pascal: {
@@ -547,7 +547,7 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
     value *= ATMOSPHERE_TO_PASCAL;
     break;
   }
-  case TechAtmosphere: {
+  case TechnicalAtmosphere: {
     value *= TECH_ATMOSPHERE_TO_PASCAL;
     break;
   }
