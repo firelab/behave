@@ -476,40 +476,51 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
   const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
   const double POUNDS_PER_SQUARE_INCH    = 6894.757;
 
-  switch (units) {
-  case Pascal: {
-    // Already in base, nothing to do
-    break;
+  switch (units)
+  {
+      case Pascal:
+      {
+          // Already in base, nothing to do
+          break;
+      }
+      case KiloPascal:
+      {
+          value /= KILOPASCAL_TO_PASCAL;
+          break;
+      }
+      case MegaPascal:
+      {
+          value /= MEGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case GigaPascal:
+      {
+          value /= GIGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case Bar:
+      {
+          value /= BAR_TO_PASCAL;
+          break;
+      }
+      case Atmosphere:
+      {
+          value /= ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case TechnicalAtmosphere:
+      {
+          value /= TECH_ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case PoundPerSquareInch:
+      {
+          value /= POUNDS_PER_SQUARE_INCH;
+          break;
+      }
   }
-  case KiloPascal: {
-    value /= KILOPASCAL_TO_PASCAL;
-    break;
-  }
-  case MegaPascal: {
-    value /= MEGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case GigaPascal: {
-    value /= GIGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case Bar: {
-    value /= BAR_TO_PASCAL;
-    break;
-  }
-  case Atmosphere: {
-    value /= ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case TechnicalAtmosphere: {
-    value /= TECH_ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case PoundPerSquareInch: {
-    value /= POUNDS_PER_SQUARE_INCH;
-    break;
-  }
-  }
+
+  return value;
 }
 
 double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
@@ -522,39 +533,47 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
   const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
   const double POUNDS_PER_SQUARE_INCH    = 6894.757;
 
-  switch (units) {
-  case Pascal: {
-    // Already in base, nothing to do
-    break;
-  }
-  case KiloPascal: {
-    value *= KILOPASCAL_TO_PASCAL;
-    break;
-  }
-  case MegaPascal: {
-    value *= MEGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case GigaPascal: {
-    value *= GIGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case Bar: {
-    value *= BAR_TO_PASCAL;
-    break;
-  }
-  case Atmosphere: {
-    value *= ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case TechnicalAtmosphere: {
-    value *= TECH_ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case PoundPerSquareInch: {
-    value *= POUNDS_PER_SQUARE_INCH;
-    break;
-  }
+  switch (units)
+  {
+      case Pascal:
+      {
+          // Already in base, nothing to do
+          break;
+      }
+      case KiloPascal:
+      {
+          value *= KILOPASCAL_TO_PASCAL;
+          break;
+      }
+      case MegaPascal:
+      {
+          value *= MEGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case GigaPascal:
+      {
+          value *= GIGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case Bar:
+      {
+          value *= BAR_TO_PASCAL;
+          break;
+      }
+      case Atmosphere:
+      {
+          value *= ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case TechnicalAtmosphere:
+      {
+          value *= TECH_ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case PoundPerSquareInch: {
+          value *= POUNDS_PER_SQUARE_INCH;
+          break;
+      }
   }
 
   return value;
