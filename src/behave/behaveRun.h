@@ -32,6 +32,7 @@
 #include "behaveUnits.h"
 #include "ContainAdapter.h"
 #include "crown.h"
+#include "fineDeadFuelMoistureTool.h"
 #include "ignite.h"
 #include "mortality.h"
 #include "safety.h"
@@ -95,6 +96,9 @@ Safety safety;
 
 // Mortality Module
 Mortality mortality;
+
+// Fine Dead Fuel Moisture Tool
+FineDeadFuelMoistureTool fineDeadFuelMoistureTool;
 
 protected:
     void memberwiseCopyAssignment(const BehaveRun& rhs);

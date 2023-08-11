@@ -67,6 +67,7 @@ SET(SOURCE
     src/behave/ContainSim.cpp
     src/behave/crown.cpp
     src/behave/crownInputs.cpp
+    src/behave/fineDeadFuelMoistureTool.cpp
     src/behave/fireSize.cpp
     src/behave/fuelModels.cpp
     src/behave/ignite.cpp

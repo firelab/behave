@@ -48,6 +48,7 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSafetyModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testContainModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun);
+void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
@@ -78,6 +79,7 @@ int main()
     testSafetyModule(testInfo, behaveRun);
     testContainModule(testInfo, behaveRun);
     testMortalityModule(testInfo, behaveRun);
+    testFineDeadFuelMoistureTool(testInfo, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     if(testInfo.numPassed > 0)
@@ -1647,8 +1649,117 @@ void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Mortality module\n";
 
-    // TODO: Create test for Mortality module
+    // TODO: Create tests for Mortality module
     // Stub for now
 
     std::cout << "Finished testing Mortality module\n\n";
+}
+
+void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    int observedReferenceMoisture = 0;
+    int observedCorrectionMoisture = 0;
+    int observedFineDeadFuelMoisture = 0;
+
+    int expectedReferenceMoisture = 0;
+    int expectedCorrectionMoisture = 0;
+    int expectedFineDeadFuelMoisture = 0;
+
+    int aspectIndex = 0;
+    int dryBulbIndex = 0;
+    int elevationIndex = 0;
+    int monthIndex = 0;
+    int relativeHumidityIndex = 0;
+    int shadingIndex = 0;
+    int slopeIndex = 0;
+    int timeOfDayIndex = 0;
+
+    string testName = "";
+
+    std::cout << "Testing Fine Dead Fuel Moisture Tool\n";
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = 1;
+    expectedCorrectionMoisture = 2;
+    expectedFineDeadFuelMoisture = 3;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all zero index values\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all zero index values\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture for all zero index values\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    aspectIndex++;
+    dryBulbIndex++;
+    elevationIndex++;
+    monthIndex++;
+    relativeHumidityIndex++;
+    shadingIndex++;
+    slopeIndex++;
+    timeOfDayIndex++;
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = 2;
+    expectedCorrectionMoisture = 4;
+    expectedFineDeadFuelMoisture = 6;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all one index values\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all one index values\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture for all one index values\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    aspectIndex = behaveRun.fineDeadFuelMoistureTool.getAspectIndexSize() - 1;
+    dryBulbIndex = behaveRun.fineDeadFuelMoistureTool.getDryBulbTemperatureIndexSize() - 1;
+    elevationIndex = behaveRun.fineDeadFuelMoistureTool.getElevationIndexSize() - 1;
+    monthIndex = behaveRun.fineDeadFuelMoistureTool.getMonthIndexSize() - 1;
+    relativeHumidityIndex = behaveRun.fineDeadFuelMoistureTool.getRelativeHumidityIndexSize() - 1;
+    shadingIndex = behaveRun.fineDeadFuelMoistureTool.getShadingIndexSize() - 1;
+    slopeIndex = behaveRun.fineDeadFuelMoistureTool.getSlopeIndexSize() - 1;
+    timeOfDayIndex = behaveRun.fineDeadFuelMoistureTool.getTimeOfDayIndexSize() - 1;
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = 12;
+    expectedCorrectionMoisture = 6;
+    expectedFineDeadFuelMoisture = 18;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all max index values\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all max index values\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture for max one index values\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    aspectIndex++;
+    dryBulbIndex++;
+    elevationIndex++;
+    monthIndex++;
+    relativeHumidityIndex++;
+    shadingIndex++;
+    slopeIndex++;
+    timeOfDayIndex++;
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = -1;
+    expectedCorrectionMoisture = -1;
+    expectedFineDeadFuelMoisture = -1;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all indices out of bounds\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all indices out of bounds\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture all indices out of bounds\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    std::cout << "Finished testing Fine Dead Fuel Moisture Tool\n\n";
 }
