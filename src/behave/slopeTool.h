@@ -55,6 +55,8 @@ public:
 
     // calculateHorizontalDistance() getters
     int getNumberOfHorizontalDistances() const;
+    double getMaxSlopeInDegrees() const;
+    double getMaxSlopeInPercent() const;
     double getHorizontalDistance(HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex) const;
     double getHorizontalDistanceAtIndex(const int index) const;
 

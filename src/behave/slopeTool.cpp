@@ -133,8 +133,8 @@ SlopeTool& SlopeTool::operator=(const SlopeTool& rhs)
 
 void SlopeTool::calculateHorizontalDistance(const double distanceInInchesOrCentimeters, const double maxSlopeSteepness, const SlopeUnits::SlopeUnitsEnum slopeUnits)
 {
-    slopeInDegrees_ = SlopeUnits::toBaseUnits(maxSlopeSteepness, slopeUnits);
-    slopeInPercent_ = SlopeUnits::fromBaseUnits(maxSlopeSteepness, SlopeUnits::Percent);
+    maxSlopeInDegrees_ = SlopeUnits::toBaseUnits(maxSlopeSteepness, slopeUnits);
+    maxSlopeInPercent_ = SlopeUnits::fromBaseUnits(maxSlopeSteepness, SlopeUnits::Percent);
 
     double groundDistance = distanceInInchesOrCentimeters;
   
@@ -165,6 +165,16 @@ void SlopeTool::calculateSlopeFromMapMeasurements(const int mapRepresentativeFra
 int SlopeTool::getNumberOfHorizontalDistances() const
 {
     return horizontalDistances_.size();
+}
+
+double SlopeTool::getMaxSlopeInDegrees() const
+{
+    return maxSlopeInDegrees_;
+}
+
+double SlopeTool::getMaxSlopeInPercent() const
+{
+    return maxSlopeInPercent_;
 }
 
 double SlopeTool::getHorizontalDistance(HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex) const
