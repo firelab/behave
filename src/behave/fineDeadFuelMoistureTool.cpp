@@ -172,7 +172,21 @@ FineDeadFuelMoistureTool::FineDeadFuelMoistureTool()
 
 FineDeadFuelMoistureTool::~FineDeadFuelMoistureTool()
 {
+   
+}
 
+FineDeadFuelMoistureTool::FineDeadFuelMoistureTool(const FineDeadFuelMoistureTool& rhs)
+{
+    memberwiseCopyAssignment(rhs);
+}
+
+FineDeadFuelMoistureTool& FineDeadFuelMoistureTool::operator=(const FineDeadFuelMoistureTool& rhs)
+{
+    if (this != &rhs)
+    {
+        memberwiseCopyAssignment(rhs);
+    }
+    return *this;
 }
 
 void FineDeadFuelMoistureTool::calculate(const FDFMToolAspectIndex::AspectIndexEnum aspectIndex,
@@ -249,6 +263,25 @@ int FineDeadFuelMoistureTool::getCorrectionMoisture() const
 int FineDeadFuelMoistureTool::getFineDeadFuelMoisture() const
 {
     return fineDeadFuelMoisture_;
+}
+
+void FineDeadFuelMoistureTool::memberwiseCopyAssignment(const FineDeadFuelMoistureTool& rhs)
+{
+    aspects_ = rhs.aspects_;
+    dryBulbTemperatures_ = rhs.dryBulbTemperatures_;
+    elevations_ = rhs.elevations_;
+    months_ = rhs.months_;
+    relativeHumidities_ = rhs.relativeHumidities_;
+    slopes_ = rhs.slopes_;
+    shadings_ = rhs.shadings_;
+    timesOfDay_ = rhs.timesOfDay_;
+
+    referenceMostures_ = rhs.referenceMostures_;
+    correctionMoistures_ = rhs.correctionMoistures_;
+
+    referenceMoisture_ = rhs.referenceMoisture_;
+    correctionMoisture_ = rhs.correctionMoisture_;
+    fineDeadFuelMoisture_ = rhs.fineDeadFuelMoisture_;
 }
 
 int FineDeadFuelMoistureTool::getAspectIndexSize() const

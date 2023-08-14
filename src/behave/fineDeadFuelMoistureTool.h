@@ -109,6 +109,8 @@ class FineDeadFuelMoistureTool
 public:
     FineDeadFuelMoistureTool();
     ~FineDeadFuelMoistureTool();
+    FineDeadFuelMoistureTool(const FineDeadFuelMoistureTool& rhs);
+    FineDeadFuelMoistureTool& operator=(const FineDeadFuelMoistureTool& rhs);
 
     void calculate(const FDFMToolAspectIndex::AspectIndexEnum aspectIndex,
         const FDFMToolDryBulbIndex::DryBulbIndexEnum dryBulbIndex,
@@ -150,6 +152,8 @@ public:
     int getFineDeadFuelMoisture() const;
 
 protected:
+    void memberwiseCopyAssignment(const FineDeadFuelMoistureTool& rhs);
+
     std::vector<std::string> aspects_; // aspect index labels
     std::vector<std::string> dryBulbTemperatures_; // labels for indices of ranges of dry bulb temperatures
     std::vector<std::string> elevations_; // labels for indices of ranges of elevations
