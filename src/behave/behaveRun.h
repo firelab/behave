@@ -36,6 +36,7 @@
 #include "ignite.h"
 #include "mortality.h"
 #include "safety.h"
+#include "slopeTool.h"
 #include "spot.h"
 #include "surface.h"
 
@@ -99,6 +100,9 @@ Mortality mortality;
 
 // Fine Dead Fuel Moisture Tool
 FineDeadFuelMoistureTool fineDeadFuelMoistureTool;
+
+// Slope Tool
+SlopeTool slopeTool;
 
 protected:
     void memberwiseCopyAssignment(const BehaveRun& rhs);

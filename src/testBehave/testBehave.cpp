@@ -49,6 +49,7 @@ void testSafetyModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testContainModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
@@ -80,6 +81,7 @@ int main()
     testContainModule(testInfo, behaveRun);
     testMortalityModule(testInfo, behaveRun);
     testFineDeadFuelMoistureTool(testInfo, behaveRun);
+    testSlopeTool(testInfo, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     if(testInfo.numPassed > 0)
@@ -1762,4 +1764,14 @@ void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
     reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
 
     std::cout << "Finished testing Fine Dead Fuel Moisture Tool\n\n";
+}
+
+void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::cout << "Testing Slope Tool\n";
+
+    // TODO: Create tests for  Slope Too
+    // Stub for now
+
+    std::cout << "Finished testing  Slope Tool\n\n";
 }
