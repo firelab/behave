@@ -73,11 +73,11 @@ public:
     double getMilesPerInchAtIndex(const int index) const;
     double getCentimetersPerKilometerAtIndex(const int index) const;
     double getKilometersPerCentimeterAtIndex(const int index) const;
-    int getRepresentativeFractionAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
-    double getInchesPerMileAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
-    double getMilesPerInchAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
-    double getCentimetersPerKilometerAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
-    double getKilometersPerCentimeterAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
+    int getRepresentativeFractionAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
+    double getInchesPerMileAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
+    double getMilesPerInchAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
+    double getCentimetersPerKilometerAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
+    double getKilometersPerCentimeterAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const;
 
 protected:
     void memberwiseCopyAssignment(const SlopeTool& rhs);

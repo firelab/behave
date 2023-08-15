@@ -267,27 +267,27 @@ double SlopeTool::getKilometersPerCentimeterAtIndex(const int index) const
     return kilometersPerCentimeter;
 }
 
-int SlopeTool::getRepresentativeFractionAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
+int SlopeTool::getRepresentativeFractionAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
 {
     return getRepresentativeFractionAtIndex(static_cast<int>(representativeFraction));
 }
 
-double SlopeTool::getInchesPerMileAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
+double SlopeTool::getInchesPerMileAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
 {
     return getInchesPerMileAtIndex(static_cast<int>(representativeFraction));
 }
 
-double SlopeTool::getMilesPerInchAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
+double SlopeTool::getMilesPerInchAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
 {
     return getMilesPerInchAtIndex(static_cast<int>(representativeFraction));
 }
 
-double SlopeTool::getCentimetersPerKilometerAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
+double SlopeTool::getCentimetersPerKilometerAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
 {
     return getCentimetersPerKilometerAtIndex(static_cast<int>(representativeFraction));
 }
 
-double SlopeTool::getKilometersPerCentimeterAtRepresentativeFraction(RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
+double SlopeTool::getKilometersPerCentimeterAtRepresentativeFraction(const RepresentativeFraction::RepresentativeFractionEnum representativeFraction) const
 {
     return getKilometersPerCentimeterAtIndex(static_cast<int>(representativeFraction));
 }
