@@ -11,8 +11,7 @@ SlopeTool::SlopeTool()
     maxSlopeInDegrees_ = -1.0;
     maxSlopeInPercent_ = -1.0;
   
-    slopeInDegrees_ = -1.0;
-    slopeInPercent_ = -1.0;
+    slopeFromMapMeasurements_ = -1.0;
     slopeHorizontalDistance_ = -1.0;
     slopeElevationChange_ = -1.0;
 
@@ -143,23 +142,24 @@ void SlopeTool::calculateHorizontalDistance(const double distanceInInchesOrCenti
         double direction = 15.0 * (double)i;
         double a = groundDistance * cos(direction * M_PI / 180.0);
         double b = groundDistance * sin(direction * M_PI / 180.0);
-        double c = a * cos(slopeInDegrees_ * M_PI / 180.0);
+        double c = a * cos(slopeFromMapMeasurements_ * M_PI / 180.0);
         double d = sqrt(c * c + b * b);
         horizontalDistances_[i] = d;
     }
 }
 
-void SlopeTool::calculateSlopeFromMapMeasurements(const int mapRepresentativeFraction, const double mapDistance, 
-    LengthUnits::LengthUnitsEnum distanceUnits, const double contourInterval, const int numberOfContours)
+void SlopeTool::calculateSlopeFromMapMeasurements(const int mapRepresentativeFraction, const double mapDistance,
+    const LengthUnits::LengthUnitsEnum distanceUnits, const double contourInterval, const double numberOfContours,
+    const LengthUnits::LengthUnitsEnum contourUnits)
 {
-    double distanceFeet = LengthUnits::toBaseUnits(mapDistance, distanceUnits);
-    double distanceInches = LengthUnits::fromBaseUnits(distanceFeet, LengthUnits::Inches);
+    const double distanceFeet = LengthUnits::toBaseUnits(mapDistance, distanceUnits);
+    const double distanceInches = LengthUnits::fromBaseUnits(distanceFeet, LengthUnits::Inches);
 
     // Calculate results
-    slopeElevationChange_ = contourInterval * numberOfContours;
+    slopeElevationChange_ = LengthUnits::toBaseUnits(contourInterval * numberOfContours, contourUnits);
     slopeHorizontalDistance_ = LengthUnits::toBaseUnits(mapRepresentativeFraction * distanceInches, LengthUnits::Inches);
-    slopeInPercent_ = (slopeHorizontalDistance_ < 0.01) ? 0.0 : slopeElevationChange_ / slopeHorizontalDistance_;
-    slopeInDegrees_ = (slopeHorizontalDistance_ < 0.01) ? 0.0 : atan(slopeInPercent_) * 180.0 / M_PI;
+    const double slopeInPercent = (slopeHorizontalDistance_ < 0.01) ? 0.0 : slopeElevationChange_ / slopeHorizontalDistance_;
+    slopeFromMapMeasurements_ = (slopeHorizontalDistance_ < 0.01) ? 0.0 : atan(slopeInPercent) * 180.0 / M_PI;
 }
 
 int SlopeTool::getNumberOfHorizontalDistances() const
@@ -167,14 +167,9 @@ int SlopeTool::getNumberOfHorizontalDistances() const
     return horizontalDistances_.size();
 }
 
-double SlopeTool::getMaxSlopeInDegrees() const
+double SlopeTool::getHorizontalDistanceMaxSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    return maxSlopeInDegrees_;
-}
-
-double SlopeTool::getMaxSlopeInPercent() const
-{
-    return maxSlopeInPercent_;
+    return SlopeUnits::fromBaseUnits(maxSlopeInDegrees_, slopeUnits);
 }
 
 double SlopeTool::getHorizontalDistance(HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex) const
@@ -192,24 +187,19 @@ double SlopeTool::getHorizontalDistanceAtIndex(const int index) const
     return distance;
 }
 
-double SlopeTool::getSlopeInDegrees() const
+double SlopeTool::getSlopeFromMapMeasurements(SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
-    return slopeInDegrees_;
+    return SlopeUnits::fromBaseUnits(slopeFromMapMeasurements_, slopeUnits);
 }
 
-double SlopeTool::getSlopeInPercent() const
+double SlopeTool::getSlopeHorizontalDistanceFromMapMeasurements(LengthUnits::LengthUnitsEnum distanceUnits) const
 {
-    return slopeInPercent_;
+    return LengthUnits::fromBaseUnits(slopeHorizontalDistance_, distanceUnits);
 }
 
-double SlopeTool::getSlopeHorizontalDistance() const
+double SlopeTool::getSlopeElevationChangeFromMapMeasurements(LengthUnits::LengthUnitsEnum elevationUnits) const
 {
-    return slopeHorizontalDistance_;
-}
-
-double SlopeTool::getSlopeElevationChange() const
-{
-    return slopeElevationChange_;
+    return LengthUnits::fromBaseUnits(slopeElevationChange_, elevationUnits);
 }
 
 int SlopeTool::getNumberOfRepresentativeFractions() const
@@ -298,8 +288,7 @@ void SlopeTool::memberwiseCopyAssignment(const SlopeTool& rhs)
     maxSlopeInPercent_ = rhs.maxSlopeInPercent_;
     horizontalDistances_ = rhs.horizontalDistances_;
 
-    slopeInDegrees_ = rhs.slopeInDegrees_;
-    slopeInPercent_ = rhs.slopeInPercent_;
+    slopeFromMapMeasurements_ = rhs.slopeFromMapMeasurements_;
     slopeHorizontalDistance_ = rhs.slopeHorizontalDistance_;
     slopeElevationChange_ = rhs.slopeElevationChange_;
 

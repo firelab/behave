@@ -51,20 +51,18 @@ public:
     void calculateHorizontalDistance(const double distanceInInchesOrCentimeters, const double maxSlopeSteepness,
         const SlopeUnits::SlopeUnitsEnum slopeUnits);
     void calculateSlopeFromMapMeasurements(const int mapRepresentativeFraction, const double mapDistance,
-        LengthUnits::LengthUnitsEnum distanceUnits,  const double contourInterval, const int numberOfContours);
+        const LengthUnits::LengthUnitsEnum distanceUnits,  const double contourInterval, const double numberOfContours, const LengthUnits::LengthUnitsEnum contourUnits);
 
     // calculateHorizontalDistance() getters
     int getNumberOfHorizontalDistances() const;
-    double getMaxSlopeInDegrees() const;
-    double getMaxSlopeInPercent() const;
+    double getHorizontalDistanceMaxSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getHorizontalDistance(HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex) const;
     double getHorizontalDistanceAtIndex(const int index) const;
 
     // calculateSlopeFromMapMeasurements() getters
-    double getSlopeInDegrees() const;
-    double getSlopeInPercent() const;
-    double getSlopeHorizontalDistance() const;
-    double getSlopeElevationChange() const;
+    double getSlopeFromMapMeasurements(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
+    double getSlopeHorizontalDistanceFromMapMeasurements(LengthUnits::LengthUnitsEnum distanceUnits) const;
+    double getSlopeElevationChangeFromMapMeasurements(LengthUnits::LengthUnitsEnum elevationUnits) const;
 
     // representative fraction table getters
     int getNumberOfRepresentativeFractions() const;
@@ -86,12 +84,10 @@ protected:
     double maxSlopeInPercent_; // calcuated by calculateHorizontalDistance()
     std::vector<double> horizontalDistances_; // calcuated by calculateHorizontalDistance()
 
-    double slopeInDegrees_; // calcuated by calculateSlopeFromMapMeasurements()
-    double slopeInPercent_; // calcuated by calculateSlopeFromMapMeasurements()
+    double slopeFromMapMeasurements_; // calcuated by calculateSlopeFromMapMeasurements()
     double slopeHorizontalDistance_; // calcuated by calculateSlopeFromMapMeasurements()
     double slopeElevationChange_; // calcuated by calculateSlopeFromMapMeasurements()
    
-
     std::vector<int> representativeFractions_; // representative fractions for representative fraction table
     std::vector<double> inchesPerMile_; // inches per mile for representative fraction table
     std::vector<double> milesPerInch_; // miles per inch for representative fraction table

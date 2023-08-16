@@ -1770,8 +1770,80 @@ void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Slope Tool\n";
 
-    // TODO: Create tests for  Slope Too
-    // Stub for now
+    int mapRepresentativeFraction = 0;
+    double mapDistance = 0.0;
+    LengthUnits::LengthUnitsEnum mapDistanceUnits = LengthUnits::Inches;
+    double contourInterval = 0.0;
+    double numberOfContours = 0.0;
+    LengthUnits::LengthUnitsEnum contourUnits = LengthUnits::Feet;
+    LengthUnits::LengthUnitsEnum slopeDistanceUnits = LengthUnits::Feet;
+    LengthUnits::LengthUnitsEnum slopeElevationUnits = LengthUnits::Feet;
+    string testName = "";
+
+    double observedSlopeSteepnessDegrees = 0.0;
+    double expectedSlopeSteepnessDegrees = 0.0;
+    double observedSlopeSteepnessPercent = 0.0;
+    double expectedSlopeSteepnessPercent = 0.0;
+    double observedSlopeDistance = 0.0;
+    double expectedSlopeDistance = 0.0;
+    double observedSlopeElevationChange = 0.0;
+    double expectedSlopeElevationChange = 0.0;
+
+    mapRepresentativeFraction = 1980;
+    mapDistance = 3.6;
+    contourInterval = 50.0;
+    numberOfContours = 4.1;
+    behaveRun.slopeTool.calculateSlopeFromMapMeasurements(mapRepresentativeFraction, mapDistance, mapDistanceUnits, contourInterval, numberOfContours, contourUnits);
+
+    testName = "Test slope in degrees from map measurements, imperial units";
+    expectedSlopeSteepnessDegrees = 19.0;
+    observedSlopeSteepnessDegrees = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Degrees));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessDegrees, expectedSlopeSteepnessDegrees, error_tolerance);
+
+    testName = "Test slope in percent from map measurements, imperial units";
+    expectedSlopeSteepnessPercent = 35.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Percent));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeSteepnessPercent, error_tolerance);
+
+    testName = "Test slope elevation change from map measurements, imperial units";
+    expectedSlopeElevationChange = 205.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeElevationChangeFromMapMeasurements(LengthUnits::Feet));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeElevationChange, error_tolerance);
+
+    testName = "Test slope horizontal distance from map measurements, imperial units";
+    expectedSlopeDistance = 594.0;
+    observedSlopeDistance = std::round(behaveRun.slopeTool.getSlopeHorizontalDistanceFromMapMeasurements(slopeDistanceUnits));
+    reportTestResult(testInfo, testName, observedSlopeDistance, expectedSlopeDistance, error_tolerance);
+
+    mapRepresentativeFraction = 3960;
+    mapDistance = 3.0;
+    mapDistanceUnits = LengthUnits::Centimeters;
+    contourInterval = 15.0;
+    numberOfContours = 5.5;
+    contourUnits = LengthUnits::Meters;
+    slopeDistanceUnits = LengthUnits::Meters;
+    slopeElevationUnits = LengthUnits::Meters;
+    behaveRun.slopeTool.calculateSlopeFromMapMeasurements(mapRepresentativeFraction, mapDistance, mapDistanceUnits, contourInterval, numberOfContours, contourUnits);
+
+    testName = "Test slope in degrees from map measurements, metric units";
+    expectedSlopeSteepnessDegrees = 35.0;
+    observedSlopeSteepnessDegrees = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Degrees));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessDegrees, expectedSlopeSteepnessDegrees, error_tolerance);
+
+    testName = "Test slope in percent from map measurements, metric units";
+    expectedSlopeSteepnessPercent = 69.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Percent));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeSteepnessPercent, error_tolerance);
+
+    testName = "Test slope elevation change from map measurements, metric units";
+    expectedSlopeElevationChange = 82.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeElevationChangeFromMapMeasurements(LengthUnits::Meters));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeElevationChange, error_tolerance);
+
+    testName = "Test slope horizontal distance from map measurements, metric units";
+    expectedSlopeDistance = 119.0;
+    observedSlopeDistance = std::round(behaveRun.slopeTool.getSlopeHorizontalDistanceFromMapMeasurements(slopeDistanceUnits));
+    reportTestResult(testInfo, testName, observedSlopeDistance, expectedSlopeDistance, error_tolerance);
 
     std::cout << "Finished testing  Slope Tool\n\n";
 }
