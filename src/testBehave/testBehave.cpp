@@ -1797,7 +1797,7 @@ void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test slope in degrees from map measurements, imperial units";
     expectedSlopeSteepnessDegrees = 19.0;
-    observedSlopeSteepnessDegrees = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Degrees));
+    observedSlopeSteepnessDegrees = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Degrees)); // BehavePlus 6 tool always rounds to nearest integer
     reportTestResult(testInfo, testName, observedSlopeSteepnessDegrees, expectedSlopeSteepnessDegrees, error_tolerance);
 
     testName = "Test slope in percent from map measurements, imperial units";
@@ -1844,6 +1844,39 @@ void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedSlopeDistance = 119.0;
     observedSlopeDistance = std::round(behaveRun.slopeTool.getSlopeHorizontalDistanceFromMapMeasurements(slopeDistanceUnits));
     reportTestResult(testInfo, testName, observedSlopeDistance, expectedSlopeDistance, error_tolerance);
+
+    const int numHorirzonalDistances = behaveRun.slopeTool.getNumberOfHorizontalDistances();
+    std::vector<double> observedHoriztonalDistances(numHorirzonalDistances);
+    std::vector<double> expectedHoriztonalDistances(numHorirzonalDistances);
+    std::vector<string> horizontalDistanceIndexNames(numHorirzonalDistances);
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::UPSLOPE_ZERO_DEGREES] = "UPSLOPE_ZERO_DEGREES";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::FIFTEEN_DEGREES_FROM_UPSLOPE] = "FIFTEEN_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::THIRTY_DEGREES_FROM_UPSLOPE] = "THIRTY_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::FORTY_FIVE_DEGREES_FROM_UPSLOPE] = "FORTY_FIVE_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::SIXTY_DEGREES_FROM_UPSLOPE] = "SIXTY_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::SEVENTY_FIVE_DEGREES_FROM_UPSLOPE] = "SEVENTY_FIVE_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::CROSS_SLOPE_NINETY_DEGREES] = "CROSS_SLOPE_NINETY_DEGREES";
+
+    double calculatedMapDistance = 3.0;
+    mapDistanceUnits = LengthUnits::Inches;
+    double maxSlopeSteepness = 30.0;
+
+    expectedHoriztonalDistances[HorizontalDistanceIndex::UPSLOPE_ZERO_DEGREES] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::FIFTEEN_DEGREES_FROM_UPSLOPE] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::THIRTY_DEGREES_FROM_UPSLOPE] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::FORTY_FIVE_DEGREES_FROM_UPSLOPE] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::SIXTY_DEGREES_FROM_UPSLOPE] = 3.0;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::SEVENTY_FIVE_DEGREES_FROM_UPSLOPE] = 3.0;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::CROSS_SLOPE_NINETY_DEGREES] = 3.0;
+
+    behaveRun.slopeTool.calculateHorizontalDistance(calculatedMapDistance, mapDistanceUnits, maxSlopeSteepness, SlopeUnits::Percent);
+
+    for (int i = 0; i < numHorirzonalDistances; i++)
+    {
+        testName = "Test calculateHorizontalDistance() " + horizontalDistanceIndexNames[i] + " distance in feet";
+        observedHoriztonalDistances[i] = std::round(behaveRun.slopeTool.getHorizontalDistanceAtIndex(i, LengthUnits::Feet) * 10.0) / 10.0; // BehavePlus 6 tool always rounds to nearest tenths place
+        reportTestResult(testInfo, testName, observedHoriztonalDistances[i], expectedHoriztonalDistances[i], error_tolerance);
+    }
 
     std::cout << "Finished testing  Slope Tool\n\n";
 }
