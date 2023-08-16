@@ -48,16 +48,16 @@ public:
     SlopeTool(const SlopeTool& rhs);
     SlopeTool& operator=(const SlopeTool& rhs);
 
-    void calculateHorizontalDistance(const double distanceInInchesOrCentimeters, const double maxSlopeSteepness,
+    void calculateHorizontalDistance(const double calulatedMapDistance, const LengthUnits::LengthUnitsEnum distanceUnits, const double maxSlopeSteepness,
         const SlopeUnits::SlopeUnitsEnum slopeUnits);
     void calculateSlopeFromMapMeasurements(const int mapRepresentativeFraction, const double mapDistance,
         const LengthUnits::LengthUnitsEnum distanceUnits,  const double contourInterval, const double numberOfContours, const LengthUnits::LengthUnitsEnum contourUnits);
 
     // calculateHorizontalDistance() getters
     int getNumberOfHorizontalDistances() const;
-    double getHorizontalDistanceMaxSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
-    double getHorizontalDistance(HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex) const;
-    double getHorizontalDistanceAtIndex(const int index) const;
+    double getHorizontalDistanceMaxSlope(const SlopeUnits::SlopeUnitsEnum slopeUnits) const;
+    double getHorizontalDistance(const HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex, const LengthUnits::LengthUnitsEnum mapDistanceUnits) const;
+    double getHorizontalDistanceAtIndex(const int index, LengthUnits::LengthUnitsEnum mapDistanceUnits) const;
 
     // calculateSlopeFromMapMeasurements() getters
     double getSlopeFromMapMeasurements(SlopeUnits::SlopeUnitsEnum slopeUnits) const;

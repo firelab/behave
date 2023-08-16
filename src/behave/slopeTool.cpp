@@ -130,21 +130,23 @@ SlopeTool& SlopeTool::operator=(const SlopeTool& rhs)
     return *this;
 }
 
-void SlopeTool::calculateHorizontalDistance(const double distanceInInchesOrCentimeters, const double maxSlopeSteepness, const SlopeUnits::SlopeUnitsEnum slopeUnits)
+void SlopeTool::calculateHorizontalDistance(const double calulatedMapDistance, const LengthUnits::LengthUnitsEnum distanceUnits,
+    const double maxSlopeSteepness, const SlopeUnits::SlopeUnitsEnum slopeUnits)
 {
     maxSlopeInDegrees_ = SlopeUnits::toBaseUnits(maxSlopeSteepness, slopeUnits);
-    maxSlopeInPercent_ = SlopeUnits::fromBaseUnits(maxSlopeSteepness, SlopeUnits::Percent);
+    maxSlopeInPercent_ = SlopeUnits::fromBaseUnits(maxSlopeInDegrees_, SlopeUnits::Percent);
 
-    double groundDistance = distanceInInchesOrCentimeters;
-  
+    const double groundDistanceInFeet = LengthUnits::toBaseUnits(calulatedMapDistance, distanceUnits);
+    const double groundDistanceInInches = LengthUnits::fromBaseUnits(calulatedMapDistance, LengthUnits::Inches);
+
     for (int i = 0; i < horizontalDistances_.size(); i++)
     {
         double direction = 15.0 * (double)i;
-        double a = groundDistance * cos(direction * M_PI / 180.0);
-        double b = groundDistance * sin(direction * M_PI / 180.0);
-        double c = a * cos(slopeFromMapMeasurements_ * M_PI / 180.0);
+        double a = groundDistanceInInches * cos(direction * M_PI / 180.0);
+        double b = groundDistanceInInches * sin(direction * M_PI / 180.0);
+        double c = a * cos(maxSlopeInDegrees_ * M_PI / 180.0);
         double d = sqrt(c * c + b * b);
-        horizontalDistances_[i] = d;
+        horizontalDistances_[i] = LengthUnits::toBaseUnits(d, LengthUnits::Inches);
     }
 }
 
@@ -167,22 +169,22 @@ int SlopeTool::getNumberOfHorizontalDistances() const
     return horizontalDistances_.size();
 }
 
-double SlopeTool::getHorizontalDistanceMaxSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const
+double SlopeTool::getHorizontalDistanceMaxSlope(const SlopeUnits::SlopeUnitsEnum slopeUnits) const
 {
     return SlopeUnits::fromBaseUnits(maxSlopeInDegrees_, slopeUnits);
 }
 
-double SlopeTool::getHorizontalDistance(HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex) const
+double SlopeTool::getHorizontalDistance(const HorizontalDistanceIndex::HorizontalDistanceIndexEnum horizontalDistanceIndex, const LengthUnits::LengthUnitsEnum mapDistanceUnits) const
 {
-    return getHorizontalDistanceAtIndex(static_cast<int>(horizontalDistanceIndex));
+    return getHorizontalDistanceAtIndex(static_cast<int>(horizontalDistanceIndex), mapDistanceUnits);
 }
 
-double SlopeTool::getHorizontalDistanceAtIndex(const int index) const
+double SlopeTool::getHorizontalDistanceAtIndex(const int index, const LengthUnits::LengthUnitsEnum mapDistanceUnits) const
 {
     double distance = -1.0;
     if (index >= 0 && index < horizontalDistances_.size())
     {
-        distance = horizontalDistances_[index];
+        distance = LengthUnits::fromBaseUnits(horizontalDistances_[index], mapDistanceUnits);
     }
     return distance;
 }
