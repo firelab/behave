@@ -750,11 +750,11 @@ void SurfaceInputs::updateMoisturesBasedOnInputMode()
     {
         if (moistureScenarios_ != nullptr)
         {
-            moistureValuesBySizeClass_[MoistureClassInput::OneHour] = moistureScenarios_->getMoistureScenarioOneHourByIndex(currentMoistureScenarioIndex_);
-            moistureValuesBySizeClass_[MoistureClassInput::TenHour] = moistureScenarios_->getMoistureScenarioTenHourByIndex(currentMoistureScenarioIndex_);
-            moistureValuesBySizeClass_[MoistureClassInput::HundredHour] = moistureScenarios_->getMoistureScenarioHundredHourByIndex(currentMoistureScenarioIndex_);
-            moistureValuesBySizeClass_[MoistureClassInput::LiveHerbaceous] = moistureScenarios_->getMoistureScenarioLiveHerbaceousByIndex(currentMoistureScenarioIndex_);
-            moistureValuesBySizeClass_[MoistureClassInput::LiveWoody] = moistureScenarios_->getMoistureScenarioLiveWoodyByIndex(currentMoistureScenarioIndex_);
+            moistureValuesBySizeClass_[MoistureClassInput::OneHour] = moistureScenarios_->getMoistureScenarioOneHourByIndex(currentMoistureScenarioIndex_, MoistureUnits::Fraction);
+            moistureValuesBySizeClass_[MoistureClassInput::TenHour] = moistureScenarios_->getMoistureScenarioTenHourByIndex(currentMoistureScenarioIndex_, MoistureUnits::Fraction);
+            moistureValuesBySizeClass_[MoistureClassInput::HundredHour] = moistureScenarios_->getMoistureScenarioHundredHourByIndex(currentMoistureScenarioIndex_, MoistureUnits::Fraction);
+            moistureValuesBySizeClass_[MoistureClassInput::LiveHerbaceous] = moistureScenarios_->getMoistureScenarioLiveHerbaceousByIndex(currentMoistureScenarioIndex_, MoistureUnits::Fraction);
+            moistureValuesBySizeClass_[MoistureClassInput::LiveWoody] = moistureScenarios_->getMoistureScenarioLiveWoodyByIndex(currentMoistureScenarioIndex_, MoistureUnits::Fraction);
             moistureValuesBySizeClass_[MoistureClassInput::DeadAggregate] = -1.0;
             moistureValuesBySizeClass_[MoistureClassInput::LiveAggregate] = -1.0;
         }
@@ -908,52 +908,52 @@ std::string SurfaceInputs::getMoistureScenarioDescriptionByName(const std::strin
     return moistureScenarioDescription;
 }
 
-double SurfaceInputs::getMoistureScenarioOneHourByName(const std::string name) const
+double SurfaceInputs::getMoistureScenarioOneHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double oneHourMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        oneHourMoisture = moistureScenarios_->getMoistureScenarioOneHourByName(name);
+        oneHourMoisture = moistureScenarios_->getMoistureScenarioOneHourByName(name, moistureUnits);
     }
     return oneHourMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioTenHourByName(const std::string name) const
+double SurfaceInputs::getMoistureScenarioTenHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double tenHourMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        tenHourMoisture = moistureScenarios_->getMoistureScenarioTenHourByName(name);
+        tenHourMoisture = moistureScenarios_->getMoistureScenarioTenHourByName(name, moistureUnits);
     }
     return tenHourMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioHundredHourByName(const std::string name) const
+double SurfaceInputs::getMoistureScenarioHundredHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double hundreadHourMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        hundreadHourMoisture = moistureScenarios_->getMoistureScenarioHundredHourByName(name);
+        hundreadHourMoisture = moistureScenarios_->getMoistureScenarioHundredHourByName(name, moistureUnits);
     }
     return hundreadHourMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioLiveHerbaceousByName(const std::string name) const
+double SurfaceInputs::getMoistureScenarioLiveHerbaceousByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double liveHerbaceousMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        liveHerbaceousMoisture = moistureScenarios_->getMoistureScenarioLiveHerbaceousByName(name);
+        liveHerbaceousMoisture = moistureScenarios_->getMoistureScenarioLiveHerbaceousByName(name, moistureUnits);
     }
     return liveHerbaceousMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioLiveWoodyByName(const std::string name) const
+double SurfaceInputs::getMoistureScenarioLiveWoodyByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double liveWoodyMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        liveWoodyMoisture = moistureScenarios_->getMoistureScenarioLiveWoodyByName(name);
+        liveWoodyMoisture = moistureScenarios_->getMoistureScenarioLiveWoodyByName(name, moistureUnits);
     }
     return liveWoodyMoisture;
 }
@@ -988,52 +988,52 @@ std::string SurfaceInputs::getMoistureScenarioDescriptionByIndex(const int index
     return moistureScenarioDescription;
 }
 
-double SurfaceInputs::getMoistureScenarioOneHourByIndex(const int index) const
+double SurfaceInputs::getMoistureScenarioOneHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double oneHourMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        oneHourMoisture = moistureScenarios_->getMoistureScenarioOneHourByIndex(index);
+        oneHourMoisture = moistureScenarios_->getMoistureScenarioOneHourByIndex(index, moistureUnits);
     }
     return oneHourMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioTenHourByIndex(const int index) const
+double SurfaceInputs::getMoistureScenarioTenHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double tenHourMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        tenHourMoisture = moistureScenarios_->getMoistureScenarioTenHourByIndex(index);
+        tenHourMoisture = moistureScenarios_->getMoistureScenarioTenHourByIndex(index, moistureUnits);
     }
     return tenHourMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioHundredHourByIndex(const int index) const
+double SurfaceInputs::getMoistureScenarioHundredHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double hundredHourMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        hundredHourMoisture = moistureScenarios_->getMoistureScenarioHundredHourByIndex(index);
+        hundredHourMoisture = moistureScenarios_->getMoistureScenarioHundredHourByIndex(index, moistureUnits);
     }
     return hundredHourMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioLiveHerbaceousByIndex(const int index) const
+double SurfaceInputs::getMoistureScenarioLiveHerbaceousByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double liveHerbaceousMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        liveHerbaceousMoisture = moistureScenarios_->getMoistureScenarioLiveHerbaceousByIndex(index);
+        liveHerbaceousMoisture = moistureScenarios_->getMoistureScenarioLiveHerbaceousByIndex(index, moistureUnits);
     }
     return liveHerbaceousMoisture;
 }
 
-double SurfaceInputs::getMoistureScenarioLiveWoodyByIndex(const int index) const
+double SurfaceInputs::getMoistureScenarioLiveWoodyByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
 {
     double liveWoodyMoisture = -1.0;
     if (moistureScenarios_ != nullptr)
     {
-        liveWoodyMoisture = moistureScenarios_->getMoistureScenarioLiveWoodyByIndex(index);
+        liveWoodyMoisture = moistureScenarios_->getMoistureScenarioLiveWoodyByIndex(index, moistureUnits);
     }
     return liveWoodyMoisture;
 }
