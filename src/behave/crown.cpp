@@ -828,14 +828,14 @@ void Crown::setMoistureScenarios(MoistureScenarios& moistureScenarios)
     surfaceFuel_.setMoistureScenarios(moistureScenarios);
 }
 
-bool Crown::setMoistureScenarioByName(std::string moistureScenarioName)
+bool Crown::setCurrentMoistureScenarioByName(std::string moistureScenarioName)
 {
-    return surfaceFuel_.setMoistureScenarioByName(moistureScenarioName);
+    return surfaceFuel_.setCurrentMoistureScenarioByName(moistureScenarioName);
 }
 
-bool Crown::setMoistureScenarioByIndex(int moistureScenarioIndex)
+bool Crown::setCurrentMoistureScenarioByIndex(int moistureScenarioIndex)
 {
-    return surfaceFuel_.setMoistureScenarioByIndex(moistureScenarioIndex);
+    return surfaceFuel_.setCurrentMoistureScenarioByIndex(moistureScenarioIndex);
 }
 
 void Crown::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)

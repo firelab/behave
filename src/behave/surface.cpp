@@ -600,87 +600,87 @@ MoistureInputMode::MoistureInputModeEnum Surface::getMoistureInputMode() const
 
 int Surface::getNumberOfMoistureScenarios() const
 {
-    return surfaceInputs_.moistureScenarios->getNumberOfMoistureScenarios();
+    return surfaceInputs_.getNumberOfMoistureScenarios();
 }
 
 int Surface::getMoistureScenarioIndexByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioIndexByName(name);
+    return  surfaceInputs_.getMoistureScenarioIndexByName(name);
 }
 
 bool Surface::getIsMoistureScenarioDefinedByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByName(name);
+    return surfaceInputs_.getIsMoistureScenarioDefinedByName(name);
 }
 
 std::string Surface::getMoistureScenarioDescriptionByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioDescriptionByName(name);
+    return surfaceInputs_.getMoistureScenarioDescriptionByName(name);
 }
 
 double Surface::getMoistureScenarioOneHourByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioOneHourByName(name);
+    return surfaceInputs_.getMoistureScenarioOneHourByName(name);
 }
 
 double Surface::getMoistureScenarioTenHourByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioTenHourByName(name);
+    return surfaceInputs_.getMoistureScenarioTenHourByName(name);
 }
 
 double Surface::getMoistureScenarioHundredHourByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioHundredHourByName(name);
+    return surfaceInputs_.getMoistureScenarioHundredHourByName(name);
 }
 
 double Surface::getMoistureScenarioLiveHerbaceousByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveHerbaceousByName(name);
+    return surfaceInputs_.getMoistureScenarioLiveHerbaceousByName(name);
 }
 
 double Surface::getMoistureScenarioLiveWoodyByName(const std::string name) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveWoodyByName(name);
+    return surfaceInputs_.getMoistureScenarioLiveWoodyByName(name);
 }
 
 bool Surface::getIsMoistureScenarioDefinedByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getIsMoistureScenarioDefinedByIndex(index);
+    return surfaceInputs_.getIsMoistureScenarioDefinedByIndex(index);
 }
 
 std::string Surface::getMoistureScenarioNameByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioNameByIndex(index);
+    return surfaceInputs_.getMoistureScenarioNameByIndex(index);
 }
 
 std::string Surface::getMoistureScenarioDescriptionByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioDescriptionByIndex(index);
+    return surfaceInputs_.getMoistureScenarioDescriptionByIndex(index);
 }
 
 double Surface::getMoistureScenarioOneHourByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioOneHourByIndex(index);
+    return surfaceInputs_.getMoistureScenarioOneHourByIndex(index);
 }
 
 double Surface::getMoistureScenarioTenHourByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioTenHourByIndex(index);
+    return surfaceInputs_.getMoistureScenarioTenHourByIndex(index);
 }
 
 double Surface::getMoistureScenarioHundredHourByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioHundredHourByIndex(index);
+    return surfaceInputs_.getMoistureScenarioHundredHourByIndex(index);
 }
 
 double Surface::getMoistureScenarioLiveHerbaceousByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveHerbaceousByIndex(index);
+    return surfaceInputs_.getMoistureScenarioLiveHerbaceousByIndex(index);
 }
 
 double Surface::getMoistureScenarioLiveWoodyByIndex(const int index) const
 {
-    return surfaceInputs_.moistureScenarios->getMoistureScenarioLiveWoodyByIndex(index);
+    return surfaceInputs_.getMoistureScenarioLiveWoodyByIndex(index);
 }
 
 double Surface::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
@@ -943,17 +943,17 @@ void Surface::setMoistureLiveAggregate(double moistureLive, MoistureUnits::Moist
 
 void Surface::setMoistureScenarios(MoistureScenarios& moistureScenarios)
 {
-    surfaceInputs_.moistureScenarios = &moistureScenarios;
+    surfaceInputs_.setMoistureScenarios(moistureScenarios);
 }
 
-bool Surface::setMoistureScenarioByName(std::string moistureScenarioName)
+bool Surface::setCurrentMoistureScenarioByName(std::string moistureScenarioName)
 {
-    return surfaceInputs_.setMoistureScenarioByName(moistureScenarioName);
+    return surfaceInputs_.setCurrentMoistureScenarioByName(moistureScenarioName);
 }
 
-bool Surface::setMoistureScenarioByIndex(int moistureScenarioIndex)
+bool Surface::setCurrentMoistureScenarioByIndex(int moistureScenarioIndex)
 {
-    return surfaceInputs_.setMoistureScenarioByIndex(moistureScenarioIndex);
+    return surfaceInputs_.setCurrentMoistureScenarioByIndex(moistureScenarioIndex);
 }
 
 void Surface::setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode)

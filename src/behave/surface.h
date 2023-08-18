@@ -111,8 +111,8 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits);
     void setMoistureScenarios(MoistureScenarios& moistureScenarios);
-    bool setMoistureScenarioByName(std::string moistureScenarioName);
-    bool setMoistureScenarioByIndex(int moistureScenarioIndex);
+    bool setCurrentMoistureScenarioByName(std::string moistureScenarioName);
+    bool setCurrentMoistureScenarioByIndex(int moistureScenarioIndex);
     void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);

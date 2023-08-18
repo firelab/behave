@@ -342,7 +342,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     testName = "Test moisture scenario input mode, D1L1 Scenario, 5 mph 20 foot uplsope wind";
     behaveRun.surface.setMoistureInputMode(MoistureInputMode::MoistureScenario);
     std::string moistureScenarioName = "D1L1";
-    behaveRun.surface.setMoistureScenarioByName(moistureScenarioName);
+    behaveRun.surface.setCurrentMoistureScenarioByName(moistureScenarioName);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 15.023945;
@@ -350,7 +350,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test moisture scenario input mode, D2L3 Scenario, 5 mph 20 foot uplsope wind";
     moistureScenarioName = "d2L3"; // testing case insensitivity
-    behaveRun.surface.setMoistureScenarioByName(moistureScenarioName);
+    behaveRun.surface.setCurrentMoistureScenarioByName(moistureScenarioName);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 1.978840;
@@ -1226,7 +1226,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test Scott and Reinhardt crown fire spread rate with moisture scenario D3L2";
     behaveRun.crown.setMoistureInputMode(MoistureInputMode::MoistureScenario);
-    behaveRun.crown.setMoistureScenarioByName("D3L2");
+    behaveRun.crown.setCurrentMoistureScenarioByName("D3L2");
     behaveRun.crown.doCrownRunScottAndReinhardt();
     expectedFinalCrownFireSpreadRate = 68.334996;
     observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::ChainsPerHour));

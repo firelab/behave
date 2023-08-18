@@ -97,7 +97,7 @@ void SurfaceInputs::initializeMembers()
 
     userProvidedWindAdjustmentFactor_ = -1.0;
 
-    moistureScenarios = nullptr;
+    moistureScenarios_ = nullptr;
     currentMoistureScenarioName_ = "";
     currentMoistureScenarioIndex_ = -1;
     moistureValuesBySizeClass_ = {-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0};
@@ -304,28 +304,42 @@ void SurfaceInputs::setMoistureLiveAggregate(double moistureLiveAggregate, Moist
     updateMoisturesBasedOnInputMode();
 }
 
-bool SurfaceInputs::setMoistureScenarioByName(std::string moistureScenarioName)
+void SurfaceInputs::setMoistureScenarios(MoistureScenarios& moistureScenarios)
 {
-    bool isMoistureScenarioDefined = moistureScenarios->getIsMoistureScenarioDefinedByName(moistureScenarioName);
-    currentMoistureScenarioName_ = "";
-    if(isMoistureScenarioDefined)
+    moistureScenarios_ = &moistureScenarios;
+}
+
+bool SurfaceInputs::setCurrentMoistureScenarioByName(std::string moistureScenarioName)
+{
+    bool isMoistureScenarioDefined = false;
+    if (moistureScenarios_ != nullptr)
     {
-        currentMoistureScenarioName_ = moistureScenarioName;
-        currentMoistureScenarioIndex_ = moistureScenarios->getMoistureScenarioIndexByName(moistureScenarioName);
-        updateMoisturesBasedOnInputMode();
+        isMoistureScenarioDefined = moistureScenarios_->getIsMoistureScenarioDefinedByName(moistureScenarioName);
+        moistureScenarios_->getIsMoistureScenarioDefinedByName(moistureScenarioName);
+        currentMoistureScenarioName_ = "";
+        if (isMoistureScenarioDefined)
+        {
+            currentMoistureScenarioName_ = moistureScenarioName;
+            currentMoistureScenarioIndex_ = moistureScenarios_->getMoistureScenarioIndexByName(moistureScenarioName);
+            updateMoisturesBasedOnInputMode();
+        }
     }
     return isMoistureScenarioDefined;
 }
 
-bool SurfaceInputs::setMoistureScenarioByIndex(int moistureScenarioIndex)
+bool SurfaceInputs::setCurrentMoistureScenarioByIndex(int moistureScenarioIndex)
 {
-    bool isMoistureScenarioDefined = moistureScenarios->getIsMoistureScenarioDefinedByIndex(moistureScenarioIndex);
-    currentMoistureScenarioIndex_ = -1;
-    if(isMoistureScenarioDefined)
+    bool isMoistureScenarioDefined = false;
+    if (moistureScenarios_ != nullptr)
     {
-        currentMoistureScenarioIndex_ = moistureScenarioIndex;
-        currentMoistureScenarioName_ = moistureScenarios->getMoistureScenarioNameByIndex(moistureScenarioIndex);
-        updateMoisturesBasedOnInputMode();
+        isMoistureScenarioDefined = moistureScenarios_->getIsMoistureScenarioDefinedByIndex(moistureScenarioIndex);
+        currentMoistureScenarioIndex_ = -1;
+        if (isMoistureScenarioDefined)
+        {
+            currentMoistureScenarioIndex_ = moistureScenarioIndex;
+            currentMoistureScenarioName_ = moistureScenarios_->getMoistureScenarioNameByIndex(moistureScenarioIndex);
+            updateMoisturesBasedOnInputMode();
+        }
     }
     return isMoistureScenarioDefined;
 }
@@ -684,7 +698,7 @@ void SurfaceInputs::memberwiseCopyAssignment(const SurfaceInputs & rhs)
     windAdjustmentFactorCalculationMethod_ = rhs.windAdjustmentFactorCalculationMethod_;
     surfaceFireSpreadDirectionMode_ = rhs.surfaceFireSpreadDirectionMode_;
 
-    moistureScenarios = rhs.moistureScenarios;
+    moistureScenarios_ = rhs.moistureScenarios_;
     currentMoistureScenarioName_ = rhs.currentMoistureScenarioName_;
     currentMoistureScenarioIndex_ = rhs.currentMoistureScenarioIndex_;
     moistureValuesBySizeClass_ = rhs.moistureValuesBySizeClass_;
@@ -734,13 +748,23 @@ void SurfaceInputs::updateMoisturesBasedOnInputMode()
     }
     else if(moistureInputMode_ == MoistureInputMode::MoistureScenario)
     {
-        moistureValuesBySizeClass_[MoistureClassInput::OneHour] = moistureScenarios->getMoistureScenarioOneHourByIndex(currentMoistureScenarioIndex_);
-        moistureValuesBySizeClass_[MoistureClassInput::TenHour] = moistureScenarios->getMoistureScenarioTenHourByIndex(currentMoistureScenarioIndex_);
-        moistureValuesBySizeClass_[MoistureClassInput::HundredHour] = moistureScenarios->getMoistureScenarioHundredHourByIndex(currentMoistureScenarioIndex_);
-        moistureValuesBySizeClass_[MoistureClassInput::LiveHerbaceous] = moistureScenarios->getMoistureScenarioLiveHerbaceousByIndex(currentMoistureScenarioIndex_);
-        moistureValuesBySizeClass_[MoistureClassInput::LiveWoody] = moistureScenarios->getMoistureScenarioLiveWoodyByIndex(currentMoistureScenarioIndex_);
-        moistureValuesBySizeClass_[MoistureClassInput::DeadAggregate] = -1.0;
-        moistureValuesBySizeClass_[MoistureClassInput::LiveAggregate] = -1.0;
+        if (moistureScenarios_ != nullptr)
+        {
+            moistureValuesBySizeClass_[MoistureClassInput::OneHour] = moistureScenarios_->getMoistureScenarioOneHourByIndex(currentMoistureScenarioIndex_);
+            moistureValuesBySizeClass_[MoistureClassInput::TenHour] = moistureScenarios_->getMoistureScenarioTenHourByIndex(currentMoistureScenarioIndex_);
+            moistureValuesBySizeClass_[MoistureClassInput::HundredHour] = moistureScenarios_->getMoistureScenarioHundredHourByIndex(currentMoistureScenarioIndex_);
+            moistureValuesBySizeClass_[MoistureClassInput::LiveHerbaceous] = moistureScenarios_->getMoistureScenarioLiveHerbaceousByIndex(currentMoistureScenarioIndex_);
+            moistureValuesBySizeClass_[MoistureClassInput::LiveWoody] = moistureScenarios_->getMoistureScenarioLiveWoodyByIndex(currentMoistureScenarioIndex_);
+            moistureValuesBySizeClass_[MoistureClassInput::DeadAggregate] = -1.0;
+            moistureValuesBySizeClass_[MoistureClassInput::LiveAggregate] = -1.0;
+        }
+        else
+        {
+            for (int i = 0; i < moistureValuesBySizeClass_.size(); i++)
+            {
+                moistureValuesBySizeClass_[i] = -1.0;
+            }
+        }
     }
 }
 
@@ -842,4 +866,174 @@ std::string SurfaceInputs::getCurrentMoistureScenarioName() const
 int SurfaceInputs::getCurrentMoistureScenarioIndex() const
 {
     return currentMoistureScenarioIndex_;
+}
+
+int SurfaceInputs::getNumberOfMoistureScenarios() const
+{
+    int numberOfMoistureScenarios = -1;
+    if (moistureScenarios_ != nullptr)
+    {
+        numberOfMoistureScenarios = moistureScenarios_->getNumberOfMoistureScenarios();
+    }
+    return numberOfMoistureScenarios;
+}
+
+int SurfaceInputs::getMoistureScenarioIndexByName(const std::string name) const
+{
+    int moistureScenarioIndex = -1;
+    if (moistureScenarios_ != nullptr)
+    {
+        moistureScenarioIndex = moistureScenarios_->getMoistureScenarioIndexByName(name);
+    }
+    return moistureScenarioIndex;
+}
+
+bool SurfaceInputs::getIsMoistureScenarioDefinedByName(const std::string name) const
+{
+    bool isMoistureScenarioDefined = false;
+    if (moistureScenarios_ != nullptr)
+    {
+        isMoistureScenarioDefined = moistureScenarios_->getIsMoistureScenarioDefinedByName(name);
+    }
+    return isMoistureScenarioDefined;
+}
+
+std::string SurfaceInputs::getMoistureScenarioDescriptionByName(const std::string name) const
+{
+    std::string moistureScenarioDescription = "error: moisture scenarios pointer is null";
+    if (moistureScenarios_ != nullptr)
+    {
+        moistureScenarioDescription = moistureScenarios_->getMoistureScenarioDescriptionByName(name);
+    }
+    return moistureScenarioDescription;
+}
+
+double SurfaceInputs::getMoistureScenarioOneHourByName(const std::string name) const
+{
+    double oneHourMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        oneHourMoisture = moistureScenarios_->getMoistureScenarioOneHourByName(name);
+    }
+    return oneHourMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioTenHourByName(const std::string name) const
+{
+    double tenHourMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        tenHourMoisture = moistureScenarios_->getMoistureScenarioTenHourByName(name);
+    }
+    return tenHourMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioHundredHourByName(const std::string name) const
+{
+    double hundreadHourMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        hundreadHourMoisture = moistureScenarios_->getMoistureScenarioHundredHourByName(name);
+    }
+    return hundreadHourMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioLiveHerbaceousByName(const std::string name) const
+{
+    double liveHerbaceousMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        liveHerbaceousMoisture = moistureScenarios_->getMoistureScenarioLiveHerbaceousByName(name);
+    }
+    return liveHerbaceousMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioLiveWoodyByName(const std::string name) const
+{
+    double liveWoodyMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        liveWoodyMoisture = moistureScenarios_->getMoistureScenarioLiveWoodyByName(name);
+    }
+    return liveWoodyMoisture;
+}
+
+bool SurfaceInputs::getIsMoistureScenarioDefinedByIndex(const int index) const
+{
+    bool moistureScenarioIsDefined = false;
+    if (moistureScenarios_ != nullptr)
+    {
+        moistureScenarioIsDefined = moistureScenarios_->getIsMoistureScenarioDefinedByIndex(index);
+    }
+    return moistureScenarioIsDefined;
+}
+
+std::string SurfaceInputs::getMoistureScenarioNameByIndex(const int index) const
+{
+    std::string moistureScenarioName = "error: moisture scenarios pointer is null";
+    if (moistureScenarios_ != nullptr)
+    {
+        moistureScenarioName = moistureScenarios_->getMoistureScenarioNameByIndex(index);
+    }
+    return moistureScenarioName;
+}
+
+std::string SurfaceInputs::getMoistureScenarioDescriptionByIndex(const int index) const
+{
+    std::string moistureScenarioDescription = "error: moisture scenarios pointer is null";
+    if (moistureScenarios_ != nullptr)
+    {
+        moistureScenarioDescription = moistureScenarios_->getMoistureScenarioDescriptionByIndex(index);
+    }
+    return moistureScenarioDescription;
+}
+
+double SurfaceInputs::getMoistureScenarioOneHourByIndex(const int index) const
+{
+    double oneHourMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        oneHourMoisture = moistureScenarios_->getMoistureScenarioOneHourByIndex(index);
+    }
+    return oneHourMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioTenHourByIndex(const int index) const
+{
+    double tenHourMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        tenHourMoisture = moistureScenarios_->getMoistureScenarioTenHourByIndex(index);
+    }
+    return tenHourMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioHundredHourByIndex(const int index) const
+{
+    double hundredHourMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        hundredHourMoisture = moistureScenarios_->getMoistureScenarioHundredHourByIndex(index);
+    }
+    return hundredHourMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioLiveHerbaceousByIndex(const int index) const
+{
+    double liveHerbaceousMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        liveHerbaceousMoisture = moistureScenarios_->getMoistureScenarioLiveHerbaceousByIndex(index);
+    }
+    return liveHerbaceousMoisture;
+}
+
+double SurfaceInputs::getMoistureScenarioLiveWoodyByIndex(const int index) const
+{
+    double liveWoodyMoisture = -1.0;
+    if (moistureScenarios_ != nullptr)
+    {
+        liveWoodyMoisture = moistureScenarios_->getMoistureScenarioLiveWoodyByIndex(index);
+    }
+    return liveWoodyMoisture;
 }
