@@ -47,7 +47,7 @@ int main()
     aspect = 291;
     directionOfInterest = 63;
     canopyCover = 0.50; // 50%
-    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
     canopyHeight = 6;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     crownRatio = 0.50;
@@ -57,7 +57,7 @@ int main()
 
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
-        MoistureUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
+        FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
         aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
 
     behave.surface.setIsUsingChaparral(true);
@@ -114,12 +114,12 @@ int main()
         firstFuelModelNumber = 1;
         secondFuelModelNumber = 124;
         firstFuelModelCoverage = 0 + (.10 * i);
-        CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits = CoverUnits::Percent;
-        CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+        FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits = FractionUnits::Percent;
+        FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
         LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
 
         behave.surface.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
-            moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, MoistureUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode,
+            moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode,
             windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope,
             slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
         behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
@@ -149,7 +149,7 @@ int main()
     aspect = 291;
     directionOfInterest = 63;
     canopyCover = 0.50; // 50%
-    canopyCoverUnits = CoverUnits::Percent;
+    canopyCoverUnits = FractionUnits::Percent;
     canopyHeight = 6;
     canopyHeightUnits = LengthUnits::Feet;
     crownRatio = 0.50;
@@ -158,7 +158,7 @@ int main()
 
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 
-        MoistureUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
+        FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
         aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
     behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
@@ -279,9 +279,9 @@ int main()
             }
         }
 
-        probalilityOfMortality = behave.mortality.calculateMortality(ProbabilityUnits::Fraction);
+        probalilityOfMortality = behave.mortality.calculateMortality(FractionUnits::Fraction);
 
-        probalilityOfMortality = behave.mortality.getProbabilityOfMortality(ProbabilityUnits::Percent);
+        probalilityOfMortality = behave.mortality.getProbabilityOfMortality(FractionUnits::Percent);
 
         std::cout << "Probability of behave.mortality: " << std::setprecision(3) << probalilityOfMortality << "%\n";
     }

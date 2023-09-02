@@ -490,7 +490,7 @@ void Crown::calculateCrownFirelineIntensity()
 void Crown::calculateCrownCriticalSurfaceFireIntensity()
 {
     // Get moisture content in percent and constrain lower limit
-    double moistureFoliar = crownInputs_.getMoistureFoliar(MoistureUnits::Percent);
+    double moistureFoliar = crownInputs_.getMoistureFoliar(FractionUnits::Percent);
     moistureFoliar = (moistureFoliar < 30.0) ? 30.0 : moistureFoliar;
 
     // Convert crown base height to meters and constrain lower limit
@@ -633,10 +633,10 @@ void Crown::calculateFireTypeScottAndReinhardt()
 }
 
 void Crown::updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits,
+    double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar, FractionUnits::FractionUnitsEnum moistureUnits,
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
-    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum coverUnits, double canopyHeight,
     double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBulkDensity,
     DensityUnits::DensityUnitsEnum densityUnits)
 {
@@ -656,7 +656,7 @@ void Crown::setCanopyBulkDensity(double canopyBulkDensity, DensityUnits::Density
     crownInputs_.setCanopyBulkDensity(canopyBulkDensity, densityUnits);
 }
 
-void Crown::setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Crown::setMoistureFoliar(double moistureFoliar, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     crownInputs_.setMoistureFoliar(moistureFoliar, moistureUnits);
 }
@@ -676,7 +676,7 @@ double Crown::getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum 
     return fuelModels_->getFuelbedDepth(fuelModelNumber, lengthUnits);
 }
 
-double Crown::getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber, moistureUnits);
 }
@@ -753,10 +753,10 @@ bool Crown::isAllFuelLoadZero(int fuelModelNumber) const
 
 void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-    MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
+    FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed,
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum coverUnits,
     double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceFuel_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour,
@@ -765,7 +765,7 @@ void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHou
         canopyHeight, canopyHeightUnits, crownRatio);
 }
 
-void  Crown::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
+void  Crown::setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum coverUnits)
 {
     surfaceFuel_.setCanopyCover(canopyCover, coverUnits);
 }
@@ -785,39 +785,39 @@ void  Crown::setFuelModelNumber(int fuelModelNumber)
     surfaceFuel_.setFuelModelNumber(fuelModelNumber);
 }
 
-void  Crown::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void  Crown::setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureOneHour(moistureOneHour, moistureUnits);
 }
 
-void  Crown::setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void  Crown::setMoistureTenHour(double moistureTenHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureTenHour(moistureTenHour, moistureUnits);
 }
 
-void  Crown::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void  Crown::setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
 }
 
-void Crown::setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Crown::setMoistureDeadAggregate(double moistureDead, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureDeadAggregate(moistureDead, moistureUnits);
     crownFuel_.setMoistureDeadAggregate(moistureDead, moistureUnits);
 }
 
-void  Crown::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void  Crown::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
 }
 
-void  Crown::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void  Crown::setMoistureLiveWoody(double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
     crownFuel_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
 }
 
-void Crown::setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Crown::setMoistureLiveAggregate(double moistureLive, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceFuel_.setMoistureLiveAggregate(moistureLive, moistureUnits);
     crownFuel_.setMoistureLiveAggregate(moistureLive, moistureUnits);
@@ -890,27 +890,27 @@ int Crown::getFuelModelNumber() const
     return surfaceFuel_.getFuelModelNumber();
 }
 
-double Crown::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceFuel_.getMoistureOneHour(moistureUnits);
 }
 
-double Crown::getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceFuel_.getMoistureTenHour(moistureUnits);
 }
 
-double Crown::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceFuel_.getMoistureHundredHour(moistureUnits);
 }
 
-double Crown::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceFuel_.getMoistureLiveHerbaceous(moistureUnits);
 }
 
-double Crown::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceFuel_.getMoistureLiveWoody(moistureUnits);
 }
@@ -1020,7 +1020,7 @@ double Crown::getAspect() const
     return surfaceFuel_.getAspect();
 }
 
-double Crown::getCanopyCover(CoverUnits::CoverUnitsEnum canopyCoverUnits) const
+double Crown::getCanopyCover(FractionUnits::FractionUnitsEnum canopyCoverUnits) const
 {
     return surfaceFuel_.getCanopyCover(canopyCoverUnits);
 }
@@ -1045,7 +1045,7 @@ double Crown::getCanopyBulkDensity(DensityUnits::DensityUnitsEnum canopyBulkDens
     return crownInputs_.getCanopyBulkDensity(canopyBulkDensityUnits);
 }
 
-double Crown::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Crown::getMoistureFoliar(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return crownInputs_.getMoistureFoliar(moistureUnits);
 }

@@ -46,7 +46,7 @@ public:
    
     bool setCustomFuelModel(int fuelModelNumber, std::string code, std::string name,
         double fuelBedDepth, LengthUnits::LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead,
-        MoistureUnits::MoistureUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
+        FractionUnits::FractionUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
         HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits,
         double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
         double fuelLoadLiveWoody, LoadingUnits::LoadingUnitsEnum loadingUnits, double savrOneHour, double savrLiveHerbaceous,
@@ -56,7 +56,7 @@ public:
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
     double getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const;
-    double getMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const;;
+    double getMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const;;
     double getHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;

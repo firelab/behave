@@ -89,8 +89,8 @@ public:
     double getHeatSource(HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum heatSourceUnits) const;
     double getFirePerimeter(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
-    double getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getLiveFuelMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getLiveFuelMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
 
     // SurfaceIntermediate Getters
@@ -99,17 +99,17 @@ public:
 
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
-    void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
+    void setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits);
     void setCrownRatio(double crownRatio);
     void setElapsedTime(double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits);
     void setFuelModelNumber(int fuelModelNumber);
-    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureTenHour(double moistureTenHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureDeadAggregate(double moistureDead, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveWoody(double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveAggregate(double moistureLive, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureScenarios(MoistureScenarios& moistureScenarios);
     bool setMoistureScenarioByName(std::string moistureScenarioName);
     bool setMoistureScenarioByIndex(int moistureScenarioIndex);
@@ -124,45 +124,45 @@ public:
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod);
-    void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, CoverUnits::CoverUnitsEnum coverUnits);
+    void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, FractionUnits::FractionUnitsEnum fractionUnits);
     void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+        double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect,
-        double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
+        double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void updateSurfaceInputsForTwoFuelModels(int firstFuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-        MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+        FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage,
-        CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
+        FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
         double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover,
-        CoverUnits::CoverUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
+        FractionUnits::FractionUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
 
     // Palmetto-Gallberry setters
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+        double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double ageOfRough, double heightOfUnderstory, double palmettoCoverage,
-        double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits,
+        double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits,
         double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setAgeOfRough(double ageOfRough);
     void setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits);
-    void setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits);
+    void setPalmettoCoverage(double palmettoCoverage, FractionUnits::FractionUnitsEnum fractionUnits);
     void setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits);
     void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
 
     // Westerm Aspen inputs setters
-    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
+    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, FractionUnits::FractionUnitsEnum fractionUnits,
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour,
-        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits,
+        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits,
         double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
         double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
-        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits, double canopyHeight,
         LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setAspenFuelModelNumber(int aspenFuelModelNumber);
-    void setAspenCuringLevel(double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits);
+    void setAspenCuringLevel(double aspenCuringLevel, FractionUnits::FractionUnitsEnum fractionUnits);
     void setAspenDBH(double dbh, LengthUnits::LengthUnitsEnum dbhUnits);
     void setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity);
     void setIsUsingWesternAspen(bool isUsingWesternAspen);
@@ -179,7 +179,7 @@ public:
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
     double getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const;
-    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const;;
+    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const;;
     double getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -199,13 +199,13 @@ public:
     bool isUsingTwoFuelModels() const;
     double getElapsedTime(TimeUnits::TimeUnitsEnum timeUnits) const;
     int getFuelModelNumber() const;
-    double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureDeadAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureDeadAggregateValue(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveAggregateValue(FractionUnits::FractionUnitsEnum moistureUnits) const;
     bool isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput::MoistureClassInputEnum moistureClass) const;
     MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
     int getNumberOfMoistureScenarios() const;
@@ -229,7 +229,7 @@ public:
     double getWindDirection() const;
     double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getAspect() const;
-    double getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getCanopyCover(FractionUnits::FractionUnitsEnum fractionUnits) const;
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const;
     double getCrownRatio() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
@@ -240,9 +240,9 @@ public:
     bool getIsUsingPalmettoGallberry() const;
     double getAgeOfRough() const;
     double getHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const;
-    double getPalmettoGallberryCoverage(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getPalmettoGallberryCoverage(FractionUnits::FractionUnitsEnum fractionUnits) const;
     double getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const;
-    double getPalmettoGallberryMoistureOfExtinctionDead(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getPalmettoGallberryMoistureOfExtinctionDead(FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getPalmettoGallberryHeatOfCombustionDead(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getPalmettoGallberyDeadFineFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -257,7 +257,7 @@ public:
     // Western Aspen getters
     bool getIsUsingWesternAspen() const;
     int getAspenFuelModelNumber() const;
-    double getAspenCuringLevel(CuringLevelUnits::CuringLevelEnum curingLevelUnits) const;
+    double getAspenCuringLevel(FractionUnits::FractionUnitsEnum fractionUnits) const;
     double getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const;
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
     double getAspenLoadDeadOneHour(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -278,8 +278,8 @@ public:
     double getChaparralAge(TimeUnits::TimeUnitsEnum ageUnits) const;
     double getChaparralDaysSinceMayFirst() const;
     double getChaparralDeadFuelFraction() const;
-    double getChaparralDeadMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getChaparralLiveMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getChaparralDeadMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getChaparralLiveMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, DensityUnits::DensityUnitsEnum densityUnits) const;
     double getChaparralHeatOfCombustion(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getChaparralLoadDeadLessThanQuarterInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -291,7 +291,7 @@ public:
     double getChaparralLoadLiveQuarterInchToLessThanHalfInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getChaparralLoadLiveHalfInchToLessThanOneInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getChaparralLoadLiveOneInchToThreeInch(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
-    double getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getChaparralTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 

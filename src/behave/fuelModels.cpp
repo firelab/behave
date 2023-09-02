@@ -577,7 +577,7 @@ void FuelModels::populateFuelModels()
 // The return value is TRUE if successful, and FALSE in case of failure
 bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::string name,
     double fuelBedDepth, LengthUnits::LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead,
-    MoistureUnits::MoistureUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
+    FractionUnits::FractionUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive,
     HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits,
     double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous,
     double fuelLoadLiveWoody, LoadingUnits::LoadingUnitsEnum loadingUnits, double savrOneHour, double savrLiveHerbaceous,
@@ -587,7 +587,7 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
     
     fuelBedDepth = LengthUnits::toBaseUnits(fuelBedDepth, lengthUnits);
 
-    moistureOfExtinctionDead = MoistureUnits::toBaseUnits(moistureOfExtinctionDead, moistureUnits);
+    moistureOfExtinctionDead = FractionUnits::toBaseUnits(moistureOfExtinctionDead, moistureUnits);
 
     if (loadingUnits != LoadingUnits::PoundsPerSquareFoot)
     {
@@ -655,9 +655,9 @@ std::string FuelModels::getFuelName(int fuelModelNumber) const
     return FuelModelVector_[fuelModelNumber].name_;
 }
 
-double FuelModels::getMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double FuelModels::getMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(FuelModelVector_[fuelModelNumber].moistureOfExtinctionDead_, moistureUnits);
+    return FractionUnits::fromBaseUnits(FuelModelVector_[fuelModelNumber].moistureOfExtinctionDead_, moistureUnits);
 }
 
 double FuelModels::getHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const

@@ -66,9 +66,9 @@ double CrownInputs::getCanopyFirelineIntensity() const
     return canopyUserProvidedFirelineIntensity_;
 }
 
-double CrownInputs::getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double CrownInputs::getMoistureFoliar(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(moistureFoliar_, moistureUnits);
+    return FractionUnits::fromBaseUnits(moistureFoliar_, moistureUnits);
 }
 
 void CrownInputs::setCanopyBaseHeight(double canopyBaseHeight, LengthUnits::LengthUnitsEnum heightUnits)
@@ -91,14 +91,14 @@ void CrownInputs::setCanopyFirelineIntensity(double canopyUserProvidedFirelineIn
     canopyUserProvidedFirelineIntensity_ = canopyUserProvidedFirelineIntensity;
 }
 
-void CrownInputs::setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void CrownInputs::setMoistureFoliar(double moistureFoliar, FractionUnits::FractionUnitsEnum moistureUnits)
 {
-    moistureFoliar_ = MoistureUnits::toBaseUnits(moistureFoliar, moistureUnits);
+    moistureFoliar_ = FractionUnits::toBaseUnits(moistureFoliar, moistureUnits);
 }
 
 void CrownInputs::updateCrownInputs(double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyBaseHeightUnits, 
     double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits,
-    double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits)
+    double moistureFoliar, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     setCanopyBaseHeight(canopyBaseHeight, canopyBaseHeightUnits);
     setCanopyBulkDensity(canopyBulkDensity, densityUnits);
