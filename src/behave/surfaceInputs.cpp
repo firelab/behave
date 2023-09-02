@@ -168,35 +168,35 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
     double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits,
-    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits, double canopyHeight,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
-        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, fractionUnits, canopyHeight, canopyHeightUnits,
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyUnits, canopyHeight, canopyHeightUnits,
         crownRatio);
 
     setPalmettoGallberryAgeOfRough(ageOfRough);
     setPalmettoGallberryHeightOfUnderstory(heightOfUnderstory, canopyHeightUnits);
-    setPalmettoGallberryPalmettoCoverage(palmettoCoverage, fractionUnits);
+    setPalmettoGallberryPalmettoCoverage(palmettoCoverage, canopyUnits);
     setPalmettoGallberryOverstoryBasalArea(overstoryBasalArea, basalAreaUnits);
 }
 
-void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, FractionUnits::FractionUnitsEnum fractionUnits,
+void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, FractionUnits::FractionUnitsEnum curingLevelUnits,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour,
     double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, 
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits, double canopyHeight,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
-        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, fractionUnits, canopyHeight, canopyHeightUnits,
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyUnits, canopyHeight, canopyHeightUnits,
         crownRatio);
 
     setAspenFuelModelNumber(aspenFuelModelNumber);
-    setAspenCuringLevel(aspenCuringLevel, fractionUnits);
+    setAspenCuringLevel(aspenCuringLevel, curingLevelUnits);
     setAspenFireSeverity(aspenFireSeverity);
     setAspenDBH(dbh, dbhUnits);
 }

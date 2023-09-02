@@ -117,7 +117,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
@@ -127,7 +127,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
-    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
@@ -146,7 +146,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
     TwoFuelModelsMethod::TwoFuelModelsMethodEnum  twoFuelModelsMethod = TwoFuelModelsMethod::TwoDimensional;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
@@ -154,12 +154,12 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     double windDirection = 0;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
     double firstFuelModelCoverage = 0;
-    CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits = FractionUnits::Percent;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
-    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
@@ -181,7 +181,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
     double moistureFoliar = 120;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
@@ -191,7 +191,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
-    CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum coverUnits = FractionUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
@@ -261,7 +261,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedSurfaceFireSpreadRate = 19.677584;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
 
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
 
     testName = "Test live moisture of extinction, 5 mph 20 foot uplsope wind";
     double observedLiveMoistureOfExtinction = roundToSixDecimalPlaces(behaveRun.surface.getLiveFuelMoistureOfExtinction(moistureUnits));
@@ -493,7 +493,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindDirection(90);
     behaveRun.surface.setWindSpeed(5, SpeedUnits::MilesPerHour, WindHeightInputMode::TwentyFoot);
     behaveRun.surface.setSlope(30, SlopeUnits::Degrees);
-    behaveRun.surface.setCanopyCover(40, CoverUnits::Percent);
+    behaveRun.surface.setCanopyCover(40, FractionUnits::Percent);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 46.631688;
@@ -593,19 +593,19 @@ void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     double windDirection = 0;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
     double firstFuelModelCoverage = 0;
-    CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits = FractionUnits::Percent;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
-    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
@@ -632,13 +632,13 @@ void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
     std::string testName = "Test Western Aspen spread rate";
     behaveRun.surface.setIsUsingWesternAspen(true);
     int aspenFuelModel = 3;
-    double aspenCuringLevel = 50.0;
-    CuringLevelUnits::CuringLevelEnum curingLevelUnits = CuringLevelUnits::Percent;
+    double aspenFractionUnits = 50.0;
+    FractionUnits::FractionUnitsEnum curingLevelUnits = FractionUnits::Percent;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
-    CoverUnits::CoverUnitsEnum canopyCoverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
     double canopyHeight = 30.0;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
     double crownRatio = 0.50;
@@ -650,14 +650,14 @@ void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
     double moistureHundredHour = 8.0;
     double moistureLiveHerbaceous = 60.0;
     double moistureLiveWoody = 90.0;
-    MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum mositureUnits = FractionUnits::Percent;
     double windSpeed = 5.0;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     double windDirection = 0;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
 
-    behaveRun.surface.updateSurfaceInputsForWesternAspen(aspenFuelModel, aspenCuringLevel, curingLevelUnits, aspenFireSeverity, dbh, dbhUnits,
+    behaveRun.surface.updateSurfaceInputsForWesternAspen(aspenFuelModel, aspenFractionUnits, curingLevelUnits, aspenFireSeverity, dbh, dbhUnits,
         moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, mositureUnits,
         windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect,
         canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
@@ -953,7 +953,7 @@ void testTwoFuelModels(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
     setSurfaceInputsForTwoFuelModelsLowMoistureScenario(behaveRun);
 
-    CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum coverUnits = FractionUnits::Percent;
 
     testName = "First fuel model coverage 0";
     behaveRun.surface.setTwoFuelModelsFirstFuelModelCoverage(0, coverUnits);
@@ -1097,7 +1097,7 @@ void testCrownModuleRothermel(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test fire type Rothermel, Surface fire expected";
     setCrownInputsLowMoistureScenario(behaveRun);
-    behaveRun.crown.setMoistureOneHour(20, MoistureUnits::Percent);
+    behaveRun.crown.setMoistureOneHour(20, FractionUnits::Percent);
     behaveRun.crown.doCrownRunRothermel();
     expectedFireType = (int)FireType::Surface;
     observedFireType = (int)behaveRun.crown.getFireType();
@@ -1158,7 +1158,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     double moistureLiveHerbaceous = 0.0;
     double moistureLiveWoody = 117.0;
     double moistureFoliar = 100;
-    MoistureUnits::MoistureUnitsEnum moistureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
     double windSpeed = 2187.226624;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::FeetPerMinute;
@@ -1168,7 +1168,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
     double aspect = 0;
     double canopyCover = 50;
-    CoverUnits::CoverUnitsEnum coverUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum coverUnits = FractionUnits::Percent;
     double canopyHeight = 38.104626;
     double canopyBaseHeight = 2.952756;
     LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
@@ -1236,7 +1236,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     moistureLiveHerbaceous = 0.0;
     moistureLiveWoody = 117.0;
     moistureFoliar = 100;
-    moistureUnits = MoistureUnits::Percent;
+    moistureUnits = FractionUnits::Percent;
     windSpeed = 24.854848;
     windHeightInputMode = WindHeightInputMode::TwentyFoot;
     windSpeedUnits = SpeedUnits::MilesPerHour;
@@ -1246,7 +1246,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     slopeUnits = SlopeUnits::Percent;
     aspect = 0;
     canopyCover = 50;
-    coverUnits = CoverUnits::Percent;
+    coverUnits = FractionUnits::Percent;
     canopyHeight = 71.631562;
     canopyBaseHeight = 4.92126;
     canopyHeightUnits = LengthUnits::Feet;
@@ -1475,9 +1475,9 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
     double expectedFirebrandIgnitionProbability = 0;
     double expectedLightningIgnitionProbability = 0;
    
-    MoistureUnits::MoistureUnitsEnum mositureUnits = MoistureUnits::Percent;
+    FractionUnits::FractionUnitsEnum mositureUnits = FractionUnits::Percent;
     TemperatureUnits::TemperatureUnitsEnum temperatureUnits = TemperatureUnits::Fahrenheit;
-    CoverUnits::CoverUnitsEnum sunShadeUnits = CoverUnits::Percent;
+    FractionUnits::FractionUnitsEnum sunShadeUnits = FractionUnits::Percent;
     LengthUnits::LengthUnitsEnum duffDepthUnits = LengthUnits::Inches;
 
     expectedFirebrandIgnitionProbability = 0.54831705;
@@ -1487,11 +1487,11 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
         temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
 
     testName = "Test firebrand ignition probability for Douglas fir duff";
-    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Fraction);
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(FractionUnits::Fraction);
     reportTestResult(testInfo, testName, observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, error_tolerance);
 
     testName = "Test lightning ignition probability for Douglas fir duff";
-    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::Fraction);
+    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(FractionUnits::Fraction);
     reportTestResult(testInfo, testName, observedLightningIgnitionProbability, expectedLightningIgnitionProbability, error_tolerance);
 
     moistureOneHour = 7.0;
@@ -1509,11 +1509,11 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
         temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
 
     testName = "Test firebrand ignition probability for Lodgepole pine duff";
-    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(ProbabilityUnits::Percent);
+    observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(FractionUnits::Percent);
     reportTestResult(testInfo, testName, observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, error_tolerance);
 
     testName = "Test lightning ignition probability for Lodgepole pine duff";
-    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(ProbabilityUnits::Percent);
+    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(FractionUnits::Percent);
     reportTestResult(testInfo, testName, observedLightningIgnitionProbability, expectedLightningIgnitionProbability, error_tolerance);
 
     std::cout << "Finished testing Ignite module\n\n";
