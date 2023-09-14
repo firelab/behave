@@ -48,6 +48,8 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSafetyModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testContainModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun);
+void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
@@ -78,6 +80,8 @@ int main()
     testSafetyModule(testInfo, behaveRun);
     testContainModule(testInfo, behaveRun);
     testMortalityModule(testInfo, behaveRun);
+    testFineDeadFuelMoistureTool(testInfo, behaveRun);
+    testSlopeTool(testInfo, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     if(testInfo.numPassed > 0)
@@ -338,7 +342,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
     testName = "Test moisture scenario input mode, D1L1 Scenario, 5 mph 20 foot uplsope wind";
     behaveRun.surface.setMoistureInputMode(MoistureInputMode::MoistureScenario);
     std::string moistureScenarioName = "D1L1";
-    behaveRun.surface.setMoistureScenarioByName(moistureScenarioName);
+    behaveRun.surface.setCurrentMoistureScenarioByName(moistureScenarioName);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 15.023945;
@@ -346,7 +350,7 @@ void testSurfaceSingleFuelModel(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test moisture scenario input mode, D2L3 Scenario, 5 mph 20 foot uplsope wind";
     moistureScenarioName = "d2L3"; // testing case insensitivity
-    behaveRun.surface.setMoistureScenarioByName(moistureScenarioName);
+    behaveRun.surface.setCurrentMoistureScenarioByName(moistureScenarioName);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     expectedSurfaceFireSpreadRate = 1.978840;
@@ -1222,7 +1226,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
 
     testName = "Test Scott and Reinhardt crown fire spread rate with moisture scenario D3L2";
     behaveRun.crown.setMoistureInputMode(MoistureInputMode::MoistureScenario);
-    behaveRun.crown.setMoistureScenarioByName("D3L2");
+    behaveRun.crown.setCurrentMoistureScenarioByName("D3L2");
     behaveRun.crown.doCrownRunScottAndReinhardt();
     expectedFinalCrownFireSpreadRate = 68.334996;
     observedFinalCrownFireSpreadRate = roundToSixDecimalPlaces(behaveRun.crown.getFinalSpreadRate(SpeedUnits::ChainsPerHour));
@@ -1647,8 +1651,232 @@ void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Mortality module\n";
 
-    // TODO: Create test for Mortality module
+    // TODO: Create tests for Mortality module
     // Stub for now
 
     std::cout << "Finished testing Mortality module\n\n";
+}
+
+void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    int observedReferenceMoisture = 0;
+    int observedCorrectionMoisture = 0;
+    int observedFineDeadFuelMoisture = 0;
+
+    int expectedReferenceMoisture = 0;
+    int expectedCorrectionMoisture = 0;
+    int expectedFineDeadFuelMoisture = 0;
+
+    int aspectIndex = 0;
+    int dryBulbIndex = 0;
+    int elevationIndex = 0;
+    int monthIndex = 0;
+    int relativeHumidityIndex = 0;
+    int shadingIndex = 0;
+    int slopeIndex = 0;
+    int timeOfDayIndex = 0;
+
+    string testName = "";
+
+    std::cout << "Testing Fine Dead Fuel Moisture Tool\n";
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = 1;
+    expectedCorrectionMoisture = 2;
+    expectedFineDeadFuelMoisture = 3;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all zero index values\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all zero index values\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture for all zero index values\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    aspectIndex++;
+    dryBulbIndex++;
+    elevationIndex++;
+    monthIndex++;
+    relativeHumidityIndex++;
+    shadingIndex++;
+    slopeIndex++;
+    timeOfDayIndex++;
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = 2;
+    expectedCorrectionMoisture = 4;
+    expectedFineDeadFuelMoisture = 6;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all one index values\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all one index values\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture for all one index values\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    aspectIndex = behaveRun.fineDeadFuelMoistureTool.getAspectIndexSize() - 1;
+    dryBulbIndex = behaveRun.fineDeadFuelMoistureTool.getDryBulbTemperatureIndexSize() - 1;
+    elevationIndex = behaveRun.fineDeadFuelMoistureTool.getElevationIndexSize() - 1;
+    monthIndex = behaveRun.fineDeadFuelMoistureTool.getMonthIndexSize() - 1;
+    relativeHumidityIndex = behaveRun.fineDeadFuelMoistureTool.getRelativeHumidityIndexSize() - 1;
+    shadingIndex = behaveRun.fineDeadFuelMoistureTool.getShadingIndexSize() - 1;
+    slopeIndex = behaveRun.fineDeadFuelMoistureTool.getSlopeIndexSize() - 1;
+    timeOfDayIndex = behaveRun.fineDeadFuelMoistureTool.getTimeOfDayIndexSize() - 1;
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = 12;
+    expectedCorrectionMoisture = 6;
+    expectedFineDeadFuelMoisture = 18;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all max index values\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all max index values\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture for max one index values\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    aspectIndex++;
+    dryBulbIndex++;
+    elevationIndex++;
+    monthIndex++;
+    relativeHumidityIndex++;
+    shadingIndex++;
+    slopeIndex++;
+    timeOfDayIndex++;
+
+    behaveRun.fineDeadFuelMoistureTool.calculateByIndex(aspectIndex, dryBulbIndex, elevationIndex, monthIndex, relativeHumidityIndex, shadingIndex, slopeIndex, timeOfDayIndex);
+    expectedReferenceMoisture = -1;
+    expectedCorrectionMoisture = -1;
+    expectedFineDeadFuelMoisture = -1;
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    testName = "Test reference moisture for all indices out of bounds\n";
+    reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
+    testName = "Test correction moisture for all indices out of bounds\n";
+    reportTestResult(testInfo, testName, observedCorrectionMoisture, expectedCorrectionMoisture, error_tolerance);
+    testName = "Test fine dead fuel moisture all indices out of bounds\n";
+    reportTestResult(testInfo, testName, observedFineDeadFuelMoisture, expectedFineDeadFuelMoisture, error_tolerance);
+
+    std::cout << "Finished testing Fine Dead Fuel Moisture Tool\n\n";
+}
+
+void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::cout << "Testing Slope Tool\n";
+
+    int mapRepresentativeFraction = 0;
+    double mapDistance = 0.0;
+    LengthUnits::LengthUnitsEnum mapDistanceUnits = LengthUnits::Inches;
+    double contourInterval = 0.0;
+    double numberOfContours = 0.0;
+    LengthUnits::LengthUnitsEnum contourUnits = LengthUnits::Feet;
+    LengthUnits::LengthUnitsEnum slopeDistanceUnits = LengthUnits::Feet;
+    LengthUnits::LengthUnitsEnum slopeElevationUnits = LengthUnits::Feet;
+    string testName = "";
+
+    double observedSlopeSteepnessDegrees = 0.0;
+    double expectedSlopeSteepnessDegrees = 0.0;
+    double observedSlopeSteepnessPercent = 0.0;
+    double expectedSlopeSteepnessPercent = 0.0;
+    double observedSlopeDistance = 0.0;
+    double expectedSlopeDistance = 0.0;
+    double observedSlopeElevationChange = 0.0;
+    double expectedSlopeElevationChange = 0.0;
+
+    mapRepresentativeFraction = 1980;
+    mapDistance = 3.6;
+    contourInterval = 50.0;
+    numberOfContours = 4.1;
+    behaveRun.slopeTool.calculateSlopeFromMapMeasurements(mapRepresentativeFraction, mapDistance, mapDistanceUnits, contourInterval, numberOfContours, contourUnits);
+
+    testName = "Test slope in degrees from map measurements, imperial units";
+    expectedSlopeSteepnessDegrees = 19.0;
+    observedSlopeSteepnessDegrees = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Degrees)); // BehavePlus 6 tool always rounds to nearest integer
+    reportTestResult(testInfo, testName, observedSlopeSteepnessDegrees, expectedSlopeSteepnessDegrees, error_tolerance);
+
+    testName = "Test slope in percent from map measurements, imperial units";
+    expectedSlopeSteepnessPercent = 35.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Percent));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeSteepnessPercent, error_tolerance);
+
+    testName = "Test slope elevation change from map measurements, imperial units";
+    expectedSlopeElevationChange = 205.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeElevationChangeFromMapMeasurements(LengthUnits::Feet));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeElevationChange, error_tolerance);
+
+    testName = "Test slope horizontal distance from map measurements, imperial units";
+    expectedSlopeDistance = 594.0;
+    observedSlopeDistance = std::round(behaveRun.slopeTool.getSlopeHorizontalDistanceFromMapMeasurements(slopeDistanceUnits));
+    reportTestResult(testInfo, testName, observedSlopeDistance, expectedSlopeDistance, error_tolerance);
+
+    mapRepresentativeFraction = 3960;
+    mapDistance = 3.0;
+    mapDistanceUnits = LengthUnits::Centimeters;
+    contourInterval = 15.0;
+    numberOfContours = 5.5;
+    contourUnits = LengthUnits::Meters;
+    slopeDistanceUnits = LengthUnits::Meters;
+    slopeElevationUnits = LengthUnits::Meters;
+    behaveRun.slopeTool.calculateSlopeFromMapMeasurements(mapRepresentativeFraction, mapDistance, mapDistanceUnits, contourInterval, numberOfContours, contourUnits);
+
+    testName = "Test slope in degrees from map measurements, metric units";
+    expectedSlopeSteepnessDegrees = 35.0;
+    observedSlopeSteepnessDegrees = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Degrees));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessDegrees, expectedSlopeSteepnessDegrees, error_tolerance);
+
+    testName = "Test slope in percent from map measurements, metric units";
+    expectedSlopeSteepnessPercent = 69.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeFromMapMeasurements(SlopeUnits::Percent));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeSteepnessPercent, error_tolerance);
+
+    testName = "Test slope elevation change from map measurements, metric units";
+    expectedSlopeElevationChange = 82.0;
+    observedSlopeSteepnessPercent = std::round(behaveRun.slopeTool.getSlopeElevationChangeFromMapMeasurements(LengthUnits::Meters));
+    reportTestResult(testInfo, testName, observedSlopeSteepnessPercent, expectedSlopeElevationChange, error_tolerance);
+
+    testName = "Test slope horizontal distance from map measurements, metric units";
+    expectedSlopeDistance = 119.0;
+    observedSlopeDistance = std::round(behaveRun.slopeTool.getSlopeHorizontalDistanceFromMapMeasurements(slopeDistanceUnits));
+    reportTestResult(testInfo, testName, observedSlopeDistance, expectedSlopeDistance, error_tolerance);
+
+    const int numHorirzonalDistances = behaveRun.slopeTool.getNumberOfHorizontalDistances();
+    std::vector<double> observedHoriztonalDistances(numHorirzonalDistances);
+    std::vector<double> expectedHoriztonalDistances(numHorirzonalDistances);
+    std::vector<string> horizontalDistanceIndexNames(numHorirzonalDistances);
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::UPSLOPE_ZERO_DEGREES] = "UPSLOPE_ZERO_DEGREES";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::FIFTEEN_DEGREES_FROM_UPSLOPE] = "FIFTEEN_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::THIRTY_DEGREES_FROM_UPSLOPE] = "THIRTY_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::FORTY_FIVE_DEGREES_FROM_UPSLOPE] = "FORTY_FIVE_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::SIXTY_DEGREES_FROM_UPSLOPE] = "SIXTY_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::SEVENTY_FIVE_DEGREES_FROM_UPSLOPE] = "SEVENTY_FIVE_DEGREES_FROM_UPSLOPE";
+    horizontalDistanceIndexNames[HorizontalDistanceIndex::CROSS_SLOPE_NINETY_DEGREES] = "CROSS_SLOPE_NINETY_DEGREES";
+
+    double calculatedMapDistance = 3.0;
+    mapDistanceUnits = LengthUnits::Inches;
+    double maxSlopeSteepness = 30.0;
+
+    expectedHoriztonalDistances[HorizontalDistanceIndex::UPSLOPE_ZERO_DEGREES] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::FIFTEEN_DEGREES_FROM_UPSLOPE] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::THIRTY_DEGREES_FROM_UPSLOPE] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::FORTY_FIVE_DEGREES_FROM_UPSLOPE] = 2.9;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::SIXTY_DEGREES_FROM_UPSLOPE] = 3.0;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::SEVENTY_FIVE_DEGREES_FROM_UPSLOPE] = 3.0;
+    expectedHoriztonalDistances[HorizontalDistanceIndex::CROSS_SLOPE_NINETY_DEGREES] = 3.0;
+
+    behaveRun.slopeTool.calculateHorizontalDistance(calculatedMapDistance, mapDistanceUnits, maxSlopeSteepness, SlopeUnits::Percent);
+
+    for (int i = 0; i < numHorirzonalDistances; i++)
+    {
+        testName = "Test calculateHorizontalDistance() " + horizontalDistanceIndexNames[i] + " distance in feet";
+        observedHoriztonalDistances[i] = std::round(behaveRun.slopeTool.getHorizontalDistanceAtIndex(i, LengthUnits::Feet) * 10.0) / 10.0; // BehavePlus 6 tool always rounds to nearest tenths place
+        reportTestResult(testInfo, testName, observedHoriztonalDistances[i], expectedHoriztonalDistances[i], error_tolerance);
+    }
+
+    std::cout << "Finished testing  Slope Tool\n\n";
 }

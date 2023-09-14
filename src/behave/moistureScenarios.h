@@ -31,6 +31,8 @@
 #include <string>
 #include <vector>
 
+#include "behaveUnits.h"
+
 class MoistureScenarios
 {
 public:
@@ -45,30 +47,30 @@ public:
     int getNumberOfMoistureScenarios();
     // If a moisture scenerio having "name" is found, returns that scenario's vector index 
     // Otherwise returns -1
-    int getMoistureScenarioIndexByName(const std::string name);
-    bool getIsMoistureScenarioDefinedByName(const std::string name);
-    std::string getMoistureScenarioDescriptionByName(const std::string name);
-    double getMoistureScenarioOneHourByName(const std::string name);
-    double getMoistureScenarioTenHourByName(const std::string name);
-    double getMoistureScenarioHundredHourByName(const std::string name);
-    double getMoistureScenarioLiveHerbaceousByName(const std::string name);
-    double getMoistureScenarioLiveWoodyByName(const std::string name);
+    int getMoistureScenarioIndexByName(std::string name);
+    bool getIsMoistureScenarioDefinedByName(std::string name);
+    std::string getMoistureScenarioDescriptionByName(std::string name);
+    double getMoistureScenarioOneHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioTenHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioHundredHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveHerbaceousByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveWoodyByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits);
   
     // Getters by vector index
-    bool getIsMoistureScenarioDefinedByIndex(const int index);
-    std::string getMoistureScenarioNameByIndex(const int index);
-    std::string getMoistureScenarioDescriptionByIndex(const int index);
-    double getMoistureScenarioOneHourByIndex(const int index);
-    double getMoistureScenarioTenHourByIndex(const int index);
-    double getMoistureScenarioHundredHourByIndex(const int index);
-    double getMoistureScenarioLiveHerbaceousByIndex(const int index);
-    double getMoistureScenarioLiveWoodyByIndex(const int index);
+    bool getIsMoistureScenarioDefinedByIndex(int index);
+    std::string getMoistureScenarioNameByIndex(int index);
+    std::string getMoistureScenarioDescriptionByIndex(int index);
+    double getMoistureScenarioOneHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioTenHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioHundredHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveHerbaceousByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveWoodyByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits);
    
 protected:
     void memberwiseCopyAssignment(const MoistureScenarios& rhs);
-    void setMoistureScenarioRecord(const std::string name, const std::string description,
-        const double moistureOneHour, const double moistureTenHour, const double moistureHundredHour,
-        const double moistureLiveHerbaceous, double moistureLiveWoody);
+    void setMoistureScenarioRecord(std::string name, std::string description,
+        double moistureOneHour, double moistureTenHour, double moistureHundredHour,
+        double moistureLiveHerbaceous, double moistureLiveWoody);
     void populateMoistureScenarios();
 
     struct MoistureScenarioRecord

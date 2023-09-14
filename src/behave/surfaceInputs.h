@@ -57,6 +57,7 @@ public:
     void setMoistureLiveWoody(double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureDeadAggregate(double moistureDeadAggregate, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureLiveAggregate(double moistureLiveAggregate, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureScenarios(MoistureScenarios& moistureScenarios);
     bool setMoistureScenarioByName(std::string moistureScenarioName);
     bool setMoistureScenarioByIndex(int moistureScenarioIndex);
     void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
@@ -103,6 +104,23 @@ public:
     MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
     std::string getCurrentMoistureScenarioName() const;
     int getCurrentMoistureScenarioIndex() const;
+    int getNumberOfMoistureScenarios() const;
+    int getMoistureScenarioIndexByName(std::string name) const;
+    bool getIsMoistureScenarioDefinedByName(std::string name) const;
+    std::string getMoistureScenarioDescriptionByName(std::string name) const;
+    double getMoistureScenarioOneHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioTenHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioHundredHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveHerbaceousByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveWoodyByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    bool getIsMoistureScenarioDefinedByIndex(int index) const;
+    std::string getMoistureScenarioNameByIndex(int index) const;
+    std::string getMoistureScenarioDescriptionByIndex(int index) const;
+    double getMoistureScenarioOneHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioTenHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioHundredHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveHerbaceousByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveWoodyByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
@@ -183,7 +201,6 @@ public:
     double getChaparralTotalFuelLoad(LoadingUnits::LoadingUnitsEnum fuelLoadUnits) const;
     bool getIsUsingChaparral() const;
 
-    MoistureScenarios* moistureScenarios; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
 protected:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);
    
@@ -209,6 +226,7 @@ protected:
     std::string currentMoistureScenarioName_;  // Currently used moisture scenario name
     int currentMoistureScenarioIndex_;         // Currently used moisture scenario vector index
     std::vector<double> moistureValuesBySizeClass_; // Stores moisture values which will be used during surface and crown runs
+    MoistureScenarios* moistureScenarios_; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
 
     // Two Fuel Models inputs
     bool isUsingTwoFuelModels_;         // Whether fire spread calculation is using Two Fuel Models

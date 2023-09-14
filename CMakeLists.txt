@@ -67,6 +67,7 @@ SET(SOURCE
     src/behave/ContainSim.cpp
     src/behave/crown.cpp
     src/behave/crownInputs.cpp
+    src/behave/fineDeadFuelMoistureTool.cpp
     src/behave/fireSize.cpp
     src/behave/fuelModels.cpp
     src/behave/ignite.cpp
@@ -80,6 +81,7 @@ SET(SOURCE
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
     src/behave/safety.cpp
+    src/behave/slopeTool.cpp
     src/behave/species_master_table.cpp
     src/behave/spot.cpp
     src/behave/spotInputs.cpp
@@ -118,6 +120,7 @@ SET(HEADERS
     src/behave/randfuel.h
     src/behave/randthread.h
     src/behave/safety.h
+    src/behave/slopeTool.h
     src/behave/species_master_table.h
     src/behave/spot.h
     src/behave/spotInputs.h
