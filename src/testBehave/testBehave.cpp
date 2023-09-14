@@ -101,9 +101,13 @@ int main()
     if(testInfo.numFailed > 0)
     {
         std::cout << testInfo.reset_text_color;
+
+#ifndef DEBUG
+        exit(1);
+#endif
     }
 
-#ifndef NDEBUG
+#ifdef DEBUG
     // Make Visual Studio wait while in debug mode
     std::cout << "Press Enter to continue . . .";
     std::cin.get();
