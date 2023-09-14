@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build-project:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -19,4 +19,4 @@ jobs:
         uses: threeal/cmake-action@v1.3.0
 
       - name: Build the project
-        runs: cmake --build build
+        run: cmake --build build
