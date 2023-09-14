@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up CMake
+        uses: lukka/run-cmake@v3
+        with:
+          cmakeListsOrSettingsJson: 'CMakeLists.txt'
+
+      - name: Create build directory
+        run: cmake --B build
+
+      - name: Build project
+        run: cmake --build build
