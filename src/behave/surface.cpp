@@ -30,9 +30,10 @@
 ******************************************************************************/
 
 #include "surface.h"
-
 #include "surfaceTwoFuelModels.h"
 #include "surfaceInputs.h"
+
+#include <cmath>
 
 Surface::Surface(const FuelModels& fuelModels)
     : surfaceInputs_(),
