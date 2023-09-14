@@ -196,7 +196,7 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
         // Calculate load values for Palmetto-Gallberry
         double ageOfRough = surfaceInputs_->getPalmettoGallberryAgeOfRough();
         double heightOfUnderstory = surfaceInputs_->getPalmettoGallberryHeightOfUnderstory(LengthUnits::Feet);
-        double palmettoCoverage = surfaceInputs_->getPalmettoGallberryPalmettoCoverage(CoverUnits::Fraction);
+        double palmettoCoverage = surfaceInputs_->getPalmettoGallberryPalmettoCoverage(FractionUnits::Fraction);
         double overstoryBasalArea = surfaceInputs_->getPalmettoGallberryOverstoryBasalArea(BasalAreaUnits::SquareFeetPerAcre);
 
         loadDead_[0] = palmettoGallberry_.calculatePalmettoGallberyDeadFineFuelLoad(ageOfRough, heightOfUnderstory);
@@ -220,7 +220,7 @@ void SurfaceFuelbedIntermediates::setFuelLoad()
     {
         // Calculate load values for Western Aspen
         int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
-        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel(CuringLevelUnits::Fraction);
+        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel(FractionUnits::Fraction);
 
         loadDead_[0] = westernAspen_.calculateAspenLoadDeadOneHour(aspenFuelModelNumber, aspenCuringLevel);
         loadDead_[1] = westernAspen_.calculateAspenLoadDeadTenHour(aspenFuelModelNumber);
@@ -278,29 +278,29 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
 {
     if (surfaceInputs_->getIsUsingChaparral())
     {
-        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(MoistureUnits::Fraction);
-        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(MoistureUnits::Fraction);
-        moistureDead_[2] = surfaceInputs_->getMoistureTenHour(MoistureUnits::Fraction);
-        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour(MoistureUnits::Fraction);
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(FractionUnits::Fraction);
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(FractionUnits::Fraction);
+        moistureDead_[2] = surfaceInputs_->getMoistureTenHour(FractionUnits::Fraction);
+        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour(FractionUnits::Fraction);
         moistureDead_[4] = 0.0;
 
-        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous(MoistureUnits::Fraction);
-        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
-        moistureLive_[2] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
-        moistureLive_[3] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
-        moistureLive_[4] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous(FractionUnits::Fraction);
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
+        moistureLive_[2] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
+        moistureLive_[3] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
+        moistureLive_[4] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
     }
     else if (surfaceInputs_->getIsUsingPalmettoGallberry())
     {
-        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(MoistureUnits::Fraction);
-        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(MoistureUnits::Fraction);
-        moistureDead_[2] = surfaceInputs_->getMoistureOneHour(MoistureUnits::Fraction);
-        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour(MoistureUnits::Fraction);
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(FractionUnits::Fraction);
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(FractionUnits::Fraction);
+        moistureDead_[2] = surfaceInputs_->getMoistureOneHour(FractionUnits::Fraction);
+        moistureDead_[3] = surfaceInputs_->getMoistureHundredHour(FractionUnits::Fraction);
         moistureDead_[4] = 0.0;
 
-        moistureLive_[0] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
-        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
-        moistureLive_[2] = surfaceInputs_->getMoistureLiveHerbaceous(MoistureUnits::Fraction);
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
+        moistureLive_[2] = surfaceInputs_->getMoistureLiveHerbaceous(FractionUnits::Fraction);
         moistureLive_[3] = 0.0;
         moistureLive_[4] = 0.0;
     }
@@ -312,13 +312,13 @@ void SurfaceFuelbedIntermediates::setMoistureContent()
             moistureLive_[i] = 0;
         }
 
-        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(MoistureUnits::Fraction);
-        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(MoistureUnits::Fraction);
-        moistureDead_[2] = surfaceInputs_->getMoistureHundredHour(MoistureUnits::Fraction);
-        moistureDead_[3] = surfaceInputs_->getMoistureOneHour(MoistureUnits::Fraction);
+        moistureDead_[0] = surfaceInputs_->getMoistureOneHour(FractionUnits::Fraction);
+        moistureDead_[1] = surfaceInputs_->getMoistureTenHour(FractionUnits::Fraction);
+        moistureDead_[2] = surfaceInputs_->getMoistureHundredHour(FractionUnits::Fraction);
+        moistureDead_[3] = surfaceInputs_->getMoistureOneHour(FractionUnits::Fraction);
 
-        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous(MoistureUnits::Fraction);
-        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(MoistureUnits::Fraction);
+        moistureLive_[0] = surfaceInputs_->getMoistureLiveHerbaceous(FractionUnits::Fraction);
+        moistureLive_[1] = surfaceInputs_->getMoistureLiveWoody(FractionUnits::Fraction);
     }
 }
 
@@ -338,7 +338,7 @@ void SurfaceFuelbedIntermediates::setDeadFuelMoistureOfExtinction()
     }
     else
     {
-        moistureOfExtinction_[FuelLifeState::Dead] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_, MoistureUnits::Fraction);
+        moistureOfExtinction_[FuelLifeState::Dead] = fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber_, FractionUnits::Fraction);
     }
 }
 
@@ -386,7 +386,7 @@ void SurfaceFuelbedIntermediates::setSAVR()
     {
         // Calculate SAVR values for Western Aspen
         int aspenFuelModelNumber = surfaceInputs_->getAspenFuelModelNumber();
-        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel(CuringLevelUnits::Fraction);
+        double aspenCuringLevel = surfaceInputs_->getAspenCuringLevel(FractionUnits::Fraction);
 
         savrDead_[0] = westernAspen_.calculateAspenSavrDeadOneHour(aspenFuelModelNumber, aspenCuringLevel);
         savrDead_[1] = westernAspen_.calculateAspenSavrDeadTenHour();
@@ -557,11 +557,11 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
 
     if(isMoistureDeadAggregated)
     {
-        weightedMoisture_[FuelLifeState::Dead] = surfaceInputs_->getMoistureDeadAggregateValue(MoistureUnits::Fraction);
+        weightedMoisture_[FuelLifeState::Dead] = surfaceInputs_->getMoistureDeadAggregateValue(FractionUnits::Fraction);
     }
     if(isMoistureLiveAggregated)
     {
-        weightedMoisture_[FuelLifeState::Live] = surfaceInputs_->getMoistureLiveAggregateValue(MoistureUnits::Fraction);
+        weightedMoisture_[FuelLifeState::Live] = surfaceInputs_->getMoistureLiveAggregateValue(FractionUnits::Fraction);
     }
 
     for (int i = 0; i < FuelConstants::MaxParticles; i++)

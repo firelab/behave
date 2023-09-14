@@ -42,18 +42,18 @@ public:
     void setCanopyBulkDensity(double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyFlameLength(double canopyUserProvidedFlameLength);
     void setCanopyFirelineIntensity(double canopyUserProvidedFirelineIntensity);
-    void setMoistureFoliar(double moistureFoliar, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureFoliar(double moistureFoliar, FractionUnits::FractionUnitsEnum moistureUnits);
 
     double getCanopyBaseHeight(LengthUnits::LengthUnitsEnum heightUnits) const;
     double getCanopyBulkDensity(DensityUnits::DensityUnitsEnum densityUnits) const;
     double getCanopyFlameLength() const;
     double getCanopyFirelineIntensity() const;
  
-    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureFoliar(FractionUnits::FractionUnitsEnum moistureUnits) const;
 
     void updateCrownInputs(double canopyBaseHeight, LengthUnits::LengthUnitsEnum heightUnits, 
         double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits, double moistureFoliar, 
-        MoistureUnits::MoistureUnitsEnum moistureUnits);
+        FractionUnits::FractionUnitsEnum moistureUnits);
 
 protected:
     double canopyBaseHeight_; //Canopy base height(ft)

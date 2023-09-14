@@ -254,60 +254,6 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     return value;
 }
 
-double CoverUnits::toBaseUnits(double value, CoverUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
-double MortalityRateUnits::toBaseUnits(double value, MortalityRateUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double MortalityRateUnits::fromBaseUnits(double value, MortalityRateUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
-double CuringLevelUnits::toBaseUnits(double value, CuringLevelEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double CuringLevelUnits::fromBaseUnits(double value, CuringLevelEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
 double FractionUnits::toBaseUnits(double value, FractionUnitsEnum units)
 {
     if (units == Percent)
@@ -318,24 +264,6 @@ double FractionUnits::toBaseUnits(double value, FractionUnitsEnum units)
 }
 
 double FractionUnits::fromBaseUnits(double value, FractionUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
-double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double MoistureUnits::fromBaseUnits(double value, MoistureUnitsEnum units)
 {
     if (units == Percent)
     {
@@ -702,24 +630,6 @@ double TemperatureUnits::fromBaseUnits(double value, TemperatureUnitsEnum units)
         {
             ; // TODO: Handle error
         }
-    }
-    return value;
-}
-
-double ProbabilityUnits::toBaseUnits(double value, ProbabilityUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double ProbabilityUnits::fromBaseUnits(double value, ProbabilityUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
     }
     return value;
 }

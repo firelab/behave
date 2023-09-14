@@ -65,7 +65,7 @@ public:
     FireSeverity getFireSeverity() const;
     double getBarkThickness(LengthUnits::LengthUnitsEnum barkThicknessUnits) const;
 
-    double calculateMortality(ProbabilityUnits::ProbabilityUnitsEnum probablityUnits);
+    double calculateMortality(FractionUnits::FractionUnitsEnum probablityUnits);
 
     // Species Master Table Interface
     string getSpeciesCodeAtSpeciesTableIndex(int index) const;
@@ -99,11 +99,11 @@ public:
     std::vector<SpeciesMasterTableRecord> getSpeciesRecordVectorForRegionAndEquationType(RegionCode region, EquationType equationType) const;
 
     // Mortality outputs getters
-    double getProbabilityOfMortality(ProbabilityUnits::ProbabilityUnitsEnum probabilityUnits) const;   // Individual Species Probility of Mortality
+    double getProbabilityOfMortality(FractionUnits::FractionUnitsEnum probabilityUnits) const;   // Individual Species Probility of Mortality
     double getTotalPrefireTrees() const;        // Total Prefire Trees               
     double getKilledTrees() const;
-    double getTreeCrownLengthScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const;
-    double getTreeCrownVolumeScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const;
+    double getTreeCrownLengthScorched(FractionUnits::FractionUnitsEnum fractionUnits) const;
+    double getTreeCrownVolumeScorched(FractionUnits::FractionUnitsEnum fractionUnits) const;
 
     double getBasalAreaPrefire() const;         // Prefire Basal Area                
     double getBasalAreaKillled() const;         // Basal Area of Killed trees        

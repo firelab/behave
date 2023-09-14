@@ -30,9 +30,10 @@
 ******************************************************************************/
 
 #include "surface.h"
-
 #include "surfaceTwoFuelModels.h"
 #include "surfaceInputs.h"
+
+#include <cmath>
 
 Surface::Surface(const FuelModels& fuelModels)
     : surfaceInputs_(),
@@ -344,14 +345,14 @@ double Surface::getFireArea(AreaUnits::AreaUnitsEnum areaUnits, double elapsedTi
     return size_.getFireArea(false, areaUnits, elapsedTime, timeUnits);
 }
 
-double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getCharacteristicMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getWeightedMoistureByLifeState(lifeState), moistureUnits);
+    return FractionUnits::fromBaseUnits(surfaceFire_.getWeightedMoistureByLifeState(lifeState), moistureUnits);
 }
 
-double Surface::getLiveFuelMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getLiveFuelMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::Live), moistureUnits);
+    return FractionUnits::fromBaseUnits(surfaceFire_.getMoistureOfExtinctionByLifeState(FuelLifeState::Live), moistureUnits);
 }
 
 double Surface::getCharacteristicSAVR(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const
@@ -367,9 +368,9 @@ double Surface::getPackingRatio() const {
   return surfaceFire_.getPackingRatio();
 }
 
-void Surface::setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits)
+void Surface::setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits)
 {
-    surfaceInputs_.setCanopyCover(canopyCover, coverUnits);
+    surfaceInputs_.setCanopyCover(canopyCover, canopyUnits);
 }
 
 void Surface::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits)
@@ -405,7 +406,7 @@ double Surface::getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnu
     return fuelModels_->getFuelbedDepth(fuelModelNumber, lengthUnits);
 }
 
-double Surface::getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber, moistureUnits);
 }
@@ -490,37 +491,37 @@ int Surface::getFuelModelNumber() const
   return surfaceInputs_.getFuelModelNumber();
 }
 
-double Surface::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureOneHour(moistureUnits);
 }
 
-double Surface::getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureTenHour(moistureUnits);
 }
 
-double Surface::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureHundredHour(moistureUnits);
 }
 
-double Surface::getMoistureDeadAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureDeadAggregateValue(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureDeadAggregateValue(moistureUnits);
 }
 
-double Surface::getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureLiveHerbaceous(moistureUnits);
 }
 
-double Surface::getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureLiveWoody(moistureUnits);
 }
 
-double Surface::getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureLiveAggregateValue(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureLiveAggregateValue(moistureUnits);
 }
@@ -618,27 +619,27 @@ std::string Surface::getMoistureScenarioDescriptionByName(const std::string name
     return surfaceInputs_.getMoistureScenarioDescriptionByName(name);
 }
 
-double Surface::getMoistureScenarioOneHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioOneHourByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioOneHourByName(name, moistureUnits);
 }
 
-double Surface::getMoistureScenarioTenHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioTenHourByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioTenHourByName(name, moistureUnits);
 }
 
-double Surface::getMoistureScenarioHundredHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioHundredHourByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioHundredHourByName(name, moistureUnits);
 }
 
-double Surface::getMoistureScenarioLiveHerbaceousByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioLiveHerbaceousByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioLiveHerbaceousByName(name, moistureUnits);
 }
 
-double Surface::getMoistureScenarioLiveWoodyByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioLiveWoodyByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioLiveWoodyByName(name, moistureUnits);
 }
@@ -658,34 +659,34 @@ std::string Surface::getMoistureScenarioDescriptionByIndex(const int index) cons
     return surfaceInputs_.getMoistureScenarioDescriptionByIndex(index);
 }
 
-double Surface::getMoistureScenarioOneHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioOneHourByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioOneHourByIndex(index, moistureUnits);
 }
 
-double Surface::getMoistureScenarioTenHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioTenHourByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioTenHourByIndex(index, moistureUnits);
 }
 
-double Surface::getMoistureScenarioHundredHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioHundredHourByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioHundredHourByIndex(index, moistureUnits);
 }
 
-double Surface::getMoistureScenarioLiveHerbaceousByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioLiveHerbaceousByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioLiveHerbaceousByIndex(index, moistureUnits);
 }
 
-double Surface::getMoistureScenarioLiveWoodyByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getMoistureScenarioLiveWoodyByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return surfaceInputs_.getMoistureScenarioLiveWoodyByIndex(index, moistureUnits);
 }
 
-double Surface::getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const
+double Surface::getCanopyCover(FractionUnits::FractionUnitsEnum canopyUnits) const
 {
-    return surfaceInputs_.getCanopyCover(coverUnits);
+    return surfaceInputs_.getCanopyCover(canopyUnits);
 }
 
 double Surface::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const
@@ -728,9 +729,9 @@ double Surface::getHeightOfUnderstory(const LengthUnits::LengthUnitsEnum heightU
     return surfaceInputs_.getPalmettoGallberryHeightOfUnderstory(heightUnits);
 }
 
-double Surface::getPalmettoGallberryCoverage(CoverUnits::CoverUnitsEnum coverUnits) const
+double Surface::getPalmettoGallberryCoverage(FractionUnits::FractionUnitsEnum coverageUnits) const
 {
-    return surfaceInputs_.getPalmettoGallberryPalmettoCoverage(coverUnits);
+    return surfaceInputs_.getPalmettoGallberryPalmettoCoverage(coverageUnits);
 }
 
 double Surface::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const
@@ -738,9 +739,9 @@ double Surface::getOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAr
     return surfaceInputs_.getPalmettoGallberryOverstoryBasalArea(basalAreaUnits);
 }
 
-double Surface::getPalmettoGallberryMoistureOfExtinctionDead(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getPalmettoGallberryMoistureOfExtinctionDead(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryMoistureOfExtinctionDead(), moistureUnits);
+    return FractionUnits::fromBaseUnits(surfaceFire_.getPalmettoGallberryMoistureOfExtinctionDead(), moistureUnits);
 }
 
 double Surface::getPalmettoGallberryHeatOfCombustionDead(HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const
@@ -803,7 +804,7 @@ int Surface::getAspenFuelModelNumber() const
     return surfaceInputs_.getAspenFuelModelNumber();
 }
 
-double Surface::getAspenCuringLevel(CuringLevelUnits::CuringLevelEnum curingLevelUnits) const
+double Surface::getAspenCuringLevel(FractionUnits::FractionUnitsEnum curingLevelUnits) const
 {
     return surfaceInputs_.getAspenCuringLevel(curingLevelUnits);
 }
@@ -906,37 +907,37 @@ void Surface::setFuelModelNumber(int fuelModelNumber)
     surfaceInputs_.setFuelModelNumber(fuelModelNumber);
 }
 
-void Surface::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureOneHour(moistureOneHour, moistureUnits);
 }
 
-void Surface::setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureTenHour(double moistureTenHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureTenHour(moistureTenHour, moistureUnits);
 }
 
-void Surface::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureHundredHour(moistureHundredHour, moistureUnits);
 }
 
-void Surface::setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureDeadAggregate(double moistureDead, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureDeadAggregate(moistureDead, moistureUnits);
 }
 
-void Surface::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureLiveHerbaceous(double moistureLiveHerbaceous, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureLiveHerbaceous(moistureLiveHerbaceous, moistureUnits);
 }
 
-void Surface::setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureLiveWoody(double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureLiveWoody(moistureLiveWoody, moistureUnits);
 }
 
-void Surface::setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void Surface::setMoistureLiveAggregate(double moistureLive, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     surfaceInputs_.setMoistureLiveAggregate(moistureLive, moistureUnits);
 }
@@ -1013,9 +1014,9 @@ void Surface::setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnu
     surfaceInputs_.setTwoFuelModelsMethod(twoFuelModelsMethod);
 }
 
-void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, CoverUnits::CoverUnitsEnum coverUnits)
+void Surface::setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, FractionUnits::FractionUnitsEnum coverageUnits)
 {
-    surfaceInputs_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage, coverUnits);
+    surfaceInputs_.setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage, coverageUnits);
 }
 
 void Surface::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod)
@@ -1024,26 +1025,26 @@ void Surface::setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalcu
 }
 
 void Surface::updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
+    double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed,
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+    double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, canopyUnits, canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
 void Surface::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
     double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody,
-    MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+    FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage,
-    CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
+    FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod,
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover,
-    CoverUnits::CoverUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    FractionUnits::FractionUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForTwoFuelModels(firstfuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
@@ -1053,31 +1054,31 @@ void Surface::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int 
 }
 
 void Surface::updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-    double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
+    double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed,
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double ageOfRough,
     double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits,
-    double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, basalAreaUnits, slope, slopeUnits, aspect, canopyCover, coverUnits,
+        ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, basalAreaUnits, slope, slopeUnits, aspect, canopyCover, canopyUnits,
         canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
-void Surface::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
+void Surface::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, FractionUnits::FractionUnitsEnum curingLevelUnits,
     AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour,
-    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits,
+    double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits,
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
-    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+    SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
     LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
 {
     surfaceInputs_.updateSurfaceInputsForWesternAspen(aspenFuelModelNumber, aspenCuringLevel, curingLevelUnits, aspenFireSeverity,
         dbh, dbhUnits, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits,
         windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect,
-        canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        canopyCover, canopyUnits, canopyHeight, canopyHeightUnits, crownRatio);
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
@@ -1086,7 +1087,7 @@ void Surface::setAspenFuelModelNumber(int aspenFuelModelNumber)
     surfaceInputs_.setAspenFuelModelNumber(aspenFuelModelNumber);
 }
 
-void Surface::setAspenCuringLevel(double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits)
+void Surface::setAspenCuringLevel(double aspenCuringLevel, FractionUnits::FractionUnitsEnum curingLevelUnits)
 {
     surfaceInputs_.setAspenCuringLevel(aspenCuringLevel, curingLevelUnits);
 }
@@ -1171,14 +1172,14 @@ double Surface::getChaparralDeadFuelFraction() const
     return surfaceFire_.getChaparralDeadFuelFraction();
 }
 
-double Surface::getChaparralDeadMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getChaparralDeadMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralDeadMoistureOfExtinction(), moistureUnits);
+    return FractionUnits::fromBaseUnits(surfaceFire_.getChaparralDeadMoistureOfExtinction(), moistureUnits);
 }
 
-double Surface::getChaparralLiveMoistureOfExtinction(MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getChaparralLiveMoistureOfExtinction(FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return  MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralLiveMoistureOfExtinction(), moistureUnits);
+    return  FractionUnits::fromBaseUnits(surfaceFire_.getChaparralLiveMoistureOfExtinction(), moistureUnits);
 }
 
 double Surface::getChaparralDensity(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, DensityUnits::DensityUnitsEnum densityUnits) const
@@ -1236,9 +1237,9 @@ double Surface::getChaparralLoadLiveOneInchToThreeInch(LoadingUnits::LoadingUnit
     return LoadingUnits::fromBaseUnits(surfaceFire_.getChaparralLoad(FuelLifeState::Live, 4), loadingUnits);
 }
 
-double Surface::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double Surface::getChaparralMoisture(FuelLifeState::FuelLifeStateEnum lifeState, int sizeClass, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
-    return MoistureUnits::fromBaseUnits(surfaceFire_.getChaparralMoisture(lifeState, sizeClass), moistureUnits);
+    return FractionUnits::fromBaseUnits(surfaceFire_.getChaparralMoisture(lifeState, sizeClass), moistureUnits);
 }
 
 double Surface::getChaparralTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const
@@ -1266,9 +1267,9 @@ void Surface::setHeightOfUnderstory(double heightOfUnderstory, LengthUnits::Leng
     surfaceInputs_.setPalmettoGallberryHeightOfUnderstory(heightOfUnderstory, heightUnits);
 }
 
-void Surface::setPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits)
+void Surface::setPalmettoCoverage(double palmettoCoverage, FractionUnits::FractionUnitsEnum coverageUnits)
 {
-    surfaceInputs_.setPalmettoGallberryPalmettoCoverage(palmettoCoverage, coverUnits);
+    surfaceInputs_.setPalmettoGallberryPalmettoCoverage(palmettoCoverage, coverageUnits);
 }
 
 void Surface::setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits)

@@ -1,13 +1,13 @@
 #include "mortality.h"
 
-#include<algorithm>
-#include<cmath>
-#include<fstream>
-#include<iostream>
-#include<locale>
-#include<sstream>
-#include<string>
-#include<vector>
+#include <algorithm>
+#include <cmath>
+#include <fstream>
+#include <iostream>
+#include <locale>
+#include <sstream>
+#include <string>
+#include <vector>
 
 class readFile {
 public:
@@ -149,14 +149,28 @@ readFile::readFile(const string& fName) { // Constructor with parameters
 }
 
 
-int main()
+int main(int argc, char *argv[])
 {
+    if (argc < 4) {
+      std::cout
+        << "Unable to start tests. Please supply .tre and .csv files like so:\n\n"
+        << "testMortality <input.tre> <output.csv> <results.csv>"
+        << argc
+        << std::endl;
+      return 1;
+    }
+
+    std::cout << "Starting tests with:"
+              << "\nInput File:" << argv[1]
+              << "\nOutput File:" << argv[2]
+              << "\nResult File:" << argv[3]
+              << std::endl;
+
     constexpr int ok = 1;
     int rc = 0;
     SpeciesMasterTable smt;
     Mortality mortality(smt);
     Mortality mortalityCopy(mortality); // test copy constructor
-
     EquationType equationType;
     string speciesCode;
 
@@ -195,8 +209,12 @@ int main()
         "fire_severity"
     };
 
-    readFile myFileInput("/home/tdog/workspace/projects/git_projects/behave/src/testMortality/FOFEM Mortality Test.tre");
-    readFile myFileOutput("/home/tdog/workspace/projects/git_projects/behave/src/testMortality/FOFEM Mortality Test-Out.csv");
+    readFile myFileInput(argv[1]);
+
+    string outputFilename = argv[2];
+    readFile myFileOutput(outputFilename);
+
+    auto resultsFilename = argv[3];
 
     fsx = myFileInput.getDataTypeIndex("FS");
     FlLe_ScHtx = myFileInput.getDataTypeIndex("FlLe/ScHt");
@@ -218,7 +236,8 @@ int main()
 //    int speciesIndex = mortality.getSpeciesTableIndexFromSpeciesCode(speciesCode);
 //    bool isInRegion = mortality.checkIsInRegionAtSpeciesTableIndex(speciesIndex, region);
 
-    outFile.open("/home/tdog/workspace/projects/git_projects/behave/src/testMortality/resultsProbMort.csv", std::ios::out);
+    string resultFilename = argv[3];
+    outFile.open(resultFilename, std::ios::out);
     outFile << "RunId,";
     for (const auto &e : myFileInput.vHeader) outFile << e << ",";
     outFile << "BehaveProbability,"  << "FOFEMProbability," << "AbsoluteDifference" << std::endl;
@@ -266,21 +285,21 @@ int main()
         if(rc == ok)
         {
             if (!fs.empty() ){
-                if (fs == "S")
-                    mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::scorch_height);
-                else if (fs == "F")
-                    mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::flame_length);
-                else {
-                    mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::flame_length);
-                    mortality.setFlameLengthOrScorchHeightValue(4, LengthUnits::Feet);
-                }
+              if (fs == "S") {
+                mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::scorch_height);
+              } else if (fs == "F") {
+                mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::flame_length);
+              } else {
+                mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::flame_length);
+                mortality.setFlameLengthOrScorchHeightValue(4, LengthUnits::Feet);
+              }
             }
 
             if (!FlLe_ScHt.empty() )
                 mortality.setFlameLengthOrScorchHeightValue(stod(FlLe_ScHt), LengthUnits::Feet);
 
             if (!TreeExpansionFactor.empty() )
-             mortality.setTreeDensityPerUnitArea(stod(TreeExpansionFactor), AreaUnits::Acres);
+                mortality.setTreeDensityPerUnitArea(stod(TreeExpansionFactor), AreaUnits::Acres);
 
             if (!Diameter.empty() )
                 mortality.setDBH(stod(Diameter), LengthUnits::Inches);
@@ -354,7 +373,7 @@ int main()
                 }
             }
 
-            probalilityOfMortality = mortality.calculateMortality(ProbabilityUnits::Percent);
+            probalilityOfMortality = mortality.calculateMortality(FractionUnits::Percent);
 
             // Write out input data for this current plotid to results file
             outFile << ++runid << ",";

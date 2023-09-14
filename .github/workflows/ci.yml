@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Build the project
+        uses: threeal/cmake-action@v1.3.0
+        with:
+          c-compiler: clang
+          cxx-compiler: clang++
+          run-build: true
+
+      - name: Run tests
+        run: ./build/testBehave
