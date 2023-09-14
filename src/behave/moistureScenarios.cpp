@@ -71,57 +71,57 @@ std::string MoistureScenarios::getMoistureScenarioDescriptionByName(const std::s
     return description;
 }
 
-double MoistureScenarios::getMoistureScenarioOneHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioOneHourByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureOneHour = -1.0;
     int index = getMoistureScenarioIndexByName(name);
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureOneHour = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureOneHour_, moistureUnits);
+        moistureOneHour = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureOneHour_, moistureUnits);
     }
     return moistureOneHour;
 }
 
-double MoistureScenarios::getMoistureScenarioTenHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioTenHourByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureTenHour = -1.0;
     int index = getMoistureScenarioIndexByName(name);
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureTenHour = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureTenHour_, moistureUnits);
+        moistureTenHour = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureTenHour_, moistureUnits);
     }
     return moistureTenHour;
 }
 
-double MoistureScenarios::getMoistureScenarioHundredHourByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioHundredHourByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureHundredHour = -1.0;
     int index = getMoistureScenarioIndexByName(name);
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureHundredHour = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureHundredHour_, moistureUnits);
+        moistureHundredHour = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureHundredHour_, moistureUnits);
     }
     return moistureHundredHour;
 }
 
-double MoistureScenarios::getMoistureScenarioLiveHerbaceousByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioLiveHerbaceousByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureLiveHerbaceous = -1.0;
     int index = getMoistureScenarioIndexByName(name);
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureLiveHerbaceous = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureLiveHerbaceous_, moistureUnits);
+        moistureLiveHerbaceous = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureLiveHerbaceous_, moistureUnits);
     }
     return moistureLiveHerbaceous;
 }
 
-double MoistureScenarios::getMoistureScenarioLiveWoodyByName(const std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioLiveWoodyByName(const std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureLiveWoody = -1.0;
     int index = getMoistureScenarioIndexByName(name);
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureLiveWoody = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureLiveWoody_, moistureUnits);
+        moistureLiveWoody = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureLiveWoody_, moistureUnits);
     }
     return moistureLiveWoody;
 }
@@ -157,52 +157,52 @@ std::string MoistureScenarios::getMoistureScenarioDescriptionByIndex(const int i
     return description;
 }
 
-double MoistureScenarios::getMoistureScenarioOneHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioOneHourByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureOneHour = -1.0;
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureOneHour = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureOneHour_, moistureUnits);
+        moistureOneHour = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureOneHour_, moistureUnits);
     }
     return moistureOneHour;
 }
 
-double MoistureScenarios::getMoistureScenarioTenHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioTenHourByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureTenHour = -1.0;
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureTenHour = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureTenHour_, moistureUnits);
+        moistureTenHour = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureTenHour_, moistureUnits);
     }
     return moistureTenHour;
 }
 
-double MoistureScenarios::getMoistureScenarioHundredHourByIndex(const int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioHundredHourByIndex(const int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureHundredHour = -1.0;
     if((index >= 0) && (index < moistureScenarioVector_.size()))
     {
-        moistureHundredHour = MoistureUnits::fromBaseUnits(moistureScenarioVector_[index].moistureHundredHour_, moistureUnits);
+        moistureHundredHour = FractionUnits::fromBaseUnits(moistureScenarioVector_[index].moistureHundredHour_, moistureUnits);
     }
     return moistureHundredHour;
 }
 
-double MoistureScenarios::getMoistureScenarioLiveHerbaceousByIndex(const int vectorIndex, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioLiveHerbaceousByIndex(const int vectorIndex, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureLiveHerbaceous = -1.0;
     if((vectorIndex >= 0) && (vectorIndex < moistureScenarioVector_.size()))
     {
-        moistureLiveHerbaceous = MoistureUnits::fromBaseUnits(moistureScenarioVector_[vectorIndex].moistureLiveHerbaceous_, moistureUnits);
+        moistureLiveHerbaceous = FractionUnits::fromBaseUnits(moistureScenarioVector_[vectorIndex].moistureLiveHerbaceous_, moistureUnits);
     }
     return moistureLiveHerbaceous;
 }
 
-double MoistureScenarios::getMoistureScenarioLiveWoodyByIndex(const int vectorIndex, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double MoistureScenarios::getMoistureScenarioLiveWoodyByIndex(const int vectorIndex, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     double moistureLiveWoody = -1.0;
     if((vectorIndex >= 0) && (vectorIndex < moistureScenarioVector_.size()))
     {
-        moistureLiveWoody = MoistureUnits::fromBaseUnits(moistureScenarioVector_[vectorIndex].moistureLiveWoody_, moistureUnits);
+        moistureLiveWoody = FractionUnits::fromBaseUnits(moistureScenarioVector_[vectorIndex].moistureLiveWoody_, moistureUnits);
     }
     return moistureLiveWoody;
 }

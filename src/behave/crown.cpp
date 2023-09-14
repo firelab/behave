@@ -935,27 +935,27 @@ std::string Crown::getMoistureScenarioDescriptionByName(std::string name)
     return surfaceFuel_.getMoistureScenarioDescriptionByName(name);
 }
 
-double Crown::getMoistureScenarioOneHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioOneHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioOneHourByName(name, moistureUnits);
 }
 
-double Crown::getMoistureScenarioTenHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioTenHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioTenHourByName(name, moistureUnits);
 }
 
-double Crown::getMoistureScenarioHundredHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioHundredHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioHundredHourByName(name, moistureUnits);
 }
 
-double Crown::getMoistureScenarioLiveHerbaceousByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioLiveHerbaceousByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioLiveHerbaceousByName(name, moistureUnits);
 }
 
-double Crown::getMoistureScenarioLiveWoodyByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioLiveWoodyByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioLiveWoodyByName(name, moistureUnits);
 }
@@ -975,27 +975,27 @@ std::string Crown::getMoistureScenarioDescriptionByIndex(int index)
     return surfaceFuel_.getMoistureScenarioDescriptionByIndex(index);
 }
 
-double Crown::getMoistureScenarioOneHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioOneHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioOneHourByIndex(index, moistureUnits);
 }
 
-double Crown::getMoistureScenarioTenHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioTenHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioTenHourByIndex(index, moistureUnits);
 }
 
-double Crown::getMoistureScenarioHundredHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioHundredHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioHundredHourByIndex(index, moistureUnits);
 }
 
-double Crown::getMoistureScenarioLiveHerbaceousByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioLiveHerbaceousByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioLiveHerbaceousByIndex(index, moistureUnits);
 }
 
-double Crown::getMoistureScenarioLiveWoodyByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits)
+double Crown::getMoistureScenarioLiveWoodyByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits)
 {
     return surfaceFuel_.getMoistureScenarioLiveWoodyByIndex(index, moistureUnits);
 }

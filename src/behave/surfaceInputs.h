@@ -58,8 +58,8 @@ public:
     void setMoistureDeadAggregate(double moistureDeadAggregate, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureLiveAggregate(double moistureLiveAggregate, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureScenarios(MoistureScenarios& moistureScenarios);
-    bool setMoistureScenarioByName(std::string moistureScenarioName);
-    bool setMoistureScenarioByIndex(int moistureScenarioIndex);
+    bool setCurrentMoistureScenarioByName(std::string moistureScenarioName);
+    bool setCurrentMoistureScenarioByIndex(int moistureScenarioIndex);
     void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
@@ -108,19 +108,19 @@ public:
     int getMoistureScenarioIndexByName(std::string name) const;
     bool getIsMoistureScenarioDefinedByName(std::string name) const;
     std::string getMoistureScenarioDescriptionByName(std::string name) const;
-    double getMoistureScenarioOneHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioTenHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioHundredHourByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioLiveHerbaceousByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioLiveWoodyByName(std::string name, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioOneHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioTenHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioHundredHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveHerbaceousByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveWoodyByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
     bool getIsMoistureScenarioDefinedByIndex(int index) const;
     std::string getMoistureScenarioNameByIndex(int index) const;
     std::string getMoistureScenarioDescriptionByIndex(int index) const;
-    double getMoistureScenarioOneHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioTenHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioHundredHourByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioLiveHerbaceousByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureScenarioLiveWoodyByIndex(int index, MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureScenarioOneHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioTenHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioHundredHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveHerbaceousByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveWoodyByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
