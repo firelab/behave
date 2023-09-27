@@ -315,6 +315,16 @@ double Surface::getEllipticalC(LengthUnits::LengthUnitsEnum lengthUnits, double 
     return size_.getEllipticalC(lengthUnits, elapsedTime, timeUnits);
 }
 
+double Surface::getFireLength(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+{
+  return size_.getFireLength(lengthUnits, elapsedTime, timeUnits);
+}
+
+double Surface::getMaxFireWidth(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const
+{
+  return size_.getMaxFireWidth(lengthUnits, elapsedTime, timeUnits);
+}
+
 double Surface::getSlopeFactor() const
 {
     return surfaceFire_.getSlopeFactor();
