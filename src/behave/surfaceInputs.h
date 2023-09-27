@@ -44,21 +44,22 @@ public:
 
     // Main Surface module inputs setters 
     void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
+        double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed,
         SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
         double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, 
-        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits,
+        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits,
         double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
-    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureDeadAggregate(double moistureDeadAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveAggregate(double moistureLiveAggregate, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    bool setMoistureScenarioByName(std::string moistureScenarioName);
-    bool setMoistureScenarioByIndex(int moistureScenarioIndex);
+    void setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureTenHour(double moistureTenHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveWoody(double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureDeadAggregate(double moistureDeadAggregate, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveAggregate(double moistureLiveAggregate, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureScenarios(MoistureScenarios& moistureScenarios);
+    bool setCurrentMoistureScenarioByName(std::string moistureScenarioName);
+    bool setCurrentMoistureScenarioByIndex(int moistureScenarioIndex);
     void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
@@ -66,7 +67,7 @@ public:
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
     void setWindHeightInputMode(WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
-    void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
+    void setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCrownRatio(double crownRatio);
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
@@ -77,19 +78,19 @@ public:
 
     // Main Surface module inputs getters 
     int getFuelModelNumber() const;
-    double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureDeadAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveAggregateValue(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureDeadAggregateValue(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveAggregateValue(FractionUnits::FractionUnitsEnum moistureUnits) const;
     void updateMoisturesBasedOnInputMode();
     double getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const;
     double getWindDirection() const;
     double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getAspect() const;
-    double getCanopyCover(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getCanopyCover(FractionUnits::FractionUnitsEnum fractionUnits) const;
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const;
     double getCrownRatio() const;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() const;
@@ -103,20 +104,37 @@ public:
     MoistureInputMode::MoistureInputModeEnum getMoistureInputMode() const;
     std::string getCurrentMoistureScenarioName() const;
     int getCurrentMoistureScenarioIndex() const;
+    int getNumberOfMoistureScenarios() const;
+    int getMoistureScenarioIndexByName(std::string name) const;
+    bool getIsMoistureScenarioDefinedByName(std::string name) const;
+    std::string getMoistureScenarioDescriptionByName(std::string name) const;
+    double getMoistureScenarioOneHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioTenHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioHundredHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveHerbaceousByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveWoodyByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    bool getIsMoistureScenarioDefinedByIndex(int index) const;
+    std::string getMoistureScenarioNameByIndex(int index) const;
+    std::string getMoistureScenarioDescriptionByIndex(int index) const;
+    double getMoistureScenarioOneHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioTenHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioHundredHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveHerbaceousByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureScenarioLiveWoodyByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits) const;
 
     // Two fuel models inputs setters
     void updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber, double moistureOneHour,
         double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, 
-        MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
+        FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, 
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection, 
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage, 
-        CoverUnits::CoverUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, 
+        FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, 
         double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover,
-        CoverUnits::CoverUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
+        FractionUnits::FractionUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setFirstFuelModelNumber(int firstFuelModelNumber);
     void setSecondFuelModelNumber(int secondFuelModelNumber);
     void setTwoFuelModelsMethod(TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod);
-    void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, CoverUnits::CoverUnitsEnum coverUnits);
+    void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, FractionUnits::FractionUnitsEnum fractionUnits);
 
     // Two fuel models inputs getters
     bool isUsingTwoFuelModels() const;
@@ -127,15 +145,15 @@ public:
 
     // Palmetto-Gallberry inputs setters
     void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed, 
+        double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed, 
         SpeedUnits::SpeedUnitsEnum windSpeedUnits,WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double ageOfRough,
         double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits, double slope,
-       SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+       SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum coverUnits, double canopyHeight,
         LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setPalmettoGallberryAgeOfRough(double ageOfRough);
     void setPalmettoGallberryHeightOfUnderstory(double heightOfUnderstory, LengthUnits::LengthUnitsEnum heightUnits);
-    void setPalmettoGallberryPalmettoCoverage(double palmettoCoverage, CoverUnits::CoverUnitsEnum coverUnits);
+    void setPalmettoGallberryPalmettoCoverage(double palmettoCoverage, FractionUnits::FractionUnitsEnum fractionUnits);
     void setPalmettoGallberryOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits);
     void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry);
 
@@ -143,19 +161,19 @@ public:
     bool getIsUsingPalmettoGallberry() const;
     double getPalmettoGallberryAgeOfRough() const;
     double getPalmettoGallberryHeightOfUnderstory(LengthUnits::LengthUnitsEnum heightUnits) const;
-    double getPalmettoGallberryPalmettoCoverage(CoverUnits::CoverUnitsEnum coverUnits) const;
+    double getPalmettoGallberryPalmettoCoverage(FractionUnits::FractionUnitsEnum fractionUnits) const;
     double getPalmettoGallberryOverstoryBasalArea(BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits) const;
   
     // Westerm Aspen inputs setters
-    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits,
+    void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, FractionUnits::FractionUnitsEnum curingLevelUnits,
         AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits::LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour,
-        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, 
+        double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, 
         double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
         double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope, 
-        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
         LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
     void setAspenFuelModelNumber(int aspenFuelModelNumber);
-    void setAspenCuringLevel(double aspenCuringLevel, CuringLevelUnits::CuringLevelEnum curingLevelUnits);
+    void setAspenCuringLevel(double aspenCuringLevel, FractionUnits::FractionUnitsEnum fractionUnits);
     void setAspenDBH(double dbh, LengthUnits::LengthUnitsEnum dbhUnits);
     void setAspenFireSeverity(AspenFireSeverity::AspenFireSeverityEnum aspenFireSeverity);
     void setIsUsingWesternAspen(bool isUsingWesternAspen);
@@ -163,7 +181,7 @@ public:
     // Western Aspen getters
     bool getIsUsingWesternAspen() const;
     int getAspenFuelModelNumber() const;
-    double getAspenCuringLevel(CuringLevelUnits::CuringLevelEnum curingLevelUnits) const;
+    double getAspenCuringLevel(FractionUnits::FractionUnitsEnum fractionUnits) const;
     double getAspenDBH(LengthUnits::LengthUnitsEnum dbhUnits) const;
     AspenFireSeverity::AspenFireSeverityEnum getAspenFireSeverity() const;
 
@@ -183,7 +201,6 @@ public:
     double getChaparralTotalFuelLoad(LoadingUnits::LoadingUnitsEnum fuelLoadUnits) const;
     bool getIsUsingChaparral() const;
 
-    MoistureScenarios* moistureScenarios; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
 protected:   
     void memberwiseCopyAssignment(const SurfaceInputs& rhs);
    
@@ -209,6 +226,7 @@ protected:
     std::string currentMoistureScenarioName_;  // Currently used moisture scenario name
     int currentMoistureScenarioIndex_;         // Currently used moisture scenario vector index
     std::vector<double> moistureValuesBySizeClass_; // Stores moisture values which will be used during surface and crown runs
+    MoistureScenarios* moistureScenarios_; // Moisture scenarios (optional list of moisture scenarios to simplify user input 
 
     // Two Fuel Models inputs
     bool isUsingTwoFuelModels_;         // Whether fire spread calculation is using Two Fuel Models

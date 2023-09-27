@@ -50,14 +50,14 @@ void Ignite::initializeMembers()
     fuelTemperature_ = 0;
 }
 
-double Ignite::calculateFirebrandIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits)
+double Ignite::calculateFirebrandIgnitionProbability(FractionUnits::FractionUnitsEnum desiredUnits)
 {
     // Covert temperature to Celcius
     calculateFuelTemperature();
     double fuelTemperature = getFuelTemperature(TemperatureUnits::Celsius);
 
     // use one hour moisture in the following calculation
-    double fuelMoisture = igniteInputs_.getMoistureOneHour(MoistureUnits::Fraction);; 
+    double fuelMoisture = igniteInputs_.getMoistureOneHour(FractionUnits::Fraction);
 
     // Calculate heat of ignition
     double heatOfIgnition = 144.51
@@ -82,14 +82,14 @@ double Ignite::calculateFirebrandIgnitionProbability(ProbabilityUnits::Probabili
         probabilityOfIgnition = 0.0;
     }
 
-    return ProbabilityUnits::fromBaseUnits(probabilityOfIgnition, desiredUnits);
+    return FractionUnits::fromBaseUnits(probabilityOfIgnition, desiredUnits);
 }
 
 double Ignite::calculateFuelTemperature()
 {
     double temperatureDifferential;
 
-    double sunShade = igniteInputs_.getSunShade(CoverUnits::Fraction);
+    double sunShade = igniteInputs_.getSunShade(FractionUnits::Fraction);
     double airTemperature = igniteInputs_.getAirTemperature(TemperatureUnits::Fahrenheit);
 
     temperatureDifferential = 25.0 - (20.0 * sunShade);
@@ -98,7 +98,7 @@ double Ignite::calculateFuelTemperature()
     return fuelTemperature_;
 }
 
-double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::ProbabilityUnitsEnum desiredUnits)
+double Ignite::calculateLightningIgnitionProbability(FractionUnits::FractionUnitsEnum desiredUnits)
 {
     /*
     *      The following assumptions are made by Latham:
@@ -127,7 +127,7 @@ double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::Probabili
     }
 
     //  use hundred hour moisture as duff moisture and conver to percent and restrict to maximum of 40%.
-    double fuelMoisture = igniteInputs_.getMoistureHundredHour(MoistureUnits::Percent);
+    double fuelMoisture = igniteInputs_.getMoistureHundredHour(FractionUnits::Percent);
     if (fuelMoisture > 40.0)
     {
         fuelMoisture = 40.0;
@@ -220,7 +220,7 @@ double Ignite::calculateLightningIgnitionProbability(ProbabilityUnits::Probabili
         probabilityOfLightningIgnition = 1.0;
     }
 
-    return ProbabilityUnits::fromBaseUnits(probabilityOfLightningIgnition, desiredUnits);
+    return FractionUnits::fromBaseUnits(probabilityOfLightningIgnition, desiredUnits);
 }
 
 void Ignite::setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnites)
@@ -228,17 +228,17 @@ void Ignite::setAirTemperature(double airTemperature, TemperatureUnits::Temperat
     igniteInputs_.setAirTemperature(airTemperature, temperatureUnites);
 }
 
-void Ignite::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum desiredUnits)
+void Ignite::setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum desiredUnits)
 {
     igniteInputs_.setMoistureOneHour(moistureOneHour, desiredUnits);
 }
 
-void Ignite::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum desiredUnits)
+void Ignite::setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum desiredUnits)
 {
     igniteInputs_.setMoistureOneHour(moistureHundredHour, desiredUnits);
 }
 
-void Ignite::setSunShade(double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits)
+void Ignite::setSunShade(double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits)
 {
     igniteInputs_.setSunShade(sunShade, sunShadeUnits);
 }
@@ -258,8 +258,8 @@ void Ignite::setLightningChargeType(LightningCharge::LightningChargeEnum lightni
     igniteInputs_.setLightningChargeType(lightningChargeType);
 }
 
-void Ignite::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits,
-    double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits,
+void Ignite::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits,
+    double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits,
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
     LightningCharge::LightningChargeEnum lightningChargeType)
 {
@@ -277,17 +277,17 @@ double Ignite::getFuelTemperature(TemperatureUnits::TemperatureUnitsEnum desired
     return TemperatureUnits::fromBaseUnits(fuelTemperature_, desiredUnits);
 }
 
-double Ignite::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum desiredUnits)
+double Ignite::getMoistureOneHour(FractionUnits::FractionUnitsEnum desiredUnits)
 {
     return igniteInputs_.getMoistureOneHour(desiredUnits);
 }
 
-double Ignite::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum desiredUnits)
+double Ignite::getMoistureHundredHour(FractionUnits::FractionUnitsEnum desiredUnits)
 {
     return igniteInputs_.getMoistureHundredHour(desiredUnits);
 }
 
-double Ignite::getSunShade(CoverUnits::CoverUnitsEnum desiredUnits)
+double Ignite::getSunShade(FractionUnits::FractionUnitsEnum desiredUnits)
 {
     return igniteInputs_.getSunShade(desiredUnits);
 }

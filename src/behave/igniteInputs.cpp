@@ -29,8 +29,8 @@ void IgniteInputs::initializeMembers()
     lightningChargeType_ = LightningCharge::Unknown;
 }
 
-void IgniteInputs::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits,
-    double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits,
+void IgniteInputs::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits,
+    double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits,
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
     LightningCharge::LightningChargeEnum lightningChargeType)
 {
@@ -43,14 +43,14 @@ void IgniteInputs::updateIgniteInputs(double moistureOneHour, double moistureHun
     lightningChargeType_ = lightningChargeType;
 }
 
-void IgniteInputs::setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void IgniteInputs::setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
-    moistureOneHour_ = MoistureUnits::toBaseUnits(moistureOneHour, moistureUnits);
+    moistureOneHour_ = FractionUnits::toBaseUnits(moistureOneHour, moistureUnits);
 }
 
-void IgniteInputs::setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits)
+void IgniteInputs::setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits)
 {
-    moistureHundredHour_ = MoistureUnits::toBaseUnits(moistureHundredHour, moistureUnits);
+    moistureHundredHour_ = FractionUnits::toBaseUnits(moistureHundredHour, moistureUnits);
 }
 
 void IgniteInputs::setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits)
@@ -58,9 +58,9 @@ void IgniteInputs::setAirTemperature(double airTemperature, TemperatureUnits::Te
     airTemperature_ = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
 }
 
-void IgniteInputs::setSunShade(double sunShade, CoverUnits::CoverUnitsEnum sunShadeUnits)
+void IgniteInputs::setSunShade(double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits)
 {
-    sunShade_ = CoverUnits::toBaseUnits(sunShade, sunShadeUnits);
+    sunShade_ = FractionUnits::toBaseUnits(sunShade, sunShadeUnits);
 }
 
 void IgniteInputs::setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType)
@@ -83,19 +83,19 @@ double IgniteInputs::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum de
     return TemperatureUnits::fromBaseUnits(airTemperature_, desiredUnits);
 }
 
-double IgniteInputs::getMoistureOneHour(MoistureUnits::MoistureUnitsEnum desiredUnits)
+double IgniteInputs::getMoistureOneHour(FractionUnits::FractionUnitsEnum desiredUnits)
 {
-    return MoistureUnits::fromBaseUnits(moistureOneHour_, desiredUnits);
+    return FractionUnits::fromBaseUnits(moistureOneHour_, desiredUnits);
 }
 
-double IgniteInputs::getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum desiredUnits)
+double IgniteInputs::getMoistureHundredHour(FractionUnits::FractionUnitsEnum desiredUnits)
 {
-    return MoistureUnits::fromBaseUnits(moistureHundredHour_, desiredUnits);
+    return FractionUnits::fromBaseUnits(moistureHundredHour_, desiredUnits);
 }
 
-double IgniteInputs::getSunShade(CoverUnits::CoverUnitsEnum desiredUnits)
+double IgniteInputs::getSunShade(FractionUnits::FractionUnitsEnum desiredUnits)
 {
-    return CoverUnits::fromBaseUnits(sunShade_, desiredUnits);
+    return FractionUnits::fromBaseUnits(sunShade_, desiredUnits);
 }
 
 IgnitionFuelBedType::IgnitionFuelBedTypeEnum IgniteInputs::getIgnitionFuelBedType()

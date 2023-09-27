@@ -32,9 +32,11 @@
 #include "behaveUnits.h"
 #include "ContainAdapter.h"
 #include "crown.h"
+#include "fineDeadFuelMoistureTool.h"
 #include "ignite.h"
 #include "mortality.h"
 #include "safety.h"
+#include "slopeTool.h"
 #include "spot.h"
 #include "surface.h"
 
@@ -59,7 +61,7 @@ public:
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
     double getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const;
-    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const;;
+    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -95,6 +97,12 @@ Safety safety;
 
 // Mortality Module
 Mortality mortality;
+
+// Fine Dead Fuel Moisture Tool
+FineDeadFuelMoistureTool fineDeadFuelMoistureTool;
+
+// Slope Tool
+SlopeTool slopeTool;
 
 protected:
     void memberwiseCopyAssignment(const BehaveRun& rhs);

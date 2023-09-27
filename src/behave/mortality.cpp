@@ -268,7 +268,7 @@ double Mortality::getBarkThickness(LengthUnits::LengthUnitsEnum barkThicknessUni
 * Desc: Calculate Mortality,
 *       Looks at the Equation Type and calls the proper calculation function.
 *******************************************************************************************************/
-double Mortality::calculateMortality(ProbabilityUnits::ProbabilityUnitsEnum probablityUnits)
+double Mortality::calculateMortality(FractionUnits::FractionUnitsEnum probablityUnits)
 {
     initializeOutputs();
 
@@ -309,7 +309,7 @@ double Mortality::calculateMortality(ProbabilityUnits::ProbabilityUnitsEnum prob
         }
     }
 
-    return ProbabilityUnits::fromBaseUnits(probabilityOfMortality_, probablityUnits);
+    return FractionUnits::fromBaseUnits(probabilityOfMortality_, probablityUnits);
 }
 
 string Mortality::getSpeciesCodeAtSpeciesTableIndex(int index) const
@@ -1712,7 +1712,7 @@ double Mortality:: MIS_Killed()
     double mortalityProbability, treesKilled;
    
     /* first get the mortality percent */
-    mortalityProbability = calculateMortality(ProbabilityUnits::Fraction);
+    mortalityProbability = calculateMortality(FractionUnits::Fraction);
     treesKilled = mortalityProbability * mortalityInputs_.getTreeDensityPerUnitArea(AreaUnits::Acres);  /* mortality times density */
   // 5-14-18, Duncan Lutes don't round off  
   //  killed = int (killed + 0.5);   /* round to whole number */
@@ -1878,9 +1878,9 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
     return speciesInSelectedRegion;
 }
 
-double Mortality::getProbabilityOfMortality(ProbabilityUnits::ProbabilityUnitsEnum probabilityUnits) const
+double Mortality::getProbabilityOfMortality(FractionUnits::FractionUnitsEnum probabilityUnits) const
 {
-    return ProbabilityUnits::fromBaseUnits(probabilityOfMortality_, probabilityUnits);
+    return FractionUnits::fromBaseUnits(probabilityOfMortality_, probabilityUnits);
 }
 
 double Mortality::getTotalPrefireTrees() const
@@ -1893,14 +1893,14 @@ double Mortality::getKilledTrees() const
     return killedTrees_;
 }
 
-double Mortality::getTreeCrownLengthScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const
+double Mortality::getTreeCrownLengthScorched(FractionUnits::FractionUnitsEnum fractionUnits) const
 {
-  return MortalityRateUnits::fromBaseUnits(treeCrownLengthScorched_, mortalityRateUnits);
+  return FractionUnits::fromBaseUnits(treeCrownLengthScorched_, fractionUnits);
 }
 
-double Mortality::getTreeCrownVolumeScorched(MortalityRateUnits::MortalityRateUnitsEnum mortalityRateUnits) const
+double Mortality::getTreeCrownVolumeScorched(FractionUnits::FractionUnitsEnum fractionUnits) const
 {
-  return MortalityRateUnits::fromBaseUnits(treeCrownVolumeScorched_, mortalityRateUnits);
+  return FractionUnits::fromBaseUnits(treeCrownVolumeScorched_, fractionUnits);
 }
 
 double Mortality::getBasalAreaPrefire() const

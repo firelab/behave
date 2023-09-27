@@ -107,7 +107,7 @@ double BehaveRun::getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsE
     return fuelModels_->getFuelbedDepth(fuelModelNumber, lengthUnits);
 }
 
-double BehaveRun::getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const
+double BehaveRun::getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const
 {
     return fuelModels_->getMoistureOfExtinctionDead(fuelModelNumber, moistureUnits);
 }

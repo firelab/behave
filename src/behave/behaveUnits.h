@@ -137,42 +137,6 @@ struct SpeedUnits
     static double fromBaseUnits(double value, SpeedUnitsEnum units);
 };
 
-struct CoverUnits
-{
-    enum CoverUnitsEnum
-    {
-        Fraction, // base cover unit
-        Percent
-    };
-
-    static double toBaseUnits(double value, CoverUnitsEnum units);
-    static double fromBaseUnits(double value, CoverUnitsEnum units);
-};
-
-struct MortalityRateUnits
-{
-    enum MortalityRateUnitsEnum
-    {
-        Fraction, // base mortality rate unit
-        Percent
-    };
-
-    static double toBaseUnits(double value, MortalityRateUnitsEnum units);
-    static double fromBaseUnits(double value, MortalityRateUnitsEnum units);
-};
-
-struct CuringLevelUnits
-{
-    enum CuringLevelEnum
-    {
-        Fraction, // base curing level unit
-        Percent
-    };
-
-    static double toBaseUnits(double value, CuringLevelEnum units);
-    static double fromBaseUnits(double value, CuringLevelEnum units);
-};
-
 struct FractionUnits
 {
     enum FractionUnitsEnum
@@ -183,30 +147,6 @@ struct FractionUnits
 
     static double toBaseUnits(double value, FractionUnitsEnum units);
     static double fromBaseUnits(double value, FractionUnitsEnum units);
-};
-
-struct ProbabilityUnits
-{
-    enum ProbabilityUnitsEnum
-    {
-        Fraction, // base probability unit
-        Percent
-    };
-
-    static double toBaseUnits(double value, ProbabilityUnitsEnum units);
-    static double fromBaseUnits(double value, ProbabilityUnitsEnum units);
-};
-
-struct MoistureUnits
-{
-    enum MoistureUnitsEnum
-    {
-        Fraction, // base moisture unit
-        Percent
-    };
-
-    static double toBaseUnits(double value, MoistureUnitsEnum units);
-    static double fromBaseUnits(double value, MoistureUnitsEnum units);
 };
 
 struct SlopeUnits

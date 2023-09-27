@@ -71,20 +71,20 @@ public:
     // CROWN Module Setters
     void updateCrownInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
         double moistureLiveHerbaceous, double moistureLiveWoody, double moistureFoliar,
-        MoistureUnits::MoistureUnitsEnum  moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+        FractionUnits::FractionUnitsEnum  moistureUnits, double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits,
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
-        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits,
+        double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits,
         double canopyHeight, double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio,
         double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyBaseHeight(double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyBulkDensity(double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
-    void setMoistureFoliar(double foliarMoisture, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureFoliar(double foliarMoisture, FractionUnits::FractionUnitsEnum moistureUnits);
 
     // Crown Module Getters
     double getCanopyBaseHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const;
     double getCanopyBulkDensity(DensityUnits::DensityUnitsEnum canopyBulkDensityUnits) const;
-    double getMoistureFoliar(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureFoliar(FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getCrownFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getCrownFireSpreadDistance(LengthUnits::LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits::TimeUnitsEnum timeUnits) const;
     double getSurfaceFireSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
@@ -108,7 +108,7 @@ public:
     std::string getFuelCode(int fuelModelNumber) const;
     std::string getFuelName(int fuelModelNumber) const;
     double getFuelbedDepth(int fuelModelNumber, LengthUnits::LengthUnitsEnum lengthUnits) const;
-    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, MoistureUnits::MoistureUnitsEnum moistureUnits) const;;
+    double getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits::FractionUnitsEnum moistureUnits) const;;
     double getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits::HeatOfCombustionUnitsEnum heatOfCombustionUnits) const;
     double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits::LoadingUnitsEnum loadingUnits) const;
@@ -126,25 +126,25 @@ public:
 
     // SURFACE Module Inputs Setters
     void updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour,
-        double moistureLiveHerbaceous, double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits, double windSpeed,
+        double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits, double windSpeed,
         SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
-        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, CoverUnits::CoverUnitsEnum coverUnits, double canopyHeight,
+        SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits, double canopyHeight,
         LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
-    void setCanopyCover(double canopyCover, CoverUnits::CoverUnitsEnum coverUnits);
+    void setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCrownRatio(double crownRatio);
     void setFuelModelNumber(int fuelModelNumber);
-    void setMoistureOneHour(double moistureOneHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureTenHour(double moistureTenHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureHundredHour(double moistureHundredHour, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureDeadAggregate(double moistureDead, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveWoody(double moistureLiveWoody, MoistureUnits::MoistureUnitsEnum moistureUnits);
-    void setMoistureLiveAggregate(double moistureLive, MoistureUnits::MoistureUnitsEnum moistureUnits);
+    void setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureTenHour(double moistureTenHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureDeadAggregate(double moistureDead, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveWoody(double moistureLiveWoody, FractionUnits::FractionUnitsEnum moistureUnits);
+    void setMoistureLiveAggregate(double moistureLive, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureScenarios(MoistureScenarios& moistureScenarios);
-    bool setMoistureScenarioByName(std::string moistureScenarioName);
-    bool setMoistureScenarioByIndex(int moistureScenarioIndex);
+    bool setCurrentMoistureScenarioByName(std::string moistureScenarioName);
+    bool setCurrentMoistureScenarioByIndex(int moistureScenarioIndex);
     void setMoistureInputMode(MoistureInputMode::MoistureInputModeEnum moistureInputMode);
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
@@ -157,33 +157,33 @@ public:
 
     // SurfaceInputs getters
     int getFuelModelNumber() const;
-    double getMoistureOneHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureTenHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureHundredHour(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveHerbaceous(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
-    double getMoistureLiveWoody(MoistureUnits::MoistureUnitsEnum moistureUnits) const;
+    double getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) const;
+    double getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) const;
     int getNumberOfMoistureScenarios();
-    int getMoistureScenarioIndexByName(const std::string name);
-    bool getIsMoistureScenarioDefinedByName(const std::string name);
-    std::string getMoistureScenarioDescriptionByName(const std::string name);
-    double getMoistureScenarioOneHourByName(const std::string name);
-    double getMoistureScenarioTenHourByName(const std::string name);
-    double getMoistureScenarioHundredHourByName(const std::string name);
-    double getMoistureScenarioLiveHerbaceousByName(const std::string name);
-    double getMoistureScenarioLiveWoodyByName(const std::string name);
-    bool getIsMoistureScenarioDefinedByIndex(const int index);
-    std::string getMoistureScenarioNameByIndex(const int index);
-    std::string getMoistureScenarioDescriptionByIndex(const int index);
-    double getMoistureScenarioOneHourByIndex(const int index);
-    double getMoistureScenarioTenHourByIndex(const int index);
-    double getMoistureScenarioHundredHourByIndex(const int index);
-    double getMoistureScenarioLiveHerbaceousByIndex(const int index);
-    double getMoistureScenarioLiveWoodyByIndex(const int index);
+    int getMoistureScenarioIndexByName(std::string name);
+    bool getIsMoistureScenarioDefinedByName(std::string name);
+    std::string getMoistureScenarioDescriptionByName(std::string name);
+    double getMoistureScenarioOneHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioTenHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioHundredHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveHerbaceousByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveWoodyByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);
+    bool getIsMoistureScenarioDefinedByIndex(int index);
+    std::string getMoistureScenarioNameByIndex(int index);
+    std::string getMoistureScenarioDescriptionByIndex(int index);
+    double getMoistureScenarioOneHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioTenHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioHundredHourByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveHerbaceousByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits);
+    double getMoistureScenarioLiveWoodyByIndex(int index, FractionUnits::FractionUnitsEnum moistureUnits);
     double getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const;
     double getWindDirection() const;
     double getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
     double getAspect() const;
-    double getCanopyCover(CoverUnits::CoverUnitsEnum canopyCoverUnits) const;
+    double getCanopyCover(FractionUnits::FractionUnitsEnum canopyCoverUnits) const;
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) const;
     double getCrownRatio() const;
 

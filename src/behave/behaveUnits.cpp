@@ -254,60 +254,6 @@ double SpeedUnits::fromBaseUnits(double value, SpeedUnits::SpeedUnitsEnum units)
     return value;
 }
 
-double CoverUnits::toBaseUnits(double value, CoverUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double CoverUnits::fromBaseUnits(double value, CoverUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
-double MortalityRateUnits::toBaseUnits(double value, MortalityRateUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double MortalityRateUnits::fromBaseUnits(double value, MortalityRateUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
-double CuringLevelUnits::toBaseUnits(double value, CuringLevelEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double CuringLevelUnits::fromBaseUnits(double value, CuringLevelEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
 double FractionUnits::toBaseUnits(double value, FractionUnitsEnum units)
 {
     if (units == Percent)
@@ -318,24 +264,6 @@ double FractionUnits::toBaseUnits(double value, FractionUnitsEnum units)
 }
 
 double FractionUnits::fromBaseUnits(double value, FractionUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
-    }
-    return value;
-}
-
-double MoistureUnits::toBaseUnits(double value, MoistureUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double MoistureUnits::fromBaseUnits(double value, MoistureUnitsEnum units)
 {
     if (units == Percent)
     {
@@ -476,40 +404,51 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
   const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
   const double POUNDS_PER_SQUARE_INCH    = 6894.757;
 
-  switch (units) {
-  case Pascal: {
-    // Already in base, nothing to do
-    break;
+  switch (units)
+  {
+      case Pascal:
+      {
+          // Already in base, nothing to do
+          break;
+      }
+      case KiloPascal:
+      {
+          value /= KILOPASCAL_TO_PASCAL;
+          break;
+      }
+      case MegaPascal:
+      {
+          value /= MEGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case GigaPascal:
+      {
+          value /= GIGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case Bar:
+      {
+          value /= BAR_TO_PASCAL;
+          break;
+      }
+      case Atmosphere:
+      {
+          value /= ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case TechnicalAtmosphere:
+      {
+          value /= TECH_ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case PoundPerSquareInch:
+      {
+          value /= POUNDS_PER_SQUARE_INCH;
+          break;
+      }
   }
-  case KiloPascal: {
-    value /= KILOPASCAL_TO_PASCAL;
-    break;
-  }
-  case MegaPascal: {
-    value /= MEGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case GigaPascal: {
-    value /= GIGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case Bar: {
-    value /= BAR_TO_PASCAL;
-    break;
-  }
-  case Atmosphere: {
-    value /= ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case TechnicalAtmosphere: {
-    value /= TECH_ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case PoundPerSquareInch: {
-    value /= POUNDS_PER_SQUARE_INCH;
-    break;
-  }
-  }
+
+  return value;
 }
 
 double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
@@ -522,39 +461,47 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
   const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
   const double POUNDS_PER_SQUARE_INCH    = 6894.757;
 
-  switch (units) {
-  case Pascal: {
-    // Already in base, nothing to do
-    break;
-  }
-  case KiloPascal: {
-    value *= KILOPASCAL_TO_PASCAL;
-    break;
-  }
-  case MegaPascal: {
-    value *= MEGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case GigaPascal: {
-    value *= GIGAPASCAL_TO_PASCAL;
-    break;
-  }
-  case Bar: {
-    value *= BAR_TO_PASCAL;
-    break;
-  }
-  case Atmosphere: {
-    value *= ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case TechnicalAtmosphere: {
-    value *= TECH_ATMOSPHERE_TO_PASCAL;
-    break;
-  }
-  case PoundPerSquareInch: {
-    value *= POUNDS_PER_SQUARE_INCH;
-    break;
-  }
+  switch (units)
+  {
+      case Pascal:
+      {
+          // Already in base, nothing to do
+          break;
+      }
+      case KiloPascal:
+      {
+          value *= KILOPASCAL_TO_PASCAL;
+          break;
+      }
+      case MegaPascal:
+      {
+          value *= MEGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case GigaPascal:
+      {
+          value *= GIGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case Bar:
+      {
+          value *= BAR_TO_PASCAL;
+          break;
+      }
+      case Atmosphere:
+      {
+          value *= ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case TechnicalAtmosphere:
+      {
+          value *= TECH_ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case PoundPerSquareInch: {
+          value *= POUNDS_PER_SQUARE_INCH;
+          break;
+      }
   }
 
   return value;
@@ -683,24 +630,6 @@ double TemperatureUnits::fromBaseUnits(double value, TemperatureUnitsEnum units)
         {
             ; // TODO: Handle error
         }
-    }
-    return value;
-}
-
-double ProbabilityUnits::toBaseUnits(double value, ProbabilityUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value /= 100.0;
-    }
-    return value;
-}
-
-double ProbabilityUnits::fromBaseUnits(double value, ProbabilityUnitsEnum units)
-{
-    if (units == Percent)
-    {
-        value *= 100.0;
     }
     return value;
 }

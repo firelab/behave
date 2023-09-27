@@ -458,7 +458,7 @@ void SurfaceFire::calculateWindAdjustmentFactor()
 {
     WindAjustmentFactor windAdjustmentFactor;
 
-    double canopyCover = surfaceInputs_->getCanopyCover(CoverUnits::Fraction);
+    double canopyCover = surfaceInputs_->getCanopyCover(FractionUnits::Fraction);
     double canopyHeight = surfaceInputs_->getCanopyHeight(LengthUnits::Feet);
     double crownRatio = surfaceInputs_->getCrownRatio();
     double fuelbedDepth = surfaceFuelbedIntermediates_.getFuelbedDepth();
