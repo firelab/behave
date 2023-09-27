@@ -268,6 +268,12 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     calculateBackingFlameLength();
     calculateFlankingFlameLength();
 
+    bool isUsingWesternAspen = surfaceInputs_->getIsUsingWesternAspen();
+    if (isUsingWesternAspen)
+    {
+        surfaceFuelbedIntermediates_.calculateWesternAspenMortality(flameLength_);
+    }
+
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
 
     spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);

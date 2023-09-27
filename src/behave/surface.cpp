@@ -869,6 +869,11 @@ double Surface::getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits::SurfaceAreaToVol
     return SurfaceAreaToVolumeUnits::fromBaseUnits(surfaceFire_.getAspenSavrLiveWoody(), savrUnits);
 }
 
+double Surface::getAspenMortality(FractionUnits::FractionUnitsEnum mortalityUnits) const
+{
+    return FractionUnits::fromBaseUnits(surfaceFire_.getAspenMortality(), mortalityUnits);
+}
+
 double Surface::getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits,
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) const
 {

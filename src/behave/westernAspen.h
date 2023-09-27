@@ -38,7 +38,6 @@ public:
     ~WesternAspen();
 
     void initializeMembers();
-    double getAspenDBH() const;
     double getAspenMortality() const;
 
     // The following getter methods are used to populate FuelModel data fields 
@@ -73,7 +72,6 @@ protected:
     double aspenInterpolate(double curing, double* valueArray);
    
     // Member variables
-    double DBH_;
     double mortality_;
     double aspenDeadOneHour_;
     double aspenDeadTenHour_;

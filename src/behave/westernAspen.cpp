@@ -44,13 +44,7 @@ WesternAspen::~WesternAspen()
 
 void WesternAspen::initializeMembers()
 {
-    DBH_ = 0.0;
     mortality_ = 0.0;
-}
-
-double WesternAspen::getAspenDBH() const
-{
-    return DBH_;
 }
 
 double WesternAspen::getAspenMortality () const
@@ -160,7 +154,7 @@ double WesternAspen::calculateAspenLoadDeadOneHour(int aspenFuelModelNumber, dou
 
 double WesternAspen::calculateAspenLoadDeadTenHour(int aspenFuelModelNumber)
 {
-    int aspenFuelModelIndex = aspenFuelModelNumber - 1;
+    const int aspenFuelModelIndex = aspenFuelModelNumber - 1;
     static double Load[] = { 0.975, 0.475, 1.035, 1.340, 1.115 };
     aspenDeadTenHour_ = 0.0;
     if (aspenFuelModelIndex >= 0 && aspenFuelModelIndex < 5)

@@ -270,6 +270,7 @@ public:
     double getAspenSavrDeadTenHour(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
     double getAspenSavrLiveHerbaceous(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
     double getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum savrUnits) const;
+    double getAspenMortality(FractionUnits::FractionUnitsEnum mortalityUnits) const;
 
     // Chaparral getters
     bool getIsUsingChaparral() const;

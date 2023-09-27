@@ -480,6 +480,11 @@ void SurfaceFuelbedIntermediates::calculatePropagatingFlux()
         : (exp((0.792 + (0.681 * sqrt(sigma_))) * (packingRatio_ + 0.1)) / (192.0 + 0.2595 * sigma_));
 }
 
+void SurfaceFuelbedIntermediates::calculateWesternAspenMortality(double flameLength)
+{
+    westernAspen_.calculateAspenMortality(surfaceInputs_->getAspenFireSeverity(), flameLength, surfaceInputs_->getAspenDBH(LengthUnits::Inches));
+}
+
 void SurfaceFuelbedIntermediates::calculateHeatSink()
 {
     double qigLive[FuelConstants::MaxParticles]; // Heat of preigintion for live fuels
@@ -537,7 +542,7 @@ void SurfaceFuelbedIntermediates::calculateCharacteristicSAVR()
     {
         totalSilicaContent_ = 0.030;
     }
-    else if (surfaceInputs_->getIsUsingChaparral())
+    else if (surfaceInputs_->getIsUsingChaparral() || surfaceInputs_->getIsUsingWesternAspen())
     {
         totalSilicaContent_ = 0.055;
     }

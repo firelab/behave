@@ -47,6 +47,7 @@ public:
 
     ~SurfaceFuelbedIntermediates();
     void calculateFuelbedIntermediates(int fuelModelNumber);
+    void calculateWesternAspenMortality(double flameLength);
 
     // Getters
     double getFuelbedDepth() const;
@@ -131,7 +132,7 @@ protected:
     void calculateHeatSink();
     void calculateLiveMoistureOfExtinction();
     void calculatePropagatingFlux();
-
+  
     const FuelModels* fuelModels_;      // Pointer to FuelModels object
     const SurfaceInputs* surfaceInputs_;    // Pointer to surfaceInputs object
     ChaparralFuel chaparralFuel_;

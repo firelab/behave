@@ -619,8 +619,8 @@ void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun)
     double crownRatio = 0.50;
     double ageOfRough = 10; // years
     double heightOfUnderstory = 4; // feet
-    double palmetoCoverage = 50; // feet
-    double overstoryBasalArea = 50;
+    double palmetoCoverage = 50; 
+    double overstoryBasalArea = 50; // sqft/ac
 
     std::string testName = "Test Palmetto-Gallberry spread rate";
     behaveRun.surface.setIsUsingPalmettoGallberry(true);
@@ -640,7 +640,7 @@ void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
     std::string testName = "Test Western Aspen spread rate";
     behaveRun.surface.setIsUsingWesternAspen(true);
     int aspenFuelModel = 3;
-    double aspenFractionUnits = 50.0;
+    double aspenCuringLevel = 50.0;
     FractionUnits::FractionUnitsEnum curingLevelUnits = FractionUnits::Percent;
     double slope = 30.0;
     SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
@@ -665,7 +665,7 @@ void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
     double windDirection = 0;
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToUpslope;
 
-    behaveRun.surface.updateSurfaceInputsForWesternAspen(aspenFuelModel, aspenFractionUnits, curingLevelUnits, aspenFireSeverity, dbh, dbhUnits,
+    behaveRun.surface.updateSurfaceInputsForWesternAspen(aspenFuelModel, aspenCuringLevel, curingLevelUnits, aspenFireSeverity, dbh, dbhUnits,
         moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, mositureUnits,
         windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect,
         canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
@@ -673,6 +673,12 @@ void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
     double observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     double expectedSurfaceFireSpreadRate = 0.847629;
     reportTestResult(testInfo, testName, observedSurfaceFireSpreadRate, expectedSurfaceFireSpreadRate, error_tolerance);
+    
+    testName = "Test Western Aspen mortality";
+    double observedMortality = behaveRun.surface.getAspenMortality(FractionUnits::Fraction);
+    double expectedMortality = 0.267093;
+    reportTestResult(testInfo, testName, observedMortality, expectedMortality, error_tolerance);
+
     behaveRun.surface.setIsUsingWesternAspen(false);
 }
 
