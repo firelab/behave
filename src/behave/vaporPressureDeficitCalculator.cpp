@@ -57,8 +57,8 @@ void VaporPressureDeficitCalculator::runCalculation() {
   // Calculate vapor pressure deficit
   vaporPressureDeficit_ = saturationVaporPressure - actualVaporPressure;
 
-  // Store in base units (Pa -> hPa)
-  vaporPressureDeficit_ = PressureUnits::toBaseUnits(vaporPressureDeficit_, PressureUnits::HectoPascal);
+  // Store in base units (kPa -> Pa)
+  vaporPressureDeficit_ = PressureUnits::toBaseUnits(vaporPressureDeficit_, PressureUnits::KiloPascal);
 }
 
 // Getters
