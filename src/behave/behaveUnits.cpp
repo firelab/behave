@@ -396,6 +396,7 @@ double LoadingUnits::fromBaseUnits(double value, LoadingUnitsEnum units)
 
 double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
   // Pressure to base units constants
+  const double HECTOPASCAL_TO_PASCAL     = 1e2;
   const double KILOPASCAL_TO_PASCAL      = 1e3;
   const double MEGAPASCAL_TO_PASCAL      = 1e6;
   const double GIGAPASCAL_TO_PASCAL      = 1e9;
@@ -409,6 +410,11 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
       case Pascal:
       {
           // Already in base, nothing to do
+          break;
+      }
+      case HectoPascal:
+      {
+          value /= HECTOPASCAL_TO_PASCAL;
           break;
       }
       case KiloPascal:
@@ -453,6 +459,7 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
 
 double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
   // Pressure to base units constants
+  const double HECTOPASCAL_TO_PASCAL     = 1e2;
   const double KILOPASCAL_TO_PASCAL      = 1e3;
   const double MEGAPASCAL_TO_PASCAL      = 1e6;
   const double GIGAPASCAL_TO_PASCAL      = 1e9;
@@ -466,6 +473,11 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
       case Pascal:
       {
           // Already in base, nothing to do
+          break;
+      }
+      case HectoPascal:
+      {
+          value *= HECTOPASCAL_TO_PASCAL;
           break;
       }
       case KiloPascal:

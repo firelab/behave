@@ -93,6 +93,7 @@ struct PressureUnits
     enum PressureUnitsEnum
     {
         Pascal,              // base loading unit
+        HectoPascal,         // hPa
         KiloPascal,          // kPa
         MegaPascal,          // MPa
         GigaPascal,          // GPa
