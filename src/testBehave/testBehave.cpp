@@ -50,6 +50,7 @@ void testContainModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun);
+void testVaporPressureDeficitCalculator(TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
@@ -82,6 +83,7 @@ int main()
     testMortalityModule(testInfo, behaveRun);
     testFineDeadFuelMoistureTool(testInfo, behaveRun);
     testSlopeTool(testInfo, behaveRun);
+    testVaporPressureDeficitCalculator(testInfo, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     if(testInfo.numPassed > 0)
@@ -1887,6 +1889,36 @@ void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun)
         observedHoriztonalDistances[i] = std::round(behaveRun.slopeTool.getHorizontalDistanceAtIndex(i, LengthUnits::Feet) * 10.0) / 10.0; // BehavePlus 6 tool always rounds to nearest tenths place
         reportTestResult(testInfo, testName, observedHoriztonalDistances[i], expectedHoriztonalDistances[i], error_tolerance);
     }
+
+    std::cout << "Finished testing  Slope Tool\n\n";
+}
+
+void testVPDScenario(VaporPressureDeficitCalculator& vpdCalculator, TestInfo& testInfo, double tempF, double rhPercent, double expectedVPD) {
+    std::stringstream ss;
+    ss << "Test " << rhPercent << "% Relative Humidity, " << tempF << " degF Air Temperature";
+    std::string testName = ss.str(); // convert stringstream to string
+
+    vpdCalculator.setTemperature(tempF, TemperatureUnits::Fahrenheit);
+    vpdCalculator.setRelativeHumidity(rhPercent, FractionUnits::Percent);
+    vpdCalculator.runCalculation();
+    double observedVPD = vpdCalculator.getVaporPressureDeficit(PressureUnits::HectoPascal);
+    reportTestResult(testInfo, testName, observedVPD, expectedVPD, 1e-03);
+}
+
+void testVaporPressureDeficitCalculator(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::cout << "Testing Vapor Pressure Deficit Calculator\n";
+
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 100.0, 0.0);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 90.0, 1.22833);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 80.0, 2.45667);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 70.0, 3.685);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 60.0, 4.91334);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 50.0, 6.14167);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 40.0, 7.37001);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 30.0, 8.59834);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 20.0, 9.82667);
+    testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 10.0, 11.055);
 
     std::cout << "Finished testing  Slope Tool\n\n";
 }
