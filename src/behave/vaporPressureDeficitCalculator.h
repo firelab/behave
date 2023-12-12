@@ -35,9 +35,13 @@ public:
   void setTemperature(double temperature, TemperatureUnits::TemperatureUnitsEnum);
   void setRelativeHumidity(double relativeHumidity, FractionUnits::FractionUnitsEnum units);
   double getVaporPressureDeficit(PressureUnits::PressureUnitsEnum units);
+  double getActualVaporPressure(PressureUnits::PressureUnitsEnum units);
+  double getSaturatedVaporPressure(PressureUnits::PressureUnitsEnum units);
 
 private:
-  double temperature_;          //<! Temparature is expected to be degrees Celsius
-  double relativeHumidity_;     //<! Relative Humidity is expected to be a fraction
-  double vaporPressureDeficit_; //<! Vapor Pressure Deficit is in kPa
+  double temperature_;		  //<! Temparature is expected to be degrees Celsius
+  double relativeHumidity_;	  //<! Relative Humidity is expected to be a fraction
+  double actualVaporPressure_;    //<! Actual Vapor Pressure in hectoPascals (hPa)
+  double saturatedVaporPressure_; //<! Saturated Vapor Pressure in hectoPascals (hPa)
+  double vaporPressureDeficit_;	  //<! Vapor Pressure Deficit is in kPa
 };

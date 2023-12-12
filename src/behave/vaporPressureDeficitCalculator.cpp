@@ -45,24 +45,37 @@ void VaporPressureDeficitCalculator::runCalculation() {
       TemperatureUnits::fromBaseUnits(temperature_, TemperatureUnits::Celsius);
 
   // Convert temperature to Kelvin
-  double temperatureKelvin = temperatureCelsius + 273.15;
+  double temperatureKelvin = temperatureCelsius + 237.3;
 
-  // Calculate saturation vapor pressure
-  double saturationVaporPressure =
-      6.1078 * std::exp((17.269 * temperatureCelsius) / temperatureKelvin);
+  // Calculate saturated vapor pressure
+  double saturatedVaporPressure = 6.11 * std::pow(10, ((7.5 * temperatureCelsius) / temperatureKelvin));
+
+  // Store saturated vapor pressure
+  saturatedVaporPressure_ = PressureUnits::toBaseUnits(saturatedVaporPressure, PressureUnits::HectoPascal);
 
   // Calculate actual vapor pressure
-  double actualVaporPressure = relativeHumidity_ * saturationVaporPressure;
+  double actualVaporPressure = relativeHumidity_ * saturatedVaporPressure;
+
+  // Store actual vapor pressure
+  actualVaporPressure_ = PressureUnits::toBaseUnits(actualVaporPressure, PressureUnits::HectoPascal);
 
   // Calculate vapor pressure deficit
-  vaporPressureDeficit_ = saturationVaporPressure - actualVaporPressure;
+  vaporPressureDeficit_ = saturatedVaporPressure - actualVaporPressure;
 
-  // Store in base units (kPa -> Pa)
-  vaporPressureDeficit_ = PressureUnits::toBaseUnits(vaporPressureDeficit_, PressureUnits::KiloPascal);
+  // Store in base units (hPa -> Pa)
+  vaporPressureDeficit_ = PressureUnits::toBaseUnits(vaporPressureDeficit_, PressureUnits::HectoPascal);
 }
 
 // Getters
 
 double VaporPressureDeficitCalculator::getVaporPressureDeficit(PressureUnits::PressureUnitsEnum units) {
   return PressureUnits::fromBaseUnits(vaporPressureDeficit_, units);
+}
+
+double VaporPressureDeficitCalculator::getActualVaporPressure(PressureUnits::PressureUnitsEnum units) {
+  return PressureUnits::fromBaseUnits(actualVaporPressure_, units);
+}
+
+double VaporPressureDeficitCalculator::getSaturatedVaporPressure(PressureUnits::PressureUnitsEnum units) {
+  return PressureUnits::fromBaseUnits(saturatedVaporPressure_, units);
 }

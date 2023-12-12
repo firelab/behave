@@ -39,6 +39,7 @@
 #include "slopeTool.h"
 #include "spot.h"
 #include "surface.h"
+#include "vaporPressureDeficitCalculator.h"
 
 class FuelModels;
 
@@ -103,6 +104,9 @@ FineDeadFuelMoistureTool fineDeadFuelMoistureTool;
 
 // Slope Tool
 SlopeTool slopeTool;
+
+// Vapor Pressure Deficit
+VaporPressureDeficitCalculator vpdCalculator;
 
 protected:
     void memberwiseCopyAssignment(const BehaveRun& rhs);
