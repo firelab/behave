@@ -36,6 +36,11 @@ SurfaceInputs::SurfaceInputs()
     initializeMembers();
 }
 
+SurfaceInputs::~SurfaceInputs()
+{
+  delete(moistureScenarios_);
+}
+
 SurfaceInputs & SurfaceInputs::operator=(const SurfaceInputs & rhs)
 {
     if (this != &rhs)
@@ -97,7 +102,7 @@ void SurfaceInputs::initializeMembers()
 
     userProvidedWindAdjustmentFactor_ = -1.0;
 
-    moistureScenarios_ = nullptr;
+    moistureScenarios_ = new MoistureScenarios();
     currentMoistureScenarioName_ = "";
     currentMoistureScenarioIndex_ = -1;
     moistureValuesBySizeClass_ = {-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0};

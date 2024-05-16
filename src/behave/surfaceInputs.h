@@ -39,6 +39,7 @@ class SurfaceInputs
 public:
     SurfaceInputs();
     SurfaceInputs& operator=(const SurfaceInputs& rhs);
+    ~SurfaceInputs();
 
     void initializeMembers();
 
