@@ -31,8 +31,10 @@ public:
     void setRegion(RegionCode region);
     void setSpeciesCode(std::string speciesCode);
     void setEquationType(EquationType equationType);
-    void setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch);
-    void setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits);
+    void setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch); // deprecated
+    void setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits); // deprecated
+    void setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void setScorchHeight(double scorchHeight, LengthUnits::LengthUnitsEnum scorchHeightUnits);
     void setTreeDensityPerUnitArea(double numberOfTrees, AreaUnits::AreaUnitsEnum areaUnits);
     void setDBH(double dbh, LengthUnits::LengthUnitsEnum diameterUnits);
     void setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits);
@@ -42,6 +44,9 @@ public:
     void setBeetleDamage(BeetleDamage beetleDamage);
     void setBoleCharHeight(double boleCharHeight, LengthUnits::LengthUnitsEnum boleCharHeightUnits);
     void setFireSeverity(FireSeverity fireSeverity);
+    void setFirelineIntensity(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits);
+    void setMidFlameWindSpeed(double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits);
 
     bool updateInputsForSpeciesCodeAndEquationType(std::string speciesCode, EquationType equationType);
 
@@ -49,8 +54,10 @@ public:
     RegionCode getRegion() const;
     std::string getSpeciesCode() const;
     EquationType getEquationType() const;
-    FlameLengthOrScorchHeightSwitch getFlameLengthOrScorchHeightSwitch() const;
-    double getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const;
+    FlameLengthOrScorchHeightSwitch getFlameLengthOrScorchHeightSwitch() const; // deprecated
+    double getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const; // deprecated
+    double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits);
+    double getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits);
     double getTreeDensityPerUnitArea(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getDBH(LengthUnits::LengthUnitsEnum diameterUnits) const;
     double getTreeHeight(LengthUnits::LengthUnitsEnum treeHeightUnits) const;

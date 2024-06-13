@@ -18,14 +18,16 @@ MortalityInputs::MortalityInputs()
     dbh_ = -1.0;
     treeHeight_ = -1.0;
     crownRatio_ = -1.0;
-    flameLengthOrScorchHeightSwitch_ = FlameLengthOrScorchHeightSwitch::flame_length; // determines whether the value for flameLengthOrScorchHeightValue_ is flame length or scorch height
-    flameLengthOrScorchHeightValue_ = -1.0;
+    flameLength_ = -1.0;
+    scorchHeight_ = -1.0;
+    flameLengthOrScorchHeightSwitch_ = FlameLengthOrScorchHeightSwitch::flame_length; // deprecated
+    flameLengthOrScorchHeightValue_ = -1.0; //deprecated
     fireSeverity_ = FireSeverity::not_set;
     crownDamage_ = -1.0;
     cambiumKillRating_ = -1.0;
     beetleDamage_ = BeetleDamage::not_set;
     boleCharHeight_ = -1.0;
-   
+
     isFieldRequiredVector_.resize((int)RequiredFieldNames::num_inputs);
     std::fill(isFieldRequiredVector_.begin(), isFieldRequiredVector_.end(), false);
     isFieldRequiredVector_[(int)RequiredFieldNames::region] = true; // always required
@@ -56,8 +58,10 @@ void MortalityInputs::memberwiseCopyAssignment(const MortalityInputs& rhs)
     dbh_ = rhs.dbh_;
     treeHeight_ = rhs.treeHeight_;
     crownRatio_ = rhs.crownRatio_;
-    flameLengthOrScorchHeightSwitch_ = rhs.flameLengthOrScorchHeightSwitch_;
-    flameLengthOrScorchHeightValue_ = rhs.flameLengthOrScorchHeightValue_;
+    flameLengthOrScorchHeightSwitch_ = rhs.flameLengthOrScorchHeightSwitch_; // deprecated
+    flameLengthOrScorchHeightValue_ = rhs.flameLengthOrScorchHeightValue_; // depreacated
+    flameLength_ = rhs.flameLength_;
+    scorchHeight_ = rhs.flameLength_;
     fireSeverity_ = rhs.fireSeverity_;
     crownDamage_ = rhs.crownDamage_;
     cambiumKillRating_ = rhs.cambiumKillRating_;
@@ -86,14 +90,26 @@ void MortalityInputs::setEquationType(EquationType equationType)
     equationType_ = equationType;
 }
 
+//deprecated
 void MortalityInputs::setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch)
 {
     flameLengthOrScorchHeightSwitch_ = flameLengthOrScorchHeightSwitch;
 }
 
+//deprecated
 void MortalityInputs::setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits)
 {
     flameLengthOrScorchHeightValue_ = LengthUnits::toBaseUnits(flameLengthOrScorchHeightValue, flameLengthOrScorchHeightUnits);
+}
+
+void MortalityInputs::setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    flameLength_ = LengthUnits::toBaseUnits(flameLength, flameLengthUnits);
+}
+
+void MortalityInputs::setScorchHeight(double scorchHeight, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    scorchHeight_ = LengthUnits::toBaseUnits(scorchHeight, flameLengthUnits);
 }
 
 void MortalityInputs::setTreeDensityPerUnitArea(double numberOfTrees, AreaUnits::AreaUnitsEnum areaUnits)
@@ -161,6 +177,17 @@ void MortalityInputs::setBarkThickness(double barkThickness, LengthUnits::Length
     barkThickness_ = LengthUnits::toBaseUnits(barkThickness, barkThicknessUnits);;
 }
 
+void MortalityInputs::setFirelineIntensity(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) {
+    firelineIntensity_ = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
+}
+void MortalityInputs::setMidFlameWindSpeed(double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits) {
+    midFlameWindSpeed_ = SpeedUnits::toBaseUnits(midFlameWindSpeed, windSpeedUnits);
+}
+
+void MortalityInputs::setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits) {
+    airTemperature_ = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
+}
+
 RegionCode MortalityInputs::getRegion() const
 {
     return region_;
@@ -184,6 +211,16 @@ FlameLengthOrScorchHeightSwitch MortalityInputs::getFlameLengthOrScorchHeightSwi
 double MortalityInputs::getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const
 {
     return LengthUnits::fromBaseUnits(flameLengthOrScorchHeightValue_, flameLengthOrScorchHeightUnits);
+}
+
+double MortalityInputs::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
+{
+    return LengthUnits::fromBaseUnits(flameLength_, flameLengthUnits);
+}
+
+double MortalityInputs::getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits) const
+{
+    return LengthUnits::fromBaseUnits(scorchHeight_, scorchHeightUnits);
 }
 
 double MortalityInputs::getTreeDensityPerUnitArea(AreaUnits::AreaUnitsEnum areaUnits) const
@@ -249,4 +286,19 @@ FireSeverity MortalityInputs::getFireSeverity() const
 double MortalityInputs::getBarkThickness(LengthUnits::LengthUnitsEnum barkThicknessUnits) const
 {
     return LengthUnits::fromBaseUnits(barkThickness_, barkThicknessUnits);
+}
+
+double MortalityInputs::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+    return FirelineIntensityUnits::fromBaseUnits(firelineIntensity_, firelineIntensityUnits);
+}
+
+double MortalityInputs::getMidFlameWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const
+{
+    return SpeedUnits::fromBaseUnits(midFlameWindSpeed_, windSpeedUnits);
+}
+
+double MortalityInputs::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) const
+{
+    return TemperatureUnits::fromBaseUnits(airTemperature_, temperatureUnits);
 }

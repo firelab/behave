@@ -48,6 +48,8 @@ public:
     void setEquationType(EquationType equationType);
     void setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch);
     void setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits);
+    void setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void setScorchHeight(double scorchHeight, LengthUnits::LengthUnitsEnum scorchHeightUnits);
     void setTreeDensityPerUnitArea(double numberOfTrees, AreaUnits::AreaUnitsEnum areaUnits);
     void setDBH(double dbh, LengthUnits::LengthUnitsEnum diameterUnits);
     void setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits);
@@ -61,6 +63,12 @@ public:
     void setCrownDamageType(CrownDamageType crownDamageType);
     void setFireSeverity(FireSeverity fireSeverity);
     void setBarkThickness(double barkThickness, LengthUnits::LengthUnitsEnum barkThicknessUnits); // Not input by user, but calculated if needed for further calcuation
+    void setFirelineIntensity(double firelineIntensity,
+                              FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits);
+    void setMidFlameWindSpeed(double midFlameWindSpeed,
+                              SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+    void setAirTemperature(double airTemperature,
+                           TemperatureUnits::TemperatureUnitsEnum temperatureUnits);
 
     RegionCode getRegion() const;
     std::string getSpeciesCode() const;
@@ -80,6 +88,11 @@ public:
     CrownDamageType getCrownDamageType() const;
     FireSeverity getFireSeverity() const;
     double getBarkThickness(LengthUnits::LengthUnitsEnum barkThicknessUnits) const;
+    double getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits) const;
+    double getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
+    double getMidFlameWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const;
+    double getAirTemperature(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) const;
 
     vector<bool> isFieldRequiredVector_; // stores a bool for each of the equation dependent required inputs
 
@@ -90,8 +103,10 @@ protected:
     RegionCode region_;
     string speciesCode_; // 4 to 7 character species name code, together with equation type identitifies a unique record in the species table
     EquationType equationType_; // crown scorch, bole char, or crown damage equation, together with species name code identitifies a unique record in the species table
-    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch_; // determines whether flameLengthOrScorchHeightValue_ is a flame length or scorch height
-    double flameLengthOrScorchHeightValue_; // the value for flame length or scorch height
+    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch_; //depricated
+    double flameLengthOrScorchHeightValue_; //depreciated
+    double flameLength_;
+    double scorchHeight_;
     double densityPerAcre_; // number of trees per acre in the stand
     double dbh_;  // diameter at breast height
     double treeHeight_;
@@ -114,6 +129,9 @@ protected:
     FireSeverity fireSeverity_; // Fire Severity: low, empty or not set
 
     double barkThickness_;             // Not input by user, but calculated if needed for further calcuation
+    double firelineIntensity_;
+    double midFlameWindSpeed_;
+    double airTemperature_;
 };
 
 #endif //MORTALITY_INPUTS_H
