@@ -104,7 +104,7 @@ protected:
     string speciesCode_; // 4 to 7 character species name code, together with equation type identitifies a unique record in the species table
     EquationType equationType_; // crown scorch, bole char, or crown damage equation, together with species name code identitifies a unique record in the species table
     FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch_; //depricated
-    double flameLengthOrScorchHeightValue_; //depreciated
+    double flameLengthOrScorchHeightValue_;
     double flameLength_;
     double scorchHeight_;
     double densityPerAcre_; // number of trees per acre in the stand

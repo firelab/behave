@@ -478,54 +478,49 @@ bool Mortality::checkIsInRegionFromSpeciesCode(string speciesCode, RegionCode re
 
 double Mortality::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
-    double  blackHillsFlameLength, flameLengthOrScorchHeightValue, flameLength;
+    double flameLength, scorchHeight;
+    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch;
 
     flameLength = mortalityInputs_.getFlameLength(flameLengthUnits);
-    if (flameLength != -1) {
-        return LengthUnits::fromBaseUnits(flameLength, flameLengthUnits);
-    } else {
-        // Assume we're given Scorch Height
-        flameLengthOrScorchHeightValue = mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet);
-        blackHillsFlameLength = Calc_Flame(flameLengthOrScorchHeightValue); // For Black Hills PiPo
+    scorchHeight = mortalityInputs_.getScorchHeight(flameLengthUnits);
+    flameLengthOrScorchHeightSwitch = mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
 
-        // But if it's Flame Length - convert
-        if(mortalityInputs_.getFlameLengthOrScorchHeightSwitch() == FlameLengthOrScorchHeightSwitch::flame_length) // if flame length
-            {
-                // convert to scorch height
-                flameLengthOrScorchHeightValue = Calc_Scorch(mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet));
-                // save flame length for Black Hills PiPo
-                blackHillsFlameLength = flameLengthOrScorchHeightValue;
-            }
-        return  LengthUnits::fromBaseUnits(blackHillsFlameLength, flameLengthUnits);
+    if (scorchHeight != -1.0 && flameLengthOrScorchHeightSwitch == FlameLengthOrScorchHeightSwitch::scorch_height) {
+        return Calc_Flame(scorchHeight); // For Black Hills PiPo
+    } else {
+         return LengthUnits::fromBaseUnits(flameLength, flameLengthUnits);
     }
 }
 
 double Mortality::getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits)
 {
-    double scorchHeight;
+    double scorchHeight, flameLength, firelineIntensity, midFlameWindSpeed, airTemperature;
+    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch;
 
-    scorchHeight = mortalityInputs_.getScorchHeight(LengthUnits::Feet);
+    flameLength = mortalityInputs_.getFlameLength(LengthUnits::Feet);
+    scorchHeight = mortalityInputs_.getScorchHeight(scorchHeightUnits);
+    firelineIntensity = mortalityInputs_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
+    midFlameWindSpeed = mortalityInputs_.getMidFlameWindSpeed(SpeedUnits::FeetPerMinute);
+    airTemperature = mortalityInputs_.getAirTemperature(TemperatureUnits::Fahrenheit);
+    flameLengthOrScorchHeightSwitch = mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
 
-    if (scorchHeight != -1 ) {
-        return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
-    } else if (mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet) == -1) {
-        scorchHeight = calculateScorchHeight(mortalityInputs_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond),
-                                             FirelineIntensityUnits::BtusPerFootPerSecond,
-                                             mortalityInputs_.getMidFlameWindSpeed(SpeedUnits::FeetPerMinute),
-                                             SpeedUnits::FeetPerMinute,
-                                             mortalityInputs_.getAirTemperature(TemperatureUnits::Fahrenheit),
-                                             TemperatureUnits::Fahrenheit,
-                                             LengthUnits::Feet);
-    } else if (mortalityInputs_.getFlameLengthOrScorchHeightSwitch() == FlameLengthOrScorchHeightSwitch::flame_length) {
-        scorchHeight = Calc_Scorch(mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet));
-    } else if (mortalityInputs_.getFlameLengthOrScorchHeightSwitch() == FlameLengthOrScorchHeightSwitch::scorch_height) {
-        scorchHeight = mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet);
+    if (scorchHeight != -1.0 && flameLengthOrScorchHeightSwitch == FlameLengthOrScorchHeightSwitch::scorch_height) {
+        return scorchHeight;
+    } else if  (firelineIntensity != -1.0 && midFlameWindSpeed != -1.0 && airTemperature != -1.0) {
+        return calculateScorchHeight(firelineIntensity,
+                                     FirelineIntensityUnits::BtusPerFootPerSecond,
+                                     midFlameWindSpeed,
+                                     SpeedUnits::FeetPerMinute,
+                                     airTemperature,
+                                     TemperatureUnits::Fahrenheit,
+                                     LengthUnits::Feet);
+    } else if (flameLength != -1) {
+        return Calc_Scorch(flameLength);
     } else {
-        scorchHeight = -1.0;
+        return -1.0;
     }
-
-    return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
 }
+
 
 /*******************************************************************************************************
 * Name: calculateMortalityCrownScorch

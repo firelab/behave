@@ -20,8 +20,11 @@ MortalityInputs::MortalityInputs()
     crownRatio_ = -1.0;
     flameLength_ = -1.0;
     scorchHeight_ = -1.0;
-    flameLengthOrScorchHeightSwitch_ = FlameLengthOrScorchHeightSwitch::flame_length; // deprecated
-    flameLengthOrScorchHeightValue_ = -1.0; //deprecated
+    firelineIntensity_ = -1.0;
+    midFlameWindSpeed_ = -1.0;
+    airTemperature_ = -1.0;
+    flameLengthOrScorchHeightSwitch_ = FlameLengthOrScorchHeightSwitch::flame_length;
+    flameLengthOrScorchHeightValue_ = -1.0; // deprecated
     fireSeverity_ = FireSeverity::not_set;
     crownDamage_ = -1.0;
     cambiumKillRating_ = -1.0;
@@ -58,7 +61,7 @@ void MortalityInputs::memberwiseCopyAssignment(const MortalityInputs& rhs)
     dbh_ = rhs.dbh_;
     treeHeight_ = rhs.treeHeight_;
     crownRatio_ = rhs.crownRatio_;
-    flameLengthOrScorchHeightSwitch_ = rhs.flameLengthOrScorchHeightSwitch_; // deprecated
+    flameLengthOrScorchHeightSwitch_ = rhs.flameLengthOrScorchHeightSwitch_;
     flameLengthOrScorchHeightValue_ = rhs.flameLengthOrScorchHeightValue_; // depreacated
     flameLength_ = rhs.flameLength_;
     scorchHeight_ = rhs.flameLength_;
@@ -90,7 +93,6 @@ void MortalityInputs::setEquationType(EquationType equationType)
     equationType_ = equationType;
 }
 
-//deprecated
 void MortalityInputs::setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch)
 {
     flameLengthOrScorchHeightSwitch_ = flameLengthOrScorchHeightSwitch;
@@ -208,6 +210,7 @@ FlameLengthOrScorchHeightSwitch MortalityInputs::getFlameLengthOrScorchHeightSwi
     return flameLengthOrScorchHeightSwitch_;
 }
 
+//deprecated
 double MortalityInputs::getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const
 {
     return LengthUnits::fromBaseUnits(flameLengthOrScorchHeightValue_, flameLengthOrScorchHeightUnits);
@@ -290,15 +293,27 @@ double MortalityInputs::getBarkThickness(LengthUnits::LengthUnitsEnum barkThickn
 
 double MortalityInputs::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
 {
-    return FirelineIntensityUnits::fromBaseUnits(firelineIntensity_, firelineIntensityUnits);
+    if (firelineIntensity_ == -1.0) {
+        return firelineIntensity_;
+    } else {
+        return FirelineIntensityUnits::fromBaseUnits(firelineIntensity_, firelineIntensityUnits);
+    }
 }
 
 double MortalityInputs::getMidFlameWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const
 {
-    return SpeedUnits::fromBaseUnits(midFlameWindSpeed_, windSpeedUnits);
+    if (midFlameWindSpeed_ == -1.0) {
+        return airTemperature_;
+    } else {
+        return SpeedUnits::fromBaseUnits(midFlameWindSpeed_, windSpeedUnits);
+    }
 }
 
 double MortalityInputs::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) const
 {
-    return TemperatureUnits::fromBaseUnits(airTemperature_, temperatureUnits);
+    if (airTemperature_ == -1.0) {
+        return airTemperature_;
+    } else {
+        return TemperatureUnits::fromBaseUnits(airTemperature_, temperatureUnits);
+    }
 }
