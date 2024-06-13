@@ -135,7 +135,7 @@ void Mortality::setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum 
 
 void Mortality::setScorchHeight(double scorchHeight, LengthUnits::LengthUnitsEnum scorchHeightUnits)
 {
-    mortalityInputs_.setFlameLength(scorchHeight, scorchHeightUnits);
+    mortalityInputs_.setScorchHeight(scorchHeight, scorchHeightUnits);
 }
 
 void Mortality::setTreeDensityPerUnitArea(double numberOfTrees, AreaUnits::AreaUnitsEnum areaUnits)
