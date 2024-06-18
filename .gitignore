@@ -196,3 +196,6 @@ ModelManifest.xml
 *.swp
 /.vs
 *.json
+
+# Test Results
+results.csv
