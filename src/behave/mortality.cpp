@@ -123,9 +123,22 @@ void Mortality::setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwit
     mortalityInputs_.setFlameLengthOrScorchHeightSwitch(flameLengthOrScorchHeightSwitch);
 }
 
+/**
+ * \deprecated
+ */
 void Mortality::setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits)
 {
     mortalityInputs_.setFlameLengthOrScorchHeightValue(flameLengthOrScorchHeightValue, flameLengthOrScorchHeightUnits);
+}
+
+void Mortality::setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    mortalityInputs_.setFlameLength(flameLength, flameLengthUnits);
+}
+
+void Mortality::setScorchHeight(double scorchHeight, LengthUnits::LengthUnitsEnum scorchHeightUnits)
+{
+    mortalityInputs_.setScorchHeight(scorchHeight, scorchHeightUnits);
 }
 
 void Mortality::setTreeDensityPerUnitArea(double numberOfTrees, AreaUnits::AreaUnitsEnum areaUnits)
@@ -173,6 +186,20 @@ void Mortality::setFireSeverity(FireSeverity fireSeverity)
     mortalityInputs_.setFireSeverity(fireSeverity);
 }
 
+void Mortality::setFirelineIntensity(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits)
+{
+    mortalityInputs_.setFirelineIntensity(firelineIntensity, firelineIntensityUnits);
+}
+
+void Mortality::setMidFlameWindSpeed(double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
+{
+    mortalityInputs_.setMidFlameWindSpeed(midFlameWindSpeed, windSpeedUnits);
+}
+void Mortality::setAirTemperature(double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits)
+{
+    mortalityInputs_.setAirTemperature(airTemperature, temperatureUnits);
+}
+
 RegionCode Mortality::getRegion() const
 {
     return mortalityInputs_.getRegion();
@@ -193,6 +220,9 @@ FlameLengthOrScorchHeightSwitch Mortality::getFlameLengthOrScorchHeightSwitch() 
     return mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
 }
 
+/**
+ * \deprecated
+ */
 double Mortality::getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const
 {
     return mortalityInputs_.getFlameLengthOrScorchHeightValue(flameLengthOrScorchHeightUnits);
@@ -452,6 +482,52 @@ bool Mortality::checkIsInRegionFromSpeciesCode(string speciesCode, RegionCode re
     return checkIsInRegionAtSpeciesTableIndex(index, region);
 }
 
+double Mortality::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    double flameLength, scorchHeight;
+    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch;
+
+    flameLength = mortalityInputs_.getFlameLength(flameLengthUnits);
+    scorchHeight = mortalityInputs_.getScorchHeight(flameLengthUnits);
+    flameLengthOrScorchHeightSwitch = mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
+
+    if (scorchHeight != -1.0 && flameLengthOrScorchHeightSwitch == FlameLengthOrScorchHeightSwitch::scorch_height) {
+        return Calc_Flame(scorchHeight); // For Black Hills PiPo
+    } else {
+        return flameLength;
+    }
+}
+
+double Mortality::getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits)
+{
+    double scorchHeight, flameLength, firelineIntensity, midFlameWindSpeed, airTemperature;
+    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch;
+
+    flameLength = mortalityInputs_.getFlameLength(LengthUnits::Feet);
+    scorchHeight = mortalityInputs_.getScorchHeight(scorchHeightUnits);
+    firelineIntensity = mortalityInputs_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
+    midFlameWindSpeed = mortalityInputs_.getMidFlameWindSpeed(SpeedUnits::FeetPerMinute);
+    airTemperature = mortalityInputs_.getAirTemperature(TemperatureUnits::Fahrenheit);
+    flameLengthOrScorchHeightSwitch = mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
+
+    if (scorchHeight != -1.0 && flameLengthOrScorchHeightSwitch == FlameLengthOrScorchHeightSwitch::scorch_height) {
+        return scorchHeight;
+    } else if  (firelineIntensity != -1.0 && midFlameWindSpeed != -1.0 && airTemperature != -1.0) {
+        return calculateScorchHeight(firelineIntensity,
+                                     FirelineIntensityUnits::BtusPerFootPerSecond,
+                                     midFlameWindSpeed,
+                                     SpeedUnits::FeetPerMinute,
+                                     airTemperature,
+                                     TemperatureUnits::Fahrenheit,
+                                     LengthUnits::Feet);
+    } else if (flameLength != -1) {
+        return Calc_Scorch(flameLength);
+    } else {
+        return -1.0;
+    }
+}
+
+
 /*******************************************************************************************************
 * Name: calculateMortalityCrownScorch
 * Desc: Calculate the Probility of Mortality, Basal Area, Trees Killed
@@ -505,37 +581,26 @@ double  Mortality::calculateMortalityCrownScorch()
 {
     double f, barkThicknessPrime, DBHcm, treeHeight, LCR, HCR, CSL, P, Fl, CH;
     double  blackHillsFlameLength, CBH;
-    double  flameLengthOrScorchHeightValue, DBH;
+    double DBH, scorchHeight;
     int  mortalityEquationNumber;
 
     DBH = mortalityInputs_.getDBH(LengthUnits::Inches);
+    Fl = getFlameLength(LengthUnits::Feet);
+    blackHillsFlameLength = Fl;
+    scorchHeight = getScorchHeight(LengthUnits::Feet);
 
-    // Assume we're given Scorch Height 
-    flameLengthOrScorchHeightValue = mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet);
-    blackHillsFlameLength = Calc_Flame(flameLengthOrScorchHeightValue); // For Black Hills PiPo 
-
-    // But if it's Flame Length - convert 
-    if(mortalityInputs_.getFlameLengthOrScorchHeightSwitch() == FlameLengthOrScorchHeightSwitch::flame_length) // if flame length 
-    {
-        // convert to scorch height    
-        flameLengthOrScorchHeightValue = Calc_Scorch(mortalityInputs_.getFlameLengthOrScorchHeightValue(LengthUnits::Feet));
-        // save flame length for Black Hills PiPo 
-        blackHillsFlameLength = flameLengthOrScorchHeightValue;
-    }
-
-    // NOTE NOTE - FuelCalc relies on the exact text "Species" being in this error message 
     if(speciesMasterTable_->getSpeciesTableIndexFromSpeciesCodeAndEquationType(mortalityInputs_.getSpeciesCode(), mortalityInputs_.getEquationType()) == -1) // Check for Valid Species        
     {
         //sprintf(cr_ErrMes, "Invalid Species: %s", mortalityInputs_.speciesCode_);
         return -1.0;
     }
 
-    // Calculate Bark Thickness 
+    // Calculate Bark Thickness
     mortalityInputs_.setBarkThickness(calculateBarkThickness(), LengthUnits::Inches);
 
     treeHeight = mortalityInputs_.getTreeHeight(LengthUnits::Feet); // Note-1                        
     HCR = treeHeight * (mortalityInputs_.getCrownRatio());
-    treeCrownLengthScorched_ = flameLengthOrScorchHeightValue - (treeHeight - HCR);
+    treeCrownLengthScorched_ = scorchHeight - (treeHeight - HCR);
 
     if(treeCrownLengthScorched_ <= 0.0)
     {
@@ -582,6 +647,7 @@ double  Mortality::calculateMortalityCrownScorch()
             else if(treeHeight < 3.0)
             {
                 P = 1.0;
+                // Fl = Calc_Flame(flameLengthOrScorchHeightValue);
             }
             else
             {
@@ -619,7 +685,7 @@ double  Mortality::calculateMortalityCrownScorch()
         }
         case 4:
         {
-            Fl = Calc_Flame(flameLengthOrScorchHeightValue);
+            // Fl = Calc_Flame(flameLengthOrScorchHeightValue);
             CH = Fl / 1.8;
             if(mortalityInputs_.getFireSeverity() == FireSeverity::low)
             {
@@ -723,7 +789,7 @@ double  Mortality::calculateMortalityCrownScorch()
         {
             f = mortalityInputs_.getCrownRatio(); // crown ratio 
             CBH = mortalityInputs_.getTreeHeight(LengthUnits::Feet) - (mortalityInputs_.getTreeHeight(LengthUnits::Feet) * f);
-            P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Feet), flameLengthOrScorchHeightValue, blackHillsFlameLength);
+            P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Feet), scorchHeight, blackHillsFlameLength);
             break;
         }
         default:
