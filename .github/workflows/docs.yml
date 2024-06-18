@@ -19,10 +19,11 @@ jobs:
         uses: mattnotmitt/doxygen-action@1.9.8
 
       - name: Push new Docs
-        git config --global user.name 'Doxygen'
-        git config --global user.email 'doxygen@users.noreply.github.com'
+        run: |
+          git config --global user.name 'Doxygen'
+          git config --global user.email 'doxygen@users.noreply.github.com'
 
-        COMMIT_HASH=$(git rev-parse HEAD)
-        git add docs
-        git commit -m "Generated Docs (commit: $COMMIT_HASH)"
-        git push
+          COMMIT_HASH=$(git rev-parse HEAD)
+          git add docs
+          git commit -m "Generated Docs (commit: $COMMIT_HASH)"
+          git push
