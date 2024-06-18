@@ -123,6 +123,9 @@ void Mortality::setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwit
     mortalityInputs_.setFlameLengthOrScorchHeightSwitch(flameLengthOrScorchHeightSwitch);
 }
 
+/**
+ * \deprecated
+ */
 void Mortality::setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits)
 {
     mortalityInputs_.setFlameLengthOrScorchHeightValue(flameLengthOrScorchHeightValue, flameLengthOrScorchHeightUnits);
@@ -217,6 +220,9 @@ FlameLengthOrScorchHeightSwitch Mortality::getFlameLengthOrScorchHeightSwitch() 
     return mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
 }
 
+/**
+ * \deprecated
+ */
 double Mortality::getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const
 {
     return mortalityInputs_.getFlameLengthOrScorchHeightValue(flameLengthOrScorchHeightUnits);
@@ -488,7 +494,7 @@ double Mortality::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits)
     if (scorchHeight != -1.0 && flameLengthOrScorchHeightSwitch == FlameLengthOrScorchHeightSwitch::scorch_height) {
         return Calc_Flame(scorchHeight); // For Black Hills PiPo
     } else {
-         return LengthUnits::fromBaseUnits(flameLength, flameLengthUnits);
+        return flameLength;
     }
 }
 
@@ -579,7 +585,8 @@ double  Mortality::calculateMortalityCrownScorch()
     int  mortalityEquationNumber;
 
     DBH = mortalityInputs_.getDBH(LengthUnits::Inches);
-    blackHillsFlameLength = Fl = getFlameLength(LengthUnits::Feet);
+    Fl = getFlameLength(LengthUnits::Feet);
+    blackHillsFlameLength = Fl;
     scorchHeight = getScorchHeight(LengthUnits::Feet);
 
     if(speciesMasterTable_->getSpeciesTableIndexFromSpeciesCodeAndEquationType(mortalityInputs_.getSpeciesCode(), mortalityInputs_.getEquationType()) == -1) // Check for Valid Species        

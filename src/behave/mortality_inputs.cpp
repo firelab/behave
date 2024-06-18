@@ -24,7 +24,7 @@ MortalityInputs::MortalityInputs()
     midFlameWindSpeed_ = -1.0;
     airTemperature_ = -1.0;
     flameLengthOrScorchHeightSwitch_ = FlameLengthOrScorchHeightSwitch::flame_length;
-    flameLengthOrScorchHeightValue_ = -1.0; // deprecated
+    flameLengthOrScorchHeightValue_ = -1.0;
     fireSeverity_ = FireSeverity::not_set;
     crownDamage_ = -1.0;
     cambiumKillRating_ = -1.0;
@@ -98,7 +98,9 @@ void MortalityInputs::setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeig
     flameLengthOrScorchHeightSwitch_ = flameLengthOrScorchHeightSwitch;
 }
 
-//deprecated
+/**
+ * \deprecated
+ */
 void MortalityInputs::setFlameLengthOrScorchHeightValue(double flameLengthOrScorchHeightValue, LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits)
 {
     flameLengthOrScorchHeightValue_ = LengthUnits::toBaseUnits(flameLengthOrScorchHeightValue, flameLengthOrScorchHeightUnits);
@@ -210,7 +212,9 @@ FlameLengthOrScorchHeightSwitch MortalityInputs::getFlameLengthOrScorchHeightSwi
     return flameLengthOrScorchHeightSwitch_;
 }
 
-//deprecated
+/**
+ * \deprecated
+ */
 double MortalityInputs::getFlameLengthOrScorchHeightValue(LengthUnits::LengthUnitsEnum flameLengthOrScorchHeightUnits) const
 {
     return LengthUnits::fromBaseUnits(flameLengthOrScorchHeightValue_, flameLengthOrScorchHeightUnits);
