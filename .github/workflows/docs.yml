@@ -1,0 +1,29 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@1.9.8
+
+      - name: Push new Docs
+        run: |
+          git config --global user.name 'Doxygen'
+          git config --global user.email 'doxygen@users.noreply.github.com'
+
+          COMMIT_HASH=$(git rev-parse HEAD)
+          git add docs
+          git commit -m "Generated Docs (commit: $COMMIT_HASH)"
+          git push
