@@ -298,7 +298,7 @@ double MortalityInputs::getBarkThickness(LengthUnits::LengthUnitsEnum barkThickn
 double MortalityInputs::getFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
 {
     if (firelineIntensity_ == -1.0) {
-        return firelineIntensity_;
+        return -1.0;
     } else {
         return FirelineIntensityUnits::fromBaseUnits(firelineIntensity_, firelineIntensityUnits);
     }
@@ -307,7 +307,7 @@ double MortalityInputs::getFirelineIntensity(FirelineIntensityUnits::FirelineInt
 double MortalityInputs::getMidFlameWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits) const
 {
     if (midFlameWindSpeed_ == -1.0) {
-        return airTemperature_;
+        return -1.0;
     } else {
         return SpeedUnits::fromBaseUnits(midFlameWindSpeed_, windSpeedUnits);
     }
@@ -316,7 +316,7 @@ double MortalityInputs::getMidFlameWindSpeed(SpeedUnits::SpeedUnitsEnum windSpee
 double MortalityInputs::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) const
 {
     if (airTemperature_ == -1.0) {
-        return airTemperature_;
+        return -1.0;
     } else {
         return TemperatureUnits::fromBaseUnits(airTemperature_, temperatureUnits);
     }
