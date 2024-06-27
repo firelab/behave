@@ -696,6 +696,8 @@ double  Mortality::calculateMortalityCrownScorch()
             {
                 P = 1.0 / (1.0 + exp((0.0858 * DBH * 2.54) - (0.118 * CH * 2.54 * 12.0) - 2.157));
             }
+            treeCrownVolumeScorched_ = -1;
+            treeCrownLengthScorched_ = -1;
             break;
         }
         //...................................................
@@ -737,51 +739,61 @@ double  Mortality::calculateMortalityCrownScorch()
         case 10:
         {
             P = Whitefir(CSL); // ABICON                            
+            treeCrownVolumeScorched_ = -1;
             break;
         }
         case 11:
         {
             P = SubalpineFir(crownVolumeScorchedPercent); // ABILAS                            
+            treeCrownLengthScorched_ = -1;
             break;
         }
         case 12:
         {
             P = IncenseCedar(CSL); // LIBDEC                            
+            treeCrownVolumeScorched_ = -1;
             break;
         }
         case 14:
         {
             P = WesternLarch(crownVolumeScorchedPercent, DBH); // LAROCC                            
+            treeCrownLengthScorched_ = -1;
             break;
         }
         case 15:
         {
             P = EngelmannSpruce(crownVolumeScorchedPercent); // PICENG                            
+            treeCrownLengthScorched_ = -1;
             break;
         }
         case 16:
         {
             P = RedFir(CSL); // ABIMAG                          
+            treeCrownVolumeScorched_ = -1;
             break;
         }
         case 17:
         {
             P = WhitebarkPine(crownVolumeScorchedPercent, DBH); // PINALB                      
+            treeCrownLengthScorched_ = -1;
             break;
         }
         case 18:
         {
             P = SugarPine(CSL);
+            treeCrownVolumeScorched_ = -1;
             break;
         }
         case 19:
         {
             P = PonderosaJeffreyPine(crownVolumeScorchedPercent);
+            treeCrownLengthScorched_ = -1;
             break;
         }
         case 20:
         {
             P = DouglasFir(crownVolumeScorchedPercent);
+            treeCrownLengthScorched_ = -1;
             break;
         }
         // Change 9-6-2016 - new Black Hills PiPo, see Duncan Lutes's .docx document saved in fofem project folder 
@@ -790,12 +802,16 @@ double  Mortality::calculateMortalityCrownScorch()
             f = mortalityInputs_.getCrownRatio(); // crown ratio 
             CBH = mortalityInputs_.getTreeHeight(LengthUnits::Feet) - (mortalityInputs_.getTreeHeight(LengthUnits::Feet) * f);
             P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Feet), scorchHeight, blackHillsFlameLength);
+            treeCrownLengthScorched_ = -1;
+            treeCrownVolumeScorched_ = -1;
             break;
         }
         default:
         {
             //sprintf(cr_ErrMes, "Equation Not implemented,  Equ Num: %d\n", i_MortEqu);
             P = 0;
+            treeCrownLengthScorched_ = -1;
+            treeCrownVolumeScorched_ = -1;
             return -1.0;
             break;
         }
@@ -1959,14 +1975,14 @@ double Mortality::getKilledTrees() const
     return killedTrees_;
 }
 
-double Mortality::getTreeCrownLengthScorched(FractionUnits::FractionUnitsEnum fractionUnits) const
+double Mortality::getTreeCrownLengthScorched(LengthUnits::LengthUnitsEnum lengthUnits) const
 {
-  return FractionUnits::fromBaseUnits(treeCrownLengthScorched_, fractionUnits);
+    return LengthUnits::fromBaseUnits(treeCrownLengthScorched_, lengthUnits);
 }
 
 double Mortality::getTreeCrownVolumeScorched(FractionUnits::FractionUnitsEnum fractionUnits) const
 {
-  return FractionUnits::fromBaseUnits(treeCrownVolumeScorched_, fractionUnits);
+    return FractionUnits::fromBaseUnits(treeCrownVolumeScorched_, fractionUnits);
 }
 
 double Mortality::getBasalAreaPrefire() const

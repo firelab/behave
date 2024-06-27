@@ -109,7 +109,7 @@ public:
     double getProbabilityOfMortality(FractionUnits::FractionUnitsEnum probabilityUnits) const;   // Individual Species Probility of Mortality
     double getTotalPrefireTrees() const;        // Total Prefire Trees               
     double getKilledTrees() const;
-    double getTreeCrownLengthScorched(FractionUnits::FractionUnitsEnum fractionUnits) const;
+    double getTreeCrownLengthScorched(LengthUnits::LengthUnitsEnum lengthUnits) const;
     double getTreeCrownVolumeScorched(FractionUnits::FractionUnitsEnum fractionUnits) const;
 
     double getBasalAreaPrefire() const;         // Prefire Basal Area                
