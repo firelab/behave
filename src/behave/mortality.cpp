@@ -27,6 +27,8 @@ Mortality::Mortality(SpeciesMasterTable& speciesMasterTable)
     {  -1,        0,         0,       0 }
 }
 {
+    treeCrownLengthScorched_ = -1;
+    treeCrownVolumeScorched_ = -1;
     speciesMasterTable_ = &speciesMasterTable;
     speciesMasterTable_->initializeMasterTable();
     initializeOutputs();
