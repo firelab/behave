@@ -101,9 +101,14 @@ void Mortality::setSpeciesCode(std::string speciesCode)
     mortalityInputs_.setSpeciesCode(speciesCode);
     EquationType equationType = mortalityInputs_.getEquationType();
 
-    if(speciesCode != "" && equationType != EquationType::not_set)
-    {
-        updateInputsForSpeciesCodeAndEquationType(speciesCode, equationType);
+    if (speciesCode != "") {
+        int speciesIndex = speciesMasterTable_->getSpeciesTableIndexFromSpeciesCode(speciesCode);
+        if (speciesIndex >= 0 && equationType == EquationType::not_set ) {
+            EquationType defaultEquationType = speciesMasterTable_->record_[speciesIndex].equationType;
+            updateInputsForSpeciesCodeAndEquationType(speciesCode, defaultEquationType);
+        } else if (equationType != EquationType::not_set) {
+            updateInputsForSpeciesCodeAndEquationType(speciesCode, equationType);
+        }
     }
 }
 
