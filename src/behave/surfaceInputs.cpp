@@ -109,7 +109,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection, 
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
     SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits,
-    double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
     setSlope(slope, slopeUnits);
     aspect_ = aspect;
@@ -141,7 +141,7 @@ void SurfaceInputs::updateSurfaceInputs(int fuelModelNumber, double moistureOneH
 
     setCanopyCover(canopyCover, fractionUnits);
     setCanopyHeight(canopyHeight, canopyHeightUnits);
-    setCrownRatio(crownRatio);
+    setCrownRatio(crownRatio, crownRatioUnits);
 }
 
 void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumber, int secondFuelModelNumber,
@@ -150,13 +150,13 @@ void  SurfaceInputs::updateSurfaceInputsForTwoFuelModels(int firstfuelModelNumbe
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
     WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage, 
     FractionUnits::FractionUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod::TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, SlopeUnits::SlopeUnitsEnum slopeUnits,
-    double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio,
+    FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
     int fuelModelNumber = firstfuelModelNumber;
     updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, 
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        slope, slopeUnits,
-        aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, crownRatioUnits);
     setSecondFuelModelNumber(secondFuelModelNumber);
     setTwoFuelModelsFirstFuelModelCoverage(firstFuelModelCoverage, firstFuelModelCoverageUnits);
     isUsingTwoFuelModels_ = true;
@@ -169,12 +169,12 @@ void  SurfaceInputs::updateSurfaceInputsForPalmettoGallbery(double moistureOneHo
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
     double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits,
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
-    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio,FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyUnits, canopyHeight, canopyHeightUnits,
-        crownRatio);
+        crownRatio, crownRatioUnits);
 
     setPalmettoGallberryAgeOfRough(ageOfRough);
     setPalmettoGallberryHeightOfUnderstory(heightOfUnderstory, canopyHeightUnits);
@@ -188,12 +188,12 @@ void SurfaceInputs::updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber,
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, 
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits, double canopyHeight,
-    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
     updateSurfaceInputs(0, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, canopyUnits, canopyHeight, canopyHeightUnits,
-        crownRatio);
+        crownRatio, crownRatioUnits);
 
     setAspenFuelModelNumber(aspenFuelModelNumber);
     setAspenCuringLevel(aspenCuringLevel, curingLevelUnits);
@@ -242,9 +242,9 @@ void SurfaceInputs::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnit
     canopyHeight_ = LengthUnits::toBaseUnits(canopyHeight, canopyHeightUnits);
 }
 
-void SurfaceInputs::setCrownRatio(double crownRatio)
+void SurfaceInputs::setCrownRatio(double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
-    crownRatio_ = crownRatio;
+    crownRatio_ = FractionUnits::toBaseUnits(crownRatio, crownRatioUnits);
 }
 
 void SurfaceInputs::setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode)
@@ -551,9 +551,9 @@ double SurfaceInputs::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeightU
     return canopyHeight_;
 }
 
-double SurfaceInputs::getCrownRatio() const
+double SurfaceInputs::getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) const
 {
-    return crownRatio_;
+    return FractionUnits::fromBaseUnits(crownRatio_, crownRatioUnits);
 }
 
 bool SurfaceInputs::getIsUsingWesternAspen() const

@@ -75,7 +75,7 @@ public:
         WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
         double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits,
-        double canopyHeight, double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio,
+        double canopyHeight, double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits,
         double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
     void setCanopyBaseHeight(double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
     void setCanopyBulkDensity(double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits);
@@ -130,10 +130,10 @@ public:
         SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode, double windDirection,
         WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
         SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits, double canopyHeight,
-        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio);
+        LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits);
     void setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum fractionUnits);
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
-    void setCrownRatio(double crownRatio);
+    void setCrownRatio(double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits);
     void setFuelModelNumber(int fuelModelNumber);
     void setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureTenHour(double moistureTenHour, FractionUnits::FractionUnitsEnum moistureUnits);
@@ -185,7 +185,7 @@ public:
     double getAspect() const;
     double getCanopyCover(FractionUnits::FractionUnitsEnum canopyCoverUnits) const;
     double getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) const;
-    double getCrownRatio() const;
+    double getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) const;
 
 protected:
     struct CrownModelType

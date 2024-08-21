@@ -131,9 +131,9 @@ void MortalityInputs::setTreeHeight(double treeHeight, LengthUnits::LengthUnitsE
     treeHeight_ = LengthUnits::toBaseUnits(treeHeight, treeHeightUnits);
 }
 
-void MortalityInputs::setCrownRatio(double crownRatio)
+void MortalityInputs::setCrownRatio(double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
-    crownRatio_ = crownRatio;
+    crownRatio_ = FractionUnits::toBaseUnits(crownRatio, crownRatioUnits);
 }
 
 void MortalityInputs::setCrownDamage(double crownDamage)
@@ -245,9 +245,9 @@ double MortalityInputs::getTreeHeight(LengthUnits::LengthUnitsEnum treeHeightUni
     return LengthUnits::fromBaseUnits(treeHeight_, treeHeightUnits);
 }
 
-double MortalityInputs::getCrownRatio() const
+double MortalityInputs::getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) const
 {
-    return crownRatio_;
+    return FractionUnits::fromBaseUnits(crownRatio_, crownRatioUnits);
 }
 
 double MortalityInputs::getCrownDamage() const

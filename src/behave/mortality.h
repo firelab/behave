@@ -38,7 +38,7 @@ public:
     void setTreeDensityPerUnitArea(double numberOfTrees, AreaUnits::AreaUnitsEnum areaUnits);
     void setDBH(double dbh, LengthUnits::LengthUnitsEnum diameterUnits);
     void setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits);
-    void setCrownRatio(double crownRatio);
+    void setCrownRatio(double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits);
     void setCrownDamage(double crownDamage);
     void setCambiumKillRating(double cambiumKillRating);
     void setBeetleDamage(BeetleDamage beetleDamage);
@@ -61,7 +61,7 @@ public:
     double getTreeDensityPerUnitArea(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getDBH(LengthUnits::LengthUnitsEnum diameterUnits) const;
     double getTreeHeight(LengthUnits::LengthUnitsEnum treeHeightUnits) const;
-    double getCrownRatio() const;
+    double getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) const;
     double getCrownDamage() const;
     CrownDamageEquationCode getCrownDamageEquationCode() const;
     CrownDamageType getCrownDamageType() const;

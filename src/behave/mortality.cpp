@@ -163,9 +163,9 @@ void Mortality::setTreeHeight(double treeHeight, LengthUnits::LengthUnitsEnum tr
     mortalityInputs_.setTreeHeight(treeHeight, treeHeightUnits);
 }
 
-void Mortality::setCrownRatio(double crownRatio)
+void Mortality::setCrownRatio(double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
-    mortalityInputs_.setCrownRatio(crownRatio);
+    mortalityInputs_.setCrownRatio(crownRatio, crownRatioUnits);
 }
 
 void Mortality::setCrownDamage(double crownDamage)
@@ -250,9 +250,9 @@ double Mortality::getTreeHeight(LengthUnits::LengthUnitsEnum treeHeightUnits) co
     return mortalityInputs_.getTreeHeight(treeHeightUnits);
 }
 
-double Mortality::getCrownRatio() const
+double Mortality::getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) const
 {
-    return mortalityInputs_.getCrownRatio();
+    return mortalityInputs_.getCrownRatio(crownRatioUnits);
 }
 
 double Mortality::getCrownDamage() const
@@ -606,7 +606,7 @@ double  Mortality::calculateMortalityCrownScorch()
     mortalityInputs_.setBarkThickness(calculateBarkThickness(), LengthUnits::Inches);
 
     treeHeight = mortalityInputs_.getTreeHeight(LengthUnits::Feet); // Note-1                        
-    HCR = treeHeight * (mortalityInputs_.getCrownRatio());
+    HCR = treeHeight * (mortalityInputs_.getCrownRatio(FractionUnits::Fraction));
     treeCrownLengthScorched_ = scorchHeight - (treeHeight - HCR);
 
     if(treeCrownLengthScorched_ <= 0.0)
@@ -806,7 +806,7 @@ double  Mortality::calculateMortalityCrownScorch()
         // Change 9-6-2016 - new Black Hills PiPo, see Duncan Lutes's .docx document saved in fofem project folder 
         case 21:
         {
-            f = mortalityInputs_.getCrownRatio(); // crown ratio 
+            f = mortalityInputs_.getCrownRatio(FractionUnits::Fraction); // crown ratio 
             CBH = mortalityInputs_.getTreeHeight(LengthUnits::Feet) - (mortalityInputs_.getTreeHeight(LengthUnits::Feet) * f);
             P = Eq21_BlkHilPiPo(mortalityInputs_.getTreeHeight(LengthUnits::Feet), CBH, mortalityInputs_.getDBH(LengthUnits::Feet), scorchHeight, blackHillsFlameLength);
             treeCrownLengthScorched_ = -1;

@@ -230,7 +230,7 @@ int main()
         double testGetDBH = behave.mortality.getDBH(LengthUnits::Feet);
         behave.mortality.setTreeHeight(35.0, LengthUnits::Feet);
         double testGetTreeHeight = behave.mortality.getTreeHeight(LengthUnits::Feet);
-        behave.mortality.setCrownRatio(0.30); // A value between 0.0 and 1.0 is valid
+        behave.mortality.setCrownRatio(0.30, FractionUnits::Fraction); // A value between 0.0 and 1.0 is valid
         behave.mortality.setCrownDamage(25.0);
         behave.mortality.setCambiumKillRating(3.2);
         behave.mortality.setBeetleDamage(BeetleDamage::yes);
@@ -252,7 +252,7 @@ int main()
                 {
                     std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
                 }
-                if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && behave.mortality.getCrownRatio() < 0)
+                if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && behave.mortality.getCrownRatio(FractionUnits::Fraction) < 0)
                 {
                     std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
                 }

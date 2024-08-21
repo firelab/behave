@@ -308,7 +308,7 @@ int main(int argc, char *argv[])
                 mortality.setTreeHeight(stod(TreeHeight), LengthUnits::Feet);
 
             if (!CrownRatio.empty() )
-                mortality.setCrownRatio(stod(CrownRatio) / 100); // input as a fraction from 0.0 to 1.0
+                mortality.setCrownRatio(stod(CrownRatio, FractionUnits::Percent) / 100); // input as a fraction from 0.0 to 1.0
 
             if (!CrownScorchP.empty() )
                 mortality.setCrownDamage(stod(CrownScorchP));
@@ -346,7 +346,7 @@ int main(int argc, char *argv[])
                     {
                         std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
                     }
-                    if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && mortality.getCrownRatio() < 0)
+                    if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && mortality.getCrownRatio(FractionUnits::Fraction) < 0)
                     {
                         std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
                     }
