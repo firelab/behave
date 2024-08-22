@@ -117,7 +117,7 @@ void Crown::doCrownRunRothermel()
         crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
     }
 
-    surfaceFuel_.setCrownRatio(crownRatio);
+    surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
 
     // Step 1: Do surface run and store values needed for further calculations 
     surfaceFuel_.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
@@ -174,7 +174,7 @@ void Crown::doCrownRunScottAndReinhardt()
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
     double crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
 
-    surfaceFuel_.setCrownRatio(crownRatio);
+    surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
 
     // Step 1: Do surface run and store values needed for further calculations
     const double windSpeed = surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
@@ -637,12 +637,12 @@ void Crown::updateCrownInputs(int fuelModelNumber, double moistureOneHour, doubl
     double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope,
     SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum coverUnits, double canopyHeight,
-    double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, double canopyBulkDensity,
-    DensityUnits::DensityUnitsEnum densityUnits)
+    double canopyBaseHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits,
+    double canopyBulkDensity, DensityUnits::DensityUnitsEnum densityUnits)
 {
     surfaceFuel_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
-        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyHeightUnits, crownRatio, crownRatioUnits);
     crownInputs_.updateCrownInputs(canopyBaseHeight, canopyHeightUnits, canopyBulkDensity, densityUnits, moistureFoliar, moistureUnits);
 }
 
@@ -757,12 +757,12 @@ void Crown::updateCrownsSurfaceInputs(int fuelModelNumber, double moistureOneHou
     SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode,
     double windDirection, WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode,
     double slope, SlopeUnits::SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits::FractionUnitsEnum coverUnits,
-    double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio)
+    double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
     surfaceFuel_.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour,
         moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
         windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits,
-        canopyHeight, canopyHeightUnits, crownRatio);
+        canopyHeight, canopyHeightUnits, crownRatio, crownRatioUnits);
 }
 
 void  Crown::setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum coverUnits)
@@ -775,9 +775,9 @@ void  Crown::setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum c
     surfaceFuel_.setCanopyHeight(canopyHeight, canopyHeightUnits);
 }
 
-void  Crown::setCrownRatio(double crownRatio)
+void  Crown::setCrownRatio(double crownRatio, FractionUnits::FractionUnitsEnum crownRatioUnits)
 {
-    surfaceFuel_.setCrownRatio(crownRatio);
+    surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
 }
 
 void  Crown::setFuelModelNumber(int fuelModelNumber)
@@ -1030,9 +1030,9 @@ double Crown::getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) con
     return surfaceFuel_.getCanopyHeight(canopyHeighUnits);
 }
 
-double Crown::getCrownRatio() const
+double Crown::getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) const
 {
-    return surfaceFuel_.getCrownRatio();
+    return surfaceFuel_.getCrownRatio(crownRatioUnits);
 }
 
 double Crown::getCanopyBaseHeight(LengthUnits::LengthUnitsEnum canopyHeightUnits) const

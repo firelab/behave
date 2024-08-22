@@ -144,7 +144,7 @@ void setSurfaceInputsForGS4LowMoistureScenario(BehaveRun& behaveRun)
 
     behaveRun.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
-        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
 }
 
 void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
@@ -177,7 +177,7 @@ void setSurfaceInputsForTwoFuelModelsLowMoistureScenario(BehaveRun& behaveRun)
     behaveRun.surface.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, 
         moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode,
         windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope, 
-        slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                                          slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
 }
 
 void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
@@ -212,7 +212,7 @@ void setCrownInputsLowMoistureScenario(BehaveRun& behaveRun)
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, 
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
-        crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
+     crownRatio, FractionUnits::Fraction, canopyBulkDensity, canopyBulkDensityUnits);
 }
 
 bool areClose(const double observed, const double expected, const double epsilon)
@@ -629,7 +629,7 @@ void testPalmettoGallberry(TestInfo& testInfo, BehaveRun& behaveRun)
     BasalAreaUnits::BasalAreaUnitsEnum basalAreaUnits = BasalAreaUnits::SquareFeetPerAcre;
     behaveRun.surface.updateSurfaceInputsForPalmettoGallbery(moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, moistureUnits,
         windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, ageOfRough, heightOfUnderstory, palmetoCoverage, overstoryBasalArea, basalAreaUnits,
-        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     double observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     double expectedSurfaceFireSpreadRate = 12.521131;
@@ -670,7 +670,7 @@ void testWesternAspen(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.surface.updateSurfaceInputsForWesternAspen(aspenFuelModel, aspenCuringLevel, curingLevelUnits, aspenFireSeverity, dbh, dbhUnits,
         moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, mositureUnits,
         windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, slopeUnits, aspect,
-        canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+        canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     double observedSurfaceFireSpreadRate = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
     double expectedSurfaceFireSpreadRate = 0.847629;
@@ -1197,7 +1197,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
-        crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
+        crownRatio, FractionUnits::Fraction, canopyBulkDensity, canopyBulkDensityUnits);
 
     testName = "Test Scott and Reinhardt crown fire spread rate";
     behaveRun.crown.doCrownRunScottAndReinhardt();
@@ -1276,7 +1276,7 @@ void testCrownModuleScottAndReinhardt(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.crown.updateCrownInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
         moistureLiveWoody, moistureFoliar, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection,
         windAndSpreadOrientationMode, slope, slopeUnits, aspect, canopyCover, coverUnits, canopyHeight, canopyBaseHeight, canopyHeightUnits,
-        crownRatio, canopyBulkDensity, canopyBulkDensityUnits);
+        crownRatio, FractionUnits::Fraction, canopyBulkDensity, canopyBulkDensityUnits);
 
     testName = "Test crown fire spread rate";
     behaveRun.crown.doCrownRunScottAndReinhardt();

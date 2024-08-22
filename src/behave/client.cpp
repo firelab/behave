@@ -58,7 +58,7 @@ int main()
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
-        aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                       aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
 
     behave.surface.setIsUsingChaparral(true);
     behave.surface.setChaparralFuelBedDepth(3, LengthUnits::Feet);
@@ -121,7 +121,7 @@ int main()
         behave.surface.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
             moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode,
             windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope,
-            slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                                           slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
         behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
         spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
         //spreadRate = floor(spreadRate * 10 + 0.5) / 10;
@@ -159,7 +159,7 @@ int main()
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 
         FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
-        aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                       aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
     behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
@@ -230,7 +230,7 @@ int main()
         double testGetDBH = behave.mortality.getDBH(LengthUnits::Feet);
         behave.mortality.setTreeHeight(35.0, LengthUnits::Feet);
         double testGetTreeHeight = behave.mortality.getTreeHeight(LengthUnits::Feet);
-        behave.mortality.setCrownRatio(0.30); // A value between 0.0 and 1.0 is valid
+        behave.mortality.setCrownRatio(0.30, FractionUnits::Fraction); // A value between 0.0 and 1.0 is valid
         behave.mortality.setCrownDamage(25.0);
         behave.mortality.setCambiumKillRating(3.2);
         behave.mortality.setBeetleDamage(BeetleDamage::yes);
@@ -252,7 +252,7 @@ int main()
                 {
                     std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
                 }
-                if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && behave.mortality.getCrownRatio() < 0)
+                if((currentRequiredFieldName == RequiredFieldNames::crown_ratio) && behave.mortality.getCrownRatio(FractionUnits::Fraction) < 0)
                 {
                     std::cout << "Error, missing required input " << fieldNameStrings[i] << "\n";
                 }

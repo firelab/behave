@@ -401,7 +401,7 @@ int main(int argc, char *argv[])
                 WindHeightInputMode::DirectMidflame, windDirection,
                 WindAndSpreadOrientationMode::RelativeToNorth, slope,
                 SlopeUnits::Degrees, aspect, canopyCover, CoverUnits::Percent,
-                canopyHeight, LengthUnits::Feet, crownRatio);
+                canopyHeight, LengthUnits::Feet, crownRatio, FractionUnits::Fraction);
             // Calculate spread rate and flame length
             behave.surface.doSurfaceRunInDirectionOfMaxSpread();
             // Get the surface fire spread rate
