@@ -308,7 +308,7 @@ int main(int argc, char *argv[])
                 mortality.setTreeHeight(stod(TreeHeight), LengthUnits::Feet);
 
             if (!CrownRatio.empty() )
-                mortality.setCrownRatio(stod(CrownRatio, FractionUnits::Percent) / 100); // input as a fraction from 0.0 to 1.0
+                mortality.setCrownRatio(stod(CrownRatio) / 100, FractionUnits::Percent); // input as a fraction from 0.0 to 1.0
 
             if (!CrownScorchP.empty() )
                 mortality.setCrownDamage(stod(CrownScorchP));

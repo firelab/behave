@@ -58,7 +58,7 @@ int main()
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody,
         FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
-        aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                       aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
 
     behave.surface.setIsUsingChaparral(true);
     behave.surface.setChaparralFuelBedDepth(3, LengthUnits::Feet);
@@ -121,7 +121,7 @@ int main()
         behave.surface.updateSurfaceInputsForTwoFuelModels(firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour,
             moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode,
             windDirection, windAndSpreadOrientationMode, firstFuelModelCoverage, firstFuelModelCoverageUnits, twoFuelModelsMethod, slope,
-            slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                                           slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
         behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
         spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
         //spreadRate = floor(spreadRate * 10 + 0.5) / 10;
@@ -159,7 +159,7 @@ int main()
     // Single fuel model test
     behave.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, 
         FractionUnits::Percent, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode, slope, SlopeUnits::Degrees,
-        aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio);
+                                       aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
     behave.surface.doSurfaceRunInDirectionOfInterest(directionOfInterest, surfaceFireSpreadDirectionMode);
     spreadRate = behave.surface.getSpreadRate(SpeedUnits::ChainsPerHour);
     //flameLength = floor((behave.getFlameLength()) * 10 + 0.5) / 10;
