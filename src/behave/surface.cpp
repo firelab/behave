@@ -32,6 +32,7 @@
 #include "surface.h"
 #include "surfaceTwoFuelModels.h"
 #include "surfaceInputs.h"
+#include <iostream>
 
 #include <cmath>
 
@@ -72,6 +73,7 @@ bool Surface::isAllFuelLoadZero(int fuelModelNumber)
 
 void Surface::doSurfaceRunInDirectionOfMaxSpread()
 {
+    std::cout << "doSurfaceRunInDirectionOfMaxSpread():\n";
     surfaceInputs_.updateMoisturesBasedOnInputMode();
     double directionOfInterest = 0.0;
     bool hasDirectionOfInterest = false;
