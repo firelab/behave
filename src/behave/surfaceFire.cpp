@@ -276,7 +276,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
 
-    if (hasDirectionOfInterest) // propposed solution
+    if (hasDirectionOfInterest)
     {
         spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);
     }
