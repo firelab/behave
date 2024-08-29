@@ -1387,12 +1387,12 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
 
     testName = "Test mountain spotting distance from surface fire, closed downwind canopy";
-    expectedMountainSpottingDistance = 0.107189;
+    expectedMountainSpottingDistance = 0.164401;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
     
     testName = "Test flat spotting distance from surface fire, closed downwind canopy";
-    expectedFlatSpottingDistance = 0.086155999999999996;
+    expectedFlatSpottingDistance = 0.132964;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
     

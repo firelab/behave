@@ -239,7 +239,6 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     calculateWindSpeedLimit();
 
     forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1.0 + phiW_ + phiS_);
-    std::cout << "forwardSpreadRate_:" << forwardSpreadRate_ << "\n";
 
     // Calculate spread rate in optimal direction.
     calculateDirectionOfMaxSpread();
@@ -270,8 +269,6 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     calculateBackingFlameLength();
     calculateFlankingFlameLength();
 
-    std::cout << "flameLength_:" << flameLength_ << "\n";
-
     bool isUsingWesternAspen = surfaceInputs_->getIsUsingWesternAspen();
     if (isUsingWesternAspen)
     {
@@ -280,14 +277,10 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
     maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
 
-    spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);
-
-    // if (hasDirectionOfInterest) // propposed solution
-    // {
-    //     spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);
-    // }
-
-    std::cout << "spreadRateInDirectionOfInterest_:" << spreadRateInDirectionOfInterest_ << "\n";
+    if (hasDirectionOfInterest) // propposed solution
+    {
+        spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);
+    }
 
     if (!hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
@@ -344,12 +337,9 @@ double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest, Surf
         double sinBeta = sin(radians);
 
         rosVector = (g * cos(radians)) + sqrt((f * f * cosBeta * cosBeta) + (h * h * sinBeta * sinBeta));
-        std::cout << "rosVector: " << rosVector << "\n";
-
         // rosVector perpendicular to perimeter at angle beta used to calculate fireline intensity and flame length
         calculateFirelineIntensity(rosVector);
         calculateFlameLength();
-        std::cout << "flameLength_:" << flameLength_ << "\n";
 
         if (directionMode == SurfaceFireSpreadDirectionMode::FromIgnitionPoint)
         {
