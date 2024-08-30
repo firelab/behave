@@ -51,6 +51,7 @@ void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun);
 void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun);
 void testVaporPressureDeficitCalculator(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSimpleSurface(TestInfo& testInfo, BehaveRun& behaveRun);
 
 int main()
 {
@@ -84,6 +85,7 @@ int main()
     testFineDeadFuelMoistureTool(testInfo, behaveRun);
     testSlopeTool(testInfo, behaveRun);
     testVaporPressureDeficitCalculator(testInfo, behaveRun);
+    testSimpleSurface(testInfo, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     if(testInfo.numPassed > 0)
@@ -1323,6 +1325,8 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
 
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
     behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setUserProvidedWindAdjustmentFactor(1.0);
+    behaveRun.surface.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
     behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
     flameLength = behaveRun.surface.getFlameLength(LengthUnits::Feet);
 
@@ -1387,12 +1391,12 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     behaveRun.spot.calculateSpottingDistanceFromSurfaceFire();
 
     testName = "Test mountain spotting distance from surface fire, closed downwind canopy";
-    expectedMountainSpottingDistance = 0.107189;
+    expectedMountainSpottingDistance = 0.267467;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
     
     testName = "Test flat spotting distance from surface fire, closed downwind canopy";
-    expectedFlatSpottingDistance = 0.086155999999999996;
+    expectedFlatSpottingDistance = 0.22005;
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromSurfaceFire(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
     
@@ -1427,6 +1431,7 @@ void testSpeedUnitConversion(TestInfo& testInfo, BehaveRun& behaveRun)
     SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
     WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
 
+    behaveRun.surface.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UseCrownRatio);
     setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 
     // Test using upslope oriented mode, 20 foot uplsope wind
@@ -1921,4 +1926,63 @@ void testVaporPressureDeficitCalculator(TestInfo& testInfo, BehaveRun& behaveRun
     testVPDScenario(behaveRun.vpdCalculator, testInfo, 50.0, 10.0, 11.055);
 
     std::cout << "Finished testing  Slope Tool\n\n";
+}
+
+
+void testSimpleSurface(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    std::cout << "Testing Simple Surface\n";
+
+    string testName = "";
+
+    double expectedRateofSpread = 0.0;
+    double observedRateofSpread = 0.0;
+
+    int fuelModelNumber = 124; // fuel model gs4(124) chosen as it is dynamic and has values for all moisture classes
+    double moistureOneHour = 6.0;
+    double moistureTenHour = 7.0;
+    double moistureHundredHour = 8.0;
+    double moistureLiveHerbaceous = 60.0;
+    double moistureLiveWoody = 90.0;
+    FractionUnits::FractionUnitsEnum moistureUnits = FractionUnits::Percent;
+    double windSpeed = 5.0;
+    WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode = WindHeightInputMode::TwentyFoot;
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits = SpeedUnits::MilesPerHour;
+    double windDirection = 0;
+    WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode = WindAndSpreadOrientationMode::RelativeToNorth;
+    double slope = 30.0;
+    SlopeUnits::SlopeUnitsEnum slopeUnits = SlopeUnits::Percent;
+    double aspect = 0;
+    double canopyCover = 0.0;
+    FractionUnits::FractionUnitsEnum canopyCoverUnits = FractionUnits::Percent;
+    double canopyHeight = 0.0;
+    LengthUnits::LengthUnitsEnum canopyHeightUnits = LengthUnits::Feet;
+    double crownRatio = 0.0;
+
+    behaveRun.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, moistureUnits, windSpeed, windSpeedUnits, windHeightInputMode, windDirection, windAndSpreadOrientationMode,
+        slope, slopeUnits, aspect, canopyCover, canopyCoverUnits, canopyHeight, canopyHeightUnits, crownRatio, FractionUnits::Fraction);
+
+    behaveRun.surface.setUserProvidedWindAdjustmentFactor(1.0);
+    behaveRun.surface.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    behaveRun.surface.setWindHeightInputMode(WindHeightInputMode::TwentyFoot);
+    behaveRun.surface.setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::RelativeToNorth);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+
+    testName = "Test Simple Surface Rate of Spread";
+    expectedRateofSpread = 34.011429;
+    observedRateofSpread = roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour));
+    reportTestResult(testInfo, testName, observedRateofSpread, expectedRateofSpread, error_tolerance);
+
+
+    testName = "Test Simple Surface Flame Length";
+    expectedRateofSpread = 15.811421;
+    observedRateofSpread = roundToSixDecimalPlaces(behaveRun.surface.getFlameLength(LengthUnits::Feet));
+    reportTestResult(testInfo, testName, observedRateofSpread, expectedRateofSpread, error_tolerance);
+
+
+    testName = "Test Simple Surface FirelineIntensity";
+    expectedRateofSpread = 2292.684759;
+    observedRateofSpread = roundToSixDecimalPlaces(behaveRun.surface.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond));
+    reportTestResult(testInfo, testName, observedRateofSpread, expectedRateofSpread, error_tolerance);
 }
