@@ -873,7 +873,7 @@ void testDirectionOfInterest(TestInfo& testInfo, BehaveRun& behaveRun)
     reportTestResult(testInfo, testName, observedSpreadRateInDirectionOfInterest, expectedSpreadRateInDirectionOfInterest, error_tolerance);
 
     testName = "Test perimeter spread direction mode upslope oriented mode, 20 foot wind, direction of interest 90 degrees from upslope, 45 degree wind flame length";
-    observedFlameLengthInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getFlameLength(LengthUnits::Feet));
+    observedFlameLengthInDirectionOfInterest = roundToSixDecimalPlaces(behaveRun.surface.getDirectionOfInterestFlameLength(LengthUnits::Feet));
     expectedFlameLengthInDirectionOfInterest = 6.5981480000000001;
     reportTestResult(testInfo, testName, observedFlameLengthInDirectionOfInterest, expectedFlameLengthInDirectionOfInterest, error_tolerance);
 
