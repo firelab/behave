@@ -612,7 +612,7 @@ double SurfaceFire::getFlankingFirelineIntensity() const
   return flankingFirelineIntensity_;
 }
 
-double SurfaceFire::getDirectionOfInterestFirelineIntensity() const
+double SurfaceFire::getFirelineIntensityInDirectionOfInterest() const
 {
     return directionOfInterestFirelineIntensity_;
 }
@@ -632,7 +632,7 @@ double SurfaceFire::getFlankingFlameLength() const
   return flankingFlameLength_;
 }
 
-double SurfaceFire::getDirectionOfInterestFlameLength() const
+double SurfaceFire::getFlameLengthInDirectionOfInterest() const
 {
     return directionOfInterestFlameLength_;
 }
