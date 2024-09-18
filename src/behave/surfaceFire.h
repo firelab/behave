@@ -62,11 +62,11 @@ public:
     double getFirelineIntensity() const;
     double getBackingFirelineIntensity() const;
     double getFlankingFirelineIntensity() const;
-    double getFirelineIntensityInDirectionOfInterest()const;
+    double getFirelineIntensityInDirectionOfInterest() const;
     double getFlameLength() const;
     double getBackingFlameLength() const;
     double getFlankingFlameLength() const;
-    double getFlameLengthInDirectionOfInterest()const;
+    double getFlameLengthInDirectionOfInterest() const;
     double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
