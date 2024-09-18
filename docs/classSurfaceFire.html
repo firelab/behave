@@ -132,6 +132,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>getBackingFirelineI
 <tr class="memitem:a24b5eaff659b4e58c8f3049289de3026" id="r_a24b5eaff659b4e58c8f3049289de3026"><td class="memItemLeft" align="right" valign="top"><a id="a24b5eaff659b4e58c8f3049289de3026" name="a24b5eaff659b4e58c8f3049289de3026"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getFlankingFirelineIntensity</b> () const</td></tr>
 <tr class="separator:a24b5eaff659b4e58c8f3049289de3026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b9eb38cd25d23758eb9de6fd845e3aa" id="r_a4b9eb38cd25d23758eb9de6fd845e3aa"><td class="memItemLeft" align="right" valign="top"><a id="a4b9eb38cd25d23758eb9de6fd845e3aa" name="a4b9eb38cd25d23758eb9de6fd845e3aa"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>getFirelineIntensityInDirectionOfInterest</b> () const</td></tr>
+<tr class="separator:a4b9eb38cd25d23758eb9de6fd845e3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0baf5df4b7dd55b60a63114e4d38064" id="r_ae0baf5df4b7dd55b60a63114e4d38064"><td class="memItemLeft" align="right" valign="top"><a id="ae0baf5df4b7dd55b60a63114e4d38064" name="ae0baf5df4b7dd55b60a63114e4d38064"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getFlameLength</b> () const</td></tr>
 <tr class="separator:ae0baf5df4b7dd55b60a63114e4d38064"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +144,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>getBackingFlameLeng
 <tr class="memitem:ad58e91321f2bc6520d4510a165bfa8ac" id="r_ad58e91321f2bc6520d4510a165bfa8ac"><td class="memItemLeft" align="right" valign="top"><a id="ad58e91321f2bc6520d4510a165bfa8ac" name="ad58e91321f2bc6520d4510a165bfa8ac"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getFlankingFlameLength</b> () const</td></tr>
 <tr class="separator:ad58e91321f2bc6520d4510a165bfa8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfdc7c0d54c44768c3d17870a84f26b" id="r_a8cfdc7c0d54c44768c3d17870a84f26b"><td class="memItemLeft" align="right" valign="top"><a id="a8cfdc7c0d54c44768c3d17870a84f26b" name="a8cfdc7c0d54c44768c3d17870a84f26b"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>getFlameLengthInDirectionOfInterest</b> () const</td></tr>
+<tr class="separator:a8cfdc7c0d54c44768c3d17870a84f26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a187fdab1c5053b30e42821af005ac781" id="r_a187fdab1c5053b30e42821af005ac781"><td class="memItemLeft" align="right" valign="top"><a id="a187fdab1c5053b30e42821af005ac781" name="a187fdab1c5053b30e42821af005ac781"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getMaxFlameLength</b> () const</td></tr>
 <tr class="separator:a187fdab1c5053b30e42821af005ac781"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -384,24 +390,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateHeatSource</
 <tr class="memitem:a5f726ea34d35c2d38160e31dc1b1d45e" id="r_a5f726ea34d35c2d38160e31dc1b1d45e"><td class="memItemLeft" align="right" valign="top"><a id="a5f726ea34d35c2d38160e31dc1b1d45e" name="a5f726ea34d35c2d38160e31dc1b1d45e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateResidenceTime</b> ()</td></tr>
 <tr class="separator:a5f726ea34d35c2d38160e31dc1b1d45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91bcc17f459e065b29dab1ada6df78a9" id="r_a91bcc17f459e065b29dab1ada6df78a9"><td class="memItemLeft" align="right" valign="top"><a id="a91bcc17f459e065b29dab1ada6df78a9" name="a91bcc17f459e065b29dab1ada6df78a9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFirelineIntensity</b> (double forwardSpreadRate)</td></tr>
-<tr class="separator:a91bcc17f459e065b29dab1ada6df78a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97506b0a31003d9f4e1d95c5380334d8" id="r_a97506b0a31003d9f4e1d95c5380334d8"><td class="memItemLeft" align="right" valign="top"><a id="a97506b0a31003d9f4e1d95c5380334d8" name="a97506b0a31003d9f4e1d95c5380334d8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateBackingFireFirelineIntensity</b> (double backingSpreadRate)</td></tr>
-<tr class="separator:a97506b0a31003d9f4e1d95c5380334d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52de68a525e9acb0547c7b8b69f492d2" id="r_a52de68a525e9acb0547c7b8b69f492d2"><td class="memItemLeft" align="right" valign="top"><a id="a52de68a525e9acb0547c7b8b69f492d2" name="a52de68a525e9acb0547c7b8b69f492d2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFlankingFireFirelineIntensity</b> (double flankingSpreadRate)</td></tr>
-<tr class="separator:a52de68a525e9acb0547c7b8b69f492d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dbb524a3c548920d900e7e021669c5c" id="r_a3dbb524a3c548920d900e7e021669c5c"><td class="memItemLeft" align="right" valign="top"><a id="a3dbb524a3c548920d900e7e021669c5c" name="a3dbb524a3c548920d900e7e021669c5c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFlameLength</b> ()</td></tr>
-<tr class="separator:a3dbb524a3c548920d900e7e021669c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a715e018ae62505be5f1154d222497182" id="r_a715e018ae62505be5f1154d222497182"><td class="memItemLeft" align="right" valign="top"><a id="a715e018ae62505be5f1154d222497182" name="a715e018ae62505be5f1154d222497182"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateBackingFlameLength</b> ()</td></tr>
-<tr class="separator:a715e018ae62505be5f1154d222497182"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a507bb99ddcb6b4dabd9ffb33fb592e09" id="r_a507bb99ddcb6b4dabd9ffb33fb592e09"><td class="memItemLeft" align="right" valign="top"><a id="a507bb99ddcb6b4dabd9ffb33fb592e09" name="a507bb99ddcb6b4dabd9ffb33fb592e09"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFlankingFlameLength</b> ()</td></tr>
-<tr class="separator:a507bb99ddcb6b4dabd9ffb33fb592e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afffe2793da25f2ae23d2864253bb4cb1" id="r_afffe2793da25f2ae23d2864253bb4cb1"><td class="memItemLeft" align="right" valign="top"><a id="afffe2793da25f2ae23d2864253bb4cb1" name="afffe2793da25f2ae23d2864253bb4cb1"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFirelineIntensity</b> (double forwardSpreadRate, SpeedUnits::SpeedUnitsEnum speedUnits, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits)</td></tr>
+<tr class="separator:afffe2793da25f2ae23d2864253bb4cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a832e40b554d557da2e0fc524dc98dc1b" id="r_a832e40b554d557da2e0fc524dc98dc1b"><td class="memItemLeft" align="right" valign="top"><a id="a832e40b554d557da2e0fc524dc98dc1b" name="a832e40b554d557da2e0fc524dc98dc1b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFirelineIntensities</b> ()</td></tr>
+<tr class="separator:a832e40b554d557da2e0fc524dc98dc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fef9d930ad56bdd8edd918225e553e7" id="r_a4fef9d930ad56bdd8edd918225e553e7"><td class="memItemLeft" align="right" valign="top"><a id="a4fef9d930ad56bdd8edd918225e553e7" name="a4fef9d930ad56bdd8edd918225e553e7"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFlameLength</b> (double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits, LengthUnits::LengthUnitsEnum flameLengthUnits)</td></tr>
+<tr class="separator:a4fef9d930ad56bdd8edd918225e553e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae58c87627c81468783e896e8dec69b6e" id="r_ae58c87627c81468783e896e8dec69b6e"><td class="memItemLeft" align="right" valign="top"><a id="ae58c87627c81468783e896e8dec69b6e" name="ae58c87627c81468783e896e8dec69b6e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateFlameLengths</b> ()</td></tr>
+<tr class="separator:ae58c87627c81468783e896e8dec69b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8abcda093962e74432bae072553dedd6" id="r_a8abcda093962e74432bae072553dedd6"><td class="memItemLeft" align="right" valign="top"><a id="a8abcda093962e74432bae072553dedd6" name="a8abcda093962e74432bae072553dedd6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateScorchHeight</b> ()</td></tr>
 <tr class="separator:a8abcda093962e74432bae072553dedd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -495,27 +495,33 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>residenceTime_</b><
 <tr class="memitem:a93345e74ba279678d46d433943f94517" id="r_a93345e74ba279678d46d433943f94517"><td class="memItemLeft" align="right" valign="top"><a id="a93345e74ba279678d46d433943f94517" name="a93345e74ba279678d46d433943f94517"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>reactionIntensity_</b></td></tr>
 <tr class="separator:a93345e74ba279678d46d433943f94517"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a550b71c69f2c84900643aec9f7f7ebca" id="r_a550b71c69f2c84900643aec9f7f7ebca"><td class="memItemLeft" align="right" valign="top"><a id="a550b71c69f2c84900643aec9f7f7ebca" name="a550b71c69f2c84900643aec9f7f7ebca"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>firelineIntensity_</b></td></tr>
-<tr class="separator:a550b71c69f2c84900643aec9f7f7ebca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ef91b89f814f2eaa9a0d9f10563d3d7" id="r_a7ef91b89f814f2eaa9a0d9f10563d3d7"><td class="memItemLeft" align="right" valign="top"><a id="a7ef91b89f814f2eaa9a0d9f10563d3d7" name="a7ef91b89f814f2eaa9a0d9f10563d3d7"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>forwardFirelineIntensity_</b></td></tr>
+<tr class="separator:a7ef91b89f814f2eaa9a0d9f10563d3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae93cd4773699facac1ce23772353991" id="r_aae93cd4773699facac1ce23772353991"><td class="memItemLeft" align="right" valign="top"><a id="aae93cd4773699facac1ce23772353991" name="aae93cd4773699facac1ce23772353991"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>backingFirelineIntensity_</b></td></tr>
 <tr class="separator:aae93cd4773699facac1ce23772353991"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fe979f4d898171d1811c4ab0a5bf1b7" id="r_a3fe979f4d898171d1811c4ab0a5bf1b7"><td class="memItemLeft" align="right" valign="top"><a id="a3fe979f4d898171d1811c4ab0a5bf1b7" name="a3fe979f4d898171d1811c4ab0a5bf1b7"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>flankingFirelineIntensity_</b></td></tr>
 <tr class="separator:a3fe979f4d898171d1811c4ab0a5bf1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2a8bbb901b797bd1b54822a31992d6b" id="r_ab2a8bbb901b797bd1b54822a31992d6b"><td class="memItemLeft" align="right" valign="top"><a id="ab2a8bbb901b797bd1b54822a31992d6b" name="ab2a8bbb901b797bd1b54822a31992d6b"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>directionOfInterestFirelineIntensity_</b></td></tr>
+<tr class="separator:ab2a8bbb901b797bd1b54822a31992d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af78c940445aadb6cdfaa31c11853582a" id="r_af78c940445aadb6cdfaa31c11853582a"><td class="memItemLeft" align="right" valign="top"><a id="af78c940445aadb6cdfaa31c11853582a" name="af78c940445aadb6cdfaa31c11853582a"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>maxFlameLength_</b></td></tr>
 <tr class="separator:af78c940445aadb6cdfaa31c11853582a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cda7c723e93faa1eca185262b66c1d8" id="r_a9cda7c723e93faa1eca185262b66c1d8"><td class="memItemLeft" align="right" valign="top"><a id="a9cda7c723e93faa1eca185262b66c1d8" name="a9cda7c723e93faa1eca185262b66c1d8"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>flameLength_</b></td></tr>
-<tr class="separator:a9cda7c723e93faa1eca185262b66c1d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7733b6daa93a3da3af7901e9740174bd" id="r_a7733b6daa93a3da3af7901e9740174bd"><td class="memItemLeft" align="right" valign="top"><a id="a7733b6daa93a3da3af7901e9740174bd" name="a7733b6daa93a3da3af7901e9740174bd"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>forwardFlameLength_</b></td></tr>
+<tr class="separator:a7733b6daa93a3da3af7901e9740174bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a371f937b4ea64af06a5a70b054717d13" id="r_a371f937b4ea64af06a5a70b054717d13"><td class="memItemLeft" align="right" valign="top"><a id="a371f937b4ea64af06a5a70b054717d13" name="a371f937b4ea64af06a5a70b054717d13"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>backingFlameLength_</b></td></tr>
 <tr class="separator:a371f937b4ea64af06a5a70b054717d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6197495897ed9ad9e5972518ec0c9db" id="r_ad6197495897ed9ad9e5972518ec0c9db"><td class="memItemLeft" align="right" valign="top"><a id="ad6197495897ed9ad9e5972518ec0c9db" name="ad6197495897ed9ad9e5972518ec0c9db"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>flankingFlameLength_</b></td></tr>
 <tr class="separator:ad6197495897ed9ad9e5972518ec0c9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81ae23e5ce73e65a8783da12282ecd7" id="r_ad81ae23e5ce73e65a8783da12282ecd7"><td class="memItemLeft" align="right" valign="top"><a id="ad81ae23e5ce73e65a8783da12282ecd7" name="ad81ae23e5ce73e65a8783da12282ecd7"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>directionOfInterestFlameLength_</b></td></tr>
+<tr class="separator:ad81ae23e5ce73e65a8783da12282ecd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add5e6cf05157a217d6141aaae625352a" id="r_add5e6cf05157a217d6141aaae625352a"><td class="memItemLeft" align="right" valign="top"><a id="add5e6cf05157a217d6141aaae625352a" name="add5e6cf05157a217d6141aaae625352a"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>heatSource_</b></td></tr>
 <tr class="separator:add5e6cf05157a217d6141aaae625352a"><td class="memSeparator" colspan="2">&#160;</td></tr>
