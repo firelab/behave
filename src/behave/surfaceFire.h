@@ -62,9 +62,11 @@ public:
     double getFirelineIntensity() const;
     double getBackingFirelineIntensity() const;
     double getFlankingFirelineIntensity() const;
+    double getFirelineIntensityInDirectionOfInterest() const;
     double getFlameLength() const;
     double getBackingFlameLength() const;
     double getFlankingFlameLength() const;
+    double getFlameLengthInDirectionOfInterest() const;
     double getMaxFlameLength() const;
     double getFireLengthToWidthRatio() const;
     double getFireEccentricity() const;
@@ -135,6 +137,7 @@ public:
 
 protected:
     // Protected setters accessible to friend classes
+
     void setDirectionOfMaxSpread(double directionOFMaxSpread);
     void setEffectiveWindSpeed(double effectiveWindSpeed);
     void setFirelineIntensity(double firelineIntensity);
@@ -157,12 +160,14 @@ protected:
     void calculateHeatSource();
 
     void calculateResidenceTime();
-    void calculateFirelineIntensity(double forwardSpreadRate);
-    void calculateBackingFireFirelineIntensity(double backingSpreadRate);
-    void calculateFlankingFireFirelineIntensity(double flankingSpreadRate);
-    void calculateFlameLength();
-    void calculateBackingFlameLength();
-    void calculateFlankingFlameLength();
+    double calculateFirelineIntensity(double forwardSpreadRate,
+                                      SpeedUnits::SpeedUnitsEnum speedUnits,
+                                      FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits);
+    void calculateFirelineIntensities();
+    double calculateFlameLength(double firelineIntensity,
+                                FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
+                                LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void calculateFlameLengths();
     void calculateScorchHeight();
     void calculateWindSpeedLimit();
     void calculateDirectionOfMaxSpread();
@@ -198,13 +203,15 @@ protected:
     double fireLengthToWidthRatio_;
     double residenceTime_;
     double reactionIntensity_;
-    double firelineIntensity_;
+    double forwardFirelineIntensity_;
     double backingFirelineIntensity_;
     double flankingFirelineIntensity_;
+    double directionOfInterestFirelineIntensity_;
     double maxFlameLength_;                                 // Flame length computed from spread rate in max direction, used in SAFETY
-    double flameLength_;
+    double forwardFlameLength_;
     double backingFlameLength_;
     double flankingFlameLength_;
+    double directionOfInterestFlameLength_;
     double heatSource_;
     double scorchHeight_;
 

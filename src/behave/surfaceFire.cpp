@@ -84,14 +84,22 @@ void SurfaceFire::initializeMembers()
     directionOfMaxSpread_ = 0.0;
     noWindNoSlopeSpreadRate_ = 0.0;
     forwardSpreadRate_ = 0.0;
+    backingSpreadRate_ = 0.0;
+    flankingSpreadRate_ = 0.0;
+    spreadRateInDirectionOfInterest_ = 0.0;
     heatPerUnitArea_ = 0.0;
     fireLengthToWidthRatio_ = 1.0;
     residenceTime_ = 0.0;
     reactionIntensity_ = 0.0;
-    firelineIntensity_ = 0.0;
-    flameLength_ = 0.0;
+    forwardFirelineIntensity_ = 0.0;
+    backingFirelineIntensity_ = 0.0;
+    flankingFirelineIntensity_ = 0.0;
+    directionOfInterestFirelineIntensity_ = 0.0;
+    forwardFlameLength_ = 0.0;
+    backingFlameLength_ = 0.0;
+    flankingFlameLength_ = 0.0;
+    directionOfInterestFlameLength_ = 0.0;
     maxFlameLength_ = 0.0;
-    backingSpreadRate_ = 0.0;
     scorchHeight_ = 0.0;
 
     midflameWindSpeed_ = 0.0;
@@ -120,15 +128,22 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
     directionOfMaxSpread_ = rhs.directionOfMaxSpread_;
     noWindNoSlopeSpreadRate_ = rhs.noWindNoSlopeSpreadRate_;
     forwardSpreadRate_ = rhs.forwardSpreadRate_;
+    backingSpreadRate_ = rhs.backingSpreadRate_;
+    flankingSpreadRate_ = rhs.flankingSpreadRate_;
     spreadRateInDirectionOfInterest_ = rhs.spreadRateInDirectionOfInterest_;
     heatPerUnitArea_ = rhs.heatPerUnitArea_;
     fireLengthToWidthRatio_ = rhs.fireLengthToWidthRatio_;
     residenceTime_ = rhs.residenceTime_;
     reactionIntensity_ = rhs.reactionIntensity_;
-    firelineIntensity_ = rhs.firelineIntensity_;
-    flameLength_ = rhs.flameLength_;
+    forwardFirelineIntensity_ = rhs.forwardFirelineIntensity_;
+    backingFirelineIntensity_ = rhs.backingFirelineIntensity_;
+    flankingFirelineIntensity_ = rhs.flankingFirelineIntensity_;
+    directionOfInterestFirelineIntensity_ = rhs.directionOfInterestFirelineIntensity_;
+    forwardFlameLength_ = rhs.forwardFlameLength_;
+    backingFlameLength_ = rhs.backingFlameLength_;
+    flankingFlameLength_ = rhs.flankingFlameLength_;
+    directionOfInterestFlameLength_ = rhs.directionOfInterestFlameLength_;
     maxFlameLength_ = rhs.maxFlameLength_;
-    backingSpreadRate_ = rhs.backingSpreadRate_;
     scorchHeight_ = rhs.scorchHeight_;
 
     midflameWindSpeed_ = rhs.midflameWindSpeed_;
@@ -153,22 +168,32 @@ void SurfaceFire::calculateResidenceTime()
         : (384. / sigma));
 }
 
-void SurfaceFire::calculateFirelineIntensity(double forwardSpreadRate)
+double SurfaceFire::calculateFirelineIntensity(double spreadRate,
+                                               SpeedUnits::SpeedUnitsEnum speedUnits,
+                                               FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits)
 {
     double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
-    firelineIntensity_ = forwardSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
+    double firelineIntensity = SpeedUnits::toBaseUnits(spreadRate, speedUnits) * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
+    return FirelineIntensityUnits::fromBaseUnits(firelineIntensity, firelineIntensityUnits);
 }
 
-void SurfaceFire::calculateBackingFireFirelineIntensity(double backingSpreadRate)
+void SurfaceFire::calculateFirelineIntensities()
 {
-  double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
-  backingFirelineIntensity_ = backingSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
-}
+    forwardFirelineIntensity_ = calculateFirelineIntensity(forwardSpreadRate_,
+                                                           SpeedUnits::FeetPerMinute,
+                                                           FirelineIntensityUnits::BtusPerFootPerSecond);
 
-void SurfaceFire::calculateFlankingFireFirelineIntensity(double flankingSpreadRate)
-{
-  double secondsPerMinute = 60.0; // for converting feet per minute to feet per second
-  flankingFirelineIntensity_ = flankingSpreadRate * reactionIntensity_ * (residenceTime_ / secondsPerMinute);
+    backingFirelineIntensity_ = calculateFirelineIntensity(backingSpreadRate_,
+                                                           SpeedUnits::FeetPerMinute,
+                                                           FirelineIntensityUnits::BtusPerFootPerSecond);
+
+    flankingFirelineIntensity_ = calculateFirelineIntensity(flankingSpreadRate_,
+                                                            SpeedUnits::FeetPerMinute,
+                                                            FirelineIntensityUnits::BtusPerFootPerSecond);
+
+    directionOfInterestFirelineIntensity_ = calculateFirelineIntensity(spreadRateInDirectionOfInterest_,
+                                                                       SpeedUnits::FeetPerMinute,
+                                                                       FirelineIntensityUnits::BtusPerFootPerSecond);
 }
 
 void SurfaceFire::skipCalculationForZeroLoad()
@@ -176,39 +201,48 @@ void SurfaceFire::skipCalculationForZeroLoad()
     initializeMembers();
 }
 
-void SurfaceFire::calculateFlameLength()
+double SurfaceFire::calculateFlameLength(double firelineIntensity,
+                                         FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits,
+                                         LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
+    firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
+
+
     // Byram 1959, Albini 1976
-    flameLength_ = ((firelineIntensity_ < 1.0e-07)
-        ? (0.0)
-        : (0.45 * pow(firelineIntensity_, 0.46)));
-}
-
-void SurfaceFire::calculateBackingFlameLength()
-{
-  // Byram 1959, Albini 1976
-  backingFlameLength_ = ((backingFirelineIntensity_ < 1.0e-07)
-                         ? (0.0)
-                         : (0.45 * pow(backingFirelineIntensity_, 0.46)));
-}
-
-void SurfaceFire::calculateFlankingFlameLength()
-{
-  // Byram 1959, Albini 1976
-  flankingFlameLength_ = ((flankingFirelineIntensity_ < 1.0e-07)
+    double flameLength = ((firelineIntensity < 1.0e-07)
                           ? (0.0)
-                          : (0.45 * pow(flankingFirelineIntensity_, 0.46)));
+                          : (0.45 * pow(firelineIntensity, 0.46)));
+    return LengthUnits::fromBaseUnits(flameLength, flameLengthUnits);
+}
+
+void SurfaceFire::calculateFlameLengths()
+{
+    forwardFlameLength_ = calculateFlameLength(forwardFirelineIntensity_,
+                                               FirelineIntensityUnits::BtusPerFootPerSecond,
+                                               LengthUnits::Feet);
+
+    backingFlameLength_ = calculateFlameLength(backingFirelineIntensity_,
+                                               FirelineIntensityUnits::BtusPerFootPerSecond,
+                                               LengthUnits::Feet);
+
+    flankingFlameLength_ = calculateFlameLength(flankingFirelineIntensity_,
+                                                FirelineIntensityUnits::BtusPerFootPerSecond,
+                                                LengthUnits::Feet);
+
+    directionOfInterestFlameLength_ = calculateFlameLength(directionOfInterestFirelineIntensity_,
+                                                           FirelineIntensityUnits::BtusPerFootPerSecond,
+                                                           LengthUnits::Feet);
 }
 
 void SurfaceFire::calculateScorchHeight()
 {
     const double airTemperature = surfaceInputs_->getAirTemperature(TemperatureUnits::Fahrenheit);
     const double windSpeed = surfaceInputs_->getWindSpeed(SpeedUnits::MilesPerHour);
-    scorchHeight_ = ((firelineIntensity_ < 1.0e-07)
+    scorchHeight_ = ((forwardFirelineIntensity_ < 1.0e-07)
         ? (0.0)
         : ((63.0 / (140.0 - airTemperature))
-            * pow(firelineIntensity_, 1.166667)
-            / sqrt(firelineIntensity_ + (windSpeed * windSpeed * windSpeed))
+            * pow(forwardFirelineIntensity_, 1.166667)
+            / sqrt(forwardFirelineIntensity_ + (windSpeed * windSpeed * windSpeed))
             ));
 }
 
@@ -259,23 +293,6 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
     backingSpreadRate_ = size_->getBackingSpreadRate(SpeedUnits::FeetPerMinute);
     flankingSpreadRate_ = size_->getFlankingSpreadRate(SpeedUnits::FeetPerMinute);
 
-    calculateHeatPerUnitArea();
-    calculateFirelineIntensity(forwardSpreadRate_);
-    calculateBackingFireFirelineIntensity(backingSpreadRate_);
-    calculateFlankingFireFirelineIntensity(flankingSpreadRate_);
-
-    calculateFlameLength();
-    calculateBackingFlameLength();
-    calculateFlankingFlameLength();
-
-    bool isUsingWesternAspen = surfaceInputs_->getIsUsingWesternAspen();
-    if (isUsingWesternAspen)
-    {
-        surfaceFuelbedIntermediates_.calculateWesternAspenMortality(flameLength_);
-    }
-
-    maxFlameLength_ = getFlameLength(); // Used by SAFETY Module
-
     if (hasDirectionOfInterest) // If needed, calculate spread rate in arbitrary direction of interest
     {
         spreadRateInDirectionOfInterest_ = calculateSpreadRateAtVector(directionOfInterest, directionMode);
@@ -285,9 +302,27 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
         spreadRateInDirectionOfInterest_ = forwardSpreadRate_;
     }
 
+    calculateHeatPerUnitArea();
+    calculateFirelineIntensities();
+    calculateFlameLengths();
+
+    bool isUsingWesternAspen = surfaceInputs_->getIsUsingWesternAspen();
+    if (isUsingWesternAspen)
+    {
+        surfaceFuelbedIntermediates_.calculateWesternAspenMortality(forwardFlameLength_);
+    }
+
+    maxFlameLength_ = forwardFlameLength_; // Used by SAFETY Module
     calculateHeatSource();
 
-    return spreadRateInDirectionOfInterest_;
+    if (hasDirectionOfInterest)
+    {
+        return spreadRateInDirectionOfInterest_;
+    }
+    else
+    {
+        return forwardSpreadRate_;
+    }
 }
 
 double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest, SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum directionMode)
@@ -334,11 +369,8 @@ double SurfaceFire::calculateSpreadRateAtVector(double directionOfInterest, Surf
         double cosBeta = cos(radians);
         double sinBeta = sin(radians);
 
-        rosVector = (g * cos(radians)) + sqrt((f * f * cosBeta * cosBeta) + (h * h * sinBeta * sinBeta));
-
         // rosVector perpendicular to perimeter at angle beta used to calculate fireline intensity and flame length
-        calculateFirelineIntensity(rosVector);
-        calculateFlameLength();
+        rosVector = (g * cos(radians)) + sqrt((f * f * cosBeta * cosBeta) + (h * h * sinBeta * sinBeta));
 
         if (directionMode == SurfaceFireSpreadDirectionMode::FromIgnitionPoint)
         {
@@ -566,7 +598,7 @@ double SurfaceFire::convertDirectionOfSpreadToRelativeToNorth(double directionOf
 
 double SurfaceFire::getFirelineIntensity() const
 {
-    return firelineIntensity_;
+    return forwardFirelineIntensity_;
 }
 
 double SurfaceFire::getBackingFirelineIntensity() const
@@ -579,9 +611,14 @@ double SurfaceFire::getFlankingFirelineIntensity() const
   return flankingFirelineIntensity_;
 }
 
+double SurfaceFire::getFirelineIntensityInDirectionOfInterest() const
+{
+    return directionOfInterestFirelineIntensity_;
+}
+
 double SurfaceFire::getFlameLength() const
 {
-    return flameLength_;
+    return forwardFlameLength_;
 }
 
 double SurfaceFire::getBackingFlameLength() const
@@ -592,6 +629,11 @@ double SurfaceFire::getBackingFlameLength() const
 double SurfaceFire::getFlankingFlameLength() const
 {
   return flankingFlameLength_;
+}
+
+double SurfaceFire::getFlameLengthInDirectionOfInterest() const
+{
+    return directionOfInterestFlameLength_;
 }
 
 double SurfaceFire::getMaxFlameLength() const
@@ -904,12 +946,12 @@ void SurfaceFire::setEffectiveWindSpeed(double effectiveWindSpeed)
 
 void SurfaceFire::setFirelineIntensity(double firelineIntensity)
 {
-    firelineIntensity_ = firelineIntensity;
+    forwardFirelineIntensity_ = firelineIntensity;
 }
 
 void SurfaceFire::setFlameLength(double flameLength)
 {
-    flameLength_ = flameLength;
+    forwardFlameLength_ = flameLength;
 }
 
 void SurfaceFire::setFireLengthToWidthRatio(double lengthToWidthRatio)
