@@ -221,7 +221,6 @@ void SurfaceFire::calculateFlameLengths()
                                                FirelineIntensityUnits::BtusPerFootPerSecond,
                                                LengthUnits::Feet);
 
-
     backingFlameLength_ = calculateFlameLength(backingFirelineIntensity_,
                                                FirelineIntensityUnits::BtusPerFootPerSecond,
                                                LengthUnits::Feet);
@@ -313,7 +312,7 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
         surfaceFuelbedIntermediates_.calculateWesternAspenMortality(forwardFlameLength_);
     }
 
-    maxFlameLength_ = forwardSpreadRate_; // Used by SAFETY Module
+    maxFlameLength_ = forwardFlameLength_; // Used by SAFETY Module
     calculateHeatSource();
 
     if (hasDirectionOfInterest)
