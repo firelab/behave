@@ -19,6 +19,9 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave)
 OPTION(TEST_BEHAVE "Enable Testing" ON)
 OPTION(TEST_MORTALITY "Enable Mortality Testing" ON)
 
+# optional SWIG library
+OPTION(SWIG "Enable SWIG" OFF)
+
 # optional stand-alone executables
 OPTION(EXAMPLE_APP "Example client application" ON)
 OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
@@ -158,6 +161,30 @@ IF(TEST_MORTALITY)
             ${BOOST_TEST_SOURCE}
             ${HEADERS})
     TARGET_LINK_LIBRARIES(testMortality)
+ENDIF()
+
+# Add a SWIG build with behave.i as the interface file
+IF(SWIG)
+
+  FIND_PACKAGE(Python REQUIRED COMPONENTS Development)
+  FIND_PACKAGE(SWIG REQUIRED)
+  INCLUDE(UseSWIG)
+
+  SET(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
+  SET(SWIG_INTERFACE_FILE behave.i)
+
+  MESSAGE(PYTHON_INCLUDES=${Python_INCLUDE_DIRS})
+  INCLUDE_DIRECTORIES(${Python_INCLUDE_DIRS})
+
+  set_property(SOURCE ${SWIG_INTERFACE_FILE} PROPERTY CPLUSPLUS ON)
+
+  swig_add_library(bepy
+    TYPE MODULE
+    LANGUAGE python
+    OUTPUT_DIR swig
+    SOURCES ${SWIG_INTERFACE_FILE}
+  )
+
 ENDIF()
 
 IF(EXAMPLE_APP)
