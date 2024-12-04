@@ -330,11 +330,23 @@ void FuelModels::populateFuelModels()
         1.0*f, 1.0*f, 0, 9.0*f, 0,
         1800, 1600, 1500,
         true, true);
-    // 110-112 are reserved for future standard grass models
-    for (int i = 110; i <= 112; i++)
-    {
-        markAsReservedModel(i);
-    }
+
+    setFuelModelRecord(110, "V-Hb",
+        "Short Gass, < 0.5 m (Dynamic)",
+        0.35, 24, 19000, 19000,
+        0.3*f, 0, 0, 1.2*f, 0,
+        6000, 6000, 6000,
+        true, true);
+    setFuelModelRecord(111, "V-Ha",
+        "Tall Grass, > 0.5 m (Dynamic)",
+        0.6, 24, 19000, 19000,
+        0.5*f, 0.1*f, 0, 2.5*f, 0.3*f,
+        4000, 6000, 4000,
+        true, true);
+
+    // 112 reserved for future standard grass models
+    markAsReservedModel(112);
+
     // 113-119 are available for custom grass models
 
     // Code GSx: Grass and shrub
@@ -426,12 +438,69 @@ void FuelModels::populateFuelModels()
         4.5*f, 2.45*f, 0, 1.55*f, 7.0*f,
         750, 1800, 1500,
         true, true);
-    // 150-152 reserved for future standard shrub models
-    for (int i = 150; i <= 152; i++)
-    {
-        markAsReservedModel(i);
-    }
-    // 153-159 available for custom shrub models
+
+    // Standard Shrub Models
+    setFuelModelRecord(150, "SCAL17",
+        "Chamise with Moderate Load Grass, 4 feet (Static)",
+        4, 20, 8000, 8000,
+        1.3*f, 1.0*f, 1.0*f, 2.0*f, 2.0*f,
+        640, 2200, 640,
+        false, true);
+    setFuelModelRecord(151, "SCAL15",
+        "Chamise with Low Load Grass, 3 feet (Static)",
+        3, 13, 10000, 10000,
+        2.0*f, 3.0*f, 1.0*f, 0.5*f, 2.0*f,
+        640, 2200, 640,
+        false, true);
+    setFuelModelRecord(152, "SCAL16",
+        "North Slope Ceanothus with Moderate Load Grass (Static)",
+        6, 15, 8000, 8000,
+        2.2*f, 4.8*f, 1.8*f, 3.0*f, 2.8*f,
+        500, 1500, 500,
+        false, true);
+    setFuelModelRecord(153, "SCAL14",
+        "Manzanita/Scrub Oak with Low Load Grass (Static)",
+        3, 15, 9211, 9211,
+        3.0*f, 4.5*f, 1.1*f, 1.4*f, 5.0*f,
+        350, 1500, 250,
+        false, true);
+    setFuelModelRecord(154, "SCAL18",
+        "Coastal Sage/Buckwheat Scrub with Low Load Grass (Static)",
+        3, 25, 9200, 9200,
+        5.5*f, 0.8*f, 0.1*f, 0.75*f, 2.5*f,
+        640, 1500, 640,
+        false, true);
+
+    setFuelModelRecord(155, "V-MH",
+        "Short Green Shrub < 1 m With Grass, Discontinuous (< 1 m) often discontinuous and with grass (Dynamic)",
+        0.55, 25, 19500, 19500,
+        1.0*f, 1.0*f, 0, 1.5*f, 5.5*f,
+        4500, 8500, 4000,
+        true, true);
+    setFuelModelRecord(156, "V-MMb",
+        "Short Shrub < 1 m, Low Dead Fraction and/or Thick Foliage (Static)",
+        0.9, 20, 20500, 20500,
+        4.0*f, 0.5*f, 0, 0, 7.0*f,
+        3000, 3000, 3000,
+        false, true);
+    setFuelModelRecord(157, "V-MAb",
+        "Short Shrub < 1 m, High Dead Fraction and/or Thin Fuel (Static)",
+        0.5, 35, 21000, 21000,
+        6.0*f, 0.5*f, 0, 0, 7.5*f,
+        4500, 4500, 4500,
+        false, true);
+    setFuelModelRecord(158, "V-MMa",
+        "Tall Shrub > 1 m, Low Dead Fraction and/or Thick Foliage (Static)",
+        1.7, 24, 20500, 20500,
+        6.0*f, 4.0*f, 0, 0, 13.0*f,
+        2500, 3000, 3000,
+        false, true);
+    setFuelModelRecord(159, "V-MAa",
+        "Tall Shrub > 1 m, High Dead Fraction and/or Thin Fuel (Static)",
+        1.05, 35, 21000, 21000,
+        9.5*f, 2.5*f, 0, 0, 14.5*f,
+        3500, 4000, 4000,
+        false, true);
 
     // Timber and understory
     // 160 available for custom timber and understory model
@@ -465,12 +534,51 @@ void FuelModels::populateFuelModels()
         4.0*f, 4.0*f, 3.0*f, 0, 3.0*f,
         1500, 1800, 750,
         true, true);
-    // 166-170 reserved for future standard timber and understory models
-    for (int i = 166; i <= 170; i++)
-    {
-        markAsReservedModel(i);
-    }
-    // 171-179 available for custom timber and understory models
+
+
+    setFuelModelRecord(166, "M-EUCd",
+        "Discontinuous Litter Eucalyptus Plantation, With or Without Shrub Understory (Static)",
+        0.4, 26, 21000, 20500,
+        1.37*f, 2.89*f, 1.59*f, 0, 1.84*f,
+        4500, 4200, 5000,
+        false, true);
+    setFuelModelRecord(167, "M-H",
+        "Deciduous or Conifer Litter, Shrub and Herb Understory",
+        0.1, 30, 20500, 20500,
+        2.71*f, 1.0*f, 0, 0.66*f, 0.1*f,
+        5500, 8000, 4500,
+        true, true);
+    setFuelModelRecord(168, "M-F", "Deciduous or Conifer Litter, Shrub and Fern Understory (Dynamic)",
+        0.3, 35, 19500, 19500,
+        4.5*f, 1.5*f, 0.5*f, 2.35*f, 0.48*f,
+        6000, 8000, 4500,
+        true, true);
+    setFuelModelRecord(169, "M-CAD",
+        "Deciduous Litter, Shrub Understory (Static)",
+        0.63, 30, 20000, 20000,
+        4.54*f, 1.87*f, 0.61*f, 0, 9.08*f,
+        6000, 4921, 5000,
+        false, true);
+    setFuelModelRecord(170, "M-ESC",
+        "Sclerophyll Broadleaf Litter, Shrub Understory (Static)",
+        0.5, 27, 20500, 20500,
+        5.65*f, 1.5*f, 0.48*f, 0, 7.89*f,
+        5000, 4921, 5500,
+        false, true);
+    setFuelModelRecord(171, "M-PIN",
+        "Medium-Long Needle Pine Litter, Shrub Understory (Static)",
+        0.5, 40, 20500, 21500,
+        7.21*f, 3.0*f, 0, 0, 6.89*f,
+        5500, 5500, 6000,
+        false, true);
+    setFuelModelRecord(172, "M-EUC",
+        "Eucalyptus Litter, Shrub Understory (Static)",
+        0.64, 32, 21000, 21000,
+        8.37*f, 3.81*f, 0, 0, 4.51*f,
+        4700, 4200, 5000,
+        false, true);
+
+    // 173-179 available for custom timber and understory models
 
     // Timber and litter
     // 180 available for custom timber and litter models
@@ -528,13 +636,33 @@ void FuelModels::populateFuelModels()
         6.65*f, 3.30*f, 4.15*f, 0, 0,
         1800, 1800, 1600,
         true, true);
-    // 190-192 reserved for future standard timber and litter models
-    for (int i = 190; i <= 192; i++)
-    {
-        markAsReservedModel(i);
-    }
 
-    // 193-199 available for custom timber and litter models
+    setFuelModelRecord(190, "F-RAC",
+        "Very Compact Litter, Short Needle Conifers (Static)",
+        0.05, 28, 20500, 20500,
+        3.75*f, 2.0*f, 1.0*f, 0, 1.18*f,
+        6500, 4921, 4500,
+        false, true);
+    setFuelModelRecord(191, "F-FOL",
+        "Compact Litter, Deciduous or Evergreen Foliage (Static)",
+        0.15, 25, 20500, 20500,
+        2.67*f, 1.27*f, 0.69*f, 0, 1.16*f,
+        4500, 5500, 5000,
+        false, true);
+    setFuelModelRecord(192, "F-PIN",
+        "Litter from Medium-Long Needle Pine Trees (Static)",
+        0.1, 45, 20500, 21500,
+        6.5*f, 1.5*f, 0, 0, 0,
+        5500, 5500, 5500,
+        false, true);
+    setFuelModelRecord(193, "F-EUC",
+        "Pure Eucalyptus Litter, No Understory (Static)",
+        0.32, 26, 21000, 20500,
+        4.63*f, 2.96*f, 1.27*f, 0, 1.12*f,
+        4200, 4200, 5000,
+        false, true);
+
+    // 194-199 available for custom timber and litter models
 
     // Slash and blowdown
     // 200 available for custom slash and blowdown model
