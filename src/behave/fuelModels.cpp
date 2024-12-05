@@ -534,8 +534,6 @@ void FuelModels::populateFuelModels()
         4.0*f, 4.0*f, 3.0*f, 0, 3.0*f,
         1500, 1800, 750,
         true, true);
-
-
     setFuelModelRecord(166, "M-EUCd",
         "Discontinuous Litter Eucalyptus Plantation, With or Without Shrub Understory (Static)",
         0.4, 26, 21000, 20500,
@@ -636,7 +634,6 @@ void FuelModels::populateFuelModels()
         6.65*f, 3.30*f, 4.15*f, 0, 0,
         1800, 1800, 1600,
         true, true);
-
     setFuelModelRecord(190, "F-RAC",
         "Very Compact Litter, Short Needle Conifers (Static)",
         0.05, 28, 20500, 20500,
