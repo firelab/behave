@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include "behaveUnits.h"
 
 struct FDFMToolAspectIndex
 {
@@ -149,9 +150,9 @@ public:
     std::string getTimeOfDayLabelAtIndex(const int index) const;
 
     // Output getters (requires prior calculation)
-    int getReferenceMoisture() const;
-    int getCorrectionMoisture() const;
-    int getFineDeadFuelMoisture() const;
+    double getReferenceMoisture(FractionUnits::FractionUnitsEnum desiredUnits) const;
+    double getCorrectionMoisture(FractionUnits::FractionUnitsEnum desiredUnits) const;
+    double getFineDeadFuelMoisture(FractionUnits::FractionUnitsEnum desiredUnits) const;
 
 protected:
     void memberwiseCopyAssignment(const FineDeadFuelMoistureTool& rhs);
@@ -165,11 +166,11 @@ protected:
     std::vector<std::string> shadings_; // labels for indices of shading
     std::vector<std::string> timesOfDay_; // labels for indices of ranges of time of day
 
-    std::vector<std::vector<int>> referenceMostures_;
-    std::vector<std::vector<int>> correctionMoistures_;
+    std::vector<std::vector<double>> referenceMostures_;
+    std::vector<std::vector<double>> correctionMoistures_;
     
     // Outputs: results of calcuate() public member function
-    int referenceMoisture_; // is a function of the dry bulb temperature and relative humidity
-    int correctionMoisture_; // is a function of month, time of day, elevation difference, slope steepness, aspect, and shading
-    int fineDeadFuelMoisture_; // is the sum of a reference fuel moisture and a moisture correction.
+    double referenceMoisture_; // is a function of the dry bulb temperature and relative humidity
+    double correctionMoisture_; // is a function of month, time of day, elevation difference, slope steepness, aspect, and shading
+    double fineDeadFuelMoisture_; // is the sum of a reference fuel moisture and a moisture correction.
 };
