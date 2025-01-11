@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['randfuel_0',['RandFuel',['../class_rand_fuel.html',1,'']]],
-  ['randfuel_1',['Randfuel',['../class_randfuel.html',1,'']]],
-  ['randthread_2',['RandThread',['../class_rand_thread.html',1,'']]],
-  ['representativefraction_3',['RepresentativeFraction',['../struct_representative_fraction.html',1,'']]]
+  ['randfuel_0',['randfuel',['../classRandfuel.html',1,'Randfuel'],['../classRandFuel.html',1,'RandFuel']]],
+  ['randthread_1',['RandThread',['../classRandThread.html',1,'']]],
+  ['representativefraction_2',['RepresentativeFraction',['../structRepresentativeFraction.html',1,'']]]
 ];
