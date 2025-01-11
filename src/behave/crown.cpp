@@ -112,14 +112,14 @@ void Crown::doCrownRunRothermel()
     double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
     double crownRatio = 0;
-    if(canopyHeight > 0)
-    {
+    if (canopyHeight > 0) {
         crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
     }
 
-    surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
-
     // Step 1: Do surface run and store values needed for further calculations 
+    if (surfaceFuel_.getWindAdjustmentFactorCalculationMethod() == WindAdjustmentFactorCalculationMethod::UseCrownRatio) {
+      surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
+    }
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread(); // Crown ROS output given in direction of max spread 
     surfaceFireHeatPerUnitArea_ = surfaceFuel_.getHeatPerUnitArea(HeatPerUnitAreaUnits::BtusPerSquareFoot);
     surfaceFirelineIntensity_ = surfaceFuel_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
@@ -171,11 +171,15 @@ void Crown::doCrownRunScottAndReinhardt()
     // Scott and Reinhardt (2001) linked models method for crown fire
     double canopyHeight = surfaceFuel_.getCanopyHeight(LengthUnits::Feet);
     double canopyBaseHeight = crownInputs_.getCanopyBaseHeight(LengthUnits::Feet);
-    double crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
-
-    surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
+    double crownRatio = 0;
+    if (canopyHeight > 0) {
+        crownRatio = (canopyHeight - canopyBaseHeight) / canopyHeight;
+    }
 
     // Step 1: Do surface run and store values needed for further calculations
+    if (surfaceFuel_.getWindAdjustmentFactorCalculationMethod() == WindAdjustmentFactorCalculationMethod::UseCrownRatio) {
+      surfaceFuel_.setCrownRatio(crownRatio, FractionUnits::Fraction);
+    }
     const double windSpeed = surfaceFuel_.getWindSpeed(SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
     surfaceFuel_.setWindSpeed(windSpeed, SpeedUnits::FeetPerMinute, WindHeightInputMode::TwentyFoot);
     surfaceFuel_.doSurfaceRunInDirectionOfMaxSpread();
