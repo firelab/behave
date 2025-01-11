@@ -1676,13 +1676,13 @@ void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun)
 
 void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
 {
-    int observedReferenceMoisture = 0;
-    int observedCorrectionMoisture = 0;
-    int observedFineDeadFuelMoisture = 0;
+    double observedReferenceMoisture = 0.0;
+    double observedCorrectionMoisture = 0.0;
+    double observedFineDeadFuelMoisture = 0.0;
 
-    int expectedReferenceMoisture = 0;
-    int expectedCorrectionMoisture = 0;
-    int expectedFineDeadFuelMoisture = 0;
+    double expectedReferenceMoisture = 0;
+    double expectedCorrectionMoisture = 0;
+    double expectedFineDeadFuelMoisture = 0;
 
     int aspectIndex = 0;
     int dryBulbIndex = 0;
@@ -1701,9 +1701,9 @@ void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedReferenceMoisture = 1;
     expectedCorrectionMoisture = 2;
     expectedFineDeadFuelMoisture = 3;
-    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
-    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
-    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture(FractionUnits::Percent);
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture(FractionUnits::Percent);
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture(FractionUnits::Percent);
     testName = "Test reference moisture for all zero index values\n";
     reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
     testName = "Test correction moisture for all zero index values\n";
@@ -1724,9 +1724,9 @@ void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedReferenceMoisture = 2;
     expectedCorrectionMoisture = 4;
     expectedFineDeadFuelMoisture = 6;
-    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
-    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
-    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture(FractionUnits::Percent);
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture(FractionUnits::Percent);
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture(FractionUnits::Percent);
     testName = "Test reference moisture for all one index values\n";
     reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
     testName = "Test correction moisture for all one index values\n";
@@ -1747,9 +1747,9 @@ void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedReferenceMoisture = 12;
     expectedCorrectionMoisture = 6;
     expectedFineDeadFuelMoisture = 18;
-    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
-    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
-    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture(FractionUnits::Percent);
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture(FractionUnits::Percent);
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture(FractionUnits::Percent);
     testName = "Test reference moisture for all max index values\n";
     reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
     testName = "Test correction moisture for all max index values\n";
@@ -1770,9 +1770,9 @@ void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun)
     expectedReferenceMoisture = -1;
     expectedCorrectionMoisture = -1;
     expectedFineDeadFuelMoisture = -1;
-    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture();
-    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture();
-    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture();
+    observedReferenceMoisture = behaveRun.fineDeadFuelMoistureTool.getReferenceMoisture(FractionUnits::Percent);
+    observedCorrectionMoisture = behaveRun.fineDeadFuelMoistureTool.getCorrectionMoisture(FractionUnits::Percent);
+    observedFineDeadFuelMoisture = behaveRun.fineDeadFuelMoistureTool.getFineDeadFuelMoisture(FractionUnits::Percent);
     testName = "Test reference moisture for all indices out of bounds\n";
     reportTestResult(testInfo, testName, observedReferenceMoisture, expectedReferenceMoisture, error_tolerance);
     testName = "Test correction moisture for all indices out of bounds\n";
