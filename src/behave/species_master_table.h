@@ -15,13 +15,18 @@
 using std::string;
 using std::vector;
 
-enum class RegionCode
-    {
-        interior_west = 1,
-        pacific_west = 2,
-        north_east = 3,
-        south_east = 4
-    };
+enum class GACC {
+    alaska = 1,
+    california = 2,
+    eastern_area = 3,
+    great_basin = 4,
+    northern_rockies = 5,
+    northwest = 6,
+    rockey_mountain = 7,
+    southern_area = 8,
+    southwest = 9,
+    not_set = -1,
+};
 
 /*.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.- */
 /*                          Species Master Table Record                      */
