@@ -93,9 +93,9 @@ double Mortality::calculateScorchHeight(double firelineIntensity, FirelineIntens
     return LengthUnits::fromBaseUnits(scorchHeight, scorchHeightUnits);
 }
 
-void Mortality::setRegion(RegionCode region)
+void Mortality::setGACCRegion(GACC region)
 {
-    mortalityInputs_.setRegion(region);
+    mortalityInputs_.setGACCRegion(region);
 }
 
 void Mortality::setSpeciesCode(std::string speciesCode)
@@ -207,9 +207,9 @@ void Mortality::setAirTemperature(double airTemperature, TemperatureUnits::Tempe
     mortalityInputs_.setAirTemperature(airTemperature, temperatureUnits);
 }
 
-RegionCode Mortality::getRegion() const
+GACC Mortality::getGACCRegion() const
 {
-    return mortalityInputs_.getRegion();
+    return mortalityInputs_.getGACCRegion();
 }
 
 std::string Mortality::getSpeciesCode() const
@@ -389,7 +389,7 @@ CrownDamageEquationCode Mortality::getCrownDamageEquationCodeAtSpeciesTableIndex
     return speciesMasterTable_->record_[index].crownDamageEquationCode;
 }
 
-bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region) const
+bool Mortality::checkIsInGACCRegionAtSpeciesTableIndex(int index, GACC region) const
 {
     bool isInRegion = false;
 
@@ -397,34 +397,34 @@ bool Mortality::checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region)
     {
         switch(region)
         {
-            case RegionCode::interior_west:
+            case GACC::alaska:
             {
-                if(speciesMasterTable_->record_[index].regionInteriorWest == (int)RegionCode::interior_west)
+                if(speciesMasterTable_->record_[index].gaccAlaska == (int)GACC::alaska)
                 {
                     isInRegion = true;
                 }
                 break;
             }
 
-            case RegionCode::pacific_west:
+            case GACC::california:
             {
-                if(speciesMasterTable_->record_[index].regionPacificWest == (int)RegionCode::pacific_west)
+                if(speciesMasterTable_->record_[index].gaccCalifornia == (int)GACC::california)
                 {
                     isInRegion = true;
                 }
                 break;
             }
-            case RegionCode::north_east:
+            case GACC::eastern_area:
             {
-                if(speciesMasterTable_->record_[index].regionNorthEast == (int)RegionCode::north_east)
+                if(speciesMasterTable_->record_[index].gaccEasternArea == (int)GACC::eastern_area)
                 {
                     isInRegion = true;
                 }
                 break;
             }
-            case RegionCode::south_east:
+            case GACC::great_basin:
             {
-                if(speciesMasterTable_->record_[index].regionSouthEast == (int)RegionCode::south_east)
+                if(speciesMasterTable_->record_[index].gaccGreatBasin == (int)GACC::great_basin)
                 {
                     isInRegion = true;
                 }
@@ -483,10 +483,10 @@ CrownDamageEquationCode Mortality::getCrownDamageEquationCodeFromSpeciesCode(str
     return getCrownDamageEquationCodeAtSpeciesTableIndex(index);
 }
 
-bool Mortality::checkIsInRegionFromSpeciesCode(string speciesCode, RegionCode region) const
+bool Mortality::checkIsInGACCRegionFromSpeciesCode(string speciesCode, GACC region) const
 {
     const int index = speciesMasterTable_->getSpeciesTableIndexFromSpeciesCode(speciesCode);
-    return checkIsInRegionAtSpeciesTableIndex(index, region);
+    return checkIsInGACCRegionAtSpeciesTableIndex(index, region);
 }
 
 double Mortality::getFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits)
@@ -1850,7 +1850,7 @@ SpeciesMasterTableRecord Mortality::getSpeciesRecordBySpeciesCodeAndEquationType
     return speciesMasterTable_->record_[index];
 }
 
-std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion(RegionCode region) const
+std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForGACCRegion(GACC region) const
 {
     std::vector<SpeciesMasterTableRecord> speciesInSelectedRegion;
     bool isErroneousInput = false;
@@ -1858,33 +1858,33 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
     {
         switch(region)
         {
-            case RegionCode::interior_west:
+            case GACC::alaska:
             {
-                if(speciesMasterTable_->record_[i].regionInteriorWest == (int)RegionCode::interior_west)
+                if(speciesMasterTable_->record_[i].gaccAlaska == (int)GACC::alaska)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case RegionCode::pacific_west:
+            case GACC::california:
             {
-                if(speciesMasterTable_->record_[i].regionPacificWest == (int)RegionCode::pacific_west)
+                if(speciesMasterTable_->record_[i].gaccCalifornia == (int)GACC::california)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case RegionCode::north_east:
+            case GACC::eastern_area:
             {
-                if(speciesMasterTable_->record_[i].regionNorthEast == (int)RegionCode::north_east)
+                if(speciesMasterTable_->record_[i].gaccEasternArea == (int)GACC::eastern_area)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case RegionCode::south_east:
+            case GACC::great_basin:
             {
-                if(speciesMasterTable_->record_[i].regionSouthEast == (int)RegionCode::south_east)
+                if(speciesMasterTable_->record_[i].gaccGreatBasin == (int)GACC::great_basin)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1906,7 +1906,7 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
     return speciesInSelectedRegion;
 }
 
-std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegionAndEquationType(RegionCode region, EquationType equationType) const
+std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForGACCRegionAndEquationType(GACC region, EquationType equationType) const
 {
     std::vector<SpeciesMasterTableRecord> speciesInSelectedRegion;
     bool isErroneousInput = false;
@@ -1915,36 +1915,36 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForRegion
     {
         switch(region)
         {
-            case RegionCode::interior_west:
+            case GACC::alaska:
             {
-                if((speciesMasterTable_->record_[i].regionInteriorWest == (int)RegionCode::interior_west) &&
+                if((speciesMasterTable_->record_[i].gaccAlaska == (int)GACC::alaska) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case RegionCode::pacific_west:
+            case GACC::california:
             {
-                if((speciesMasterTable_->record_[i].regionPacificWest == (int)RegionCode::pacific_west) &&
+                if((speciesMasterTable_->record_[i].gaccCalifornia == (int)GACC::california) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case RegionCode::north_east:
+            case GACC::eastern_area:
             {
-                if((speciesMasterTable_->record_[i].regionNorthEast == (int)RegionCode::north_east) &&
+                if((speciesMasterTable_->record_[i].gaccEasternArea == (int)GACC::eastern_area) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case RegionCode::south_east:
+            case GACC::great_basin:
             {
-                if((speciesMasterTable_->record_[i].regionSouthEast == (int)RegionCode::south_east) &&
+                if((speciesMasterTable_->record_[i].gaccGreatBasin == (int)GACC::great_basin) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);

@@ -193,15 +193,15 @@ int main()
         "fire_severity"
     };   // This vecctor is for getting the name of an input from its enum value
 
-    RegionCode region = RegionCode::interior_west;
+    GACC region = GACC::eastern_area;
     EquationType equationType = EquationType::crown_scorch;
 
-    behave.mortality.setRegion(region);
+    behave.mortality.setGACCRegion(region);
     behave.mortality.setEquationType(equationType);
 
     // Get species lists by region or by region and equation type to narrow down further
-    speciesInRegion = behave.mortality.getSpeciesRecordVectorForRegion(region);
-    speciesInRegion = behave.mortality.getSpeciesRecordVectorForRegionAndEquationType(region, equationType);
+    speciesInRegion = behave.mortality.getSpeciesRecordVectorForGACCRegion(region);
+    speciesInRegion = behave.mortality.getSpeciesRecordVectorForGACCRegionAndEquationType(region, equationType);
 
     string speciesCode = "ABBA";
     behave.mortality.setSpeciesCode(speciesCode);
@@ -209,7 +209,7 @@ int main()
     // Query the species master table for various info
     int numSpeciesRecords = behave.mortality.getNumberOfRecordsInSpeciesTable();
     int speciesIndex = behave.mortality.getSpeciesTableIndexFromSpeciesCode(speciesCode);
-    bool isInRegion = behave.mortality.checkIsInRegionAtSpeciesTableIndex(speciesIndex, region);
+    bool isInRegion = behave.mortality.checkIsInGACCRegionAtSpeciesTableIndex(speciesIndex, region);
    
     // With species and equation type selected, find out the required inputs
     bool isInputOk = false;

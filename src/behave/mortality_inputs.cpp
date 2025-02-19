@@ -78,7 +78,7 @@ MortalityInputs::~MortalityInputs()
 
 }
 
-void MortalityInputs::setRegion(RegionCode region)
+void MortalityInputs::setGACCRegion(GACC region)
 {
     region_ = region;
 }
@@ -192,7 +192,7 @@ void MortalityInputs::setAirTemperature(double airTemperature, TemperatureUnits:
     airTemperature_ = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
 }
 
-RegionCode MortalityInputs::getRegion() const
+GACC MortalityInputs::getGACCRegion() const
 {
     return region_;
 }

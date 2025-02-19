@@ -15,6 +15,7 @@
 using std::string;
 using std::vector;
 
+// Geographic Area Coordination Centers
 enum class GACC {
     alaska = 1,
     california = 2,
