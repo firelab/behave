@@ -193,7 +193,7 @@ int main()
         "fire_severity"
     };   // This vecctor is for getting the name of an input from its enum value
 
-    GACC region = GACC::eastern_area;
+    GACC region = GACC::EasternArea;
     EquationType equationType = EquationType::crown_scorch;
 
     behave.mortality.setGACCRegion(region);

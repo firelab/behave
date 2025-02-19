@@ -397,34 +397,74 @@ bool Mortality::checkIsInGACCRegionAtSpeciesTableIndex(int index, GACC region) c
     {
         switch(region)
         {
-            case GACC::alaska:
+            case GACC::Alaska:
             {
-                if(speciesMasterTable_->record_[index].gaccAlaska == (int)GACC::alaska)
+                if(speciesMasterTable_->record_[index].Alaska == (int)GACC::Alaska)
                 {
                     isInRegion = true;
                 }
                 break;
             }
 
-            case GACC::california:
+            case GACC::California:
             {
-                if(speciesMasterTable_->record_[index].gaccCalifornia == (int)GACC::california)
+                if(speciesMasterTable_->record_[index].California == (int)GACC::California)
                 {
                     isInRegion = true;
                 }
                 break;
             }
-            case GACC::eastern_area:
+            case GACC::EasternArea:
             {
-                if(speciesMasterTable_->record_[index].gaccEasternArea == (int)GACC::eastern_area)
+                if(speciesMasterTable_->record_[index].EasternArea == (int)GACC::EasternArea)
                 {
                     isInRegion = true;
                 }
                 break;
             }
-            case GACC::great_basin:
+            case GACC::GreatBasin:
             {
-                if(speciesMasterTable_->record_[index].gaccGreatBasin == (int)GACC::great_basin)
+                if(speciesMasterTable_->record_[index].GreatBasin == (int)GACC::GreatBasin)
+                {
+                    isInRegion = true;
+                }
+                break;
+            }
+            case GACC::NorthernRockies:
+            {
+                if(speciesMasterTable_->record_[index].NorthernRockies == (int)GACC::NorthernRockies)
+                {
+                    isInRegion = true;
+                }
+                break;
+            }
+            case GACC::Northwest:
+            {
+                if(speciesMasterTable_->record_[index].Northwest == (int)GACC::Northwest)
+                {
+                    isInRegion = true;
+                }
+                break;
+            }
+            case GACC::RockeyMountain:
+            {
+                if(speciesMasterTable_->record_[index].RockeyMountain == (int)GACC::RockeyMountain)
+                {
+                    isInRegion = true;
+                }
+                break;
+            }
+            case GACC::SouthernArea:
+            {
+                if(speciesMasterTable_->record_[index].SouthernArea == (int)GACC::SouthernArea)
+                {
+                    isInRegion = true;
+                }
+                break;
+            }
+            case GACC::Southwest:
+            {
+                if(speciesMasterTable_->record_[index].Southwest == (int)GACC::Southwest)
                 {
                     isInRegion = true;
                 }
@@ -1858,33 +1898,73 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForGACCRe
     {
         switch(region)
         {
-            case GACC::alaska:
+            case GACC::Alaska:
             {
-                if(speciesMasterTable_->record_[i].gaccAlaska == (int)GACC::alaska)
+                if(speciesMasterTable_->record_[i].Alaska == (int)GACC::Alaska)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case GACC::california:
+            case GACC::California:
             {
-                if(speciesMasterTable_->record_[i].gaccCalifornia == (int)GACC::california)
+                if(speciesMasterTable_->record_[i].California == (int)GACC::California)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case GACC::eastern_area:
+            case GACC::EasternArea:
             {
-                if(speciesMasterTable_->record_[i].gaccEasternArea == (int)GACC::eastern_area)
+                if(speciesMasterTable_->record_[i].EasternArea == (int)GACC::EasternArea)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case GACC::great_basin:
+            case GACC::GreatBasin:
             {
-                if(speciesMasterTable_->record_[i].gaccGreatBasin == (int)GACC::great_basin)
+                if(speciesMasterTable_->record_[i].GreatBasin == (int)GACC::GreatBasin)
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::NorthernRockies:
+            {
+                if(speciesMasterTable_->record_[i].NorthernRockies == (int)GACC::NorthernRockies)
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::Northwest:
+            {
+                if(speciesMasterTable_->record_[i].Northwest == (int)GACC::Northwest)
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::RockeyMountain:
+            {
+                if(speciesMasterTable_->record_[i].RockeyMountain == (int)GACC::RockeyMountain)
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::SouthernArea:
+            {
+                if(speciesMasterTable_->record_[i].SouthernArea == (int)GACC::SouthernArea)
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::Southwest:
+            {
+                if(speciesMasterTable_->record_[i].Southwest == (int)GACC::Southwest)
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
@@ -1915,42 +1995,88 @@ std::vector<SpeciesMasterTableRecord> Mortality::getSpeciesRecordVectorForGACCRe
     {
         switch(region)
         {
-            case GACC::alaska:
+            case GACC::Alaska:
             {
-                if((speciesMasterTable_->record_[i].gaccAlaska == (int)GACC::alaska) &&
+                if((speciesMasterTable_->record_[i].Alaska == (int)GACC::Alaska) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case GACC::california:
+            case GACC::California:
             {
-                if((speciesMasterTable_->record_[i].gaccCalifornia == (int)GACC::california) &&
+                if((speciesMasterTable_->record_[i].California == (int)GACC::California) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case GACC::eastern_area:
+            case GACC::EasternArea:
             {
-                if((speciesMasterTable_->record_[i].gaccEasternArea == (int)GACC::eastern_area) &&
+                if((speciesMasterTable_->record_[i].EasternArea == (int)GACC::EasternArea) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
-            case GACC::great_basin:
+            case GACC::GreatBasin:
             {
-                if((speciesMasterTable_->record_[i].gaccGreatBasin == (int)GACC::great_basin) &&
+                if((speciesMasterTable_->record_[i].GreatBasin == (int)GACC::GreatBasin) &&
                     (speciesMasterTable_->record_[i].equationType == equationType))
                 {
                     speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
                 }
                 break;
             }
+            case GACC::NorthernRockies:
+            {
+                if((speciesMasterTable_->record_[i].NorthernRockies == (int)GACC::NorthernRockies) &&
+                   (speciesMasterTable_->record_[i].equationType == equationType))
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::Northwest:
+            {
+                if((speciesMasterTable_->record_[i].Northwest == (int)GACC::Northwest) &&
+                   (speciesMasterTable_->record_[i].equationType == equationType))
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::RockeyMountain:
+            {
+                if((speciesMasterTable_->record_[i].RockeyMountain == (int)GACC::RockeyMountain) &&
+                   (speciesMasterTable_->record_[i].equationType == equationType))
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::SouthernArea:
+            {
+                if((speciesMasterTable_->record_[i].SouthernArea == (int)GACC::SouthernArea) &&
+                   (speciesMasterTable_->record_[i].equationType == equationType))
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+            case GACC::Southwest:
+            {
+                if((speciesMasterTable_->record_[i].Southwest == (int)GACC::Southwest) &&
+                   (speciesMasterTable_->record_[i].equationType == equationType))
+                {
+                    speciesInSelectedRegion.push_back(speciesMasterTable_->record_[i]);
+                }
+                break;
+            }
+
             default: // error case
             {
                 isErroneousInput = true;
