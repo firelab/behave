@@ -17,6 +17,7 @@ using std::vector;
 
 // Geographic Area Coordination Centers
 enum class GACC {
+    NotSet = -1,
     Alaska = 1,
     California = 2,
     EasternArea = 3,
@@ -26,7 +27,6 @@ enum class GACC {
     RockeyMountain = 7,
     SouthernArea = 8,
     Southwest = 9,
-    NotSet = -1,
 };
 
 /*.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.- */
