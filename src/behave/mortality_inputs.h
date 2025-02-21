@@ -43,7 +43,7 @@ public:
     MortalityInputs& operator=(const MortalityInputs& rhs);
     ~MortalityInputs();
 
-    void setRegion(RegionCode region);
+    void setGACCRegion(GACC region);
     void setSpeciesCode(std::string speciesCode);
     void setEquationType(EquationType equationType);
     void setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch);
@@ -70,7 +70,7 @@ public:
     void setAirTemperature(double airTemperature,
                            TemperatureUnits::TemperatureUnitsEnum temperatureUnits);
 
-    RegionCode getRegion() const;
+    GACC getGACCRegion() const;
     std::string getSpeciesCode() const;
     EquationType getEquationType() const;
     FlameLengthOrScorchHeightSwitch getFlameLengthOrScorchHeightSwitch() const;
@@ -100,7 +100,7 @@ protected:
     void memberwiseCopyAssignment(const MortalityInputs& rhs);
 
     // Inputs..................
-    RegionCode region_;
+    GACC region_;
     string speciesCode_; // 4 to 7 character species name code, together with equation type identitifies a unique record in the species table
     EquationType equationType_; // crown scorch, bole char, or crown damage equation, together with species name code identitifies a unique record in the species table
     FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch_;

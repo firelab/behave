@@ -28,7 +28,7 @@ public:
         TemperatureUnits::TemperatureUnitsEnum temperatureUnits, LengthUnits::LengthUnitsEnum scorchHeightUnits);
 
     // Mortality Inputs setters (for indiviual species)
-    void setRegion(RegionCode region);
+    void setGACCRegion(GACC region);
     void setSpeciesCode(std::string speciesCode);
     void setEquationType(EquationType equationType);
     void setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch);
@@ -51,7 +51,7 @@ public:
     bool updateInputsForSpeciesCodeAndEquationType(std::string speciesCode, EquationType equationType);
 
     // Mortality Inputs getters (for indiviual species)
-    RegionCode getRegion() const;
+    GACC getGACCRegion() const;
     std::string getSpeciesCode() const;
     EquationType getEquationType() const;
     FlameLengthOrScorchHeightSwitch getFlameLengthOrScorchHeightSwitch() const;
@@ -83,7 +83,7 @@ public:
     int  getCrownCoefficientCodeAtSpeciesTableIndex(int index) const; /* canopy cover equation #, (FVS Species Index No. )      */
     EquationType getEquationTypeAtSpeciesTableIndex(int index) const;
     CrownDamageEquationCode getCrownDamageEquationCodeAtSpeciesTableIndex(int index) const;
-    bool  checkIsInRegionAtSpeciesTableIndex(int index, RegionCode region) const;
+    bool  checkIsInGACCRegionAtSpeciesTableIndex(int index, GACC region) const;
 
     string getScientificNameFromSpeciesCode(string speciesCode) const;
     string getCommonNameFromSpeciesCode(string speciesCode) const;
@@ -92,7 +92,7 @@ public:
     int  getCrownCoefficientCodeFromSpeciesCode(string speciesCode) const; /* canopy cover equation #, (FVS Species Index No. )      */
     EquationType getEquationTypeFromSpeciesCode(string speciesCode) const;
     CrownDamageEquationCode getCrownDamageEquationCodeFromSpeciesCode(string speciesCode) const;
-    bool  checkIsInRegionFromSpeciesCode(string speciesCode, RegionCode region) const;
+    bool  checkIsInGACCRegionFromSpeciesCode(string speciesCode, GACC region) const;
 
     int getNumberOfRecordsInSpeciesTable() const;
     int getSpeciesTableIndexFromSpeciesCode(string speciesNameCode) const;
@@ -102,8 +102,8 @@ public:
     SpeciesMasterTableRecord getSpeciesRecordAtIndex(int index) const;
     SpeciesMasterTableRecord getSpeciesRecordBySpeciesCodeAndEquationType(string speciesCode, EquationType equationType) const;
 
-    std::vector<SpeciesMasterTableRecord> getSpeciesRecordVectorForRegion(RegionCode region) const;
-    std::vector<SpeciesMasterTableRecord> getSpeciesRecordVectorForRegionAndEquationType(RegionCode region, EquationType equationType) const;
+    std::vector<SpeciesMasterTableRecord> getSpeciesRecordVectorForGACCRegion(GACC gacc) const;
+    std::vector<SpeciesMasterTableRecord> getSpeciesRecordVectorForGACCRegionAndEquationType(GACC region, EquationType equationType) const;
 
     // Mortality outputs getters
     double getProbabilityOfMortality(FractionUnits::FractionUnitsEnum probabilityUnits) const;   // Individual Species Probility of Mortality

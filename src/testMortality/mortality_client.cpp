@@ -226,8 +226,8 @@ int main(int argc, char *argv[])
     CKRx = myFileInput.getDataTypeIndex("CKR");
     BeetleDamagex = myFileInput.getDataTypeIndex("BeetleDamage");
 
-    RegionCode region = RegionCode::south_east;
-    mortality.setRegion(region);
+    GACC region = GACC::SouthernArea;
+    mortality.setGACCRegion(region);
 
     /* Not Sure if this block is needed */
 //    speciesInRegion = mortality.getSpeciesRecordVectorForRegion(region);
