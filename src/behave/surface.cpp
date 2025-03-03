@@ -389,6 +389,18 @@ double Surface::getPackingRatio() const {
   return surfaceFire_.getPackingRatio();
 }
 
+double Surface::getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+    return surfaceFire_.getTotalLiveFuelLoad(loadingUnits);
+}
+
+double Surface::getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+    return surfaceFire_.getTotalDeadFuelLoad(loadingUnits);
+}
+
+double Surface::getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+    return surfaceFire_.getTotalDeadHerbaceousFuelLoad(loadingUnits);
+}
+
 void Surface::setCanopyCover(double canopyCover, FractionUnits::FractionUnitsEnum canopyUnits)
 {
     surfaceInputs_.setCanopyCover(canopyCover, canopyUnits);

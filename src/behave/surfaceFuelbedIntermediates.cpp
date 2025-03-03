@@ -989,6 +989,29 @@ double SurfaceFuelbedIntermediates::getWeightedFuelLoadByLifeState(FuelLifeState
     return weightedFuelLoad_[lifeState];
 }
 
+double SurfaceFuelbedIntermediates::getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+    double totalLoad;
+    for (int i = 0; i < FuelConstants::MaxParticles; i++)
+    {
+        totalLoad = totalLoad + loadLive_[i];
+    }
+    return LoadingUnits::fromBaseUnits(totalLoad, loadingUnits);
+}
+
+double SurfaceFuelbedIntermediates::getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+    double totalLoad;
+    for (int i = 0; i < FuelConstants::MaxParticles; i++)
+    {
+        totalLoad = totalLoad + loadDead_[i];
+    }
+    return LoadingUnits::fromBaseUnits(totalLoad, loadingUnits);
+}
+
+double SurfaceFuelbedIntermediates::getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+
+    return LoadingUnits::fromBaseUnits(loadingUnits, loadingUnits);
+}
+
 double SurfaceFuelbedIntermediates::getPalmettoGallberryMoistureOfExtinctionDead() const
 {
     return palmettoGallberry_.getMoistureOfExtinctionDead();
