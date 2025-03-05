@@ -127,7 +127,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classMortalityInputs.html">MortalityInputs</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classMortalityInputs.html">MortalityInputs</a>&amp; rhs);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_class" href="classMortalityInputs.html">~MortalityInputs</a>();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> setRegion(RegionCode region);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> setGACCRegion(GACC region);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> setSpeciesCode(std::string speciesCode);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> setEquationType(EquationType equationType);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch);</div>
@@ -154,7 +154,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">void</span> setAirTemperature(<span class="keywordtype">double</span> airTemperature,</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                           TemperatureUnits::TemperatureUnitsEnum temperatureUnits);</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    RegionCode getRegion() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    GACC getGACCRegion() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    std::string getSpeciesCode() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    EquationType getEquationType() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    FlameLengthOrScorchHeightSwitch getFlameLengthOrScorchHeightSwitch() <span class="keyword">const</span>;</div>
@@ -184,7 +184,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">void</span> memberwiseCopyAssignment(<span class="keyword">const</span> <a class="code hl_class" href="classMortalityInputs.html">MortalityInputs</a>&amp; rhs);</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="comment">// Inputs..................</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    RegionCode region_;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    GACC region_;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">string</span> speciesCode_; <span class="comment">// 4 to 7 character species name code, together with equation type identitifies a unique record in the species table</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    EquationType equationType_; <span class="comment">// crown scorch, bole char, or crown damage equation, together with species name code identitifies a unique record in the species table</span></div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    FlameLengthOrScorchHeightSwitch flameLengthOrScorchHeightSwitch_;</div>

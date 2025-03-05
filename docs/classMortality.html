@@ -93,9 +93,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a75ca1ffab3f34033a96892cd2dba0f30" id="r_a75ca1ffab3f34033a96892cd2dba0f30"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMortality.html#a75ca1ffab3f34033a96892cd2dba0f30">calculateScorchHeight</a> (double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits, double midFlameWindSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, LengthUnits::LengthUnitsEnum scorchHeightUnits)</td></tr>
 <tr class="memdesc:a75ca1ffab3f34033a96892cd2dba0f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates scorch height from fireline intensity, wind speed, and air temperature.  <br /></td></tr>
 <tr class="separator:a75ca1ffab3f34033a96892cd2dba0f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d1bbb3ec94fdbf5706064709bc56a94" id="r_a4d1bbb3ec94fdbf5706064709bc56a94"><td class="memItemLeft" align="right" valign="top"><a id="a4d1bbb3ec94fdbf5706064709bc56a94" name="a4d1bbb3ec94fdbf5706064709bc56a94"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRegion</b> (RegionCode region)</td></tr>
-<tr class="separator:a4d1bbb3ec94fdbf5706064709bc56a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af91a067b994fe2e6e9802c4b475d6071" id="r_af91a067b994fe2e6e9802c4b475d6071"><td class="memItemLeft" align="right" valign="top"><a id="af91a067b994fe2e6e9802c4b475d6071" name="af91a067b994fe2e6e9802c4b475d6071"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setGACCRegion</b> (GACC region)</td></tr>
+<tr class="separator:af91a067b994fe2e6e9802c4b475d6071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14c857fb98149c0090882a99e5976076" id="r_a14c857fb98149c0090882a99e5976076"><td class="memItemLeft" align="right" valign="top"><a id="a14c857fb98149c0090882a99e5976076" name="a14c857fb98149c0090882a99e5976076"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSpeciesCode</b> (std::string speciesCode)</td></tr>
 <tr class="separator:a14c857fb98149c0090882a99e5976076"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,9 +152,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setAirTemperature</b>
 <tr class="memitem:a9635664245387f800a61908fa58fd6da" id="r_a9635664245387f800a61908fa58fd6da"><td class="memItemLeft" align="right" valign="top"><a id="a9635664245387f800a61908fa58fd6da" name="a9635664245387f800a61908fa58fd6da"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateInputsForSpeciesCodeAndEquationType</b> (std::string speciesCode, EquationType equationType)</td></tr>
 <tr class="separator:a9635664245387f800a61908fa58fd6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a683e253e3f04a4d40992c4fc7a4bc036" id="r_a683e253e3f04a4d40992c4fc7a4bc036"><td class="memItemLeft" align="right" valign="top"><a id="a683e253e3f04a4d40992c4fc7a4bc036" name="a683e253e3f04a4d40992c4fc7a4bc036"></a>
-RegionCode&#160;</td><td class="memItemRight" valign="bottom"><b>getRegion</b> () const</td></tr>
-<tr class="separator:a683e253e3f04a4d40992c4fc7a4bc036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe1bda584e98f8d5fd21c7a0c78c8ab" id="r_a6fe1bda584e98f8d5fd21c7a0c78c8ab"><td class="memItemLeft" align="right" valign="top"><a id="a6fe1bda584e98f8d5fd21c7a0c78c8ab" name="a6fe1bda584e98f8d5fd21c7a0c78c8ab"></a>
+GACC&#160;</td><td class="memItemRight" valign="bottom"><b>getGACCRegion</b> () const</td></tr>
+<tr class="separator:a6fe1bda584e98f8d5fd21c7a0c78c8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7541297563df7b77b9c1121a182f5b0" id="r_ab7541297563df7b77b9c1121a182f5b0"><td class="memItemLeft" align="right" valign="top"><a id="ab7541297563df7b77b9c1121a182f5b0" name="ab7541297563df7b77b9c1121a182f5b0"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesCode</b> () const</td></tr>
 <tr class="separator:ab7541297563df7b77b9c1121a182f5b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,9 +238,9 @@ EquationType&#160;</td><td class="memItemRight" valign="bottom"><b>getEquationTy
 <tr class="memitem:ad9362de5bfea858d2050de16d1ee3fc4" id="r_ad9362de5bfea858d2050de16d1ee3fc4"><td class="memItemLeft" align="right" valign="top"><a id="ad9362de5bfea858d2050de16d1ee3fc4" name="ad9362de5bfea858d2050de16d1ee3fc4"></a>
 CrownDamageEquationCode&#160;</td><td class="memItemRight" valign="bottom"><b>getCrownDamageEquationCodeAtSpeciesTableIndex</b> (int index) const</td></tr>
 <tr class="separator:ad9362de5bfea858d2050de16d1ee3fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6975d225e104411eec6b964d8c00d882" id="r_a6975d225e104411eec6b964d8c00d882"><td class="memItemLeft" align="right" valign="top"><a id="a6975d225e104411eec6b964d8c00d882" name="a6975d225e104411eec6b964d8c00d882"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkIsInRegionAtSpeciesTableIndex</b> (int index, RegionCode region) const</td></tr>
-<tr class="separator:a6975d225e104411eec6b964d8c00d882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafee85d6bbf8a837a4b13d1bc8e79f4" id="r_adafee85d6bbf8a837a4b13d1bc8e79f4"><td class="memItemLeft" align="right" valign="top"><a id="adafee85d6bbf8a837a4b13d1bc8e79f4" name="adafee85d6bbf8a837a4b13d1bc8e79f4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkIsInGACCRegionAtSpeciesTableIndex</b> (int index, GACC region) const</td></tr>
+<tr class="separator:adafee85d6bbf8a837a4b13d1bc8e79f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0da351f6b79ef206a6f6c859d99a2892" id="r_a0da351f6b79ef206a6f6c859d99a2892"><td class="memItemLeft" align="right" valign="top"><a id="a0da351f6b79ef206a6f6c859d99a2892" name="a0da351f6b79ef206a6f6c859d99a2892"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>getScientificNameFromSpeciesCode</b> (string speciesCode) const</td></tr>
 <tr class="separator:a0da351f6b79ef206a6f6c859d99a2892"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -262,9 +262,9 @@ EquationType&#160;</td><td class="memItemRight" valign="bottom"><b>getEquationTy
 <tr class="memitem:a26f856f02b0907064d1864ab8ca74967" id="r_a26f856f02b0907064d1864ab8ca74967"><td class="memItemLeft" align="right" valign="top"><a id="a26f856f02b0907064d1864ab8ca74967" name="a26f856f02b0907064d1864ab8ca74967"></a>
 CrownDamageEquationCode&#160;</td><td class="memItemRight" valign="bottom"><b>getCrownDamageEquationCodeFromSpeciesCode</b> (string speciesCode) const</td></tr>
 <tr class="separator:a26f856f02b0907064d1864ab8ca74967"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5b0c315b5ce802a88321ca487ff860c" id="r_ad5b0c315b5ce802a88321ca487ff860c"><td class="memItemLeft" align="right" valign="top"><a id="ad5b0c315b5ce802a88321ca487ff860c" name="ad5b0c315b5ce802a88321ca487ff860c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkIsInRegionFromSpeciesCode</b> (string speciesCode, RegionCode region) const</td></tr>
-<tr class="separator:ad5b0c315b5ce802a88321ca487ff860c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3135ac1737a59d8703b7dd7942189ab6" id="r_a3135ac1737a59d8703b7dd7942189ab6"><td class="memItemLeft" align="right" valign="top"><a id="a3135ac1737a59d8703b7dd7942189ab6" name="a3135ac1737a59d8703b7dd7942189ab6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkIsInGACCRegionFromSpeciesCode</b> (string speciesCode, GACC region) const</td></tr>
+<tr class="separator:a3135ac1737a59d8703b7dd7942189ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee31ed7ed8c7ac886ab55ffe80c0f2d0" id="r_aee31ed7ed8c7ac886ab55ffe80c0f2d0"><td class="memItemLeft" align="right" valign="top"><a id="aee31ed7ed8c7ac886ab55ffe80c0f2d0" name="aee31ed7ed8c7ac886ab55ffe80c0f2d0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfRecordsInSpeciesTable</b> () const</td></tr>
 <tr class="separator:aee31ed7ed8c7ac886ab55ffe80c0f2d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,12 +283,12 @@ vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getRe
 <tr class="memitem:a721f3dd0dba52fadc7bfcc724eb383cf" id="r_a721f3dd0dba52fadc7bfcc724eb383cf"><td class="memItemLeft" align="right" valign="top"><a id="a721f3dd0dba52fadc7bfcc724eb383cf" name="a721f3dd0dba52fadc7bfcc724eb383cf"></a>
 <a class="el" href="structSpeciesMasterTableRecord.html">SpeciesMasterTableRecord</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesRecordBySpeciesCodeAndEquationType</b> (string speciesCode, EquationType equationType) const</td></tr>
 <tr class="separator:a721f3dd0dba52fadc7bfcc724eb383cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5300b9a5b2676ce35a4e8b0897239f5" id="r_aa5300b9a5b2676ce35a4e8b0897239f5"><td class="memItemLeft" align="right" valign="top"><a id="aa5300b9a5b2676ce35a4e8b0897239f5" name="aa5300b9a5b2676ce35a4e8b0897239f5"></a>
-std::vector&lt; <a class="el" href="structSpeciesMasterTableRecord.html">SpeciesMasterTableRecord</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesRecordVectorForRegion</b> (RegionCode region) const</td></tr>
-<tr class="separator:aa5300b9a5b2676ce35a4e8b0897239f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73813f627212f4240eae3d8903d9268a" id="r_a73813f627212f4240eae3d8903d9268a"><td class="memItemLeft" align="right" valign="top"><a id="a73813f627212f4240eae3d8903d9268a" name="a73813f627212f4240eae3d8903d9268a"></a>
-std::vector&lt; <a class="el" href="structSpeciesMasterTableRecord.html">SpeciesMasterTableRecord</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesRecordVectorForRegionAndEquationType</b> (RegionCode region, EquationType equationType) const</td></tr>
-<tr class="separator:a73813f627212f4240eae3d8903d9268a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09604090ec6f13c41249ebf20363ef09" id="r_a09604090ec6f13c41249ebf20363ef09"><td class="memItemLeft" align="right" valign="top"><a id="a09604090ec6f13c41249ebf20363ef09" name="a09604090ec6f13c41249ebf20363ef09"></a>
+std::vector&lt; <a class="el" href="structSpeciesMasterTableRecord.html">SpeciesMasterTableRecord</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesRecordVectorForGACCRegion</b> (GACC gacc) const</td></tr>
+<tr class="separator:a09604090ec6f13c41249ebf20363ef09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfb08766288caddc11fd04a3b2d51d6c" id="r_adfb08766288caddc11fd04a3b2d51d6c"><td class="memItemLeft" align="right" valign="top"><a id="adfb08766288caddc11fd04a3b2d51d6c" name="adfb08766288caddc11fd04a3b2d51d6c"></a>
+std::vector&lt; <a class="el" href="structSpeciesMasterTableRecord.html">SpeciesMasterTableRecord</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesRecordVectorForGACCRegionAndEquationType</b> (GACC region, EquationType equationType) const</td></tr>
+<tr class="separator:adfb08766288caddc11fd04a3b2d51d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2257909e84fbb7464ae34e0f865174d4" id="r_a2257909e84fbb7464ae34e0f865174d4"><td class="memItemLeft" align="right" valign="top"><a id="a2257909e84fbb7464ae34e0f865174d4" name="a2257909e84fbb7464ae34e0f865174d4"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getProbabilityOfMortality</b> (FractionUnits::FractionUnitsEnum probabilityUnits) const</td></tr>
 <tr class="separator:a2257909e84fbb7464ae34e0f865174d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
