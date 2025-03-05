@@ -62,6 +62,9 @@ public:
     double getWeightedHeatByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWeightedSilicaByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWeightedFuelLoadByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
+    double getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
     // Palmetto-Gallberry getters
     double getPalmettoGallberryMoistureOfExtinctionDead() const;

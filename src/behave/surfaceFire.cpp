@@ -934,6 +934,22 @@ double SurfaceFire::getChaparralTotalLiveFuelLoad() const
     return surfaceFuelbedIntermediates_.getChaparralTotalLiveFuelLoad();
 }
 
+double SurfaceFire::getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+
+    return surfaceFuelbedIntermediates_.getTotalLiveFuelLoad(loadingUnits);
+}
+
+double SurfaceFire::getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+
+    return surfaceFuelbedIntermediates_.getTotalDeadFuelLoad(loadingUnits);
+}
+
+double SurfaceFire::getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
+
+    return surfaceFuelbedIntermediates_.getTotalDeadHerbaceousFuelLoad(loadingUnits);
+}
+
+
 void SurfaceFire::setDirectionOfMaxSpread(double directionOFMaxSpread)
 {
     directionOfMaxSpread_ = directionOFMaxSpread;

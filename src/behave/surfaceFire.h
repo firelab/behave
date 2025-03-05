@@ -134,6 +134,9 @@ public:
     double getChaparralTotalFuelLoad() const;
     double getChaparralTotalLiveFuelLoad() const;
     ChaparralFuelType::ChaparralFuelTypeEnum getChaparralFuelType() const;
+    double getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
 protected:
     // Protected setters accessible to friend classes

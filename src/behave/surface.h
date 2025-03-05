@@ -100,6 +100,9 @@ public:
     // SurfaceIntermediate Getters
     double getRelativePackingRatio() const;
     double getPackingRatio()const;
+    double getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
+    double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
     // SurfaceInputs setters
     void setCanopyHeight(double canopyHeight, LengthUnits::LengthUnitsEnum canopyHeightUnits);
