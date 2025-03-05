@@ -1009,7 +1009,7 @@ double SurfaceFuelbedIntermediates::getTotalDeadFuelLoad(LoadingUnits::LoadingUn
 
 double SurfaceFuelbedIntermediates::getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
 
-    return LoadingUnits::fromBaseUnits(loadingUnits, loadingUnits);
+    return LoadingUnits::fromBaseUnits(loadDead_[3], loadingUnits);
 }
 
 double SurfaceFuelbedIntermediates::getPalmettoGallberryMoistureOfExtinctionDead() const
