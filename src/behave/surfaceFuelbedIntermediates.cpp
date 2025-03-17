@@ -990,7 +990,7 @@ double SurfaceFuelbedIntermediates::getWeightedFuelLoadByLifeState(FuelLifeState
 }
 
 double SurfaceFuelbedIntermediates::getTotalLiveFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
-    double totalLoad;
+    double totalLoad = 0.0;
     for (int i = 0; i < FuelConstants::MaxParticles; i++)
     {
         totalLoad = totalLoad + loadLive_[i];
@@ -999,7 +999,7 @@ double SurfaceFuelbedIntermediates::getTotalLiveFuelLoad(LoadingUnits::LoadingUn
 }
 
 double SurfaceFuelbedIntermediates::getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const {
-    double totalLoad;
+    double totalLoad = 0.0;
     for (int i = 0; i < FuelConstants::MaxParticles; i++)
     {
         totalLoad = totalLoad + loadDead_[i];
