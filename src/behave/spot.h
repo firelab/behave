@@ -33,6 +33,7 @@
 #define SPOT_H
 
 #include "spotInputs.h"
+#include "CrownFirebrandProcessor.h"
 
 class Spot
 {
@@ -48,6 +49,7 @@ public:
     void calculateSpottingDistanceFromBurningPile();
     void calculateSpottingDistanceFromSurfaceFire();
     void calculateSpottingDistanceFromTorchingTrees();
+    void calculateSpottingDistanceFromActiveCrown();
 
   // Spot Inputs Setters
     void setBurningPileFlameHeight(double buringPileflameHeight, LengthUnits::LengthUnitsEnum flameHeightUnits);
@@ -55,6 +57,7 @@ public:
     void setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits);
     void setDownwindCanopyMode(SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode);
     void setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void setFirelineIntensity(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits);
     void setLocation(SpotFireLocation::SpotFireLocationEnum location);
     void setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
     void setRidgeToValleyElevation(double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits);
@@ -84,6 +87,7 @@ public:
     double getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits) const;
     SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum getDownwindCanopyMode() const;
     double getSurfaceFlameLength(LengthUnits::LengthUnitsEnum surfaceFlameLengthUnits) const;
+    double getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     SpotFireLocation::SpotFireLocationEnum getLocation() const;
     double getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits) const;
     double getRidgeToValleyElevation(LengthUnits::LengthUnitsEnum elevationUnits) const;
@@ -108,6 +112,8 @@ public:
     double getMaxMountainousTerrainSpottingDistanceFromBurningPile(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const;
     double getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const;
     double getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const;
+
+    double getMaxMountainousTerrainSpottingDistanceFromActiveCrown(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const;
 
 protected:
     void memberwiseCopyAssignment(const Spot& rhs);
@@ -137,9 +143,12 @@ protected:
     double flatDistanceFromBurningPile_;        // Maximum spotting distance over flat terrain for burning pile(mi).
     double flatDistanceFromSurfaceFire_;        // Maximum spotting distance over flat terrain for surface fire(mi).
     double flatDistanceFromTorchingTrees_;      // Maximum spotting distance over flat terrain for torching trees(mi).
+    double flatDistanceFromActiveCrown_;      // Maximum spotting distance over flat terrain for torching trees(mi).
+
     double mountainDistanceFromBurningPile_;    // Maximum spotting distance over mountain terrain for burning pile(mi).
     double mountainDistanceFromSurfaceFire_;    // Maximum spotting distance over mountain terrain surface fire(mi).
     double mountainDistanceFromTorchingTrees_;  // Maximum spotting distance over mountain terrain torching trees(mi).
+    double mountainDistanceFromActiveCrown_;    // Maximum spotting distance over mountain terrain active crown(mi).
 };
 
 #endif // SPOT_H

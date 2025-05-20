@@ -262,6 +262,36 @@ void Spot::calculateSpottingDistanceFromBurningPile()
     }
 }
 
+void Spot::calculateSpottingDistanceFromActiveCrown() {
+
+    SpotFireLocation::SpotFireLocationEnum location = spotInputs_.getLocation();
+    double ridgeToValleyDistance = spotInputs_.getRidgeToValleyDistance(LengthUnits::Miles);
+    double ridgeToValleyElevation = spotInputs_.getRidgeToValleyElevation(LengthUnits::Feet);
+    double downwindCoverHeight = calculateDownwindCanopyCoverHeight();
+    double canopyHtM = 0.3048 * downwindCoverHeight;
+    double fireIntKw = spotInputs_.getCrownFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
+    double windSpeedKph = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::KilometersPerHour);;
+    double windHtM = 6.09; //20ft in meters
+    double emberDiamMm = 1.0;
+
+    CrownFirebrandProcessor *processor = new CrownFirebrandProcessor(canopyHtM,
+                                                                     fireIntKw,
+                                                                     windSpeedKph,
+                                                                     windHtM,
+                                                                     emberDiamMm,
+                                                                     0.2);
+
+    double flatDistM    = processor->getFirebrandDistance();// m
+    double flatDistMi   = flatDistM / 0.3048 / 5280.;
+    double mountainDistanceFromActiveCrownMi = spotDistanceMountainTerrain(flatDistMi,
+                                                                           location,
+                                                                           ridgeToValleyDistance,
+                                                                           ridgeToValleyElevation);
+
+    flatDistanceFromActiveCrown_ = LengthUnits::toBaseUnits(flatDistM, LengthUnits::Miles);
+    mountainDistanceFromActiveCrown_ = LengthUnits::toBaseUnits(mountainDistanceFromActiveCrownMi, LengthUnits::Miles);
+
+}
 void Spot::calculateSpottingDistanceFromSurfaceFire()
 {
     // Get needed inputs
@@ -406,6 +436,11 @@ void Spot::setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flame
     spotInputs_.setSurfaceFlameLength(flameLength, flameLengthUnits);
 }
 
+void Spot::setFirelineIntensity(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits)
+{
+    spotInputs_.setCrownFirelineIntensity(firelineIntensity, firelineIntensityUnits);
+}
+
 void Spot::setLocation(SpotFireLocation::SpotFireLocationEnum location)
 {
     spotInputs_.setLocation(location);
@@ -494,6 +529,12 @@ double Spot::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits
 {
     return spotInputs_.getSurfaceFlameLength(flameLengthUnits);
 }
+
+double Spot::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+    return spotInputs_.getCrownFirelineIntensity(firelineIntensityUnits);
+}
+
 
 SpotFireLocation::SpotFireLocationEnum Spot::getLocation() const
 {
@@ -603,4 +644,9 @@ double Spot::getMaxMountainousTerrainSpottingDistanceFromSurfaceFire(LengthUnits
 double Spot::getMaxMountainousTerrainSpottingDistanceFromTorchingTrees(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const
 {
     return LengthUnits::fromBaseUnits(mountainDistanceFromTorchingTrees_, spottingDistanceUnits);
+}
+
+double Spot::getMaxMountainousTerrainSpottingDistanceFromActiveCrown(LengthUnits::LengthUnitsEnum spottingDistanceUnits) const
+{
+    return LengthUnits::fromBaseUnits(mountainDistanceFromActiveCrown_, spottingDistanceUnits);
 }

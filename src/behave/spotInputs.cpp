@@ -57,6 +57,10 @@ void SpotInputs::setSurfaceFlameLength(double surfaceFlameLength, LengthUnits::L
     surfaceFlameLength_ = LengthUnits::toBaseUnits(surfaceFlameLength, flameLengthUnits);
 }
 
+void SpotInputs::setCrownFirelineIntensity(double crownFirelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) {
+    crownFirelineIntensity_ = FirelineIntensityUnits::toBaseUnits(crownFirelineIntensity, firelineIntensityUnits);
+}
+
 void SpotInputs::setLocation(SpotFireLocation::SpotFireLocationEnum location)
 {
     location_ = location;
@@ -161,6 +165,11 @@ SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum SpotInputs::getDownWindCanopy
 double SpotInputs::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum surfaceFlameLengthUnits) const
 {
     return LengthUnits::fromBaseUnits(surfaceFlameLength_, surfaceFlameLengthUnits);
+}
+
+double SpotInputs::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
+{
+    return FirelineIntensityUnits::fromBaseUnits(crownFirelineIntensity_, firelineIntensityUnits);
 }
 
 SpotFireLocation::SpotFireLocationEnum SpotInputs::getLocation() const

@@ -67,8 +67,8 @@ struct SpotDownWindCanopyMode
     enum SpotDownWindCanopyModeEnum
     {
         // If open, downwind canopy height used in calcuations is halved 
-        CLOSED = 1,
-        OPEN = 2
+        CLOSED = 0,
+        OPEN = 1
     };
 };
 
@@ -82,6 +82,7 @@ public:
     void setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits);
     void setDownwindCanopyMode(SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode);
     void setSurfaceFlameLength(double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void setCrownFirelineIntensity(double crownFirelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits);
     void setLocation(SpotFireLocation::SpotFireLocationEnum location);
     void setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
     void setRidgeToValleyElevation(double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits);
@@ -109,6 +110,7 @@ public:
     double getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits) const;
     SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum getDownWindCanopyMode() const;
     double getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     SpotFireLocation::SpotFireLocationEnum getLocation() const;
     double getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits) const;
     double getRidgeToValleyElevation(LengthUnits::LengthUnitsEnum elevationUnits) const;
@@ -139,6 +141,7 @@ protected:
     double windSpeedAtTwentyFeet_;
     double buringPileFlameHeight_;
     double surfaceFlameLength_;
+    double crownFirelineIntensity_;
     int torchingTrees_;
     double treeHeight_;
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies_;

@@ -94,7 +94,8 @@ SET(SOURCE
     src/behave/westernAspen.cpp
     src/behave/windAdjustmentFactor.cpp
     src/behave/windSpeedUtility.cpp
-    src/behave/vaporPressureDeficitCalculator.cpp)
+    src/behave/vaporPressureDeficitCalculator.cpp
+    src/behave/CrownFirebrandProcessor.cpp)
 
 SET(HEADERS
     src/behave/behaveRun.h
@@ -135,7 +136,8 @@ SET(HEADERS
     src/behave/westernAspen.h
     src/behave/windAdjustmentFactor.h
     src/behave/windSpeedUtility.h
-    src/behave/vaporPressureDeficitCalculator.h)
+    src/behave/vaporPressureDeficitCalculator.h
+    src/behave/CrownFirebrandProcessor.h)
 
 SOURCE_GROUP("Behave Core Source Files" FILES ${SOURCE})
 SOURCE_GROUP("Behave Core Header Files" FILES ${HEADERS})
