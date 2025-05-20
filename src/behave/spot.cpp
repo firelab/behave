@@ -272,14 +272,11 @@ void Spot::calculateSpottingDistanceFromActiveCrown() {
     double fireIntKw = spotInputs_.getCrownFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
     double windSpeedKph = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::KilometersPerHour);;
     double windHtM = 6.09; //20ft in meters
-    double emberDiamMm = 1.0;
 
     CrownFirebrandProcessor *processor = new CrownFirebrandProcessor(canopyHtM,
                                                                      fireIntKw,
                                                                      windSpeedKph,
-                                                                     windHtM,
-                                                                     emberDiamMm,
-                                                                     0.2);
+                                                                     windHtM);
 
     double flatDistM    = processor->getFirebrandDistance();// m
     double flatDistMi   = flatDistM / 0.3048 / 5280.;
@@ -288,7 +285,7 @@ void Spot::calculateSpottingDistanceFromActiveCrown() {
                                                                            ridgeToValleyDistance,
                                                                            ridgeToValleyElevation);
 
-    flatDistanceFromActiveCrown_ = LengthUnits::toBaseUnits(flatDistM, LengthUnits::Miles);
+    flatDistanceFromActiveCrown_ = LengthUnits::toBaseUnits(flatDistMi, LengthUnits::Miles);
     mountainDistanceFromActiveCrown_ = LengthUnits::toBaseUnits(mountainDistanceFromActiveCrownMi, LengthUnits::Miles);
 
 }
