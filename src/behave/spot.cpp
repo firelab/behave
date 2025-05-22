@@ -271,12 +271,14 @@ void Spot::calculateSpottingDistanceFromActiveCrown() {
     double canopyHtM = 0.3048 * downwindCoverHeight;
     double fireIntKw = spotInputs_.getCrownFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
     double windSpeedKph = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::KilometersPerHour);;
-    double windHtM = 6.09; //20ft in meters
+    double windHtM = 6.096; //20ft in meters
+    double emberDiamMm = 1.0;
 
     CrownFirebrandProcessor *processor = new CrownFirebrandProcessor(canopyHtM,
                                                                      fireIntKw,
                                                                      windSpeedKph,
-                                                                     windHtM);
+                                                                     windHtM,
+                                                                     emberDiamMm);
 
     double flatDistM    = processor->getFirebrandDistance();// m
     double flatDistMi   = flatDistM / 0.3048 / 5280.;
