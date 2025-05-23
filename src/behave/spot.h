@@ -119,6 +119,7 @@ protected:
     void memberwiseCopyAssignment(const Spot& rhs);
     double calculateSpotCriticalCoverHeight(double firebrandHeight, double coverHeight);
     double calculateDownwindCanopyCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits) const;
+    double calculateTreeHeight(LengthUnits::LengthUnitsEnum coverHeightUnits) const;
     double spotDistanceFlatTerrain(double firebrandHeight, double coverHeight, double windSpeedAtTwentyFeet);
     double spotDistanceMountainTerrain(double flatDistance, SpotFireLocation::SpotFireLocationEnum location,
     double ridgeToValleyDistance, double ridgeToValleyElevation);
