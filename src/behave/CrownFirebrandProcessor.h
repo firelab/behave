@@ -53,6 +53,8 @@ public:
     void setFirelineIntensity( double fireInt=0. ) ;
     void setWindSpeed( double windSpeed=0. ) ;
     void setWindSpeedHeight( double windHt=0. ) ;
+
+private:
     void process( void ) ;
     void processCanopyWindSpeed( void ) ;
     void processFirebrandDrift( void ) ;
