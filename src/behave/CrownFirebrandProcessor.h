@@ -1,7 +1,7 @@
 #ifndef CROWNFIREBRANDPROCESSOR_H
 #define CROWNFIREBRANDPROCESSOR_H
 
-/*!	\class Sem::Fire::Crown::Firebrand::Processor
+/*!	\class CrownFirebrandProcessor::Processor
   \brief Determines the height and drift distance of a firebrand of
   specified diameter from an active crown fire.
 
