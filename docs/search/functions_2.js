@@ -19,5 +19,6 @@ var searchData=
   ['containlog_16',['containLog',['../classSem_1_1Contain.html#ab9ce996952a65bf17f3766a692cecaa2',1,'Sem::Contain']]],
   ['containpsi_17',['containPsi',['../classSem_1_1Contain.html#a9574a46c40111c37f8d0aba80063548c',1,'Sem::Contain']]],
   ['containresource_18',['containresource',['../classSem_1_1ContainResource.html#a987c05bae8646b1f7fd5ba9663badb9c',1,'Sem::ContainResource::ContainResource(void)'],['../classSem_1_1ContainResource.html#a036c407d1dfb044d521b230bcf9f5798',1,'Sem::ContainResource::ContainResource(double arrival, double production, double duration=480., Sem::ContainFlank flank=Sem::LeftFlank, char *const desc=&quot;&quot;, double baseCost=0.00, double hourCost=0.00)']]],
-  ['containsim_19',['ContainSim',['../classSem_1_1ContainSim.html#a63e59ab2650bae62e0561a50ec2ad3fd',1,'Sem::ContainSim']]]
+  ['containsim_19',['ContainSim',['../classSem_1_1ContainSim.html#a63e59ab2650bae62e0561a50ec2ad3fd',1,'Sem::ContainSim']]],
+  ['crownfirebrandprocessor_20',['CrownFirebrandProcessor',['../classCrownFirebrandProcessor.html#a113b7b8dce1a8e95fe3f59044e917629',1,'CrownFirebrandProcessor']]]
 ];

@@ -16,6 +16,7 @@ var searchData=
   ['containstatus_13',['ContainStatus',['../structContainAdapterEnums_1_1ContainStatus.html',1,'ContainAdapterEnums']]],
   ['containtactic_14',['ContainTactic',['../structContainAdapterEnums_1_1ContainTactic.html',1,'ContainAdapterEnums']]],
   ['crown_15',['Crown',['../classCrown.html',1,'']]],
-  ['crowninputs_16',['CrownInputs',['../classCrownInputs.html',1,'']]],
-  ['crownmodeltype_17',['CrownModelType',['../structCrown_1_1CrownModelType.html',1,'Crown']]]
+  ['crownfirebrandprocessor_16',['CrownFirebrandProcessor',['../classCrownFirebrandProcessor.html',1,'']]],
+  ['crowninputs_17',['CrownInputs',['../classCrownInputs.html',1,'']]],
+  ['crownmodeltype_18',['CrownModelType',['../structCrown_1_1CrownModelType.html',1,'Crown']]]
 ];
