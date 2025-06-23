@@ -199,6 +199,7 @@ void ContainAdapter::doContainRun()
         finalTime_ = TimeUnits::toBaseUnits(containSim.finalFireTime(), TimeUnits::Minutes);
         containmentStatus_ = convertSemStatusToAdapterStatus(containSim.status());
         containmentStatus_ = static_cast<ContainStatus::ContainStatusEnum>(containSim.status());
+        finalProductionRate_ = finalFireLineLength_ / finalTime_;
 
         // Calculate effective windspeed needed for Size module
         // Find the effective windspeed
@@ -299,4 +300,8 @@ ContainAdapterEnums::ContainStatus::ContainStatusEnum ContainAdapter::convertSem
 Sem::ContainFlank ContainAdapter::converAdapterFlankToSemFlank(ContainAdapterEnums::ContainFlank::ContainFlankEnum flank)
 {
     return (Sem::ContainFlank)flank;
+}
+
+double ContainAdapter::getFinalProductionRate(SpeedUnits::SpeedUnitsEnum productionRateUnits) const {
+    return SpeedUnits::fromBaseUnits(finalProductionRate_, productionRateUnits);
 }

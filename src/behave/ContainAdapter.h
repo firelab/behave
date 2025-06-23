@@ -134,6 +134,7 @@ public:
     double getFinalFireSize(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getFinalContainmentArea(AreaUnits::AreaUnitsEnum areaUnits) const;
     double getFinalTimeSinceReport(TimeUnits::TimeUnitsEnum timeUnits) const;
+    double getFinalProductionRate(SpeedUnits::SpeedUnitsEnum productionRateUnits) const;
     ContainStatus::ContainStatusEnum getContainmentStatus() const;
 
 protected:
@@ -167,6 +168,7 @@ protected:
     double finalFireSize_; // Final fire size (area) at containment or escape
     double finalContainmentArea_; // Final containment area at containment or escape
     double finalTime_; // Containment or escape time since report
+    double finalProductionRate_; //Final Produciton Rate for the final fireline constructed.
     ContainAdapterEnums::ContainStatus::ContainStatusEnum containmentStatus_;
 
     // ContainSim Outputs
