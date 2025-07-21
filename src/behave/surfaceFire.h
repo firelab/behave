@@ -150,6 +150,7 @@ protected:
     void setWindSpeedLimit(double windSpeedLimit);
     void setReactionIntensity(double reactionIntensity);
     void setHeatPerUnitArea(double heatPerUnitArea);
+    void setIsWindLimitEnabled(bool isWindLimitEnabled);
     void setIsWindLimitExceeded(bool isWindLimitExceeded);
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);
@@ -187,6 +188,7 @@ protected:
     SurfaceFireReactionIntensity surfaceFireReactionIntensity_;
 
     // Member variables
+    bool isWindLimitEnabled_;
     bool isWindLimitExceeded_;
     double directionOfInterest_;
     double effectiveWindSpeed_;
