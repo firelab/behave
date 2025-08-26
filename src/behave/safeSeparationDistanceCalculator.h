@@ -35,6 +35,16 @@ struct SafetyCondition {
   };
 };
 
+struct TupleHash {
+    template <typename T1, typename T2, typename T3>
+    std::size_t operator()(const std::tuple<T1, T2, T3>& t) const {
+        auto hash1 = std::hash<T1>{}(std::get<0>(t));
+        auto hash2 = std::hash<T2>{}(std::get<1>(t));
+        auto hash3 = std::hash<T3>{}(std::get<2>(t));
+        return hash1 ^ (hash2 << 1) ^ (hash3 << 2); // Combine the hash values
+    }
+};
+
 class SafeSeparationDistanceCalculator {
 public:
   SafeSeparationDistanceCalculator();
@@ -62,6 +72,14 @@ public:
 
 protected:
   void memberwiseCopyAssignment(const SafeSeparationDistanceCalculator& rhs);
+  static double getValue(SpeedClass::SpeedClassEnum speed, BurningCondition::BurningConditionEnum burning, SlopeClass::SlopeClassEnum slope) {
+    auto key = std::make_tuple(speed, burning, slope);
+    auto it = deltaLookup.find(key);
+    if (it != deltaLookup.end()) {
+      return it->second;
+    }
+    return 0.0;
+  }
 
   BurningCondition::BurningConditionEnum burningCondition_;
   SlopeClass::SlopeClassEnum slopeClass_;
@@ -70,51 +88,5 @@ protected:
   double safeSeparationDistance_;
   double safetyZoneSize_;
 
-  static std::unordered_map<std::tuple<SpeedClass::SpeedClassEnum, BurningCondition::BurningConditionEnum, SlopeClass::SlopeClassEnum>, double> deltaLookup = {
-      // Light Burning Conditions
-      {{SpeedClass::Light, BurningCondition::Low, SlopeClass::Flat}, 1.0},
-      {{SpeedClass::Light, BurningCondition::Low, SlopeClass::Moderate}, 1.0},
-      {{SpeedClass::Light, BurningCondition::Low, SlopeClass::Steep}, 2.0},
-
-      // Moderate Burning Conditions
-      {{SpeedClass::Light, BurningCondition::Moderate, SlopeClass::Flat}, 1.0},
-      {{SpeedClass::Light, BurningCondition::Moderate, SlopeClass::Moderate}, 1.0},
-      {{SpeedClass::Light, BurningCondition::Moderate, SlopeClass::Steep}, 2.0},
-
-      // Extreme Burning Conditions
-      {{SpeedClass::Light, BurningCondition::Extreme, SlopeClass::Flat}, 1.0},
-      {{SpeedClass::Light, BurningCondition::Extreme, SlopeClass::Moderate}, 2.0},
-      {{SpeedClass::Light, BurningCondition::Extreme, SlopeClass::Steep}, 3.0},
-
-      /// Moderate Wind Speed
-      // Light Burning Conditions
-      {{SpeedClass::Moderate, BurningCondition::Low, SlopeClass::Flat}, 1.5},
-      {{SpeedClass::Moderate, BurningCondition::Low, SlopeClass::Moderate}, 3.0},
-      {{SpeedClass::Moderate, BurningCondition::Low, SlopeClass::Steep}, 4.0},
-
-      // Moderate Burning Conditions
-      {{SpeedClass::Moderate, BurningCondition::Moderate, SlopeClass::Flat}, 2.0},
-      {{SpeedClass::Moderate, BurningCondition::Moderate, SlopeClass::Moderate}, 4.0},
-      {{SpeedClass::Moderate, BurningCondition::Moderate, SlopeClass::Steep}, 5.0},
-
-      // Extreme Burning Conditions
-      {{SpeedClass::Moderate, BurningCondition::Extreme, SlopeClass::Flat}, 2.5},
-      {{SpeedClass::Moderate, BurningCondition::Extreme, SlopeClass::Moderate}, 5.0},
-      {{SpeedClass::Moderate, BurningCondition::Extreme, SlopeClass::Steep}, 5.0},
-
-      /// High Wind Speed
-      {{SpeedClass::High, BurningCondition::Low, SlopeClass::Flat}, 3.0},
-      {{SpeedClass::High, BurningCondition::Low, SlopeClass::Moderate}, 4.0},
-      {{SpeedClass::High, BurningCondition::Low, SlopeClass::Steep}, 6.0},
-
-      // Moderate Burning Conditions
-      {{SpeedClass::High, BurningCondition::Moderate, SlopeClass::Flat}, 3.0},
-      {{SpeedClass::High, BurningCondition::Moderate, SlopeClass::Moderate}, 5.0},
-      {{SpeedClass::High, BurningCondition::Moderate, SlopeClass::Steep}, 7.0},
-
-      // Extreme Burning Conditions
-      {{SpeedClass::High, BurningCondition::Extreme, SlopeClass::Flat}, 4.0},
-      {{SpeedClass::High, BurningCondition::Extreme, SlopeClass::Moderate}, 5.0},
-      {{SpeedClass::High, BurningCondition::Extreme, SlopeClass::Steep}, 10.0},
-    };
+  static const std::unordered_map<std::tuple<SpeedClass::SpeedClassEnum, BurningCondition::BurningConditionEnum, SlopeClass::SlopeClassEnum>, double, TupleHash> deltaLookup;
 };
