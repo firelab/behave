@@ -41,9 +41,6 @@ void RelativeHumidityTool::calculate() {
   double wetBulbTemp = TemperatureUnits::fromBaseUnits(wetBulbTemperature_, TemperatureUnits::Celsius);
   double siteElevation = LengthUnits::fromBaseUnits(siteElevation_, LengthUnits::Meters);
 
-  // Calculate Wet Bulb Depression
-  double wetBulbDep = dryBulbTemp - wetBulbTemp;
-
   // Calculate Dew Point
   double dewPointTemp = dryBulbTemp;
 
@@ -63,8 +60,7 @@ void RelativeHumidityTool::calculate() {
       e3 = 0.001;
     }
 
-    double t3 = -240.97 /  ( 1.- 17.502 / log(e3 / 6.1121) );
-    dewPointTemp = t3;
+    dewPointTemp = -240.97 /  ( 1.- 17.502 / log(e3 / 6.1121) );
 
     if ( dewPointTemp < -40. ) {
       dewPointTemp = -40.;
@@ -74,14 +70,17 @@ void RelativeHumidityTool::calculate() {
   // Calculate Relative Humidity
   double relativeHumidity = 0.;
 
-  if ( dewPointTemp >= dryBulbTemp ) {
+  // Convert to Fahrenheit
+  double dewPointTempF = dewPointTemp * 9. / 5. + 32.0;
+  double dryBulbTempF = dryBulbTemp * 9. / 5. + 32.0;
+
+  if ( dewPointTempF >= dryBulbTempF ) {
     relativeHumidity = 1.0;
   } else {
-    relativeHumidity = exp( -7469. / ( dewPointTemp + 398.0 ) + 7469. / ( dryBulbTemp + 398.0 ) );
+    relativeHumidity = exp( -7469. / ( dewPointTempF + 398.0 ) + 7469. / ( dryBulbTempF + 398.0 ) );
   }
 
   // Store results
-  wetBulbDepression_ = TemperatureUnits::toBaseUnits(wetBulbDep, TemperatureUnits::Celsius);
   dewPointTemperature_ = TemperatureUnits::toBaseUnits(dewPointTemp, TemperatureUnits::Celsius);
   relativeHumidity_ = FractionUnits::toBaseUnits(relativeHumidity, FractionUnits::Fraction);
 }
@@ -100,7 +99,17 @@ double RelativeHumidityTool::getSiteElevation(LengthUnits::LengthUnitsEnum lengt
 }
 
 double RelativeHumidityTool::getWetBulbDepression(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) {
-  return TemperatureUnits::fromBaseUnits(wetBulbDepression_, temperatureUnits);
+  double dryBulbTemp = TemperatureUnits::fromBaseUnits(dryBulbTemperature_, TemperatureUnits::Celsius);
+  double wetBulbTemp = TemperatureUnits::fromBaseUnits(wetBulbTemperature_, TemperatureUnits::Celsius);
+
+  double wetBulbDep = dryBulbTemp - wetBulbTemp;
+
+  if (temperatureUnits == TemperatureUnits::Celsius) {
+    return wetBulbDep;
+  } else {
+    return wetBulbDep * 1.8;
+  }
+
 }
 
 double RelativeHumidityTool::getDewPointTemperature(TemperatureUnits::TemperatureUnitsEnum temperatureUnits) {
