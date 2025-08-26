@@ -29,6 +29,11 @@ struct SpeedClass {
 
 class SafeSeparationDistanceCalculator {
 public:
+  SafeSeparationDistanceCalculator();
+  ~SafeSeparationDistanceCalculator();
+  SafeSeparationDistanceCalculator(const SafeSeparationDistanceCalculator& rhs);
+  SafeSeparationDistanceCalculator& operator=(const SafeSeparationDistanceCalculator& rhs);
+
 
   // calculate
   void calculate();
@@ -48,14 +53,16 @@ public:
   void setVegetationHeight(double height, LengthUnits::LengthUnitsEnum lengthUnits);
 
 protected:
-  BurningCondition::BurningConditionEnum _burningCondition;
-  SlopeClass::SlopeClassEnum _slopeClass;
-  SpeedClass::SpeedClassEnum _speedClass;
-  double _vegetationHeight;
-  double _safeSeparationDistance;
-  double _safetyZoneSite;
+  void memberwiseCopyAssignment(const SafeSeparationDistanceCalculator& rhs);
 
-  std::unordered_map<std::tuple<SpeedClass::SpeedClassEnum, BurningCondition::BurningConditionEnum, SlopeClass::SlopeClassEnum>, double> _deltaLookup = {
+  BurningCondition::BurningConditionEnum burningCondition_;
+  SlopeClass::SlopeClassEnum slopeClass_;
+  SpeedClass::SpeedClassEnum speedClass_;
+  double vegetationHeight_;
+  double safeSeparationDistance_;
+  double safetyZoneSite_;
+
+  static std::unordered_map<std::tuple<SpeedClass::SpeedClassEnum, BurningCondition::BurningConditionEnum, SlopeClass::SlopeClassEnum>, double> deltaLookup = {
       // Light Burning Conditions
       {{SpeedClass::Light, BurningCondition::Low, SlopeClass::Flat}, 1.0},
       {{SpeedClass::Light, BurningCondition::Low, SlopeClass::Moderate}, 1.0},
