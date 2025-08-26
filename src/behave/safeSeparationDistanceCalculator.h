@@ -52,7 +52,7 @@ public:
   SafetyCondition::SafetyConditionEnum getSafetyCondition();
   double getVegetationHeight(LengthUnits::LengthUnitsEnum lengthUnits);
   double getSafeSeparationDistance(LengthUnits::LengthUnitsEnum lengthUnits);
-  double getSafetyZoneSite(AreaUnits::AreaUnitsEnum areaUnits);
+  double getSafetyZoneSize(AreaUnits::AreaUnitsEnum areaUnits);
 
   // Setters
   void setBurningCondition(BurningCondition::BurningConditionEnum condition);
@@ -68,7 +68,7 @@ protected:
   SpeedClass::SpeedClassEnum speedClass_;
   double vegetationHeight_;
   double safeSeparationDistance_;
-  double safetyZoneSite_;
+  double safetyZoneSize_;
 
   static std::unordered_map<std::tuple<SpeedClass::SpeedClassEnum, BurningCondition::BurningConditionEnum, SlopeClass::SlopeClassEnum>, double> deltaLookup = {
       // Light Burning Conditions

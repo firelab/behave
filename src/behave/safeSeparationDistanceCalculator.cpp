@@ -7,7 +7,7 @@ SafeSeparationDistanceCalculator::~SafeSeparationDistanceCalculator()
   speedClass_ = SpeedClass::Light;
   vegetationHeight_ = 0.0;
   safeSeparationDistance_ = 0.0;
-  safetyZoneSite_ = 0.0;
+  safetyZoneSize_ = 0.0;
 }
 
 SafeSeparationDistanceCalculator::SafeSeparationDistanceCalculator(const SafeSeparationDistanceCalculator& rhs)
@@ -34,10 +34,10 @@ void SafeSeparationDistanceCalculator::calculate() {
 
     // Perform calculation using delta
     double safeSeparationDistance = 8.0 * vegetationHeight * delta;
-    double safetyZoneSite = M_PI * pow(safeSeparationDistance, 2.0);
+    double safetyZoneSize = M_PI * pow(safeSeparationDistance, 2.0);
 
     safeSeparationDistance_ = LengthUnits::toBaseUnits(safeSeparationDistance, LengthUnits::Feet);
-    safetyZoneSite_ = AreaUnits::toBaseUnits(safetyZoneSite, AreaUnits::Acres);
+    safetyZoneSize_ = AreaUnits::toBaseUnits(safetyZoneSize, AreaUnits::Acres);
 }
 
 // Getters
@@ -91,8 +91,8 @@ double SafeSeparationDistanceCalculator::getSafeSeparationDistance(LengthUnits::
   return LengthUnits::fromBaseUnits(safeSeparationDistance_, lengthUnits);
 }
 
-double SafeSeparationDistanceCalculator::getSafetyZoneSite(AreaUnits::AreaUnitsEnum areaUnits) {
-  return AreaUnits::fromBaseUnits(safetyZoneSite_, areaUnits);
+double SafeSeparationDistanceCalculator::getSafetyZoneSize(AreaUnits::AreaUnitsEnum areaUnits) {
+  return AreaUnits::fromBaseUnits(safetyZoneSize_, areaUnits);
 }
 
 // Setters
@@ -119,5 +119,5 @@ void SafeSeparationDistanceCalculator::memberwiseCopyAssignment(const SafeSepara
   speedClass_ = rhs.speedClass_;
   vegetationHeight_ = rhs.vegetationHeight_;
   safeSeparationDistance_ = rhs.safeSeparationDistance_;
-  safetyZoneSite_ = rhs.safetyZoneSite_;
+  safetyZoneSize_ = rhs.safetyZoneSize_;
 }
