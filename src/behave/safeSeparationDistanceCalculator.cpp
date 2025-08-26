@@ -53,6 +53,36 @@ SpeedClass::SpeedClassEnum SafeSeparationDistanceCalculator::getSpeedClass() {
   return speedClass_;
 }
 
+SafetyCondition::SafetyConditionEnum SafeSeparationDistanceCalculator::getSafetyCondition() {
+  if (slopeClass_ == SlopeClass:Flat) {
+    if (speedClass_ == SpeedClass::High) {
+      return SafetyCondition::Moderate;
+    } else {
+      return SafetyCondition::Low;
+    }
+  } else if (slopeClass_ == SlopeClass:Moderate) {
+    if (speedClass_ == SpeedClass::Light) {
+      return SafetyCondition::Low;
+    } else if (speedClass_ == SpeedClass::Moderate) {
+      return SafetyCondition::Moderate;
+    } else {
+      return SafetyCondition::Extreme;
+    }
+  } else /* Steep Slope */ {
+    if (speedClass_ == SpeedClass::Light) {
+      if (burningCondition_ == BurningCondition::Extreme) {
+        return SafetyCondition::Moderate;
+      } else {
+        return SafetyCondition::Low;
+      }
+    } else if (speedClass == SpeedClass::Moderate) {
+      return SafetyCondition::Moderate;
+    } else {
+      return SafetyCondition::Extreme;
+    }
+  }
+}
+
 double SafeSeparationDistanceCalculator::getVegetationHeight(LengthUnits::LengthUnitsEnum lengthUnits) {
   return LengthUnits::fromBaseUnits(vegetationHeight_, lengthUnits);
 }

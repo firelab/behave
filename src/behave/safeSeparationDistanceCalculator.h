@@ -27,13 +27,20 @@ struct SpeedClass {
   };
 };
 
+struct SafetyCondition {
+  enum SafetyConditionEnum {
+    Low,
+    Moderate,
+    Extreme
+  };
+};
+
 class SafeSeparationDistanceCalculator {
 public:
   SafeSeparationDistanceCalculator();
   ~SafeSeparationDistanceCalculator();
   SafeSeparationDistanceCalculator(const SafeSeparationDistanceCalculator& rhs);
   SafeSeparationDistanceCalculator& operator=(const SafeSeparationDistanceCalculator& rhs);
-
 
   // calculate
   void calculate();
@@ -42,6 +49,7 @@ public:
   BurningCondition::BurningConditionEnum getBurningCondition();
   SlopeClass::SlopeClassEnum getSlopeClass();
   SpeedClass::SpeedClassEnum getSpeedClass();
+  SafetyCondition::SafetyConditionEnum getSafetyCondition();
   double getVegetationHeight(LengthUnits::LengthUnitsEnum lengthUnits);
   double getSafeSeparationDistance(LengthUnits::LengthUnitsEnum lengthUnits);
   double getSafetyZoneSite(AreaUnits::AreaUnitsEnum areaUnits);
