@@ -80,6 +80,7 @@ SET(SOURCE
     src/behave/palmettoGallberry.cpp
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
+    src/behave/relativeHumidity.cpp
     src/behave/safety.cpp
     src/behave/slopeTool.cpp
     src/behave/species_master_table.cpp
@@ -121,6 +122,7 @@ SET(HEADERS
     src/behave/palmettoGallberry.h
     src/behave/randfuel.h
     src/behave/randthread.h
+    src/behave/relativeHumidity.h
     src/behave/safety.h
     src/behave/slopeTool.h
     src/behave/species_master_table.h
