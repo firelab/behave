@@ -198,4 +198,5 @@ ModelManifest.xml
 *.json
 
 # Test Results
-results.csvdocs/classRandFuel.html
+results.csv
+docs/classRandFuel.html
