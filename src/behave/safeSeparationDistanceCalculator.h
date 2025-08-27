@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include <unordered_map>
 #include <tuple>
 #include "behaveUnits.h"
