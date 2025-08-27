@@ -81,6 +81,7 @@ SET(SOURCE
     src/behave/randfuel.cpp
     src/behave/randthread.cpp
     src/behave/safety.cpp
+    src/behave/safeSeparationDistanceCalculator.cpp
     src/behave/slopeTool.cpp
     src/behave/species_master_table.cpp
     src/behave/spot.cpp
@@ -122,6 +123,7 @@ SET(HEADERS
     src/behave/randfuel.h
     src/behave/randthread.h
     src/behave/safety.h
+    src/behave/safeSeparationDistanceCalculator.h
     src/behave/slopeTool.h
     src/behave/species_master_table.h
     src/behave/spot.h
