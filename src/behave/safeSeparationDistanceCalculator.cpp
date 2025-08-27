@@ -86,7 +86,7 @@ void SafeSeparationDistanceCalculator::calculate() {
     double safetyZoneSize = M_PI * pow(safeSeparationDistance, 2.0);
 
     safeSeparationDistance_ = LengthUnits::toBaseUnits(safeSeparationDistance, LengthUnits::Feet);
-    safetyZoneSize_ = AreaUnits::toBaseUnits(safetyZoneSize, AreaUnits::Acres);
+    safetyZoneSize_ = AreaUnits::toBaseUnits(safetyZoneSize, AreaUnits::SquareFeet);
 }
 
 // Getters
