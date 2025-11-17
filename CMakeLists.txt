@@ -16,11 +16,12 @@ PROJECT(behave)
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave)      
 
 # optional test executable
-OPTION(TEST_BEHAVE "Enable Testing" ON)
-OPTION(TEST_MORTALITY "Enable Mortality Testing" ON)
+OPTION(TEST_BEHAVE "Enable Testing" OFF)
+OPTION(TEST_MORTALITY "Enable Mortality Testing" OFF)
 
 # optional stand-alone executables
-OPTION(EXAMPLE_APP "Example client application" ON)
+OPTION(EXAMPLE_APP "Example client application" OFF)
+OPTION(LIBRARY "DLL with wrapper for C#" ON)
 OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
 OPTION(COMPUTE_SPOT_PILE "Build pile spot fire distance calculator" OFF)
 OPTION(COMPUTE_SPOT_SURFACE "Build surface spot fire distance calculator" OFF)
@@ -199,4 +200,13 @@ IF(COMPUTE_SPOT_TORCHING_TREES)
         ${SOURCE}
         src/spotDistanceTorchingTrees/computeTorchingTreesSpottingDistance.cpp
         ${HEADERS})
+ENDIF()
+
+IF(LIBRARY)
+    ADD_LIBRARY(BehaveCore 
+        SHARED
+        ${SOURCE}
+        swig/behave_csharp_wrap.cxx
+        ${HEADERS})
+        TARGET_LINK_LIBRARIES(BehaveCore)
 ENDIF()

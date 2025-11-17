@@ -1,4 +1,6 @@
 #include "safeSeparationDistanceCalculator.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 const std::unordered_map<std::tuple<SpeedClass::SpeedClassEnum, BurningCondition::BurningConditionEnum, SlopeClass::SlopeClassEnum>, double, TupleHash> SafeSeparationDistanceCalculator::deltaLookup = {
   {{SpeedClass::Light, BurningCondition::Low, SlopeClass::Flat}, 1.0},
