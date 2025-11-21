@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class WindAdjustmentFactorCalculationMethod : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class WindAdjustmentFactorCalculationMethod : global::System.IDisposable 
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_WindAdjustmentFactorCalculationMethod(swigCPtr);
+          BehavePINVOKE.delete_WindAdjustmentFactorCalculationMethod(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public WindAdjustmentFactorCalculationMethod() : this(BehaveCorePINVOKE.new_WindAdjustmentFactorCalculationMethod(), true) {
+  public WindAdjustmentFactorCalculationMethod() : this(BehavePINVOKE.new_WindAdjustmentFactorCalculationMethod(), true) {
   }
 
   public enum WindAdjustmentFactorCalculationMethodEnum {

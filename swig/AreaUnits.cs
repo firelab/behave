@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class AreaUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class AreaUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_AreaUnits(swigCPtr);
+          BehavePINVOKE.delete_AreaUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class AreaUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, AreaUnits.AreaUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.AreaUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.AreaUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, AreaUnits.AreaUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.AreaUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.AreaUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public AreaUnits() : this(BehaveCorePINVOKE.new_AreaUnits(), true) {
+  public AreaUnits() : this(BehavePINVOKE.new_AreaUnits(), true) {
   }
 
   public enum AreaUnitsEnum {

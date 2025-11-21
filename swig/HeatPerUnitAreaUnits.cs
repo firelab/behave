@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class HeatPerUnitAreaUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class HeatPerUnitAreaUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_HeatPerUnitAreaUnits(swigCPtr);
+          BehavePINVOKE.delete_HeatPerUnitAreaUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class HeatPerUnitAreaUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, HeatPerUnitAreaUnits.HeatPerUnitAreaUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.HeatPerUnitAreaUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.HeatPerUnitAreaUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, HeatPerUnitAreaUnits.HeatPerUnitAreaUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.HeatPerUnitAreaUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.HeatPerUnitAreaUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public HeatPerUnitAreaUnits() : this(BehaveCorePINVOKE.new_HeatPerUnitAreaUnits(), true) {
+  public HeatPerUnitAreaUnits() : this(BehavePINVOKE.new_HeatPerUnitAreaUnits(), true) {
   }
 
   public enum HeatPerUnitAreaUnitsEnum {

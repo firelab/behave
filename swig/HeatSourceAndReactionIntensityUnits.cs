@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class HeatSourceAndReactionIntensityUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class HeatSourceAndReactionIntensityUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_HeatSourceAndReactionIntensityUnits(swigCPtr);
+          BehavePINVOKE.delete_HeatSourceAndReactionIntensityUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class HeatSourceAndReactionIntensityUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, HeatSourceAndReactionIntensityUnits.HeatSourceAndReactionIntensityUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.HeatSourceAndReactionIntensityUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.HeatSourceAndReactionIntensityUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, HeatSourceAndReactionIntensityUnits.HeatSourceAndReactionIntensityUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.HeatSourceAndReactionIntensityUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.HeatSourceAndReactionIntensityUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public HeatSourceAndReactionIntensityUnits() : this(BehaveCorePINVOKE.new_HeatSourceAndReactionIntensityUnits(), true) {
+  public HeatSourceAndReactionIntensityUnits() : this(BehavePINVOKE.new_HeatSourceAndReactionIntensityUnits(), true) {
   }
 
   public enum HeatSourceAndReactionIntensityUnitsEnum {

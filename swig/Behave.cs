@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCsharp {
+namespace BehavCore {
 
 public class Behave {
 }

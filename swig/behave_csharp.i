@@ -1,5 +1,5 @@
 /* File : behave_csharp.i */
-%module BehaveCore
+%module Behave
 %ignore *::operator=;
 
 %{

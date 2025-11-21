@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class AspenFireSeverity : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class AspenFireSeverity : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_AspenFireSeverity(swigCPtr);
+          BehavePINVOKE.delete_AspenFireSeverity(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public AspenFireSeverity() : this(BehaveCorePINVOKE.new_AspenFireSeverity(), true) {
+  public AspenFireSeverity() : this(BehavePINVOKE.new_AspenFireSeverity(), true) {
   }
 
   public enum AspenFireSeverityEnum {

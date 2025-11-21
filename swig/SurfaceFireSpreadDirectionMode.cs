@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class SurfaceFireSpreadDirectionMode : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class SurfaceFireSpreadDirectionMode : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_SurfaceFireSpreadDirectionMode(swigCPtr);
+          BehavePINVOKE.delete_SurfaceFireSpreadDirectionMode(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public SurfaceFireSpreadDirectionMode() : this(BehaveCorePINVOKE.new_SurfaceFireSpreadDirectionMode(), true) {
+  public SurfaceFireSpreadDirectionMode() : this(BehavePINVOKE.new_SurfaceFireSpreadDirectionMode(), true) {
   }
 
   public enum SurfaceFireSpreadDirectionModeEnum {

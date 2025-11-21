@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class LengthUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class LengthUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_LengthUnits(swigCPtr);
+          BehavePINVOKE.delete_LengthUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class LengthUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, LengthUnits.LengthUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.LengthUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.LengthUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, LengthUnits.LengthUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.LengthUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.LengthUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public LengthUnits() : this(BehaveCorePINVOKE.new_LengthUnits(), true) {
+  public LengthUnits() : this(BehavePINVOKE.new_LengthUnits(), true) {
   }
 
   public enum LengthUnitsEnum {

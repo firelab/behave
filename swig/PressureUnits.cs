@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class PressureUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class PressureUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_PressureUnits(swigCPtr);
+          BehavePINVOKE.delete_PressureUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class PressureUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, PressureUnits.PressureUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.PressureUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.PressureUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, PressureUnits.PressureUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.PressureUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.PressureUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public PressureUnits() : this(BehaveCorePINVOKE.new_PressureUnits(), true) {
+  public PressureUnits() : this(BehavePINVOKE.new_PressureUnits(), true) {
   }
 
   public enum PressureUnitsEnum {

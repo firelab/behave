@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class SurfaceAreaToVolumeUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class SurfaceAreaToVolumeUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_SurfaceAreaToVolumeUnits(swigCPtr);
+          BehavePINVOKE.delete_SurfaceAreaToVolumeUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class SurfaceAreaToVolumeUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.SurfaceAreaToVolumeUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.SurfaceAreaToVolumeUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.SurfaceAreaToVolumeUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.SurfaceAreaToVolumeUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public SurfaceAreaToVolumeUnits() : this(BehaveCorePINVOKE.new_SurfaceAreaToVolumeUnits(), true) {
+  public SurfaceAreaToVolumeUnits() : this(BehavePINVOKE.new_SurfaceAreaToVolumeUnits(), true) {
   }
 
   public enum SurfaceAreaToVolumeUnitsEnum {

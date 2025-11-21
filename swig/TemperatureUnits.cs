@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class TemperatureUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class TemperatureUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_TemperatureUnits(swigCPtr);
+          BehavePINVOKE.delete_TemperatureUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class TemperatureUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, TemperatureUnits.TemperatureUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.TemperatureUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.TemperatureUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, TemperatureUnits.TemperatureUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.TemperatureUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.TemperatureUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public TemperatureUnits() : this(BehaveCorePINVOKE.new_TemperatureUnits(), true) {
+  public TemperatureUnits() : this(BehavePINVOKE.new_TemperatureUnits(), true) {
   }
 
   public enum TemperatureUnitsEnum {

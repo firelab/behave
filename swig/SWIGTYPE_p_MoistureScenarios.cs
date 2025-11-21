@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class SWIGTYPE_p_MoistureScenarios {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;

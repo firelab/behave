@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class SpeedUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class SpeedUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_SpeedUnits(swigCPtr);
+          BehavePINVOKE.delete_SpeedUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class SpeedUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, SpeedUnits.SpeedUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.SpeedUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.SpeedUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, SpeedUnits.SpeedUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.SpeedUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.SpeedUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public SpeedUnits() : this(BehaveCorePINVOKE.new_SpeedUnits(), true) {
+  public SpeedUnits() : this(BehavePINVOKE.new_SpeedUnits(), true) {
   }
 
   public enum SpeedUnitsEnum {

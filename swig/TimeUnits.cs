@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class TimeUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class TimeUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_TimeUnits(swigCPtr);
+          BehavePINVOKE.delete_TimeUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class TimeUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, TimeUnits.TimeUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.TimeUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.TimeUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, TimeUnits.TimeUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.TimeUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.TimeUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public TimeUnits() : this(BehaveCorePINVOKE.new_TimeUnits(), true) {
+  public TimeUnits() : this(BehavePINVOKE.new_TimeUnits(), true) {
   }
 
   public enum TimeUnitsEnum {

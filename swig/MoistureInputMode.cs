@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class MoistureInputMode : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class MoistureInputMode : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_MoistureInputMode(swigCPtr);
+          BehavePINVOKE.delete_MoistureInputMode(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public MoistureInputMode() : this(BehaveCorePINVOKE.new_MoistureInputMode(), true) {
+  public MoistureInputMode() : this(BehavePINVOKE.new_MoistureInputMode(), true) {
   }
 
   public enum MoistureInputModeEnum {

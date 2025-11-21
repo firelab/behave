@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class DensityUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class DensityUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_DensityUnits(swigCPtr);
+          BehavePINVOKE.delete_DensityUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class DensityUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, DensityUnits.DensityUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.DensityUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.DensityUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, DensityUnits.DensityUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.DensityUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.DensityUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public DensityUnits() : this(BehaveCorePINVOKE.new_DensityUnits(), true) {
+  public DensityUnits() : this(BehavePINVOKE.new_DensityUnits(), true) {
   }
 
   public enum DensityUnitsEnum {

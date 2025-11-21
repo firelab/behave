@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class ChaparralFuelType : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class ChaparralFuelType : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_ChaparralFuelType(swigCPtr);
+          BehavePINVOKE.delete_ChaparralFuelType(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public ChaparralFuelType() : this(BehaveCorePINVOKE.new_ChaparralFuelType(), true) {
+  public ChaparralFuelType() : this(BehavePINVOKE.new_ChaparralFuelType(), true) {
   }
 
   public enum ChaparralFuelTypeEnum {

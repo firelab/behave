@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class FuelModels : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,118 +50,118 @@ public class FuelModels : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_FuelModels(swigCPtr);
+          BehavePINVOKE.delete_FuelModels(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public FuelModels() : this(BehaveCorePINVOKE.new_FuelModels__SWIG_0(), true) {
+  public FuelModels() : this(BehavePINVOKE.new_FuelModels__SWIG_0(), true) {
   }
 
-  public FuelModels(FuelModels rhs) : this(BehaveCorePINVOKE.new_FuelModels__SWIG_1(FuelModels.getCPtr(rhs)), true) {
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+  public FuelModels(FuelModels rhs) : this(BehavePINVOKE.new_FuelModels__SWIG_1(FuelModels.getCPtr(rhs)), true) {
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
   }
 
   public bool setCustomFuelModel(int fuelModelNumber, SWIGTYPE_p_std__string code, SWIGTYPE_p_std__string name, double fuelBedDepth, LengthUnits.LengthUnitsEnum lengthUnits, double moistureOfExtinctionDead, FractionUnits.FractionUnitsEnum moistureUnits, double heatOfCombustionDead, double heatOfCombustionLive, HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits, double fuelLoadOneHour, double fuelLoadTenHour, double fuelLoadHundredHour, double fuelLoadLiveHerbaceous, double fuelLoadLiveWoody, LoadingUnits.LoadingUnitsEnum loadingUnits, double savrOneHour, double savrLiveHerbaceous, double savrLiveWoody, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits, bool isDynamic) {
-    bool ret = BehaveCorePINVOKE.FuelModels_setCustomFuelModel(swigCPtr, fuelModelNumber, SWIGTYPE_p_std__string.getCPtr(code), SWIGTYPE_p_std__string.getCPtr(name), fuelBedDepth, (int)lengthUnits, moistureOfExtinctionDead, (int)moistureUnits, heatOfCombustionDead, heatOfCombustionLive, (int)heatOfCombustionUnits, fuelLoadOneHour, fuelLoadTenHour, fuelLoadHundredHour, fuelLoadLiveHerbaceous, fuelLoadLiveWoody, (int)loadingUnits, savrOneHour, savrLiveHerbaceous, savrLiveWoody, (int)savrUnits, isDynamic);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    bool ret = BehavePINVOKE.FuelModels_setCustomFuelModel(swigCPtr, fuelModelNumber, SWIGTYPE_p_std__string.getCPtr(code), SWIGTYPE_p_std__string.getCPtr(name), fuelBedDepth, (int)lengthUnits, moistureOfExtinctionDead, (int)moistureUnits, heatOfCombustionDead, heatOfCombustionLive, (int)heatOfCombustionUnits, fuelLoadOneHour, fuelLoadTenHour, fuelLoadHundredHour, fuelLoadLiveHerbaceous, fuelLoadLiveWoody, (int)loadingUnits, savrOneHour, savrLiveHerbaceous, savrLiveWoody, (int)savrUnits, isDynamic);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public bool clearCustomFuelModel(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.FuelModels_clearCustomFuelModel(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.FuelModels_clearCustomFuelModel(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public SWIGTYPE_p_std__string getFuelCode(int fuelModelNumber) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.FuelModels_getFuelCode(swigCPtr, fuelModelNumber), true);
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.FuelModels_getFuelCode(swigCPtr, fuelModelNumber), true);
     return ret;
   }
 
   public SWIGTYPE_p_std__string getFuelName(int fuelModelNumber) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.FuelModels_getFuelName(swigCPtr, fuelModelNumber), true);
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.FuelModels_getFuelName(swigCPtr, fuelModelNumber), true);
     return ret;
   }
 
   public double getFuelbedDepth(int fuelModelNumber, LengthUnits.LengthUnitsEnum lengthUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getFuelbedDepth(swigCPtr, fuelModelNumber, (int)lengthUnits);
+    double ret = BehavePINVOKE.FuelModels_getFuelbedDepth(swigCPtr, fuelModelNumber, (int)lengthUnits);
     return ret;
   }
 
   public double getMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getMoistureOfExtinctionDead(swigCPtr, fuelModelNumber, (int)moistureUnits);
+    double ret = BehavePINVOKE.FuelModels_getMoistureOfExtinctionDead(swigCPtr, fuelModelNumber, (int)moistureUnits);
     return ret;
   }
 
   public double getHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getHeatOfCombustionDead(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.FuelModels_getHeatOfCombustionDead(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getHeatOfCombustionLive(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.FuelModels_getHeatOfCombustionLive(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getFuelLoadOneHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.FuelModels_getFuelLoadOneHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadTenHour(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getFuelLoadTenHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.FuelModels_getFuelLoadTenHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getFuelLoadHundredHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.FuelModels_getFuelLoadHundredHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getFuelLoadLiveHerbaceous(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.FuelModels_getFuelLoadLiveHerbaceous(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getFuelLoadLiveWoody(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.FuelModels_getFuelLoadLiveWoody(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getSavrOneHour(swigCPtr, fuelModelNumber, (int)savrUnits);
+    double ret = BehavePINVOKE.FuelModels_getSavrOneHour(swigCPtr, fuelModelNumber, (int)savrUnits);
     return ret;
   }
 
   public double getSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getSavrLiveHerbaceous(swigCPtr, fuelModelNumber, (int)savrUnits);
+    double ret = BehavePINVOKE.FuelModels_getSavrLiveHerbaceous(swigCPtr, fuelModelNumber, (int)savrUnits);
     return ret;
   }
 
   public double getSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.FuelModels_getSavrLiveWoody(swigCPtr, fuelModelNumber, (int)savrUnits);
+    double ret = BehavePINVOKE.FuelModels_getSavrLiveWoody(swigCPtr, fuelModelNumber, (int)savrUnits);
     return ret;
   }
 
   public bool getIsDynamic(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.FuelModels_getIsDynamic(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.FuelModels_getIsDynamic(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public bool isFuelModelDefined(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.FuelModels_isFuelModelDefined(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.FuelModels_isFuelModelDefined(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public bool isFuelModelReserved(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.FuelModels_isFuelModelReserved(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.FuelModels_isFuelModelReserved(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public bool isAllFuelLoadZero(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.FuelModels_isAllFuelLoadZero(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.FuelModels_isAllFuelLoadZero(swigCPtr, fuelModelNumber);
     return ret;
   }
 

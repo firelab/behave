@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class LoadingUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class LoadingUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_LoadingUnits(swigCPtr);
+          BehavePINVOKE.delete_LoadingUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class LoadingUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, LoadingUnits.LoadingUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.LoadingUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.LoadingUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, LoadingUnits.LoadingUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.LoadingUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.LoadingUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public LoadingUnits() : this(BehaveCorePINVOKE.new_LoadingUnits(), true) {
+  public LoadingUnits() : this(BehavePINVOKE.new_LoadingUnits(), true) {
   }
 
   public enum LoadingUnitsEnum {

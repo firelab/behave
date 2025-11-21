@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class SlopeUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class SlopeUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_SlopeUnits(swigCPtr);
+          BehavePINVOKE.delete_SlopeUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class SlopeUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, SlopeUnits.SlopeUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.SlopeUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.SlopeUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, SlopeUnits.SlopeUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.SlopeUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.SlopeUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public SlopeUnits() : this(BehaveCorePINVOKE.new_SlopeUnits(), true) {
+  public SlopeUnits() : this(BehavePINVOKE.new_SlopeUnits(), true) {
   }
 
   public enum SlopeUnitsEnum {

@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class FractionUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class FractionUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_FractionUnits(swigCPtr);
+          BehavePINVOKE.delete_FractionUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class FractionUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, FractionUnits.FractionUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.FractionUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.FractionUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, FractionUnits.FractionUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.FractionUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.FractionUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public FractionUnits() : this(BehaveCorePINVOKE.new_FractionUnits(), true) {
+  public FractionUnits() : this(BehavePINVOKE.new_FractionUnits(), true) {
   }
 
   public enum FractionUnitsEnum {

@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class FirelineIntensityUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class FirelineIntensityUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_FirelineIntensityUnits(swigCPtr);
+          BehavePINVOKE.delete_FirelineIntensityUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class FirelineIntensityUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, FirelineIntensityUnits.FirelineIntensityUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.FirelineIntensityUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.FirelineIntensityUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, FirelineIntensityUnits.FirelineIntensityUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.FirelineIntensityUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.FirelineIntensityUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public FirelineIntensityUnits() : this(BehaveCorePINVOKE.new_FirelineIntensityUnits(), true) {
+  public FirelineIntensityUnits() : this(BehavePINVOKE.new_FirelineIntensityUnits(), true) {
   }
 
   public enum FirelineIntensityUnitsEnum {

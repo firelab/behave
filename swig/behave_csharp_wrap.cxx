@@ -249,7 +249,7 @@ static void SWIGUNUSED SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpExcepti
 #ifdef __cplusplus
 extern "C" 
 #endif
-SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionCallbacks_BehaveCore(
+SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionCallbacks_Behave(
                                                 SWIG_CSharpExceptionCallback_t applicationCallback,
                                                 SWIG_CSharpExceptionCallback_t arithmeticCallback,
                                                 SWIG_CSharpExceptionCallback_t divideByZeroCallback, 
@@ -277,7 +277,7 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionCallbacks_BehaveCore(
 #ifdef __cplusplus
 extern "C" 
 #endif
-SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionArgumentCallbacks_BehaveCore(
+SWIGEXPORT void SWIGSTDCALL SWIGRegisterExceptionArgumentCallbacks_Behave(
                                                 SWIG_CSharpExceptionArgumentCallback_t argumentCallback,
                                                 SWIG_CSharpExceptionArgumentCallback_t argumentNullCallback,
                                                 SWIG_CSharpExceptionArgumentCallback_t argumentOutOfRangeCallback) {
@@ -295,7 +295,7 @@ static SWIG_CSharpStringHelperCallback SWIG_csharp_string_callback = NULL;
 #ifdef __cplusplus
 extern "C" 
 #endif
-SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_BehaveCore(SWIG_CSharpStringHelperCallback callback) {
+SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_Behave(SWIG_CSharpStringHelperCallback callback) {
   SWIG_csharp_string_callback = callback;
 }
 
@@ -364,7 +364,7 @@ template <typename T> T SwigValueInit() {
 extern "C" {
 #endif
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Surface__SWIG_0(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_Surface__SWIG_0(void * jarg1) {
   void * jresult ;
   FuelModels *arg1 = 0 ;
   Surface *result = 0 ;
@@ -380,7 +380,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Surface__SWIG_0(void * jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Surface__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_Surface__SWIG_1(void * jarg1) {
   void * jresult ;
   Surface *arg1 = 0 ;
   Surface *result = 0 ;
@@ -396,7 +396,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Surface__SWIG_1(void * jarg1
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isAllFuelLoadZero__SWIG_0(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_isAllFuelLoadZero__SWIG_0(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -410,7 +410,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isAllFuelLoadZero_
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_doSurfaceRunInDirectionOfMaxSpread(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_doSurfaceRunInDirectionOfMaxSpread(void * jarg1) {
   Surface *arg1 = 0 ;
   
   arg1 = (Surface *)jarg1; 
@@ -418,7 +418,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_doSurfaceRunInDirectionOfM
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_doSurfaceRunInDirectionOfInterest(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_doSurfaceRunInDirectionOfInterest(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   SurfaceFireSpreadDirectionMode::SurfaceFireSpreadDirectionModeEnum arg3 ;
@@ -430,7 +430,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_doSurfaceRunInDirectionOfI
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_calculateFlameLength(void * jarg1, double jarg2, int jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_calculateFlameLength(void * jarg1, double jarg2, int jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   double arg2 ;
@@ -448,7 +448,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_calculateFlameLength(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setFuelModels(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setFuelModels(void * jarg1, void * jarg2) {
   Surface *arg1 = 0 ;
   FuelModels *arg2 = 0 ;
   
@@ -462,7 +462,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setFuelModels(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_initializeMembers(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_initializeMembers(void * jarg1) {
   Surface *arg1 = 0 ;
   
   arg1 = (Surface *)jarg1; 
@@ -470,7 +470,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_initializeMembers(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadRate(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSpreadRate(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -484,7 +484,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadRate(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadRateInDirectionOfInterest(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSpreadRateInDirectionOfInterest(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -498,7 +498,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadRateInDirection
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingSpreadRate(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getBackingSpreadRate(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -512,7 +512,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingSpreadRate(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingSpreadRate(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFlankingSpreadRate(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -526,7 +526,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingSpreadRate(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -544,7 +544,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadDistance(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadDistanceInDirectionOfInterest(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSpreadDistanceInDirectionOfInterest(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -562,7 +562,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSpreadDistanceInDirec
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getBackingSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -580,7 +580,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingSpreadDistance
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFlankingSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -598,7 +598,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingSpreadDistanc
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getDirectionOfMaxSpread(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getDirectionOfMaxSpread(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -610,7 +610,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getDirectionOfMaxSpread(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlameLength(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFlameLength(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -624,7 +624,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlameLength(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingFlameLength(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getBackingFlameLength(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -638,7 +638,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingFlameLength(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingFlameLength(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFlankingFlameLength(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -652,7 +652,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingFlameLength(v
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlameLengthInDirectionOfInterest(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFlameLengthInDirectionOfInterest(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -666,7 +666,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlameLengthInDirectio
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireLengthToWidthRatio(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFireLengthToWidthRatio(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -678,7 +678,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireLengthToWidthRati
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireEccentricity(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFireEccentricity(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -690,7 +690,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireEccentricity(void
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeadingToBackingRatio(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getHeadingToBackingRatio(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -702,7 +702,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeadingToBackingRatio
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFirelineIntensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFirelineIntensity(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -716,7 +716,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFirelineIntensity(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingFirelineIntensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getBackingFirelineIntensity(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -730,7 +730,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBackingFirelineIntens
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingFirelineIntensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFlankingFirelineIntensity(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -744,7 +744,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFlankingFirelineInten
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFirelineIntensityInDirectionOfInterest(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFirelineIntensityInDirectionOfInterest(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -758,7 +758,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFirelineIntensityInDi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeatPerUnitArea(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getHeatPerUnitArea(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum arg2 ;
@@ -772,7 +772,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeatPerUnitArea(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMidflameWindspeed(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMidflameWindspeed(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -786,7 +786,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMidflameWindspeed(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getResidenceTime(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getResidenceTime(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   TimeUnits::TimeUnitsEnum arg2 ;
@@ -800,7 +800,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getResidenceTime(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getReactionIntensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getReactionIntensity(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum arg2 ;
@@ -814,7 +814,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getReactionIntensity(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSurfaceFireReactionIntensityForLifeState(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSurfaceFireReactionIntensityForLifeState(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FuelLifeState::FuelLifeStateEnum arg2 ;
@@ -828,7 +828,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSurfaceFireReactionIn
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getEllipticalA(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getEllipticalA(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -846,7 +846,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getEllipticalA(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getEllipticalB(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getEllipticalB(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -864,7 +864,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getEllipticalB(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getEllipticalC(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getEllipticalC(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -882,7 +882,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getEllipticalC(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireLength(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFireLength(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -900,7 +900,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireLength(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMaxFireWidth(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMaxFireWidth(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -918,7 +918,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMaxFireWidth(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSlopeFactor(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSlopeFactor(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -930,7 +930,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSlopeFactor(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBulkDensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getBulkDensity(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   DensityUnits::DensityUnitsEnum arg2 ;
@@ -944,7 +944,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getBulkDensity(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeatSink(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getHeatSink(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   HeatSinkUnits::HeatSinkUnitsEnum arg2 ;
@@ -958,7 +958,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeatSink(void * jarg1
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeatSource(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getHeatSource(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum arg2 ;
@@ -972,7 +972,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeatSource(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFirePerimeter(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFirePerimeter(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -990,7 +990,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFirePerimeter(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireArea(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFireArea(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   AreaUnits::AreaUnitsEnum arg2 ;
@@ -1008,7 +1008,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFireArea(void * jarg1
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCharacteristicMoistureByLifeState(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getCharacteristicMoistureByLifeState(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   FuelLifeState::FuelLifeStateEnum arg2 ;
@@ -1024,7 +1024,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCharacteristicMoistur
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getLiveFuelMoistureOfExtinction(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getLiveFuelMoistureOfExtinction(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -1038,7 +1038,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getLiveFuelMoistureOfExt
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCharacteristicSAVR(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getCharacteristicSAVR(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -1052,7 +1052,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCharacteristicSAVR(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getRelativePackingRatio(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getRelativePackingRatio(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -1064,7 +1064,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getRelativePackingRatio(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPackingRatio(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPackingRatio(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -1076,7 +1076,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPackingRatio(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getTotalLiveFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getTotalLiveFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -1090,7 +1090,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getTotalLiveFuelLoad(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getTotalDeadFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getTotalDeadFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -1104,7 +1104,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getTotalDeadFuelLoad(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getTotalDeadHerbaceousFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getTotalDeadHerbaceousFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -1118,7 +1118,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getTotalDeadHerbaceousFu
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setCanopyHeight(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setCanopyHeight(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   LengthUnits::LengthUnitsEnum arg3 ;
@@ -1130,7 +1130,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setCanopyHeight(void * jar
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setCanopyCover(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setCanopyCover(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1142,7 +1142,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setCanopyCover(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setCrownRatio(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setCrownRatio(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1154,7 +1154,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setCrownRatio(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setElapsedTime(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setElapsedTime(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   TimeUnits::TimeUnitsEnum arg3 ;
@@ -1166,7 +1166,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setElapsedTime(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setFuelModelNumber(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setFuelModelNumber(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   int arg2 ;
   
@@ -1176,7 +1176,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setFuelModelNumber(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureOneHour(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureOneHour(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1188,7 +1188,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureOneHour(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureTenHour(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureTenHour(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1200,7 +1200,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureTenHour(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureHundredHour(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureHundredHour(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1212,7 +1212,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureHundredHour(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureDeadAggregate(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureDeadAggregate(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1224,7 +1224,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureDeadAggregate(v
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureLiveHerbaceous(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureLiveHerbaceous(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1236,7 +1236,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureLiveHerbaceous(
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureLiveWoody(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureLiveWoody(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1248,7 +1248,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureLiveWoody(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureLiveAggregate(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureLiveAggregate(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1260,7 +1260,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureLiveAggregate(v
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureScenarios(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureScenarios(void * jarg1, void * jarg2) {
   Surface *arg1 = 0 ;
   MoistureScenarios *arg2 = 0 ;
   
@@ -1274,7 +1274,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureScenarios(void 
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_setCurrentMoistureScenarioByName(void * jarg1, void * jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_setCurrentMoistureScenarioByName(void * jarg1, void * jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -1294,7 +1294,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_setCurrentMoisture
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_setCurrentMoistureScenarioByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_setCurrentMoistureScenarioByIndex(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1308,7 +1308,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_setCurrentMoisture
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureInputMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setMoistureInputMode(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   MoistureInputMode::MoistureInputModeEnum arg2 ;
   
@@ -1318,7 +1318,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setMoistureInputMode(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setSlope(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setSlope(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   SlopeUnits::SlopeUnitsEnum arg3 ;
@@ -1330,7 +1330,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setSlope(void * jarg1, dou
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspect(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setAspect(void * jarg1, double jarg2) {
   Surface *arg1 = 0 ;
   double arg2 ;
   
@@ -1340,7 +1340,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspect(void * jarg1, do
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindSpeed(void * jarg1, double jarg2, int jarg3, int jarg4) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setWindSpeed(void * jarg1, double jarg2, int jarg3, int jarg4) {
   Surface *arg1 = 0 ;
   double arg2 ;
   SpeedUnits::SpeedUnitsEnum arg3 ;
@@ -1354,7 +1354,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindSpeed(void * jarg1,
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setUserProvidedWindAdjustmentFactor(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setUserProvidedWindAdjustmentFactor(void * jarg1, double jarg2) {
   Surface *arg1 = 0 ;
   double arg2 ;
   
@@ -1364,7 +1364,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setUserProvidedWindAdjustm
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindDirection(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setWindDirection(void * jarg1, double jarg2) {
   Surface *arg1 = 0 ;
   double arg2 ;
   
@@ -1374,7 +1374,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindDirection(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindAndSpreadOrientationMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setWindAndSpreadOrientationMode(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum arg2 ;
   
@@ -1384,7 +1384,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindAndSpreadOrientatio
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindHeightInputMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setWindHeightInputMode(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   WindHeightInputMode::WindHeightInputModeEnum arg2 ;
   
@@ -1394,7 +1394,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindHeightInputMode(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setFirstFuelModelNumber(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setFirstFuelModelNumber(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   int arg2 ;
   
@@ -1404,7 +1404,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setFirstFuelModelNumber(vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setSecondFuelModelNumber(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setSecondFuelModelNumber(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   int arg2 ;
   
@@ -1414,7 +1414,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setSecondFuelModelNumber(v
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setTwoFuelModelsMethod(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setTwoFuelModelsMethod(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   TwoFuelModelsMethod::TwoFuelModelsMethodEnum arg2 ;
   
@@ -1424,7 +1424,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setTwoFuelModelsMethod(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setTwoFuelModelsFirstFuelModelCoverage(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setTwoFuelModelsFirstFuelModelCoverage(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1436,7 +1436,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setTwoFuelModelsFirstFuelM
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindAdjustmentFactorCalculationMethod(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setWindAdjustmentFactorCalculationMethod(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum arg2 ;
   
@@ -1446,7 +1446,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setWindAdjustmentFactorCal
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputs(void * jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, int jarg8, double jarg9, int jarg10, int jarg11, double jarg12, int jarg13, double jarg14, int jarg15, double jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, int jarg22) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_updateSurfaceInputs(void * jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, int jarg8, double jarg9, int jarg10, int jarg11, double jarg12, int jarg13, double jarg14, int jarg15, double jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, int jarg22) {
   Surface *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
@@ -1496,7 +1496,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputs(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputsForTwoFuelModels(void * jarg1, int jarg2, int jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, int jarg9, double jarg10, int jarg11, int jarg12, double jarg13, int jarg14, double jarg15, int jarg16, int jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_updateSurfaceInputsForTwoFuelModels(void * jarg1, int jarg2, int jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, int jarg9, double jarg10, int jarg11, int jarg12, double jarg13, int jarg14, double jarg15, int jarg16, int jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26) {
   Surface *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
@@ -1554,7 +1554,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputsForTwoF
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputsForPalmettoGallbery(void * jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, int jarg7, double jarg8, int jarg9, int jarg10, double jarg11, int jarg12, double jarg13, double jarg14, double jarg15, double jarg16, int jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_updateSurfaceInputsForPalmettoGallbery(void * jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, int jarg7, double jarg8, int jarg9, int jarg10, double jarg11, int jarg12, double jarg13, double jarg14, double jarg15, double jarg16, int jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26) {
   Surface *arg1 = 0 ;
   double arg2 ;
   double arg3 ;
@@ -1612,7 +1612,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputsForPalm
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAgeOfRough(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setAgeOfRough(void * jarg1, double jarg2) {
   Surface *arg1 = 0 ;
   double arg2 ;
   
@@ -1622,7 +1622,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAgeOfRough(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setHeightOfUnderstory(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setHeightOfUnderstory(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   LengthUnits::LengthUnitsEnum arg3 ;
@@ -1634,7 +1634,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setHeightOfUnderstory(void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setPalmettoCoverage(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setPalmettoCoverage(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1646,7 +1646,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setPalmettoCoverage(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setOverstoryBasalArea(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setOverstoryBasalArea(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   BasalAreaUnits::BasalAreaUnitsEnum arg3 ;
@@ -1658,7 +1658,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setOverstoryBasalArea(void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setIsUsingPalmettoGallberry(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setIsUsingPalmettoGallberry(void * jarg1, unsigned int jarg2) {
   Surface *arg1 = 0 ;
   bool arg2 ;
   
@@ -1668,7 +1668,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setIsUsingPalmettoGallberr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputsForWesternAspen(void * jarg1, int jarg2, double jarg3, int jarg4, int jarg5, double jarg6, int jarg7, double jarg8, double jarg9, double jarg10, double jarg11, double jarg12, int jarg13, double jarg14, int jarg15, int jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, double jarg22, int jarg23, double jarg24, int jarg25, double jarg26, int jarg27) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_updateSurfaceInputsForWesternAspen(void * jarg1, int jarg2, double jarg3, int jarg4, int jarg5, double jarg6, int jarg7, double jarg8, double jarg9, double jarg10, double jarg11, double jarg12, int jarg13, double jarg14, int jarg15, int jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, double jarg22, int jarg23, double jarg24, int jarg25, double jarg26, int jarg27) {
   Surface *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
@@ -1728,7 +1728,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_updateSurfaceInputsForWest
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenFuelModelNumber(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setAspenFuelModelNumber(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   int arg2 ;
   
@@ -1738,7 +1738,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenFuelModelNumber(vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenCuringLevel(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setAspenCuringLevel(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -1750,7 +1750,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenCuringLevel(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenDBH(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setAspenDBH(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   LengthUnits::LengthUnitsEnum arg3 ;
@@ -1762,7 +1762,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenDBH(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenFireSeverity(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setAspenFireSeverity(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   AspenFireSeverity::AspenFireSeverityEnum arg2 ;
   
@@ -1772,7 +1772,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setAspenFireSeverity(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setIsUsingWesternAspen(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setIsUsingWesternAspen(void * jarg1, unsigned int jarg2) {
   Surface *arg1 = 0 ;
   bool arg2 ;
   
@@ -1782,7 +1782,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setIsUsingWesternAspen(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelLoadInputMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setChaparralFuelLoadInputMode(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   ChaparralFuelLoadInputMode::ChaparralFuelInputLoadModeEnum arg2 ;
   
@@ -1792,7 +1792,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelLoadInputM
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelType(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setChaparralFuelType(void * jarg1, int jarg2) {
   Surface *arg1 = 0 ;
   ChaparralFuelType::ChaparralFuelTypeEnum arg2 ;
   
@@ -1802,7 +1802,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelType(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelBedDepth(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setChaparralFuelBedDepth(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   LengthUnits::LengthUnitsEnum arg3 ;
@@ -1814,7 +1814,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelBedDepth(v
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelDeadLoadFraction(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setChaparralFuelDeadLoadFraction(void * jarg1, double jarg2) {
   Surface *arg1 = 0 ;
   double arg2 ;
   
@@ -1824,7 +1824,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralFuelDeadLoadFr
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralTotalFuelLoad(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setChaparralTotalFuelLoad(void * jarg1, double jarg2, int jarg3) {
   Surface *arg1 = 0 ;
   double arg2 ;
   LoadingUnits::LoadingUnitsEnum arg3 ;
@@ -1836,7 +1836,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setChaparralTotalFuelLoad(
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setIsUsingChaparral(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Surface_setIsUsingChaparral(void * jarg1, unsigned int jarg2) {
   Surface *arg1 = 0 ;
   bool arg2 ;
   
@@ -1846,7 +1846,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Surface_setIsUsingChaparral(void *
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelCode(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Surface_getFuelCode(void * jarg1, int jarg2) {
   void * jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1860,7 +1860,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelCode(void * jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelName(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Surface_getFuelName(void * jarg1, int jarg2) {
   void * jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1874,7 +1874,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelName(void * jarg1
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelbedDepth(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelbedDepth(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1890,7 +1890,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelbedDepth(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelMoistureOfExtinctionDead(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelMoistureOfExtinctionDead(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1906,7 +1906,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelMoistureOfExtinct
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelHeatOfCombustionDead(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelHeatOfCombustionDead(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1922,7 +1922,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelHeatOfCombustionD
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelHeatOfCombustionLive(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelHeatOfCombustionLive(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1938,7 +1938,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelHeatOfCombustionL
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadOneHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelLoadOneHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1954,7 +1954,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadOneHour(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadTenHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelLoadTenHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1970,7 +1970,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadTenHour(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadHundredHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelLoadHundredHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -1986,7 +1986,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadHundredHour(v
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelLoadLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2002,7 +2002,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadLiveHerbaceou
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadLiveWoody(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelLoadLiveWoody(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2018,7 +2018,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelLoadLiveWoody(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelSavrOneHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelSavrOneHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2034,7 +2034,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelSavrOneHour(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelSavrLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelSavrLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2050,7 +2050,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelSavrLiveHerbaceou
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelSavrLiveWoody(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getFuelSavrLiveWoody(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2066,7 +2066,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelSavrLiveWoody(voi
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isFuelDynamic(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_isFuelDynamic(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2080,7 +2080,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isFuelDynamic(void
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isFuelModelDefined(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_isFuelModelDefined(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2094,7 +2094,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isFuelModelDefined
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isFuelModelReserved(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_isFuelModelReserved(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2108,7 +2108,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isFuelModelReserve
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isUsingTwoFuelModels(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_isUsingTwoFuelModels(void * jarg1) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   bool result;
@@ -2120,7 +2120,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isUsingTwoFuelMode
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getElapsedTime(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getElapsedTime(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   TimeUnits::TimeUnitsEnum arg2 ;
@@ -2134,7 +2134,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getElapsedTime(void * ja
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelModelNumber(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getFuelModelNumber(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   int result;
@@ -2146,7 +2146,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getFuelModelNumber(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureOneHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureOneHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2160,7 +2160,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureOneHour(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureTenHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureTenHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2174,7 +2174,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureTenHour(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureHundredHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureHundredHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2188,7 +2188,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureHundredHour(v
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureDeadAggregateValue(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureDeadAggregateValue(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2202,7 +2202,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureDeadAggregate
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureLiveHerbaceous(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureLiveHerbaceous(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2216,7 +2216,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureLiveHerbaceou
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureLiveWoody(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureLiveWoody(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2230,7 +2230,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureLiveWoody(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureLiveAggregateValue(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureLiveAggregateValue(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2244,7 +2244,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureLiveAggregate
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isMoistureClassInputNeededForCurrentFuelModel(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_isMoistureClassInputNeededForCurrentFuelModel(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   MoistureClassInput::MoistureClassInputEnum arg2 ;
@@ -2258,7 +2258,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_isMoistureClassInp
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureInputMode(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureInputMode(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   MoistureInputMode::MoistureInputModeEnum result;
@@ -2270,7 +2270,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureInputMode(void *
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getNumberOfMoistureScenarios(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getNumberOfMoistureScenarios(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   int result;
@@ -2282,7 +2282,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getNumberOfMoistureScenario
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioIndexByName(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioIndexByName(void * jarg1, void * jarg2) {
   int jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2302,7 +2302,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioIndexByN
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsMoistureScenarioDefinedByName(void * jarg1, void * jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_getIsMoistureScenarioDefinedByName(void * jarg1, void * jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2322,7 +2322,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsMoistureScena
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioDescriptionByName(void * jarg1, void * jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioDescriptionByName(void * jarg1, void * jarg2) {
   void * jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2342,7 +2342,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioDescr
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioOneHourByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioOneHourByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2364,7 +2364,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioOneHo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioTenHourByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioTenHourByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2386,7 +2386,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioTenHo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioHundredHourByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioHundredHourByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2408,7 +2408,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioHundr
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveHerbaceousByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioLiveHerbaceousByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2430,7 +2430,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveH
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveWoodyByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioLiveWoodyByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   std::string arg2 ;
@@ -2452,7 +2452,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveW
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsMoistureScenarioDefinedByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_getIsMoistureScenarioDefinedByIndex(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2466,7 +2466,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsMoistureScena
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioNameByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioNameByIndex(void * jarg1, int jarg2) {
   void * jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2480,7 +2480,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioNameB
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioDescriptionByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioDescriptionByIndex(void * jarg1, int jarg2) {
   void * jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2494,7 +2494,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioDescr
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioOneHourByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioOneHourByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2510,7 +2510,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioOneHo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioTenHourByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioTenHourByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2526,7 +2526,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioTenHo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioHundredHourByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioHundredHourByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2542,7 +2542,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioHundr
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveHerbaceousByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioLiveHerbaceousByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2558,7 +2558,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveH
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveWoodyByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getMoistureScenarioLiveWoodyByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   int arg2 ;
@@ -2574,7 +2574,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getMoistureScenarioLiveW
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getWindSpeed(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getWindSpeed(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Surface *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -2590,7 +2590,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getWindSpeed(void * jarg
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getWindDirection(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getWindDirection(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -2602,7 +2602,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getWindDirection(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSlope(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getSlope(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SlopeUnits::SlopeUnitsEnum arg2 ;
@@ -2616,7 +2616,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getSlope(void * jarg1, i
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspect(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspect(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -2628,7 +2628,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspect(void * jarg1) 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCanopyCover(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getCanopyCover(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2642,7 +2642,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCanopyCover(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCanopyHeight(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getCanopyHeight(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -2656,7 +2656,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCanopyHeight(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCrownRatio(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getCrownRatio(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2670,7 +2670,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getCrownRatio(void * jar
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getWindAndSpreadOrientationMode(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getWindAndSpreadOrientationMode(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum result;
@@ -2682,7 +2682,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getWindAndSpreadOrientation
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getWindHeightInputMode(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getWindHeightInputMode(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   WindHeightInputMode::WindHeightInputModeEnum result;
@@ -2694,7 +2694,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getWindHeightInputMode(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getWindAdjustmentFactorCalculationMethod(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getWindAdjustmentFactorCalculationMethod(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum result;
@@ -2706,7 +2706,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getWindAdjustmentFactorCalc
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsUsingPalmettoGallberry(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_getIsUsingPalmettoGallberry(void * jarg1) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   bool result;
@@ -2718,7 +2718,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsUsingPalmetto
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAgeOfRough(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAgeOfRough(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -2730,7 +2730,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAgeOfRough(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeightOfUnderstory(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getHeightOfUnderstory(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -2744,7 +2744,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getHeightOfUnderstory(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryCoverage(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberryCoverage(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2758,7 +2758,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryCove
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getOverstoryBasalArea(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getOverstoryBasalArea(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   BasalAreaUnits::BasalAreaUnitsEnum arg2 ;
@@ -2772,7 +2772,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getOverstoryBasalArea(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryMoistureOfExtinctionDead(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberryMoistureOfExtinctionDead(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2786,7 +2786,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryMois
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryHeatOfCombustionDead(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberryHeatOfCombustionDead(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   HeatOfCombustionUnits::HeatOfCombustionUnitsEnum arg2 ;
@@ -2800,7 +2800,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryHeat
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryHeatOfCombustionLive(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberryHeatOfCombustionLive(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   HeatOfCombustionUnits::HeatOfCombustionUnitsEnum arg2 ;
@@ -2814,7 +2814,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberryHeat
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyDeadFineFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyDeadFineFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2828,7 +2828,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyDeadF
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyDeadMediumFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyDeadMediumFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2842,7 +2842,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyDeadM
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyDeadFoliageLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyDeadFoliageLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2856,7 +2856,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyDeadF
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLitterLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyLitterLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2870,7 +2870,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLitte
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLiveFineFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyLiveFineFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2884,7 +2884,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLiveF
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLiveMediumFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyLiveMediumFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2898,7 +2898,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLiveM
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLiveFoliageLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyLiveFoliageLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -2912,7 +2912,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyLiveF
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyFuelBedDepth(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getPalmettoGallberyFuelBedDepth(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -2926,7 +2926,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getPalmettoGallberyFuelB
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsUsingWesternAspen(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_getIsUsingWesternAspen(void * jarg1) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   bool result;
@@ -2938,7 +2938,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsUsingWesternA
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenFuelModelNumber(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getAspenFuelModelNumber(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   int result;
@@ -2950,7 +2950,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenFuelModelNumber(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenCuringLevel(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenCuringLevel(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -2964,7 +2964,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenCuringLevel(void
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenDBH(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenDBH(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -2978,7 +2978,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenDBH(void * jarg1
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenFireSeverity(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getAspenFireSeverity(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   AspenFireSeverity::AspenFireSeverityEnum result;
@@ -2990,7 +2990,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenFireSeverity(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadDeadOneHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenLoadDeadOneHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3004,7 +3004,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadDeadOneHour(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadDeadTenHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenLoadDeadTenHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3018,7 +3018,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadDeadTenHour(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadLiveHerbaceous(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenLoadLiveHerbaceous(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3032,7 +3032,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadLiveHerbaceo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadLiveWoody(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenLoadLiveWoody(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3046,7 +3046,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenLoadLiveWoody(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrDeadOneHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenSavrDeadOneHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -3060,7 +3060,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrDeadOneHour(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrDeadTenHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenSavrDeadTenHour(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -3074,7 +3074,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrDeadTenHour(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrLiveHerbaceous(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenSavrLiveHerbaceous(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -3088,7 +3088,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrLiveHerbaceo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrLiveWoody(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenSavrLiveWoody(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -3102,7 +3102,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenSavrLiveWoody(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenMortality(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getAspenMortality(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -3116,7 +3116,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getAspenMortality(void *
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsUsingChaparral(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Surface_getIsUsingChaparral(void * jarg1) {
   unsigned int jresult ;
   Surface *arg1 = 0 ;
   bool result;
@@ -3128,7 +3128,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Surface_getIsUsingChaparra
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralFuelType(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralFuelType(void * jarg1) {
   int jresult ;
   Surface *arg1 = 0 ;
   ChaparralFuelType::ChaparralFuelTypeEnum result;
@@ -3140,7 +3140,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralFuelType(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralFuelBedDepth(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralFuelBedDepth(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3154,7 +3154,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralFuelBedDepth
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralFuelDeadLoadFraction(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralFuelDeadLoadFraction(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -3166,7 +3166,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralFuelDeadLoad
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralTotalFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralTotalFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3180,7 +3180,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralTotalFuelLoa
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralAge(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralAge(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   TimeUnits::TimeUnitsEnum arg2 ;
@@ -3194,7 +3194,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralAge(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDaysSinceMayFirst(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralDaysSinceMayFirst(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -3206,7 +3206,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDaysSinceMay
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDeadFuelFraction(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralDeadFuelFraction(void * jarg1) {
   double jresult ;
   Surface *arg1 = 0 ;
   double result;
@@ -3218,7 +3218,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDeadFuelFrac
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDeadMoistureOfExtinction(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralDeadMoistureOfExtinction(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -3232,7 +3232,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDeadMoisture
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLiveMoistureOfExtinction(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLiveMoistureOfExtinction(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -3246,7 +3246,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLiveMoisture
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDensity(void * jarg1, int jarg2, int jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralDensity(void * jarg1, int jarg2, int jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   FuelLifeState::FuelLifeStateEnum arg2 ;
@@ -3264,7 +3264,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralDensity(void
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralHeatOfCombustion(void * jarg1, int jarg2, int jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralHeatOfCombustion(void * jarg1, int jarg2, int jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   FuelLifeState::FuelLifeStateEnum arg2 ;
@@ -3282,7 +3282,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralHeatOfCombus
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadLessThanQuarterInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadDeadLessThanQuarterInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3296,7 +3296,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadLess
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3310,7 +3310,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadQuar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadHalfInchToLessThanOneInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadDeadHalfInchToLessThanOneInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3324,7 +3324,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadHalf
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadOneInchToThreeInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadDeadOneInchToThreeInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3338,7 +3338,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadDeadOneI
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveLeaves(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadLiveLeaves(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3352,7 +3352,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveLeav
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveStemsLessThanQuaterInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadLiveStemsLessThanQuaterInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3366,7 +3366,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveStem
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3380,7 +3380,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveQuar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveHalfInchToLessThanOneInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadLiveHalfInchToLessThanOneInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3394,7 +3394,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveHalf
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveOneInchToThreeInch(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralLoadLiveOneInchToThreeInch(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3408,7 +3408,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralLoadLiveOneI
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralMoisture(void * jarg1, int jarg2, int jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralMoisture(void * jarg1, int jarg2, int jarg3, int jarg4) {
   double jresult ;
   Surface *arg1 = 0 ;
   FuelLifeState::FuelLifeStateEnum arg2 ;
@@ -3426,7 +3426,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralMoisture(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralTotalDeadFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralTotalDeadFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3440,7 +3440,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralTotalDeadFue
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralTotalLiveFuelLoad(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Surface_getChaparralTotalLiveFuelLoad(void * jarg1, int jarg2) {
   double jresult ;
   Surface *arg1 = 0 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -3454,7 +3454,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Surface_getChaparralTotalLiveFue
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_Surface(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_Surface(void * jarg1) {
   Surface *arg1 = 0 ;
   
   arg1 = (Surface *)jarg1; 
@@ -3462,7 +3462,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_Surface(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FireType() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FireType() {
   void * jresult ;
   FireType *result = 0 ;
   
@@ -3472,7 +3472,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FireType() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FireType(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_FireType(void * jarg1) {
   FireType *arg1 = 0 ;
   
   arg1 = (FireType *)jarg1; 
@@ -3480,7 +3480,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FireType(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Crown__SWIG_0(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_Crown__SWIG_0(void * jarg1) {
   void * jresult ;
   FuelModels *arg1 = 0 ;
   Crown *result = 0 ;
@@ -3496,7 +3496,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Crown__SWIG_0(void * jarg1) 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_Crown(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_Crown(void * jarg1) {
   Crown *arg1 = 0 ;
   
   arg1 = (Crown *)jarg1; 
@@ -3504,7 +3504,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_Crown(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Crown__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_Crown__SWIG_1(void * jarg1) {
   void * jresult ;
   Crown *arg1 = 0 ;
   Crown *result = 0 ;
@@ -3520,7 +3520,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_Crown__SWIG_1(void * jarg1) 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_doCrownRunRothermel(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_doCrownRunRothermel(void * jarg1) {
   Crown *arg1 = 0 ;
   
   arg1 = (Crown *)jarg1; 
@@ -3528,7 +3528,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_doCrownRunRothermel(void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_doCrownRunScottAndReinhardt(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_doCrownRunScottAndReinhardt(void * jarg1) {
   Crown *arg1 = 0 ;
   
   arg1 = (Crown *)jarg1; 
@@ -3536,7 +3536,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_doCrownRunScottAndReinhardt(
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_initializeMembers(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_initializeMembers(void * jarg1) {
   Crown *arg1 = 0 ;
   
   arg1 = (Crown *)jarg1; 
@@ -3544,7 +3544,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_initializeMembers(void * jar
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setFuelModels(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setFuelModels(void * jarg1, void * jarg2) {
   Crown *arg1 = 0 ;
   FuelModels *arg2 = 0 ;
   
@@ -3558,7 +3558,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setFuelModels(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_updateCrownInputs(void * jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, int jarg9, double jarg10, int jarg11, int jarg12, double jarg13, int jarg14, double jarg15, int jarg16, double jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_updateCrownInputs(void * jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, int jarg9, double jarg10, int jarg11, int jarg12, double jarg13, int jarg14, double jarg15, int jarg16, double jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26) {
   Crown *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
@@ -3616,7 +3616,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_updateCrownInputs(void * jar
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyBaseHeight(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setCanopyBaseHeight(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   LengthUnits::LengthUnitsEnum arg3 ;
@@ -3628,7 +3628,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyBaseHeight(void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyBulkDensity(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setCanopyBulkDensity(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   DensityUnits::DensityUnitsEnum arg3 ;
@@ -3640,7 +3640,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyBulkDensity(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureFoliar(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureFoliar(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -3652,7 +3652,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureFoliar(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyBaseHeight(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCanopyBaseHeight(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3666,7 +3666,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyBaseHeight(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyBulkDensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCanopyBulkDensity(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   DensityUnits::DensityUnitsEnum arg2 ;
@@ -3680,7 +3680,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyBulkDensity(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureFoliar(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureFoliar(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -3694,7 +3694,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureFoliar(void * j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireSpreadRate(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFireSpreadRate(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -3708,7 +3708,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireSpreadRate(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFireSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3726,7 +3726,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireSpreadDistance
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getSurfaceFireSpreadRate(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getSurfaceFireSpreadRate(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -3740,7 +3740,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getSurfaceFireSpreadRate(v
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getSurfaceFireSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getSurfaceFireSpreadDistance(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3758,7 +3758,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getSurfaceFireSpreadDistan
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFirelineIntensity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFirelineIntensity(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -3772,7 +3772,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFirelineIntensity(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFlameLength(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFlameLength(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3786,7 +3786,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFlameLength(void *
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getFireType(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Crown_getFireType(void * jarg1) {
   int jresult ;
   Crown *arg1 = 0 ;
   FireType::FireTypeEnum result;
@@ -3798,7 +3798,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getFireType(void * jarg1) {
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalSpreadRate(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFinalSpreadRate(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -3812,7 +3812,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalSpreadRate(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalHeatPerUnitArea(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFinalHeatPerUnitArea(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum arg2 ;
@@ -3826,7 +3826,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalHeatPerUnitArea(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalFirelineIntesity(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFinalFirelineIntesity(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -3840,7 +3840,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalFirelineIntesity(v
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalFlameLength(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFinalFlameLength(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3854,7 +3854,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFinalFlameLength(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireLengthToWidthRatio(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFireLengthToWidthRatio(void * jarg1) {
   double jresult ;
   Crown *arg1 = 0 ;
   double result;
@@ -3866,7 +3866,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireLengthToWidthR
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireArea(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFireArea(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Crown *arg1 = 0 ;
   AreaUnits::AreaUnitsEnum arg2 ;
@@ -3884,7 +3884,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFireArea(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFirePerimeter(void * jarg1, int jarg2, double jarg3, int jarg4) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFirePerimeter(void * jarg1, int jarg2, double jarg3, int jarg4) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -3902,7 +3902,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFirePerimeter(void
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCriticalOpenWindSpeed(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCriticalOpenWindSpeed(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -3916,7 +3916,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCriticalOpenWindSpeed(v
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFractionBurned(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownFractionBurned(void * jarg1) {
   double jresult ;
   Crown *arg1 = 0 ;
   double result;
@@ -3928,7 +3928,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownFractionBurned(voi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelCode(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Crown_getFuelCode(void * jarg1, int jarg2) {
   void * jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -3942,7 +3942,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelCode(void * jarg1, 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelName(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Crown_getFuelName(void * jarg1, int jarg2) {
   void * jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -3956,7 +3956,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelName(void * jarg1, 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelbedDepth(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelbedDepth(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -3972,7 +3972,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelbedDepth(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelMoistureOfExtinctionDead(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelMoistureOfExtinctionDead(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -3988,7 +3988,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelMoistureOfExtinctio
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelHeatOfCombustionDead(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelHeatOfCombustionDead(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4004,7 +4004,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelHeatOfCombustionDea
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelHeatOfCombustionLive(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelHeatOfCombustionLive(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4020,7 +4020,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelHeatOfCombustionLiv
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadOneHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelLoadOneHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4036,7 +4036,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadOneHour(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadTenHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelLoadTenHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4052,7 +4052,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadTenHour(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadHundredHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelLoadHundredHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4068,7 +4068,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadHundredHour(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelLoadLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4084,7 +4084,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadLiveHerbaceous(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadLiveWoody(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelLoadLiveWoody(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4100,7 +4100,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelLoadLiveWoody(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelSavrOneHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelSavrOneHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4116,7 +4116,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelSavrOneHour(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelSavrLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelSavrLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4132,7 +4132,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelSavrLiveHerbaceous(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelSavrLiveWoody(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getFuelSavrLiveWoody(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4148,7 +4148,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelSavrLiveWoody(void 
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isFuelDynamic(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_isFuelDynamic(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4162,7 +4162,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isFuelDynamic(void *
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isFuelModelDefined(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_isFuelModelDefined(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4176,7 +4176,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isFuelModelDefined(v
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isFuelModelReserved(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_isFuelModelReserved(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4190,7 +4190,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isFuelModelReserved(
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isAllFuelLoadZero(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_isAllFuelLoadZero(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4204,7 +4204,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_isAllFuelLoadZero(vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_updateCrownsSurfaceInputs(void * jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, int jarg8, double jarg9, int jarg10, int jarg11, double jarg12, int jarg13, double jarg14, int jarg15, double jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, int jarg22) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_updateCrownsSurfaceInputs(void * jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, int jarg8, double jarg9, int jarg10, int jarg11, double jarg12, int jarg13, double jarg14, int jarg15, double jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, int jarg22) {
   Crown *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
@@ -4254,7 +4254,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_updateCrownsSurfaceInputs(vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyCover(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setCanopyCover(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4266,7 +4266,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyCover(void * jarg1,
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyHeight(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setCanopyHeight(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   LengthUnits::LengthUnitsEnum arg3 ;
@@ -4278,7 +4278,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCanopyHeight(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCrownRatio(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setCrownRatio(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4290,7 +4290,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setCrownRatio(void * jarg1, 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setFuelModelNumber(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setFuelModelNumber(void * jarg1, int jarg2) {
   Crown *arg1 = 0 ;
   int arg2 ;
   
@@ -4300,7 +4300,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setFuelModelNumber(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureOneHour(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureOneHour(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4312,7 +4312,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureOneHour(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureTenHour(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureTenHour(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4324,7 +4324,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureTenHour(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureHundredHour(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureHundredHour(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4336,7 +4336,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureHundredHour(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureDeadAggregate(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureDeadAggregate(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4348,7 +4348,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureDeadAggregate(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureLiveHerbaceous(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureLiveHerbaceous(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4360,7 +4360,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureLiveHerbaceous(vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureLiveWoody(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureLiveWoody(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4372,7 +4372,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureLiveWoody(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureLiveAggregate(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureLiveAggregate(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   FractionUnits::FractionUnitsEnum arg3 ;
@@ -4384,7 +4384,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureLiveAggregate(voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureScenarios(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureScenarios(void * jarg1, void * jarg2) {
   Crown *arg1 = 0 ;
   MoistureScenarios *arg2 = 0 ;
   
@@ -4398,7 +4398,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureScenarios(void * 
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_setCurrentMoistureScenarioByName(void * jarg1, void * jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_setCurrentMoistureScenarioByName(void * jarg1, void * jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4418,7 +4418,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_setCurrentMoistureSc
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_setCurrentMoistureScenarioByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_setCurrentMoistureScenarioByIndex(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4432,7 +4432,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_setCurrentMoistureSc
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureInputMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setMoistureInputMode(void * jarg1, int jarg2) {
   Crown *arg1 = 0 ;
   MoistureInputMode::MoistureInputModeEnum arg2 ;
   
@@ -4442,7 +4442,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setMoistureInputMode(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setSlope(void * jarg1, double jarg2, int jarg3) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setSlope(void * jarg1, double jarg2, int jarg3) {
   Crown *arg1 = 0 ;
   double arg2 ;
   SlopeUnits::SlopeUnitsEnum arg3 ;
@@ -4454,7 +4454,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setSlope(void * jarg1, doubl
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setAspect(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setAspect(void * jarg1, double jarg2) {
   Crown *arg1 = 0 ;
   double arg2 ;
   
@@ -4464,7 +4464,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setAspect(void * jarg1, doub
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindSpeed(void * jarg1, double jarg2, int jarg3, int jarg4) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setWindSpeed(void * jarg1, double jarg2, int jarg3, int jarg4) {
   Crown *arg1 = 0 ;
   double arg2 ;
   SpeedUnits::SpeedUnitsEnum arg3 ;
@@ -4478,7 +4478,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindSpeed(void * jarg1, d
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindDirection(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setWindDirection(void * jarg1, double jarg2) {
   Crown *arg1 = 0 ;
   double arg2 ;
   
@@ -4488,7 +4488,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindDirection(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindHeightInputMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setWindHeightInputMode(void * jarg1, int jarg2) {
   Crown *arg1 = 0 ;
   WindHeightInputMode::WindHeightInputModeEnum arg2 ;
   
@@ -4498,7 +4498,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindHeightInputMode(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindAndSpreadOrientationMode(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setWindAndSpreadOrientationMode(void * jarg1, int jarg2) {
   Crown *arg1 = 0 ;
   WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum arg2 ;
   
@@ -4508,7 +4508,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindAndSpreadOrientationM
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setUserProvidedWindAdjustmentFactor(void * jarg1, double jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setUserProvidedWindAdjustmentFactor(void * jarg1, double jarg2) {
   Crown *arg1 = 0 ;
   double arg2 ;
   
@@ -4518,7 +4518,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setUserProvidedWindAdjustmen
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindAdjustmentFactorCalculationMethod(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_Crown_setWindAdjustmentFactorCalculationMethod(void * jarg1, int jarg2) {
   Crown *arg1 = 0 ;
   WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum arg2 ;
   
@@ -4528,7 +4528,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_Crown_setWindAdjustmentFactorCalcu
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelModelNumber(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Crown_getFuelModelNumber(void * jarg1) {
   int jresult ;
   Crown *arg1 = 0 ;
   int result;
@@ -4540,7 +4540,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getFuelModelNumber(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureOneHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureOneHour(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -4554,7 +4554,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureOneHour(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureTenHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureTenHour(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -4568,7 +4568,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureTenHour(void * 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureHundredHour(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureHundredHour(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -4582,7 +4582,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureHundredHour(voi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureLiveHerbaceous(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureLiveHerbaceous(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -4596,7 +4596,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureLiveHerbaceous(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureLiveWoody(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureLiveWoody(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -4610,7 +4610,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureLiveWoody(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getNumberOfMoistureScenarios(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Crown_getNumberOfMoistureScenarios(void * jarg1) {
   int jresult ;
   Crown *arg1 = 0 ;
   int result;
@@ -4622,7 +4622,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getNumberOfMoistureScenarios(
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioIndexByName(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioIndexByName(void * jarg1, void * jarg2) {
   int jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4642,7 +4642,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioIndexByNam
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_getIsMoistureScenarioDefinedByName(void * jarg1, void * jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_getIsMoistureScenarioDefinedByName(void * jarg1, void * jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4662,7 +4662,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_getIsMoistureScenari
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioDescriptionByName(void * jarg1, void * jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioDescriptionByName(void * jarg1, void * jarg2) {
   void * jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4682,7 +4682,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioDescrip
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioOneHourByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioOneHourByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4704,7 +4704,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioOneHour
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioTenHourByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioTenHourByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4726,7 +4726,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioTenHour
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioHundredHourByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioHundredHourByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4748,7 +4748,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioHundred
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveHerbaceousByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioLiveHerbaceousByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4770,7 +4770,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveHer
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveWoodyByName(void * jarg1, void * jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioLiveWoodyByName(void * jarg1, void * jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   std::string arg2 ;
@@ -4792,7 +4792,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveWoo
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_getIsMoistureScenarioDefinedByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_Crown_getIsMoistureScenarioDefinedByIndex(void * jarg1, int jarg2) {
   unsigned int jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4806,7 +4806,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_Crown_getIsMoistureScenari
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioNameByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioNameByIndex(void * jarg1, int jarg2) {
   void * jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4820,7 +4820,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioNameByI
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioDescriptionByIndex(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioDescriptionByIndex(void * jarg1, int jarg2) {
   void * jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4834,7 +4834,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioDescrip
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioOneHourByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioOneHourByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4850,7 +4850,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioOneHour
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioTenHourByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioTenHourByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4866,7 +4866,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioTenHour
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioHundredHourByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioHundredHourByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4882,7 +4882,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioHundred
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveHerbaceousByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioLiveHerbaceousByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4898,7 +4898,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveHer
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveWoodyByIndex(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getMoistureScenarioLiveWoodyByIndex(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   int arg2 ;
@@ -4914,7 +4914,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getMoistureScenarioLiveWoo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getWindSpeed(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getWindSpeed(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   Crown *arg1 = 0 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -4930,7 +4930,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getWindSpeed(void * jarg1,
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getWindDirection(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getWindDirection(void * jarg1) {
   double jresult ;
   Crown *arg1 = 0 ;
   double result;
@@ -4942,7 +4942,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getWindDirection(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getSlope(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getSlope(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   SlopeUnits::SlopeUnitsEnum arg2 ;
@@ -4956,7 +4956,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getSlope(void * jarg1, int
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getAspect(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getAspect(void * jarg1) {
   double jresult ;
   Crown *arg1 = 0 ;
   double result;
@@ -4968,7 +4968,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getAspect(void * jarg1) {
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyCover(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCanopyCover(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -4982,7 +4982,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyCover(void * jarg
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyHeight(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCanopyHeight(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -4996,7 +4996,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCanopyHeight(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownRatio(void * jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_Crown_getCrownRatio(void * jarg1, int jarg2) {
   double jresult ;
   Crown *arg1 = 0 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -5010,7 +5010,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_Crown_getCrownRatio(void * jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelModels__SWIG_0() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FuelModels__SWIG_0() {
   void * jresult ;
   FuelModels *result = 0 ;
   
@@ -5020,7 +5020,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelModels__SWIG_0() {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelModels__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FuelModels__SWIG_1(void * jarg1) {
   void * jresult ;
   FuelModels *arg1 = 0 ;
   FuelModels *result = 0 ;
@@ -5036,7 +5036,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelModels__SWIG_1(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FuelModels(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_FuelModels(void * jarg1) {
   FuelModels *arg1 = 0 ;
   
   arg1 = (FuelModels *)jarg1; 
@@ -5044,7 +5044,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FuelModels(void * jarg1) {
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_setCustomFuelModel(void * jarg1, int jarg2, void * jarg3, void * jarg4, double jarg5, int jarg6, double jarg7, int jarg8, double jarg9, double jarg10, int jarg11, double jarg12, double jarg13, double jarg14, double jarg15, double jarg16, int jarg17, double jarg18, double jarg19, double jarg20, int jarg21, unsigned int jarg22) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_FuelModels_setCustomFuelModel(void * jarg1, int jarg2, void * jarg3, void * jarg4, double jarg5, int jarg6, double jarg7, int jarg8, double jarg9, double jarg10, int jarg11, double jarg12, double jarg13, double jarg14, double jarg15, double jarg16, int jarg17, double jarg18, double jarg19, double jarg20, int jarg21, unsigned int jarg22) {
   unsigned int jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5110,7 +5110,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_setCustomFuelMo
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_clearCustomFuelModel(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_FuelModels_clearCustomFuelModel(void * jarg1, int jarg2) {
   unsigned int jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5124,7 +5124,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_clearCustomFuel
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelCode(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelCode(void * jarg1, int jarg2) {
   void * jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5138,7 +5138,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelCode(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelName(void * jarg1, int jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelName(void * jarg1, int jarg2) {
   void * jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5152,7 +5152,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelName(void * ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelbedDepth(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelbedDepth(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5168,7 +5168,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelbedDepth(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getMoistureOfExtinctionDead(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getMoistureOfExtinctionDead(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5184,7 +5184,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getMoistureOfExtincti
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getHeatOfCombustionDead(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getHeatOfCombustionDead(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5200,7 +5200,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getHeatOfCombustionDe
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getHeatOfCombustionLive(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getHeatOfCombustionLive(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5216,7 +5216,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getHeatOfCombustionLi
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadOneHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelLoadOneHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5232,7 +5232,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadOneHour(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadTenHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelLoadTenHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5248,7 +5248,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadTenHour(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadHundredHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelLoadHundredHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5264,7 +5264,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadHundredHou
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelLoadLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5280,7 +5280,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadLiveHerbac
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadLiveWoody(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getFuelLoadLiveWoody(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5296,7 +5296,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getFuelLoadLiveWoody(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getSavrOneHour(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getSavrOneHour(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5312,7 +5312,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getSavrOneHour(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getSavrLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getSavrLiveHerbaceous(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5328,7 +5328,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getSavrLiveHerbaceous
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getSavrLiveWoody(void * jarg1, int jarg2, int jarg3) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FuelModels_getSavrLiveWoody(void * jarg1, int jarg2, int jarg3) {
   double jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5344,7 +5344,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FuelModels_getSavrLiveWoody(void
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_getIsDynamic(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_FuelModels_getIsDynamic(void * jarg1, int jarg2) {
   unsigned int jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5358,7 +5358,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_getIsDynamic(vo
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_isFuelModelDefined(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_FuelModels_isFuelModelDefined(void * jarg1, int jarg2) {
   unsigned int jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5372,7 +5372,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_isFuelModelDefi
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_isFuelModelReserved(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_FuelModels_isFuelModelReserved(void * jarg1, int jarg2) {
   unsigned int jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5386,7 +5386,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_isFuelModelRese
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_isAllFuelLoadZero(void * jarg1, int jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehavCore_FuelModels_isAllFuelLoadZero(void * jarg1, int jarg2) {
   unsigned int jresult ;
   FuelModels *arg1 = 0 ;
   int arg2 ;
@@ -5400,7 +5400,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BehaveCore_FuelModels_isAllFuelLoadZe
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_MoistureClassInput() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_MoistureClassInput() {
   void * jresult ;
   MoistureClassInput *result = 0 ;
   
@@ -5410,7 +5410,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_MoistureClassInput() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_MoistureClassInput(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_MoistureClassInput(void * jarg1) {
   MoistureClassInput *arg1 = 0 ;
   
   arg1 = (MoistureClassInput *)jarg1; 
@@ -5418,7 +5418,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_MoistureClassInput(void * j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_AspenFireSeverity() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_AspenFireSeverity() {
   void * jresult ;
   AspenFireSeverity *result = 0 ;
   
@@ -5428,7 +5428,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_AspenFireSeverity() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_AspenFireSeverity(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_AspenFireSeverity(void * jarg1) {
   AspenFireSeverity *arg1 = 0 ;
   
   arg1 = (AspenFireSeverity *)jarg1; 
@@ -5436,7 +5436,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_AspenFireSeverity(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindAdjustmentFactorShelterMethod() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_WindAdjustmentFactorShelterMethod() {
   void * jresult ;
   WindAdjustmentFactorShelterMethod *result = 0 ;
   
@@ -5446,7 +5446,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindAdjustmentFactorShelterM
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindAdjustmentFactorShelterMethod(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_WindAdjustmentFactorShelterMethod(void * jarg1) {
   WindAdjustmentFactorShelterMethod *arg1 = 0 ;
   
   arg1 = (WindAdjustmentFactorShelterMethod *)jarg1; 
@@ -5454,7 +5454,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindAdjustmentFactorShelter
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindAdjustmentFactorCalculationMethod() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_WindAdjustmentFactorCalculationMethod() {
   void * jresult ;
   WindAdjustmentFactorCalculationMethod *result = 0 ;
   
@@ -5464,7 +5464,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindAdjustmentFactorCalculat
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindAdjustmentFactorCalculationMethod(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_WindAdjustmentFactorCalculationMethod(void * jarg1) {
   WindAdjustmentFactorCalculationMethod *arg1 = 0 ;
   
   arg1 = (WindAdjustmentFactorCalculationMethod *)jarg1; 
@@ -5472,7 +5472,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindAdjustmentFactorCalcula
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindHeightInputMode() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_WindHeightInputMode() {
   void * jresult ;
   WindHeightInputMode *result = 0 ;
   
@@ -5482,7 +5482,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindHeightInputMode() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindHeightInputMode(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_WindHeightInputMode(void * jarg1) {
   WindHeightInputMode *arg1 = 0 ;
   
   arg1 = (WindHeightInputMode *)jarg1; 
@@ -5490,7 +5490,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindHeightInputMode(void * 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindAndSpreadOrientationMode() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_WindAndSpreadOrientationMode() {
   void * jresult ;
   WindAndSpreadOrientationMode *result = 0 ;
   
@@ -5500,7 +5500,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_WindAndSpreadOrientationMode
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindAndSpreadOrientationMode(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_WindAndSpreadOrientationMode(void * jarg1) {
   WindAndSpreadOrientationMode *arg1 = 0 ;
   
   arg1 = (WindAndSpreadOrientationMode *)jarg1; 
@@ -5508,7 +5508,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_WindAndSpreadOrientationMod
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelLifeState() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FuelLifeState() {
   void * jresult ;
   FuelLifeState *result = 0 ;
   
@@ -5518,7 +5518,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelLifeState() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FuelLifeState(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_FuelLifeState(void * jarg1) {
   FuelLifeState *arg1 = 0 ;
   
   arg1 = (FuelLifeState *)jarg1; 
@@ -5526,7 +5526,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FuelLifeState(void * jarg1)
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelConstants() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FuelConstants() {
   void * jresult ;
   FuelConstants *result = 0 ;
   
@@ -5536,7 +5536,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FuelConstants() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FuelConstants(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_FuelConstants(void * jarg1) {
   FuelConstants *arg1 = 0 ;
   
   arg1 = (FuelConstants *)jarg1; 
@@ -5544,7 +5544,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FuelConstants(void * jarg1)
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SurfaceFireSpreadDirectionMode() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_SurfaceFireSpreadDirectionMode() {
   void * jresult ;
   SurfaceFireSpreadDirectionMode *result = 0 ;
   
@@ -5554,7 +5554,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SurfaceFireSpreadDirectionMo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SurfaceFireSpreadDirectionMode(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_SurfaceFireSpreadDirectionMode(void * jarg1) {
   SurfaceFireSpreadDirectionMode *arg1 = 0 ;
   
   arg1 = (SurfaceFireSpreadDirectionMode *)jarg1; 
@@ -5562,7 +5562,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SurfaceFireSpreadDirectionM
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TwoFuelModelsMethod() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_TwoFuelModelsMethod() {
   void * jresult ;
   TwoFuelModelsMethod *result = 0 ;
   
@@ -5572,7 +5572,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TwoFuelModelsMethod() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TwoFuelModelsMethod(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_TwoFuelModelsMethod(void * jarg1) {
   TwoFuelModelsMethod *arg1 = 0 ;
   
   arg1 = (TwoFuelModelsMethod *)jarg1; 
@@ -5580,7 +5580,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TwoFuelModelsMethod(void * 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TwoFuelModelsContants() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_TwoFuelModelsContants() {
   void * jresult ;
   TwoFuelModelsContants *result = 0 ;
   
@@ -5590,7 +5590,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TwoFuelModelsContants() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TwoFuelModelsContants(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_TwoFuelModelsContants(void * jarg1) {
   TwoFuelModelsContants *arg1 = 0 ;
   
   arg1 = (TwoFuelModelsContants *)jarg1; 
@@ -5598,7 +5598,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TwoFuelModelsContants(void 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_MoistureInputMode() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_MoistureInputMode() {
   void * jresult ;
   MoistureInputMode *result = 0 ;
   
@@ -5608,7 +5608,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_MoistureInputMode() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_MoistureInputMode(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_MoistureInputMode(void * jarg1) {
   MoistureInputMode *arg1 = 0 ;
   
   arg1 = (MoistureInputMode *)jarg1; 
@@ -5616,7 +5616,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_MoistureInputMode(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_ChaparralFuelType() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_ChaparralFuelType() {
   void * jresult ;
   ChaparralFuelType *result = 0 ;
   
@@ -5626,7 +5626,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_ChaparralFuelType() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_ChaparralFuelType(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_ChaparralFuelType(void * jarg1) {
   ChaparralFuelType *arg1 = 0 ;
   
   arg1 = (ChaparralFuelType *)jarg1; 
@@ -5634,7 +5634,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_ChaparralFuelType(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_ChaparralContants() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_ChaparralContants() {
   void * jresult ;
   ChaparralContants *result = 0 ;
   
@@ -5644,7 +5644,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_ChaparralContants() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_ChaparralContants(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_ChaparralContants(void * jarg1) {
   ChaparralContants *arg1 = 0 ;
   
   arg1 = (ChaparralContants *)jarg1; 
@@ -5652,7 +5652,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_ChaparralContants(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_ChaparralFuelLoadInputMode() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_ChaparralFuelLoadInputMode() {
   void * jresult ;
   ChaparralFuelLoadInputMode *result = 0 ;
   
@@ -5662,7 +5662,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_ChaparralFuelLoadInputMode()
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_ChaparralFuelLoadInputMode(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_ChaparralFuelLoadInputMode(void * jarg1) {
   ChaparralFuelLoadInputMode *arg1 = 0 ;
   
   arg1 = (ChaparralFuelLoadInputMode *)jarg1; 
@@ -5670,7 +5670,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_ChaparralFuelLoadInputMode(
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_AreaUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_AreaUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   AreaUnits::AreaUnitsEnum arg2 ;
@@ -5684,7 +5684,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_AreaUnits_toBaseUnits(double jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_AreaUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_AreaUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   AreaUnits::AreaUnitsEnum arg2 ;
@@ -5698,7 +5698,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_AreaUnits_fromBaseUnits(double j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_AreaUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_AreaUnits() {
   void * jresult ;
   AreaUnits *result = 0 ;
   
@@ -5708,7 +5708,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_AreaUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_AreaUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_AreaUnits(void * jarg1) {
   AreaUnits *arg1 = 0 ;
   
   arg1 = (AreaUnits *)jarg1; 
@@ -5716,7 +5716,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_AreaUnits(void * jarg1) {
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_BasalAreaUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_BasalAreaUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   BasalAreaUnits::BasalAreaUnitsEnum arg2 ;
@@ -5730,7 +5730,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_BasalAreaUnits_toBaseUnits(doubl
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_BasalAreaUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_BasalAreaUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   BasalAreaUnits::BasalAreaUnitsEnum arg2 ;
@@ -5744,7 +5744,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_BasalAreaUnits_fromBaseUnits(dou
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_BasalAreaUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_BasalAreaUnits() {
   void * jresult ;
   BasalAreaUnits *result = 0 ;
   
@@ -5754,7 +5754,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_BasalAreaUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_BasalAreaUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_BasalAreaUnits(void * jarg1) {
   BasalAreaUnits *arg1 = 0 ;
   
   arg1 = (BasalAreaUnits *)jarg1; 
@@ -5762,7 +5762,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_BasalAreaUnits(void * jarg1
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LengthUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_LengthUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -5776,7 +5776,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LengthUnits_toBaseUnits(double j
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LengthUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_LengthUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   LengthUnits::LengthUnitsEnum arg2 ;
@@ -5790,7 +5790,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LengthUnits_fromBaseUnits(double
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_LengthUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_LengthUnits() {
   void * jresult ;
   LengthUnits *result = 0 ;
   
@@ -5800,7 +5800,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_LengthUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_LengthUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_LengthUnits(void * jarg1) {
   LengthUnits *arg1 = 0 ;
   
   arg1 = (LengthUnits *)jarg1; 
@@ -5808,7 +5808,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_LengthUnits(void * jarg1) {
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LoadingUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_LoadingUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -5822,7 +5822,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LoadingUnits_toBaseUnits(double 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LoadingUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_LoadingUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   LoadingUnits::LoadingUnitsEnum arg2 ;
@@ -5836,7 +5836,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_LoadingUnits_fromBaseUnits(doubl
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_LoadingUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_LoadingUnits() {
   void * jresult ;
   LoadingUnits *result = 0 ;
   
@@ -5846,7 +5846,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_LoadingUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_LoadingUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_LoadingUnits(void * jarg1) {
   LoadingUnits *arg1 = 0 ;
   
   arg1 = (LoadingUnits *)jarg1; 
@@ -5854,7 +5854,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_LoadingUnits(void * jarg1) 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_PressureUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_PressureUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   PressureUnits::PressureUnitsEnum arg2 ;
@@ -5868,7 +5868,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_PressureUnits_toBaseUnits(double
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_PressureUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_PressureUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   PressureUnits::PressureUnitsEnum arg2 ;
@@ -5882,7 +5882,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_PressureUnits_fromBaseUnits(doub
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_PressureUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_PressureUnits() {
   void * jresult ;
   PressureUnits *result = 0 ;
   
@@ -5892,7 +5892,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_PressureUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_PressureUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_PressureUnits(void * jarg1) {
   PressureUnits *arg1 = 0 ;
   
   arg1 = (PressureUnits *)jarg1; 
@@ -5900,7 +5900,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_PressureUnits(void * jarg1)
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SurfaceAreaToVolumeUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_SurfaceAreaToVolumeUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -5914,7 +5914,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SurfaceAreaToVolumeUnits_toBaseU
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SurfaceAreaToVolumeUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_SurfaceAreaToVolumeUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   SurfaceAreaToVolumeUnits::SurfaceAreaToVolumeUnitsEnum arg2 ;
@@ -5928,7 +5928,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SurfaceAreaToVolumeUnits_fromBas
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SurfaceAreaToVolumeUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_SurfaceAreaToVolumeUnits() {
   void * jresult ;
   SurfaceAreaToVolumeUnits *result = 0 ;
   
@@ -5938,7 +5938,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SurfaceAreaToVolumeUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SurfaceAreaToVolumeUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_SurfaceAreaToVolumeUnits(void * jarg1) {
   SurfaceAreaToVolumeUnits *arg1 = 0 ;
   
   arg1 = (SurfaceAreaToVolumeUnits *)jarg1; 
@@ -5946,7 +5946,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SurfaceAreaToVolumeUnits(vo
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SpeedUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_SpeedUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -5960,7 +5960,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SpeedUnits_toBaseUnits(double ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SpeedUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_SpeedUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   SpeedUnits::SpeedUnitsEnum arg2 ;
@@ -5974,7 +5974,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SpeedUnits_fromBaseUnits(double 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SpeedUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_SpeedUnits() {
   void * jresult ;
   SpeedUnits *result = 0 ;
   
@@ -5984,7 +5984,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SpeedUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SpeedUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_SpeedUnits(void * jarg1) {
   SpeedUnits *arg1 = 0 ;
   
   arg1 = (SpeedUnits *)jarg1; 
@@ -5992,7 +5992,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SpeedUnits(void * jarg1) {
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FractionUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FractionUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -6006,7 +6006,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FractionUnits_toBaseUnits(double
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FractionUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FractionUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   FractionUnits::FractionUnitsEnum arg2 ;
@@ -6020,7 +6020,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FractionUnits_fromBaseUnits(doub
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FractionUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FractionUnits() {
   void * jresult ;
   FractionUnits *result = 0 ;
   
@@ -6030,7 +6030,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FractionUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FractionUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_FractionUnits(void * jarg1) {
   FractionUnits *arg1 = 0 ;
   
   arg1 = (FractionUnits *)jarg1; 
@@ -6038,7 +6038,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FractionUnits(void * jarg1)
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SlopeUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_SlopeUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   SlopeUnits::SlopeUnitsEnum arg2 ;
@@ -6052,7 +6052,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SlopeUnits_toBaseUnits(double ja
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SlopeUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_SlopeUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   SlopeUnits::SlopeUnitsEnum arg2 ;
@@ -6066,7 +6066,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_SlopeUnits_fromBaseUnits(double 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SlopeUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_SlopeUnits() {
   void * jresult ;
   SlopeUnits *result = 0 ;
   
@@ -6076,7 +6076,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_SlopeUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SlopeUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_SlopeUnits(void * jarg1) {
   SlopeUnits *arg1 = 0 ;
   
   arg1 = (SlopeUnits *)jarg1; 
@@ -6084,7 +6084,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_SlopeUnits(void * jarg1) {
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_DensityUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_DensityUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   DensityUnits::DensityUnitsEnum arg2 ;
@@ -6098,7 +6098,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_DensityUnits_toBaseUnits(double 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_DensityUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_DensityUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   DensityUnits::DensityUnitsEnum arg2 ;
@@ -6112,7 +6112,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_DensityUnits_fromBaseUnits(doubl
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_DensityUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_DensityUnits() {
   void * jresult ;
   DensityUnits *result = 0 ;
   
@@ -6122,7 +6122,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_DensityUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_DensityUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_DensityUnits(void * jarg1) {
   DensityUnits *arg1 = 0 ;
   
   arg1 = (DensityUnits *)jarg1; 
@@ -6130,7 +6130,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_DensityUnits(void * jarg1) 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatOfCombustionUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatOfCombustionUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatOfCombustionUnits::HeatOfCombustionUnitsEnum arg2 ;
@@ -6144,7 +6144,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatOfCombustionUnits_toBaseUnit
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatOfCombustionUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatOfCombustionUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatOfCombustionUnits::HeatOfCombustionUnitsEnum arg2 ;
@@ -6158,7 +6158,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatOfCombustionUnits_fromBaseUn
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatOfCombustionUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_HeatOfCombustionUnits() {
   void * jresult ;
   HeatOfCombustionUnits *result = 0 ;
   
@@ -6168,7 +6168,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatOfCombustionUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatOfCombustionUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_HeatOfCombustionUnits(void * jarg1) {
   HeatOfCombustionUnits *arg1 = 0 ;
   
   arg1 = (HeatOfCombustionUnits *)jarg1; 
@@ -6176,7 +6176,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatOfCombustionUnits(void 
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSinkUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatSinkUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatSinkUnits::HeatSinkUnitsEnum arg2 ;
@@ -6190,7 +6190,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSinkUnits_toBaseUnits(double
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSinkUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatSinkUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatSinkUnits::HeatSinkUnitsEnum arg2 ;
@@ -6204,7 +6204,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSinkUnits_fromBaseUnits(doub
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatSinkUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_HeatSinkUnits() {
   void * jresult ;
   HeatSinkUnits *result = 0 ;
   
@@ -6214,7 +6214,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatSinkUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatSinkUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_HeatSinkUnits(void * jarg1) {
   HeatSinkUnits *arg1 = 0 ;
   
   arg1 = (HeatSinkUnits *)jarg1; 
@@ -6222,7 +6222,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatSinkUnits(void * jarg1)
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatPerUnitAreaUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatPerUnitAreaUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum arg2 ;
@@ -6236,7 +6236,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatPerUnitAreaUnits_toBaseUnits
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatPerUnitAreaUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatPerUnitAreaUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatPerUnitAreaUnits::HeatPerUnitAreaUnitsEnum arg2 ;
@@ -6250,7 +6250,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatPerUnitAreaUnits_fromBaseUni
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatPerUnitAreaUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_HeatPerUnitAreaUnits() {
   void * jresult ;
   HeatPerUnitAreaUnits *result = 0 ;
   
@@ -6260,7 +6260,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatPerUnitAreaUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatPerUnitAreaUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_HeatPerUnitAreaUnits(void * jarg1) {
   HeatPerUnitAreaUnits *arg1 = 0 ;
   
   arg1 = (HeatPerUnitAreaUnits *)jarg1; 
@@ -6268,7 +6268,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatPerUnitAreaUnits(void *
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSourceAndReactionIntensityUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatSourceAndReactionIntensityUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum arg2 ;
@@ -6282,7 +6282,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSourceAndReactionIntensityUn
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSourceAndReactionIntensityUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_HeatSourceAndReactionIntensityUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   HeatSourceAndReactionIntensityUnits::HeatSourceAndReactionIntensityUnitsEnum arg2 ;
@@ -6296,7 +6296,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_HeatSourceAndReactionIntensityUn
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatSourceAndReactionIntensityUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_HeatSourceAndReactionIntensityUnits() {
   void * jresult ;
   HeatSourceAndReactionIntensityUnits *result = 0 ;
   
@@ -6306,7 +6306,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_HeatSourceAndReactionIntensi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatSourceAndReactionIntensityUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_HeatSourceAndReactionIntensityUnits(void * jarg1) {
   HeatSourceAndReactionIntensityUnits *arg1 = 0 ;
   
   arg1 = (HeatSourceAndReactionIntensityUnits *)jarg1; 
@@ -6314,7 +6314,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_HeatSourceAndReactionIntens
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FirelineIntensityUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FirelineIntensityUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -6328,7 +6328,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FirelineIntensityUnits_toBaseUni
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FirelineIntensityUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_FirelineIntensityUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   FirelineIntensityUnits::FirelineIntensityUnitsEnum arg2 ;
@@ -6342,7 +6342,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_FirelineIntensityUnits_fromBaseU
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FirelineIntensityUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_FirelineIntensityUnits() {
   void * jresult ;
   FirelineIntensityUnits *result = 0 ;
   
@@ -6352,7 +6352,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_FirelineIntensityUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FirelineIntensityUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_FirelineIntensityUnits(void * jarg1) {
   FirelineIntensityUnits *arg1 = 0 ;
   
   arg1 = (FirelineIntensityUnits *)jarg1; 
@@ -6360,7 +6360,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_FirelineIntensityUnits(void
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TemperatureUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_TemperatureUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   TemperatureUnits::TemperatureUnitsEnum arg2 ;
@@ -6374,7 +6374,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TemperatureUnits_toBaseUnits(dou
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TemperatureUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_TemperatureUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   TemperatureUnits::TemperatureUnitsEnum arg2 ;
@@ -6388,7 +6388,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TemperatureUnits_fromBaseUnits(d
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TemperatureUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_TemperatureUnits() {
   void * jresult ;
   TemperatureUnits *result = 0 ;
   
@@ -6398,7 +6398,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TemperatureUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TemperatureUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_TemperatureUnits(void * jarg1) {
   TemperatureUnits *arg1 = 0 ;
   
   arg1 = (TemperatureUnits *)jarg1; 
@@ -6406,7 +6406,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TemperatureUnits(void * jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TimeUnits_toBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_TimeUnits_toBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   TimeUnits::TimeUnitsEnum arg2 ;
@@ -6420,7 +6420,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TimeUnits_toBaseUnits(double jar
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TimeUnits_fromBaseUnits(double jarg1, int jarg2) {
+SWIGEXPORT double SWIGSTDCALL CSharp_BehavCore_TimeUnits_fromBaseUnits(double jarg1, int jarg2) {
   double jresult ;
   double arg1 ;
   TimeUnits::TimeUnitsEnum arg2 ;
@@ -6434,7 +6434,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_BehaveCore_TimeUnits_fromBaseUnits(double j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TimeUnits() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_BehavCore_new_TimeUnits() {
   void * jresult ;
   TimeUnits *result = 0 ;
   
@@ -6444,7 +6444,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_BehaveCore_new_TimeUnits() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_BehaveCore_delete_TimeUnits(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_BehavCore_delete_TimeUnits(void * jarg1) {
   TimeUnits *arg1 = 0 ;
   
   arg1 = (TimeUnits *)jarg1; 

@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCsharp {
+namespace BehavCore {
 
 class BehavePINVOKE {
 
@@ -225,1312 +225,1312 @@ class BehavePINVOKE {
   }
 
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_Surface__SWIG_0")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_Surface__SWIG_0")]
   public static extern global::System.IntPtr new_Surface__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_Surface__SWIG_1")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_Surface__SWIG_1")]
   public static extern global::System.IntPtr new_Surface__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_isAllFuelLoadZero__SWIG_0")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_isAllFuelLoadZero__SWIG_0")]
   public static extern bool Surface_isAllFuelLoadZero__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_doSurfaceRunInDirectionOfMaxSpread")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_doSurfaceRunInDirectionOfMaxSpread")]
   public static extern void Surface_doSurfaceRunInDirectionOfMaxSpread(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_doSurfaceRunInDirectionOfInterest")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_doSurfaceRunInDirectionOfInterest")]
   public static extern void Surface_doSurfaceRunInDirectionOfInterest(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_calculateFlameLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_calculateFlameLength")]
   public static extern double Surface_calculateFlameLength(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setFuelModels")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setFuelModels")]
   public static extern void Surface_setFuelModels(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_initializeMembers")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_initializeMembers")]
   public static extern void Surface_initializeMembers(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSpreadRate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSpreadRate")]
   public static extern double Surface_getSpreadRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSpreadRateInDirectionOfInterest")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSpreadRateInDirectionOfInterest")]
   public static extern double Surface_getSpreadRateInDirectionOfInterest(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getBackingSpreadRate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getBackingSpreadRate")]
   public static extern double Surface_getBackingSpreadRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFlankingSpreadRate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFlankingSpreadRate")]
   public static extern double Surface_getFlankingSpreadRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSpreadDistance")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSpreadDistance")]
   public static extern double Surface_getSpreadDistance(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSpreadDistanceInDirectionOfInterest")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSpreadDistanceInDirectionOfInterest")]
   public static extern double Surface_getSpreadDistanceInDirectionOfInterest(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getBackingSpreadDistance")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getBackingSpreadDistance")]
   public static extern double Surface_getBackingSpreadDistance(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFlankingSpreadDistance")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFlankingSpreadDistance")]
   public static extern double Surface_getFlankingSpreadDistance(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getDirectionOfMaxSpread")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getDirectionOfMaxSpread")]
   public static extern double Surface_getDirectionOfMaxSpread(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFlameLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFlameLength")]
   public static extern double Surface_getFlameLength(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getBackingFlameLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getBackingFlameLength")]
   public static extern double Surface_getBackingFlameLength(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFlankingFlameLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFlankingFlameLength")]
   public static extern double Surface_getFlankingFlameLength(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFlameLengthInDirectionOfInterest")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFlameLengthInDirectionOfInterest")]
   public static extern double Surface_getFlameLengthInDirectionOfInterest(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFireLengthToWidthRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFireLengthToWidthRatio")]
   public static extern double Surface_getFireLengthToWidthRatio(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFireEccentricity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFireEccentricity")]
   public static extern double Surface_getFireEccentricity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getHeadingToBackingRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getHeadingToBackingRatio")]
   public static extern double Surface_getHeadingToBackingRatio(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFirelineIntensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFirelineIntensity")]
   public static extern double Surface_getFirelineIntensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getBackingFirelineIntensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getBackingFirelineIntensity")]
   public static extern double Surface_getBackingFirelineIntensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFlankingFirelineIntensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFlankingFirelineIntensity")]
   public static extern double Surface_getFlankingFirelineIntensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFirelineIntensityInDirectionOfInterest")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFirelineIntensityInDirectionOfInterest")]
   public static extern double Surface_getFirelineIntensityInDirectionOfInterest(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getHeatPerUnitArea")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getHeatPerUnitArea")]
   public static extern double Surface_getHeatPerUnitArea(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMidflameWindspeed")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMidflameWindspeed")]
   public static extern double Surface_getMidflameWindspeed(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getResidenceTime")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getResidenceTime")]
   public static extern double Surface_getResidenceTime(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getReactionIntensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getReactionIntensity")]
   public static extern double Surface_getReactionIntensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSurfaceFireReactionIntensityForLifeState")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSurfaceFireReactionIntensityForLifeState")]
   public static extern double Surface_getSurfaceFireReactionIntensityForLifeState(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getEllipticalA")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getEllipticalA")]
   public static extern double Surface_getEllipticalA(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getEllipticalB")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getEllipticalB")]
   public static extern double Surface_getEllipticalB(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getEllipticalC")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getEllipticalC")]
   public static extern double Surface_getEllipticalC(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFireLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFireLength")]
   public static extern double Surface_getFireLength(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMaxFireWidth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMaxFireWidth")]
   public static extern double Surface_getMaxFireWidth(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSlopeFactor")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSlopeFactor")]
   public static extern double Surface_getSlopeFactor(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getBulkDensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getBulkDensity")]
   public static extern double Surface_getBulkDensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getHeatSink")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getHeatSink")]
   public static extern double Surface_getHeatSink(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getHeatSource")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getHeatSource")]
   public static extern double Surface_getHeatSource(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFirePerimeter")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFirePerimeter")]
   public static extern double Surface_getFirePerimeter(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFireArea")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFireArea")]
   public static extern double Surface_getFireArea(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getCharacteristicMoistureByLifeState")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getCharacteristicMoistureByLifeState")]
   public static extern double Surface_getCharacteristicMoistureByLifeState(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getLiveFuelMoistureOfExtinction")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getLiveFuelMoistureOfExtinction")]
   public static extern double Surface_getLiveFuelMoistureOfExtinction(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getCharacteristicSAVR")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getCharacteristicSAVR")]
   public static extern double Surface_getCharacteristicSAVR(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getRelativePackingRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getRelativePackingRatio")]
   public static extern double Surface_getRelativePackingRatio(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPackingRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPackingRatio")]
   public static extern double Surface_getPackingRatio(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getTotalLiveFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getTotalLiveFuelLoad")]
   public static extern double Surface_getTotalLiveFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getTotalDeadFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getTotalDeadFuelLoad")]
   public static extern double Surface_getTotalDeadFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getTotalDeadHerbaceousFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getTotalDeadHerbaceousFuelLoad")]
   public static extern double Surface_getTotalDeadHerbaceousFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setCanopyHeight")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setCanopyHeight")]
   public static extern void Surface_setCanopyHeight(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setCanopyCover")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setCanopyCover")]
   public static extern void Surface_setCanopyCover(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setCrownRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setCrownRatio")]
   public static extern void Surface_setCrownRatio(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setElapsedTime")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setElapsedTime")]
   public static extern void Surface_setElapsedTime(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setFuelModelNumber")]
   public static extern void Surface_setFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureOneHour")]
   public static extern void Surface_setMoistureOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureTenHour")]
   public static extern void Surface_setMoistureTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureHundredHour")]
   public static extern void Surface_setMoistureHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureDeadAggregate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureDeadAggregate")]
   public static extern void Surface_setMoistureDeadAggregate(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureLiveHerbaceous")]
   public static extern void Surface_setMoistureLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureLiveWoody")]
   public static extern void Surface_setMoistureLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureLiveAggregate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureLiveAggregate")]
   public static extern void Surface_setMoistureLiveAggregate(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureScenarios")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureScenarios")]
   public static extern void Surface_setMoistureScenarios(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setCurrentMoistureScenarioByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setCurrentMoistureScenarioByName")]
   public static extern bool Surface_setCurrentMoistureScenarioByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setCurrentMoistureScenarioByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setCurrentMoistureScenarioByIndex")]
   public static extern bool Surface_setCurrentMoistureScenarioByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setMoistureInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setMoistureInputMode")]
   public static extern void Surface_setMoistureInputMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setSlope")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setSlope")]
   public static extern void Surface_setSlope(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setAspect")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setAspect")]
   public static extern void Surface_setAspect(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setWindSpeed")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setWindSpeed")]
   public static extern void Surface_setWindSpeed(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setUserProvidedWindAdjustmentFactor")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setUserProvidedWindAdjustmentFactor")]
   public static extern void Surface_setUserProvidedWindAdjustmentFactor(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setWindDirection")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setWindDirection")]
   public static extern void Surface_setWindDirection(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setWindAndSpreadOrientationMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setWindAndSpreadOrientationMode")]
   public static extern void Surface_setWindAndSpreadOrientationMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setWindHeightInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setWindHeightInputMode")]
   public static extern void Surface_setWindHeightInputMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setFirstFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setFirstFuelModelNumber")]
   public static extern void Surface_setFirstFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setSecondFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setSecondFuelModelNumber")]
   public static extern void Surface_setSecondFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setTwoFuelModelsMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setTwoFuelModelsMethod")]
   public static extern void Surface_setTwoFuelModelsMethod(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setTwoFuelModelsFirstFuelModelCoverage")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setTwoFuelModelsFirstFuelModelCoverage")]
   public static extern void Surface_setTwoFuelModelsFirstFuelModelCoverage(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setWindAdjustmentFactorCalculationMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setWindAdjustmentFactorCalculationMethod")]
   public static extern void Surface_setWindAdjustmentFactorCalculationMethod(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_updateSurfaceInputs")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_updateSurfaceInputs")]
   public static extern void Surface_updateSurfaceInputs(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, int jarg8, double jarg9, int jarg10, int jarg11, double jarg12, int jarg13, double jarg14, int jarg15, double jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, int jarg22);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_updateSurfaceInputsForTwoFuelModels")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_updateSurfaceInputsForTwoFuelModels")]
   public static extern void Surface_updateSurfaceInputsForTwoFuelModels(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, int jarg9, double jarg10, int jarg11, int jarg12, double jarg13, int jarg14, double jarg15, int jarg16, int jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_updateSurfaceInputsForPalmettoGallbery")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_updateSurfaceInputsForPalmettoGallbery")]
   public static extern void Surface_updateSurfaceInputsForPalmettoGallbery(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, int jarg7, double jarg8, int jarg9, int jarg10, double jarg11, int jarg12, double jarg13, double jarg14, double jarg15, double jarg16, int jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setAgeOfRough")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setAgeOfRough")]
   public static extern void Surface_setAgeOfRough(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setHeightOfUnderstory")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setHeightOfUnderstory")]
   public static extern void Surface_setHeightOfUnderstory(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setPalmettoCoverage")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setPalmettoCoverage")]
   public static extern void Surface_setPalmettoCoverage(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setOverstoryBasalArea")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setOverstoryBasalArea")]
   public static extern void Surface_setOverstoryBasalArea(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setIsUsingPalmettoGallberry")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setIsUsingPalmettoGallberry")]
   public static extern void Surface_setIsUsingPalmettoGallberry(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_updateSurfaceInputsForWesternAspen")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_updateSurfaceInputsForWesternAspen")]
   public static extern void Surface_updateSurfaceInputsForWesternAspen(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4, int jarg5, double jarg6, int jarg7, double jarg8, double jarg9, double jarg10, double jarg11, double jarg12, int jarg13, double jarg14, int jarg15, int jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, double jarg22, int jarg23, double jarg24, int jarg25, double jarg26, int jarg27);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setAspenFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setAspenFuelModelNumber")]
   public static extern void Surface_setAspenFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setAspenCuringLevel")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setAspenCuringLevel")]
   public static extern void Surface_setAspenCuringLevel(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setAspenDBH")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setAspenDBH")]
   public static extern void Surface_setAspenDBH(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setAspenFireSeverity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setAspenFireSeverity")]
   public static extern void Surface_setAspenFireSeverity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setIsUsingWesternAspen")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setIsUsingWesternAspen")]
   public static extern void Surface_setIsUsingWesternAspen(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setChaparralFuelLoadInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setChaparralFuelLoadInputMode")]
   public static extern void Surface_setChaparralFuelLoadInputMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setChaparralFuelType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setChaparralFuelType")]
   public static extern void Surface_setChaparralFuelType(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setChaparralFuelBedDepth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setChaparralFuelBedDepth")]
   public static extern void Surface_setChaparralFuelBedDepth(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setChaparralFuelDeadLoadFraction")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setChaparralFuelDeadLoadFraction")]
   public static extern void Surface_setChaparralFuelDeadLoadFraction(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setChaparralTotalFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setChaparralTotalFuelLoad")]
   public static extern void Surface_setChaparralTotalFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_setIsUsingChaparral")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_setIsUsingChaparral")]
   public static extern void Surface_setIsUsingChaparral(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelCode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelCode")]
   public static extern global::System.IntPtr Surface_getFuelCode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelName")]
   public static extern global::System.IntPtr Surface_getFuelName(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelbedDepth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelbedDepth")]
   public static extern double Surface_getFuelbedDepth(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelMoistureOfExtinctionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelMoistureOfExtinctionDead")]
   public static extern double Surface_getFuelMoistureOfExtinctionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelHeatOfCombustionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelHeatOfCombustionDead")]
   public static extern double Surface_getFuelHeatOfCombustionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelHeatOfCombustionLive")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelHeatOfCombustionLive")]
   public static extern double Surface_getFuelHeatOfCombustionLive(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelLoadOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelLoadOneHour")]
   public static extern double Surface_getFuelLoadOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelLoadTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelLoadTenHour")]
   public static extern double Surface_getFuelLoadTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelLoadHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelLoadHundredHour")]
   public static extern double Surface_getFuelLoadHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelLoadLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelLoadLiveHerbaceous")]
   public static extern double Surface_getFuelLoadLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelLoadLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelLoadLiveWoody")]
   public static extern double Surface_getFuelLoadLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelSavrOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelSavrOneHour")]
   public static extern double Surface_getFuelSavrOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelSavrLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelSavrLiveHerbaceous")]
   public static extern double Surface_getFuelSavrLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelSavrLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelSavrLiveWoody")]
   public static extern double Surface_getFuelSavrLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_isFuelDynamic")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_isFuelDynamic")]
   public static extern bool Surface_isFuelDynamic(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_isFuelModelDefined")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_isFuelModelDefined")]
   public static extern bool Surface_isFuelModelDefined(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_isFuelModelReserved")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_isFuelModelReserved")]
   public static extern bool Surface_isFuelModelReserved(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_isUsingTwoFuelModels")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_isUsingTwoFuelModels")]
   public static extern bool Surface_isUsingTwoFuelModels(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getElapsedTime")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getElapsedTime")]
   public static extern double Surface_getElapsedTime(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getFuelModelNumber")]
   public static extern int Surface_getFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureOneHour")]
   public static extern double Surface_getMoistureOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureTenHour")]
   public static extern double Surface_getMoistureTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureHundredHour")]
   public static extern double Surface_getMoistureHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureDeadAggregateValue")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureDeadAggregateValue")]
   public static extern double Surface_getMoistureDeadAggregateValue(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureLiveHerbaceous")]
   public static extern double Surface_getMoistureLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureLiveWoody")]
   public static extern double Surface_getMoistureLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureLiveAggregateValue")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureLiveAggregateValue")]
   public static extern double Surface_getMoistureLiveAggregateValue(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_isMoistureClassInputNeededForCurrentFuelModel")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_isMoistureClassInputNeededForCurrentFuelModel")]
   public static extern bool Surface_isMoistureClassInputNeededForCurrentFuelModel(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureInputMode")]
   public static extern int Surface_getMoistureInputMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getNumberOfMoistureScenarios")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getNumberOfMoistureScenarios")]
   public static extern int Surface_getNumberOfMoistureScenarios(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioIndexByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioIndexByName")]
   public static extern int Surface_getMoistureScenarioIndexByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getIsMoistureScenarioDefinedByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getIsMoistureScenarioDefinedByName")]
   public static extern bool Surface_getIsMoistureScenarioDefinedByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioDescriptionByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioDescriptionByName")]
   public static extern global::System.IntPtr Surface_getMoistureScenarioDescriptionByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioOneHourByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioOneHourByName")]
   public static extern double Surface_getMoistureScenarioOneHourByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioTenHourByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioTenHourByName")]
   public static extern double Surface_getMoistureScenarioTenHourByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioHundredHourByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioHundredHourByName")]
   public static extern double Surface_getMoistureScenarioHundredHourByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioLiveHerbaceousByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioLiveHerbaceousByName")]
   public static extern double Surface_getMoistureScenarioLiveHerbaceousByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioLiveWoodyByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioLiveWoodyByName")]
   public static extern double Surface_getMoistureScenarioLiveWoodyByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getIsMoistureScenarioDefinedByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getIsMoistureScenarioDefinedByIndex")]
   public static extern bool Surface_getIsMoistureScenarioDefinedByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioNameByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioNameByIndex")]
   public static extern global::System.IntPtr Surface_getMoistureScenarioNameByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioDescriptionByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioDescriptionByIndex")]
   public static extern global::System.IntPtr Surface_getMoistureScenarioDescriptionByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioOneHourByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioOneHourByIndex")]
   public static extern double Surface_getMoistureScenarioOneHourByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioTenHourByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioTenHourByIndex")]
   public static extern double Surface_getMoistureScenarioTenHourByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioHundredHourByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioHundredHourByIndex")]
   public static extern double Surface_getMoistureScenarioHundredHourByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioLiveHerbaceousByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioLiveHerbaceousByIndex")]
   public static extern double Surface_getMoistureScenarioLiveHerbaceousByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getMoistureScenarioLiveWoodyByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getMoistureScenarioLiveWoodyByIndex")]
   public static extern double Surface_getMoistureScenarioLiveWoodyByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getWindSpeed")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getWindSpeed")]
   public static extern double Surface_getWindSpeed(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getWindDirection")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getWindDirection")]
   public static extern double Surface_getWindDirection(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getSlope")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getSlope")]
   public static extern double Surface_getSlope(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspect")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspect")]
   public static extern double Surface_getAspect(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getCanopyCover")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getCanopyCover")]
   public static extern double Surface_getCanopyCover(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getCanopyHeight")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getCanopyHeight")]
   public static extern double Surface_getCanopyHeight(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getCrownRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getCrownRatio")]
   public static extern double Surface_getCrownRatio(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getWindAndSpreadOrientationMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getWindAndSpreadOrientationMode")]
   public static extern int Surface_getWindAndSpreadOrientationMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getWindHeightInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getWindHeightInputMode")]
   public static extern int Surface_getWindHeightInputMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getWindAdjustmentFactorCalculationMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getWindAdjustmentFactorCalculationMethod")]
   public static extern int Surface_getWindAdjustmentFactorCalculationMethod(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getIsUsingPalmettoGallberry")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getIsUsingPalmettoGallberry")]
   public static extern bool Surface_getIsUsingPalmettoGallberry(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAgeOfRough")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAgeOfRough")]
   public static extern double Surface_getAgeOfRough(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getHeightOfUnderstory")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getHeightOfUnderstory")]
   public static extern double Surface_getHeightOfUnderstory(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberryCoverage")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberryCoverage")]
   public static extern double Surface_getPalmettoGallberryCoverage(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getOverstoryBasalArea")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getOverstoryBasalArea")]
   public static extern double Surface_getOverstoryBasalArea(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberryMoistureOfExtinctionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberryMoistureOfExtinctionDead")]
   public static extern double Surface_getPalmettoGallberryMoistureOfExtinctionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberryHeatOfCombustionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberryHeatOfCombustionDead")]
   public static extern double Surface_getPalmettoGallberryHeatOfCombustionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberryHeatOfCombustionLive")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberryHeatOfCombustionLive")]
   public static extern double Surface_getPalmettoGallberryHeatOfCombustionLive(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyDeadFineFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyDeadFineFuelLoad")]
   public static extern double Surface_getPalmettoGallberyDeadFineFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyDeadMediumFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyDeadMediumFuelLoad")]
   public static extern double Surface_getPalmettoGallberyDeadMediumFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyDeadFoliageLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyDeadFoliageLoad")]
   public static extern double Surface_getPalmettoGallberyDeadFoliageLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyLitterLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyLitterLoad")]
   public static extern double Surface_getPalmettoGallberyLitterLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyLiveFineFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyLiveFineFuelLoad")]
   public static extern double Surface_getPalmettoGallberyLiveFineFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyLiveMediumFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyLiveMediumFuelLoad")]
   public static extern double Surface_getPalmettoGallberyLiveMediumFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyLiveFoliageLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyLiveFoliageLoad")]
   public static extern double Surface_getPalmettoGallberyLiveFoliageLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getPalmettoGallberyFuelBedDepth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getPalmettoGallberyFuelBedDepth")]
   public static extern double Surface_getPalmettoGallberyFuelBedDepth(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getIsUsingWesternAspen")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getIsUsingWesternAspen")]
   public static extern bool Surface_getIsUsingWesternAspen(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenFuelModelNumber")]
   public static extern int Surface_getAspenFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenCuringLevel")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenCuringLevel")]
   public static extern double Surface_getAspenCuringLevel(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenDBH")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenDBH")]
   public static extern double Surface_getAspenDBH(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenFireSeverity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenFireSeverity")]
   public static extern int Surface_getAspenFireSeverity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenLoadDeadOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenLoadDeadOneHour")]
   public static extern double Surface_getAspenLoadDeadOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenLoadDeadTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenLoadDeadTenHour")]
   public static extern double Surface_getAspenLoadDeadTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenLoadLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenLoadLiveHerbaceous")]
   public static extern double Surface_getAspenLoadLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenLoadLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenLoadLiveWoody")]
   public static extern double Surface_getAspenLoadLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenSavrDeadOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenSavrDeadOneHour")]
   public static extern double Surface_getAspenSavrDeadOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenSavrDeadTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenSavrDeadTenHour")]
   public static extern double Surface_getAspenSavrDeadTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenSavrLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenSavrLiveHerbaceous")]
   public static extern double Surface_getAspenSavrLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenSavrLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenSavrLiveWoody")]
   public static extern double Surface_getAspenSavrLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getAspenMortality")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getAspenMortality")]
   public static extern double Surface_getAspenMortality(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getIsUsingChaparral")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getIsUsingChaparral")]
   public static extern bool Surface_getIsUsingChaparral(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralFuelType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralFuelType")]
   public static extern int Surface_getChaparralFuelType(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralFuelBedDepth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralFuelBedDepth")]
   public static extern double Surface_getChaparralFuelBedDepth(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralFuelDeadLoadFraction")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralFuelDeadLoadFraction")]
   public static extern double Surface_getChaparralFuelDeadLoadFraction(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralTotalFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralTotalFuelLoad")]
   public static extern double Surface_getChaparralTotalFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralAge")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralAge")]
   public static extern double Surface_getChaparralAge(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralDaysSinceMayFirst")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralDaysSinceMayFirst")]
   public static extern double Surface_getChaparralDaysSinceMayFirst(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralDeadFuelFraction")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralDeadFuelFraction")]
   public static extern double Surface_getChaparralDeadFuelFraction(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralDeadMoistureOfExtinction")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralDeadMoistureOfExtinction")]
   public static extern double Surface_getChaparralDeadMoistureOfExtinction(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLiveMoistureOfExtinction")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLiveMoistureOfExtinction")]
   public static extern double Surface_getChaparralLiveMoistureOfExtinction(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralDensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralDensity")]
   public static extern double Surface_getChaparralDensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralHeatOfCombustion")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralHeatOfCombustion")]
   public static extern double Surface_getChaparralHeatOfCombustion(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadDeadLessThanQuarterInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadDeadLessThanQuarterInch")]
   public static extern double Surface_getChaparralLoadDeadLessThanQuarterInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch")]
   public static extern double Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadDeadHalfInchToLessThanOneInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadDeadHalfInchToLessThanOneInch")]
   public static extern double Surface_getChaparralLoadDeadHalfInchToLessThanOneInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadDeadOneInchToThreeInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadDeadOneInchToThreeInch")]
   public static extern double Surface_getChaparralLoadDeadOneInchToThreeInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadLiveLeaves")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadLiveLeaves")]
   public static extern double Surface_getChaparralLoadLiveLeaves(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadLiveStemsLessThanQuaterInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadLiveStemsLessThanQuaterInch")]
   public static extern double Surface_getChaparralLoadLiveStemsLessThanQuaterInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch")]
   public static extern double Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadLiveHalfInchToLessThanOneInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadLiveHalfInchToLessThanOneInch")]
   public static extern double Surface_getChaparralLoadLiveHalfInchToLessThanOneInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralLoadLiveOneInchToThreeInch")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralLoadLiveOneInchToThreeInch")]
   public static extern double Surface_getChaparralLoadLiveOneInchToThreeInch(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralMoisture")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralMoisture")]
   public static extern double Surface_getChaparralMoisture(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralTotalDeadFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralTotalDeadFuelLoad")]
   public static extern double Surface_getChaparralTotalDeadFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Surface_getChaparralTotalLiveFuelLoad")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Surface_getChaparralTotalLiveFuelLoad")]
   public static extern double Surface_getChaparralTotalLiveFuelLoad(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_Surface")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_Surface")]
   public static extern void delete_Surface(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FireType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FireType")]
   public static extern global::System.IntPtr new_FireType();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_FireType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_FireType")]
   public static extern void delete_FireType(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_Crown__SWIG_0")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_Crown__SWIG_0")]
   public static extern global::System.IntPtr new_Crown__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_Crown")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_Crown")]
   public static extern void delete_Crown(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_Crown__SWIG_1")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_Crown__SWIG_1")]
   public static extern global::System.IntPtr new_Crown__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_doCrownRunRothermel")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_doCrownRunRothermel")]
   public static extern void Crown_doCrownRunRothermel(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_doCrownRunScottAndReinhardt")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_doCrownRunScottAndReinhardt")]
   public static extern void Crown_doCrownRunScottAndReinhardt(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_initializeMembers")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_initializeMembers")]
   public static extern void Crown_initializeMembers(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setFuelModels")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setFuelModels")]
   public static extern void Crown_setFuelModels(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_updateCrownInputs")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_updateCrownInputs")]
   public static extern void Crown_updateCrownInputs(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, int jarg9, double jarg10, int jarg11, int jarg12, double jarg13, int jarg14, double jarg15, int jarg16, double jarg17, double jarg18, int jarg19, double jarg20, double jarg21, int jarg22, double jarg23, int jarg24, double jarg25, int jarg26);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCanopyBaseHeight")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCanopyBaseHeight")]
   public static extern void Crown_setCanopyBaseHeight(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCanopyBulkDensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCanopyBulkDensity")]
   public static extern void Crown_setCanopyBulkDensity(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureFoliar")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureFoliar")]
   public static extern void Crown_setMoistureFoliar(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCanopyBaseHeight")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCanopyBaseHeight")]
   public static extern double Crown_getCanopyBaseHeight(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCanopyBulkDensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCanopyBulkDensity")]
   public static extern double Crown_getCanopyBulkDensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureFoliar")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureFoliar")]
   public static extern double Crown_getMoistureFoliar(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFireSpreadRate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFireSpreadRate")]
   public static extern double Crown_getCrownFireSpreadRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFireSpreadDistance")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFireSpreadDistance")]
   public static extern double Crown_getCrownFireSpreadDistance(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getSurfaceFireSpreadRate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getSurfaceFireSpreadRate")]
   public static extern double Crown_getSurfaceFireSpreadRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getSurfaceFireSpreadDistance")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getSurfaceFireSpreadDistance")]
   public static extern double Crown_getSurfaceFireSpreadDistance(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFirelineIntensity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFirelineIntensity")]
   public static extern double Crown_getCrownFirelineIntensity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFlameLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFlameLength")]
   public static extern double Crown_getCrownFlameLength(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFireType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFireType")]
   public static extern int Crown_getFireType(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFinalSpreadRate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFinalSpreadRate")]
   public static extern double Crown_getFinalSpreadRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFinalHeatPerUnitArea")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFinalHeatPerUnitArea")]
   public static extern double Crown_getFinalHeatPerUnitArea(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFinalFirelineIntesity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFinalFirelineIntesity")]
   public static extern double Crown_getFinalFirelineIntesity(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFinalFlameLength")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFinalFlameLength")]
   public static extern double Crown_getFinalFlameLength(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFireLengthToWidthRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFireLengthToWidthRatio")]
   public static extern double Crown_getCrownFireLengthToWidthRatio(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFireArea")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFireArea")]
   public static extern double Crown_getCrownFireArea(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFirePerimeter")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFirePerimeter")]
   public static extern double Crown_getCrownFirePerimeter(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCriticalOpenWindSpeed")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCriticalOpenWindSpeed")]
   public static extern double Crown_getCriticalOpenWindSpeed(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownFractionBurned")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownFractionBurned")]
   public static extern double Crown_getCrownFractionBurned(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelCode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelCode")]
   public static extern global::System.IntPtr Crown_getFuelCode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelName")]
   public static extern global::System.IntPtr Crown_getFuelName(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelbedDepth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelbedDepth")]
   public static extern double Crown_getFuelbedDepth(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelMoistureOfExtinctionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelMoistureOfExtinctionDead")]
   public static extern double Crown_getFuelMoistureOfExtinctionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelHeatOfCombustionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelHeatOfCombustionDead")]
   public static extern double Crown_getFuelHeatOfCombustionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelHeatOfCombustionLive")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelHeatOfCombustionLive")]
   public static extern double Crown_getFuelHeatOfCombustionLive(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelLoadOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelLoadOneHour")]
   public static extern double Crown_getFuelLoadOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelLoadTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelLoadTenHour")]
   public static extern double Crown_getFuelLoadTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelLoadHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelLoadHundredHour")]
   public static extern double Crown_getFuelLoadHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelLoadLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelLoadLiveHerbaceous")]
   public static extern double Crown_getFuelLoadLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelLoadLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelLoadLiveWoody")]
   public static extern double Crown_getFuelLoadLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelSavrOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelSavrOneHour")]
   public static extern double Crown_getFuelSavrOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelSavrLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelSavrLiveHerbaceous")]
   public static extern double Crown_getFuelSavrLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelSavrLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelSavrLiveWoody")]
   public static extern double Crown_getFuelSavrLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_isFuelDynamic")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_isFuelDynamic")]
   public static extern bool Crown_isFuelDynamic(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_isFuelModelDefined")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_isFuelModelDefined")]
   public static extern bool Crown_isFuelModelDefined(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_isFuelModelReserved")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_isFuelModelReserved")]
   public static extern bool Crown_isFuelModelReserved(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_isAllFuelLoadZero")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_isAllFuelLoadZero")]
   public static extern bool Crown_isAllFuelLoadZero(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_updateCrownsSurfaceInputs")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_updateCrownsSurfaceInputs")]
   public static extern void Crown_updateCrownsSurfaceInputs(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, int jarg8, double jarg9, int jarg10, int jarg11, double jarg12, int jarg13, double jarg14, int jarg15, double jarg16, double jarg17, int jarg18, double jarg19, int jarg20, double jarg21, int jarg22);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCanopyCover")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCanopyCover")]
   public static extern void Crown_setCanopyCover(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCanopyHeight")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCanopyHeight")]
   public static extern void Crown_setCanopyHeight(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCrownRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCrownRatio")]
   public static extern void Crown_setCrownRatio(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setFuelModelNumber")]
   public static extern void Crown_setFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureOneHour")]
   public static extern void Crown_setMoistureOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureTenHour")]
   public static extern void Crown_setMoistureTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureHundredHour")]
   public static extern void Crown_setMoistureHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureDeadAggregate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureDeadAggregate")]
   public static extern void Crown_setMoistureDeadAggregate(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureLiveHerbaceous")]
   public static extern void Crown_setMoistureLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureLiveWoody")]
   public static extern void Crown_setMoistureLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureLiveAggregate")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureLiveAggregate")]
   public static extern void Crown_setMoistureLiveAggregate(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureScenarios")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureScenarios")]
   public static extern void Crown_setMoistureScenarios(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCurrentMoistureScenarioByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCurrentMoistureScenarioByName")]
   public static extern bool Crown_setCurrentMoistureScenarioByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setCurrentMoistureScenarioByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setCurrentMoistureScenarioByIndex")]
   public static extern bool Crown_setCurrentMoistureScenarioByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setMoistureInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setMoistureInputMode")]
   public static extern void Crown_setMoistureInputMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setSlope")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setSlope")]
   public static extern void Crown_setSlope(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setAspect")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setAspect")]
   public static extern void Crown_setAspect(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setWindSpeed")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setWindSpeed")]
   public static extern void Crown_setWindSpeed(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, int jarg3, int jarg4);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setWindDirection")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setWindDirection")]
   public static extern void Crown_setWindDirection(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setWindHeightInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setWindHeightInputMode")]
   public static extern void Crown_setWindHeightInputMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setWindAndSpreadOrientationMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setWindAndSpreadOrientationMode")]
   public static extern void Crown_setWindAndSpreadOrientationMode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setUserProvidedWindAdjustmentFactor")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setUserProvidedWindAdjustmentFactor")]
   public static extern void Crown_setUserProvidedWindAdjustmentFactor(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_setWindAdjustmentFactorCalculationMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_setWindAdjustmentFactorCalculationMethod")]
   public static extern void Crown_setWindAdjustmentFactorCalculationMethod(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getFuelModelNumber")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getFuelModelNumber")]
   public static extern int Crown_getFuelModelNumber(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureOneHour")]
   public static extern double Crown_getMoistureOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureTenHour")]
   public static extern double Crown_getMoistureTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureHundredHour")]
   public static extern double Crown_getMoistureHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureLiveHerbaceous")]
   public static extern double Crown_getMoistureLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureLiveWoody")]
   public static extern double Crown_getMoistureLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getNumberOfMoistureScenarios")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getNumberOfMoistureScenarios")]
   public static extern int Crown_getNumberOfMoistureScenarios(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioIndexByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioIndexByName")]
   public static extern int Crown_getMoistureScenarioIndexByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getIsMoistureScenarioDefinedByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getIsMoistureScenarioDefinedByName")]
   public static extern bool Crown_getIsMoistureScenarioDefinedByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioDescriptionByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioDescriptionByName")]
   public static extern global::System.IntPtr Crown_getMoistureScenarioDescriptionByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioOneHourByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioOneHourByName")]
   public static extern double Crown_getMoistureScenarioOneHourByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioTenHourByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioTenHourByName")]
   public static extern double Crown_getMoistureScenarioTenHourByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioHundredHourByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioHundredHourByName")]
   public static extern double Crown_getMoistureScenarioHundredHourByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioLiveHerbaceousByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioLiveHerbaceousByName")]
   public static extern double Crown_getMoistureScenarioLiveHerbaceousByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioLiveWoodyByName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioLiveWoodyByName")]
   public static extern double Crown_getMoistureScenarioLiveWoodyByName(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getIsMoistureScenarioDefinedByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getIsMoistureScenarioDefinedByIndex")]
   public static extern bool Crown_getIsMoistureScenarioDefinedByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioNameByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioNameByIndex")]
   public static extern global::System.IntPtr Crown_getMoistureScenarioNameByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioDescriptionByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioDescriptionByIndex")]
   public static extern global::System.IntPtr Crown_getMoistureScenarioDescriptionByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioOneHourByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioOneHourByIndex")]
   public static extern double Crown_getMoistureScenarioOneHourByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioTenHourByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioTenHourByIndex")]
   public static extern double Crown_getMoistureScenarioTenHourByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioHundredHourByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioHundredHourByIndex")]
   public static extern double Crown_getMoistureScenarioHundredHourByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioLiveHerbaceousByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioLiveHerbaceousByIndex")]
   public static extern double Crown_getMoistureScenarioLiveHerbaceousByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getMoistureScenarioLiveWoodyByIndex")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getMoistureScenarioLiveWoodyByIndex")]
   public static extern double Crown_getMoistureScenarioLiveWoodyByIndex(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getWindSpeed")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getWindSpeed")]
   public static extern double Crown_getWindSpeed(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getWindDirection")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getWindDirection")]
   public static extern double Crown_getWindDirection(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getSlope")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getSlope")]
   public static extern double Crown_getSlope(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getAspect")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getAspect")]
   public static extern double Crown_getAspect(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCanopyCover")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCanopyCover")]
   public static extern double Crown_getCanopyCover(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCanopyHeight")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCanopyHeight")]
   public static extern double Crown_getCanopyHeight(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_Crown_getCrownRatio")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_Crown_getCrownRatio")]
   public static extern double Crown_getCrownRatio(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FuelModels__SWIG_0")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FuelModels__SWIG_0")]
   public static extern global::System.IntPtr new_FuelModels__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FuelModels__SWIG_1")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FuelModels__SWIG_1")]
   public static extern global::System.IntPtr new_FuelModels__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_FuelModels")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_FuelModels")]
   public static extern void delete_FuelModels(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_setCustomFuelModel")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_setCustomFuelModel")]
   public static extern bool FuelModels_setCustomFuelModel(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3, global::System.Runtime.InteropServices.HandleRef jarg4, double jarg5, int jarg6, double jarg7, int jarg8, double jarg9, double jarg10, int jarg11, double jarg12, double jarg13, double jarg14, double jarg15, double jarg16, int jarg17, double jarg18, double jarg19, double jarg20, int jarg21, bool jarg22);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_clearCustomFuelModel")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_clearCustomFuelModel")]
   public static extern bool FuelModels_clearCustomFuelModel(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelCode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelCode")]
   public static extern global::System.IntPtr FuelModels_getFuelCode(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelName")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelName")]
   public static extern global::System.IntPtr FuelModels_getFuelName(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelbedDepth")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelbedDepth")]
   public static extern double FuelModels_getFuelbedDepth(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getMoistureOfExtinctionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getMoistureOfExtinctionDead")]
   public static extern double FuelModels_getMoistureOfExtinctionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getHeatOfCombustionDead")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getHeatOfCombustionDead")]
   public static extern double FuelModels_getHeatOfCombustionDead(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getHeatOfCombustionLive")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getHeatOfCombustionLive")]
   public static extern double FuelModels_getHeatOfCombustionLive(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelLoadOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelLoadOneHour")]
   public static extern double FuelModels_getFuelLoadOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelLoadTenHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelLoadTenHour")]
   public static extern double FuelModels_getFuelLoadTenHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelLoadHundredHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelLoadHundredHour")]
   public static extern double FuelModels_getFuelLoadHundredHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelLoadLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelLoadLiveHerbaceous")]
   public static extern double FuelModels_getFuelLoadLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getFuelLoadLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getFuelLoadLiveWoody")]
   public static extern double FuelModels_getFuelLoadLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getSavrOneHour")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getSavrOneHour")]
   public static extern double FuelModels_getSavrOneHour(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getSavrLiveHerbaceous")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getSavrLiveHerbaceous")]
   public static extern double FuelModels_getSavrLiveHerbaceous(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getSavrLiveWoody")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getSavrLiveWoody")]
   public static extern double FuelModels_getSavrLiveWoody(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_getIsDynamic")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_getIsDynamic")]
   public static extern bool FuelModels_getIsDynamic(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_isFuelModelDefined")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_isFuelModelDefined")]
   public static extern bool FuelModels_isFuelModelDefined(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_isFuelModelReserved")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_isFuelModelReserved")]
   public static extern bool FuelModels_isFuelModelReserved(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FuelModels_isAllFuelLoadZero")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FuelModels_isAllFuelLoadZero")]
   public static extern bool FuelModels_isAllFuelLoadZero(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_MoistureClassInput")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_MoistureClassInput")]
   public static extern global::System.IntPtr new_MoistureClassInput();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_MoistureClassInput")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_MoistureClassInput")]
   public static extern void delete_MoistureClassInput(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_AspenFireSeverity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_AspenFireSeverity")]
   public static extern global::System.IntPtr new_AspenFireSeverity();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_AspenFireSeverity")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_AspenFireSeverity")]
   public static extern void delete_AspenFireSeverity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_WindAdjustmentFactorShelterMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_WindAdjustmentFactorShelterMethod")]
   public static extern global::System.IntPtr new_WindAdjustmentFactorShelterMethod();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_WindAdjustmentFactorShelterMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_WindAdjustmentFactorShelterMethod")]
   public static extern void delete_WindAdjustmentFactorShelterMethod(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_WindAdjustmentFactorCalculationMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_WindAdjustmentFactorCalculationMethod")]
   public static extern global::System.IntPtr new_WindAdjustmentFactorCalculationMethod();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_WindAdjustmentFactorCalculationMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_WindAdjustmentFactorCalculationMethod")]
   public static extern void delete_WindAdjustmentFactorCalculationMethod(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_WindHeightInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_WindHeightInputMode")]
   public static extern global::System.IntPtr new_WindHeightInputMode();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_WindHeightInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_WindHeightInputMode")]
   public static extern void delete_WindHeightInputMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_WindAndSpreadOrientationMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_WindAndSpreadOrientationMode")]
   public static extern global::System.IntPtr new_WindAndSpreadOrientationMode();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_WindAndSpreadOrientationMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_WindAndSpreadOrientationMode")]
   public static extern void delete_WindAndSpreadOrientationMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FuelLifeState")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FuelLifeState")]
   public static extern global::System.IntPtr new_FuelLifeState();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_FuelLifeState")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_FuelLifeState")]
   public static extern void delete_FuelLifeState(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FuelConstants")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FuelConstants")]
   public static extern global::System.IntPtr new_FuelConstants();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_FuelConstants")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_FuelConstants")]
   public static extern void delete_FuelConstants(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_SurfaceFireSpreadDirectionMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_SurfaceFireSpreadDirectionMode")]
   public static extern global::System.IntPtr new_SurfaceFireSpreadDirectionMode();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_SurfaceFireSpreadDirectionMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_SurfaceFireSpreadDirectionMode")]
   public static extern void delete_SurfaceFireSpreadDirectionMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_TwoFuelModelsMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_TwoFuelModelsMethod")]
   public static extern global::System.IntPtr new_TwoFuelModelsMethod();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_TwoFuelModelsMethod")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_TwoFuelModelsMethod")]
   public static extern void delete_TwoFuelModelsMethod(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_TwoFuelModelsContants")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_TwoFuelModelsContants")]
   public static extern global::System.IntPtr new_TwoFuelModelsContants();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_TwoFuelModelsContants")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_TwoFuelModelsContants")]
   public static extern void delete_TwoFuelModelsContants(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_MoistureInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_MoistureInputMode")]
   public static extern global::System.IntPtr new_MoistureInputMode();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_MoistureInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_MoistureInputMode")]
   public static extern void delete_MoistureInputMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_ChaparralFuelType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_ChaparralFuelType")]
   public static extern global::System.IntPtr new_ChaparralFuelType();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_ChaparralFuelType")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_ChaparralFuelType")]
   public static extern void delete_ChaparralFuelType(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_ChaparralContants")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_ChaparralContants")]
   public static extern global::System.IntPtr new_ChaparralContants();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_ChaparralContants")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_ChaparralContants")]
   public static extern void delete_ChaparralContants(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_ChaparralFuelLoadInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_ChaparralFuelLoadInputMode")]
   public static extern global::System.IntPtr new_ChaparralFuelLoadInputMode();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_ChaparralFuelLoadInputMode")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_ChaparralFuelLoadInputMode")]
   public static extern void delete_ChaparralFuelLoadInputMode(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_AreaUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_AreaUnits_toBaseUnits")]
   public static extern double AreaUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_AreaUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_AreaUnits_fromBaseUnits")]
   public static extern double AreaUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_AreaUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_AreaUnits")]
   public static extern global::System.IntPtr new_AreaUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_AreaUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_AreaUnits")]
   public static extern void delete_AreaUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_BasalAreaUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_BasalAreaUnits_toBaseUnits")]
   public static extern double BasalAreaUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_BasalAreaUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_BasalAreaUnits_fromBaseUnits")]
   public static extern double BasalAreaUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_BasalAreaUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_BasalAreaUnits")]
   public static extern global::System.IntPtr new_BasalAreaUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_BasalAreaUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_BasalAreaUnits")]
   public static extern void delete_BasalAreaUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_LengthUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_LengthUnits_toBaseUnits")]
   public static extern double LengthUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_LengthUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_LengthUnits_fromBaseUnits")]
   public static extern double LengthUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_LengthUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_LengthUnits")]
   public static extern global::System.IntPtr new_LengthUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_LengthUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_LengthUnits")]
   public static extern void delete_LengthUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_LoadingUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_LoadingUnits_toBaseUnits")]
   public static extern double LoadingUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_LoadingUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_LoadingUnits_fromBaseUnits")]
   public static extern double LoadingUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_LoadingUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_LoadingUnits")]
   public static extern global::System.IntPtr new_LoadingUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_LoadingUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_LoadingUnits")]
   public static extern void delete_LoadingUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_PressureUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_PressureUnits_toBaseUnits")]
   public static extern double PressureUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_PressureUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_PressureUnits_fromBaseUnits")]
   public static extern double PressureUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_PressureUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_PressureUnits")]
   public static extern global::System.IntPtr new_PressureUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_PressureUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_PressureUnits")]
   public static extern void delete_PressureUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_SurfaceAreaToVolumeUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_SurfaceAreaToVolumeUnits_toBaseUnits")]
   public static extern double SurfaceAreaToVolumeUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_SurfaceAreaToVolumeUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_SurfaceAreaToVolumeUnits_fromBaseUnits")]
   public static extern double SurfaceAreaToVolumeUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_SurfaceAreaToVolumeUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_SurfaceAreaToVolumeUnits")]
   public static extern global::System.IntPtr new_SurfaceAreaToVolumeUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_SurfaceAreaToVolumeUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_SurfaceAreaToVolumeUnits")]
   public static extern void delete_SurfaceAreaToVolumeUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_SpeedUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_SpeedUnits_toBaseUnits")]
   public static extern double SpeedUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_SpeedUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_SpeedUnits_fromBaseUnits")]
   public static extern double SpeedUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_SpeedUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_SpeedUnits")]
   public static extern global::System.IntPtr new_SpeedUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_SpeedUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_SpeedUnits")]
   public static extern void delete_SpeedUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FractionUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FractionUnits_toBaseUnits")]
   public static extern double FractionUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FractionUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FractionUnits_fromBaseUnits")]
   public static extern double FractionUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FractionUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FractionUnits")]
   public static extern global::System.IntPtr new_FractionUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_FractionUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_FractionUnits")]
   public static extern void delete_FractionUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_SlopeUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_SlopeUnits_toBaseUnits")]
   public static extern double SlopeUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_SlopeUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_SlopeUnits_fromBaseUnits")]
   public static extern double SlopeUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_SlopeUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_SlopeUnits")]
   public static extern global::System.IntPtr new_SlopeUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_SlopeUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_SlopeUnits")]
   public static extern void delete_SlopeUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_DensityUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_DensityUnits_toBaseUnits")]
   public static extern double DensityUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_DensityUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_DensityUnits_fromBaseUnits")]
   public static extern double DensityUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_DensityUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_DensityUnits")]
   public static extern global::System.IntPtr new_DensityUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_DensityUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_DensityUnits")]
   public static extern void delete_DensityUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatOfCombustionUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatOfCombustionUnits_toBaseUnits")]
   public static extern double HeatOfCombustionUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatOfCombustionUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatOfCombustionUnits_fromBaseUnits")]
   public static extern double HeatOfCombustionUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_HeatOfCombustionUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_HeatOfCombustionUnits")]
   public static extern global::System.IntPtr new_HeatOfCombustionUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_HeatOfCombustionUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_HeatOfCombustionUnits")]
   public static extern void delete_HeatOfCombustionUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatSinkUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatSinkUnits_toBaseUnits")]
   public static extern double HeatSinkUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatSinkUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatSinkUnits_fromBaseUnits")]
   public static extern double HeatSinkUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_HeatSinkUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_HeatSinkUnits")]
   public static extern global::System.IntPtr new_HeatSinkUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_HeatSinkUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_HeatSinkUnits")]
   public static extern void delete_HeatSinkUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatPerUnitAreaUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatPerUnitAreaUnits_toBaseUnits")]
   public static extern double HeatPerUnitAreaUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatPerUnitAreaUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatPerUnitAreaUnits_fromBaseUnits")]
   public static extern double HeatPerUnitAreaUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_HeatPerUnitAreaUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_HeatPerUnitAreaUnits")]
   public static extern global::System.IntPtr new_HeatPerUnitAreaUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_HeatPerUnitAreaUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_HeatPerUnitAreaUnits")]
   public static extern void delete_HeatPerUnitAreaUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatSourceAndReactionIntensityUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatSourceAndReactionIntensityUnits_toBaseUnits")]
   public static extern double HeatSourceAndReactionIntensityUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_HeatSourceAndReactionIntensityUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_HeatSourceAndReactionIntensityUnits_fromBaseUnits")]
   public static extern double HeatSourceAndReactionIntensityUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_HeatSourceAndReactionIntensityUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_HeatSourceAndReactionIntensityUnits")]
   public static extern global::System.IntPtr new_HeatSourceAndReactionIntensityUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_HeatSourceAndReactionIntensityUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_HeatSourceAndReactionIntensityUnits")]
   public static extern void delete_HeatSourceAndReactionIntensityUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FirelineIntensityUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FirelineIntensityUnits_toBaseUnits")]
   public static extern double FirelineIntensityUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_FirelineIntensityUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_FirelineIntensityUnits_fromBaseUnits")]
   public static extern double FirelineIntensityUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_FirelineIntensityUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_FirelineIntensityUnits")]
   public static extern global::System.IntPtr new_FirelineIntensityUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_FirelineIntensityUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_FirelineIntensityUnits")]
   public static extern void delete_FirelineIntensityUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_TemperatureUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_TemperatureUnits_toBaseUnits")]
   public static extern double TemperatureUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_TemperatureUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_TemperatureUnits_fromBaseUnits")]
   public static extern double TemperatureUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_TemperatureUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_TemperatureUnits")]
   public static extern global::System.IntPtr new_TemperatureUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_TemperatureUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_TemperatureUnits")]
   public static extern void delete_TemperatureUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_TimeUnits_toBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_TimeUnits_toBaseUnits")]
   public static extern double TimeUnits_toBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_TimeUnits_fromBaseUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_TimeUnits_fromBaseUnits")]
   public static extern double TimeUnits_fromBaseUnits(double jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_new_TimeUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_new_TimeUnits")]
   public static extern global::System.IntPtr new_TimeUnits();
 
-  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehaveCsharp_delete_TimeUnits")]
+  [global::System.Runtime.InteropServices.DllImport("Behave", EntryPoint="CSharp_BehavCore_delete_TimeUnits")]
   public static extern void delete_TimeUnits(global::System.Runtime.InteropServices.HandleRef jarg1);
 }
 

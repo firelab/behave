@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class Surface : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,1019 +50,1019 @@ public class Surface : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_Surface(swigCPtr);
+          BehavePINVOKE.delete_Surface(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public Surface(FuelModels fuelModels) : this(BehaveCorePINVOKE.new_Surface__SWIG_0(FuelModels.getCPtr(fuelModels)), true) {
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+  public Surface(FuelModels fuelModels) : this(BehavePINVOKE.new_Surface__SWIG_0(FuelModels.getCPtr(fuelModels)), true) {
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public Surface(Surface rhs) : this(BehaveCorePINVOKE.new_Surface__SWIG_1(Surface.getCPtr(rhs)), true) {
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+  public Surface(Surface rhs) : this(BehavePINVOKE.new_Surface__SWIG_1(Surface.getCPtr(rhs)), true) {
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
   }
 
   public bool isAllFuelLoadZero(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.Surface_isAllFuelLoadZero__SWIG_0(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.Surface_isAllFuelLoadZero__SWIG_0(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public void doSurfaceRunInDirectionOfMaxSpread() {
-    BehaveCorePINVOKE.Surface_doSurfaceRunInDirectionOfMaxSpread(swigCPtr);
+    BehavePINVOKE.Surface_doSurfaceRunInDirectionOfMaxSpread(swigCPtr);
   }
 
   public void doSurfaceRunInDirectionOfInterest(double directionOfInterest, SurfaceFireSpreadDirectionMode.SurfaceFireSpreadDirectionModeEnum directionMode) {
-    BehaveCorePINVOKE.Surface_doSurfaceRunInDirectionOfInterest(swigCPtr, directionOfInterest, (int)directionMode);
+    BehavePINVOKE.Surface_doSurfaceRunInDirectionOfInterest(swigCPtr, directionOfInterest, (int)directionMode);
   }
 
   public double calculateFlameLength(double firelineIntensity, FirelineIntensityUnits.FirelineIntensityUnitsEnum firelineIntensityUnits, LengthUnits.LengthUnitsEnum flameLengthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_calculateFlameLength(swigCPtr, firelineIntensity, (int)firelineIntensityUnits, (int)flameLengthUnits);
+    double ret = BehavePINVOKE.Surface_calculateFlameLength(swigCPtr, firelineIntensity, (int)firelineIntensityUnits, (int)flameLengthUnits);
     return ret;
   }
 
   public void setFuelModels(FuelModels fuelModels) {
-    BehaveCorePINVOKE.Surface_setFuelModels(swigCPtr, FuelModels.getCPtr(fuelModels));
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    BehavePINVOKE.Surface_setFuelModels(swigCPtr, FuelModels.getCPtr(fuelModels));
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
   }
 
   public void initializeMembers() {
-    BehaveCorePINVOKE.Surface_initializeMembers(swigCPtr);
+    BehavePINVOKE.Surface_initializeMembers(swigCPtr);
   }
 
   public double getSpreadRate(SpeedUnits.SpeedUnitsEnum spreadRateUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getSpreadRate(swigCPtr, (int)spreadRateUnits);
+    double ret = BehavePINVOKE.Surface_getSpreadRate(swigCPtr, (int)spreadRateUnits);
     return ret;
   }
 
   public double getSpreadRateInDirectionOfInterest(SpeedUnits.SpeedUnitsEnum spreadRateUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getSpreadRateInDirectionOfInterest(swigCPtr, (int)spreadRateUnits);
+    double ret = BehavePINVOKE.Surface_getSpreadRateInDirectionOfInterest(swigCPtr, (int)spreadRateUnits);
     return ret;
   }
 
   public double getBackingSpreadRate(SpeedUnits.SpeedUnitsEnum spreadRateUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getBackingSpreadRate(swigCPtr, (int)spreadRateUnits);
+    double ret = BehavePINVOKE.Surface_getBackingSpreadRate(swigCPtr, (int)spreadRateUnits);
     return ret;
   }
 
   public double getFlankingSpreadRate(SpeedUnits.SpeedUnitsEnum spreadRateUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFlankingSpreadRate(swigCPtr, (int)spreadRateUnits);
+    double ret = BehavePINVOKE.Surface_getFlankingSpreadRate(swigCPtr, (int)spreadRateUnits);
     return ret;
   }
 
   public double getSpreadDistance(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getSpreadDistance(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getSpreadDistance(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getSpreadDistanceInDirectionOfInterest(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getSpreadDistanceInDirectionOfInterest(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getSpreadDistanceInDirectionOfInterest(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getBackingSpreadDistance(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getBackingSpreadDistance(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getBackingSpreadDistance(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getFlankingSpreadDistance(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFlankingSpreadDistance(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getFlankingSpreadDistance(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getDirectionOfMaxSpread() {
-    double ret = BehaveCorePINVOKE.Surface_getDirectionOfMaxSpread(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getDirectionOfMaxSpread(swigCPtr);
     return ret;
   }
 
   public double getFlameLength(LengthUnits.LengthUnitsEnum flameLengthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFlameLength(swigCPtr, (int)flameLengthUnits);
+    double ret = BehavePINVOKE.Surface_getFlameLength(swigCPtr, (int)flameLengthUnits);
     return ret;
   }
 
   public double getBackingFlameLength(LengthUnits.LengthUnitsEnum flameLengthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getBackingFlameLength(swigCPtr, (int)flameLengthUnits);
+    double ret = BehavePINVOKE.Surface_getBackingFlameLength(swigCPtr, (int)flameLengthUnits);
     return ret;
   }
 
   public double getFlankingFlameLength(LengthUnits.LengthUnitsEnum flameLengthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFlankingFlameLength(swigCPtr, (int)flameLengthUnits);
+    double ret = BehavePINVOKE.Surface_getFlankingFlameLength(swigCPtr, (int)flameLengthUnits);
     return ret;
   }
 
   public double getFlameLengthInDirectionOfInterest(LengthUnits.LengthUnitsEnum flameLengthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFlameLengthInDirectionOfInterest(swigCPtr, (int)flameLengthUnits);
+    double ret = BehavePINVOKE.Surface_getFlameLengthInDirectionOfInterest(swigCPtr, (int)flameLengthUnits);
     return ret;
   }
 
   public double getFireLengthToWidthRatio() {
-    double ret = BehaveCorePINVOKE.Surface_getFireLengthToWidthRatio(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getFireLengthToWidthRatio(swigCPtr);
     return ret;
   }
 
   public double getFireEccentricity() {
-    double ret = BehaveCorePINVOKE.Surface_getFireEccentricity(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getFireEccentricity(swigCPtr);
     return ret;
   }
 
   public double getHeadingToBackingRatio() {
-    double ret = BehaveCorePINVOKE.Surface_getHeadingToBackingRatio(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getHeadingToBackingRatio(swigCPtr);
     return ret;
   }
 
   public double getFirelineIntensity(FirelineIntensityUnits.FirelineIntensityUnitsEnum firelineIntensityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFirelineIntensity(swigCPtr, (int)firelineIntensityUnits);
+    double ret = BehavePINVOKE.Surface_getFirelineIntensity(swigCPtr, (int)firelineIntensityUnits);
     return ret;
   }
 
   public double getBackingFirelineIntensity(FirelineIntensityUnits.FirelineIntensityUnitsEnum firelineIntensityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getBackingFirelineIntensity(swigCPtr, (int)firelineIntensityUnits);
+    double ret = BehavePINVOKE.Surface_getBackingFirelineIntensity(swigCPtr, (int)firelineIntensityUnits);
     return ret;
   }
 
   public double getFlankingFirelineIntensity(FirelineIntensityUnits.FirelineIntensityUnitsEnum firelineIntensityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFlankingFirelineIntensity(swigCPtr, (int)firelineIntensityUnits);
+    double ret = BehavePINVOKE.Surface_getFlankingFirelineIntensity(swigCPtr, (int)firelineIntensityUnits);
     return ret;
   }
 
   public double getFirelineIntensityInDirectionOfInterest(FirelineIntensityUnits.FirelineIntensityUnitsEnum firelineIntensityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFirelineIntensityInDirectionOfInterest(swigCPtr, (int)firelineIntensityUnits);
+    double ret = BehavePINVOKE.Surface_getFirelineIntensityInDirectionOfInterest(swigCPtr, (int)firelineIntensityUnits);
     return ret;
   }
 
   public double getHeatPerUnitArea(HeatPerUnitAreaUnits.HeatPerUnitAreaUnitsEnum heatPerUnitAreaUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getHeatPerUnitArea(swigCPtr, (int)heatPerUnitAreaUnits);
+    double ret = BehavePINVOKE.Surface_getHeatPerUnitArea(swigCPtr, (int)heatPerUnitAreaUnits);
     return ret;
   }
 
   public double getMidflameWindspeed(SpeedUnits.SpeedUnitsEnum windSpeedUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMidflameWindspeed(swigCPtr, (int)windSpeedUnits);
+    double ret = BehavePINVOKE.Surface_getMidflameWindspeed(swigCPtr, (int)windSpeedUnits);
     return ret;
   }
 
   public double getResidenceTime(TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getResidenceTime(swigCPtr, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getResidenceTime(swigCPtr, (int)timeUnits);
     return ret;
   }
 
   public double getReactionIntensity(HeatSourceAndReactionIntensityUnits.HeatSourceAndReactionIntensityUnitsEnum reactiontionIntensityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getReactionIntensity(swigCPtr, (int)reactiontionIntensityUnits);
+    double ret = BehavePINVOKE.Surface_getReactionIntensity(swigCPtr, (int)reactiontionIntensityUnits);
     return ret;
   }
 
   public double getSurfaceFireReactionIntensityForLifeState(FuelLifeState.FuelLifeStateEnum lifeState) {
-    double ret = BehaveCorePINVOKE.Surface_getSurfaceFireReactionIntensityForLifeState(swigCPtr, (int)lifeState);
+    double ret = BehavePINVOKE.Surface_getSurfaceFireReactionIntensityForLifeState(swigCPtr, (int)lifeState);
     return ret;
   }
 
   public double getEllipticalA(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getEllipticalA(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getEllipticalA(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getEllipticalB(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getEllipticalB(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getEllipticalB(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getEllipticalC(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getEllipticalC(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getEllipticalC(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getFireLength(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFireLength(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getFireLength(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getMaxFireWidth(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMaxFireWidth(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getMaxFireWidth(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getSlopeFactor() {
-    double ret = BehaveCorePINVOKE.Surface_getSlopeFactor(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getSlopeFactor(swigCPtr);
     return ret;
   }
 
   public double getBulkDensity(DensityUnits.DensityUnitsEnum densityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getBulkDensity(swigCPtr, (int)densityUnits);
+    double ret = BehavePINVOKE.Surface_getBulkDensity(swigCPtr, (int)densityUnits);
     return ret;
   }
 
   public double getHeatSink(HeatSinkUnits.HeatSinkUnitsEnum heatSinkUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getHeatSink(swigCPtr, (int)heatSinkUnits);
+    double ret = BehavePINVOKE.Surface_getHeatSink(swigCPtr, (int)heatSinkUnits);
     return ret;
   }
 
   public double getHeatSource(HeatSourceAndReactionIntensityUnits.HeatSourceAndReactionIntensityUnitsEnum heatSourceUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getHeatSource(swigCPtr, (int)heatSourceUnits);
+    double ret = BehavePINVOKE.Surface_getHeatSource(swigCPtr, (int)heatSourceUnits);
     return ret;
   }
 
   public double getFirePerimeter(LengthUnits.LengthUnitsEnum lengthUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFirePerimeter(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getFirePerimeter(swigCPtr, (int)lengthUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getFireArea(AreaUnits.AreaUnitsEnum areaUnits, double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFireArea(swigCPtr, (int)areaUnits, elapsedTime, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getFireArea(swigCPtr, (int)areaUnits, elapsedTime, (int)timeUnits);
     return ret;
   }
 
   public double getCharacteristicMoistureByLifeState(FuelLifeState.FuelLifeStateEnum lifeState, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getCharacteristicMoistureByLifeState(swigCPtr, (int)lifeState, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getCharacteristicMoistureByLifeState(swigCPtr, (int)lifeState, (int)moistureUnits);
     return ret;
   }
 
   public double getLiveFuelMoistureOfExtinction(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getLiveFuelMoistureOfExtinction(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getLiveFuelMoistureOfExtinction(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getCharacteristicSAVR(SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getCharacteristicSAVR(swigCPtr, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getCharacteristicSAVR(swigCPtr, (int)savrUnits);
     return ret;
   }
 
   public double getRelativePackingRatio() {
-    double ret = BehaveCorePINVOKE.Surface_getRelativePackingRatio(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getRelativePackingRatio(swigCPtr);
     return ret;
   }
 
   public double getPackingRatio() {
-    double ret = BehaveCorePINVOKE.Surface_getPackingRatio(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getPackingRatio(swigCPtr);
     return ret;
   }
 
   public double getTotalLiveFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getTotalLiveFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getTotalLiveFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getTotalDeadFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getTotalDeadFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getTotalDeadFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getTotalDeadHerbaceousFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getTotalDeadHerbaceousFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getTotalDeadHerbaceousFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public void setCanopyHeight(double canopyHeight, LengthUnits.LengthUnitsEnum canopyHeightUnits) {
-    BehaveCorePINVOKE.Surface_setCanopyHeight(swigCPtr, canopyHeight, (int)canopyHeightUnits);
+    BehavePINVOKE.Surface_setCanopyHeight(swigCPtr, canopyHeight, (int)canopyHeightUnits);
   }
 
   public void setCanopyCover(double canopyCover, FractionUnits.FractionUnitsEnum coverUnits) {
-    BehaveCorePINVOKE.Surface_setCanopyCover(swigCPtr, canopyCover, (int)coverUnits);
+    BehavePINVOKE.Surface_setCanopyCover(swigCPtr, canopyCover, (int)coverUnits);
   }
 
   public void setCrownRatio(double crownRatio, FractionUnits.FractionUnitsEnum crownRatioUnits) {
-    BehaveCorePINVOKE.Surface_setCrownRatio(swigCPtr, crownRatio, (int)crownRatioUnits);
+    BehavePINVOKE.Surface_setCrownRatio(swigCPtr, crownRatio, (int)crownRatioUnits);
   }
 
   public void setElapsedTime(double elapsedTime, TimeUnits.TimeUnitsEnum timeUnits) {
-    BehaveCorePINVOKE.Surface_setElapsedTime(swigCPtr, elapsedTime, (int)timeUnits);
+    BehavePINVOKE.Surface_setElapsedTime(swigCPtr, elapsedTime, (int)timeUnits);
   }
 
   public void setFuelModelNumber(int fuelModelNumber) {
-    BehaveCorePINVOKE.Surface_setFuelModelNumber(swigCPtr, fuelModelNumber);
+    BehavePINVOKE.Surface_setFuelModelNumber(swigCPtr, fuelModelNumber);
   }
 
   public void setMoistureOneHour(double moistureOneHour, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureOneHour(swigCPtr, moistureOneHour, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureOneHour(swigCPtr, moistureOneHour, (int)moistureUnits);
   }
 
   public void setMoistureTenHour(double moistureTenHour, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureTenHour(swigCPtr, moistureTenHour, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureTenHour(swigCPtr, moistureTenHour, (int)moistureUnits);
   }
 
   public void setMoistureHundredHour(double moistureHundredHour, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureHundredHour(swigCPtr, moistureHundredHour, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureHundredHour(swigCPtr, moistureHundredHour, (int)moistureUnits);
   }
 
   public void setMoistureDeadAggregate(double moistureDead, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureDeadAggregate(swigCPtr, moistureDead, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureDeadAggregate(swigCPtr, moistureDead, (int)moistureUnits);
   }
 
   public void setMoistureLiveHerbaceous(double moistureLiveHerbaceous, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureLiveHerbaceous(swigCPtr, moistureLiveHerbaceous, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureLiveHerbaceous(swigCPtr, moistureLiveHerbaceous, (int)moistureUnits);
   }
 
   public void setMoistureLiveWoody(double moistureLiveWoody, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureLiveWoody(swigCPtr, moistureLiveWoody, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureLiveWoody(swigCPtr, moistureLiveWoody, (int)moistureUnits);
   }
 
   public void setMoistureLiveAggregate(double moistureLive, FractionUnits.FractionUnitsEnum moistureUnits) {
-    BehaveCorePINVOKE.Surface_setMoistureLiveAggregate(swigCPtr, moistureLive, (int)moistureUnits);
+    BehavePINVOKE.Surface_setMoistureLiveAggregate(swigCPtr, moistureLive, (int)moistureUnits);
   }
 
   public void setMoistureScenarios(SWIGTYPE_p_MoistureScenarios moistureScenarios) {
-    BehaveCorePINVOKE.Surface_setMoistureScenarios(swigCPtr, SWIGTYPE_p_MoistureScenarios.getCPtr(moistureScenarios));
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    BehavePINVOKE.Surface_setMoistureScenarios(swigCPtr, SWIGTYPE_p_MoistureScenarios.getCPtr(moistureScenarios));
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
   }
 
   public bool setCurrentMoistureScenarioByName(SWIGTYPE_p_std__string moistureScenarioName) {
-    bool ret = BehaveCorePINVOKE.Surface_setCurrentMoistureScenarioByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(moistureScenarioName));
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    bool ret = BehavePINVOKE.Surface_setCurrentMoistureScenarioByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(moistureScenarioName));
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public bool setCurrentMoistureScenarioByIndex(int moistureScenarioIndex) {
-    bool ret = BehaveCorePINVOKE.Surface_setCurrentMoistureScenarioByIndex(swigCPtr, moistureScenarioIndex);
+    bool ret = BehavePINVOKE.Surface_setCurrentMoistureScenarioByIndex(swigCPtr, moistureScenarioIndex);
     return ret;
   }
 
   public void setMoistureInputMode(MoistureInputMode.MoistureInputModeEnum moistureInputMode) {
-    BehaveCorePINVOKE.Surface_setMoistureInputMode(swigCPtr, (int)moistureInputMode);
+    BehavePINVOKE.Surface_setMoistureInputMode(swigCPtr, (int)moistureInputMode);
   }
 
   public void setSlope(double slope, SlopeUnits.SlopeUnitsEnum slopeUnits) {
-    BehaveCorePINVOKE.Surface_setSlope(swigCPtr, slope, (int)slopeUnits);
+    BehavePINVOKE.Surface_setSlope(swigCPtr, slope, (int)slopeUnits);
   }
 
   public void setAspect(double aspect) {
-    BehaveCorePINVOKE.Surface_setAspect(swigCPtr, aspect);
+    BehavePINVOKE.Surface_setAspect(swigCPtr, aspect);
   }
 
   public void setWindSpeed(double windSpeed, SpeedUnits.SpeedUnitsEnum windSpeedUnits, WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode) {
-    BehaveCorePINVOKE.Surface_setWindSpeed(swigCPtr, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode);
+    BehavePINVOKE.Surface_setWindSpeed(swigCPtr, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode);
   }
 
   public void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor) {
-    BehaveCorePINVOKE.Surface_setUserProvidedWindAdjustmentFactor(swigCPtr, userProvidedWindAdjustmentFactor);
+    BehavePINVOKE.Surface_setUserProvidedWindAdjustmentFactor(swigCPtr, userProvidedWindAdjustmentFactor);
   }
 
   public void setWindDirection(double windDirection) {
-    BehaveCorePINVOKE.Surface_setWindDirection(swigCPtr, windDirection);
+    BehavePINVOKE.Surface_setWindDirection(swigCPtr, windDirection);
   }
 
   public void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode) {
-    BehaveCorePINVOKE.Surface_setWindAndSpreadOrientationMode(swigCPtr, (int)windAndSpreadOrientationMode);
+    BehavePINVOKE.Surface_setWindAndSpreadOrientationMode(swigCPtr, (int)windAndSpreadOrientationMode);
   }
 
   public void setWindHeightInputMode(WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode) {
-    BehaveCorePINVOKE.Surface_setWindHeightInputMode(swigCPtr, (int)windHeightInputMode);
+    BehavePINVOKE.Surface_setWindHeightInputMode(swigCPtr, (int)windHeightInputMode);
   }
 
   public void setFirstFuelModelNumber(int firstFuelModelNumber) {
-    BehaveCorePINVOKE.Surface_setFirstFuelModelNumber(swigCPtr, firstFuelModelNumber);
+    BehavePINVOKE.Surface_setFirstFuelModelNumber(swigCPtr, firstFuelModelNumber);
   }
 
   public void setSecondFuelModelNumber(int secondFuelModelNumber) {
-    BehaveCorePINVOKE.Surface_setSecondFuelModelNumber(swigCPtr, secondFuelModelNumber);
+    BehavePINVOKE.Surface_setSecondFuelModelNumber(swigCPtr, secondFuelModelNumber);
   }
 
   public void setTwoFuelModelsMethod(TwoFuelModelsMethod.TwoFuelModelsMethodEnum twoFuelModelsMethod) {
-    BehaveCorePINVOKE.Surface_setTwoFuelModelsMethod(swigCPtr, (int)twoFuelModelsMethod);
+    BehavePINVOKE.Surface_setTwoFuelModelsMethod(swigCPtr, (int)twoFuelModelsMethod);
   }
 
   public void setTwoFuelModelsFirstFuelModelCoverage(double firstFuelModelCoverage, FractionUnits.FractionUnitsEnum coverageUnits) {
-    BehaveCorePINVOKE.Surface_setTwoFuelModelsFirstFuelModelCoverage(swigCPtr, firstFuelModelCoverage, (int)coverageUnits);
+    BehavePINVOKE.Surface_setTwoFuelModelsFirstFuelModelCoverage(swigCPtr, firstFuelModelCoverage, (int)coverageUnits);
   }
 
   public void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod) {
-    BehaveCorePINVOKE.Surface_setWindAdjustmentFactorCalculationMethod(swigCPtr, (int)windAdjustmentFactorCalculationMethod);
+    BehavePINVOKE.Surface_setWindAdjustmentFactorCalculationMethod(swigCPtr, (int)windAdjustmentFactorCalculationMethod);
   }
 
   public void updateSurfaceInputs(int fuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits.FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits.SpeedUnitsEnum windSpeedUnits, WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode, double windDirection, WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope, SlopeUnits.SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits.FractionUnitsEnum coverUnits, double canopyHeight, LengthUnits.LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits.FractionUnitsEnum crownRatioUnits) {
-    BehaveCorePINVOKE.Surface_updateSurfaceInputs(swigCPtr, fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, slope, (int)slopeUnits, aspect, canopyCover, (int)coverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
+    BehavePINVOKE.Surface_updateSurfaceInputs(swigCPtr, fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, slope, (int)slopeUnits, aspect, canopyCover, (int)coverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
   }
 
   public void updateSurfaceInputsForTwoFuelModels(int firstFuelModelNumber, int secondFuelModelNumber, double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits.FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits.SpeedUnitsEnum windSpeedUnits, WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode, double windDirection, WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double firstFuelModelCoverage, FractionUnits.FractionUnitsEnum firstFuelModelCoverageUnits, TwoFuelModelsMethod.TwoFuelModelsMethodEnum twoFuelModelsMethod, double slope, SlopeUnits.SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits.FractionUnitsEnum canopyCoverUnits, double canopyHeight, LengthUnits.LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits.FractionUnitsEnum crownRatioUnits) {
-    BehaveCorePINVOKE.Surface_updateSurfaceInputsForTwoFuelModels(swigCPtr, firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, firstFuelModelCoverage, (int)firstFuelModelCoverageUnits, (int)twoFuelModelsMethod, slope, (int)slopeUnits, aspect, canopyCover, (int)canopyCoverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
+    BehavePINVOKE.Surface_updateSurfaceInputsForTwoFuelModels(swigCPtr, firstFuelModelNumber, secondFuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, firstFuelModelCoverage, (int)firstFuelModelCoverageUnits, (int)twoFuelModelsMethod, slope, (int)slopeUnits, aspect, canopyCover, (int)canopyCoverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
   }
 
   public void updateSurfaceInputsForPalmettoGallbery(double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits.FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits.SpeedUnitsEnum windSpeedUnits, WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode, double windDirection, WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double ageOfRough, double heightOfUnderstory, double palmettoCoverage, double overstoryBasalArea, BasalAreaUnits.BasalAreaUnitsEnum basalAreaUnits, double slope, SlopeUnits.SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits.FractionUnitsEnum coverUnits, double canopyHeight, LengthUnits.LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits.FractionUnitsEnum crownRatioUnits) {
-    BehaveCorePINVOKE.Surface_updateSurfaceInputsForPalmettoGallbery(swigCPtr, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, (int)basalAreaUnits, slope, (int)slopeUnits, aspect, canopyCover, (int)coverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
+    BehavePINVOKE.Surface_updateSurfaceInputsForPalmettoGallbery(swigCPtr, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, ageOfRough, heightOfUnderstory, palmettoCoverage, overstoryBasalArea, (int)basalAreaUnits, slope, (int)slopeUnits, aspect, canopyCover, (int)coverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
   }
 
   public void setAgeOfRough(double ageOfRough) {
-    BehaveCorePINVOKE.Surface_setAgeOfRough(swigCPtr, ageOfRough);
+    BehavePINVOKE.Surface_setAgeOfRough(swigCPtr, ageOfRough);
   }
 
   public void setHeightOfUnderstory(double heightOfUnderstory, LengthUnits.LengthUnitsEnum heightUnits) {
-    BehaveCorePINVOKE.Surface_setHeightOfUnderstory(swigCPtr, heightOfUnderstory, (int)heightUnits);
+    BehavePINVOKE.Surface_setHeightOfUnderstory(swigCPtr, heightOfUnderstory, (int)heightUnits);
   }
 
   public void setPalmettoCoverage(double palmettoCoverage, FractionUnits.FractionUnitsEnum coverageUnits) {
-    BehaveCorePINVOKE.Surface_setPalmettoCoverage(swigCPtr, palmettoCoverage, (int)coverageUnits);
+    BehavePINVOKE.Surface_setPalmettoCoverage(swigCPtr, palmettoCoverage, (int)coverageUnits);
   }
 
   public void setOverstoryBasalArea(double overstoryBasalArea, BasalAreaUnits.BasalAreaUnitsEnum basalAreaUnits) {
-    BehaveCorePINVOKE.Surface_setOverstoryBasalArea(swigCPtr, overstoryBasalArea, (int)basalAreaUnits);
+    BehavePINVOKE.Surface_setOverstoryBasalArea(swigCPtr, overstoryBasalArea, (int)basalAreaUnits);
   }
 
   public void setIsUsingPalmettoGallberry(bool isUsingPalmettoGallberry) {
-    BehaveCorePINVOKE.Surface_setIsUsingPalmettoGallberry(swigCPtr, isUsingPalmettoGallberry);
+    BehavePINVOKE.Surface_setIsUsingPalmettoGallberry(swigCPtr, isUsingPalmettoGallberry);
   }
 
   public void updateSurfaceInputsForWesternAspen(int aspenFuelModelNumber, double aspenCuringLevel, FractionUnits.FractionUnitsEnum curingLevelUnits, AspenFireSeverity.AspenFireSeverityEnum aspenFireSeverity, double dbh, LengthUnits.LengthUnitsEnum dbhUnits, double moistureOneHour, double moistureTenHour, double moistureHundredHour, double moistureLiveHerbaceous, double moistureLiveWoody, FractionUnits.FractionUnitsEnum moistureUnits, double windSpeed, SpeedUnits.SpeedUnitsEnum windSpeedUnits, WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode, double windDirection, WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode, double slope, SlopeUnits.SlopeUnitsEnum slopeUnits, double aspect, double canopyCover, FractionUnits.FractionUnitsEnum coverUnits, double canopyHeight, LengthUnits.LengthUnitsEnum canopyHeightUnits, double crownRatio, FractionUnits.FractionUnitsEnum crownRatioUnits) {
-    BehaveCorePINVOKE.Surface_updateSurfaceInputsForWesternAspen(swigCPtr, aspenFuelModelNumber, aspenCuringLevel, (int)curingLevelUnits, (int)aspenFireSeverity, dbh, (int)dbhUnits, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, slope, (int)slopeUnits, aspect, canopyCover, (int)coverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
+    BehavePINVOKE.Surface_updateSurfaceInputsForWesternAspen(swigCPtr, aspenFuelModelNumber, aspenCuringLevel, (int)curingLevelUnits, (int)aspenFireSeverity, dbh, (int)dbhUnits, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous, moistureLiveWoody, (int)moistureUnits, windSpeed, (int)windSpeedUnits, (int)windHeightInputMode, windDirection, (int)windAndSpreadOrientationMode, slope, (int)slopeUnits, aspect, canopyCover, (int)coverUnits, canopyHeight, (int)canopyHeightUnits, crownRatio, (int)crownRatioUnits);
   }
 
   public void setAspenFuelModelNumber(int aspenFuelModelNumber) {
-    BehaveCorePINVOKE.Surface_setAspenFuelModelNumber(swigCPtr, aspenFuelModelNumber);
+    BehavePINVOKE.Surface_setAspenFuelModelNumber(swigCPtr, aspenFuelModelNumber);
   }
 
   public void setAspenCuringLevel(double aspenCuringLevel, FractionUnits.FractionUnitsEnum curingLevelUnits) {
-    BehaveCorePINVOKE.Surface_setAspenCuringLevel(swigCPtr, aspenCuringLevel, (int)curingLevelUnits);
+    BehavePINVOKE.Surface_setAspenCuringLevel(swigCPtr, aspenCuringLevel, (int)curingLevelUnits);
   }
 
   public void setAspenDBH(double dbh, LengthUnits.LengthUnitsEnum dbhUnits) {
-    BehaveCorePINVOKE.Surface_setAspenDBH(swigCPtr, dbh, (int)dbhUnits);
+    BehavePINVOKE.Surface_setAspenDBH(swigCPtr, dbh, (int)dbhUnits);
   }
 
   public void setAspenFireSeverity(AspenFireSeverity.AspenFireSeverityEnum aspenFireSeverity) {
-    BehaveCorePINVOKE.Surface_setAspenFireSeverity(swigCPtr, (int)aspenFireSeverity);
+    BehavePINVOKE.Surface_setAspenFireSeverity(swigCPtr, (int)aspenFireSeverity);
   }
 
   public void setIsUsingWesternAspen(bool isUsingWesternAspen) {
-    BehaveCorePINVOKE.Surface_setIsUsingWesternAspen(swigCPtr, isUsingWesternAspen);
+    BehavePINVOKE.Surface_setIsUsingWesternAspen(swigCPtr, isUsingWesternAspen);
   }
 
   public void setChaparralFuelLoadInputMode(ChaparralFuelLoadInputMode.ChaparralFuelInputLoadModeEnum fuelLoadInputMode) {
-    BehaveCorePINVOKE.Surface_setChaparralFuelLoadInputMode(swigCPtr, (int)fuelLoadInputMode);
+    BehavePINVOKE.Surface_setChaparralFuelLoadInputMode(swigCPtr, (int)fuelLoadInputMode);
   }
 
   public void setChaparralFuelType(ChaparralFuelType.ChaparralFuelTypeEnum chaparralFuelType) {
-    BehaveCorePINVOKE.Surface_setChaparralFuelType(swigCPtr, (int)chaparralFuelType);
+    BehavePINVOKE.Surface_setChaparralFuelType(swigCPtr, (int)chaparralFuelType);
   }
 
   public void setChaparralFuelBedDepth(double chaparralFuelBedDepth, LengthUnits.LengthUnitsEnum depthUnts) {
-    BehaveCorePINVOKE.Surface_setChaparralFuelBedDepth(swigCPtr, chaparralFuelBedDepth, (int)depthUnts);
+    BehavePINVOKE.Surface_setChaparralFuelBedDepth(swigCPtr, chaparralFuelBedDepth, (int)depthUnts);
   }
 
   public void setChaparralFuelDeadLoadFraction(double chaparralFuelDeadLoadFraction) {
-    BehaveCorePINVOKE.Surface_setChaparralFuelDeadLoadFraction(swigCPtr, chaparralFuelDeadLoadFraction);
+    BehavePINVOKE.Surface_setChaparralFuelDeadLoadFraction(swigCPtr, chaparralFuelDeadLoadFraction);
   }
 
   public void setChaparralTotalFuelLoad(double chaparralTotalFuelLoad, LoadingUnits.LoadingUnitsEnum fuelLoadUnits) {
-    BehaveCorePINVOKE.Surface_setChaparralTotalFuelLoad(swigCPtr, chaparralTotalFuelLoad, (int)fuelLoadUnits);
+    BehavePINVOKE.Surface_setChaparralTotalFuelLoad(swigCPtr, chaparralTotalFuelLoad, (int)fuelLoadUnits);
   }
 
   public void setIsUsingChaparral(bool isUsingChaparral) {
-    BehaveCorePINVOKE.Surface_setIsUsingChaparral(swigCPtr, isUsingChaparral);
+    BehavePINVOKE.Surface_setIsUsingChaparral(swigCPtr, isUsingChaparral);
   }
 
   public SWIGTYPE_p_std__string getFuelCode(int fuelModelNumber) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.Surface_getFuelCode(swigCPtr, fuelModelNumber), true);
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.Surface_getFuelCode(swigCPtr, fuelModelNumber), true);
     return ret;
   }
 
   public SWIGTYPE_p_std__string getFuelName(int fuelModelNumber) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.Surface_getFuelName(swigCPtr, fuelModelNumber), true);
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.Surface_getFuelName(swigCPtr, fuelModelNumber), true);
     return ret;
   }
 
   public double getFuelbedDepth(int fuelModelNumber, LengthUnits.LengthUnitsEnum lengthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelbedDepth(swigCPtr, fuelModelNumber, (int)lengthUnits);
+    double ret = BehavePINVOKE.Surface_getFuelbedDepth(swigCPtr, fuelModelNumber, (int)lengthUnits);
     return ret;
   }
 
   public double getFuelMoistureOfExtinctionDead(int fuelModelNumber, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelMoistureOfExtinctionDead(swigCPtr, fuelModelNumber, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getFuelMoistureOfExtinctionDead(swigCPtr, fuelModelNumber, (int)moistureUnits);
     return ret;
   }
 
   public double getFuelHeatOfCombustionDead(int fuelModelNumber, HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelHeatOfCombustionDead(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.Surface_getFuelHeatOfCombustionDead(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getFuelHeatOfCombustionLive(int fuelModelNumber, HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelHeatOfCombustionLive(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.Surface_getFuelHeatOfCombustionLive(swigCPtr, fuelModelNumber, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getFuelLoadOneHour(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelLoadOneHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getFuelLoadOneHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadTenHour(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelLoadTenHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getFuelLoadTenHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadHundredHour(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelLoadHundredHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getFuelLoadHundredHour(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadLiveHerbaceous(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelLoadLiveHerbaceous(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getFuelLoadLiveHerbaceous(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelLoadLiveWoody(int fuelModelNumber, LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelLoadLiveWoody(swigCPtr, fuelModelNumber, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getFuelLoadLiveWoody(swigCPtr, fuelModelNumber, (int)loadingUnits);
     return ret;
   }
 
   public double getFuelSavrOneHour(int fuelModelNumber, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelSavrOneHour(swigCPtr, fuelModelNumber, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getFuelSavrOneHour(swigCPtr, fuelModelNumber, (int)savrUnits);
     return ret;
   }
 
   public double getFuelSavrLiveHerbaceous(int fuelModelNumber, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelSavrLiveHerbaceous(swigCPtr, fuelModelNumber, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getFuelSavrLiveHerbaceous(swigCPtr, fuelModelNumber, (int)savrUnits);
     return ret;
   }
 
   public double getFuelSavrLiveWoody(int fuelModelNumber, SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getFuelSavrLiveWoody(swigCPtr, fuelModelNumber, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getFuelSavrLiveWoody(swigCPtr, fuelModelNumber, (int)savrUnits);
     return ret;
   }
 
   public bool isFuelDynamic(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.Surface_isFuelDynamic(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.Surface_isFuelDynamic(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public bool isFuelModelDefined(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.Surface_isFuelModelDefined(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.Surface_isFuelModelDefined(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public bool isFuelModelReserved(int fuelModelNumber) {
-    bool ret = BehaveCorePINVOKE.Surface_isFuelModelReserved(swigCPtr, fuelModelNumber);
+    bool ret = BehavePINVOKE.Surface_isFuelModelReserved(swigCPtr, fuelModelNumber);
     return ret;
   }
 
   public bool isUsingTwoFuelModels() {
-    bool ret = BehaveCorePINVOKE.Surface_isUsingTwoFuelModels(swigCPtr);
+    bool ret = BehavePINVOKE.Surface_isUsingTwoFuelModels(swigCPtr);
     return ret;
   }
 
   public double getElapsedTime(TimeUnits.TimeUnitsEnum timeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getElapsedTime(swigCPtr, (int)timeUnits);
+    double ret = BehavePINVOKE.Surface_getElapsedTime(swigCPtr, (int)timeUnits);
     return ret;
   }
 
   public int getFuelModelNumber() {
-    int ret = BehaveCorePINVOKE.Surface_getFuelModelNumber(swigCPtr);
+    int ret = BehavePINVOKE.Surface_getFuelModelNumber(swigCPtr);
     return ret;
   }
 
   public double getMoistureOneHour(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureOneHour(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureOneHour(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureTenHour(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureTenHour(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureTenHour(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureHundredHour(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureHundredHour(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureHundredHour(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureDeadAggregateValue(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureDeadAggregateValue(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureDeadAggregateValue(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureLiveHerbaceous(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureLiveHerbaceous(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureLiveHerbaceous(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureLiveWoody(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureLiveWoody(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureLiveWoody(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureLiveAggregateValue(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureLiveAggregateValue(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureLiveAggregateValue(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public bool isMoistureClassInputNeededForCurrentFuelModel(MoistureClassInput.MoistureClassInputEnum moistureClass) {
-    bool ret = BehaveCorePINVOKE.Surface_isMoistureClassInputNeededForCurrentFuelModel(swigCPtr, (int)moistureClass);
+    bool ret = BehavePINVOKE.Surface_isMoistureClassInputNeededForCurrentFuelModel(swigCPtr, (int)moistureClass);
     return ret;
   }
 
   public MoistureInputMode.MoistureInputModeEnum getMoistureInputMode() {
-    MoistureInputMode.MoistureInputModeEnum ret = (MoistureInputMode.MoistureInputModeEnum)BehaveCorePINVOKE.Surface_getMoistureInputMode(swigCPtr);
+    MoistureInputMode.MoistureInputModeEnum ret = (MoistureInputMode.MoistureInputModeEnum)BehavePINVOKE.Surface_getMoistureInputMode(swigCPtr);
     return ret;
   }
 
   public int getNumberOfMoistureScenarios() {
-    int ret = BehaveCorePINVOKE.Surface_getNumberOfMoistureScenarios(swigCPtr);
+    int ret = BehavePINVOKE.Surface_getNumberOfMoistureScenarios(swigCPtr);
     return ret;
   }
 
   public int getMoistureScenarioIndexByName(SWIGTYPE_p_std__string name) {
-    int ret = BehaveCorePINVOKE.Surface_getMoistureScenarioIndexByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name));
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    int ret = BehavePINVOKE.Surface_getMoistureScenarioIndexByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name));
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public bool getIsMoistureScenarioDefinedByName(SWIGTYPE_p_std__string name) {
-    bool ret = BehaveCorePINVOKE.Surface_getIsMoistureScenarioDefinedByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name));
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    bool ret = BehavePINVOKE.Surface_getIsMoistureScenarioDefinedByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name));
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public SWIGTYPE_p_std__string getMoistureScenarioDescriptionByName(SWIGTYPE_p_std__string name) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.Surface_getMoistureScenarioDescriptionByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name)), true);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.Surface_getMoistureScenarioDescriptionByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name)), true);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public double getMoistureScenarioOneHourByName(SWIGTYPE_p_std__string name, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioOneHourByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioOneHourByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public double getMoistureScenarioTenHourByName(SWIGTYPE_p_std__string name, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioTenHourByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioTenHourByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public double getMoistureScenarioHundredHourByName(SWIGTYPE_p_std__string name, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioHundredHourByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioHundredHourByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public double getMoistureScenarioLiveHerbaceousByName(SWIGTYPE_p_std__string name, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioLiveHerbaceousByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioLiveHerbaceousByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public double getMoistureScenarioLiveWoodyByName(SWIGTYPE_p_std__string name, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioLiveWoodyByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
-    if (BehaveCorePINVOKE.SWIGPendingException.Pending) throw BehaveCorePINVOKE.SWIGPendingException.Retrieve();
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioLiveWoodyByName(swigCPtr, SWIGTYPE_p_std__string.getCPtr(name), (int)moistureUnits);
+    if (BehavePINVOKE.SWIGPendingException.Pending) throw BehavePINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public bool getIsMoistureScenarioDefinedByIndex(int index) {
-    bool ret = BehaveCorePINVOKE.Surface_getIsMoistureScenarioDefinedByIndex(swigCPtr, index);
+    bool ret = BehavePINVOKE.Surface_getIsMoistureScenarioDefinedByIndex(swigCPtr, index);
     return ret;
   }
 
   public SWIGTYPE_p_std__string getMoistureScenarioNameByIndex(int index) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.Surface_getMoistureScenarioNameByIndex(swigCPtr, index), true);
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.Surface_getMoistureScenarioNameByIndex(swigCPtr, index), true);
     return ret;
   }
 
   public SWIGTYPE_p_std__string getMoistureScenarioDescriptionByIndex(int index) {
-    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehaveCorePINVOKE.Surface_getMoistureScenarioDescriptionByIndex(swigCPtr, index), true);
+    SWIGTYPE_p_std__string ret = new SWIGTYPE_p_std__string(BehavePINVOKE.Surface_getMoistureScenarioDescriptionByIndex(swigCPtr, index), true);
     return ret;
   }
 
   public double getMoistureScenarioOneHourByIndex(int index, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioOneHourByIndex(swigCPtr, index, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioOneHourByIndex(swigCPtr, index, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureScenarioTenHourByIndex(int index, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioTenHourByIndex(swigCPtr, index, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioTenHourByIndex(swigCPtr, index, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureScenarioHundredHourByIndex(int index, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioHundredHourByIndex(swigCPtr, index, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioHundredHourByIndex(swigCPtr, index, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureScenarioLiveHerbaceousByIndex(int index, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioLiveHerbaceousByIndex(swigCPtr, index, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioLiveHerbaceousByIndex(swigCPtr, index, (int)moistureUnits);
     return ret;
   }
 
   public double getMoistureScenarioLiveWoodyByIndex(int index, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getMoistureScenarioLiveWoodyByIndex(swigCPtr, index, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getMoistureScenarioLiveWoodyByIndex(swigCPtr, index, (int)moistureUnits);
     return ret;
   }
 
   public double getWindSpeed(SpeedUnits.SpeedUnitsEnum windSpeedUnits, WindHeightInputMode.WindHeightInputModeEnum windHeightInputMode) {
-    double ret = BehaveCorePINVOKE.Surface_getWindSpeed(swigCPtr, (int)windSpeedUnits, (int)windHeightInputMode);
+    double ret = BehavePINVOKE.Surface_getWindSpeed(swigCPtr, (int)windSpeedUnits, (int)windHeightInputMode);
     return ret;
   }
 
   public double getWindDirection() {
-    double ret = BehaveCorePINVOKE.Surface_getWindDirection(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getWindDirection(swigCPtr);
     return ret;
   }
 
   public double getSlope(SlopeUnits.SlopeUnitsEnum slopeUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getSlope(swigCPtr, (int)slopeUnits);
+    double ret = BehavePINVOKE.Surface_getSlope(swigCPtr, (int)slopeUnits);
     return ret;
   }
 
   public double getAspect() {
-    double ret = BehaveCorePINVOKE.Surface_getAspect(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getAspect(swigCPtr);
     return ret;
   }
 
   public double getCanopyCover(FractionUnits.FractionUnitsEnum coverUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getCanopyCover(swigCPtr, (int)coverUnits);
+    double ret = BehavePINVOKE.Surface_getCanopyCover(swigCPtr, (int)coverUnits);
     return ret;
   }
 
   public double getCanopyHeight(LengthUnits.LengthUnitsEnum canopyHeightUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getCanopyHeight(swigCPtr, (int)canopyHeightUnits);
+    double ret = BehavePINVOKE.Surface_getCanopyHeight(swigCPtr, (int)canopyHeightUnits);
     return ret;
   }
 
   public double getCrownRatio(FractionUnits.FractionUnitsEnum crownRatioUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getCrownRatio(swigCPtr, (int)crownRatioUnits);
+    double ret = BehavePINVOKE.Surface_getCrownRatio(swigCPtr, (int)crownRatioUnits);
     return ret;
   }
 
   public WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum getWindAndSpreadOrientationMode() {
-    WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum ret = (WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum)BehaveCorePINVOKE.Surface_getWindAndSpreadOrientationMode(swigCPtr);
+    WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum ret = (WindAndSpreadOrientationMode.WindAndSpreadOrientationModeEnum)BehavePINVOKE.Surface_getWindAndSpreadOrientationMode(swigCPtr);
     return ret;
   }
 
   public WindHeightInputMode.WindHeightInputModeEnum getWindHeightInputMode() {
-    WindHeightInputMode.WindHeightInputModeEnum ret = (WindHeightInputMode.WindHeightInputModeEnum)BehaveCorePINVOKE.Surface_getWindHeightInputMode(swigCPtr);
+    WindHeightInputMode.WindHeightInputModeEnum ret = (WindHeightInputMode.WindHeightInputModeEnum)BehavePINVOKE.Surface_getWindHeightInputMode(swigCPtr);
     return ret;
   }
 
   public WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum getWindAdjustmentFactorCalculationMethod() {
-    WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum ret = (WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum)BehaveCorePINVOKE.Surface_getWindAdjustmentFactorCalculationMethod(swigCPtr);
+    WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum ret = (WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum)BehavePINVOKE.Surface_getWindAdjustmentFactorCalculationMethod(swigCPtr);
     return ret;
   }
 
   public bool getIsUsingPalmettoGallberry() {
-    bool ret = BehaveCorePINVOKE.Surface_getIsUsingPalmettoGallberry(swigCPtr);
+    bool ret = BehavePINVOKE.Surface_getIsUsingPalmettoGallberry(swigCPtr);
     return ret;
   }
 
   public double getAgeOfRough() {
-    double ret = BehaveCorePINVOKE.Surface_getAgeOfRough(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getAgeOfRough(swigCPtr);
     return ret;
   }
 
   public double getHeightOfUnderstory(LengthUnits.LengthUnitsEnum heightUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getHeightOfUnderstory(swigCPtr, (int)heightUnits);
+    double ret = BehavePINVOKE.Surface_getHeightOfUnderstory(swigCPtr, (int)heightUnits);
     return ret;
   }
 
   public double getPalmettoGallberryCoverage(FractionUnits.FractionUnitsEnum coverageUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberryCoverage(swigCPtr, (int)coverageUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberryCoverage(swigCPtr, (int)coverageUnits);
     return ret;
   }
 
   public double getOverstoryBasalArea(BasalAreaUnits.BasalAreaUnitsEnum basalAreaUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getOverstoryBasalArea(swigCPtr, (int)basalAreaUnits);
+    double ret = BehavePINVOKE.Surface_getOverstoryBasalArea(swigCPtr, (int)basalAreaUnits);
     return ret;
   }
 
   public double getPalmettoGallberryMoistureOfExtinctionDead(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberryMoistureOfExtinctionDead(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberryMoistureOfExtinctionDead(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getPalmettoGallberryHeatOfCombustionDead(HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberryHeatOfCombustionDead(swigCPtr, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberryHeatOfCombustionDead(swigCPtr, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getPalmettoGallberryHeatOfCombustionLive(HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberryHeatOfCombustionLive(swigCPtr, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberryHeatOfCombustionLive(swigCPtr, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getPalmettoGallberyDeadFineFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyDeadFineFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyDeadFineFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyDeadMediumFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyDeadMediumFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyDeadMediumFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyDeadFoliageLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyDeadFoliageLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyDeadFoliageLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyLitterLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyLitterLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyLitterLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyLiveFineFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyLiveFineFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyLiveFineFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyLiveMediumFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyLiveMediumFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyLiveMediumFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyLiveFoliageLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyLiveFoliageLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyLiveFoliageLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getPalmettoGallberyFuelBedDepth(LengthUnits.LengthUnitsEnum depthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getPalmettoGallberyFuelBedDepth(swigCPtr, (int)depthUnits);
+    double ret = BehavePINVOKE.Surface_getPalmettoGallberyFuelBedDepth(swigCPtr, (int)depthUnits);
     return ret;
   }
 
   public bool getIsUsingWesternAspen() {
-    bool ret = BehaveCorePINVOKE.Surface_getIsUsingWesternAspen(swigCPtr);
+    bool ret = BehavePINVOKE.Surface_getIsUsingWesternAspen(swigCPtr);
     return ret;
   }
 
   public int getAspenFuelModelNumber() {
-    int ret = BehaveCorePINVOKE.Surface_getAspenFuelModelNumber(swigCPtr);
+    int ret = BehavePINVOKE.Surface_getAspenFuelModelNumber(swigCPtr);
     return ret;
   }
 
   public double getAspenCuringLevel(FractionUnits.FractionUnitsEnum curingLevelUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenCuringLevel(swigCPtr, (int)curingLevelUnits);
+    double ret = BehavePINVOKE.Surface_getAspenCuringLevel(swigCPtr, (int)curingLevelUnits);
     return ret;
   }
 
   public double getAspenDBH(LengthUnits.LengthUnitsEnum dbhUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenDBH(swigCPtr, (int)dbhUnits);
+    double ret = BehavePINVOKE.Surface_getAspenDBH(swigCPtr, (int)dbhUnits);
     return ret;
   }
 
   public AspenFireSeverity.AspenFireSeverityEnum getAspenFireSeverity() {
-    AspenFireSeverity.AspenFireSeverityEnum ret = (AspenFireSeverity.AspenFireSeverityEnum)BehaveCorePINVOKE.Surface_getAspenFireSeverity(swigCPtr);
+    AspenFireSeverity.AspenFireSeverityEnum ret = (AspenFireSeverity.AspenFireSeverityEnum)BehavePINVOKE.Surface_getAspenFireSeverity(swigCPtr);
     return ret;
   }
 
   public double getAspenLoadDeadOneHour(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenLoadDeadOneHour(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getAspenLoadDeadOneHour(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getAspenLoadDeadTenHour(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenLoadDeadTenHour(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getAspenLoadDeadTenHour(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getAspenLoadLiveHerbaceous(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenLoadLiveHerbaceous(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getAspenLoadLiveHerbaceous(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getAspenLoadLiveWoody(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenLoadLiveWoody(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getAspenLoadLiveWoody(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getAspenSavrDeadOneHour(SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenSavrDeadOneHour(swigCPtr, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getAspenSavrDeadOneHour(swigCPtr, (int)savrUnits);
     return ret;
   }
 
   public double getAspenSavrDeadTenHour(SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenSavrDeadTenHour(swigCPtr, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getAspenSavrDeadTenHour(swigCPtr, (int)savrUnits);
     return ret;
   }
 
   public double getAspenSavrLiveHerbaceous(SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenSavrLiveHerbaceous(swigCPtr, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getAspenSavrLiveHerbaceous(swigCPtr, (int)savrUnits);
     return ret;
   }
 
   public double getAspenSavrLiveWoody(SurfaceAreaToVolumeUnits.SurfaceAreaToVolumeUnitsEnum savrUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenSavrLiveWoody(swigCPtr, (int)savrUnits);
+    double ret = BehavePINVOKE.Surface_getAspenSavrLiveWoody(swigCPtr, (int)savrUnits);
     return ret;
   }
 
   public double getAspenMortality(FractionUnits.FractionUnitsEnum mortalityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getAspenMortality(swigCPtr, (int)mortalityUnits);
+    double ret = BehavePINVOKE.Surface_getAspenMortality(swigCPtr, (int)mortalityUnits);
     return ret;
   }
 
   public bool getIsUsingChaparral() {
-    bool ret = BehaveCorePINVOKE.Surface_getIsUsingChaparral(swigCPtr);
+    bool ret = BehavePINVOKE.Surface_getIsUsingChaparral(swigCPtr);
     return ret;
   }
 
   public ChaparralFuelType.ChaparralFuelTypeEnum getChaparralFuelType() {
-    ChaparralFuelType.ChaparralFuelTypeEnum ret = (ChaparralFuelType.ChaparralFuelTypeEnum)BehaveCorePINVOKE.Surface_getChaparralFuelType(swigCPtr);
+    ChaparralFuelType.ChaparralFuelTypeEnum ret = (ChaparralFuelType.ChaparralFuelTypeEnum)BehavePINVOKE.Surface_getChaparralFuelType(swigCPtr);
     return ret;
   }
 
   public double getChaparralFuelBedDepth(LengthUnits.LengthUnitsEnum depthUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralFuelBedDepth(swigCPtr, (int)depthUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralFuelBedDepth(swigCPtr, (int)depthUnits);
     return ret;
   }
 
   public double getChaparralFuelDeadLoadFraction() {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralFuelDeadLoadFraction(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getChaparralFuelDeadLoadFraction(swigCPtr);
     return ret;
   }
 
   public double getChaparralTotalFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralTotalFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralTotalFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralAge(TimeUnits.TimeUnitsEnum ageUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralAge(swigCPtr, (int)ageUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralAge(swigCPtr, (int)ageUnits);
     return ret;
   }
 
   public double getChaparralDaysSinceMayFirst() {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralDaysSinceMayFirst(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getChaparralDaysSinceMayFirst(swigCPtr);
     return ret;
   }
 
   public double getChaparralDeadFuelFraction() {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralDeadFuelFraction(swigCPtr);
+    double ret = BehavePINVOKE.Surface_getChaparralDeadFuelFraction(swigCPtr);
     return ret;
   }
 
   public double getChaparralDeadMoistureOfExtinction(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralDeadMoistureOfExtinction(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralDeadMoistureOfExtinction(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getChaparralLiveMoistureOfExtinction(FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLiveMoistureOfExtinction(swigCPtr, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLiveMoistureOfExtinction(swigCPtr, (int)moistureUnits);
     return ret;
   }
 
   public double getChaparralDensity(FuelLifeState.FuelLifeStateEnum lifeState, int sizeClass, DensityUnits.DensityUnitsEnum densityUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralDensity(swigCPtr, (int)lifeState, sizeClass, (int)densityUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralDensity(swigCPtr, (int)lifeState, sizeClass, (int)densityUnits);
     return ret;
   }
 
   public double getChaparralHeatOfCombustion(FuelLifeState.FuelLifeStateEnum lifeState, int sizeClass, HeatOfCombustionUnits.HeatOfCombustionUnitsEnum heatOfCombustionUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralHeatOfCombustion(swigCPtr, (int)lifeState, sizeClass, (int)heatOfCombustionUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralHeatOfCombustion(swigCPtr, (int)lifeState, sizeClass, (int)heatOfCombustionUnits);
     return ret;
   }
 
   public double getChaparralLoadDeadLessThanQuarterInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadDeadLessThanQuarterInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadDeadLessThanQuarterInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadDeadQuarterInchToLessThanHalfInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadDeadQuarterInchToLessThanHalfInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadDeadHalfInchToLessThanOneInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadDeadHalfInchToLessThanOneInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadDeadHalfInchToLessThanOneInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadDeadOneInchToThreeInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadDeadOneInchToThreeInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadDeadOneInchToThreeInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadLiveLeaves(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadLiveLeaves(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadLiveLeaves(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadLiveStemsLessThanQuaterInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadLiveStemsLessThanQuaterInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadLiveStemsLessThanQuaterInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadLiveQuarterInchToLessThanHalfInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadLiveQuarterInchToLessThanHalfInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadLiveHalfInchToLessThanOneInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadLiveHalfInchToLessThanOneInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadLiveHalfInchToLessThanOneInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralLoadLiveOneInchToThreeInch(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralLoadLiveOneInchToThreeInch(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralLoadLiveOneInchToThreeInch(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralMoisture(FuelLifeState.FuelLifeStateEnum lifeState, int sizeClass, FractionUnits.FractionUnitsEnum moistureUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralMoisture(swigCPtr, (int)lifeState, sizeClass, (int)moistureUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralMoisture(swigCPtr, (int)lifeState, sizeClass, (int)moistureUnits);
     return ret;
   }
 
   public double getChaparralTotalDeadFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralTotalDeadFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralTotalDeadFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 
   public double getChaparralTotalLiveFuelLoad(LoadingUnits.LoadingUnitsEnum loadingUnits) {
-    double ret = BehaveCorePINVOKE.Surface_getChaparralTotalLiveFuelLoad(swigCPtr, (int)loadingUnits);
+    double ret = BehavePINVOKE.Surface_getChaparralTotalLiveFuelLoad(swigCPtr, (int)loadingUnits);
     return ret;
   }
 

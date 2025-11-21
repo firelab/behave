@@ -203,10 +203,10 @@ IF(COMPUTE_SPOT_TORCHING_TREES)
 ENDIF()
 
 IF(LIBRARY)
-    ADD_LIBRARY(BehaveCore 
+    ADD_LIBRARY(Behave 
         SHARED
         ${SOURCE}
         swig/behave_csharp_wrap.cxx
         ${HEADERS})
-        TARGET_LINK_LIBRARIES(BehaveCore)
+	TARGET_LINK_LIBRARIES(Behave)
 ENDIF()

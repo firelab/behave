@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class FuelLifeState : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class FuelLifeState : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_FuelLifeState(swigCPtr);
+          BehavePINVOKE.delete_FuelLifeState(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public FuelLifeState() : this(BehaveCorePINVOKE.new_FuelLifeState(), true) {
+  public FuelLifeState() : this(BehavePINVOKE.new_FuelLifeState(), true) {
   }
 
   public enum FuelLifeStateEnum {

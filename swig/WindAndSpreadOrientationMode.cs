@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class WindAndSpreadOrientationMode : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,14 +50,14 @@ public class WindAndSpreadOrientationMode : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_WindAndSpreadOrientationMode(swigCPtr);
+          BehavePINVOKE.delete_WindAndSpreadOrientationMode(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
-  public WindAndSpreadOrientationMode() : this(BehaveCorePINVOKE.new_WindAndSpreadOrientationMode(), true) {
+  public WindAndSpreadOrientationMode() : this(BehavePINVOKE.new_WindAndSpreadOrientationMode(), true) {
   }
 
   public enum WindAndSpreadOrientationModeEnum {

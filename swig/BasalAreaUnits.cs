@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehaveCore {
+namespace BehavCore {
 
 public class BasalAreaUnits : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -50,7 +50,7 @@ public class BasalAreaUnits : global::System.IDisposable {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          BehaveCorePINVOKE.delete_BasalAreaUnits(swigCPtr);
+          BehavePINVOKE.delete_BasalAreaUnits(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -58,16 +58,16 @@ public class BasalAreaUnits : global::System.IDisposable {
   }
 
   public static double toBaseUnits(double value, BasalAreaUnits.BasalAreaUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.BasalAreaUnits_toBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.BasalAreaUnits_toBaseUnits(value, (int)units);
     return ret;
   }
 
   public static double fromBaseUnits(double value, BasalAreaUnits.BasalAreaUnitsEnum units) {
-    double ret = BehaveCorePINVOKE.BasalAreaUnits_fromBaseUnits(value, (int)units);
+    double ret = BehavePINVOKE.BasalAreaUnits_fromBaseUnits(value, (int)units);
     return ret;
   }
 
-  public BasalAreaUnits() : this(BehaveCorePINVOKE.new_BasalAreaUnits(), true) {
+  public BasalAreaUnits() : this(BehavePINVOKE.new_BasalAreaUnits(), true) {
   }
 
   public enum BasalAreaUnitsEnum {
