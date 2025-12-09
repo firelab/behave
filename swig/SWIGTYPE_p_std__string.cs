@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehavCore {
+namespace BehaveCore {
 
 public class SWIGTYPE_p_std__string {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;

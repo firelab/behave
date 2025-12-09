@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehavCore {
+namespace BehaveCore {
 
 public class Crown : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -381,6 +381,16 @@ public class Crown : global::System.IDisposable {
 
   public void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod.WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod) {
     BehavePINVOKE.Crown_setWindAdjustmentFactorCalculationMethod(swigCPtr, (int)windAdjustmentFactorCalculationMethod);
+  }
+
+  public double getDirectionOfMaxSpread() {
+    double ret = BehavePINVOKE.Crown_getDirectionOfMaxSpread(swigCPtr);
+    return ret;
+  }
+
+  public double getFireEccentricity() {
+    double ret = BehavePINVOKE.Crown_getFireEccentricity(swigCPtr);
+    return ret;
   }
 
   public int getFuelModelNumber() {

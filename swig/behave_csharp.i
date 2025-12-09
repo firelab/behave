@@ -1,4 +1,5 @@
 /* File : behave_csharp.i */
+/*create by typing swig -c++ -csharp -namespace BehaveCore behave_csharp.i*/
 %module Behave
 %ignore *::operator=;
 

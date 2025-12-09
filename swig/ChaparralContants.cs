@@ -8,7 +8,7 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace BehavCore {
+namespace BehaveCore {
 
 public class ChaparralContants : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
