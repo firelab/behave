@@ -194,6 +194,16 @@ double SlopeTool::getSlopeFromMapMeasurements(SlopeUnits::SlopeUnitsEnum slopeUn
     return SlopeUnits::fromBaseUnits(slopeFromMapMeasurements_, slopeUnits);
 }
 
+double SlopeTool::getSlopeFromMapMeasurementsInPercent() const
+{
+    return SlopeUnits::fromBaseUnits(slopeFromMapMeasurements_, SlopeUnits::Percent);
+}
+
+double SlopeTool::getSlopeFromMapMeasurementsInDegrees() const
+{
+    return SlopeUnits::fromBaseUnits(slopeFromMapMeasurements_, SlopeUnits::Degrees);
+}
+
 double SlopeTool::getSlopeHorizontalDistanceFromMapMeasurements(LengthUnits::LengthUnitsEnum distanceUnits) const
 {
     return LengthUnits::fromBaseUnits(slopeHorizontalDistance_, distanceUnits);
