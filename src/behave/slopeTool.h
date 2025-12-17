@@ -62,6 +62,8 @@ public:
 
     // calculateSlopeFromMapMeasurements() getters
     double getSlopeFromMapMeasurements(SlopeUnits::SlopeUnitsEnum slopeUnits) const;
+    double getSlopeFromMapMeasurementsInPercent() const;
+    double getSlopeFromMapMeasurementsInDegrees() const;
     double getSlopeHorizontalDistanceFromMapMeasurements(LengthUnits::LengthUnitsEnum distanceUnits) const;
     double getSlopeElevationChangeFromMapMeasurements(LengthUnits::LengthUnitsEnum elevationUnits) const;
 
