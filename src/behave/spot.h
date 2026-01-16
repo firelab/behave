@@ -80,6 +80,10 @@ public:
       double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode,
       int torchingTrees, double DBH, LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
       SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits);
+  void updateSpotInputsForActiveCrownFire(SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+      LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits,
+      double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode, 
+      double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
 
   // Spot Inputs Getters
     double getBurningPileFlameHeight(LengthUnits::LengthUnitsEnum flameHeightUnits) const;
