@@ -291,7 +291,7 @@ void Spot::calculateSpottingDistanceFromActiveCrown() {
     double treeHeight = calculateTreeHeight(LengthUnits::Meters);
 
     double firelineIntensity = spotInputs_.getCrownFirelineIntensity(FirelineIntensityUnits::KilowattsPerMeter);
-    double flameLength = spotInputs_.getSurfaceFlameLength(LengthUnits::Meters);
+    double flameLength = spotInputs_.getActiveCrownFlameLength(LengthUnits::Meters);
 
     // Use Byram (1959) FLI approximation if FLI is null
     if ((std::abs(firelineIntensity) < 0.01) && (flameLength > 0.0)) {
@@ -464,6 +464,11 @@ void Spot::setFlameLength(double flameLength, LengthUnits::LengthUnitsEnum flame
     spotInputs_.setSurfaceFlameLength(flameLength, flameLengthUnits);
 }
 
+void Spot::setActiveCrownFlameLength(double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    spotInputs_.setActiveCrownFlameLength(activeCrownFlameLength, flameLengthUnits);
+}
+
 void Spot::setFirelineIntensity(double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits)
 {
     spotInputs_.setCrownFirelineIntensity(firelineIntensity, firelineIntensityUnits);
@@ -565,6 +570,11 @@ SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum Spot::getDownwindCanopyMode()
 double Spot::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
 {
     return spotInputs_.getSurfaceFlameLength(flameLengthUnits);
+}
+
+double Spot::getActiveCrownFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const
+{
+    return spotInputs_.getActiveCrownFlameLength(flameLengthUnits);
 }
 
 double Spot::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const

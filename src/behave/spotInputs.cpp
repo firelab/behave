@@ -57,6 +57,11 @@ void SpotInputs::setSurfaceFlameLength(double surfaceFlameLength, LengthUnits::L
     surfaceFlameLength_ = LengthUnits::toBaseUnits(surfaceFlameLength, flameLengthUnits);
 }
 
+void SpotInputs::setActiveCrownFlameLength(double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    activeCrownFlameLength_ = LengthUnits::toBaseUnits(activeCrownFlameLength, flameLengthUnits);
+}
+
 void SpotInputs::setCrownFirelineIntensity(double crownFirelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) {
     crownFirelineIntensity_ = FirelineIntensityUnits::toBaseUnits(crownFirelineIntensity, firelineIntensityUnits);
 }
@@ -156,7 +161,7 @@ void SpotInputs::updateSpotInputsForActiveCrownFire(
 {
     initializeMembers();
     setLocation(location);
-    setSurfaceFlameLength(activeCrownFlameLength, flameLengthUnits);
+    setActiveCrownFlameLength(activeCrownFlameLength, flameLengthUnits);
     setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
     setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
     setTreeHeight(treeHeight, treeHeightUnits);
@@ -187,6 +192,11 @@ SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum SpotInputs::getDownWindCanopy
 double SpotInputs::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum surfaceFlameLengthUnits) const
 {
     return LengthUnits::fromBaseUnits(surfaceFlameLength_, surfaceFlameLengthUnits);
+}
+
+double SpotInputs::getActiveCrownFlameLength(LengthUnits::LengthUnitsEnum activeCrownFlameLengthUnits) const
+{
+    return LengthUnits::fromBaseUnits(activeCrownFlameLength_, activeCrownFlameLengthUnits);
 }
 
 double SpotInputs::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
@@ -231,6 +241,7 @@ double SpotInputs::getWindSpeedAtTwentyFeet(SpeedUnits::SpeedUnitsEnum windSpeed
 
 void SpotInputs::initializeMembers()
 {
+    activeCrownFlameLength_ = 0.0;
     downwindCoverHeight_ = 0.0;
     downwindCanopyMode_ = SpotDownWindCanopyMode::CLOSED;
     crownFirelineIntensity_ = 0.0;

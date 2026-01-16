@@ -82,6 +82,7 @@ public:
     void setDownwindCoverHeight(double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits);
     void setDownwindCanopyMode(SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode);
     void setSurfaceFlameLength(double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
+    void setActiveCrownFlameLength(double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits);
     void setCrownFirelineIntensity(double crownFirelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits);
     void setLocation(SpotFireLocation::SpotFireLocationEnum location);
     void setRidgeToValleyDistance(double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits);
@@ -114,6 +115,7 @@ public:
     double getDownwindCoverHeight(LengthUnits::LengthUnitsEnum coverHeightUnits) const;
     SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum getDownWindCanopyMode() const;
     double getSurfaceFlameLength(LengthUnits::LengthUnitsEnum flameLengthUnits) const;
+    double getActiveCrownFlameLength(LengthUnits::LengthUnitsEnum activeCrownFlameLengthUnits) const;
     double getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const;
     SpotFireLocation::SpotFireLocationEnum getLocation() const;
     double getRidgeToValleyDistance(LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits) const;
@@ -136,6 +138,7 @@ public:
 protected:
     void initializeMembers();
 
+    double activeCrownFlameLength_ = 0.0;
     double DBH_ = 0.0;
     double downwindCoverHeight_ = 0.0;
     SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode_;
