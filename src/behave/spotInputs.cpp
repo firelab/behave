@@ -57,6 +57,11 @@ void SpotInputs::setSurfaceFlameLength(double surfaceFlameLength, LengthUnits::L
     surfaceFlameLength_ = LengthUnits::toBaseUnits(surfaceFlameLength, flameLengthUnits);
 }
 
+void SpotInputs::setActiveCrownFlameLength(double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    activeCrownFlameLength_ = LengthUnits::toBaseUnits(activeCrownFlameLength, flameLengthUnits);
+}
+
 void SpotInputs::setCrownFirelineIntensity(double crownFirelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) {
     crownFirelineIntensity_ = FirelineIntensityUnits::toBaseUnits(crownFirelineIntensity, firelineIntensityUnits);
 }
@@ -101,6 +106,7 @@ void SpotInputs::updateSpotInputsForBurningPile(SpotFireLocation::SpotFireLocati
     double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downindCanopyMode,
     double buringPileFlameHeight, LengthUnits::LengthUnitsEnum flameHeightUnits, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
+    initializeMembers();
     setLocation(location);
     setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
     setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
@@ -115,6 +121,7 @@ void SpotInputs::updateSpotInputsForSurfaceFire(SpotFireLocation::SpotFireLocati
     double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downindCanopyMode,
     double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double surfaceFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
 {
+    initializeMembers();
     setLocation(location);
     setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
     setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
@@ -130,6 +137,7 @@ void SpotInputs::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLoca
     int torchingTrees, double DBH, LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum  treeHeightUnits,
     SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)
 {
+    initializeMembers();
     setLocation(location);
     setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
     setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
@@ -139,6 +147,25 @@ void SpotInputs::updateSpotInputsForTorchingTrees(SpotFireLocation::SpotFireLoca
     setDBH(DBH, DBHUnits);
     setTreeHeight(treeHeight, treeHeightUnits);
     setTreeSpecies(treeSpecies);
+    setWindSpeedAtTwentyFeet(windSpeedAtTwentyFeet, windSpeedUnits);
+}
+
+void SpotInputs::updateSpotInputsForActiveCrownFire(
+    SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance,
+    LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation,
+    LengthUnits::LengthUnitsEnum elevationUnits, double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits,
+    SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downindCanopyMode,
+    double windSpeedAtTwentyFeet,
+    SpeedUnits::SpeedUnitsEnum windSpeedUnits,
+    double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)
+{
+    initializeMembers();
+    setLocation(location);
+    setActiveCrownFlameLength(activeCrownFlameLength, flameLengthUnits);
+    setRidgeToValleyDistance(ridgeToValleyDistance, ridgeToValleyDistanceUnits);
+    setRidgeToValleyElevation(ridgeToValleyElevation, elevationUnits);
+    setTreeHeight(treeHeight, treeHeightUnits);
+    setDownwindCanopyMode(downindCanopyMode);
     setWindSpeedAtTwentyFeet(windSpeedAtTwentyFeet, windSpeedUnits);
 }
 
@@ -165,6 +192,11 @@ SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum SpotInputs::getDownWindCanopy
 double SpotInputs::getSurfaceFlameLength(LengthUnits::LengthUnitsEnum surfaceFlameLengthUnits) const
 {
     return LengthUnits::fromBaseUnits(surfaceFlameLength_, surfaceFlameLengthUnits);
+}
+
+double SpotInputs::getActiveCrownFlameLength(LengthUnits::LengthUnitsEnum activeCrownFlameLengthUnits) const
+{
+    return LengthUnits::fromBaseUnits(activeCrownFlameLength_, activeCrownFlameLengthUnits);
 }
 
 double SpotInputs::getCrownFirelineIntensity(FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const
@@ -209,8 +241,10 @@ double SpotInputs::getWindSpeedAtTwentyFeet(SpeedUnits::SpeedUnitsEnum windSpeed
 
 void SpotInputs::initializeMembers()
 {
+    activeCrownFlameLength_ = 0.0;
     downwindCoverHeight_ = 0.0;
     downwindCanopyMode_ = SpotDownWindCanopyMode::CLOSED;
+    crownFirelineIntensity_ = 0.0;
     location_ = SpotFireLocation::MIDSLOPE_WINDWARD;
     ridgeToValleyDistance_ = 0.0;
     ridgeToValleyElevation_ = 0.0;

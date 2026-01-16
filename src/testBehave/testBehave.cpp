@@ -1415,6 +1415,19 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
     observedFlatSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxFlatTerrainSpottingDistanceFromTorchingTrees(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedFlatSpottingDistance, expectedFlatSpottingDistance, error_tolerance);
 
+    /// Active Crown
+    testName = "Test mountain spotting distance from active crown fire, closed downwind canopy";
+    double activeCrownFlameLength = 20.0;
+
+    behaveRun.spot.updateSpotInputsForActiveCrownFire(location, ridgeToValleyDistance, ridgeToValleyDistanceUnits,
+        ridgeToValleyElevation, elevationUnits, treeHeight, treeHeightUnits, downWindCanopyMode,
+        windSpeedAtTwentyFeet, windSpeedUnits, activeCrownFlameLength, flameHeightUnits);
+    behaveRun.spot.calculateSpottingDistanceFromActiveCrown();
+
+    expectedMountainSpottingDistance = 0.384247;
+    observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromActiveCrown(spottingDistanceUnits));
+    reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
+
     std::cout << "Finished testing Spot module\n\n";
 }
 
