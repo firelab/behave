@@ -6,7 +6,7 @@
 # and links to the qtmain.lib library on Windows.
 # *****************************************************************************
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.2.3)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5.0)
 
 # Make use of c++14
 SET(CMAKE_CXX_STANDARD 14)
