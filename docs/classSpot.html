@@ -116,6 +116,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setDownwindCanopyMode
 <tr class="memitem:af438afcb80a6189a2a6f4e4231e54a6e" id="r_af438afcb80a6189a2a6f4e4231e54a6e"><td class="memItemLeft" align="right" valign="top"><a id="af438afcb80a6189a2a6f4e4231e54a6e" name="af438afcb80a6189a2a6f4e4231e54a6e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setFlameLength</b> (double flameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)</td></tr>
 <tr class="separator:af438afcb80a6189a2a6f4e4231e54a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac393b526b872ed209d2ba565928afc68" id="r_ac393b526b872ed209d2ba565928afc68"><td class="memItemLeft" align="right" valign="top"><a id="ac393b526b872ed209d2ba565928afc68" name="ac393b526b872ed209d2ba565928afc68"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setActiveCrownFlameLength</b> (double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)</td></tr>
+<tr class="separator:ac393b526b872ed209d2ba565928afc68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac061ee8386de811bddaa056b442c1e37" id="r_ac061ee8386de811bddaa056b442c1e37"><td class="memItemLeft" align="right" valign="top"><a id="ac061ee8386de811bddaa056b442c1e37" name="ac061ee8386de811bddaa056b442c1e37"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setFirelineIntensity</b> (double firelineIntensity, FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits)</td></tr>
 <tr class="separator:ac061ee8386de811bddaa056b442c1e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +152,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSpotInputsForSu
 <tr class="memitem:a0b32694155db3d9d9d288046c2797c66" id="r_a0b32694155db3d9d9d288046c2797c66"><td class="memItemLeft" align="right" valign="top"><a id="a0b32694155db3d9d9d288046c2797c66" name="a0b32694155db3d9d9d288046c2797c66"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSpotInputsForTorchingTrees</b> (SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits, double downwindCoverHeight, LengthUnits::LengthUnitsEnum coverHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode, int torchingTrees, double DBH, LengthUnits::LengthUnitsEnum DBHUnits, double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits, SpotTreeSpecies::SpotTreeSpeciesEnum treeSpecies, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits)</td></tr>
 <tr class="separator:a0b32694155db3d9d9d288046c2797c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f3523f7eea31ca3ff74498ebb5fb41b" id="r_a1f3523f7eea31ca3ff74498ebb5fb41b"><td class="memItemLeft" align="right" valign="top"><a id="a1f3523f7eea31ca3ff74498ebb5fb41b" name="a1f3523f7eea31ca3ff74498ebb5fb41b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSpotInputsForActiveCrownFire</b> (SpotFireLocation::SpotFireLocationEnum location, double ridgeToValleyDistance, LengthUnits::LengthUnitsEnum ridgeToValleyDistanceUnits, double ridgeToValleyElevation, LengthUnits::LengthUnitsEnum elevationUnits, double treeHeight, LengthUnits::LengthUnitsEnum treeHeightUnits, SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum downwindCanopyMode, double windSpeedAtTwentyFeet, SpeedUnits::SpeedUnitsEnum windSpeedUnits, double activeCrownFlameLength, LengthUnits::LengthUnitsEnum flameLengthUnits)</td></tr>
+<tr class="separator:a1f3523f7eea31ca3ff74498ebb5fb41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a090d956067539b6ad1b99c87ce19362f" id="r_a090d956067539b6ad1b99c87ce19362f"><td class="memItemLeft" align="right" valign="top"><a id="a090d956067539b6ad1b99c87ce19362f" name="a090d956067539b6ad1b99c87ce19362f"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getBurningPileFlameHeight</b> (LengthUnits::LengthUnitsEnum flameHeightUnits) const</td></tr>
 <tr class="separator:a090d956067539b6ad1b99c87ce19362f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,6 +170,9 @@ SpotDownWindCanopyMode::SpotDownWindCanopyModeEnum&#160;</td><td class="memItemR
 <tr class="memitem:af11ae6f93b869aa05a098640bbb6b61f" id="r_af11ae6f93b869aa05a098640bbb6b61f"><td class="memItemLeft" align="right" valign="top"><a id="af11ae6f93b869aa05a098640bbb6b61f" name="af11ae6f93b869aa05a098640bbb6b61f"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getSurfaceFlameLength</b> (LengthUnits::LengthUnitsEnum surfaceFlameLengthUnits) const</td></tr>
 <tr class="separator:af11ae6f93b869aa05a098640bbb6b61f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5411494a636fb9ed410ad4f7aa0b7de8" id="r_a5411494a636fb9ed410ad4f7aa0b7de8"><td class="memItemLeft" align="right" valign="top"><a id="a5411494a636fb9ed410ad4f7aa0b7de8" name="a5411494a636fb9ed410ad4f7aa0b7de8"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>getActiveCrownFlameLength</b> (LengthUnits::LengthUnitsEnum flameLengthUnits) const</td></tr>
+<tr class="separator:a5411494a636fb9ed410ad4f7aa0b7de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2844809a09d2d0aa998256901681dd4" id="r_ab2844809a09d2d0aa998256901681dd4"><td class="memItemLeft" align="right" valign="top"><a id="ab2844809a09d2d0aa998256901681dd4" name="ab2844809a09d2d0aa998256901681dd4"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>getCrownFirelineIntensity</b> (FirelineIntensityUnits::FirelineIntensityUnitsEnum firelineIntensityUnits) const</td></tr>
 <tr class="separator:ab2844809a09d2d0aa998256901681dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
