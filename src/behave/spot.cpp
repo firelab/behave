@@ -300,7 +300,7 @@ void Spot::calculateSpottingDistanceFromActiveCrown() {
 
     double windSpeed = spotInputs_.getWindSpeedAtTwentyFeet(SpeedUnits::KilometersPerHour);;
     double windHeight = 6.096; //20ft in meters
-    double emberDiamMm = 1.0;
+    double emberDiamMm = 0.5;
 
     CrownFirebrandProcessor *processor = new CrownFirebrandProcessor(treeHeight,
                                                                      firelineIntensity,
