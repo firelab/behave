@@ -16,7 +16,7 @@ public:
                             double fireInt=0.,
                             double windSpeed=0.,
                             double windHt=0.,
-                            double emberDiam=1.,
+                            double emberDiam=0.5,
                             double ds=0.2);
     virtual ~CrownFirebrandProcessor(){}
 
@@ -46,10 +46,10 @@ public:
 
     // These are input property mutators
     void set( double canopyHt=0., double fireInt=0., double windSpeed=0.,
-              double windHt=0., double emberDiam=1., double ds=0.2 ) ;
+              double windHt=0., double emberDiam=0.5, double ds=0.2 ) ;
     void setCanopyHeight( double canopyHt=0. ) ;
     void setDeltaStep( double deltaStep=0.2 ) ;
-    void setEmberDiameter( double emberDiam=1. ) ;
+    void setEmberDiameter( double emberDiam=0.5 ) ;
     void setFirelineIntensity( double fireInt=0. ) ;
     void setWindSpeed( double windSpeed=0. ) ;
     void setWindSpeedHeight( double windHt=0. ) ;
