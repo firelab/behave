@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['set_0',['set',['../classCrownFirebrandProcessor.html#a42f7485bf6276128ef305c8819f4080e',1,'CrownFirebrandProcessor']]],
+  ['set_0',['set',['../classCrownFirebrandProcessor.html#abd70693bddedb1d0762d69f711ae9610',1,'CrownFirebrandProcessor']]],
   ['setage_1',['setAge',['../classChaparralFuel.html#a69a8ad77420a87f6161e6d8cc9b6d256',1,'ChaparralFuel']]],
   ['setattack_2',['setAttack',['../classSem_1_1Contain.html#ab190d9ea71f1ffe47b9703e38352758f',1,'Sem::Contain']]],
   ['setcanopyheight_3',['setCanopyHeight',['../classCrownFirebrandProcessor.html#a6b86c9901979883bcb2feb20941404cc',1,'CrownFirebrandProcessor']]],
   ['setdate_4',['setdate',['../classChaparralFuel.html#a786b5e247779ff670674f34b961ca94f',1,'ChaparralFuel::setDate(int daysSinceMayFirst)'],['../classChaparralFuel.html#a5854aa1cd791230fdea6cf2c74f18731',1,'ChaparralFuel::setDate(int month, int day)']]],
   ['setdeltastep_5',['setDeltaStep',['../classCrownFirebrandProcessor.html#ac643d852c3357fba44d9c01e82510f03',1,'CrownFirebrandProcessor']]],
   ['setdepth_6',['setDepth',['../classChaparralFuel.html#a8993ac274d2274ab354870a36247c983',1,'ChaparralFuel']]],
-  ['setemberdiameter_7',['setEmberDiameter',['../classCrownFirebrandProcessor.html#a249aee9dcfd3f8894be366c1319a1a4c',1,'CrownFirebrandProcessor']]],
+  ['setemberdiameter_7',['setEmberDiameter',['../classCrownFirebrandProcessor.html#ae86dc4cc447380049a41d3f191f645a0',1,'CrownFirebrandProcessor']]],
   ['setfirelineintensity_8',['setFirelineIntensity',['../classCrownFirebrandProcessor.html#a7cbed10f743f9fbc89b713f7c0632117',1,'CrownFirebrandProcessor']]],
   ['setflamelengthorscorchheightvalue_9',['setflamelengthorscorchheightvalue',['../classMortality.html#a5a30cb7b621005ef934c5a496bdd184f',1,'Mortality::setFlameLengthOrScorchHeightValue()'],['../classMortalityInputs.html#aad0561e61cc8192f8444e6523a4293e0',1,'MortalityInputs::setFlameLengthOrScorchHeightValue()']]],
   ['setlivefuelheatofcombustion_10',['setLiveFuelHeatOfCombustion',['../classChaparralFuel.html#a7e48c5976aa6172edc0d604ef94a461c',1,'ChaparralFuel']]],
