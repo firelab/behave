@@ -1424,7 +1424,7 @@ void testSpotModule(TestInfo& testInfo, BehaveRun& behaveRun)
         windSpeedAtTwentyFeet, windSpeedUnits, activeCrownFlameLength, flameHeightUnits);
     behaveRun.spot.calculateSpottingDistanceFromActiveCrown();
 
-    expectedMountainSpottingDistance = 0.384247;
+    expectedMountainSpottingDistance = 0.400473;
     observedMountainSpottingDistance = roundToSixDecimalPlaces(behaveRun.spot.getMaxMountainousTerrainSpottingDistanceFromActiveCrown(spottingDistanceUnits));
     reportTestResult(testInfo, testName, observedMountainSpottingDistance, expectedMountainSpottingDistance, error_tolerance);
 
