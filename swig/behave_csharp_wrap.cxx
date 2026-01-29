@@ -353,11 +353,11 @@ template <typename T> T SwigValueInit() {
 #endif
 
 
-	#include "..\src\behave\surface.h"
-	#include "..\src\behave\crown.h"
-	#include "..\src\behave\fuelModels.h"
-	#include "..\src\behave\surfaceInputEnums.h"
-	#include "..\src\behave\behaveUnits.h"
+	#include "../src/behave/surface.h"
+	#include "../src/behave/crown.h"
+	#include "../src/behave/fuelModels.h"
+	#include "../src/behave/surfaceInputEnums.h"
+	#include "../src/behave/behaveUnits.h"
 
 
 #ifdef __cplusplus
