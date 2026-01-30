@@ -80,8 +80,14 @@ double Mortality::calculateScorchHeight(double firelineIntensity, FirelineIntens
 {
     firelineIntensity = FirelineIntensityUnits::toBaseUnits(firelineIntensity, firelineIntensityUnits);
 
-    double midFlameWindSpeedInBaseUnits = SpeedUnits::toBaseUnits(midFlameWindSpeed, windSpeedUnits);
-    double midFlameWindSpeedInMilesPerHour = SpeedUnits::fromBaseUnits(midFlameWindSpeedInBaseUnits, SpeedUnits::MilesPerHour);
+    double midFlameWindSpeedInBaseUnits;
+    double midFlameWindSpeedInMilesPerHour ;
+    if (windSpeedUnits != SpeedUnits::MilesPerHour) {
+         midFlameWindSpeedInBaseUnits = SpeedUnits::toBaseUnits(midFlameWindSpeed, windSpeedUnits);
+         midFlameWindSpeedInMilesPerHour = SpeedUnits::fromBaseUnits(midFlameWindSpeedInBaseUnits, SpeedUnits::MilesPerHour);
+    } else {
+        midFlameWindSpeedInMilesPerHour = midFlameWindSpeed;
+    }
 
     airTemperature = TemperatureUnits::toBaseUnits(airTemperature, temperatureUnits);
     double scorchHeight = ((firelineIntensity < 1.0e-07)
@@ -553,7 +559,7 @@ double Mortality::getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits
     flameLength = mortalityInputs_.getFlameLength(LengthUnits::Feet);
     scorchHeight = mortalityInputs_.getScorchHeight(scorchHeightUnits);
     firelineIntensity = mortalityInputs_.getFirelineIntensity(FirelineIntensityUnits::BtusPerFootPerSecond);
-    midFlameWindSpeed = mortalityInputs_.getMidFlameWindSpeed(SpeedUnits::FeetPerMinute);
+    midFlameWindSpeed = mortalityInputs_.getMidFlameWindSpeed(SpeedUnits::MilesPerHour);
     airTemperature = mortalityInputs_.getAirTemperature(TemperatureUnits::Fahrenheit);
     flameLengthOrScorchHeightSwitch = mortalityInputs_.getFlameLengthOrScorchHeightSwitch();
 
@@ -563,7 +569,7 @@ double Mortality::getScorchHeight(LengthUnits::LengthUnitsEnum scorchHeightUnits
         return calculateScorchHeight(firelineIntensity,
                                      FirelineIntensityUnits::BtusPerFootPerSecond,
                                      midFlameWindSpeed,
-                                     SpeedUnits::FeetPerMinute,
+                                     SpeedUnits::MilesPerHour,
                                      airTemperature,
                                      TemperatureUnits::Fahrenheit,
                                      LengthUnits::Feet);
