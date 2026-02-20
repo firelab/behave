@@ -427,70 +427,6 @@ double PressureUnits::toBaseUnits(double value, PressureUnitsEnum units) {
       }
       case HectoPascal:
       {
-          value /= HECTOPASCAL_TO_PASCAL;
-          break;
-      }
-      case KiloPascal:
-      {
-          value /= KILOPASCAL_TO_PASCAL;
-          break;
-      }
-      case MegaPascal:
-      {
-          value /= MEGAPASCAL_TO_PASCAL;
-          break;
-      }
-      case GigaPascal:
-      {
-          value /= GIGAPASCAL_TO_PASCAL;
-          break;
-      }
-      case Bar:
-      {
-          value /= BAR_TO_PASCAL;
-          break;
-      }
-      case Atmosphere:
-      {
-          value /= ATMOSPHERE_TO_PASCAL;
-          break;
-      }
-      case TechnicalAtmosphere:
-      {
-          value /= TECH_ATMOSPHERE_TO_PASCAL;
-          break;
-      }
-      case PoundPerSquareInch:
-      {
-          value /= POUNDS_PER_SQUARE_INCH;
-          break;
-      }
-  }
-
-  return value;
-}
-
-double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
-  if (value == 0.0) return 0.0;
-  // Pressure to base units constants
-  const double HECTOPASCAL_TO_PASCAL     = 1e2;
-  const double KILOPASCAL_TO_PASCAL      = 1e3;
-  const double MEGAPASCAL_TO_PASCAL      = 1e6;
-  const double GIGAPASCAL_TO_PASCAL      = 1e9;
-  const double BAR_TO_PASCAL             = 1e5;
-  const double ATMOSPHERE_TO_PASCAL      = 101325;
-  const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
-  const double POUNDS_PER_SQUARE_INCH    = 6894.757;
-
-  switch (units)
-  {
-      case Pascal:
-      {
-          // Already in base, nothing to do
-          break;
-      }
-      case HectoPascal:
-      {
           value *= HECTOPASCAL_TO_PASCAL;
           break;
       }
@@ -524,8 +460,72 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
           value *= TECH_ATMOSPHERE_TO_PASCAL;
           break;
       }
-      case PoundPerSquareInch: {
+      case PoundPerSquareInch:
+      {
           value *= POUNDS_PER_SQUARE_INCH;
+          break;
+      }
+  }
+
+  return value;
+}
+
+double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
+  if (value == 0.0) return 0.0;
+  // Pressure to base units constants
+  const double HECTOPASCAL_TO_PASCAL     = 1e2;
+  const double KILOPASCAL_TO_PASCAL      = 1e3;
+  const double MEGAPASCAL_TO_PASCAL      = 1e6;
+  const double GIGAPASCAL_TO_PASCAL      = 1e9;
+  const double BAR_TO_PASCAL             = 1e5;
+  const double ATMOSPHERE_TO_PASCAL      = 101325;
+  const double TECH_ATMOSPHERE_TO_PASCAL = 98066.5;
+  const double POUNDS_PER_SQUARE_INCH    = 6894.757;
+
+  switch (units)
+  {
+      case Pascal:
+      {
+          // Already in base, nothing to do
+          break;
+      }
+      case HectoPascal:
+      {
+          value /= HECTOPASCAL_TO_PASCAL;
+          break;
+      }
+      case KiloPascal:
+      {
+          value /= KILOPASCAL_TO_PASCAL;
+          break;
+      }
+      case MegaPascal:
+      {
+          value /= MEGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case GigaPascal:
+      {
+          value /= GIGAPASCAL_TO_PASCAL;
+          break;
+      }
+      case Bar:
+      {
+          value /= BAR_TO_PASCAL;
+          break;
+      }
+      case Atmosphere:
+      {
+          value /= ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case TechnicalAtmosphere:
+      {
+          value /= TECH_ATMOSPHERE_TO_PASCAL;
+          break;
+      }
+      case PoundPerSquareInch: {
+          value /= POUNDS_PER_SQUARE_INCH;
           break;
       }
   }
