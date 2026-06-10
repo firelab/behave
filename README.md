@@ -1,6 +1,8 @@
 # Behave
 A new implementation of the extended Rothermel model
 
+kenny was here again
+
 ## Dependencies
 - [CMake](https://cmake.org/download/)
 - [LLVM/Clang](https://clang.llvm.org/)
