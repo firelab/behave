@@ -53,6 +53,7 @@ void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun);
 void testVaporPressureDeficitCalculator(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSimpleSurface(TestInfo& testInfo, BehaveRun& behaveRun);
 void testFuelModelDynamicFlags(TestInfo& testInfo, FuelModels& fuelModels);
+void testMetricFuelModels(TestInfo& testInfo, FuelModels& fuelModels, BehaveRun& behaveRun);
 
 int main()
 {
@@ -88,6 +89,7 @@ int main()
     testVaporPressureDeficitCalculator(testInfo, behaveRun);
     testSimpleSurface(testInfo, behaveRun);
     testFuelModelDynamicFlags(testInfo, fuelModels);
+    testMetricFuelModels(testInfo, fuelModels, behaveRun);
 
     std::cout << "Total tests performed: " << testInfo.numTotalTests << "\n";
     if(testInfo.numPassed > 0)
@@ -2033,4 +2035,70 @@ void testFuelModelDynamicFlags(TestInfo& testInfo, FuelModels& fuelModels)
             + " (" + std::to_string(fuelModelNumber) + ")";
         reportTestResult(testInfo, testName, (double)observedIsDynamic, (double)expectedIsDynamic, error_tolerance);
     }
+}
+
+void testMetricFuelModels(TestInfo& testInfo, FuelModels& fuelModels, BehaveRun& behaveRun)
+{
+    std::cout << "Testing metric fuel models\n";
+
+    string testName = "";
+
+    // Reading V-Hb (110) back in metric units must recover its published values:
+    // depth 0.35 m, loads 0.3/1.2 tonnes/ha, heat 19000 kJ/kg, SAVR 6000 m2/m3.
+    // Moisture of extinction skipped (percent/fraction inconsistency).
+    const int fuelModelNumber = 110;
+
+    testName = "Test metric fuel model V-Hb (110) fuel bed depth in meters";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(fuelModels.getFuelbedDepth(fuelModelNumber, LengthUnits::Meters)),
+        0.35, error_tolerance);
+
+    testName = "Test metric fuel model V-Hb (110) one hour fuel load in tonnes per hectare";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(fuelModels.getFuelLoadOneHour(fuelModelNumber, LoadingUnits::TonnesPerHectare)),
+        0.3, error_tolerance);
+
+    testName = "Test metric fuel model V-Hb (110) live herbaceous fuel load in tonnes per hectare";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(fuelModels.getFuelLoadLiveHerbaceous(fuelModelNumber, LoadingUnits::TonnesPerHectare)),
+        1.2, error_tolerance);
+
+    // heat to/from factors aren't exact inverses; loosen epsilon
+    testName = "Test metric fuel model V-Hb (110) dead heat of combustion in kJ/kg";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(fuelModels.getHeatOfCombustionDead(fuelModelNumber, HeatOfCombustionUnits::KilojoulesPerKilogram)),
+        19000.0, 0.01);
+
+    // SAVR checked in base units (6000 * 0.3048); metric SAVR conversion can't round-trip
+    testName = "Test metric fuel model V-Hb (110) one hour SAVR in ft2/ft3";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(fuelModels.getSavrOneHour(fuelModelNumber, SurfaceAreaToVolumeUnits::SquareFeetOverCubicFeet)),
+        1828.8, error_tolerance);
+
+    // Regression pin: surface run with V-Hb, same inputs as testSimpleSurface
+    double moistureOneHour = 6.0;
+    double moistureTenHour = 7.0;
+    double moistureHundredHour = 8.0;
+    double moistureLiveHerbaceous = 60.0;
+    double moistureLiveWoody = 90.0;
+    double windSpeed = 5.0;
+    double windDirection = 0;
+    double slope = 30.0;
+    double aspect = 0;
+    double canopyCover = 0.0;
+    double canopyHeight = 0.0;
+    double crownRatio = 0.0;
+
+    behaveRun.surface.updateSurfaceInputs(fuelModelNumber, moistureOneHour, moistureTenHour, moistureHundredHour, moistureLiveHerbaceous,
+        moistureLiveWoody, FractionUnits::Percent, windSpeed, SpeedUnits::MilesPerHour, WindHeightInputMode::TwentyFoot, windDirection,
+        WindAndSpreadOrientationMode::RelativeToNorth, slope, SlopeUnits::Percent, aspect, canopyCover, FractionUnits::Percent,
+        canopyHeight, LengthUnits::Feet, crownRatio, FractionUnits::Fraction);
+    behaveRun.surface.setUserProvidedWindAdjustmentFactor(1.0);
+    behaveRun.surface.setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::UserInput);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+
+    testName = "Test metric fuel model V-Hb (110) surface rate of spread";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour)),
+        78.247962, error_tolerance);
 }
