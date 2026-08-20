@@ -43,7 +43,9 @@ public:
     void initializeMembers();
 
     double calculateFirebrandIgnitionProbability(FractionUnits::FractionUnitsEnum desiredUnits);
-    double calculateLightningIgnitionProbability(FractionUnits::FractionUnitsEnum desiredUnits);
+    /* Code is deprecated as the science is no longer considered reliable.
+	   There is no known method to accurately calculate Probability of Ignition from a lightning strike. */
+    // double calculateLightningIgnitionProbability(FractionUnits::FractionUnitsEnum desiredUnits);
 
     void setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureHundredHour(double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits);
@@ -51,12 +53,13 @@ public:
     void setSunShade(double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits);
     void setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits);
     void setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_);
-    void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
+    /* Code is deprecated as the science is no longer considered reliable.
+	   There is no known method to accurately calculate Probability of Ignition from a lightning strike. */
+    // void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
 
     void updateIgniteInputs(double moistureOneHour, double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits,
         double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits,
-        IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
-        LightningCharge::LightningChargeEnum lightningChargeType);
+        IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits);
 
     double getAirTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits);
     double getFuelTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits);
@@ -65,7 +68,9 @@ public:
     double getSunShade(FractionUnits::FractionUnitsEnum desiredUnits);
     double getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits);
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum getFuelBedType();
-    LightningCharge::LightningChargeEnum getLightningChargeType();
+    /* Code is deprecated as the science is no longer considered reliable.
+	   There is no known method to accurately calculate Probability of Ignition from a lightning strike. */
+    // LightningCharge::LightningChargeEnum getLightningChargeType();
 
     // isFuelDepthNeeded() can be used in applications to determine whether user input of fuel bed depth is 
     // neccessary based on the current value of fuel bed used by the ignite module 

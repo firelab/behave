@@ -1506,12 +1506,9 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
     double sunShade = 50.0; // Percent 
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType = IgnitionFuelBedType::DouglasFirDuff;
     double duffDepth = 6.0; // inches
-    LightningCharge::LightningChargeEnum lightningChargeType = LightningCharge::Unknown;
 
     double observedFirebrandIgnitionProbability = 0;
-    double observedLightningIgnitionProbability = 0;
     double expectedFirebrandIgnitionProbability = 0;
-    double expectedLightningIgnitionProbability = 0;
    
     FractionUnits::FractionUnitsEnum mositureUnits = FractionUnits::Percent;
     TemperatureUnits::TemperatureUnitsEnum temperatureUnits = TemperatureUnits::Fahrenheit;
@@ -1519,18 +1516,13 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
     LengthUnits::LengthUnitsEnum duffDepthUnits = LengthUnits::Inches;
 
     expectedFirebrandIgnitionProbability = 0.54831705;
-    expectedLightningIgnitionProbability = 0.39362018;
 
     behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
-        temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
+										temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits);
 
     testName = "Test firebrand ignition probability for Douglas fir duff";
     observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(FractionUnits::Fraction);
     reportTestResult(testInfo, testName, observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, error_tolerance);
-
-    testName = "Test lightning ignition probability for Douglas fir duff";
-    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(FractionUnits::Fraction);
-    reportTestResult(testInfo, testName, observedLightningIgnitionProbability, expectedLightningIgnitionProbability, error_tolerance);
 
     moistureOneHour = 7.0;
     moistureHundredHour = 9.0;
@@ -1538,21 +1530,15 @@ void testIgniteModule(TestInfo& testInfo, BehaveRun& behaveRun)
     sunShade = 25.0; // Percent 
     fuelBedType = IgnitionFuelBedType::LodgepolePineDuff;
     duffDepth = 8.0; // inches
-    lightningChargeType = LightningCharge::Negative;
 
     expectedFirebrandIgnitionProbability = 50.717573;
-    expectedLightningIgnitionProbability = 17.931991;
 
     behaveRun.ignite.updateIgniteInputs(moistureOneHour, moistureHundredHour, mositureUnits, airTemperature,
-        temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits, lightningChargeType);
+                                        temperatureUnits, sunShade, sunShadeUnits, fuelBedType, duffDepth, duffDepthUnits);
 
     testName = "Test firebrand ignition probability for Lodgepole pine duff";
     observedFirebrandIgnitionProbability = behaveRun.ignite.calculateFirebrandIgnitionProbability(FractionUnits::Percent);
     reportTestResult(testInfo, testName, observedFirebrandIgnitionProbability, expectedFirebrandIgnitionProbability, error_tolerance);
-
-    testName = "Test lightning ignition probability for Lodgepole pine duff";
-    observedLightningIgnitionProbability = behaveRun.ignite.calculateLightningIgnitionProbability(FractionUnits::Percent);
-    reportTestResult(testInfo, testName, observedLightningIgnitionProbability, expectedLightningIgnitionProbability, error_tolerance);
 
     std::cout << "Finished testing Ignite module\n\n";
 }
