@@ -65,8 +65,7 @@ public:
 
     void updateIgniteInputs(double moistureOneHour, double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits,
         double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits,
-        IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
-        LightningCharge::LightningChargeEnum lightningChargeType);
+        IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits);
 
     void setMoistureHundredHour(double hundredHourMoisture, FractionUnits::FractionUnitsEnum moistureUnits);
     void setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits);
@@ -75,7 +74,7 @@ public:
     void setIgnitionFuelBedType(IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType_);
     void setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum lengthUnits);
   
-    void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
+    // void setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType);
 
     double getAirTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits);
     double getMoistureOneHour(FractionUnits::FractionUnitsEnum desiredUnits);
@@ -83,7 +82,7 @@ public:
     double getSunShade(FractionUnits::FractionUnitsEnum desiredUnits);
     IgnitionFuelBedType::IgnitionFuelBedTypeEnum getIgnitionFuelBedType();
     double getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits);
-    LightningCharge::LightningChargeEnum getLightningChargeType();
+    // LightningCharge::LightningChargeEnum getLightningChargeType();
      
 protected:
     double moistureOneHour_;

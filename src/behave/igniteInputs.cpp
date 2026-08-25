@@ -31,8 +31,7 @@ void IgniteInputs::initializeMembers()
 
 void IgniteInputs::updateIgniteInputs(double moistureOneHour, double moistureHundredHour, FractionUnits::FractionUnitsEnum moistureUnits,
     double airTemperature, TemperatureUnits::TemperatureUnitsEnum temperatureUnits, double sunShade, FractionUnits::FractionUnitsEnum sunShadeUnits,
-    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits,
-    LightningCharge::LightningChargeEnum lightningChargeType)
+    IgnitionFuelBedType::IgnitionFuelBedTypeEnum fuelBedType, double duffDepth, LengthUnits::LengthUnitsEnum duffDepthUnits)
 {
     setMoistureOneHour(moistureOneHour, moistureUnits);
     setMoistureHundredHour(moistureHundredHour, moistureUnits);
@@ -40,7 +39,6 @@ void IgniteInputs::updateIgniteInputs(double moistureOneHour, double moistureHun
     setSunShade(sunShade, sunShadeUnits);
     fuelBedType_ = fuelBedType;
     setDuffDepth(duffDepth, duffDepthUnits);
-    lightningChargeType_ = lightningChargeType;
 }
 
 void IgniteInputs::setMoistureOneHour(double moistureOneHour, FractionUnits::FractionUnitsEnum moistureUnits)
@@ -73,10 +71,12 @@ void IgniteInputs::setDuffDepth(double duffDepth, LengthUnits::LengthUnitsEnum l
     duffDepth_ = LengthUnits::toBaseUnits(duffDepth, lengthUnits);
 }
 
-void IgniteInputs::setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType)
-{
-    lightningChargeType_ = lightningChargeType;
-}
+/* Code is deprecated as the science is no longer considered reliable.
+   There is no known method to accurately calculate Probability of Ignition from a lightning strike. */
+// void IgniteInputs::setLightningChargeType(LightningCharge::LightningChargeEnum lightningChargeType)
+// {
+//    lightningChargeType_ = lightningChargeType;
+//}
 
 double IgniteInputs::getAirTemperature(TemperatureUnits::TemperatureUnitsEnum desiredUnits)
 {
@@ -108,7 +108,9 @@ double IgniteInputs::getDuffDepth(LengthUnits::LengthUnitsEnum desiredUnits)
     return LengthUnits::fromBaseUnits(duffDepth_,desiredUnits);
 }
 
-LightningCharge::LightningChargeEnum IgniteInputs::getLightningChargeType()
-{
-    return lightningChargeType_;
-}
+/* Code is deprecated as the science is no longer considered reliable.
+   There is no known method to accurately calculate Probability of Ignition from a lightning strike. */
+// LightningCharge::LightningChargeEnum IgniteInputs::getLightningChargeType()
+// {
+//     return lightningChargeType_;
+// }
