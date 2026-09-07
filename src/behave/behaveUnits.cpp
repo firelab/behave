@@ -548,10 +548,10 @@ double PressureUnits::fromBaseUnits(double value, PressureUnitsEnum units) {
 double SurfaceAreaToVolumeUnits::toBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units)
 {
     if (value == 0.0) return 0.0;
-    const double SQUARE_METERS_OVER_CUBIC_METERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 3.280839895013123;
+    const double SQUARE_METERS_OVER_CUBIC_METERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.3048;
 
-    const double SQUARE_INCHES_OVER_CUBIC_INCHES_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.083333333333333;
-    const double SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 0.03280839895013123;
+    const double SQUARE_INCHES_OVER_CUBIC_INCHES_TO_SQUARE_FEET_OVER_CUBIC_FEET = 12;
+    const double SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS_TO_SQUARE_FEET_OVER_CUBIC_FEET = 30.48;
 
     switch (units)
     {
@@ -586,9 +586,9 @@ double SurfaceAreaToVolumeUnits::toBaseUnits(double value, SurfaceAreaToVolumeUn
 double SurfaceAreaToVolumeUnits::fromBaseUnits(double value, SurfaceAreaToVolumeUnitsEnum units)
 {
     if (value == 0.0) return 0.0;
-    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_METERS_OVER_CUBIC_METERS = 0.3048;
-    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_INCHES_OVER_CUBIC_INCHES = 12;
-    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS = 30.48;
+    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_METERS_OVER_CUBIC_METERS = 3.280839895013123;
+    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_INCHES_OVER_CUBIC_INCHES = 0.083333333333333;
+    const double SQUARE_FEET_OVER_CUBIC_FEET_TO_SQUARE_CENTIMETERS_OVER_CUBIC_CENTIMERS = 0.03280839895013123;
 
     switch (units)
     {
