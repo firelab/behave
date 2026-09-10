@@ -156,6 +156,8 @@ public:
     void setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);
 
     // SurfaceInputs getters
+    double getDirectionOfMaxSpread(){ return surfaceFuel_.getDirectionOfMaxSpread(); }
+    double getFireEccentricity() { return surfaceFuel_.getFireEccentricity(); }
     int getFuelModelNumber() const;
     double getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
     double getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) const;
