@@ -721,6 +721,12 @@ bool FuelModels::setCustomFuelModel(int fuelModelNumber, std::string code, std::
 
     moistureOfExtinctionDead = FractionUnits::toBaseUnits(moistureOfExtinctionDead, moistureUnits);
 
+    if (heatOfCombustionUnits != HeatOfCombustionUnits::BtusPerPound)
+    {
+        heatOfCombustionDead = HeatOfCombustionUnits::toBaseUnits(heatOfCombustionDead, heatOfCombustionUnits);
+        heatOfCombustionLive = HeatOfCombustionUnits::toBaseUnits(heatOfCombustionLive, heatOfCombustionUnits);
+    }
+
     if (loadingUnits != LoadingUnits::PoundsPerSquareFoot)
     {
         fuelLoadOneHour = LoadingUnits::toBaseUnits(fuelLoadOneHour, loadingUnits);
