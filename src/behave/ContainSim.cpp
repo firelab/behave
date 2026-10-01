@@ -489,14 +489,24 @@ double* Sem::ContainSim::firePerimeterY( void ) const
 }
 
 //------------------------------------------------------------------------------
-/*! \brief Access to the size of the fire perimeter and head array.
+/*! \brief Access to the number of simulated fire perimeter points.
 
-    \return Size of the fire perimeter and head arrays.
+    \return Number of valid points in the fire perimeter and head arrays
+             (simulation steps of the final pass + 1), never more than the
+             arrays' allocated size.
  */
 
 int Sem::ContainSim::firePoints( void ) const
 {
-    return( m_size );
+    // Points 0..m_step of the final pass are simulated; m_size is only the
+    // array allocation (m_maxSteps+1), so everything past m_step is unwritten
+    // (or stale from an earlier pass) and must not be read as perimeter.
+    if ( ! m_left )
+    {
+        return( 0 );
+    }
+    int points = m_left->simulationStep() + 1;
+    return( ( points < m_size ) ? points : m_size );
 }
 
 //------------------------------------------------------------------------------
