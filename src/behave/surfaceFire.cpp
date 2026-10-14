@@ -30,6 +30,7 @@
 ******************************************************************************/
 
 #define _USE_MATH_DEFINES
+#include <algorithm>
 #include <cmath>
 
 #include "surfaceFire.h"
@@ -84,6 +85,8 @@ void SurfaceFire::initializeMembers()
     directionOfInterest_ = 0.0;
     directionOfMaxSpread_ = 0.0;
     noWindNoSlopeSpreadRate_ = 0.0;
+    noWindSpreadRate_ = 0.0;
+    noSlopeSpreadRate_ = 0.0;
     forwardSpreadRate_ = 0.0;
     backingSpreadRate_ = 0.0;
     flankingSpreadRate_ = 0.0;
@@ -128,6 +131,8 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
 
     directionOfMaxSpread_ = rhs.directionOfMaxSpread_;
     noWindNoSlopeSpreadRate_ = rhs.noWindNoSlopeSpreadRate_;
+    noWindSpreadRate_ = rhs.noWindSpreadRate_;
+    noSlopeSpreadRate_ = rhs.noSlopeSpreadRate_;
     forwardSpreadRate_ = rhs.forwardSpreadRate_;
     backingSpreadRate_ = rhs.backingSpreadRate_;
     flankingSpreadRate_ = rhs.flankingSpreadRate_;
@@ -274,6 +279,10 @@ double SurfaceFire::calculateForwardSpreadRate(int fuelModelNumber, bool hasDire
 
     forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1.0 + phiW_ + phiS_);
 
+    // Spread rates with only one of wind or slope applied
+    noWindSpreadRate_ = noWindNoSlopeSpreadRate_ * (1.0 + phiS_);
+    noSlopeSpreadRate_ = noWindNoSlopeSpreadRate_ * (1.0 + phiW_);
+
     // Calculate spread rate in optimal direction.
     calculateDirectionOfMaxSpread();
     calculateEffectiveWindSpeed();
@@ -389,6 +398,9 @@ void SurfaceFire::applyWindSpeedLimit()
     double relativePackingRatio = surfaceFuelbedIntermediates_.getRelativePackingRatio();
     double phiEffectiveWind = windC_ * pow(windSpeedLimit_, windB_) * pow(relativePackingRatio, -windE_);
     forwardSpreadRate_ = noWindNoSlopeSpreadRate_ * (1 + phiEffectiveWind);
+
+    // Cap the wind-only spread rate at the wind speed limit
+    noSlopeSpreadRate_ = noWindNoSlopeSpreadRate_ * (1.0 + std::min(phiW_, phiEffectiveWind));
 }
 
 void SurfaceFire::calculateEffectiveWindSpeed()
@@ -572,6 +584,16 @@ double SurfaceFire::getFuelbedDepth() const
 double SurfaceFire::getSpreadRate() const
 {
     return forwardSpreadRate_;
+}
+
+double SurfaceFire::getNoWindSpreadRate() const
+{
+    return noWindSpreadRate_;
+}
+
+double SurfaceFire::getNoSlopeSpreadRate() const
+{
+    return noSlopeSpreadRate_;
 }
 
 double SurfaceFire::getSpreadRateInDirectionOfInterest() const

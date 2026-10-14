@@ -177,6 +177,16 @@ double Surface::getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
     return SpeedUnits::fromBaseUnits(surfaceFire_.getSpreadRate(), spreadRateUnits);
 }
 
+double Surface::getNoWindSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+{
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getNoWindSpreadRate(), spreadRateUnits);
+}
+
+double Surface::getNoSlopeSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
+{
+    return SpeedUnits::fromBaseUnits(surfaceFire_.getNoSlopeSpreadRate(), spreadRateUnits);
+}
+
 double Surface::getSpreadRateInDirectionOfInterest(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const
 {
     return SpeedUnits::fromBaseUnits(surfaceFire_.getSpreadRateInDirectionOfInterest(), spreadRateUnits);
