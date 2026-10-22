@@ -448,31 +448,31 @@ void FuelModels::populateFuelModels()
     // Standard Shrub Models
     setFuelModelRecord(150, "SCAL17",
         "Chamise with Moderate Load Grass, 4 feet (Static)",
-        4, 20, 8000, 8000,
+        4, 0.20, 8000, 8000,
         1.3*f, 1.0*f, 1.0*f, 2.0*f, 2.0*f,
         640, 2200, 640,
         false, true);
     setFuelModelRecord(151, "SCAL15",
         "Chamise with Low Load Grass, 3 feet (Static)",
-        3, 13, 10000, 10000,
+        3, 0.13, 10000, 10000,
         2.0*f, 3.0*f, 1.0*f, 0.5*f, 2.0*f,
         640, 2200, 640,
         false, true);
     setFuelModelRecord(152, "SCAL16",
         "North Slope Ceanothus with Moderate Load Grass (Static)",
-        6, 15, 8000, 8000,
+        6, 0.15, 8000, 8000,
         2.2*f, 4.8*f, 1.8*f, 3.0*f, 2.8*f,
         500, 1500, 500,
         false, true);
     setFuelModelRecord(153, "SCAL14",
         "Manzanita/Scrub Oak with Low Load Grass (Static)",
-        3, 15, 9211, 9211,
+        3, 0.15, 9211, 9211,
         3.0*f, 4.5*f, 1.1*f, 1.4*f, 5.0*f,
         350, 1500, 250,
         false, true);
     setFuelModelRecord(154, "SCAL18",
         "Coastal Sage/Buckwheat Scrub with Low Load Grass (Static)",
-        3, 25, 9200, 9200,
+        3, 0.25, 9200, 9200,
         5.5*f, 0.8*f, 0.1*f, 0.75*f, 2.5*f,
         640, 1500, 640,
         false, true);
