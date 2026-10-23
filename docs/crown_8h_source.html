@@ -242,129 +242,131 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">void</span> setWindAdjustmentFactorCalculationMethod(WindAdjustmentFactorCalculationMethod::WindAdjustmentFactorCalculationMethodEnum windAdjustmentFactorCalculationMethod);</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="comment">// SurfaceInputs getters</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">int</span> getFuelModelNumber() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordtype">double</span> getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordtype">double</span> getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">double</span> getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">double</span> getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">double</span> getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">int</span> getNumberOfMoistureScenarios();</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">int</span> getMoistureScenarioIndexByName(std::string name);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordtype">bool</span> getIsMoistureScenarioDefinedByName(std::string name);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    std::string getMoistureScenarioDescriptionByName(std::string name);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">double</span> getMoistureScenarioOneHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordtype">double</span> getMoistureScenarioTenHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">double</span> getMoistureScenarioHundredHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveHerbaceousByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveWoodyByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">bool</span> getIsMoistureScenarioDefinedByIndex(<span class="keywordtype">int</span> index);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    std::string getMoistureScenarioNameByIndex(<span class="keywordtype">int</span> index);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    std::string getMoistureScenarioDescriptionByIndex(<span class="keywordtype">int</span> index);</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordtype">double</span> getMoistureScenarioOneHourByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordtype">double</span> getMoistureScenarioTenHourByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">double</span> getMoistureScenarioHundredHourByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveHerbaceousByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveWoodyByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">double</span> getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">double</span> getWindDirection() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordtype">double</span> getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordtype">double</span> getAspect() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">double</span> getCanopyCover(FractionUnits::FractionUnitsEnum canopyCoverUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">double</span> getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">double</span> getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword">protected</span>:</div>
-<div class="foldopen" id="foldopen00191" data-start="{" data-end="};">
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="structCrown_1_1CrownModelType.html">  191</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structCrown_1_1CrownModelType.html">CrownModelType</a></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    {</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keyword">enum</span> CrownModelTypeEnum</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            rothermel,</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            scott_and_reinhardt</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        };</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    };</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">double</span> getDirectionOfMaxSpread(){ <span class="keywordflow">return</span> surfaceFuel_.getDirectionOfMaxSpread(); }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordtype">double</span> getFireEccentricity() { <span class="keywordflow">return</span> surfaceFuel_.getFireEccentricity(); }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordtype">int</span> getFuelModelNumber() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">double</span> getMoistureOneHour(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">double</span> getMoistureTenHour(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">double</span> getMoistureHundredHour(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">double</span> getMoistureLiveHerbaceous(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">double</span> getMoistureLiveWoody(FractionUnits::FractionUnitsEnum moistureUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordtype">int</span> getNumberOfMoistureScenarios();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordtype">int</span> getMoistureScenarioIndexByName(std::string name);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">bool</span> getIsMoistureScenarioDefinedByName(std::string name);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    std::string getMoistureScenarioDescriptionByName(std::string name);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">double</span> getMoistureScenarioOneHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">double</span> getMoistureScenarioTenHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">double</span> getMoistureScenarioHundredHourByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveHerbaceousByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveWoodyByName(std::string name, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">bool</span> getIsMoistureScenarioDefinedByIndex(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    std::string getMoistureScenarioNameByIndex(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    std::string getMoistureScenarioDescriptionByIndex(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">double</span> getMoistureScenarioOneHourByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">double</span> getMoistureScenarioTenHourByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordtype">double</span> getMoistureScenarioHundredHourByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveHerbaceousByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">double</span> getMoistureScenarioLiveWoodyByIndex(<span class="keywordtype">int</span> index, FractionUnits::FractionUnitsEnum moistureUnits);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordtype">double</span> getWindSpeed(SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordtype">double</span> getWindDirection() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">double</span> getSlope(SlopeUnits::SlopeUnitsEnum slopeUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">double</span> getAspect() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">double</span> getCanopyCover(FractionUnits::FractionUnitsEnum canopyCoverUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">double</span> getCanopyHeight(LengthUnits::LengthUnitsEnum canopyHeighUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">double</span> getCrownRatio(FractionUnits::FractionUnitsEnum crownRatioUnits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="};">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="structCrown_1_1CrownModelType.html">  193</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structCrown_1_1CrownModelType.html">CrownModelType</a></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keyword">enum</span> CrownModelTypeEnum</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            rothermel,</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            scott_and_reinhardt</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        };</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    };</div>
 </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <a class="code hl_class" href="classFuelModels.html">FuelModels</a>* fuelModels_;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_class" href="classCrownInputs.html">CrownInputs</a> crownInputs_;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="comment">// SURFACE module components</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <a class="code hl_class" href="classSurface.html">Surface</a> surfaceFuel_;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <a class="code hl_class" href="classSurface.html">Surface</a> crownFuel_;</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="comment">// SIZE</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <a class="code hl_class" href="classFireSize.html">FireSize</a> crownFireSize_;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="comment">// Private methods</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordtype">void</span> memberwiseCopyAssignment(<span class="keyword">const</span> <a class="code hl_class" href="classCrown.html">Crown</a>&amp; rhs);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordtype">void</span> calculateCrownFireActiveWindSpeed();</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordtype">void</span> calculateCanopyHeatPerUnitArea();</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordtype">void</span> calculateCrownFireHeatPerUnitArea();</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordtype">void</span> calculateCrownFuelLoad();</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">void</span> calculateCrownFirelineIntensity();</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">void</span> calculateCrownFlameLength();</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordtype">void</span> calculatePassiveCrownFlameLength();</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordtype">void</span> calculateSurfaceFireCriticalSpreadRateScottAndReinhardt();</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordtype">void</span> calculateCrownCriticalFireSpreadRate();</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordtype">void</span> calculateCrownCriticalSurfaceFireIntensity();</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">void</span> calculateCrownCriticalSurfaceFlameLength();</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordtype">void</span> calculateCrownFireTransitionRatio();</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">void</span> calculateCrownFireActiveRatio();</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">void</span> calculateFireTypeRothermel();</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">void</span> calculateFireTypeScottAndReinhardt();</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordtype">void</span> calculateWindSpeedAtTwentyFeet();</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordtype">void</span> calculateCrowningSurfaceFireRateOfSpread();</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordtype">void</span> calculateCrownFractionBurned();</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordtype">void</span> assignFinalFireBehaviorBasedOnFireType(CrownModelType::CrownModelTypeEnum);</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="comment">// Member variables</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    FireType::FireTypeEnum fireType_;               <span class="comment">// Classification based on corwn fire active and transition ratios</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordtype">double</span> surfaceFireHeatPerUnitArea_;             <span class="comment">// Surface fire hpua used for parallel surface runs (Btu/ft^2)</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordtype">double</span> surfaceFirelineIntensity_;               <span class="comment">// Surface fireline intensity used for parallel surface runs</span></div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordtype">double</span> surfaceFireSpreadRate_;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordtype">double</span> surfaceFireFlameLength_;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordtype">double</span> surfaceFireCriticalSpreadRate_;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordtype">double</span> crownFuelLoad_;                          <span class="comment">// Crown fire fuel load (lb / ft^2)</span></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">double</span> canopyHeatPerUnitArea_;                  <span class="comment">// Canopy heat per unit area (Btu/ft^2)</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordtype">double</span> crownFireHeatPerUnitArea_;               <span class="comment">// Crown fire heat per unit area (Btu/ft^2)</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordtype">double</span> crownFirelineIntensity_;                 <span class="comment">// Crown fire fireline intensity (Btu / ft / s)</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keywordtype">double</span> crownFlameLength_;                       <span class="comment">// Crown fire flame length (ft)</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordtype">double</span> crownFireSpreadRate_;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordtype">double</span> crownCriticalSurfaceFirelineIntensity_;  <span class="comment">// Crown fire&#39;s critical surface fire intensity (Btu / ft / s)</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordtype">double</span> crownCriticalFireSpreadRate_;            <span class="comment">// Crown fire&#39;s critical crown fire spread rate (ft / min)</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordtype">double</span> crownCriticalSurfaceFlameLength_;        <span class="comment">// Crown fire&#39;s critical surface fire flame length (ft)</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordtype">double</span> crownFireActiveRatio_;                   <span class="comment">// Crown fire active ratio</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordtype">double</span> crownFireTransitionRatio_;               <span class="comment">// Crown fire transition ratio</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordtype">double</span> crownFireLengthToWidthRatio_;            <span class="comment">// Crown fire length-to-width ratio</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordtype">double</span> crownFireActiveWindSpeed_;               <span class="comment">// 20 ft windspeed at which active crowning is possible (ft/min)</span></div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordtype">double</span> crownFractionBurned_;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keywordtype">double</span> crowningSurfaceFireRos_;                 <span class="comment">// Surface fire spread rate at which the active crown fire spread rate is fully achieved (ft/min)</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordtype">double</span> windSpeedAtTwentyFeet_;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordtype">double</span> finalSpreadRate_;                        <span class="comment">// &quot;Actual&quot; spread rate of the fire, depends on fire type</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <span class="keywordtype">double</span> finalHeatPerUnitArea_;                   <span class="comment">// &quot;Actual&quot; fire heat per unit area, depends on fire type</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordtype">double</span> finalFirelineIntesity_;                  <span class="comment">// &quot;Actual&quot; fireline intensity, depends on fire type</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordtype">double</span> finalFlameLength_;                       <span class="comment">// &quot;Actual&quot; flame length, depends on fire type</span></div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">double</span> passiveCrownFireSpreadRate_;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordtype">double</span> passiveCrownFireHeatPerUnitArea_;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordtype">double</span> passiveCrownFireLineIntensity_;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordtype">double</span> passiveCrownFireFlameLength_;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordtype">bool</span> isSurfaceFire_;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordtype">bool</span> isPassiveCrownFire_;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordtype">bool</span> isActiveCrownFire_;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordtype">bool</span> isCrownFire_;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>};</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <a class="code hl_class" href="classFuelModels.html">FuelModels</a>* fuelModels_;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <a class="code hl_class" href="classCrownInputs.html">CrownInputs</a> crownInputs_;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="comment">// SURFACE module components</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <a class="code hl_class" href="classSurface.html">Surface</a> surfaceFuel_;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <a class="code hl_class" href="classSurface.html">Surface</a> crownFuel_;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="comment">// SIZE</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <a class="code hl_class" href="classFireSize.html">FireSize</a> crownFireSize_;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="comment">// Private methods</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordtype">void</span> memberwiseCopyAssignment(<span class="keyword">const</span> <a class="code hl_class" href="classCrown.html">Crown</a>&amp; rhs);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordtype">void</span> calculateCrownFireActiveWindSpeed();</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordtype">void</span> calculateCanopyHeatPerUnitArea();</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">void</span> calculateCrownFireHeatPerUnitArea();</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">void</span> calculateCrownFuelLoad();</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordtype">void</span> calculateCrownFirelineIntensity();</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordtype">void</span> calculateCrownFlameLength();</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keywordtype">void</span> calculatePassiveCrownFlameLength();</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordtype">void</span> calculateSurfaceFireCriticalSpreadRateScottAndReinhardt();</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">void</span> calculateCrownCriticalFireSpreadRate();</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordtype">void</span> calculateCrownCriticalSurfaceFireIntensity();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">void</span> calculateCrownCriticalSurfaceFlameLength();</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">void</span> calculateCrownFireTransitionRatio();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">void</span> calculateCrownFireActiveRatio();</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordtype">void</span> calculateFireTypeRothermel();</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordtype">void</span> calculateFireTypeScottAndReinhardt();</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordtype">void</span> calculateWindSpeedAtTwentyFeet();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordtype">void</span> calculateCrowningSurfaceFireRateOfSpread();</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordtype">void</span> calculateCrownFractionBurned();</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordtype">void</span> assignFinalFireBehaviorBasedOnFireType(CrownModelType::CrownModelTypeEnum);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">// Member variables</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    FireType::FireTypeEnum fireType_;               <span class="comment">// Classification based on corwn fire active and transition ratios</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordtype">double</span> surfaceFireHeatPerUnitArea_;             <span class="comment">// Surface fire hpua used for parallel surface runs (Btu/ft^2)</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordtype">double</span> surfaceFirelineIntensity_;               <span class="comment">// Surface fireline intensity used for parallel surface runs</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordtype">double</span> surfaceFireSpreadRate_;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordtype">double</span> surfaceFireFlameLength_;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">double</span> surfaceFireCriticalSpreadRate_;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordtype">double</span> crownFuelLoad_;                          <span class="comment">// Crown fire fuel load (lb / ft^2)</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordtype">double</span> canopyHeatPerUnitArea_;                  <span class="comment">// Canopy heat per unit area (Btu/ft^2)</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keywordtype">double</span> crownFireHeatPerUnitArea_;               <span class="comment">// Crown fire heat per unit area (Btu/ft^2)</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordtype">double</span> crownFirelineIntensity_;                 <span class="comment">// Crown fire fireline intensity (Btu / ft / s)</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordtype">double</span> crownFlameLength_;                       <span class="comment">// Crown fire flame length (ft)</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="keywordtype">double</span> crownFireSpreadRate_;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordtype">double</span> crownCriticalSurfaceFirelineIntensity_;  <span class="comment">// Crown fire&#39;s critical surface fire intensity (Btu / ft / s)</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordtype">double</span> crownCriticalFireSpreadRate_;            <span class="comment">// Crown fire&#39;s critical crown fire spread rate (ft / min)</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordtype">double</span> crownCriticalSurfaceFlameLength_;        <span class="comment">// Crown fire&#39;s critical surface fire flame length (ft)</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="keywordtype">double</span> crownFireActiveRatio_;                   <span class="comment">// Crown fire active ratio</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordtype">double</span> crownFireTransitionRatio_;               <span class="comment">// Crown fire transition ratio</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordtype">double</span> crownFireLengthToWidthRatio_;            <span class="comment">// Crown fire length-to-width ratio</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keywordtype">double</span> crownFireActiveWindSpeed_;               <span class="comment">// 20 ft windspeed at which active crowning is possible (ft/min)</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordtype">double</span> crownFractionBurned_;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keywordtype">double</span> crowningSurfaceFireRos_;                 <span class="comment">// Surface fire spread rate at which the active crown fire spread rate is fully achieved (ft/min)</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordtype">double</span> windSpeedAtTwentyFeet_;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordtype">double</span> finalSpreadRate_;                        <span class="comment">// &quot;Actual&quot; spread rate of the fire, depends on fire type</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordtype">double</span> finalHeatPerUnitArea_;                   <span class="comment">// &quot;Actual&quot; fire heat per unit area, depends on fire type</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordtype">double</span> finalFirelineIntesity_;                  <span class="comment">// &quot;Actual&quot; fireline intensity, depends on fire type</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordtype">double</span> finalFlameLength_;                       <span class="comment">// &quot;Actual&quot; flame length, depends on fire type</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keywordtype">double</span> passiveCrownFireSpreadRate_;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="keywordtype">double</span> passiveCrownFireHeatPerUnitArea_;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordtype">double</span> passiveCrownFireLineIntensity_;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordtype">double</span> passiveCrownFireFlameLength_;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordtype">bool</span> isSurfaceFire_;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordtype">bool</span> isPassiveCrownFire_;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordtype">bool</span> isActiveCrownFire_;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordtype">bool</span> isCrownFire_;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>};</div>
 </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="preprocessor">#endif </span><span class="comment">// CROWN_H</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="preprocessor">#endif </span><span class="comment">// CROWN_H</span></div>
 <div class="ttc" id="aclassCrownInputs_html"><div class="ttname"><a href="classCrownInputs.html">CrownInputs</a></div><div class="ttdef"><b>Definition</b> crownInputs.h:34</div></div>
 <div class="ttc" id="aclassCrown_html"><div class="ttname"><a href="classCrown.html">Crown</a></div><div class="ttdef"><b>Definition</b> crown.h:56</div></div>
 <div class="ttc" id="aclassFireSize_html"><div class="ttname"><a href="classFireSize.html">FireSize</a></div><div class="ttdef"><b>Definition</b> fireSize.h:34</div></div>
 <div class="ttc" id="aclassFuelModels_html"><div class="ttname"><a href="classFuelModels.html">FuelModels</a></div><div class="ttdef"><b>Definition</b> fuelModels.h:40</div></div>
 <div class="ttc" id="aclassMoistureScenarios_html"><div class="ttname"><a href="classMoistureScenarios.html">MoistureScenarios</a></div><div class="ttdef"><b>Definition</b> moistureScenarios.h:37</div></div>
 <div class="ttc" id="aclassSurface_html"><div class="ttname"><a href="classSurface.html">Surface</a></div><div class="ttdef"><b>Definition</b> surface.h:42</div></div>
-<div class="ttc" id="astructCrown_1_1CrownModelType_html"><div class="ttname"><a href="structCrown_1_1CrownModelType.html">Crown::CrownModelType</a></div><div class="ttdef"><b>Definition</b> crown.h:192</div></div>
+<div class="ttc" id="astructCrown_1_1CrownModelType_html"><div class="ttname"><a href="structCrown_1_1CrownModelType.html">Crown::CrownModelType</a></div><div class="ttdef"><b>Definition</b> crown.h:194</div></div>
 <div class="ttc" id="astructFireType_html"><div class="ttname"><a href="structFireType.html">FireType</a></div><div class="ttdef"><b>Definition</b> crown.h:45</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
