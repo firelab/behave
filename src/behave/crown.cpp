@@ -322,7 +322,7 @@ void Crown::calculateCrownFireActiveWindSpeed()
 
     double cbd = 16.0185 * getCanopyBulkDensity(DensityUnits::PoundsPerCubicFoot);
     double ractive = 3.28084 * (3.0 / cbd);         // R'active, ft/min
-    double r10 = ractive / 3.34;                    // R'active = 3.324 * R10
+    double r10 = ractive / 3.34;                    // R'active = 3.34 * R10
     double propFlux = 0.048317062998571636;         // Fuel model 10 actual propagating flux ratio
     double reactionIntensity = crownFuel_.getReactionIntensity(HeatSourceAndReactionIntensityUnits::BtusPerSquareFootPerMinute);
     double heatSink = crownFuel_.getHeatSink(HeatSinkUnits::BtusPerCubicFoot);
