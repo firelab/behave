@@ -40,7 +40,7 @@
 SurfaceFire::SurfaceFire()
     : surfaceFireReactionIntensity_()
 {
-
+    isWindLimitEnabled_ = false;
 }
 
 SurfaceFire::SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surfaceInputs,
@@ -51,6 +51,7 @@ SurfaceFire::SurfaceFire(const FuelModels& fuelModels, const SurfaceInputs& surf
     fuelModels_ = &fuelModels;
     size_ = &size;
     surfaceInputs_ = &surfaceInputs;
+    isWindLimitEnabled_ = false; // an option, off by default; set with setIsWindLimitEnabled()
     initializeMembers();
 }
 
@@ -72,7 +73,8 @@ SurfaceFire& SurfaceFire::operator=(const SurfaceFire& rhs)
 
 void SurfaceFire::initializeMembers()
 {
-    isWindLimitEnabled_ = false;
+    // isWindLimitEnabled_ is a user option, not a result, so it is not reset here. It is set in the
+    // constructors and by setIsWindLimitEnabled(), and it is kept for every following calculation.
     isWindLimitExceeded_ = false;
     effectiveWindSpeed_ = 0.0;
     windSpeedLimit_ = 0.0;
@@ -117,6 +119,7 @@ void SurfaceFire::memberwiseCopyAssignment(const SurfaceFire& rhs)
     surfaceFireReactionIntensity_ = rhs.surfaceFireReactionIntensity_;
     surfaceFuelbedIntermediates_ = rhs.surfaceFuelbedIntermediates_;
 
+    isWindLimitEnabled_ = rhs.isWindLimitEnabled_;
     isWindLimitExceeded_ = rhs.isWindLimitExceeded_;
     effectiveWindSpeed_ = rhs.effectiveWindSpeed_;
     windSpeedLimit_ = rhs.windSpeedLimit_;
@@ -720,6 +723,11 @@ double SurfaceFire::getWindAdjustmentFactor() const
 double SurfaceFire::getCharacteristicSAVR() const
 {
     return surfaceFuelbedIntermediates_.getSigma();
+}
+
+bool SurfaceFire::getIsWindLimitEnabled() const
+{
+    return isWindLimitEnabled_;
 }
 
 bool SurfaceFire::getIsWindLimitExceeded() const

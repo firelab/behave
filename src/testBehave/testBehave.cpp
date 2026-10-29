@@ -52,6 +52,7 @@ void testFineDeadFuelMoistureTool(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSlopeTool(TestInfo& testInfo, BehaveRun& behaveRun);
 void testVaporPressureDeficitCalculator(TestInfo& testInfo, BehaveRun& behaveRun);
 void testSimpleSurface(TestInfo& testInfo, BehaveRun& behaveRun);
+void testSurfaceWindLimit(TestInfo& testInfo, BehaveRun& behaveRun);
 void testFuelModelDynamicFlags(TestInfo& testInfo, FuelModels& fuelModels);
 void testMetricFuelModels(TestInfo& testInfo, FuelModels& fuelModels, BehaveRun& behaveRun);
 
@@ -88,6 +89,7 @@ int main()
     testSlopeTool(testInfo, behaveRun);
     testVaporPressureDeficitCalculator(testInfo, behaveRun);
     testSimpleSurface(testInfo, behaveRun);
+    testSurfaceWindLimit(testInfo, behaveRun);
     testFuelModelDynamicFlags(testInfo, fuelModels);
     testMetricFuelModels(testInfo, fuelModels, behaveRun);
 
@@ -2087,4 +2089,65 @@ void testMetricFuelModels(TestInfo& testInfo, FuelModels& fuelModels, BehaveRun&
     reportTestResult(testInfo, testName,
         roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour)),
         78.247962, error_tolerance);
+}
+
+void testSurfaceWindLimit(TestInfo& testInfo, BehaveRun& behaveRun)
+{
+    string testName = "";
+    std::cout << "Testing Surface, wind speed limit option\n";
+
+    // Fuel model 1, 6/7/8 % dead and 60/90 % live moisture, 20 mi/h midflame wind (1760 ft/min).
+    // The limit is 0.9 times the reaction intensity, 743.5194 ft/min, and the effective wind speed exceeds it.
+    // Expected values: spread rate in ft/min with and without the limit, from an independent implementation of
+    // Rothermel (1972), https://github.com/bangch119/rothcruz (effective-wind limit).
+    const double expectedUnlimitedFlat = 1747.279440;
+    const double expectedLimited = 297.099053;
+    const double expectedUnlimitedSlope = 1764.333376;
+    const double rosTolerance = 1e-2;
+    SpeedUnits::SpeedUnitsEnum ftMin = SpeedUnits::FeetPerMinute;
+
+    auto setInputs = [&behaveRun](double slopePercent)
+    {
+        behaveRun.surface.updateSurfaceInputs(1, 6.0, 7.0, 8.0, 60.0, 90.0, FractionUnits::Percent,
+            20.0, SpeedUnits::MilesPerHour, WindHeightInputMode::DirectMidflame, 0.0, WindAndSpreadOrientationMode::RelativeToNorth,
+            slopePercent, SlopeUnits::Percent, 0.0, 50.0, FractionUnits::Percent, 30.0, LengthUnits::Feet, 0.5, FractionUnits::Fraction);
+    };
+
+    setInputs(0.0);
+    testName = "Test the wind limit is off by default";
+    reportTestResult(testInfo, testName, behaveRun.surface.getIsWindLimitEnabled() ? 1.0 : 0.0, 0.0, error_tolerance);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    testName = "Test spread rate without the wind limit (ft/min)";
+    reportTestResult(testInfo, testName, behaveRun.surface.getSpreadRate(ftMin), expectedUnlimitedFlat, rosTolerance);
+    testName = "Test wind limit is not exceeded when it is off";
+    reportTestResult(testInfo, testName, behaveRun.surface.getIsWindLimitExceeded() ? 1.0 : 0.0, 0.0, error_tolerance);
+
+    behaveRun.surface.setIsWindLimitEnabled(true);
+    testName = "Test the wind limit can be enabled";
+    reportTestResult(testInfo, testName, behaveRun.surface.getIsWindLimitEnabled() ? 1.0 : 0.0, 1.0, error_tolerance);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    testName = "Test spread rate with the wind limit enabled (ft/min)";
+    reportTestResult(testInfo, testName, behaveRun.surface.getSpreadRate(ftMin), expectedLimited, rosTolerance);
+    testName = "Test wind limit is exceeded when it is enabled";
+    reportTestResult(testInfo, testName, behaveRun.surface.getIsWindLimitExceeded() ? 1.0 : 0.0, 1.0, error_tolerance);
+
+    // The setting must survive further calculations, new inputs and copies of the Surface object
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    testName = "Test the wind limit is kept for a second run";
+    reportTestResult(testInfo, testName, behaveRun.surface.getSpreadRate(ftMin), expectedLimited, rosTolerance);
+    setInputs(30.0);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    testName = "Test the wind limit is kept after new inputs, 30 % slope (the limit applies to the effective wind)";
+    reportTestResult(testInfo, testName, behaveRun.surface.getSpreadRate(ftMin), expectedLimited, rosTolerance);
+    Surface surfaceCopy = behaveRun.surface;
+    testName = "Test the wind limit setting is copied with the Surface object";
+    reportTestResult(testInfo, testName, surfaceCopy.getIsWindLimitEnabled() ? 1.0 : 0.0, 1.0, error_tolerance);
+
+    behaveRun.surface.setIsWindLimitEnabled(false);
+    behaveRun.surface.doSurfaceRunInDirectionOfMaxSpread();
+    testName = "Test the wind limit can be disabled again, 30 % slope (ft/min)";
+    reportTestResult(testInfo, testName, behaveRun.surface.getSpreadRate(ftMin), expectedUnlimitedSlope, rosTolerance);
+
+    // Leave the shared BehaveRun object as the other tests expect it
+    setSurfaceInputsForGS4LowMoistureScenario(behaveRun);
 }

@@ -124,6 +124,12 @@ public:
     void setSlope(double slope, SlopeUnits::SlopeUnitsEnum slopeUnits);
     void setAspect(double aspect);
     void setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpeedUnits, WindHeightInputMode::WindHeightInputModeEnum windHeightInputMode);
+
+    // Wind speed limit of Rothermel (1972): limit the effective wind speed to 0.9 times the reaction intensity.
+    // Off by default. The setting is kept for all following calculations until it is changed.
+    void setIsWindLimitEnabled(bool isWindLimitEnabled);
+    bool getIsWindLimitEnabled() const;
+    bool getIsWindLimitExceeded() const;
     void setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor);
     void setWindDirection(double windDirection);
     void setWindAndSpreadOrientationMode(WindAndSpreadOrientationMode::WindAndSpreadOrientationModeEnum windAndSpreadOrientationMode);
