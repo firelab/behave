@@ -56,6 +56,8 @@ public:
     // Public getters
     double getFuelbedDepth() const;
     double getSpreadRate() const;
+    double getNoWindSpreadRate() const;
+    double getNoSlopeSpreadRate() const;
     double getSpreadRateInDirectionOfInterest() const;
     double getDirectionOfMaxSpread() const;
     double getEffectiveWindSpeed() const;
@@ -200,6 +202,8 @@ protected:
     double windE_;											// Rothermel 1972, Equation 50
     double directionOfMaxSpread_;							// Direction of max fire spread in degrees clockwise from upslope
     double noWindNoSlopeSpreadRate_;						// No-wind-no-slope fire spread rate, Rothermel 1972, equation 52
+    double noWindSpreadRate_;								// Slope-only fire spread rate, Rothermel 1972, equation 52 with phiW = 0
+    double noSlopeSpreadRate_;								// Wind-only fire spread rate, Rothermel 1972, equation 52 with phiS = 0
     double forwardSpreadRate_;								// Maximum rate of fire spread rate, Rothermel 1972, equation 52
     double backingSpreadRate_;
     double flankingSpreadRate_;

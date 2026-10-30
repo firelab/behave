@@ -58,6 +58,8 @@ public:
 
     // SurfaceFire getters
     double getSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getNoWindSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
+    double getNoSlopeSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getSpreadRateInDirectionOfInterest(SpeedUnits::SpeedUnitsEnum spreadRateUnits) const;
     double getBackingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
     double getFlankingSpreadRate(SpeedUnits::SpeedUnitsEnum spreadRateUnits);
