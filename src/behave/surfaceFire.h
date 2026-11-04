@@ -86,6 +86,7 @@ public:
     double getWeightedMoistureByLifeState(FuelLifeState::FuelLifeStateEnum lifeState) const;
     double getWindAdjustmentFactor() const;
     double getCharacteristicSAVR() const;
+    bool getIsWindLimitEnabled() const;
     bool getIsWindLimitExceeded() const;
     double getRelativePackingRatio() const;
     double getPackingRatio()const;
@@ -140,6 +141,9 @@ public:
     double getTotalDeadFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
     double getTotalDeadHerbaceousFuelLoad(LoadingUnits::LoadingUnitsEnum loadingUnits) const;
 
+    // Option: limit the effective wind speed to 0.9 times the reaction intensity (Rothermel 1972). Off by default.
+    void setIsWindLimitEnabled(bool isWindLimitEnabled);
+
 protected:
     // Protected setters accessible to friend classes
 
@@ -152,7 +156,6 @@ protected:
     void setWindSpeedLimit(double windSpeedLimit);
     void setReactionIntensity(double reactionIntensity);
     void setHeatPerUnitArea(double heatPerUnitArea);
-    void setIsWindLimitEnabled(bool isWindLimitEnabled);
     void setIsWindLimitExceeded(bool isWindLimitExceeded);
     void setWindAdjustmentFactor(double windAdjustmentFactor);
     void setMidflameWindSpeed(double midflameWindSpeed);

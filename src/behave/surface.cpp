@@ -1027,6 +1027,21 @@ void Surface::setWindSpeed(double windSpeed, SpeedUnits::SpeedUnitsEnum windSpee
     surfaceFire_.calculateMidflameWindSpeed();
 }
 
+void Surface::setIsWindLimitEnabled(bool isWindLimitEnabled)
+{
+    surfaceFire_.setIsWindLimitEnabled(isWindLimitEnabled);
+}
+
+bool Surface::getIsWindLimitEnabled() const
+{
+    return surfaceFire_.getIsWindLimitEnabled();
+}
+
+bool Surface::getIsWindLimitExceeded() const
+{
+    return surfaceFire_.getIsWindLimitExceeded();
+}
+
 void Surface::setUserProvidedWindAdjustmentFactor(double userProvidedWindAdjustmentFactor)
 {
     surfaceInputs_.setUserProvidedWindAdjustmentFactor(userProvidedWindAdjustmentFactor);
