@@ -768,7 +768,7 @@ double  Mortality::calculateMortalityCrownScorch()
                 P = 0.0;
                 break;
             }
-            DBHcm = LengthUnits::fromBaseUnits(DBH, LengthUnits::Centimeters);
+            DBHcm = mortalityInputs_.getDBH(LengthUnits::Centimeters);
             barkThicknessPrime = 0.435 + (0.031 * DBHcm);
             f = crownVolumeScorchedPercent / 10.0; // see comments just above 
             barkThicknessPrime = 0.169 + (5.136 * barkThicknessPrime) + (14.492 * Squaredouble(barkThicknessPrime)) - (0.348 * Squaredouble(f));
@@ -1284,7 +1284,7 @@ void  Mortality::calculateMortalityTotals()
     globalDivisorForAvgTotalProbabilityOfMortality_++; // count for averaging
     averageMortality_ = (int)((globalTotalProbabilityOfMortality_ / globalDivisorForAvgTotalProbabilityOfMortality_) + 0.5);
 
-    if (mortalityInputs_.getDBH(LengthUnits::Feet) >= 4.0) // Average Prob of Mort on trees over 4 inches
+    if (mortalityInputs_.getDBH(LengthUnits::Inches) >= 4.0) // Average Prob of Mort on trees over 4 inches
     {
         globalTotalMortMortalityGreaterThan4DBH_ += probabilityOfMortality_;
         globalDivisorForAvgTotalMortMortalityGreaterThan4DBH_++;
