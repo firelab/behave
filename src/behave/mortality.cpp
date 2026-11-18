@@ -773,6 +773,7 @@ double  Mortality::calculateMortalityCrownScorch()
          * FOFEM for use in the Coastal Plain Region of the Southeastern US.
          * JFSP Program Report 05-4-3-06.
          * As documented in the FOFEM 6.9.4 User Guide (Equation 5, p. 63).
+         * https://www.frames.gov/catalog/25092
          */
         case 5:
         {
