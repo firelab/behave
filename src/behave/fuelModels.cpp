@@ -339,13 +339,13 @@ void FuelModels::populateFuelModels()
 
     setFuelModelRecord(110, "V-Hb",
         "Short Grass, < 0.5 m (Dynamic)",
-        0.35*mToFt, 24, 19000*kjPerKgToBtuPerLb, 19000*kjPerKgToBtuPerLb,
+        0.35*mToFt, 0.24, 19000*kjPerKgToBtuPerLb, 19000*kjPerKgToBtuPerLb,
         0.3*tphToLbsPerSqFt, 0, 0, 1.2*tphToLbsPerSqFt, 0,
         6000*mSavToFtSav, 6000*mSavToFtSav, 6000*mSavToFtSav,
         true, true);
     setFuelModelRecord(111, "V-Ha",
         "Tall Grass, > 0.5 m (Dynamic)",
-        0.6*mToFt, 24, 19000*kjPerKgToBtuPerLb, 19000*kjPerKgToBtuPerLb,
+        0.6*mToFt, 0.24, 19000*kjPerKgToBtuPerLb, 19000*kjPerKgToBtuPerLb,
         0.5*tphToLbsPerSqFt, 0.1*tphToLbsPerSqFt, 0, 2.5*tphToLbsPerSqFt, 0.3*tphToLbsPerSqFt,
         4000*mSavToFtSav, 6000*mSavToFtSav, 4000*mSavToFtSav,
         true, true);
@@ -479,31 +479,31 @@ void FuelModels::populateFuelModels()
 
     setFuelModelRecord(155, "V-MH",
         "Short Green Shrub < 1 m With Grass, Discontinuous (< 1 m) often discontinuous and with grass (Dynamic)",
-        0.55*mToFt, 25, 19500*kjPerKgToBtuPerLb, 19500*kjPerKgToBtuPerLb,
+        0.55*mToFt, 0.25, 19500*kjPerKgToBtuPerLb, 19500*kjPerKgToBtuPerLb,
         1.0*tphToLbsPerSqFt, 1.0*tphToLbsPerSqFt, 0, 1.5*tphToLbsPerSqFt, 5.5*tphToLbsPerSqFt,
         4500*mSavToFtSav, 8500*mSavToFtSav, 4000*mSavToFtSav,
         true, true);
     setFuelModelRecord(156, "V-MMb",
         "Short Shrub < 1 m, Low Dead Fraction and/or Thick Foliage (Static)",
-        0.9*mToFt, 20, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.9*mToFt, 0.20, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         4.0*tphToLbsPerSqFt, 0.5*tphToLbsPerSqFt, 0, 0, 7.0*tphToLbsPerSqFt,
         3000*mSavToFtSav, 3000*mSavToFtSav, 3000*mSavToFtSav,
         false, true);
     setFuelModelRecord(157, "V-MAb",
         "Short Shrub < 1 m, High Dead Fraction and/or Thin Fuel (Static)",
-        0.5*mToFt, 35, 21000*kjPerKgToBtuPerLb, 21000*kjPerKgToBtuPerLb,
+        0.5*mToFt, 0.35, 21000*kjPerKgToBtuPerLb, 21000*kjPerKgToBtuPerLb,
         6.0*tphToLbsPerSqFt, 0.5*tphToLbsPerSqFt, 0, 0, 7.5*tphToLbsPerSqFt,
         4500*mSavToFtSav, 4500*mSavToFtSav, 4500*mSavToFtSav,
         false, true);
     setFuelModelRecord(158, "V-MMa",
         "Tall Shrub > 1 m, Low Dead Fraction and/or Thick Foliage (Static)",
-        1.7*mToFt, 24, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        1.7*mToFt, 0.24, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         6.0*tphToLbsPerSqFt, 4.0*tphToLbsPerSqFt, 0, 0, 13.0*tphToLbsPerSqFt,
         2500*mSavToFtSav, 3000*mSavToFtSav, 3000*mSavToFtSav,
         false, true);
     setFuelModelRecord(159, "V-MAa",
         "Tall Shrub > 1 m, High Dead Fraction and/or Thin Fuel (Static)",
-        1.05*mToFt, 35, 21000*kjPerKgToBtuPerLb, 21000*kjPerKgToBtuPerLb,
+        1.05*mToFt, 0.35, 21000*kjPerKgToBtuPerLb, 21000*kjPerKgToBtuPerLb,
         9.5*tphToLbsPerSqFt, 2.5*tphToLbsPerSqFt, 0, 0, 14.5*tphToLbsPerSqFt,
         3500*mSavToFtSav, 4000*mSavToFtSav, 4000*mSavToFtSav,
         false, true);
@@ -542,43 +542,43 @@ void FuelModels::populateFuelModels()
         false, true);
     setFuelModelRecord(166, "M-EUCd",
         "Discontinuous Litter Eucalyptus Plantation, With or Without Shrub Understory (Static)",
-        0.4*mToFt, 26, 21000*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.4*mToFt, 0.26, 21000*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         1.37*tphToLbsPerSqFt, 2.89*tphToLbsPerSqFt, 1.59*tphToLbsPerSqFt, 0, 1.84*tphToLbsPerSqFt,
         4500*mSavToFtSav, 4200*mSavToFtSav, 5000*mSavToFtSav,
         false, true);
     setFuelModelRecord(167, "M-H",
         "Deciduous or Conifer Litter, Shrub and Herb Understory",
-        0.1*mToFt, 30, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.1*mToFt, 0.30, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         2.71*tphToLbsPerSqFt, 1.0*tphToLbsPerSqFt, 0, 0.66*tphToLbsPerSqFt, 0.1*tphToLbsPerSqFt,
         5500*mSavToFtSav, 8000*mSavToFtSav, 4500*mSavToFtSav,
         true, true);
     setFuelModelRecord(168, "M-F",
         "Deciduous or Conifer Litter, Shrub and Fern Understory (Dynamic)",
-        0.3*mToFt, 35, 19500*kjPerKgToBtuPerLb, 19500*kjPerKgToBtuPerLb,
+        0.3*mToFt, 0.35, 19500*kjPerKgToBtuPerLb, 19500*kjPerKgToBtuPerLb,
         4.5*tphToLbsPerSqFt, 1.5*tphToLbsPerSqFt, 0.5*tphToLbsPerSqFt, 2.35*tphToLbsPerSqFt, 0.48*tphToLbsPerSqFt,
         6000*mSavToFtSav, 8000*mSavToFtSav, 4500*mSavToFtSav,
         true, true);
     setFuelModelRecord(169, "M-CAD",
         "Deciduous Litter, Shrub Understory (Static)",
-        0.63*mToFt, 30, 20000*kjPerKgToBtuPerLb, 20000*kjPerKgToBtuPerLb,
+        0.63*mToFt, 0.30, 20000*kjPerKgToBtuPerLb, 20000*kjPerKgToBtuPerLb,
         4.54*tphToLbsPerSqFt, 1.87*tphToLbsPerSqFt, 0.61*tphToLbsPerSqFt, 0, 9.08*tphToLbsPerSqFt,
         6000*mSavToFtSav, 4921*mSavToFtSav, 5000*mSavToFtSav,
         false, true);
     setFuelModelRecord(170, "M-ESC",
         "Sclerophyll Broadleaf Litter, Shrub Understory (Static)",
-        0.5*mToFt, 27, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.5*mToFt, 0.27, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         5.65*tphToLbsPerSqFt, 1.5*tphToLbsPerSqFt, 0.48*tphToLbsPerSqFt, 0, 7.89*tphToLbsPerSqFt,
         5000*mSavToFtSav, 4921*mSavToFtSav, 5500*mSavToFtSav,
         false, true);
     setFuelModelRecord(171, "M-PIN",
         "Medium-Long Needle Pine Litter, Shrub Understory (Static)",
-        0.5*mToFt, 40, 20500*kjPerKgToBtuPerLb, 21500*kjPerKgToBtuPerLb,
+        0.5*mToFt, 0.40, 20500*kjPerKgToBtuPerLb, 21500*kjPerKgToBtuPerLb,
         7.21*tphToLbsPerSqFt, 3.0*tphToLbsPerSqFt, 0, 0, 6.89*tphToLbsPerSqFt,
         5500*mSavToFtSav, 5500*mSavToFtSav, 6000*mSavToFtSav,
         false, true);
     setFuelModelRecord(172, "M-EUC",
         "Eucalyptus Litter, Shrub Understory (Static)",
-        0.64*mToFt, 32, 21000*kjPerKgToBtuPerLb, 21000*kjPerKgToBtuPerLb,
+        0.64*mToFt, 0.32, 21000*kjPerKgToBtuPerLb, 21000*kjPerKgToBtuPerLb,
         8.37*tphToLbsPerSqFt, 3.81*tphToLbsPerSqFt, 0, 0, 4.51*tphToLbsPerSqFt,
         4700*mSavToFtSav, 4200*mSavToFtSav, 5000*mSavToFtSav,
         false, true);
@@ -643,25 +643,25 @@ void FuelModels::populateFuelModels()
         false, true);
     setFuelModelRecord(190, "F-RAC",
         "Very Compact Litter, Short Needle Conifers (Static)",
-        0.05*mToFt, 28, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.05*mToFt, 0.28, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         3.75*tphToLbsPerSqFt, 2.0*tphToLbsPerSqFt, 1.0*tphToLbsPerSqFt, 0, 1.18*tphToLbsPerSqFt,
         6500*mSavToFtSav, 4921*mSavToFtSav, 4500*mSavToFtSav,
         false, true);
     setFuelModelRecord(191, "F-FOL",
         "Compact Litter, Deciduous or Evergreen Foliage (Static)",
-        0.15*mToFt, 25, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.15*mToFt, 0.25, 20500*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         2.67*tphToLbsPerSqFt, 1.27*tphToLbsPerSqFt, 0.69*tphToLbsPerSqFt, 0, 1.16*tphToLbsPerSqFt,
         4500*mSavToFtSav, 5500*mSavToFtSav, 5000*mSavToFtSav,
         false, true);
     setFuelModelRecord(192, "F-PIN",
         "Litter from Medium-Long Needle Pine Trees (Static)",
-        0.1*mToFt, 45, 20500*kjPerKgToBtuPerLb, 21500*kjPerKgToBtuPerLb,
+        0.1*mToFt, 0.45, 20500*kjPerKgToBtuPerLb, 21500*kjPerKgToBtuPerLb,
         6.5*tphToLbsPerSqFt, 1.5*tphToLbsPerSqFt, 0, 0, 0,
         5500*mSavToFtSav, 5500*mSavToFtSav, 5500*mSavToFtSav,
         false, true);
     setFuelModelRecord(193, "F-EUC",
         "Pure Eucalyptus Litter, No Understory (Static)",
-        0.32*mToFt, 26, 21000*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
+        0.32*mToFt, 0.26, 21000*kjPerKgToBtuPerLb, 20500*kjPerKgToBtuPerLb,
         4.63*tphToLbsPerSqFt, 2.96*tphToLbsPerSqFt, 1.27*tphToLbsPerSqFt, 0, 1.12*tphToLbsPerSqFt,
         4200*mSavToFtSav, 4200*mSavToFtSav, 5000*mSavToFtSav,
         false, true);
