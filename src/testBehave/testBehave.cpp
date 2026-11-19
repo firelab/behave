@@ -2033,8 +2033,13 @@ void testMetricFuelModels(TestInfo& testInfo, FuelModels& fuelModels, BehaveRun&
 
     // Reading V-Hb (110) back in metric units must recover its published values:
     // depth 0.35 m, loads 0.3/1.2 tonnes/ha, heat 19000 kJ/kg, SAVR 6000 m2/m3.
-    // Moisture of extinction skipped (percent/fraction inconsistency).
+    // Moisture of extinction 24 % (0.24 as a fraction).
     const int fuelModelNumber = 110;
+
+    testName = "Test metric fuel model V-Hb (110) dead moisture of extinction as a fraction";
+    reportTestResult(testInfo, testName,
+        roundToSixDecimalPlaces(fuelModels.getMoistureOfExtinctionDead(fuelModelNumber, FractionUnits::Fraction)),
+        0.24, error_tolerance);
 
     testName = "Test metric fuel model V-Hb (110) fuel bed depth in meters";
     reportTestResult(testInfo, testName,
@@ -2088,7 +2093,7 @@ void testMetricFuelModels(TestInfo& testInfo, FuelModels& fuelModels, BehaveRun&
     testName = "Test metric fuel model V-Hb (110) surface rate of spread";
     reportTestResult(testInfo, testName,
         roundToSixDecimalPlaces(behaveRun.surface.getSpreadRate(SpeedUnits::ChainsPerHour)),
-        78.247962, error_tolerance);
+        53.529663, error_tolerance);
 }
 
 void testSurfaceWindLimit(TestInfo& testInfo, BehaveRun& behaveRun)
