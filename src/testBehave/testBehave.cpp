@@ -1673,8 +1673,40 @@ void testMortalityModule(TestInfo& testInfo, BehaveRun& behaveRun)
 {
     std::cout << "Testing Mortality module\n";
 
-    // TODO: Create tests for Mortality module
-    // Stub for now
+    std::string testName = "";
+    double observedMortality = 0.0;
+    double expectedMortality = 0.0;
+
+    // Longleaf pine (PIPA2), crown scorch Eq 5. Expected values are from
+    // FOFEM's form of Eq 5 with DBH converted from inches to centimeters.
+    behaveRun.mortality.setGACCRegion(GACC::SouthernArea);
+    behaveRun.mortality.setSpeciesCode("PIPA2");
+    behaveRun.mortality.setEquationType(EquationType::crown_scorch);
+    behaveRun.mortality.setFlameLengthOrScorchHeightSwitch(FlameLengthOrScorchHeightSwitch::scorch_height);
+    behaveRun.mortality.setTreeDensityPerUnitArea(100.0, AreaUnits::Acres);
+    behaveRun.mortality.setTreeHeight(60.0, LengthUnits::Feet);
+    behaveRun.mortality.setCrownRatio(0.4, FractionUnits::Fraction);
+
+    testName = "Test PIPA2 mortality, 2 in DBH, 60 ft tall, 0.4 crown ratio, 40 ft scorch height";
+    behaveRun.mortality.setDBH(2.0, LengthUnits::Inches);
+    behaveRun.mortality.setScorchHeight(40.0, LengthUnits::Feet);
+    observedMortality = behaveRun.mortality.calculateMortality(FractionUnits::Fraction);
+    expectedMortality = 0.006368;
+    reportTestResult(testInfo, testName, observedMortality, expectedMortality, error_tolerance);
+
+    testName = "Test PIPA2 mortality, 6 in DBH, 60 ft tall, 0.4 crown ratio, 45 ft scorch height";
+    behaveRun.mortality.setDBH(6.0, LengthUnits::Inches);
+    behaveRun.mortality.setScorchHeight(45.0, LengthUnits::Feet);
+    observedMortality = behaveRun.mortality.calculateMortality(FractionUnits::Fraction);
+    expectedMortality = 0.021032;
+    reportTestResult(testInfo, testName, observedMortality, expectedMortality, error_tolerance);
+
+    testName = "Test PIPA2 mortality, 20.32 cm DBH, 60 ft tall, 0.4 crown ratio, 50 ft scorch height";
+    behaveRun.mortality.setDBH(20.32, LengthUnits::Centimeters);
+    behaveRun.mortality.setScorchHeight(50.0, LengthUnits::Feet);
+    observedMortality = behaveRun.mortality.calculateMortality(FractionUnits::Fraction);
+    expectedMortality = 0.844542;
+    reportTestResult(testInfo, testName, observedMortality, expectedMortality, error_tolerance);
 
     std::cout << "Finished testing Mortality module\n\n";
 }
