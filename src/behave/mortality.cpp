@@ -753,14 +753,28 @@ double  Mortality::calculateMortalityCrownScorch()
             treeCrownLengthScorched_ = -1;
             break;
         }
-        //...................................................
-        //    case 5: 
-        //...................................................
-        // Change - 8-20-2012 
-        // New formula from Duncan Lutes  
-        // we were having trouble with this, the original paper was  
-        // saying that proportion of crown scorch was 0->1 but we found 
-        // that we had to use a value at 1->10   
+        /**
+         * \par Equation 5: Longleaf pine (PIPA2)
+         * \f$ P_m = 0 \f$ when \f$ SCH = 0 \f$, otherwise
+         * \f[
+         *   P_m = \frac{1}{1 + \exp\left(0.169 + 5.136\,BT + 14.492\,BT^2 - 0.348\,SCH^2\right)}
+         * \f]
+         * where \f$ BT = 0.435 + 0.031\,DBH \f$ is bark thickness (\f$ BT \f$ and
+         * \f$ DBH \f$ in cm) and \f$ SCH \f$ is crown volume scorched on a 0-10
+         * scale (percent / 10).
+         *
+         * \note Change - 8-20-2012. New formula from Duncan Lutes. We were having
+         * trouble with this, the original paper was saying that proportion of
+         * crown scorch was 0->1 but we found that we had to use a value at 1->10.
+         *
+         * \par Source
+         * Wang, G.G.; Wangen, S.; Reinhardt, E.; Waldrop, T.A.; Outcalt, K.W.;
+         * Walker, J.L.; Brockway, D.G.; Haywood, J.D.; Hiers, J.K. 2007. Modify
+         * FOFEM for use in the Coastal Plain Region of the Southeastern US.
+         * JFSP Program Report 05-4-3-06.
+         * As documented in the FOFEM 6.9.4 User Guide (Equation 5, p. 63).
+         * https://www.frames.gov/catalog/25092
+         */
         case 5:
         {
             if(CSL <= 0.0)
@@ -768,7 +782,7 @@ double  Mortality::calculateMortalityCrownScorch()
                 P = 0.0;
                 break;
             }
-            DBHcm = LengthUnits::fromBaseUnits(DBH, LengthUnits::Centimeters);
+            DBHcm = mortalityInputs_.getDBH(LengthUnits::Centimeters);
             barkThicknessPrime = 0.435 + (0.031 * DBHcm);
             f = crownVolumeScorchedPercent / 10.0; // see comments just above 
             barkThicknessPrime = 0.169 + (5.136 * barkThicknessPrime) + (14.492 * Squaredouble(barkThicknessPrime)) - (0.348 * Squaredouble(f));
@@ -1284,7 +1298,7 @@ void  Mortality::calculateMortalityTotals()
     globalDivisorForAvgTotalProbabilityOfMortality_++; // count for averaging
     averageMortality_ = (int)((globalTotalProbabilityOfMortality_ / globalDivisorForAvgTotalProbabilityOfMortality_) + 0.5);
 
-    if (mortalityInputs_.getDBH(LengthUnits::Feet) >= 4.0) // Average Prob of Mort on trees over 4 inches
+    if (mortalityInputs_.getDBH(LengthUnits::Inches) >= 4.0) // Average Prob of Mort on trees over 4 inches
     {
         globalTotalMortMortalityGreaterThan4DBH_ += probabilityOfMortality_;
         globalDivisorForAvgTotalMortMortalityGreaterThan4DBH_++;
