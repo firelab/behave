@@ -59,19 +59,19 @@ protected:
     void calculateFlankingSpreadRate();
 
     // Inputs
-    double effectiveWindSpeed_; // internally stored in mph
-    double forwardSpreadRate_; // internally stored in ft/min
-    double elapsedTime_; // internally stored in minutes
+    double effectiveWindSpeed_ = 0.0; // internally stored in mph
+    double forwardSpreadRate_ = 0.0; // internally stored in ft/min
+    double elapsedTime_ = 0.0; // internally stored in minutes
 
     // Outputs
-    double ellipticalA_; // semi-minor axis of fire ellipse
-    double ellipticalB_; // semi-major axis of fire ellipse
-    double ellipticalC_; // distance from center of ellipse to a focus
-    double eccentricity_; // measure of deviance from perfect circle, ranges from [0,1)
-    double backingSpreadRate_; // spread rate 180 degrees from max spread
-    double flankingSpreadRate_; // spread rate at widest part of ellipse breadth
-    double fireLengthToWidthRatio_;           
-    double headingToBackingRatio_; // Alexander 1985 heading/backing ratio
+    double ellipticalA_ = 0.0; // semi-minor axis of fire ellipse
+    double ellipticalB_ = 0.0; // semi-major axis of fire ellipse
+    double ellipticalC_ = 0.0; // distance from center of ellipse to a focus
+    double eccentricity_ = 0.0; // measure of deviance from perfect circle, ranges from [0,1)
+    double backingSpreadRate_ = 0.0; // spread rate 180 degrees from max spread
+    double flankingSpreadRate_ = 0.0; // spread rate at widest part of ellipse breadth
+    double fireLengthToWidthRatio_ = 0.0;
+    double headingToBackingRatio_ = 0.0; // Alexander 1985 heading/backing ratio
 };
 
 #endif // FIRESIZE_H
