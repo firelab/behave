@@ -72,15 +72,15 @@ protected:
     double aspenInterpolate(double curing, double* valueArray);
    
     // Member variables
-    double mortality_;
-    double aspenDeadOneHour_;
-    double aspenDeadTenHour_;
-    double aspenLiveHerbaceous_;
-    double aspenLiveWoody_;
-    double aspenSavrDeadOneHour_;
-    double aspenSavrDeadTenHour_;
-    double aspenSavrLiveHerbaceous_;
-    double aspenSavrLiveWoody_;
+    double mortality_ = 0.0;
+    double aspenDeadOneHour_ = 0.0;
+    double aspenDeadTenHour_ = 0.0;
+    double aspenLiveHerbaceous_ = 0.0;
+    double aspenLiveWoody_ = 0.0;
+    double aspenSavrDeadOneHour_ = 0.0;
+    double aspenSavrDeadTenHour_ = 0.0;
+    double aspenSavrLiveHerbaceous_ = 0.0;
+    double aspenSavrLiveWoody_ = 0.0;
 };
 
 #endif // WESTERNASPEN_H
